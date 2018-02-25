@@ -1,0 +1,2 @@
+#!/usr/bin/bash
+php artisan serv --host hikonnect.ga --port 8100
