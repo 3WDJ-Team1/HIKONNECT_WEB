@@ -13,11 +13,21 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\User::class, function (Faker $faker) {
-    return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
-        'remember_token' => str_random(10),
-    ];
-});
+$factory->define(
+    App\User::class,
+    function (Faker $faker) {
+        return [
+            'join_id'           => $faker->uuid(),
+            'user_id'           => $faker->userName(),
+            'password'          => $faker->password(),
+            'nickname'          => $faker->firstName(),
+            'user_photo_path'   => $faker->imageUrl(640, 480),
+            'phone'             => $faker->e164PhoneNumber(),
+            'phone_isopen'      => array_rand([true, false]),
+            'gender'            => array_rand(array_flip(['male', 'female'])),
+            'gender_isopen'     => array_rand([true, false]),
+            'age_group'         => array_rand(array_flip(['10', '20', '30', '40', '50', '60'])),
+            'age_group_isopen'  => array_rand([true, false]),
+        ];
+    }
+);
