@@ -4,7 +4,7 @@
  * 
  * @category Model
  * @package  App
- * @author   bs Kown <rnjs9957@gmail.com>
+ * @author   bs Kwon <rnjs9957@gamil.com>
  * @license  MIT license
  * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB
  */
@@ -13,7 +13,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Model class for User
+ * Model for Notification
  * 
  * @category Model
  * @package  App
@@ -21,7 +21,18 @@ use Illuminate\Database\Eloquent\Model;
  * @license  MIT license
  * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB
  */
-class User extends Model
+class Notice extends Model
 {
-    protected $table = 'user';
+    protected $table = 'notice';
+
+    /**
+     * Get notification list from database
+     * 
+     * @return Array
+     */
+    public function getNotifications()
+    {
+        DB::table(TABLE_NAME)->get();
+        return ;
+    }
 }
