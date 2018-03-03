@@ -28,11 +28,65 @@ class Notice extends Model
     /**
      * Get notification list from database
      * 
+     * @param int $pageIndex |  
+     * @param int $perPage   | 
+     * 
      * @return Array
      */
-    public function getNotifications()
+    public function getNotifications(int $pageIndex = 0, int $perPage = 10)
     {
-        DB::table(TABLE_NAME)->get();
-        return ;
+        return Notice::skip(10)->take(5)->get();
+    }
+
+    /**
+     * Update notification
+     * 
+     * @param Array  $inputData | Form input data from browser.
+     *                          | [
+     *                          |    "uuid"          Record ID
+     *                          |    "writer_id"     Writer ID in User table
+     *                          |    "content"       Notice Content
+     *                          |    "notice_range"  Range 
+     *                          |    "notice_for"    
+     *                          | ]
+     * @param String $uuid      |
+     * 
+     * @return void
+     */
+    public function updateNotification(Array $inputData, String $uuid)
+    {
+        Notice::where('uuid', $uuid)
+        ->update($inputData);
+    }
+
+    /**
+     * Delete notification
+     * 
+     * @param String $uuid | Notification's ID
+     * 
+     * @return void
+     */
+    public function deleteNotification(String $uuid)
+    {
+        Notice::where('uuid', $uuid)
+        ->delete();
+    }
+
+    /**
+     * Create Notification
+     * 
+     * @param Array $inputData | Form input data from browser.
+     *                         | [
+     *                         |    "writer_id"     Writer ID in User table
+     *                         |    "content"       Notice Content
+     *                         |    "notice_range"  Range 
+     *                         |    "notice_for"    
+     *                         | ]
+     * 
+     * @return void
+     */
+    public function insertNotification(Array $inputData)
+    {
+        Notice::insert($inputData);
     }
 }

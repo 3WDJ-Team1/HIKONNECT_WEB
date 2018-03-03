@@ -43,7 +43,8 @@ class NoticeController extends Controller
      */
     public function index()
     {
-        Notice::getNotifications();
+        $notifications = $this->_model->getNotifications();
+        return view('layouts/app', ['notices' => $notifications]);
     }
 
     /**
@@ -65,7 +66,8 @@ class NoticeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return "Store";
+        // $this->_model->insertNotification();
     }
 
     /**
@@ -102,7 +104,8 @@ class NoticeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return 'GOOOOOD';
+        // $this->_model->updateNotification( ,$id);
     }
 
     /**
