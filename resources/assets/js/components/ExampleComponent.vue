@@ -8,7 +8,7 @@
                     <div class="panel-body">
                         I'm an example component!<br>
                         routes/web.php -> resources/views/app.blade.php<br>
-                        app.blade.php 의 id="app" 부분에 ExampleComponent를 mount 했습니다.
+                        app.blade.php 의 id="app" 부분에 ExampleComponent를 mount 했습니다
                     </div>
                 </div>
             </div>
