@@ -13,6 +13,7 @@ window.Vue.use(VueRouter);
  
 import ExampleComponent from "./components/ExampleComponent.vue";
 import App from './components/App.vue';
+import jungyu from './components/jungyu.vue';
 
 const routes = [
     {
@@ -20,6 +21,11 @@ const routes = [
         path: '/',
         component: ExampleComponent,
     },
+    {
+        name: 'jungyu',
+        path: '/jungyu',
+        component: jungyu
+    }
 ];
  
 const router = new VueRouter({ routes })
