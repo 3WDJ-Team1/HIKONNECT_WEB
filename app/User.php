@@ -24,4 +24,14 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Model
 {
     protected $table = 'user';
+
+    /**
+     * Get user list
+     * 
+     * @return Array
+     */
+    public function getUserList()
+    {
+        return User::skip(0)->take(5)->get();
+    }
 }

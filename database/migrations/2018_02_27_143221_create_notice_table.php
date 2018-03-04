@@ -17,8 +17,8 @@ class CreateNoticeTable extends Migration
         Schema::create(
             'notice', 
             function (Blueprint $table) {
-                $table->uuid('notice_id')->primary();
-                $table->string('writer', 36)->references('join_id')->on('user');
+                $table->uuid('uuid')->primary();
+                $table->string('writer', 36)->references('uuid')->on('user');
                 $table->string('content', 500);
                 $table->char('notice_range', 20);
                 $table->string('notice_for', 36);
@@ -32,9 +32,7 @@ class CreateNoticeTable extends Migration
             BEFORE INSERT ON notice
             FOR EACH ROW
             BEGIN
-            IF new.notice_id LIKE "" THEN
-                SET new.notice_id = uuid();
-            END IF;
+                SET new.uuid = uuid();
             END
             '
         );

@@ -12,6 +12,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Notice;
+use App\User;
 
 /**
  * Controller for Notification
@@ -26,14 +27,16 @@ use App\Notice;
  */
 class NoticeController extends Controller
 {
-    private $_model = null;
+    private $_notice_model = null;
+    private $_user_model = null;
 
     /**
      * Constructor for NoticeController
      */
     public function __construct()
     {
-        $this->_model = new Notice();
+        $this->_notice_model = new Notice();
+        $this->_user_model = new User();
     }
     
     /**
@@ -43,8 +46,9 @@ class NoticeController extends Controller
      */
     public function index()
     {
-        $notifications = $this->_model->getNotifications();
-        return view('layouts/app', ['notices' => $notifications]);
+        $notifications = $this->_notice_model->getNotifications();
+        $users = $this->_user_model->getUserList();
+        return view('notice', ['userList' => $users]);
     }
 
     /**
@@ -66,8 +70,7 @@ class NoticeController extends Controller
      */
     public function store(Request $request)
     {
-        return "Store";
-        // $this->_model->insertNotification();
+        return $this->_notice_model->insertNotification($request->input());
     }
 
     /**
@@ -104,8 +107,7 @@ class NoticeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return 'GOOOOOD';
-        // $this->_model->updateNotification( ,$id);
+        return $this->_notice_model->updateNotification($request->input(), $id);
     }
 
     /**
@@ -117,6 +119,6 @@ class NoticeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return $this->_notice_model->where('uuid', $id)->delete();
     }
 }

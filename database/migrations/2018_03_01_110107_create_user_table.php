@@ -16,7 +16,7 @@ class CreateUserTable extends Migration
         Schema::create(
             'user',
             function (Blueprint $table) {
-                $table->uuid('join_id')->primary();
+                $table->uuid('uuid')->primary();
                 $table->string('user_id', 40)->notNull();
                 $table->string('password', 40)->notNull();
                 $table->string('nickname', 10)->notNull();
@@ -37,8 +37,8 @@ class CreateUserTable extends Migration
             BEFORE INSERT ON user
             FOR EACH ROW
             BEGIN
-            IF new.join_id LIKE "" THEN
-                SET new.join_id = uuid();
+            IF new.uuid LIKE "" THEN
+                SET new.uuid = uuid();
             END IF;
             END
             '

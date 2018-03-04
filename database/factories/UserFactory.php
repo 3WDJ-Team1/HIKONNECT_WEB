@@ -17,7 +17,7 @@ $factory->define(
     App\User::class,
     function (Faker $faker) {
         return [
-            'join_id'           => $faker->uuid(),
+            'uuid'           => $faker->uuid(),
             'user_id'           => $faker->userName(),
             'password'          => $faker->password(),
             'nickname'          => $faker->firstName(),

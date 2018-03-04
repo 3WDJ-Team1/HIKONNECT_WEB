@@ -11,6 +11,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Request;
 
 /**
  * Model for Notification
@@ -55,7 +56,7 @@ class Notice extends Model
      */
     public function updateNotification(Array $inputData, String $uuid)
     {
-        Notice::where('uuid', $uuid)
+        return Notice::where('uuid', $uuid)
         ->update($inputData);
     }
 
@@ -68,8 +69,9 @@ class Notice extends Model
      */
     public function deleteNotification(String $uuid)
     {
-        Notice::where('uuid', $uuid)
-        ->delete();
+        return $uuid;
+        // Notice::where('uuid', $uuid)
+        // ->delete();
     }
 
     /**
