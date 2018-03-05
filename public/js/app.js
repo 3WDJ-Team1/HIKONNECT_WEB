@@ -46487,9 +46487,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
-        dummylogin: function dummylogin() {
-            alert(this.item.idv + this.item.pwv);
-        },
         login: function login() {
             if ($('#id').val() == "" || $('#pw').val() == "") {
                 alert('아이디 또는 비밀번호에 값이 비었습니다.');
@@ -46598,7 +46595,7 @@ var render = function() {
                     "router-link",
                     {
                       staticClass: "btn btn-primary",
-                      staticStyle: { "margin-left": "10px" },
+                      staticStyle: { "margin-left": "270px" },
                       attrs: { to: { name: "register" } }
                     },
                     [_vm._v(" 회원가입")]
@@ -46707,19 +46704,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
-        dummylogin: function dummylogin() {
-            alert(this.item.idv + this.item.pwv);
-        },
-        login: function login() {
+        regist: function regist() {
 
             var uri = 'http://localhost:8000/login';
-            this.axios.post(uri, this.item).then(function (response) {
-                $('#nm').val('');
-                $('#id').val('');
-                $('#pw').val('');
-                $('#pwvc').val('');
-                alert('회원가입 완료');
-            });
+            if ($('#id').val() == "" || $('#pw').val() == "" || $('#pwvc').val() == "" || $('#nm').val() == "") {
+                alert('값이 비어있습니다');
+            } else if ($('#pw').val() != $('#pwvc').val()) {
+                alert('비밀 번호와 비밀번호 확인이 다릅니다');
+            } else {
+                this.axios.get(uri, this.item).then(function (response) {
+                    alert('회원가입 완료');
+                });
+            }
         }
     }
 });
@@ -46852,8 +46848,8 @@ var render = function() {
                 _vm._v(" "),
                 _c("input", {
                   staticClass: "btn btn-primary",
-                  attrs: { type: "button", value: "회원가입" },
-                  on: { click: _vm.login }
+                  attrs: { type: "button", value: "확인" },
+                  on: { click: _vm.regist }
                 })
               ])
             ]
