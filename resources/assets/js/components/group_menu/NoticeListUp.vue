@@ -1,10 +1,13 @@
 <template>
-    <!-- notice cards -->
+    <!-- the wrapper of notice list -->
     <div class="text-center">
+        <!-- show the name of group -->
         <h1>{{ groupName }}</h1>
         <h2>Group notice</h2>
         <br>
+        <!-- notice cards are formed automatically by data.notices -->
         <div v-for="notice in notices">
+            <!-- the wrapper of notice card -->
             <div class="card_wrapper">
                 <b-card img-src="https://via.placeholder.com/650x50"
                         img-alt="Card image"
@@ -27,8 +30,10 @@
     export default {
         data : function() {
             return {
+                // groupName and notices will be changed by http response. (now there're dump data)
                 groupName : "3WDJ-Team1",
                 notices : [
+                    // the type of notices is 'object' certainly.
                     {
                         title : 'Dump1',
                         writer : 'tester1',
@@ -46,6 +51,48 @@
                         writer : 'tester3',
                         hits : 30,
                         text : "exampleexampleexampleexampleexampleexampleexampleexampleexampleexampleexampleexampleexampleexampleexampleexample text to build on the card and make up the bulk of the card's content."
+                    },
+                    {
+                        title : 'Dump4',
+                        writer : 'tester4',
+                        hits : 40,
+                        text : "Some quick example text to build on the card and make up the bulk of the card's content."
+                    },
+                    {
+                        title : 'Dump4',
+                        writer : 'tester4',
+                        hits : 40,
+                        text : "Some quick example text to build on the card and make up the bulk of the card's content."
+                    },
+                    {
+                        title : 'Dump4',
+                        writer : 'tester4',
+                        hits : 40,
+                        text : "Some quick example text to build on the card and make up the bulk of the card's content."
+                    },
+                    {
+                        title : 'Dump4',
+                        writer : 'tester4',
+                        hits : 40,
+                        text : "Some quick example text to build on the card and make up the bulk of the card's content."
+                    },
+                    {
+                        title : 'Dump4',
+                        writer : 'tester4',
+                        hits : 40,
+                        text : "Some quick example text to build on the card and make up the bulk of the card's content."
+                    },
+                    {
+                        title : 'Dump4',
+                        writer : 'tester4',
+                        hits : 40,
+                        text : "Some quick example text to build on the card and make up the bulk of the card's content."
+                    },
+                    {
+                        title : 'Dump4',
+                        writer : 'tester4',
+                        hits : 40,
+                        text : "Some quick example text to build on the card and make up the bulk of the card's content."
                     },
                     {
                         title : 'Dump4',

@@ -16,6 +16,7 @@ Vue.use(Bootstrap);
 
 import ExampleComponent from "./components/ExampleComponent.vue";
 import NoticeListUp     from "./components/group_menu/NoticeListUp.vue";
+import NoticeShowDetail from "./components/group_menu/NoticeShowDetail.vue";
 import App              from './components/App.vue';
 
 const routes = [
@@ -29,6 +30,11 @@ const routes = [
         path: '/notice',
         component: NoticeListUp
     },
+    {
+        name: 'NoticeShowDetail',
+        path: '/notice/detail',
+        component: NoticeShowDetail
+    }
 ];
  
 const router = new VueRouter({ routes })
