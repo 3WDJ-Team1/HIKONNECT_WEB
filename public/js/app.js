@@ -1125,7 +1125,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_
 
 var routes = [{
     name: 'login',
-    path: '/',
+    path: '/login',
     component: __WEBPACK_IMPORTED_MODULE_7__components_login_vue___default.a
 }, {
     name: 'Example',
@@ -45786,7 +45786,7 @@ var render = function() {
             "div",
             { staticClass: "panel-body" },
             [
-              _c("router-link", { attrs: { to: { name: "jungyu" } } }, [
+              _c("router-link", { attrs: { to: { name: "login" } } }, [
                 _vm._v("sadasd")
               ])
             ],

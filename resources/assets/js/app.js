@@ -25,7 +25,7 @@ import login from './components/login.vue';
 const routes = [
     {
         name: 'login',
-        path: '/',
+        path: '/login',
         component: login
     },
     {

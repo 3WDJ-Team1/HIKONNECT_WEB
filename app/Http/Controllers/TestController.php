@@ -37,12 +37,13 @@ class TestController extends Controller
      */
     public function store(Request $request)
     {
-        $item = new Item([
+        if ()
+       /*$item = new Item([
             'idv' => $request->get('idv'),
             'pwv' => $request->get('pwv')
         ]);
         $item->save();
-        return response()->json('Successfully added');
+        return response()->json('Successfully added');*/
     }
 
     /**

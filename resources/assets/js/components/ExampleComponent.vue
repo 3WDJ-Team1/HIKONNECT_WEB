@@ -7,7 +7,7 @@
                     <div class="panel-heading">Example Component</div>
 
                     <div class="panel-body">
-                        <router-link :to="{ name: 'jungyu' }">sadasd</router-link>
+                        <router-link :to="{ name: 'login' }">sadasd</router-link>
                     </div>
                 </div>
             </div>
