@@ -1129,7 +1129,7 @@ var routes = [{
     component: __WEBPACK_IMPORTED_MODULE_7__components_login_vue___default.a
 }, {
     name: 'Example',
-    path: '/exam',
+    path: '/',
     component: __WEBPACK_IMPORTED_MODULE_4__components_ExampleComponent_vue___default.a
 }, {
     name: 'jungyu',
@@ -46469,6 +46469,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -46483,8 +46484,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             alert(this.item.idv + this.item.pwv);
         },
         login: function login() {
+
             var uri = 'http://localhost:8000/login';
             this.axios.post(uri, this.item).then(function (response) {
+                $('#id').val('');
+                $('#pw').val('');
+                alert('로그인 완료');
                 console.log(response);
                 //트루 or 펄스(이유)
             });
@@ -46500,68 +46505,87 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("h1", [_vm._v("안녕")]),
-    _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-8 col-md-offset-2" }, [
-        _c("div", { staticClass: "panel panel-default" }, [
-          _c("div", { staticClass: "panel-heading" }, [
-            _vm._v("Example Component")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "panel-body" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.item.idv,
-                  expression: "item.idv"
-                }
-              ],
-              attrs: { type: "text" },
-              domProps: { value: _vm.item.idv },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+  return _c(
+    "div",
+    { staticClass: "container", staticStyle: { margin: "0 auto" } },
+    [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-5 col-md-offset-2" }, [
+          _c(
+            "div",
+            {
+              staticClass: "panel panel-default",
+              staticStyle: { "margin-top": "20px" }
+            },
+            [
+              _c("div", { staticClass: "panel-heading" }, [_vm._v("로그인")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "panel-body" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.item.idv,
+                      expression: "item.idv"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", placeholder: "Enter id", id: "id" },
+                  domProps: { value: _vm.item.idv },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.item, "idv", $event.target.value)
+                    }
                   }
-                  _vm.$set(_vm.item, "idv", $event.target.value)
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.item.pwv,
-                  expression: "item.pwv"
-                }
-              ],
-              attrs: { type: "password" },
-              domProps: { value: _vm.item.pwv },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+                }),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.item.pwv,
+                      expression: "item.pwv"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  staticStyle: { "margin-top": "5px" },
+                  attrs: {
+                    type: "password",
+                    placeholder: "Enter password",
+                    id: "pw"
+                  },
+                  domProps: { value: _vm.item.pwv },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.item, "pwv", $event.target.value)
+                    }
                   }
-                  _vm.$set(_vm.item, "pwv", $event.target.value)
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c("input", {
-              attrs: { type: "button", value: "로그인" },
-              on: { click: _vm.login }
-            })
-          ])
+                }),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "button", value: "로그인" },
+                  on: { click: _vm.login }
+                })
+              ])
+            ]
+          )
         ])
       ])
-    ])
-  ])
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
