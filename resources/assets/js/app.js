@@ -5,12 +5,12 @@
  */
  
 require('./bootstrap');
+
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 import VueAxios from 'vue-axios';
-
 import axios from 'axios';
 Vue.use(VueAxios, axios);
 
@@ -18,12 +18,20 @@ Vue.use(VueAxios, axios);
 import ExampleComponent from "./components/ExampleComponent.vue";
 import App from './components/App.vue';
 import jungyu from './components/jungyu.vue';
+import login from './components/login.vue';
+
+
 
 const routes = [
     {
-        name: 'Example',
+        name: 'login',
         path: '/',
-        component: ExampleComponent,
+        component: login
+    },
+    {
+        name: 'Example',
+        path: '/exam',
+        component: ExampleComponent
     },
     {
         name: 'jungyu',
