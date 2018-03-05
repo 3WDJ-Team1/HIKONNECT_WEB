@@ -23,9 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class User extends Model
 {
-    protected $table = 'login';
+    protected $table = 'item';
 
-    public function login($userId, $userPw) {
-        $model = login::where($userId,$userPw)->firstOrFail();
-    }
+
 }
