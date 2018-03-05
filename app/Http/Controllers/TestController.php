@@ -32,8 +32,7 @@ class TestController extends Controller
      */
     public function create()
     {
-        $data = User::all();
-        return $data;
+
     }
 
     /**
@@ -46,8 +45,14 @@ class TestController extends Controller
 
     public function store(Request $request)
     {
-        $data = $this->model->userInfo();
-        return $data;
+        $userdata = User::all();
+        foreach ($userdata as $user) {
+            if ($user->idv == $request->get('idv') && $user->pwv == $request->get('pwv'))
+                return 'true';
+            else
+                continue;
+        }
+        return 'false';
     }
 
     /**
