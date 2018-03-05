@@ -1125,7 +1125,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_
 
 var routes = [{
     name: 'login',
-    path: '/login',
+    path: '/',
     component: __WEBPACK_IMPORTED_MODULE_7__components_login_vue___default.a
 }, {
     name: 'Example',
@@ -45786,7 +45786,7 @@ var render = function() {
             "div",
             { staticClass: "panel-body" },
             [
-              _c("router-link", { attrs: { to: { name: "login" } } }, [
+              _c("router-link", { attrs: { to: { name: "jungyu" } } }, [
                 _vm._v("sadasd")
               ])
             ],
@@ -46469,6 +46469,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -46488,7 +46489,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.axios.post(uri, this.item).then(function (response) {
                 $('#id').val('');
                 $('#pw').val('');
-                alert(response.data);
+                alert('로그인 완료');
+                console.log(response);
                 //트루 or 펄스(이유)
             });
         }
@@ -46516,7 +46518,7 @@ var render = function() {
               staticStyle: { "margin-top": "20px" }
             },
             [
-              _c("div", { staticClass: "panel-heading" }, [_vm._v("login")]),
+              _c("div", { staticClass: "panel-heading" }, [_vm._v("로그인")]),
               _vm._v(" "),
               _c("div", { staticClass: "panel-body" }, [
                 _c("input", {
@@ -46551,7 +46553,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  staticStyle: { "margin-top": "10px" },
+                  staticStyle: { "margin-top": "5px" },
                   attrs: {
                     type: "password",
                     placeholder: "Enter password",
@@ -46570,9 +46572,11 @@ var render = function() {
                 _vm._v(" "),
                 _c("br"),
                 _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
                 _c("input", {
                   staticClass: "btn btn-primary",
-                  attrs: { type: "button", value: "login" },
+                  attrs: { type: "button", value: "로그인" },
                   on: { click: _vm.login }
                 })
               ])

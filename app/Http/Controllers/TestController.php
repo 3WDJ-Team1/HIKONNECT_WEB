@@ -2,27 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
 use Illuminate\Http\Request;
 use App\item;
 
 class TestController extends Controller
 {
-    protected $model = null;
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
 
-    public function __construct()
-    {
-        $this->model = new User();
-    }
-
     public function index()
     {
-
+        $items = Item::all();
+        return response()->json($items);
     }
 
     /**
@@ -32,7 +26,7 @@ class TestController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**
@@ -41,19 +35,14 @@ class TestController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-
-
     public function store(Request $request)
     {
-        $userdata = User::all();
-        foreach ($userdata as $user) {
-            if ($user->idv == $request->get('idv') && $user->pwv == $request->get('pwv'))
-                return 'true';
-            else
-                continue;
-        }
-        return 'false';
-
+        $item = new Item([
+            'idv' => $request->get('idv'),
+            'pwv' => $request->get('pwv')
+        ]);
+        $item->save();
+        return response()->json('Successfully added');
     }
 
     /**
