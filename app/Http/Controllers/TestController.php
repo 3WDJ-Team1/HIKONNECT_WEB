@@ -53,7 +53,6 @@ class TestController extends Controller
                 continue;
         }
         return 'false';
-
     }
 
     /**
