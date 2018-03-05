@@ -37,12 +37,14 @@ class TestController extends Controller
      */
     public function store(Request $request)
     {
-        $item = new Item([
-            'idv' => $request->get('idv'),
-            'pwv' => $request->get('pwv')
-        ]);
-        $item->save();
-        return response()->json('true');
+        $userInfo = User::all();
+        foreach ($userInfo as $user) {
+            if($user->idv == $request->get('idv'))
+                return 'true';
+            else
+                continue;
+        }
+        return 'false';
     }
 
     /**
@@ -53,6 +55,7 @@ class TestController extends Controller
      */
     public function show($id)
     {
+        //
     }
 
     /**
