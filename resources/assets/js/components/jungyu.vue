@@ -1,7 +1,7 @@
 <template>
     <div>
-    <div><h1>안녕</h1></div>
-    <button v-on:click='getData'>데이터 가져오기</button>
+        <div><h1>안녕</h1></div>
+        <button v-on:click='getData'>데이터 가져오기</button>
     </div>
 </template>
 <script>
