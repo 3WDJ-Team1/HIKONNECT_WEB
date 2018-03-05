@@ -46467,10 +46467,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    mounted: function mounted() {
-        console.log('Component mounted.');
+    data: function data() {
+        return {
+            item: {}
+        };
+    },
+
+    methods: {
+        dummylogin: function dummylogin() {
+            alert(this.item.idv + this.item.pwv);
+        },
+        login: function login() {
+            var uri = 'http://localhost:8000/login';
+            this.axios.post(uri, this.item).then(function (response) {
+                console.log(response);
+                //트루 or 펄스(이유)
+            });
+        }
     }
 });
 
@@ -46492,16 +46510,54 @@ var render = function() {
             _vm._v("Example Component")
           ]),
           _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "panel-body" },
-            [
-              _c("router-link", { attrs: { to: { name: "jungyu" } } }, [
-                _vm._v("sadasd")
-              ])
-            ],
-            1
-          )
+          _c("div", { staticClass: "panel-body" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.item.idv,
+                  expression: "item.idv"
+                }
+              ],
+              attrs: { type: "text" },
+              domProps: { value: _vm.item.idv },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.item, "idv", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.item.pwv,
+                  expression: "item.pwv"
+                }
+              ],
+              attrs: { type: "password" },
+              domProps: { value: _vm.item.pwv },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.item, "pwv", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "button", value: "로그인" },
+              on: { click: _vm.login }
+            })
+          ])
         ])
       ])
     ])
