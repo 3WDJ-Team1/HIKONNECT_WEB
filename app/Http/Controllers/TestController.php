@@ -42,7 +42,7 @@ class TestController extends Controller
             'pwv' => $request->get('pwv')
         ]);
         $item->save();
-        return response()->json('Successfully added');
+        return response()->json('true');
     }
 
     /**

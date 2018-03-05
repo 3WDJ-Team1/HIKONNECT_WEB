@@ -46469,7 +46469,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -46484,15 +46483,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             alert(this.item.idv + this.item.pwv);
         },
         login: function login() {
-
-            var uri = 'http://localhost:8000/login';
-            this.axios.post(uri, this.item).then(function (response) {
-                $('#id').val('');
-                $('#pw').val('');
-                alert('로그인 완료');
-                console.log(response);
-                //트루 or 펄스(이유)
-            });
+            if ($('#id').val() == "" || $('#pw').val() == "") {
+                alert('아이디 또는 비밀번호에 값이 비었습니다.');
+            } else {
+                var uri = 'http://localhost:8000/login';
+                this.axios.post(uri, this.item).then(function (response) {
+                    if (response.data == 'true') {
+                        alert('로그인 완료');
+                    } else {
+                        $('#id').val('');
+                        $('#pw').val('');
+                    }
+                });
+            }
         }
     }
 });
@@ -46515,7 +46518,7 @@ var render = function() {
             "div",
             {
               staticClass: "panel panel-default",
-              staticStyle: { "margin-top": "20px" }
+              staticStyle: { "margin-top": "80px" }
             },
             [
               _c("div", { staticClass: "panel-heading" }, [_vm._v("로그인")]),
@@ -46553,7 +46556,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  staticStyle: { "margin-top": "5px" },
+                  staticStyle: { "margin-top": "10px" },
                   attrs: {
                     type: "password",
                     placeholder: "Enter password",
@@ -46569,8 +46572,6 @@ var render = function() {
                     }
                   }
                 }),
-                _vm._v(" "),
-                _c("br"),
                 _vm._v(" "),
                 _c("br"),
                 _vm._v(" "),
