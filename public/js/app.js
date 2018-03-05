@@ -377,33 +377,6 @@ module.exports = {
 /* 1 */
 /***/ (function(module, exports) {
 
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
 /* globals __VUE_SSR_CONTEXT__ */
 
 // IMPORTANT: Do NOT use ES2015 features in this file.
@@ -507,6 +480,33 @@ module.exports = function normalizeComponent (
     options: options
   }
 }
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
 
 
 /***/ }),
@@ -1078,7 +1078,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(12);
-module.exports = __webpack_require__(58);
+module.exports = __webpack_require__(61);
 
 
 /***/ }),
@@ -1102,6 +1102,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_jungyu_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_jungyu_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_login_vue__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_login_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_login_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_register_vue__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_register_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_register_vue__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -1123,9 +1125,14 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_
 
 
 
+
 var routes = [{
+    name: 'register',
+    path: '/register',
+    component: __WEBPACK_IMPORTED_MODULE_8__components_register_vue___default.a
+}, {
     name: 'login',
-    path: '/',
+    path: '/login',
     component: __WEBPACK_IMPORTED_MODULE_7__components_login_vue___default.a
 }, {
     name: 'Example',
@@ -18304,7 +18311,7 @@ if (token) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(15)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(15)(module)))
 
 /***/ }),
 /* 15 */
@@ -42787,7 +42794,7 @@ Vue$3.compile = compileToFunctions;
 
 module.exports = Vue$3;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(37).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(37).setImmediate))
 
 /***/ }),
 /* 37 */
@@ -42854,7 +42861,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
                          (typeof global !== "undefined" && global.clearImmediate) ||
                          (this && this.clearImmediate);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ }),
 /* 38 */
@@ -43047,7 +43054,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(6)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(6)))
 
 /***/ }),
 /* 39 */
@@ -45692,7 +45699,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof="fun
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(2)
+var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(42)
 /* template */
@@ -45786,7 +45793,7 @@ var render = function() {
             "div",
             { staticClass: "panel-body" },
             [
-              _c("router-link", { attrs: { to: { name: "jungyu" } } }, [
+              _c("router-link", { attrs: { to: { name: "login" } } }, [
                 _vm._v("sadasd")
               ])
             ],
@@ -45816,7 +45823,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(45)
 }
-var normalizeComponent = __webpack_require__(2)
+var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(50)
 /* template */
@@ -46301,7 +46308,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(2)
+var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(53)
 /* template */
@@ -46402,7 +46409,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(2)
+var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(56)
 /* template */
@@ -46484,15 +46491,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             alert(this.item.idv + this.item.pwv);
         },
         login: function login() {
-
-            var uri = 'http://localhost:8000/login';
-            this.axios.post(uri, this.item).then(function (response) {
-                $('#id').val('');
-                $('#pw').val('');
-                alert('로그인 완료');
-                console.log(response);
-                //트루 or 펄스(이유)
-            });
+            if ($('#id').val() == "" || $('#pw').val() == "") {
+                alert('아이디 또는 비밀번호에 값이 비었습니다.');
+            } else {
+                var uri = 'http://localhost:8000/login';
+                this.axios.post(uri, this.item).then(function (response) {
+                    console.log(response.data);
+                    if (response.data == 'true') {
+                        alert('로그인 완료');
+                        $('#id').val('');
+                        $('#pw').val('');
+                    } else {
+                        alert('로그인 실패');
+                    }
+                });
+            }
         }
     }
 });
@@ -46520,7 +46533,244 @@ var render = function() {
             [
               _c("div", { staticClass: "panel-heading" }, [_vm._v("로그인")]),
               _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "panel-body" },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.item.idv,
+                        expression: "item.idv"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", placeholder: "Enter id", id: "id" },
+                    domProps: { value: _vm.item.idv },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.item, "idv", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.item.pwv,
+                        expression: "item.pwv"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    staticStyle: { "margin-top": "10px" },
+                    attrs: {
+                      type: "password",
+                      placeholder: "Enter password",
+                      id: "pw"
+                    },
+                    domProps: { value: _vm.item.pwv },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.item, "pwv", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button", value: "로그인" },
+                    on: { click: _vm.login }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "btn btn-primary",
+                      staticStyle: { "margin-left": "10px" },
+                      attrs: { to: { name: "register" } }
+                    },
+                    [_vm._v(" 회원가입")]
+                  )
+                ],
+                1
+              )
+            ]
+          )
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-eb1453bc", module.exports)
+  }
+}
+
+/***/ }),
+/* 58 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(59)
+/* template */
+var __vue_template__ = __webpack_require__(60)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\register.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-f5da110c", Component.options)
+  } else {
+    hotAPI.reload("data-v-f5da110c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 59 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            item: {}
+        };
+    },
+
+    methods: {
+        dummylogin: function dummylogin() {
+            alert(this.item.idv + this.item.pwv);
+        },
+        login: function login() {
+
+            var uri = 'http://localhost:8000/login';
+            this.axios.post(uri, this.item).then(function (response) {
+                $('#nm').val('');
+                $('#id').val('');
+                $('#pw').val('');
+                $('#pwvc').val('');
+                alert('회원가입 완료');
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "container", staticStyle: { margin: "0 auto" } },
+    [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-5 col-md-offset-2" }, [
+          _c(
+            "div",
+            {
+              staticClass: "panel panel-default",
+              staticStyle: { "margin-top": "80px" }
+            },
+            [
+              _c("div", { staticClass: "panel-heading" }, [_vm._v("회원가입")]),
+              _vm._v(" "),
               _c("div", { staticClass: "panel-body" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.item.nm,
+                      expression: "item.nm"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  staticStyle: { "margin-top": "10px" },
+                  attrs: { type: "text", placeholder: "Enter name", id: "nm" },
+                  domProps: { value: _vm.item.nm },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.item, "nm", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
                 _c("input", {
                   directives: [
                     {
@@ -46531,6 +46781,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
+                  staticStyle: { "margin-top": "10px" },
                   attrs: { type: "text", placeholder: "Enter id", id: "id" },
                   domProps: { value: _vm.item.idv },
                   on: {
@@ -46553,7 +46804,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  staticStyle: { "margin-top": "5px" },
+                  staticStyle: { "margin-top": "10px" },
                   attrs: {
                     type: "password",
                     placeholder: "Enter password",
@@ -46570,13 +46821,38 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _c("br"),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.item.pwvc,
+                      expression: "item.pwvc"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  staticStyle: { "margin-top": "10px" },
+                  attrs: {
+                    type: "password",
+                    placeholder: "Enter password again",
+                    id: "pwvc"
+                  },
+                  domProps: { value: _vm.item.pwvc },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.item, "pwvc", $event.target.value)
+                    }
+                  }
+                }),
                 _vm._v(" "),
                 _c("br"),
                 _vm._v(" "),
                 _c("input", {
                   staticClass: "btn btn-primary",
-                  attrs: { type: "button", value: "로그인" },
+                  attrs: { type: "button", value: "회원가입" },
                   on: { click: _vm.login }
                 })
               ])
@@ -46593,12 +46869,12 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-eb1453bc", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-f5da110c", module.exports)
   }
 }
 
 /***/ }),
-/* 58 */
+/* 61 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

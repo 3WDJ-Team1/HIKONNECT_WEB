@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use App\item;
 
@@ -37,14 +38,13 @@ class TestController extends Controller
      */
     public function store(Request $request)
     {
-        $userInfo = User::all();
-        foreach ($userInfo as $user) {
-            if($user->idv == $request->get('idv'))
-                return 'true';
+        $userinfo = User::all();
+        foreach ($userinfo as $user) {
+            if ($user->idv == $request->get('idv') && $user->pwv == $request->get('pwv'))
+                return response()->json('true');
             else
-                continue;
+                return response()->json('false');
         }
-        return 'false';
 
     }
 

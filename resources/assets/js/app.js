@@ -19,10 +19,16 @@ import ExampleComponent from "./components/ExampleComponent.vue";
 import App from './components/App.vue';
 import jungyu from './components/jungyu.vue';
 import login from './components/login.vue';
+import register from './components/register.vue';
 
 
 
 const routes = [
+    {
+        name: 'register',
+        path: '/register',
+        component: register
+    },
     {
         name: 'login',
         path: '/login',

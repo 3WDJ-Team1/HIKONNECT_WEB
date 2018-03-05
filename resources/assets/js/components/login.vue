@@ -10,6 +10,7 @@
                         <input type="password" style="margin-top: 10px" v-model="item.pwv" class="form-control" placeholder="Enter password" id="pw"/>
                         <br>
                         <input type='button' class="btn btn-primary" v-on:click="login" value="로그인">
+                        <router-link style='margin-left: 10px' :to="{ name: 'register' }" class = "btn btn-primary"> 회원가입</router-link>
                     </div>
                 </div>
             </div>
@@ -26,9 +27,6 @@
            }
        },
         methods: {
-            dummylogin() {
-               alert(this.item.idv+this.item.pwv);
-            },
             login() {
                 if($('#id').val() == "" || $('#pw').val() == "") {
                     alert('아이디 또는 비밀번호에 값이 비었습니다.');
@@ -36,13 +34,14 @@
                 else {
                     let uri = 'http://localhost:8000/login';
                     this.axios.post(uri, this.item).then(function (response) {
+                        console.log(response.data);
                         if (response.data == 'true') {
                             alert('로그인 완료');
-                        }
-                        else {
                             $('#id').val('');
                             $('#pw').val('');
-
+                        }
+                        else {
+                            alert('로그인 실패');
                         }
 
                     })
