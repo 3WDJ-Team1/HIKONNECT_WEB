@@ -19,6 +19,8 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
+        "bootstrap-vue": "^2.0.0-rc.1",
+        "node-sass": "^4.7.2",
         "vue-router": "^3.0.1"
     }
 }

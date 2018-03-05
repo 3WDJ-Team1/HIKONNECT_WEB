@@ -7,18 +7,27 @@
 require('./bootstrap');
  
 window.Vue = require('vue');
-import VueRouter from 'vue-router';
- 
+
+import VueRouter    from 'vue-router';
 window.Vue.use(VueRouter);
  
+import Bootstrap    from 'bootstrap-vue';
+Vue.use(Bootstrap);
+
 import ExampleComponent from "./components/ExampleComponent.vue";
-import App from './components/App.vue';
+import NoticeListUp     from "./components/group_menu/NoticeListUp.vue";
+import App              from './components/App.vue';
 
 const routes = [
     {
         name: 'Example',
         path: '/',
         component: ExampleComponent,
+    },
+    {
+        name: 'NoticeListUp',
+        path: '/notice',
+        component: NoticeListUp
     },
 ];
  
