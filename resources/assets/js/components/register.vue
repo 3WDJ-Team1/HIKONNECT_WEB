@@ -31,7 +31,7 @@
         methods: {
             regist() {
 
-                let uri= 'http://localhost:8000/login/create';
+                let uri= 'http://localhost:8000/register';
                 if($('#id').val() == "" || $('#pw').val() == ""
                     || $('#pwvc').val() == "") {
                     alert('값이 비어있습니다');
