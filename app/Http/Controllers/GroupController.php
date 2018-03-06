@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Group;
 use Illuminate\Http\Request;
 
-/**
+    /**
      * @var Model $model       A reference variable for Group model
      */
 class GroupController extends Controller
@@ -50,7 +50,7 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $selection = $request->input('selection');
     }
 
     /**
