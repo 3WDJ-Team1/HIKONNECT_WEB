@@ -1144,9 +1144,9 @@ var routes = [{
     component: __WEBPACK_IMPORTED_MODULE_6__components_jungyu_vue___default.a
 }];
 
-var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({ routes: routes });
+var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({ mode: 'history', routes: routes });
 
-var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a(__WEBPACK_IMPORTED_MODULE_0_vue___default.a.util.extend({ router: router }, __WEBPACK_IMPORTED_MODULE_5__components_App_vue___default.a)).$mount('#app');
+new __WEBPACK_IMPORTED_MODULE_0_vue___default.a(__WEBPACK_IMPORTED_MODULE_0_vue___default.a.util.extend({ router: router }, __WEBPACK_IMPORTED_MODULE_5__components_App_vue___default.a)).$mount('#app');
 
 /***/ }),
 /* 13 */
@@ -46705,15 +46705,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         regist: function regist() {
+            var _this = this;
 
-            var uri = 'http://localhost:8000/login';
-            if ($('#id').val() == "" || $('#pw').val() == "" || $('#pwvc').val() == "" || $('#nm').val() == "") {
+            var uri = 'http://localhost:8000/login/create';
+            if ($('#id').val() == "" || $('#pw').val() == "" || $('#pwvc').val() == "") {
                 alert('값이 비어있습니다');
             } else if ($('#pw').val() != $('#pwvc').val()) {
                 alert('비밀 번호와 비밀번호 확인이 다릅니다');
             } else {
                 this.axios.get(uri, this.item).then(function (response) {
-                    alert('회원가입 완료');
+                    if (response == 'true') {
+                        alert('회원가입 완료');
+                        _this.$router.push({ name: 'Example' });
+                    } else alert('이미 존재하는 아이디 입니다.');
+                    _this.$router.push({ name: 'Example' });
                 });
             }
         }
@@ -46743,115 +46748,90 @@ var render = function() {
             [
               _c("div", { staticClass: "panel-heading" }, [_vm._v("회원가입")]),
               _vm._v(" "),
-              _c("div", { staticClass: "panel-body" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.item.nm,
-                      expression: "item.nm"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  staticStyle: { "margin-top": "10px" },
-                  attrs: { type: "text", placeholder: "Enter name", id: "nm" },
-                  domProps: { value: _vm.item.nm },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+              _c(
+                "div",
+                { staticClass: "panel-body" },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.item.idv,
+                        expression: "item.idv"
                       }
-                      _vm.$set(_vm.item, "nm", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.item.idv,
-                      expression: "item.idv"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  staticStyle: { "margin-top": "10px" },
-                  attrs: { type: "text", placeholder: "Enter id", id: "id" },
-                  domProps: { value: _vm.item.idv },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+                    ],
+                    staticClass: "form-control",
+                    staticStyle: { "margin-top": "10px" },
+                    attrs: { type: "text", placeholder: "Enter id", id: "id" },
+                    domProps: { value: _vm.item.idv },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.item, "idv", $event.target.value)
                       }
-                      _vm.$set(_vm.item, "idv", $event.target.value)
                     }
-                  }
-                }),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.item.pwv,
-                      expression: "item.pwv"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  staticStyle: { "margin-top": "10px" },
-                  attrs: {
-                    type: "password",
-                    placeholder: "Enter password",
-                    id: "pw"
-                  },
-                  domProps: { value: _vm.item.pwv },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+                  }),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.item.pwv,
+                        expression: "item.pwv"
                       }
-                      _vm.$set(_vm.item, "pwv", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.item.pwvc,
-                      expression: "item.pwvc"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  staticStyle: { "margin-top": "10px" },
-                  attrs: {
-                    type: "password",
-                    placeholder: "Enter password again",
-                    id: "pwvc"
-                  },
-                  domProps: { value: _vm.item.pwvc },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+                    ],
+                    staticClass: "form-control",
+                    staticStyle: { "margin-top": "10px" },
+                    attrs: {
+                      type: "password",
+                      placeholder: "Enter password",
+                      id: "pw"
+                    },
+                    domProps: { value: _vm.item.pwv },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.item, "pwv", $event.target.value)
                       }
-                      _vm.$set(_vm.item, "pwvc", $event.target.value)
                     }
-                  }
-                }),
-                _vm._v(" "),
-                _c("br"),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "btn btn-primary",
-                  attrs: { type: "button", value: "확인" },
-                  on: { click: _vm.regist }
-                })
-              ])
+                  }),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    staticStyle: { "margin-top": "10px" },
+                    attrs: {
+                      type: "password",
+                      placeholder: "Enter password again",
+                      id: "pwvc"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button", value: "확인" },
+                    on: { click: _vm.regist }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "btn btn-primary",
+                      staticStyle: { "margin-left": "270px" },
+                      attrs: { to: { name: "Example" } }
+                    },
+                    [_vm._v(" 취소")]
+                  )
+                ],
+                1
+              )
             ]
           )
         ])
