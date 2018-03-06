@@ -6,7 +6,6 @@
                     <div class="panel-heading">회원가입</div>
 
                     <div class="panel-body">
-                        <input type="text"     style="margin-top: 10px" v-model="item.nm" class="form-control" placeholder="Enter name" id="nm"/>
                         <input type="text"     style="margin-top: 10px" v-model="item.idv" class="form-control" placeholder="Enter id" id="id"/>
                         <input type="password" style="margin-top: 10px" v-model="item.pwv" class="form-control" placeholder="Enter password" id="pw"/>
                         <input type="password" style="margin-top: 10px" v-model="item.pwvc" class="form-control" placeholder="Enter password again" id="pwvc"/>
@@ -32,7 +31,7 @@
 
                 let uri= 'http://localhost:8000/login';
                 if($('#id').val() == "" || $('#pw').val() == ""
-                    || $('#pwvc').val() == "" || $('#nm').val() == "") {
+                    || $('#pwvc').val() == "") {
                     alert('값이 비어있습니다');
                 }
                 else if($('#pw').val() != $('#pwvc').val()) {
