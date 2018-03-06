@@ -11,8 +11,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Notice;
-use App\User;
+use App\Models\Notice;
+use App\Models\User;
 
 /**
  * Controller for Notification
@@ -23,7 +23,8 @@ use App\User;
  * @license  MIT license
  * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB
  * 
- * @var Model $_model       A reference variable for Notice model
+ * @var Model $_notice_model        A reference variable for Notice model
+ * @var Model $_user_model          A reference variable for user model
  */
 class NoticeController extends Controller
 {
