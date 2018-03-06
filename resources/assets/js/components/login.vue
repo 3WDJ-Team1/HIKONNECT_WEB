@@ -32,7 +32,7 @@
                     alert('아이디 또는 비밀번호에 값이 비었습니다.');
                 }
                 else {
-                    let uri = 'http://localhost:8000/login';
+                    let uri = 'http://localhost:8000/loginprocess';
                     this.axios.post(uri, this.item).then(function (response) {
                         console.log(response.data);
                         if (response.data == 'true') {
@@ -40,10 +40,9 @@
                             $('#id').val('');
                             $('#pw').val('');
                         }
-                        else {
+                        else if(response.data == 'false') {
                             alert('로그인 실패');
                         }
-
                     })
                 }
 

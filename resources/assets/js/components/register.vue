@@ -31,7 +31,7 @@
         methods: {
             regist() {
 
-                let uri= 'http://localhost:8000/register';
+                let uri= 'http://localhost:8000/user';
                 if($('#id').val() == "" || $('#pw').val() == ""
                     || $('#pwvc').val() == "") {
                     alert('값이 비어있습니다');
@@ -40,12 +40,12 @@
                     alert('비밀 번호와 비밀번호 확인이 다릅니다')
                 }
                 else {
-                    this.axios.get(uri, this.item).then((response) => {
-                        if(response == 'true') {
+                    this.axios.post(uri, this.item).then((response) => {
+                        if(response.data == 'true') {
                             alert('회원가입 완료');
                             this.$router.push({ name: 'Example'});
                         }
-                        else
+                        else if(response.data == 'false')
                             alert('이미 존재하는 아이디 입니다.');
                             this.$router.push({ name: 'Example'});
                     })

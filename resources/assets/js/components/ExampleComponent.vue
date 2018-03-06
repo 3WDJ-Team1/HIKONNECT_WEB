@@ -5,9 +5,8 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">Example Component</div>
-
                     <div class="panel-body">
-                        <router-link :to="{ name: 'login' }">sadasd</router-link>
+                        <router-link :to="{ name: 'login' }">로그인</router-link>
                     </div>
                 </div>
             </div>

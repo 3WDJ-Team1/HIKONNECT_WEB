@@ -11,6 +11,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 /**
  * Model class for User
@@ -24,6 +25,9 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Model
 {
     protected $table = 'item';
+    public $timestamps = false;
 
-
+    public function userReg(Array $userinfo) {
+        User::insert($userinfo);
+    }
 }

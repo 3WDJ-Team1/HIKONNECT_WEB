@@ -45763,7 +45763,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
@@ -45794,7 +45793,7 @@ var render = function() {
             { staticClass: "panel-body" },
             [
               _c("router-link", { attrs: { to: { name: "login" } } }, [
-                _vm._v("sadasd")
+                _vm._v("로그인")
               ])
             ],
             1
@@ -46491,14 +46490,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if ($('#id').val() == "" || $('#pw').val() == "") {
                 alert('아이디 또는 비밀번호에 값이 비었습니다.');
             } else {
-                var uri = 'http://localhost:8000/login';
+                var uri = 'http://localhost:8000/loginprocess';
                 this.axios.post(uri, this.item).then(function (response) {
                     console.log(response.data);
                     if (response.data == 'true') {
                         alert('로그인 완료');
                         $('#id').val('');
                         $('#pw').val('');
-                    } else {
+                    } else if (response.data == 'false') {
                         alert('로그인 실패');
                     }
                 });
@@ -46707,17 +46706,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         regist: function regist() {
             var _this = this;
 
-            var uri = 'http://localhost:8000/login/create';
+            var uri = 'http://localhost:8000/user';
             if ($('#id').val() == "" || $('#pw').val() == "" || $('#pwvc').val() == "") {
                 alert('값이 비어있습니다');
             } else if ($('#pw').val() != $('#pwvc').val()) {
                 alert('비밀 번호와 비밀번호 확인이 다릅니다');
             } else {
-                this.axios.get(uri, this.item).then(function (response) {
-                    if (response == 'true') {
+                this.axios.post(uri, this.item).then(function (response) {
+                    if (response.data == 'true') {
                         alert('회원가입 완료');
                         _this.$router.push({ name: 'Example' });
-                    } else alert('이미 존재하는 아이디 입니다.');
+                    } else if (response.data == 'false') alert('이미 존재하는 아이디 입니다.');
                     _this.$router.push({ name: 'Example' });
                 });
             }
