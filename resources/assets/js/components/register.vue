@@ -8,9 +8,10 @@
                     <div class="panel-body">
                         <input type="text"     style="margin-top: 10px" v-model="item.idv" class="form-control" placeholder="Enter id" id="id"/>
                         <input type="password" style="margin-top: 10px" v-model="item.pwv" class="form-control" placeholder="Enter password" id="pw"/>
-                        <input type="password" style="margin-top: 10px" v-model="item.pwvc" class="form-control" placeholder="Enter password again" id="pwvc"/>
+                        <input type="password" style="margin-top: 10px" class="form-control" placeholder="Enter password again" id="pwvc"/>
                         <br>
                         <input type='button' class="btn btn-primary" v-on:click="regist" value="확인">
+                        <router-link :to="{ name : 'Example'}" value="취소"  ></router-link>
                     </div>
                 </div>
             </div>
@@ -29,7 +30,7 @@
         methods: {
             regist() {
 
-                let uri= 'http://localhost:8000/login';
+                let uri= 'http://localhost:8000/login/create';
                 if($('#id').val() == "" || $('#pw').val() == ""
                     || $('#pwvc').val() == "") {
                     alert('값이 비어있습니다');
@@ -39,10 +40,14 @@
                 }
                 else {
                     this.axios.get(uri, this.item).then(function (response) {
-                        alert('회원가입 완료');
+                        if(response == 'true')
+                            alert('회원가입 완료');
+                        else
+                            alert('이미 존재하는 아이디 입니다.')
                     })
                 }
-            }
+            },
+            cancel
 
 
         }
