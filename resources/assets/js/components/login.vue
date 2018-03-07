@@ -37,8 +37,9 @@
                         console.log(response.data);
                         if (response.data == 'true') {
                             alert('로그인 완료');
-                            this.$router.push('main');
-                            sessionStorage.setItem('auth', param);
+                            this.$router.push({ name: 'main'});
+                            sessionStorage.setItem('login',$('#id').val());
+                            window.location.reload();
 
                         }
                         else if(response.data == 'false') {

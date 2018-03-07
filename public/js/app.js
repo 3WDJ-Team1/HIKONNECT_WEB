@@ -46217,8 +46217,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+    methods: {
+        sessionver: function sessionver() {
+            if (sessionStorage.getItem('login') != null) {
+                return 'true';
+            }
+        },
+        logout: function logout() {
+            sessionStorage.clear();
+            this.$router.push({ name: 'main' });
+            window.location.reload();
+        }
+    }
+});
 
 /***/ }),
 /* 48 */
@@ -46233,7 +46250,7 @@ var render = function() {
       _c("div", { staticClass: "container-fluid" }, [
         _c(
           "div",
-          { staticClass: "navbar-header" },
+          { staticClass: "nav navbar-nav" },
           [
             _c("router-link", { attrs: { to: { name: "main" } } }, [
               _vm._v("홈으로")
@@ -46244,16 +46261,6 @@ var render = function() {
         _vm._v(" "),
         _c("div", [
           _c("ul", { staticClass: "nav navbar-nav" }, [
-            _c(
-              "li",
-              [
-                _c("router-link", { attrs: { to: { name: "login" } } }, [
-                  _vm._v("로그인")
-                ])
-              ],
-              1
-            ),
-            _vm._v(" "),
             _c(
               "li",
               [
@@ -46303,7 +46310,29 @@ var render = function() {
               ],
               1
             )
-          ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticStyle: { position: "absolute", "margin-left": "700px" } },
+            [
+              _vm.sessionver() == "true"
+                ? _c("p", [
+                    _c("button", { on: { click: _vm.logout } }, [
+                      _vm._v("로그아웃 ")
+                    ])
+                  ])
+                : _c(
+                    "p",
+                    [
+                      _c("router-link", { attrs: { to: { name: "login" } } }, [
+                        _c("button", [_vm._v(" 로그인")])
+                      ])
+                    ],
+                    1
+                  )
+            ]
+          )
         ])
       ])
     ])
@@ -46523,13 +46552,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-/* harmony default export */ __webpack_exports__["default"] = ({
-    methods: {
-        kk: function kk() {
-            alert(sessionStorage.getItem("userid"));
-        }
-    }
-});
+/* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
 /* 57 */
@@ -46539,7 +46562,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_c("button", { on: { click: _vm.kk } }, [_vm._v("s")])])
+  return _c("div")
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -46791,8 +46814,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     console.log(response.data);
                     if (response.data == 'true') {
                         alert('로그인 완료');
-                        _this.$router.push('main');
-                        sessionStorage.setItem('auth', param);
+                        _this.$router.push({ name: 'main' });
+                        sessionStorage.setItem('login', $('#id').val());
+                        window.location.reload();
                     } else if (response.data == 'false') {
                         alert('로그인 실패');
                     }
@@ -47222,7 +47246,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            hello: 'hello'
+            hello: 'sbs_cms/WE/2017/08/04/WE68468406_ori.jpg'
         };
     }
 });
@@ -47238,7 +47262,8 @@ var render = function() {
   return _c("div", [
     _c("img", {
       attrs: {
-        src: "https://spaceplace.nasa.gov/templates/featured/sun/" + _vm.hello,
+        src:
+          "http://img2.sbs.co.kr/img/sbs_cms/WE/2017/08/04/WE68468406_ori.jpg",
         width: "200"
       }
     })
