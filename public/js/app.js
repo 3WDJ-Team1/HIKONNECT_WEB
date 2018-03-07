@@ -1439,7 +1439,7 @@ function applyToTag (styleElement, obj) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(15);
-module.exports = __webpack_require__(72);
+module.exports = __webpack_require__(75);
 
 
 /***/ }),
@@ -1459,13 +1459,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_main_main_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_main_main_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_main_mainbody_vue__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_main_mainbody_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_main_mainbody_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_main_test_vue__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_main_test_vue__ = __webpack_require__(61);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_main_test_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_main_test_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_App_vue__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_App_vue__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_App_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_App_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_login_vue__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_login_vue__ = __webpack_require__(69);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_login_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_login_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_register_vue__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_register_vue__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_register_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_register_vue__);
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -46072,7 +46072,7 @@ var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(45)
 /* template */
-var __vue_template__ = __webpack_require__(57)
+var __vue_template__ = __webpack_require__(60)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -46122,6 +46122,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mainbody_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__mainbody_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mainbanner_vue__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mainbanner_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__mainbanner_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__lore_vue__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__lore_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__lore_vue__);
 //
 //
 //
@@ -46130,6 +46132,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+
 
 
 
@@ -46139,7 +46143,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     components: {
         'mainbar': __WEBPACK_IMPORTED_MODULE_0__mainbar_vue___default.a,
         'mainbody': __WEBPACK_IMPORTED_MODULE_1__mainbody_vue___default.a,
-        'mainbanner': __WEBPACK_IMPORTED_MODULE_2__mainbanner_vue___default.a
+        'mainbanner': __WEBPACK_IMPORTED_MODULE_2__mainbanner_vue___default.a,
+        'lore': __WEBPACK_IMPORTED_MODULE_3__lore_vue___default.a
     }
 });
 
@@ -46217,25 +46222,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
-/* harmony default export */ __webpack_exports__["default"] = ({
-    methods: {
-        sessionver: function sessionver() {
-            if (sessionStorage.getItem('login') != null) {
-                return 'true';
-            }
-        },
-        logout: function logout() {
-            sessionStorage.clear();
-            this.$router.push({ name: 'main' });
-            window.location.reload();
-        }
-    }
-});
+/* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
 /* 48 */
@@ -46310,29 +46298,7 @@ var render = function() {
               ],
               1
             )
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticStyle: { position: "absolute", "margin-left": "700px" } },
-            [
-              _vm.sessionver() == "true"
-                ? _c("p", [
-                    _c("button", { on: { click: _vm.logout } }, [
-                      _vm._v("로그아웃 ")
-                    ])
-                  ])
-                : _c(
-                    "p",
-                    [
-                      _c("router-link", { attrs: { to: { name: "login" } } }, [
-                        _c("button", [_vm._v(" 로그인")])
-                      ])
-                    ],
-                    1
-                  )
-            ]
-          )
+          ])
         ])
       ])
     ])
@@ -46569,13 +46535,157 @@ if (false) {
 /* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(58)
+/* template */
+var __vue_template__ = __webpack_require__(59)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\main\\lore.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7037b51c", Component.options)
+  } else {
+    hotAPI.reload("data-v-7037b51c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 58 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    methods: {
+        sessionver: function sessionver() {
+            if (sessionStorage.getItem('login') != null) {
+                return 'true';
+            }
+        },
+        logout: function logout() {
+            sessionStorage.clear();
+            this.$router.push({ name: 'main' });
+            window.location.reload();
+        }
+    }
+});
+
+/***/ }),
+/* 59 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "span",
+      [
+        _c("router-link", { attrs: { to: { name: "register" } } }, [
+          _vm._v("회원가입  ")
+        ])
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _vm.sessionver() == "true"
+      ? _c("span", { on: { click: _vm.logout } }, [_vm._v("  로그아웃  ")])
+      : _c(
+          "span",
+          [
+            _c("router-link", { attrs: { to: { name: "login" } } }, [
+              _vm._v("  로그인")
+            ])
+          ],
+          1
+        )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-7037b51c", module.exports)
+  }
+}
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    [_c("mainbar"), _vm._v(" "), _c("mainbanner"), _vm._v(" "), _c("mainbody")],
+    [
+      _c("mainbar"),
+      _vm._v(" "),
+      _c("mainbanner", {
+        staticStyle: {
+          width: "1140px",
+          height: "200px",
+          "background-color": "red"
+        }
+      }),
+      _vm._v(" "),
+      _c("mainbody", {
+        staticStyle: {
+          width: "1140px",
+          height: "600px",
+          "background-color": "yellow"
+        }
+      }),
+      _vm._v(" "),
+      _c("lore", {
+        staticStyle: {
+          position: "absolute",
+          "margin-left": "1180px",
+          "margin-top": "-870px"
+        }
+      })
+    ],
     1
   )
 }
@@ -46590,15 +46700,15 @@ if (false) {
 }
 
 /***/ }),
-/* 58 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(59)
+var __vue_script__ = __webpack_require__(62)
 /* template */
-var __vue_template__ = __webpack_require__(60)
+var __vue_template__ = __webpack_require__(63)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -46637,7 +46747,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 59 */
+/* 62 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46647,20 +46757,67 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
-/* 60 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("header", { attrs: { id: "header" } }, [
+        _c("h1", [
+          _c("a", { attrs: { href: "index.html" } }, [_vm._v("Transit")])
+        ]),
+        _vm._v(" "),
+        _c("nav", { attrs: { id: "nav" } }, [
+          _c("ul", [
+            _c("li", [
+              _c("a", { attrs: { href: "index.html" } }, [_vm._v("Home")])
+            ]),
+            _vm._v(" "),
+            _c("li", [
+              _c("a", { attrs: { href: "generic.html" } }, [_vm._v("Generic")])
+            ]),
+            _vm._v(" "),
+            _c("li", [
+              _c("a", { attrs: { href: "elements.html" } }, [
+                _vm._v("Elements")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("li", [
+              _c("a", { staticClass: "button special", attrs: { href: "#" } }, [
+                _vm._v("Sign Up")
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -46671,19 +46828,19 @@ if (false) {
 }
 
 /***/ }),
-/* 61 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(62)
+  __webpack_require__(65)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(64)
+var __vue_script__ = __webpack_require__(67)
 /* template */
-var __vue_template__ = __webpack_require__(65)
+var __vue_template__ = __webpack_require__(68)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -46722,13 +46879,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 62 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(63);
+var content = __webpack_require__(66);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -46748,7 +46905,7 @@ if(false) {
 }
 
 /***/ }),
-/* 63 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(12)(false);
@@ -46762,7 +46919,7 @@ exports.push([module.i, "\n.fade-enter-active, .fade-leave-active {\n  -webkit-t
 
 
 /***/ }),
-/* 64 */
+/* 67 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46791,7 +46948,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
-/* 65 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -46817,15 +46974,15 @@ if (false) {
 }
 
 /***/ }),
-/* 66 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(67)
+var __vue_script__ = __webpack_require__(70)
 /* template */
-var __vue_template__ = __webpack_require__(68)
+var __vue_template__ = __webpack_require__(71)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -46864,7 +47021,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 67 */
+/* 70 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46923,7 +47080,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 68 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -47011,9 +47168,9 @@ var render = function() {
                     {
                       staticClass: "btn btn-primary",
                       staticStyle: { "margin-left": "270px" },
-                      attrs: { to: { name: "register" } }
+                      attrs: { to: { name: "main" } }
                     },
-                    [_vm._v(" 회원가입")]
+                    [_vm._v(" 취소")]
                   )
                 ],
                 1
@@ -47036,15 +47193,15 @@ if (false) {
 }
 
 /***/ }),
-/* 69 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(70)
+var __vue_script__ = __webpack_require__(73)
 /* template */
-var __vue_template__ = __webpack_require__(71)
+var __vue_template__ = __webpack_require__(74)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -47083,11 +47240,31 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 70 */
+/* 73 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -47123,7 +47300,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             var uri = 'http://localhost:8000/user';
-            if ($('#id').val() == "" || $('#pw').val() == "" || $('#pwvc').val() == "") {
+            if ($('#id').val() == "" || $('#pw').val() == "" || $('#pwvc').val() == "" || $('#nn').val() == "") {
                 alert('값이 비어있습니다');
             } else if ($('#pw').val() != $('#pwvc').val()) {
                 alert('비밀 번호와 비밀번호 확인이 다릅니다');
@@ -47141,7 +47318,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 71 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -47227,6 +47404,312 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.item.nn,
+                        expression: "item.nn"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    staticStyle: { "margin-top": "10px" },
+                    attrs: {
+                      type: "text",
+                      placeholder: "Enter nickname",
+                      id: "nn"
+                    },
+                    domProps: { value: _vm.item.nn },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.item, "nn", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.item.phone,
+                        expression: "item.phone"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    staticStyle: { "margin-top": "10px" },
+                    attrs: {
+                      type: "text",
+                      placeholder: "Enter phone",
+                      id: "phone"
+                    },
+                    domProps: { value: _vm.item.phone },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.item, "phone", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("label", [_vm._v("번호 공개 여부")]),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.item.phonesc,
+                        expression: "item.phonesc"
+                      }
+                    ],
+                    staticStyle: { "margin-top": "10px" },
+                    attrs: { type: "checkbox", id: "phonesc" },
+                    domProps: {
+                      checked: Array.isArray(_vm.item.phonesc)
+                        ? _vm._i(_vm.item.phonesc, null) > -1
+                        : _vm.item.phonesc
+                    },
+                    on: {
+                      change: function($event) {
+                        var $$a = _vm.item.phonesc,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = null,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 && (_vm.item.phonesc = $$a.concat([$$v]))
+                          } else {
+                            $$i > -1 &&
+                              (_vm.item.phonesc = $$a
+                                .slice(0, $$i)
+                                .concat($$a.slice($$i + 1)))
+                          }
+                        } else {
+                          _vm.$set(_vm.item, "phonesc", $$c)
+                        }
+                      }
+                    }
+                  }),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("label", [_vm._v("성별 선택")]),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.item.gender,
+                          expression: "item.gender"
+                        }
+                      ],
+                      attrs: { id: "gender" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.item,
+                            "gender",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    [
+                      _c("option", [_vm._v(" 남자 ")]),
+                      _vm._v(" "),
+                      _c("option", [_vm._v(" 여자 ")])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("label", [_vm._v("성별 공개 여부")]),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.item.gendersc,
+                        expression: "item.gendersc"
+                      }
+                    ],
+                    staticStyle: { "margin-top": "10px" },
+                    attrs: { type: "checkbox", id: "gendersc" },
+                    domProps: {
+                      checked: Array.isArray(_vm.item.gendersc)
+                        ? _vm._i(_vm.item.gendersc, null) > -1
+                        : _vm.item.gendersc
+                    },
+                    on: {
+                      change: function($event) {
+                        var $$a = _vm.item.gendersc,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = null,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 && (_vm.item.gendersc = $$a.concat([$$v]))
+                          } else {
+                            $$i > -1 &&
+                              (_vm.item.gendersc = $$a
+                                .slice(0, $$i)
+                                .concat($$a.slice($$i + 1)))
+                          }
+                        } else {
+                          _vm.$set(_vm.item, "gendersc", $$c)
+                        }
+                      }
+                    }
+                  }),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("label", [_vm._v("연령대 선택")]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.item.age,
+                          expression: "item.age"
+                        }
+                      ],
+                      attrs: { id: "age" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.item,
+                            "age",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    [
+                      _c("option", [_vm._v(" 10대 ")]),
+                      _vm._v(" "),
+                      _c("option", [_vm._v(" 20대 ")]),
+                      _vm._v(" "),
+                      _c("option", [_vm._v(" 30대 ")]),
+                      _vm._v(" "),
+                      _c("option", [_vm._v(" 40대 ")]),
+                      _vm._v(" "),
+                      _c("option", [_vm._v(" 50대 ")]),
+                      _vm._v(" "),
+                      _c("option", [_vm._v(" 60대 이상 ")])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("label", [_vm._v("연령 공개 여부")]),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.item.agesc,
+                        expression: "item.agesc"
+                      }
+                    ],
+                    staticStyle: { "margin-top": "10px" },
+                    attrs: { type: "checkbox", id: "agesc" },
+                    domProps: {
+                      checked: Array.isArray(_vm.item.agesc)
+                        ? _vm._i(_vm.item.agesc, null) > -1
+                        : _vm.item.agesc
+                    },
+                    on: {
+                      change: function($event) {
+                        var $$a = _vm.item.agesc,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = null,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 && (_vm.item.agesc = $$a.concat([$$v]))
+                          } else {
+                            $$i > -1 &&
+                              (_vm.item.agesc = $$a
+                                .slice(0, $$i)
+                                .concat($$a.slice($$i + 1)))
+                          }
+                        } else {
+                          _vm.$set(_vm.item, "agesc", $$c)
+                        }
+                      }
+                    }
+                  }),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("label", [_vm._v("전체 공개 ")]),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.item.scv,
+                        expression: "item.scv"
+                      }
+                    ],
+                    staticStyle: { "margin-top": "10px" },
+                    attrs: { type: "radio", name: "sc" },
+                    domProps: { checked: _vm._q(_vm.item.scv, null) },
+                    on: {
+                      change: function($event) {
+                        _vm.$set(_vm.item, "scv", null)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("label", [_vm._v("그룹 공개 ")]),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.item.scv,
+                        expression: "item.scv"
+                      }
+                    ],
+                    staticStyle: { "margin-top": "10px" },
+                    attrs: { type: "radio", name: "sc" },
+                    domProps: { checked: _vm._q(_vm.item.scv, null) },
+                    on: {
+                      change: function($event) {
+                        _vm.$set(_vm.item, "scv", null)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
                   _c("br"),
                   _vm._v(" "),
                   _c("input", {
@@ -47240,7 +47723,14 @@ var render = function() {
                     {
                       staticClass: "btn btn-primary",
                       staticStyle: { "margin-left": "270px" },
-                      attrs: { to: { name: "main" } }
+                      attrs: { to: { name: "main" } },
+                      model: {
+                        value: _vm.item.pwv,
+                        callback: function($$v) {
+                          _vm.$set(_vm.item, "pwv", $$v)
+                        },
+                        expression: "item.pwv"
+                      }
                     },
                     [_vm._v(" 취소")]
                   )
@@ -47265,7 +47755,7 @@ if (false) {
 }
 
 /***/ }),
-/* 72 */
+/* 75 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

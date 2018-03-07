@@ -9,9 +9,29 @@
                         <input type="text"     style="margin-top: 10px" v-model="item.idv" class="form-control" placeholder="Enter id" id="id"/>
                         <input type="password" style="margin-top: 10px" v-model="item.pwv" class="form-control" placeholder="Enter password" id="pw"/>
                         <input type="password" style="margin-top: 10px" class="form-control" placeholder="Enter password again" id="pwvc"/>
+                        <input type="text" style="margin-top: 10px" v-model="item.nn" class="form-control" placeholder="Enter nickname" id="nn"/>
+                        <input type="text" style="margin-top: 10px" v-model="item.phone" class="form-control" placeholder="Enter phone" id="phone"/>
+                        <label>번호 공개 여부</label><input type="checkbox" style="margin-top: 10px" v-model="item.phonesc"  id="phonesc"/><br>
+                        <label>성별 선택</label><select id="gender" v-model="item.gender">
+                            <option> 남자 </option>
+                            <option> 여자 </option>
+                        </select>
+                        <label>성별 공개 여부</label><input type="checkbox" style="margin-top: 10px" v-model="item.gendersc"  id="gendersc"/><br>
+                        <label>연령대 선택</label>
+                        <select id="age" v-model="item.age">
+                            <option> 10대 </option>
+                            <option> 20대 </option>
+                            <option> 30대 </option>
+                            <option> 40대 </option>
+                            <option> 50대 </option>
+                            <option> 60대 이상 </option>
+                        </select>
+                        <label>연령 공개 여부</label><input type="checkbox" style="margin-top: 10px" v-model="item.agesc"   id="agesc"/><br>
+                        <label>전체 공개 </label><input type="radio" name="sc" style="margin-top: 10px" v-model="item.scv" />
+                        <label>그룹 공개 </label><input type="radio" name="sc" style="margin-top: 10px" v-model="item.scv" />
                         <br>
-                        <input type='button' class="btn btn-primary" v-on:click="regist" value="확인">
-                        <router-link style='margin-left: 270px' :to="{ name: 'main' }" class = "btn btn-primary"> 취소</router-link>
+                        <input type='button'  class="btn btn-primary" v-on:click="regist" value="확인">
+                        <router-link style='margin-left: 270px' :to="{ name: 'main' }" v-model="item.pwv" class = "btn btn-primary"> 취소</router-link>
                     </div>
                 </div>
             </div>
@@ -33,7 +53,7 @@
 
                 let uri= 'http://localhost:8000/user';
                 if($('#id').val() == "" || $('#pw').val() == ""
-                    || $('#pwvc').val() == "") {
+                    || $('#pwvc').val() == "" || $('#nn').val() == "") {
                     alert('값이 비어있습니다');
                 }
                 else if($('#pw').val() != $('#pwvc').val()) {

@@ -10,7 +10,7 @@
                         <input type="password" style="margin-top: 10px" v-model="item.pwv" class="form-control" placeholder="Enter password" id="pw"/>
                         <br>
                         <input type='button' class="btn btn-primary" v-on:click="login" value="로그인">
-                        <router-link style='margin-left: 270px' :to="{ name: 'register' }" class = "btn btn-primary"> 회원가입</router-link>
+                        <router-link style='margin-left: 270px' :to="{ name: 'main' }" class = "btn btn-primary"> 취소</router-link>
                     </div>
                 </div>
             </div>

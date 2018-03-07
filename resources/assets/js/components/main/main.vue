@@ -1,8 +1,9 @@
 <template>
     <div>
         <mainbar></mainbar>
-        <mainbanner></mainbanner>
-        <mainbody></mainbody>
+        <mainbanner style="width: 1140px; height: 200px; background-color: red"></mainbanner>
+        <mainbody style="width: 1140px; height: 600px; background-color: yellow"></mainbody>
+        <lore style="position: absolute; margin-left: 1180px; margin-top: -870px"></lore>
 
     </div>
 </template>
@@ -10,13 +11,15 @@
     import mainbar from './mainbar.vue'
     import mainbody from './mainbody.vue'
     import mainbanner from './mainbanner.vue'
+    import lore     from './lore.vue'
 
 
     export default {
         components: {
             'mainbar'   : mainbar,
             'mainbody'  : mainbody,
-            'mainbanner': mainbanner
+            'mainbanner': mainbanner,
+            'lore'      : lore
         }
     }
 </script>
