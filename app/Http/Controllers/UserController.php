@@ -52,7 +52,8 @@ class UserController extends Controller
         }
         $userinfo = array(
             'idv' => $request->get('idv'),
-            'pwv' => $request->get('pwv')
+            'pwv' => $request->get('pwv'),
+            'nn' => $request->get('nn')
         );
         $this->model->userReg($userinfo);
         return response()->json('true');

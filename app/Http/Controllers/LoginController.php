@@ -35,9 +35,4 @@ class LoginController extends Controller
         return response()->json('false');
     }
 
-    public function logout(Request $request) {
-        $request->session()->flush('login');
-        return redirect()->route('/');
-    }
-
 }
