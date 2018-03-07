@@ -24,8 +24,24 @@ use Illuminate\Http\Request;
  */
 class User extends Model
 {
-    protected $table = 'item';
-    public $timestamps = false;
+    protected $table = 'user';
+
+    public function userReg(Array $userinfo) {
+        User::insert($userinfo);
+    }
+
+    public function userUpdate(Array $userinfo,$id) {
+        User::where('id',$id)->update([$userinfo]);
+    }
+
+    public function userDelete($id) {
+        User::where('id',$id)->delete();
+    }
+}
+
+class User_Profile extends Model
+{
+    protected $table = 'user_profile';
 
     public function userReg(Array $userinfo) {
         User::insert($userinfo);

@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 class UserController extends Controller
 {
     private $model = null;
+    private $scope;
 
     public function __construct()
     {
@@ -47,6 +48,8 @@ class UserController extends Controller
         foreach ($usercheck as $user) {
             if ($user->idv == $request->get('idv'))
                 return response()->json('false');
+            if ($user->nn == $request->get('nn'))
+                return response()->json('nnfalse');
             else
                 continue;
         }
@@ -56,6 +59,22 @@ class UserController extends Controller
             'nn' => $request->get('nn')
         );
         $this->model->userReg($userinfo);
+        if ($request->get('phonesc') == true) {
+            $this->scope += 100;
+        }
+        if ($request->get('gendersc') == true) {
+            $this->scope += 10;
+        }
+        if ($request->get(''))
+        $userprofile = array(
+            'idv'           => $request->get('idv'),
+            'nickname'     => $request->get('nickname'),
+            'image_path'   => 'abc',
+            'phone'         => $request->get('phone'),
+            'gender'        => $request->get('gender'),
+            'age_group'     => $request->get('age_group'),
+            'scope'         => $this->scope
+        );
         return response()->json('true');
     }
 
