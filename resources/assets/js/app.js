@@ -16,6 +16,8 @@ Vue.use(VueAxios, axios);
 
  
 import main from './components/main/main.vue';
+import mainbody from './components/main/mainbody.vue';
+import test from './components/main/test.vue';
 import App from './components/App.vue';
 import login from './components/login.vue';
 import register from './components/register.vue';
@@ -24,22 +26,36 @@ import register from './components/register.vue';
 
 const routes = [
     {
-        name: 'register',
-        path: '/register',
-        component: register
-    },
-    {
-        name: 'login',
-        path: '/login',
-        component: login
-    },
-    {
         name: 'main',
         path: '/',
-        component: main
+        component: main,
+        children: [
+            {
+                name: 'mainbody',
+                path: '/main',
+                component: mainbody
+            },
+            {
+                name: 'test',
+                path: '/test',
+                component: test
+            },
+            {
+                name: 'register',
+                path: '/register',
+                component: register
+            },
+            {
+                name: 'login',
+                path: '/login',
+                component: login
+            }
+        ]
     }
+
 ];
  
 const router = new VueRouter({ mode: 'history', routes:routes });
  
 new Vue(Vue.util.extend({ router }, App)).$mount('#app');//view-router 와 직접적인 관련이 있다.
+

@@ -11,7 +11,7 @@
                         <input type="password" style="margin-top: 10px" class="form-control" placeholder="Enter password again" id="pwvc"/>
                         <br>
                         <input type='button' class="btn btn-primary" v-on:click="regist" value="확인">
-                        <router-link style='margin-left: 270px' :to="{ name: 'Example' }" class = "btn btn-primary"> 취소</router-link>
+                        <router-link style='margin-left: 270px' :to="{ name: 'main' }" class = "btn btn-primary"> 취소</router-link>
                     </div>
                 </div>
             </div>
@@ -43,11 +43,11 @@
                     this.axios.post(uri, this.item).then((response) => {
                         if(response.data == 'true') {
                             alert('회원가입 완료');
-                            this.$router.push({ name: 'Example'});
+                            this.$router.push({ name: 'main'});
                         }
                         else if(response.data == 'false')
                             alert('이미 존재하는 아이디 입니다.');
-                            this.$router.push({ name: 'Example'});
+                            this.$router.push({ name: 'main'});
 
                     })
                 }

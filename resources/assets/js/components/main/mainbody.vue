@@ -1,8 +1,18 @@
 <template>
-    <div style="background-color: red; height: 700px; width: 700px">
-    asdasd
+    <div  id="#test">
+        <transition name="fade">
+            <router-view></router-view>
+        </transition>
     </div>
 </template>
+<style>
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s
+    }
+    .fade-enter, .fade-leave-active {
+        opacity: 0
+    }
+</style>
 <script>
     export default {
 

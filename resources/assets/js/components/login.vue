@@ -33,18 +33,17 @@
                 }
                 else {
                     let uri = 'http://localhost:8000/loginprocess';
-                    this.axios.post(uri, this.item).then(function (response) {
+                    this.axios.post(uri, this.item).then((response) => {
                         console.log(response.data);
                         if (response.data == 'true') {
                             alert('로그인 완료');
-                            $('#id').val('');
-                            $('#pw').val('');
+                            this.$router.push('main')
                         }
                         else if(response.data == 'false') {
                             alert('로그인 실패');
 
                         }
-                    })
+                    });
                 }
 
             }
