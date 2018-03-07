@@ -1,10 +1,14 @@
 <template>
     <div>
-        야이씨발년아
+        <button v-on:click="kk">s</button>
     </div>
 </template>
 <script>
     export default {
-
+        methods: {
+            kk() {
+                alert(sessionStorage.getItem("userid"));
+            }
+        }
     }
 </script>
