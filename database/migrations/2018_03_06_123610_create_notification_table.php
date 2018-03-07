@@ -4,9 +4,10 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserTable extends Migration
+class CreateNotificationTable extends Migration
 {
-    private $_table = 'user';
+    private $_table = 'notification';
+
     /**
      * Run the migrations.
      *
@@ -15,11 +16,13 @@ class CreateUserTable extends Migration
     public function up()
     {
         Schema::create(
-            $this->_table,
+            'notification', 
             function (Blueprint $table) {
                 $table->uuid('uuid')->primary();
-                $table->string('id', 20);
-                $table->string('password', 20);
+                $table->uuid('writer');
+                $table->string('title', 20);
+                $table->string('content', 200);
+                $table->unsignedBigInteger('hits')->default(0);
                 $table->timestamps();
             }
         );

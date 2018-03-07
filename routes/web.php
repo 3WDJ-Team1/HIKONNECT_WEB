@@ -16,4 +16,4 @@ Route::get(
     }
 );
 
-Route::resource('notice', 'NoticeController');
+Route::resource('/rest/notice', 'NoticeController');

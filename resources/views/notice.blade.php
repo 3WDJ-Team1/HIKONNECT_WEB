@@ -40,7 +40,7 @@
         function createNotice(){
             $.ajax({
                 method: 'post',
-                url: '/notice',
+                url: '/be/notice',
                 dataType: 'json',
                 data: {
                     uuid: 'dump',
@@ -57,7 +57,7 @@
         function updateNotice(){
             $.ajax({
                 method: 'patch',
-                url: '/notice/35e5dfc8-1fa9-11e8-a8b7-c8d3ffedbe28',
+                url: '/be/notice/35e5dfc8-1fa9-11e8-a8b7-c8d3ffedbe28',
                 dataType: 'json',
                 data: {
                     writer: '010f7f88-f181-3646-9ed3-ff108e8c6505',
@@ -73,7 +73,7 @@
         function deleteNotice(){
             $.ajax({
                 method: 'delete',
-                url: '/notice/4addcdb5-1fa9-11e8-a8b7-c8d3ffedbe28',
+                url: '/be/notice/4addcdb5-1fa9-11e8-a8b7-c8d3ffedbe28',
             }).done(() => {
                 console.log('Delete request sended');
             });

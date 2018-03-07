@@ -11,12 +11,15 @@
 use Faker\Generator as Faker;
 
 $factory->define(
-    App\Models\User::class,
+    App\Models\HikingPlan::class, 
     function (Faker $faker) {
         return [
             'uuid'              => $faker->uuid(),
-            'id'                => $faker->userName(),
-            'password'          => $faker->password(),
+            'hiking_group'      => App\Models\HikingGroup::pluck('uuid')->random(),
+            'start_date'        => $faker->dateTimeThisMonth(),
+            'starting_point'    => '[]',
+            'stopover'          => '[]',
+            'end_point'         => '[]',
         ];
     }
 );
