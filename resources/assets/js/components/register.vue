@@ -48,6 +48,7 @@
                         else if(response.data == 'false')
                             alert('이미 존재하는 아이디 입니다.');
                             this.$router.push({ name: 'Example'});
+
                     })
                 }
             },
