@@ -13,13 +13,13 @@ window.Vue.use(VueRouter);
  
 import ExampleComponent from "./components/ExampleComponent.vue";
 import App from './components/App.vue';
-import groupMake from "./components/groupMake.vue";
+import groupList from "../components/groupList.vue";
 
 const routes = [
     {
-        name: 'groupMake',
+        name: 'groupList',
         path: '/',
-        component: groupMake,
+        component: groupList,
     }
 ];
  

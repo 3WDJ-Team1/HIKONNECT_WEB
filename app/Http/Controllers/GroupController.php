@@ -27,8 +27,8 @@ class GroupController extends Controller
     public function index()
     {
         $groupInformations = $this->model->getGroupInformations();
-        return view('layouts/app', ['groups' => $groupInformations]);
-            
+        $numberOfPeople = $this->model->getPeopleCount();
+        return view('layouts/app', ['groups' => $groupInformations, 'peoplecount' => $numberOfPeople]);
     }
 
     /**
