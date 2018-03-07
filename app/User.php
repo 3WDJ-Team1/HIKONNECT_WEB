@@ -30,4 +30,12 @@ class User extends Model
     public function userReg(Array $userinfo) {
         User::insert($userinfo);
     }
+
+    public function userUpdate(Array $userinfo,$id) {
+        User::where('id',$id)->update([$userinfo]);
+    }
+
+    public function userDelete($id) {
+        User::where('id',$id)->delete();
+    }
 }
