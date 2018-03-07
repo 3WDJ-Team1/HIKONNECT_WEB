@@ -65,7 +65,15 @@ class UserController extends Controller
         if ($request->get('gendersc') == true) {
             $this->scope += 10;
         }
-        if ($request->get(''))
+        if ($request->get('agesc') == true) {
+            $this->scope += 1;
+        }
+        if ($request->get('scv') == '전체 공개') {
+            $this->scope += 10000;
+        }
+        elseif ($request->get('scv') == '그룹 공개') {
+            $this->scope += 1000;
+        }
         $userprofile = array(
             'idv'           => $request->get('idv'),
             'nickname'     => $request->get('nickname'),
