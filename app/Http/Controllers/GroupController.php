@@ -28,7 +28,7 @@ class GroupController extends Controller
     {
         $groupInformations = $this->model->getGroupInformations();
         $numberOfPeople = $this->model->getPeopleCount();
-        return view('layouts/app', ['groups' => $groupInformations, 'peoplecount' => $numberOfPeople]);
+        return view('layouts/app', ['groups' => $groupInformations, 'persons' => $numberOfPeople]);
     }
 
     /**
@@ -51,6 +51,7 @@ class GroupController extends Controller
     public function store(Request $request)
     {
         $selection = $request->input('selection');
+
     }
 
     /**
