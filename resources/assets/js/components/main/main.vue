@@ -3,7 +3,7 @@
         <mainbar></mainbar>
         <mainbanner style="width: 1140px; height: 200px; background-color: red"></mainbanner>
         <mainbody style="width: 1140px; height: 600px; background-color: yellow"></mainbody>
-        <lore style="position: absolute; margin-left: 1180px; margin-top: -870px"></lore>
+        <lore style="position: absolute; margin-left: 1000px; margin-top: -870px"></lore>
 
     </div>
 </template>
