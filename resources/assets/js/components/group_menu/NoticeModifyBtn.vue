@@ -15,10 +15,12 @@
 
 <script>
     export default {
+        props: ['propsNotice'],
         methods : {
             // the function for open modal
             openModifyModal : function() {
                 this.$refs.modify.open();
+                this.$EventBus.$emit('noticeData', this.propsNotice);
             },
         },
     }

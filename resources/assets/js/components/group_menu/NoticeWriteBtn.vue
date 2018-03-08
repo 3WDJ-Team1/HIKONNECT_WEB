@@ -21,7 +21,9 @@
         methods : {
             openWriteModal : function() {
                 this.$refs.write.open();
-            }
+                this.$EventBus.$emit('noticeData', {title: '', content: ''});
+            },
+
         }
     }
 </script>

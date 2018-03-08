@@ -66,6 +66,7 @@ sessionStorage.setItem('nickname', '닉넴');
                 this.text = data.content;
             })
         }
+            
     }
 </script>
 

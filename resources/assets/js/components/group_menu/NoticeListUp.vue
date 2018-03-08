@@ -11,7 +11,7 @@
             <!-- the wrapper of notice card -->
             <div class="card_wrapper">
                 <!-- if you click this div, -->
-                <div v-b-toggle="'n' + notice.uuid" class="m-1" v-on:click="sendData(notice)">
+                <div v-b-toggle="'n' + notice.uuid" class="m-1">
                     <h3 class="card-title">{{ notice.title }}</h3>
                     <p class="card-text">writer : {{ notice.nickname }} | hits : {{ notice.hits }}</p>
                    
@@ -23,7 +23,7 @@
                     </div>
                     <!-- send notice.uuid to children components -->
                     <router-view name="delete"></router-view>
-                    <router-view name="modify"></router-view>
+                    <router-view name="modify" v-bind:propsNotice="notice"></router-view>
                 </b-collapse>
             </div>
         </div>
@@ -44,11 +44,6 @@
             axios.get('http://localhost:8000/notice/0/5')
                 .then(response => {console.log(response); this.notices = response.data});
         },
-        methods: {
-            sendData: function(notice) {
-                this.$EventBus.$emit('noticeData', notice);
-            }
-        }
     }
 </script>
 
