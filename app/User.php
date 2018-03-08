@@ -10,6 +10,7 @@
  */
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
@@ -26,9 +27,16 @@ class User extends Model
 {
     protected $table = 'user';
 
-    public function userReg(Array $userinfo) {
-        User::insert($userinfo);
+    public function userReg(Request $request) {
+        User::insert([
+            'uuid'           => '',
+            'id'             => $request->get('idv'),
+            'password'      => $request->get('pwv'),
+            'created_at'    => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'    => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
     }
+
 
     public function userUpdate(Array $userinfo,$id) {
         User::where('id',$id)->update([$userinfo]);
@@ -43,15 +51,26 @@ class User_Profile extends Model
 {
     protected $table = 'user_profile';
 
-    public function userReg(Array $userinfo) {
-        User::insert($userinfo);
+    public function userReg(Request $request,$userid) {
+        User_Profile::insert([
+            'uuid'          => '',
+            'user'          => $userid,
+            'nickname'     => $request->get('nn'),
+            'image_path'   => 'https://lorempixe.com/640/400/?66549',
+            'phone'         => '010-0000-0000',
+            'gender'        => '1',
+            'age_group'     => '2',
+            'scope'         => '4',
+            'created_at'    => Carbon::now()->format('Y-m-d H:i:s'),
+            'update_at'     => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
     }
 
     public function userUpdate(Array $userinfo,$id) {
-        User::where('id',$id)->update([$userinfo]);
+        User_Profile::where('id',$id)->update([$userinfo]);
     }
 
     public function userDelete($id) {
-        User::where('id',$id)->delete();
+        User_Profile::where('id',$id)->delete();
     }
 }

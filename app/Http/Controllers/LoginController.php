@@ -24,13 +24,14 @@ class LoginController extends Controller
         $userid = $request->get('idv');
         $userinfo = User::all();
         foreach ($userinfo as $user) {
-            if ($user->idv == $request->get('idv') && $user->pwv == $request->get('pwv')) {
+            if ($user->id == $request->get('idv') && $user->password == $request->get('pwv')) {
                 $request->session()->put('login',true);
                 $request->session()->put('userid',$userid);
                 return response()->json('true');
             }
             else
                 continue;
+
         }
         return response()->json('false');
     }
