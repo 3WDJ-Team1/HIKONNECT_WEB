@@ -1,8 +1,8 @@
 <template>
-    <div class="container" style="margin: 0 auto">
+    <div class="container" style="margin-left: 130px;" >
         <div class="row">
             <div class="col-md-5 col-md-offset-2">
-                <div class="panel panel-default" style="margin-top: 20px">
+                <div class="panel panel-default" style="margin-top: 150px">
                     <div class="panel-heading">로그인</div>
 
                     <div class="panel-body">
@@ -10,7 +10,7 @@
                         <input type="password" style="margin-top: 10px" v-model="item.pwv" class="form-control" placeholder="Enter password" id="pw"/>
                         <br>
                         <input type='button' class="btn btn-primary" v-on:click="login" value="로그인">
-                        <router-link style='margin-left: 270px' :to="{ name: 'main' }" class = "btn btn-primary"> 취소</router-link>
+                        <router-link style='margin-left: 298px' :to="{ name: 'main' }" class = "btn btn-primary"> 취소</router-link>
                     </div>
                 </div>
             </div>
