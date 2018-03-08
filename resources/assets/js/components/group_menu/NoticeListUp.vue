@@ -1,10 +1,11 @@
 <template>
     <!-- the wrapper of notice list -->
-    <div class="text-center">
+    <div class="text-center" id="group_notice">
         <!-- show the name of group -->
         <h1>{{ groupName }}</h1>
         <h2>Group notice</h2>
         <br>
+        <router-view name="write"></router-view>
         <!-- notice div are formed automatically by data.notices -->
         <div v-for="notice in notices">
             <!-- the wrapper of notice card -->
@@ -13,12 +14,16 @@
                 <div v-b-toggle="'n' + notice.uuid" class="m-1">
                     <h3 class="card-title">{{ notice.title }}</h3>
                     <p class="card-text">writer : {{ notice.writer }} | hits : {{ notice.hits }}</p>
+                   
                 </div>
                 <!-- this will be shown. -->
                 <b-collapse v-bind:id="'n' + notice.uuid">
-                    <b-card class="notice_text">
-                            {{ notice.text }}
-                    </b-card>
+                    <div class="notice_text">
+                        {{ notice.content }}
+                    </div>
+                    <!-- send notice.uuid to children components -->
+                    <router-view name="delete" v-bind:propsUuid="notice.uuid"></router-view>
+                    <router-view name="modify" v-bind:propsUuid="notice.uuid"></router-view>
                 </b-collapse>
             </div>
         </div>
@@ -27,42 +32,17 @@
 
 <script>
     export default {
-        data : function() {
-            return {
+        data : ()  => ({
                 // groupName and notices will be changed by http response. (now there're dump data)
                 groupName : "3WDJ-Team1",
                 notices : [
                     // the type of notices is 'object' certainly.
-                    {
-                        uuid : '1',
-                        title : 'Dump1',
-                        writer : 'tester1',
-                        hits : 10,
-                        text : "Some quick example text to build on the card and make up the bulk of the card's content."
-                    },
-                    {
-                        uuid : '2',
-                        title : 'Dump2',
-                        writer : 'tester2',
-                        hits : 20,
-                        text : "Some quick example text to build on the card and make up the bulk of the card's content."
-                    },
-                    {
-                        uuid : '3',
-                        title : 'Dump3',
-                        writer : 'tester3',
-                        hits : 30,
-                        text : "exampleexampleexampleexampleexampleexampleexampleexampleexampleexampleexample exampleexampleexampleexampleexample text to build on the card and make up the bulk of the card's content."
-                    },
-                    {
-                        uuid : '4',
-                        title : 'Dump4',
-                        writer : 'tester4',
-                        hits : 40,
-                        text : "Some quick example text to build on the card and make up the bulk of the card's content."
-                    }
                 ],
-            }
+        }),
+        beforeMount() {
+            // get object of notice information
+            axios.get('http://localhost:8000/notice/0/10')
+                .then(response => {console.log(response); this.notices = response.data});
         }
     }
 </script>
@@ -81,6 +61,7 @@
 /* class for inner text of notice cards */
 .notice_text {
     width: 90%;
+    margin: 0 auto;
     word-break: keep-all;
 }
 </style>
