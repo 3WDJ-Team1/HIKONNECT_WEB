@@ -36,7 +36,17 @@ class Notification extends Model
      */
     public function getNotifications(int $pageIndex = 0, int $perPage = 5)
     {
-        return Notification::skip($pageIndex)->take($perPage)->get();
+        return Notification::join('user', 'notification.writer', '=', 'user.uuid')
+            ->join('user_profile', 'user.uuid', '=', 'user_profile.user')
+            ->select(
+                'notification.uuid', 
+                'user_profile.nickname', 
+                'notification.title', 
+                'notification.content', 
+                'notification.hits',
+                'notification.created_at',
+                'notification.updated_at'
+            )->skip($pageIndex)->take($perPage)->get();
     }
 
     /**
