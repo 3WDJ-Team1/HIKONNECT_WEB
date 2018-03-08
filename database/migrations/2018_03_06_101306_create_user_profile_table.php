@@ -22,10 +22,10 @@ class CreateUserProfileTable extends Migration
                 $table->uuid('user');
                 $table->string('nickname', 20);
                 $table->string('image_path', 200);
-                $table->char('phone', 13);
-                $table->boolean('gender');
-                $table->tinyInteger('age_group')->unsigned();
-                $table->binary('scope', 5);
+                $table->char('phone', 13)->nullable();
+                $table->boolean('gender')->nullable();
+                $table->tinyInteger('age_group')->unsigned()->nullable();
+                $table->unsignedSmallInteger('scope', 5)->default('00000');
                 $table->timestamps();
             }
         );

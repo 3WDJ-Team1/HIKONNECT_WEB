@@ -28,7 +28,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-<<<<<<< HEAD
         // factory(App\Models\User::class, 100)->create();
         // factory(App\Models\HikingGroup::class, 100)->create();
         // factory(App\Models\Announce::class, 100)->create();
@@ -41,10 +40,5 @@ class DatabaseSeeder extends Seeder
         // factory(App\Models\Recruitment::class, 100)->create();
         // factory(App\Models\UserPosition::class, 100)->create();
         factory(App\Models\UserProfile::class, 100)->create();
-=======
-        factory(App\Models\User::class, 20)->create();
-        factory(App\Models\Notice::class, 20)->create();
-        factory(App\Models\Group::class, 20)->create();
->>>>>>> group_members_function
     }
 }

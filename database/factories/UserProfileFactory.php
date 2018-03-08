@@ -21,16 +21,9 @@ $factory->define(
             'image_path'    => $faker->imageUrl(640, 400),
             'phone'         => '010-0000-0000',
             'gender'        => rand(0, 1),
-            'age_group'     => array_rand([10, 20, 30, 40, 50]),
+            'age_group'     => array_rand(array_flip(["10", "20", "30", "40", "50"])),
             'scope'         => array_rand(
-                [
-                    "b'00000'", 
-                    "b'10111'", 
-                    "b'10110'", 
-                    "b'10100'", 
-                    "b'01111'", 
-                    "b'01011'"
-                ]
+                array_flip(["00000", "10111", "10110", "10100", "01111", "01011"])
             ),
         ];
     }
