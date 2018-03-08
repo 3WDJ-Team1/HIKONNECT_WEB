@@ -21,6 +21,7 @@ import test from './components/main/test.vue';
 import App from './components/App.vue';
 import login from './components/login.vue';
 import register from './components/register.vue';
+import mypage from './components/mypage/mypagemain.vue';
 
 
 
@@ -49,6 +50,12 @@ const routes = [
                 name: 'login',
                 path: '/login',
                 component: login
+            }
+            ,
+            {
+                name: 'mypage',
+                path: '/mypage',
+                component: mypage
             }
         ]
     }

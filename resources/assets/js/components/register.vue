@@ -1,5 +1,5 @@
 <template>
-    <div class="container" style="margin: 0 auto">
+    <div class="container" style="margin-left: 130px" >
         <div class="row">
             <div class="col-md-5 col-md-offset-2">
                 <div class="panel panel-default" style="margin-top: 80px">
@@ -12,7 +12,8 @@
                         <input type="text" style="margin-top: 10px" v-model="item.nn" class="form-control" placeholder="Enter nickname" id="nn"/>
                         <input type="text" style="margin-top: 10px" v-model="item.phone" class="form-control" placeholder="Enter phone" id="phone"/>
                         <label>번호 공개 여부</label><input type="checkbox" style="margin-top: 10px" v-model="item.phonesc"  id="phonesc"/><br>
-                        <label>성별 선택</label><select id="gender" v-model="item.gender">
+                        <label>성별 선택</label>
+                        <select id="gender" v-model="item.gender">
                             <option> 남자 </option>
                             <option> 여자 </option>
                         </select>
@@ -27,8 +28,8 @@
                             <option> 60대 이상 </option>
                         </select>
                         <label>연령 공개 여부</label><input type="checkbox" style="margin-top: 10px" v-model="item.agesc"   id="agesc"/><br>
-                        <label>전체 공개 </label><input type="radio" name="sc" style="margin-top: 10px" v-model="item.scv" />
-                        <label>그룹 공개 </label><input type="radio" name="sc" style="margin-top: 10px" v-model="item.scv" />
+                        <label>전체 공개</label><input type="radio" value="all" name="sc" style="margin-top: 10px" v-model="item.scv" />
+                        <label>그룹 공개</label><input type="radio" value="group" name="sc" style="margin-top: 10px" v-model="item.scv" />
                         <br>
                         <input type='button'  class="btn btn-primary" v-on:click="regist" value="확인">
                         <router-link style='margin-left: 270px' :to="{ name: 'main' }" v-model="item.pwv" class = "btn btn-primary"> 취소</router-link>
