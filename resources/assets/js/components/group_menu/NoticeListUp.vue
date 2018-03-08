@@ -22,7 +22,7 @@
                         {{ notice.content }}
                     </div>
                     <!-- send notice.uuid to children components -->
-                    <router-view name="delete"></router-view>
+                    <router-view name="delete" v-bind:propsNotice="notice"></router-view>
                     <router-view name="modify" v-bind:propsNotice="notice"></router-view>
                 </b-collapse>
             </div>
