@@ -16,12 +16,15 @@ $factory->define(
     function (Faker $faker) {
         return [
             'uuid'          => $faker->uuid(),
+            'user'          => array_shift($userUUIDs),
             'user'          => App\Models\User::Pluck('uuid')->random(),
             'nickname'      => $faker->lastName(),
             'image_path'    => $faker->imageUrl(640, 400),
             'phone'         => '010-0000-0000',
             'gender'        => rand(0, 1),
-            'age_group'     => array_rand(array_flip(["10", "20", "30", "40", "50"])),
+            'age_group'     => array_rand(
+                array_flip(["10", "20", "30", "40", "50"])
+            ),
             'scope'         => array_rand(
                 array_flip(["00000", "10111", "10110", "10100", "01111", "01011"])
             ),
