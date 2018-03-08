@@ -16,4 +16,6 @@ Route::get(
     }
 );
 
-Route::resource('/rest/notice', 'NoticeController');
+Route::resource('notice', 'NoticeController');
+Route::get('notice/{pageIndex?}/{perPage?}', 'NoticeController@index');
+Route::resource('hiking-group', 'HikingGroupController');

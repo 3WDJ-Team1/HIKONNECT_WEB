@@ -15,8 +15,11 @@
 </head>
 <body>
     @foreach ($userList as $record)
-        {{ $record['uuid'] }}
-        <br />
+        {{ "uuid : " . $record['uuid'] }}<br />
+        {{ "writer : " . $record['writer'] }}<br />
+        {{ "title : " . $record['title'] }}<br />
+        {{ "content : " . $record['content'] }}<br />
+        {{ "hits : " . $record['hits'] }}<br /><br />
     @endforeach
     <button onclick="createNotice()">Create Notice</button>
     <button onclick="updateNotice()">Update Notice</button>

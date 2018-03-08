@@ -1,7 +1,24 @@
 <?php
-
+/**
+ * PHP version 7.0
+ * 
+ * @category Seeder
+ * @package  Global
+ * @author   bs Kwon <rnjs9957@gmail.com>
+ * @license  MIT license
+ * @link     https://github.com/3wdj-team1/HIKONNECT_WEB
+ */
 use Illuminate\Database\Seeder;
 
+/**
+ * Seeder for database
+ * 
+ * @category Seeder
+ * @package  Global
+ * @author   bs Kwon <rnjs9957@gmail.com>
+ * @license  MIT license
+ * @link     https://github.com/3wdj-team1/HIKONNECT_WEB
+ */
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -11,6 +28,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+<<<<<<< HEAD
         // factory(App\Models\User::class, 100)->create();
         // factory(App\Models\HikingGroup::class, 100)->create();
         // factory(App\Models\Announce::class, 100)->create();
@@ -23,5 +41,10 @@ class DatabaseSeeder extends Seeder
         // factory(App\Models\Recruitment::class, 100)->create();
         // factory(App\Models\UserPosition::class, 100)->create();
         factory(App\Models\UserProfile::class, 100)->create();
+=======
+        factory(App\Models\User::class, 20)->create();
+        factory(App\Models\Notice::class, 20)->create();
+        factory(App\Models\Group::class, 20)->create();
+>>>>>>> group_members_function
     }
 }

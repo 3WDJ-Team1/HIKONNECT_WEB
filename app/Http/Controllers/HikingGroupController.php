@@ -1,56 +1,44 @@
 <?php
 /**
- * PHP version 7.0
  * 
- * @category Controllers
- * @package  App\Http\Controllers
- * @author   bs Kwon <rnjs9957@gmail.com>
- * @license  MIT license
- * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB
  */
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Notification;
-use App\Models\User;
+
+use App\Models\HikingGroup;
 
 /**
- * Controller for Notification
- * 
- * @category Controllers
- * @package  App\Http\Controllers
- * @author   bs Kwon <rnjs9957@gmail.com>
- * @license  MIT license
- * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB
- * 
- * @var Model $_notice_model        A reference variable for Notice model
- * @var Model $_user_model          A reference variable for user model
+ * Controller for Group
  */
-class NoticeController extends Controller
+class HikingGroupController extends Controller
 {
-    private $_notice_model = null;
-    private $_user_model = null;
+    private $_group_model = null;
 
     /**
-     * Constructor for NoticeController
+     * Constructor for GroupController
      */
     public function __construct()
     {
-        $this->_notice_model = new Notification();
-        $this->_user_model = new User();
+        $this->_group_model = new HikingGroup();
     }
-    
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($pageIndex, $perPage)
+    public function index()
     {
-        $notifications = $this->_notice_model
-            ->getNotifications($pageIndex, $perPage);
-        return $notifications;
-        // return view('notice', ['userList' => $notifications]);
+        $groupList = $this->_group_model->getGroupList();
+
+        $returnTag = "";
+
+        foreach ($groupList as $index => $record) {
+            $returnTag .= "<a href='/group/" . $record['uuid'] . "'>" . $record['uuid'] . "</a><br />";
+        }
+        
+        return $returnTag;
     }
 
     /**
@@ -60,7 +48,21 @@ class NoticeController extends Controller
      */
     public function create()
     {
-        //
+        return "
+        <input /><br />
+        <input /><br />
+        <input /><br />
+        <input /><br />
+        <input /><br />
+        <button onclick='createGroup()'>create</button>
+        <script>
+            function createGroup(){
+                $.ajax({
+                    method: 'post'
+                });
+            }
+        </script>
+        ";
     }
 
     /**
@@ -72,7 +74,7 @@ class NoticeController extends Controller
      */
     public function store(Request $request)
     {
-        return $this->_notice_model->insertNotification($request->input());
+        return ;
     }
 
     /**
@@ -84,8 +86,15 @@ class NoticeController extends Controller
      */
     public function show($id)
     {
-        return $notification = $this->_notice_model
-            ->selectOwn($id);
+        $groupDetail = $this->_group_model->getGroupDetail($id);
+
+        $returnTag = "";
+
+        foreach ($groupDetail as $index => $record) {
+            $returnTag .= "";
+        }
+
+        return $groupDetail;
     }
 
     /**
@@ -122,6 +131,6 @@ class NoticeController extends Controller
      */
     public function destroy($id)
     {
-        return $this->_notice_model->deleteNotification($id);
+        return $this->_notice_model->where('uuid', $id)->delete();
     }
 }
