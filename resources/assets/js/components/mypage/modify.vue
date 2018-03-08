@@ -1,5 +1,7 @@
 <template>
-    <h1>여기는 프로필 수정~</h1>
+    <div>
+    <router-link  :to="{ name: 'mypage' }" class = "btn btn-primary"> 뒤로</router-link>
+    </div>
 </template>
 <script>
     export default {}

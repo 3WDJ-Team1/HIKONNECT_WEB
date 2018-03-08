@@ -1,5 +1,7 @@
 <template>
-    <h1>응디응디</h1>
+    <div>
+        기록들~
+    </div>
 </template>
 <script>
     export default {}

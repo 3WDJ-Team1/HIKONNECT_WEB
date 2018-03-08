@@ -1,20 +1,12 @@
 <template>
-    <div>
-    <history></history>
-    <modify></modify>
-    <rank></rank>
-    </div>
+    <profile> </profile>
 </template>
+
 <script>
-    import modify from './modify.vue';
-    import rank from './rank.vue';
-    import history from './history.vue';
+    import profile from './profile.vue';
     export default {
         components: {
-            'modify' : modify,
-            'rank' : rank,
-            'history' : history
-
+            'profile' : profile
         }
     }
 </script>

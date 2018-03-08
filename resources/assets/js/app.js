@@ -12,7 +12,10 @@ Vue.use(VueRouter);
 
 import VueAxios from 'vue-axios';
 import axios from 'axios';
-Vue.use(VueAxios, axios);
+Vue.use(VueAxios, axios) ;
+
+/*import VueChart from 'vuechart';
+Vue.component(VueChart.name,VueChart);*/
 
  
 import main from './components/main/main.vue';
@@ -22,6 +25,9 @@ import App from './components/App.vue';
 import login from './components/login.vue';
 import register from './components/register.vue';
 import mypage from './components/mypage/mypagemain.vue';
+import modify from './components/mypage/modify.vue';
+import graph  from  './components/mypage/graph.vue';
+
 
 
 
@@ -56,6 +62,16 @@ const routes = [
                 name: 'mypage',
                 path: '/mypage',
                 component: mypage
+            },
+            {
+                name: 'modify',
+                path: '/modify',
+                component: modify
+            },
+            {
+                name: 'graph',
+                path: '/graph',
+                component: graph
             }
         ]
     }
