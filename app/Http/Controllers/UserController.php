@@ -15,7 +15,7 @@ class UserController extends Controller
     private $scope;
     private $gender;
     private $age_group;
-
+    private $userid;
     public function __construct()
     {
         $this->usermodel = new User();
@@ -52,15 +52,21 @@ class UserController extends Controller
     {
         $usercheck = User::all();
         foreach ($usercheck as $user) {
-            if ($user->id == $request->get('idv'))
+            if ($user->idv == $request->get('idv')) {
                 return response()->json('false');
-            if ($user->nn == $request->get('nn'))
+            }
+            else
+                continue;
+        }
+        $usercheck = User_Profile::all();
+        foreach ($usercheck as $user) {
+            if ($user->nickname == $request->get('nn'))
                 return response()->json('nnfalse');
             else
                 continue;
         }
         $this->usermodel->userReg($request);
-        $userid = User::where('id',$request->get('idv'))->pluck('uuid');
+        $this->userid = User::where('id',$request->get('idv'))->pluck('uuid');
         if ($request->get('phonesc') == true) {
             $this->scope += 100;
         }
@@ -108,7 +114,20 @@ class UserController extends Controller
                 break;
 
         }
-        $this->userfilmodel->userProReg($request, $userid, $this->scope, $this->gender, $this->age_group);
+        $userproinfo = array([
+            'uuid'          => '',
+            'user'          => 'f42f795e-0701-3772-90c9-d1b9e697fb3e',
+            'nickname'     =>  $request->get('nn'),
+            'image_path'   => 'https://lorempixe.com/640/400/?66549',
+            'phone'         => $request->get('phone'),
+            'gender'        => $this->gender,
+            'age_group'     => $this->age_group,
+            'scope'         => $this->scope,
+            'created_at'    => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'    => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+        $this->userfilmodel->userProReg($userproinfo);
+
         return response()->json('true');
     }
 

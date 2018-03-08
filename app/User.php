@@ -10,9 +10,11 @@
  */
 namespace App;
 
+use App\Http\Controllers\UserController;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use PhpParser\Node\Scalar\String_;
 
 /**
  * Model class for User
@@ -50,20 +52,19 @@ class User extends Model
 class User_Profile extends Model
 {
     protected $table = 'user_profile';
-
-    public function userReg(Request $request,$userid,$gender,$scope,$age_group) {
-        User_Profile::insert([
+    public function userProReg(Array $userproinfo) {
+        User_Profile::insert($userproinfo/*[
             'uuid'          => '',
-            'user'          => 'fd4b4476-1b7b-3d2a-a12f-21d339102a88',
-            'nickname'     => $request->get('nn'),
+            'user'          => 'fa796add-910e-3bbb-a4d0-50b47760b8c8',
+            'nickname'     =>  $request->get('nn'),
             'image_path'   => 'https://lorempixe.com/640/400/?66549',
             'phone'         => $request->get('phone'),
-            'gender'        => '0',
-            'age_group'     => '10',
-            'scope'         => '1011',
+            'gender'        => $gender,
+            'age_group'     => $age_group,
+            'scope'         => $scope,
             'created_at'    => Carbon::now()->format('Y-m-d H:i:s'),
-            'update_at'     => Carbon::now()->format('Y-m-d H:i:s')
-        ]);
+            'updated_at'    => Carbon::now()->format('Y-m-d H:i:s')
+        ]*/);
     }
 
     public function userUpdate(Array $userinfo,$id) {
