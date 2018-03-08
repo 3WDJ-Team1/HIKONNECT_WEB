@@ -1,7 +1,7 @@
 <template>
     <div>
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
+        <nav class="navbar navbar-default" style="width: 700px">
+            <div class="container-fluid" >
                 <div class="nav navbar-nav">
                    <router-link  :to="{ name : 'main'}">홈으로</router-link>
                 </div>
