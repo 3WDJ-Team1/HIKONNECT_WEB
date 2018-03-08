@@ -37,6 +37,7 @@ class User extends Model
         ]);
     }
 
+
     public function userUpdate(Array $userinfo,$id) {
         User::where('id',$id)->update([$userinfo]);
     }

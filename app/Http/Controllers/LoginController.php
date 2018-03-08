@@ -31,6 +31,7 @@ class LoginController extends Controller
             }
             else
                 continue;
+
         }
         return response()->json('false');
     }

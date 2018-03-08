@@ -77,6 +77,7 @@ class UserController extends Controller
         if ($request->get('agesc') == true) {
             $this->scope += 1;
         }
+
         switch ($request->get('scv')) {
             case 'all':
                 $this->scope += 10000;
