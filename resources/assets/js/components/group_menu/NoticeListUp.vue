@@ -11,9 +11,9 @@
             <!-- the wrapper of notice card -->
             <div class="card_wrapper">
                 <!-- if you click this div, -->
-                <div v-b-toggle="'n' + notice.uuid" class="m-1">
+                <div v-b-toggle="'n' + notice.uuid" class="m-1" v-on:click="sendData(notice)">
                     <h3 class="card-title">{{ notice.title }}</h3>
-                    <p class="card-text">writer : {{ notice.writer }} | hits : {{ notice.hits }}</p>
+                    <p class="card-text">writer : {{ notice.nickname }} | hits : {{ notice.hits }}</p>
                    
                 </div>
                 <!-- this will be shown. -->
@@ -22,8 +22,8 @@
                         {{ notice.content }}
                     </div>
                     <!-- send notice.uuid to children components -->
-                    <router-view name="delete" v-bind:propsUuid="notice.uuid"></router-view>
-                    <router-view name="modify" v-bind:propsUuid="notice.uuid"></router-view>
+                    <router-view name="delete"></router-view>
+                    <router-view name="modify"></router-view>
                 </b-collapse>
             </div>
         </div>
@@ -41,8 +41,13 @@
         }),
         beforeMount() {
             // get object of notice information
-            axios.get('http://localhost:8000/notice/0/10')
+            axios.get('http://localhost:8000/notice/0/5')
                 .then(response => {console.log(response); this.notices = response.data});
+        },
+        methods: {
+            sendData: function(notice) {
+                this.$EventBus.$emit('noticeData', notice);
+            }
         }
     }
 </script>

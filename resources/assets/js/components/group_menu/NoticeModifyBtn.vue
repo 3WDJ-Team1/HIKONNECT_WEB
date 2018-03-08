@@ -15,14 +15,10 @@
 
 <script>
     export default {
-        // this is sent from parent component
-        props :['propsUuid'],
         methods : {
             // the function for open modal
             openModifyModal : function() {
                 this.$refs.modify.open();
-                axios.get('http://localhost:8000/notice/' + this.propsUuid)
-                        .then(response => {this.$EventBus.$emit('noticeData', response.data[0])});
             },
         },
     }
