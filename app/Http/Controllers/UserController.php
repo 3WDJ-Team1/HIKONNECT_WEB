@@ -59,14 +59,7 @@ class UserController extends Controller
             else
                 continue;
         }
-        $userinfo = array([
-            'uuid'           => '',
-            'id'             => $request->get('idv'),
-            'password'      => $request->get('pwv'),
-            'created_at'    => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at'    => Carbon::now()->format('Y-m-d H:i:s')
-        ]);
-        $this->usermodel->userReg($userinfo);
+        $this->usermodel->userReg($request);
         $userid = User::where('id',$request->get('idv'))->pluck('uuid');
         if ($request->get('phonesc') == true) {
             $this->scope += 100;
@@ -88,35 +81,35 @@ class UserController extends Controller
         }
         switch ($request->get('gender')) {
             case '남자' :
-                $this->gender = 1;
+                $this->gender = 0;
                 break;
             case "여자" :
-                $this->gender = 2;
+                $this->gender = 1;
                 break;
         }
         switch ($request->get('age')) {
             case '10대':
-                $this->age_group = 1;
+                $this->age_group = 10;
                 break;
             case '20대':
-                $this->age_group = 2;
+                $this->age_group = 20;
                 break;
             case '30대':
-                $this->age_group = 3;
+                $this->age_group = 30;
                 break;
             case '40대':
-                $this->age_group = 4;
+                $this->age_group = 40;
                 break;
             case '50대':
-                $this->age_group = 5;
+                $this->age_group = 50;
                 break;
             case '60대 이상':
-                $this->age_group = 6;
+                $this->age_group = 60;
                 break;
 
         }
         $this->userfilmodel->userProReg($request, $userid, $this->scope, $this->gender, $this->age_group);
-        return response()->json($request);
+        return response()->json('true');
     }
 
     /**
