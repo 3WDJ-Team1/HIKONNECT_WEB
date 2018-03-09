@@ -20,3 +20,5 @@ Route::resource('notice', 'NoticeController');
  
 Route::resource('group', 'GroupController');
 Route::resource('group/{pageIndex?}/{perPage?}', 'GroupController@index');
+//Route::post('/list', 'GroupController@jiyoon');
+

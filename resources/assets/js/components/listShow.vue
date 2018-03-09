@@ -1,11 +1,11 @@
 <template>
     <div class="container">
-        <div class="searchOp">
+        <div class="serchOp">
             <div class="listOp">
                 <button type="button" class="btn">최신순</button>
                 <button type="button" class="btn">참여자가 많은 순</button>
             </div>
-            <div class="listSerch">
+            <div class="listSearch">
                 <div class="col-xs-8 col-xs-offset-2">
                     <div class="input-group">
                     <span class="input-group-btn search-panel">
@@ -29,26 +29,27 @@
         <div class="listShow">
             <table class="table table-hover">
                 <thead>
-                    <tr>
-                        <th>글번호</th>
-                        <th>제목</th>
-                        <th>목적지</th>
-                        <th>작성자</th>
-                        <th>산행 예정 일자</th>
-                        <th>목표수</th>
-                        <th>참여수</th>
-                    </tr>
+                <tr>
+                    <th>글번호</th>
+                    <th>제목</th>
+                    <th>목적지</th>
+                    <th>작성자</th>
+                    <th>산행 예정 일자</th>
+                    <th>목표수</th>
+                    <th>참여수</th>
+                </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>100</td>
-                        <td><a href="">등산은 곧 등산 입니다.</a></td>
-                        <td>소백산</td>
-                        <td>작성자</td>
-                        <td>2018.05.16</td>
-                        <td>-</td>
-                        <td>25</td>
-                    </tr>
+                <tr v-for="item in items">
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.id }}</td>
+                    {{ name }}
+                </tr>
                 </tbody>
             </table>
         </div>
@@ -60,7 +61,6 @@
                 <li class="page-item"><a class="page-link" href="#">&#60;&#60;</a></li>
                 <li class="page-item"><a class="page-link" href="#">1</a></li>
                 <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
                 <li class="page-item"><a class="page-link" href="#">>></a></li>
             </ul>
         </div>
@@ -68,13 +68,63 @@
 </template>
 
 <script>
-    import listSerch from './listSerch.vue'
-    import listCard from './listCard.vue'
-
     export default {
-        components: {
-            'list-serch'    : listSerch,
-            'list-card'   : listCard,
+        data() {
+            return{
+                items: [],
+                name: 'dfsdfsdf'
+            }
+        },
+        created: function ()
+        {
+            this.fetchItems();
+        },
+        method: {
+            fetchItem()
+            {
+                this.axios.post('http://localhost:8000/list')
+                    .then(response => {
+                        console.log(response.data);
+                    })
+                    .catch(e => {
+                        this.errors.push(e)
+                    })
+            }
         }
     }
 </script>
+
+
+<style>
+    .serchOp    {
+        display: inline;
+        height: 36px;
+    }
+    .listOp {
+        float: left;
+        margin-left: 100px;
+    }
+    .listSerch {
+        float: right;
+    }
+    .col-xs-offset-2   {
+        width: 350px;
+        margin-right: 170px;
+    }
+    .listShow {
+        margin-right: 100px;
+        margin-left: 100px;
+        text-align: center;
+        vertical-align: middle;
+    }
+    .groupWrite {
+        width: 68px;
+        margin-left: 972px;
+    }
+    .pagination {
+        display: table;
+        margin-top: 0px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
