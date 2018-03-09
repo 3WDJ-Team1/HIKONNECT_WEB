@@ -22,8 +22,8 @@ Vue.use(Vuetify);
 
 import 'vuetify/dist/vuetify.min.css';
 
-import VueAxios from 'vue-axios';
-import axios from 'axios';
+import VueAxios     from 'vue-axios';
+import axios        from 'axios';
 Vue.use(VueAxios, axios);
 
 Vue.prototype.$EventBus = new Vue();
