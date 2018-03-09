@@ -107,6 +107,17 @@ class Notification extends Model
      *                         | ]
      * 
      * @return void
+     * 
+     * @todo 
+     *          inputdata
+     *              작성자      writer     user's uuid
+     *              타이틀      title      notification's title
+     *              내용        content    notification's content
+     * 
+     *          추가해야 할 데이터
+     *              조회수      hits        DB의 값 참조
+     *              생성 시간   created_at  
+     *              수정 시간   updated_at  
      */
     public function insertNotification(Array $inputData)
     {

@@ -27,4 +27,16 @@ class HikingPlan extends Model
 {
     protected $table = 'hiking_plan';
 
+    /**
+     * Parse xml to json for using mountain routes(gpx files)
+     * in file system.
+     * 
+     * @return ????
+     */
+    public function xmlToJson()
+    {
+        $gpxPaths = Storage::get('maps/PMNTN_소백산_비로봉_438001301.gpx');
+
+        return $gpxPaths;
+    }
 }
