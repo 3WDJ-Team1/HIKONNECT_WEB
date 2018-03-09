@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="serchOp">
+        <div class="searchOp">
             <div class="listOp">
                 <button type="button" class="btn">최신순</button>
                 <button type="button" class="btn">참여자가 많은 순</button>
