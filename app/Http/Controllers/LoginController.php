@@ -21,13 +21,13 @@ class LoginController extends Controller
 
     public function loginprocess(Request $request)
     {
-        $userid = $request->get('idv');
         $userinfo = User::all();
         foreach ($userinfo as $user) {
             if ($user->id == $request->get('idv') && $user->password == $request->get('pwv')) {
-                $request->session()->put('login',true);
-                $request->session()->put('userid',$userid);
-                return response()->json('true');
+                $sessionVal = User::join('user_profile','user_profile.user','=','user.uuid')->select('user_profile.nickname','user_profile.image_path','user_profile.phone',
+                    'user_profile.gender','user_profile.age_group','user_profile.scope','user.uuid','user.password')
+                    ->where('id',$request->get('idv'))->get();
+                return response()->json($sessionVal);
             }
             else
                 continue;

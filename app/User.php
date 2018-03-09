@@ -56,6 +56,11 @@ class User_Profile extends Model
         User_Profile::insert($userproinfo);
     }
 
+    public function userUpdateinfo($userid) {
+        User_Profile::join('user','user.uuid','=','user_profile.user')->select('user_profile.*','user.id')
+            ->where('user.id',$userid)->get();
+    }
+
     public function userUpdate(Array $userinfo,$id) {
         User_Profile::where('id',$id)->update([$userinfo]);
     }
