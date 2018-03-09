@@ -23,17 +23,11 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
-<<<<<<< HEAD
-        "bootstrap-vue": "^2.0.0-rc.1",
-        "sweet-modal-vue": "^2.0.0",
-        "vue-axios": "^2.0.2",
-=======
         "bootstrap-select": "^1.12.4",
         "bootstrap-vue": "^2.0.0-rc.2",
         "sweet-modal-vue": "^2.0.0",
         "vue-axios": "^2.0.2",
         "vue-loader": "^14.2.1",
->>>>>>> 4ee3eff891537fc6ce1a4cf4043c54616c14c920
         "vue-router": "^3.0.1",
         "vuejs-dialog": "^0.8.0",
         "vuetify": "^1.0.5"
