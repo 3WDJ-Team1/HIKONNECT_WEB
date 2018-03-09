@@ -14,10 +14,10 @@ class GroupController extends Controller
     /**
      * Constructor for GroupController
      */
-//    public function __construct()
-//    {
-//        $this->model = new Group();
-//    }
+    public function __construct()
+    {
+        $this->model = new Group();
+    }
     
     /**
      * Display a listing of the resource.
@@ -100,13 +100,5 @@ class GroupController extends Controller
     public function destroy($id)
     {
         //
-    }
-    public function jiyoon()
-    {
-
-        $jojo = array(
-            array('name'=>'지윤', 'id'=>'jiyoon')
-        );
-        return response() -> json($jojo);
     }
 }

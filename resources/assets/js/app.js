@@ -28,9 +28,9 @@ import groupList from "./components/groupList.vue";
 
 const routes = [
     {
-        name: 'listShow',
+        name: 'groupList',
         path: '/',
-        component: listShow
+        component: groupList
     }
 ];
 
