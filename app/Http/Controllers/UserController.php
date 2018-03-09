@@ -15,7 +15,8 @@ class UserController extends Controller
     private $scope;
     private $gender;
     private $age_group;
-    private $userid;
+    private $uuid;
+    private $nickname;
     public function __construct()
     {
         $this->usermodel = new User();
@@ -48,8 +49,9 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request)     //회원가입
     {
+        //아이디 닉네임 중복 검사
         $usercheck = User::all();
         foreach ($usercheck as $user) {
             if ($user->idv == $request->get('idv')) {
@@ -65,8 +67,11 @@ class UserController extends Controller
             else
                 continue;
         }
+        //user 테이블 insert
         $this->usermodel->userReg($request);
-        $this->userid = User::where('id',$request->get('idv'))->pluck('uuid');
+        //가입 시 uuid 가져오기
+        $this->uuid = User::where('id',$request->get('idv'))->pluck('uuid');
+        //scope 설정
         if ($request->get('phonesc') == true) {
             $this->scope += 100;
         }
@@ -76,7 +81,6 @@ class UserController extends Controller
         if ($request->get('agesc') == true) {
             $this->scope += 1;
         }
-
         switch ($request->get('scv')) {
             case 'all':
                 $this->scope += 10000;
@@ -112,11 +116,11 @@ class UserController extends Controller
             case '60대 이상':
                 $this->age_group = 60;
                 break;
-
         }
+        //user_profile 테이블에 insert
         $userproinfo = array([
             'uuid'          => '',
-            'user'          => 'f42f795e-0701-3772-90c9-d1b9e697fb3e',
+            'user'          => $this->uuid[0],
             'nickname'     =>  $request->get('nn'),
             'image_path'   => 'https://lorempixe.com/640/400/?66549',
             'phone'         => $request->get('phone'),
@@ -127,7 +131,7 @@ class UserController extends Controller
             'updated_at'    => Carbon::now()->format('Y-m-d H:i:s')
         ]);
         $this->userfilmodel->userProReg($userproinfo);
-
+        //true 반환
         return response()->json('true');
     }
 

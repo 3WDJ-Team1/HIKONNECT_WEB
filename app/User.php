@@ -53,18 +53,7 @@ class User_Profile extends Model
 {
     protected $table = 'user_profile';
     public function userProReg(Array $userproinfo) {
-        User_Profile::insert($userproinfo/*[
-            'uuid'          => '',
-            'user'          => 'fa796add-910e-3bbb-a4d0-50b47760b8c8',
-            'nickname'     =>  $request->get('nn'),
-            'image_path'   => 'https://lorempixe.com/640/400/?66549',
-            'phone'         => $request->get('phone'),
-            'gender'        => $gender,
-            'age_group'     => $age_group,
-            'scope'         => $scope,
-            'created_at'    => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at'    => Carbon::now()->format('Y-m-d H:i:s')
-        ]*/);
+        User_Profile::insert($userproinfo);
     }
 
     public function userUpdate(Array $userinfo,$id) {
