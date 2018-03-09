@@ -22,9 +22,13 @@ Vue.use(Vuetify);
 
 import 'vuetify/dist/vuetify.min.css';
 
-import VueAxios from 'vue-axios';
-import axios from 'axios';
+import VueAxios     from 'vue-axios';
+import axios        from 'axios';
 Vue.use(VueAxios, axios);
+
+import InfiniteScroll       from 'v-infinite-scroll';
+import 'v-infinite-scroll/dist/v-infinite-scroll.css';
+Vue.use(InfiniteScroll);
 
 Vue.prototype.$EventBus = new Vue();
 

@@ -27,6 +27,7 @@
         "sweet-modal-vue": "^2.0.0",
         "v-infinite-scroll": "^1.0.4",
         "vue-axios": "^2.0.2",
+        "vue-infinite-scroll": "^2.0.2",
         "vue-router": "^3.0.1",
         "vuejs-dialog": "^0.8.0",
         "vuetify": "^1.0.5"
