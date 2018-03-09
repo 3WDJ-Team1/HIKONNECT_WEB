@@ -24,13 +24,13 @@ import ExampleComponent from "./components/ExampleComponent.vue";
 import App from './components/App.vue';
 import listShow from "./components/listShow.vue";
 import listSerch from "./components/listSerch.vue";
+import groupList from "./components/groupList.vue";
 
 const routes = [
     {
-        name: 'listSerch',
+        name: 'groupList',
         path: '/',
-        component: listSerch,
-        component: listCard
+        component: groupList
     }
 ];
 

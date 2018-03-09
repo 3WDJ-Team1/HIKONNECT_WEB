@@ -1,15 +1,23 @@
 <template>
-    <div>
-        <img :src="'http://img2.sbs.co.kr/img/sbs_cms/WE/2017/08/04/WE68468406_ori.jpg'" width="200"/>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Example Component</div>
+
+                    <div class="panel-body">
+                        I'm an example component!
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
-<script>
 
+<script>
     export default {
-        data() {
-            return {
-                hello : 'sbs_cms/WE/2017/08/04/WE68468406_ori.jpg'
-            }
+        mounted() {
+            console.log('Component mounted.')
         }
     }
 </script>
