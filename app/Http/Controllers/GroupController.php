@@ -50,8 +50,7 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        $selection = $request->input('selection');
-
+    
     }
 
     /**
@@ -88,7 +87,7 @@ class GroupController extends Controller
      */
     public function update(Request $request, $id)
     {
-      
+        
     }
 
     /**

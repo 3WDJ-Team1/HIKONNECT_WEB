@@ -19,3 +19,4 @@ Route::get(
 Route::resource('notice', 'NoticeController');
  
 Route::resource('group', 'GroupController');
+Route::resource('group/{pageIndex?}/{perPage?}', 'GroupController@index');
