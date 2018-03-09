@@ -26,6 +26,7 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
+        "bootstrap-select": "^1.12.4",
         "bootstrap-vue": "^2.0.0-rc.2",
         "sweet-modal-vue": "^2.0.0",
         "vue-axios": "^2.0.2",
