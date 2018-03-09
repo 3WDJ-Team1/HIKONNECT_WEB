@@ -7,7 +7,7 @@
         <br>
         <router-view name="write"></router-view>
         <!-- Use infinite scroll for pagination -->
-        <v-infinite-scroll :loading="loading" @top="prevPage" @bottom="nextPage" :offset='5' class="scroll-div">
+        <div>
             <!-- notice div are formed automatically by data.notices -->
             <div v-for="notice in notices">
                 <!-- the wrapper of notice card -->
@@ -29,7 +29,7 @@
                     </b-collapse>
                 </div>
             </div>
-        </v-infinite-scroll>
+        </div>
     </div>
 </template>
 
@@ -41,8 +41,7 @@
             notices : [
                 // the type of notices is 'object' certainly.
             ],
-            page: 1,
-            loading: false
+            page: 1
         }),
         beforeMount() {
             // get object of notice information
@@ -52,14 +51,12 @@
                 });
         },
         methods: {
-            prevPage: function () {
-                if (this.page == 1) return;
-                --this.page;
-                this.api();
-            },
             nextPage: function () {
-                ++this.page;
-                this.api();
+                const scrollY = window.scrollY;
+                const visible = document.documentElement.clientHeight;
+                const pageHeight = document.documentElement.scrollHeight;
+                const bottomOfPage = visible + scrollY >= pageHeight
+                return bottomOfPage || pageHeight < visible
             },
             api: function () {
                 this.loading = true;

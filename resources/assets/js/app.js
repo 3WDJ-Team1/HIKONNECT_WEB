@@ -26,10 +26,6 @@ import VueAxios     from 'vue-axios';
 import axios        from 'axios';
 Vue.use(VueAxios, axios);
 
-import InfiniteScroll       from 'v-infinite-scroll';
-import 'v-infinite-scroll/dist/v-infinite-scroll.css';
-Vue.use(InfiniteScroll);
-
 Vue.prototype.$EventBus = new Vue();
 
 import ExampleComponent     from "./components/ExampleComponent.vue";
