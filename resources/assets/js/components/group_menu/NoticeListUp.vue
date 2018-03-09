@@ -41,30 +41,43 @@
             notices : [
                 // the type of notices is 'object' certainly.
             ],
-            page: 1
+            page: 1,
+            size: 5,
+            bottom: false,
+            httpAddr: 'http://localhost:8000'
         }),
-        beforeMount() {
-            // get object of notice information
-            axios.get('http://localhost:8000/notice/0/5')
-                .then(response => {
-                    this.notices = response.data;
-                });
+        created() {
+            window.addEventListener('scroll', () => {
+                this.bottom = this.bottomVisible()
+                console.log(window.scrollY + ', ' + document.documentElement.scrollHeight+ ',' +document.documentElement.clientHeight)
+            });
+            axios.get(this.httpAddr + '/notice/0/10')
+                .then(response => { this.notices = response.data });
         },
         methods: {
-            nextPage: function () {
+            bottomVisible: function () {
                 const scrollY = window.scrollY;
                 const visible = document.documentElement.clientHeight;
                 const pageHeight = document.documentElement.scrollHeight;
-                const bottomOfPage = visible + scrollY >= pageHeight
+                const bottomOfPage = visible + scrollY + 1 >= pageHeight
                 return bottomOfPage || pageHeight < visible
             },
-            api: function () {
-                this.loading = true;
-                axios.get('http://localhost:8000/notice/' + (this.page - 1) * 5 + '/' + this.page * 5)
+            addNotices() {
+                let url = this.httpAddr + '/notice/' + ((this.page - 1) * this.size + 10) + '/' + ((this.page + 1) * this.size + 10);
+                axios.get(url)
                 .then(response => {
-                    this.notices = response.data;
-                    this.loading = false;
+                    for (let i = 0 ; i < this.size ; i++) {
+                        this.notices.push(response.data[i]);
+                    }
                 });
+                this.page++;
+            }
+        },
+        watch: {
+            bottom(bottom) {
+                if (bottom) {
+                    this.addNotices();
+                }
             }
         }
     }
@@ -86,10 +99,5 @@
     width: 90%;
     margin: 0 auto;
     word-break: keep-all;
-}
-
-.scroll_div {
-    height: 100%;
-    overflow-y: scroll;
 }
 </style>

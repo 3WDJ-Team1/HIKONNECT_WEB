@@ -27,6 +27,7 @@
         "sweet-modal-vue": "^2.0.0",
         "vue-axios": "^2.0.2",
         "vue-router": "^3.0.1",
+        "vue-spinner": "^1.0.3",
         "vuejs-dialog": "^0.8.0",
         "vuetify": "^1.0.5"
     }
