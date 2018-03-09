@@ -41,7 +41,7 @@
         }),
         beforeMount() {
             // get object of notice information
-            axios.get('http://localhost:8000/notice/0/5')
+            axios.get('http://localhost:8000/notice/0/15')
                 .then(response => {console.log(response); this.notices = response.data});
         },
     }
