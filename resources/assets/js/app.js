@@ -3,9 +3,20 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
- 
+
 require('./bootstrap');
- 
+
+import Vue from 'vue'
+import BootstrapVue from 'bootstrap-vue'
+
+Vue.use(BootstrapVue);
+
+
+
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+
 window.Vue = require('vue');
 
 import VueRouter    from 'vue-router';
@@ -22,8 +33,8 @@ Vue.use(Vuetify);
 
 import 'vuetify/dist/vuetify.min.css';
 
-import VueAxios from 'vue-axios';
-import axios from 'axios';
+import VueAxios     from 'vue-axios';
+import axios        from 'axios';
 Vue.use(VueAxios, axios);
 
 Vue.prototype.$EventBus = new Vue();
@@ -35,10 +46,15 @@ import NoticeWriteBtn       from './components/group_menu/NoticeWriteBtn.vue';
 import NoticeModifyBtn      from './components/group_menu/NoticeModifyBtn.vue';
 import NoticeDeleteBtn      from './components/group_menu/NoticeDeleteBtn.vue';
 import NoticeFormInside     from './components/group_menu/NoticeFormInside.vue';
+import ExampleComponent from "./components/ExampleComponent.vue";
+import App from './components/App.vue';
+import listShow from "./components/listShow.vue";
+import listSerch from "./components/listSerch.vue";
+import groupList from "./components/groupList.vue";
 
 const routes = [
     {
-        name: 'Example',
+        name: 'groupList',
         path: '/',
         component: ExampleComponent,
     },
@@ -68,6 +84,9 @@ const routes = [
         ]
     },
 ];
+
+
+ 
 const router = new VueRouter({ routes })
  
 const app = new Vue(Vue.util.extend({ router }, App)).$mount('#app')

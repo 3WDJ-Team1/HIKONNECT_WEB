@@ -22,3 +22,7 @@ Route::resource('hiking-group', 'HikingGroupController');
 
 
 Route::get('xmltesting', 'HikingPlanController@index');
+ 
+Route::resource('group', 'GroupController');
+
+Route::post('/list', 'GroupController@jiyoon');

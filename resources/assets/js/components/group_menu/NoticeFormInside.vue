@@ -34,12 +34,12 @@
 </template>
 
 <script>
-sessionStorage.setItem('nickname', '닉넴');
     export default {
         data : function () {
             return {
                 title: '',
                 text: '',
+                noticeUuid: '',
                 valid: false,
                 titleRules: [
                     title => !!title || 'Title is required.'
@@ -47,16 +47,32 @@ sessionStorage.setItem('nickname', '닉넴');
                 textRules: [
                     text => !!text || 'Text is required.'
                 ],
+                mode: ''
             }
         },
         methods: {
             submit: function() {
-                if(this.$refs.form.validate()) {
-                    axios.post('http://localhost:8000/notice', {
-                        writer: sessionStorage.getItem('nickname'),
-                        title: this.title,
-                        text: this.text
-                    })
+                switch(this.mode) {
+                    case "edit":
+                        if(this.$refs.form.validate()) {
+                            axios.patch('http://localhost:8000/notice/' + this.noticeUuid, {
+                                // nickname: this.nickname,
+                                writer:'', // user's uuid,
+                                title: this.title,
+                                content: this.text
+                            })
+                        }
+                    break;
+                    case "write":
+                        if(this.$refs.form.validate()) {
+                            axios.post('http://localhost:8000/notice', {
+                                // nickname: this.nickname,
+                                writer:'', // user's uuid,
+                                title: this.title,
+                                content: this.text
+                            })
+                        }
+                    break;
                 }
             },
         },
@@ -64,8 +80,13 @@ sessionStorage.setItem('nickname', '닉넴');
             this.$EventBus.$on('noticeData', (data) => {
                 this.title = data.title;
                 this.text = data.content;
-            })
+                this.noticeUuid = data.uuid;
+            });
+            this.$EventBus.$on('modalMode', (modalMode) => {
+                this.mode = modalMode;
+            });
         }
+            
     }
 </script>
 
