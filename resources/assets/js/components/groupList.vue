@@ -1,6 +1,8 @@
 <template>
-    <list-serch></list-serch>
-    <list-card></list-card>
+    <div class="container">
+        <list-serch></list-serch>
+        <list-card></list-card>
+    </div>
 </template>
 
 <script>
@@ -11,7 +13,6 @@
         components: {
             'list-serch'    : listSerch,
             'list-card'   : listCard,
-
         }
     }
 </script>
