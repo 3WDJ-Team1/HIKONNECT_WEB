@@ -9,9 +9,9 @@
 
 <script>
     export default {
-        data: {
+        data: () => ({
             httpAddr: 'http://hikonnect.ga'
-        },
+        }),
         props: ['propsNotice'],
         methods: {
             deleteNotice: function () {
