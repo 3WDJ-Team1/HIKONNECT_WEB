@@ -19,6 +19,16 @@
 <script>
 
     export default {
-
+        method: {
+            input: function()   {
+                this.axios.post('http://localhost:8000/list')
+                    .then(response => {
+                        console.log(response.data);
+                    })
+                    .catch(e => {
+                        this.errors.push(e)
+                    })
+            }
+        }
     }
 </script>
