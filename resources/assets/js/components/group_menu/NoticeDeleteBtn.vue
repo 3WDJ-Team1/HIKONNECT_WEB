@@ -9,10 +9,13 @@
 
 <script>
     export default {
+        data: {
+            httpAddr: 'http://hikonnect.ga'
+        },
         props: ['propsNotice'],
         methods: {
             deleteNotice: function () {
-                axios.delete('http://localhost:8000/notice/' + this.propsNotice.uuid, {});
+                axios.delete(this.httpAddr + '/notice/' + this.propsNotice.uuid, {});
             }
         }
     }

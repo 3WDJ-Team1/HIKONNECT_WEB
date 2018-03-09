@@ -30,6 +30,7 @@
                 </div>
             </div>
         </div>
+        <pulse-loader></pulse-loader>
     </div>
 </template>
 
@@ -44,7 +45,10 @@
             page: 1,
             size: 5,
             bottom: false,
-            httpAddr: 'http://localhost:8000'
+            httpAddr: 'http://hikonnect.ga',
+            loader: {
+
+            }
         }),
         created() {
             window.addEventListener('scroll', () => {

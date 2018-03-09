@@ -47,7 +47,8 @@
                 textRules: [
                     text => !!text || 'Text is required.'
                 ],
-                mode: ''
+                mode: '',
+                httpAddr: 'http://hikonnect.ga'
             }
         },
         methods: {
@@ -55,7 +56,7 @@
                 switch(this.mode) {
                     case "edit":
                         if(this.$refs.form.validate()) {
-                            axios.patch('http://localhost:8000/notice/' + this.noticeUuid, {
+                            axios.patch(this.httpAddr + '/notice/' + this.noticeUuid, {
                                 // nickname: this.nickname,
                                 writer:'', // user's uuid,
                                 title: this.title,
@@ -65,7 +66,7 @@
                     break;
                     case "write":
                         if(this.$refs.form.validate()) {
-                            axios.post('http://localhost:8000/notice', {
+                            axios.post(this.httpAddr + '/notice', {
                                 // nickname: this.nickname,
                                 writer:'', // user's uuid,
                                 title: this.title,
