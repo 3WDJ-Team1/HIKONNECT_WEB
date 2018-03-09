@@ -30,7 +30,7 @@
                 </div>
             </div>
         </div>
-        <pulse-loader></pulse-loader>
+        <sync-loader class="loader" :color="loader.color" :loading="loader.loading" :margin="loader.margin" :size="loader.size"></sync-loader>
     </div>
 </template>
 
@@ -47,32 +47,40 @@
             bottom: false,
             httpAddr: 'http://hikonnect.ga',
             loader: {
-
+                loading: true,
+                color: "#4df1e1",
+                margin: "2px",
+                size: "10px"
             }
         }),
         created() {
             window.addEventListener('scroll', () => {
                 this.bottom = this.bottomVisible()
-                console.log(window.scrollY + ', ' + document.documentElement.scrollHeight+ ',' +document.documentElement.clientHeight)
             });
             axios.get(this.httpAddr + '/notice/0/10')
-                .then(response => { this.notices = response.data });
+                .then(response => {
+                    this.notices = response.data;
+                    this.loader.loading = false;
+                });
         },
         methods: {
             bottomVisible: function () {
                 const scrollY = window.scrollY;
                 const visible = document.documentElement.clientHeight;
                 const pageHeight = document.documentElement.scrollHeight;
-                const bottomOfPage = visible + scrollY + 1 >= pageHeight
+                const bottomOfPage = visible + scrollY >= pageHeight
                 return bottomOfPage || pageHeight < visible
             },
             addNotices() {
-                let url = this.httpAddr + '/notice/' + ((this.page - 1) * this.size + 10) + '/' + ((this.page + 1) * this.size + 10);
+                this.loader.loading = true;
+                let url = this.httpAddr + '/notice/' + ((this.page - 1) * this.size + 10) + '/' + (this.page * this.size + 10);
+                console.log(url);
                 axios.get(url)
                 .then(response => {
                     for (let i = 0 ; i < this.size ; i++) {
                         this.notices.push(response.data[i]);
                     }
+                    this.loader.loading = false;
                 });
                 this.page++;
             }
@@ -103,5 +111,11 @@
     width: 90%;
     margin: 0 auto;
     word-break: keep-all;
+}
+#group_notice {
+    margin-bottom: 8%;
+}
+.loader {
+    margin-top: 2%
 }
 </style>

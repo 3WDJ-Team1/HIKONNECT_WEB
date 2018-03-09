@@ -26,7 +26,7 @@ import VueAxios     from 'vue-axios';
 import axios        from 'axios';
 Vue.use(VueAxios, axios);
 
-Vue.component('pulse-loader', require('vue-spinner/src/PulseLoader.vue'));
+Vue.component('sync-loader', require('vue-spinner/src/SyncLoader.vue'));
 
 Vue.prototype.$EventBus = new Vue();
 
