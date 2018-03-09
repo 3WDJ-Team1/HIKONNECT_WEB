@@ -11,14 +11,14 @@
 use Faker\Generator as Faker;
 
 $factory->define(
-    App\Models\Notice::class, 
+    App\Models\Notification::class, 
     function (Faker $faker) {
         return [
             'uuid'          => $faker->uuid(),
-            'writer'        => App\Models\user::pluck('uuid')->random(),
-            'content'       => $faker->text(200),
-            'notice_range'  => array_rand(array_flip(['all', 'group', 'person'])),
-            'notice_for'    => App\Models\user::pluck('uuid')->random(),
+            'writer'        => App\Models\User::pluck('uuid')->random(),
+            'title'         => $faker->realText(20),
+            'content'       => $faker->realText(200),
+            'hits'          => rand(0, 200),
         ];
     }
 );

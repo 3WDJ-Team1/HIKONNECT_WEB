@@ -12,10 +12,10 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
 </head>
 <body>
     <div id="app">
-        
     </div>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>

@@ -4,9 +4,10 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserTable extends Migration
+class CreateRadiogramLogTable extends Migration
 {
-    private $_table = 'user';
+    private $_table = 'radiogram_log';
+    
     /**
      * Run the migrations.
      *
@@ -15,11 +16,12 @@ class CreateUserTable extends Migration
     public function up()
     {
         Schema::create(
-            $this->_table,
+            'radiogram_log', 
             function (Blueprint $table) {
                 $table->uuid('uuid')->primary();
-                $table->string('id', 20);
-                $table->string('password', 20);
+                $table->uuid('hiking_group');
+                $table->uuid('sender');
+                $table->string('radiogram_path', 200);
                 $table->timestamps();
             }
         );

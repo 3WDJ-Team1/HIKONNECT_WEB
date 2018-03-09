@@ -4,9 +4,10 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserTable extends Migration
+class CreateUserProfileTable extends Migration
 {
-    private $_table = 'user';
+    private $_table = "user_profile";
+
     /**
      * Run the migrations.
      *
@@ -15,11 +16,16 @@ class CreateUserTable extends Migration
     public function up()
     {
         Schema::create(
-            $this->_table,
+            $this->_table, 
             function (Blueprint $table) {
                 $table->uuid('uuid')->primary();
-                $table->string('id', 20);
-                $table->string('password', 20);
+                $table->uuid('user');
+                $table->string('nickname', 20);
+                $table->string('image_path', 200);
+                $table->char('phone', 13)->nullable();
+                $table->boolean('gender')->nullable();
+                $table->tinyInteger('age_group')->unsigned()->nullable();
+                $table->unsignedSmallInteger('scope', 5)->default('00000');
                 $table->timestamps();
             }
         );

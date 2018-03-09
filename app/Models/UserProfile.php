@@ -3,17 +3,18 @@
  * PHP version 7.0
  * 
  * @category Model
- * @package  App
- * @author   bs Kown <rnjs9957@gmail.com>
+ * @package  App\Models
+ * @author   bs Kwon <rnjs9957@gamil.com>
  * @license  MIT license
  * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB
  */
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Request;
 
 /**
- * Model class for User
+ * Model for Notification
  * 
  * @category Model
  * @package  App
@@ -21,7 +22,9 @@ use Illuminate\Database\Eloquent\Model;
  * @license  MIT license
  * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB
  */
-class User extends Model
+
+class UserProfile extends Model
 {
-    protected $table = 'user';
+    protected $table = 'user_profile';
+
 }

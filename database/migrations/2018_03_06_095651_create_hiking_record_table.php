@@ -4,9 +4,10 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserTable extends Migration
+class CreateHikingRecordTable extends Migration
 {
-    private $_table = 'user';
+    private $_table = 'hiking_record';
+
     /**
      * Run the migrations.
      *
@@ -15,11 +16,13 @@ class CreateUserTable extends Migration
     public function up()
     {
         Schema::create(
-            $this->_table,
+            'hiking_record',
             function (Blueprint $table) {
                 $table->uuid('uuid')->primary();
-                $table->string('id', 20);
-                $table->string('password', 20);
+                $table->uuid('owner');
+                $table->uuid('hiking_plan');
+                $table->decimal('avg_speed', 5, 2)->nullable();
+                $table->smallInteger('rank')->unsigned()->nullable();
                 $table->timestamps();
             }
         );
@@ -27,8 +30,8 @@ class CreateUserTable extends Migration
         if (Schema::hasTable($this->_table)) {
             DB::unprepared(
                 '
-                CREATE TRIGGER before_insert_' . $this->_table . '
-                BEFORE INSERT ON ' . $this->_table . '
+                CREATE TRIGGER before_insert_hiking_record
+                BEFORE INSERT ON hiking_record
                 FOR EACH ROW
                 BEGIN
                 IF new.uuid LIKE "" THEN
