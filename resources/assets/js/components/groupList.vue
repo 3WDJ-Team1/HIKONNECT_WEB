@@ -40,14 +40,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>100</td>
-                        <td><a href="">등산은 곧 등산 입니다.</a></td>
-                        <td>소백산</td>
-                        <td>작성자</td>
-                        <td>2018.05.16</td>
-                        <td>-</td>
-                        <td>25</td>
+                    <tr v-for="item in items">
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.id }}</td>
+                        {{ name }}
                     </tr>
                 </tbody>
             </table>
@@ -60,7 +61,6 @@
                 <li class="page-item"><a class="page-link" href="#">&#60;&#60;</a></li>
                 <li class="page-item"><a class="page-link" href="#">1</a></li>
                 <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
                 <li class="page-item"><a class="page-link" href="#">>></a></li>
             </ul>
         </div>
@@ -69,8 +69,27 @@
 
 <script>
     export default {
-        ready() {
-            console.log('Component ready.')
+        data() {
+            return{
+                items: [],
+                name: 'dfsdfsdf'
+            }
+        },
+        created: function ()
+        {
+            this.fetchItems();
+        },
+        method: {
+            fetchItem()
+            {
+                this.axios.post('http://localhost:8000/list')
+                    .then(response => {
+                        console.log(response.data);
+                    })
+                    .catch(e => {
+                        this.errors.push(e)
+                    })
+            }
         }
     }
 </script>

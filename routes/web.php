@@ -19,3 +19,5 @@ Route::get(
 Route::resource('notice', 'NoticeController');
  
 Route::resource('group', 'GroupController');
+
+Route::post('/list', 'GroupController@jiyoon');
