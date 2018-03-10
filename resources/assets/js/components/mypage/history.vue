@@ -1,8 +1,10 @@
 <template>
     <div>
-        기록들~
+        <button v-on:click="info">sad</button>
     </div>
 </template>
 <script>
-    export default {}
+    export default {
+
+    }
 </script>

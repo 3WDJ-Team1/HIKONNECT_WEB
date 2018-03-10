@@ -11,7 +11,7 @@
     export default {
         methods: {
             sessionver() {
-                if(sessionStorage.getItem('login') != null) {
+                if(sessionStorage.getItem('userid') != null) {
                     return 'true';
                 }
             },

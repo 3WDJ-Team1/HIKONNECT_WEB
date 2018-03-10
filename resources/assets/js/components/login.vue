@@ -34,18 +34,24 @@
                 else {
                     let uri = 'http://localhost:8000/loginprocess';
                     this.axios.post(uri, this.item).then((response) => {
-                        console.log(response.data);
                         if (response.data == 'false') {
                             alert('아이디가 없습니다.');
                         }
                         else if(response.data == 'pwfalse') {
-                            alert('비밀번호가 없습니다');
+                            alert('비밀번호가 틀렸습니다');
                         }
                         else  {
                             alert('로그인 완료');
+                            var datavalue = Object.values(response.data);
+                            sessionStorage.setItem('userid',$('#id').val());
+                            sessionStorage.setItem('phone',datavalue[0].phone);
+                            sessionStorage.setItem('nickname',datavalue[0].nickname);
+                            sessionStorage.setItem('gender',datavalue[0].gender);
+                            sessionStorage.setItem('age_group',datavalue[0].age_group);
+                            sessionStorage.setItem('image_path',datavalue[0].image_path);
                             this.$router.push({ name: 'main'});
-                            sessionStorage.setItem('login',$('#id').val());
                             window.location.reload();
+
 
 
                         }

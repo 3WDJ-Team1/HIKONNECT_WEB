@@ -57717,7 +57717,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     methods: {
         sessionver: function sessionver() {
-            if (sessionStorage.getItem('login') != null) {
+            if (sessionStorage.getItem('userid') != null) {
                 return 'true';
             }
         },
@@ -58142,14 +58142,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             } else {
                 var uri = 'http://localhost:8000/loginprocess';
                 this.axios.post(uri, this.item).then(function (response) {
-                    console.log(response.data);
-                    if (response.data == 'true') {
+                    if (response.data == 'false') {
+                        alert('아이디가 없습니다.');
+                    } else if (response.data == 'pwfalse') {
+                        alert('비밀번호가 틀렸습니다');
+                    } else {
                         alert('로그인 완료');
+                        var datavalue = Object.values(response.data);
+                        sessionStorage.setItem('userid', $('#id').val());
+                        sessionStorage.setItem('phone', datavalue[0].phone);
+                        sessionStorage.setItem('nickname', datavalue[0].nickname);
+                        sessionStorage.setItem('gender', datavalue[0].gender);
+                        sessionStorage.setItem('age_group', datavalue[0].age_group);
+                        sessionStorage.setItem('image_path', datavalue[0].image_path);
                         _this.$router.push({ name: 'main' });
-                        sessionStorage.setItem('login', $('#id').val());
                         window.location.reload();
-                    } else if (response.data == 'false') {
-                        alert('로그인 실패');
                     }
                 });
             }
@@ -58323,6 +58330,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -58963,8 +58971,10 @@ module.exports = Component.exports
 
 /***/ }),
 /* 293 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
@@ -58972,46 +58982,8 @@ module.exports = Component.exports
 //
 //
 //
-//
 
-
-/*import Vue from 'vue';
-import graph from './graph.vue'
-import VueRouter from 'vue-router';
-Vue.use(VueRouter);
-
-export default {
-
-    methods: {
-        profile() {
-                let uri= 'http://localhost:8000/user';
-                this.axios.post(uri).then((response) => {
-
-                })
-            }
-        }
-}
-const router = new VueRouter({
-    mode: 'history',
-    routes: [
-        { path: '/',
-            // a single route can define multiple named components
-            // which will be rendered into <router-view>s with corresponding names.
-            components: {
-                a: graph
-
-            }
-        },
-        {
-            path: '/other',
-            components: {
-                a: graph
-            }
-        }
-    ]
-});
-
-new Vue(Vue.util.extend({ router }, this)).$mount('#d');*/
+/* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
 /* 294 */
@@ -59023,7 +58995,6 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { id: "d" } },
     [
       _c(
         "router-link",
@@ -59134,8 +59105,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            item: {}
+        };
+    },
+
+    methods: {
+        login: function login() {
+            var uri = 'http://localhost:8000/user/1';
+            this.axios.patch(uri, sessionStorage.getItem('login')).then(function (response) {
+                console.log(response);
+            });
+        }
+    }
+});
 
 /***/ }),
 /* 298 */
@@ -59147,14 +59148,70 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "container", staticStyle: { "margin-left": "130px" } },
     [
-      _c(
-        "router-link",
-        { staticClass: "btn btn-primary", attrs: { to: { name: "mypage" } } },
-        [_vm._v(" 뒤로")]
-      )
-    ],
-    1
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-5 col-md-offset-2" }, [
+          _c(
+            "div",
+            {
+              staticClass: "panel panel-default",
+              staticStyle: { "margin-top": "150px" }
+            },
+            [
+              _c("div", { staticClass: "panel-heading" }, [_vm._v("로그인")]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "panel-body" },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.item.idv,
+                        expression: "item.idv"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", placeholder: "Enter id", id: "id" },
+                    domProps: { value: _vm.item.idv },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.item, "idv", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button", value: "로그인" },
+                    on: { click: _vm.login }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "btn btn-primary",
+                      staticStyle: { "margin-left": "298px" },
+                      attrs: { to: { name: "main" } }
+                    },
+                    [_vm._v(" 취소")]
+                  )
+                ],
+                1
+              )
+            ]
+          )
+        ])
+      ])
+    ]
   )
 }
 var staticRenderFns = []
@@ -59374,7 +59431,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n    기록들~\n")])
+  return _c("div", [_c("button", { on: { click: _vm.info } }, [_vm._v("sad")])])
 }
 var staticRenderFns = []
 render._withStripped = true
