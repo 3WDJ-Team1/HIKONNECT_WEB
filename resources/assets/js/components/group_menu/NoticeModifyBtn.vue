@@ -1,13 +1,19 @@
-<!-- NoticeModifyBtn.vue -->
-<!-- editButton of every notices -->
+<!-- 
+    @file   NoticeModifyBtn.vue
+    @brief  A component that is an editButton of each notice
+    @author Sungeun Kang
+    @todo   error test
+ -->
 <template>
+    <!-- @div   A container of this component -->
     <div class='edit_button'>
-        <!-- if you click this button, -->
+        <!-- @v-btn         button for deciding to open modal -->
         <v-btn style="height: 100%;" flat v-on:click="openModifyModal();">
              <v-icon dark>edit</v-icon>&nbsp;edit
         </v-btn>
-        <!-- this will be shown -->
+        <!-- @sweet-modal   a modal which have input form script -->
         <sweet-modal ref="modify" blocking>
+            <!-- @router-view   insert component "form" -->
             <router-view name="form"></router-view>
         </sweet-modal>
     </div>
@@ -15,9 +21,17 @@
 
 <script>
     export default {
+        /**
+         * @prop    propsNotice
+         * @brief   the object of selected notice.
+         */
         props: ['propsNotice'],
         methods : {
-            // the function for open modal
+            /**
+             * @function    openModifyModal
+             * @brief       if button is clicked, this is invoked.
+             *              the function for opening modal.
+             */
             openModifyModal : function() {
                 this.$refs.modify.open();
                 this.$EventBus.$emit('noticeData', this.propsNotice);
