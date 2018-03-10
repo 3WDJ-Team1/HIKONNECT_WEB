@@ -8,9 +8,9 @@
     <!-- @div#group_notice  the wrapper of notice list -->
     <div class="text-center" id="group_notice">
         <!-- show the name of group -->
-        <h1>{{ groupName }}</h1>
-        <h2>Group notice</h2>
-        <br>
+        <!-- <h1>{{ groupName }}</h1> -->
+        <!-- <h2>Group notice</h2> -->
+        <!-- <br> -->
         <!-- @router-view   'write' floating button -->
         <router-view name="write"></router-view>
         <!-- @div           notice list area -->
@@ -163,6 +163,7 @@
     word-break: keep-all;
 }
 #group_notice {
+    width: 99.5%;
     margin-bottom: 8%;
 }
 .loader {

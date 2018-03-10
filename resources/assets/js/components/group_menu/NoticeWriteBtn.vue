@@ -14,7 +14,7 @@
             class="btn--bottom btn--floating btn--fixed btn--right"
             color="cyan"
             v-on:click="openWriteModal()">
-            <v-icon style="color: white">add</v-icon>
+            <v-icon color="white">add</v-icon>
         </v-btn>
         <!-- @sweet-modal   the modal which have form script for writing notices -->
         <sweet-modal ref="write" blocking>
