@@ -35,15 +35,17 @@
                     let uri = 'http://localhost:8000/loginprocess';
                     this.axios.post(uri, this.item).then((response) => {
                         console.log(response.data);
-                        if (response.data == 'true') {
+                        if (response.data == 'false') {
+                            alert('아이디가 없습니다.');
+                        }
+                        else if(response.data == 'pwfalse') {
+                            alert('비밀번호가 없습니다');
+                        }
+                        else  {
                             alert('로그인 완료');
                             this.$router.push({ name: 'main'});
                             sessionStorage.setItem('login',$('#id').val());
                             window.location.reload();
-
-                        }
-                        else if(response.data == 'false') {
-                            alert('로그인 실패');
 
 
                         }

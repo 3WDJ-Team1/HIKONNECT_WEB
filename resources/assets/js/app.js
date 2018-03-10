@@ -31,6 +31,7 @@ import graph  from  './components/mypage/graph.vue';
 
 
 
+
 const routes = [
     {
         name: 'main',
