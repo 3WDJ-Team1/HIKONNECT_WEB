@@ -14,7 +14,7 @@
         },
         methods: {
             verifysession() {
-                if(sessionStorage.getItem('login') != null) {
+                if(sessionStorage.getItem('userid') != null) {
                     return 'true'
                 }
             }
