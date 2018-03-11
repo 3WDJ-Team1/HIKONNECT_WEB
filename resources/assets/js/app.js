@@ -41,7 +41,6 @@ Vue.component('sync-loader', require('vue-spinner/src/SyncLoader.vue'));
 
 Vue.prototype.$EventBus = new Vue();
 
-import ExampleComponent     from "./components/ExampleComponent.vue";
 import GroupMenuTab         from "./components/group_menu/GroupMenuTab.vue";
 import NoticeListUp         from "./components/group_menu/NoticeListUp.vue";
 import App                  from './components/App.vue';
@@ -67,70 +66,65 @@ const routes = [
         name: 'main',
         path: '/',
         component: main,
-    },
-    {
-        name: 'GroupMenu',
-        path: '/group',
-        component: GroupMenuTab,
         children: [
             {
-                path: '/group',
-                components: {
-                    notice: NoticeListUp,
+                name: 'mainbody',
+                path: '/main',
+                component: mainbody
+            },
+            {
+                name: 'test',
+                path: '/test',
+                component: test
+            },
+            {
+                name: 'register',
+                path: '/register',
+                component: register
+            },
+            {
+                name: 'login',
+                path: '/login',
+                component: login
+            }
+            ,
+            {
+                name: 'mypage',
+                path: '/mypage',
+                component: mypage
+            },
+            {
+                name: 'modify',
+                path: '/modify',
+                component: modify
+            },
+            {
+                name: 'graph',
+                path: '/graph',
+                component: graph
+            }
+        ]
+    },
+    {
+        name: 'NoticeListUp',
+        path: '/notice',
+        component: NoticeListUp,
+
+        children: [
+            {
+                path : '/notice',
+                components : {
+                    write : NoticeWriteBtn,
+                    modify: NoticeModifyBtn,
+                    delete: NoticeDeleteBtn
                 },
-        
+
                 children: [
                     {
-                        name: 'mainbody',
-                        path: '/main',
-                        component: mainbody
-                    },
-                    {
-                        name: 'test',
-                        path: '/test',
-                        component: test
-                    },
-                    {
-                        name: 'register',
-                        path: '/register',
-                        component: register
-                    },
-                    {
-                        name: 'login',
-                        path: '/login',
-                        component: login
-                    }
-                    ,
-                    {
-                        name: 'mypage',
-                        path: '/mypage',
-                        component: mypage
-                    },
-                    {
-                        name: 'modify',
-                        path: '/modify',
-                        component: modify
-                    },
-                    {
-                        name: 'graph',
-                        path: '/graph',
-                        component: graph
-                    },
-                    {
-                        path : '/group',
-                        components : {
-                            write : NoticeWriteBtn,
-                            modify: NoticeModifyBtn,
-                            delete: NoticeDeleteBtn
-                        },
-                        children: [
-                            {
-                                path: '/group',
-                                components: {
-                                    form : NoticeFormInside
-                                }
-                            }
-                        ]
+                        path: '/notice',
+                        components: {
+                            form : NoticeFormInside
+                        }
                     }
                 ]
             }
@@ -140,5 +134,6 @@ const routes = [
  
 const router = new VueRouter({ mode: 'history', routes:routes });
  
-new Vue(Vue.util.extend({ router }, App)).$mount('#app');//view-router 와 직접적인 관련이 있다.
+// view-router 와 직접적인 관련이 있다.
+new Vue(Vue.util.extend({ router }, App)).$mount('#app');
 
