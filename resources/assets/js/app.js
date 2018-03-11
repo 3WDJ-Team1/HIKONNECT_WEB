@@ -53,11 +53,20 @@ import listShow             from "./components/listShow.vue";
 import listSerch            from "./components/listSerch.vue";
 import groupList            from "./components/groupList.vue";
 
+import main                 from './components/main/main.vue';
+import mainbody             from './components/main/mainbody.vue';
+import test                 from './components/main/test.vue';
+import login                from './components/login.vue';
+import register             from './components/register.vue';
+import mypage               from './components/mypage/mypagemain.vue';
+import modify               from './components/mypage/modify.vue';
+import graph                from  './components/mypage/graph.vue';
+
 const routes = [
     {
-        name: 'groupList',
+        name: 'main',
         path: '/',
-        component: groupList,
+        component: main,
     },
     {
         name: 'GroupMenu',
@@ -71,6 +80,42 @@ const routes = [
                 },
         
                 children: [
+                    {
+                        name: 'mainbody',
+                        path: '/main',
+                        component: mainbody
+                    },
+                    {
+                        name: 'test',
+                        path: '/test',
+                        component: test
+                    },
+                    {
+                        name: 'register',
+                        path: '/register',
+                        component: register
+                    },
+                    {
+                        name: 'login',
+                        path: '/login',
+                        component: login
+                    }
+                    ,
+                    {
+                        name: 'mypage',
+                        path: '/mypage',
+                        component: mypage
+                    },
+                    {
+                        name: 'modify',
+                        path: '/modify',
+                        component: modify
+                    },
+                    {
+                        name: 'graph',
+                        path: '/graph',
+                        component: graph
+                    },
                     {
                         path : '/group',
                         components : {
@@ -92,9 +137,8 @@ const routes = [
         ]
     },
 ];
-
-
  
-const router = new VueRouter({ routes })
+const router = new VueRouter({ mode: 'history', routes:routes });
  
-const app = new Vue(Vue.util.extend({ router }, App)).$mount('#app')
+new Vue(Vue.util.extend({ router }, App)).$mount('#app');//view-router 와 직접적인 관련이 있다.
+

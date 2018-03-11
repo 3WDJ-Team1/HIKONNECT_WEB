@@ -26,3 +26,8 @@ Route::get('xmltesting', 'HikingPlanController@index');
 Route::resource('group', 'GroupController');
 
 Route::post('/list', 'GroupController@jiyoon');
+
+Route::resource('/user', 'UserController');
+Route::post('/login', 'LoginController@login')->name('login');
+Route::post('/loginprocess', 'LoginController@loginprocess')->name('loginprocess');
+Route::post('/logout', 'LoginController@logout')->name('logout');
