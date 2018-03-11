@@ -46,17 +46,15 @@ import NoticeWriteBtn       from './components/group_menu/NoticeWriteBtn.vue';
 import NoticeModifyBtn      from './components/group_menu/NoticeModifyBtn.vue';
 import NoticeDeleteBtn      from './components/group_menu/NoticeDeleteBtn.vue';
 import NoticeFormInside     from './components/group_menu/NoticeFormInside.vue';
-import ExampleComponent from "./components/ExampleComponent.vue";
-import App from './components/App.vue';
-import listShow from "./components/listShow.vue";
-import listSerch from "./components/listSerch.vue";
-import groupList from "./components/groupList.vue";
+import listShow             from "./components/listShow.vue";
+import listSerch            from "./components/listSerch.vue";
+import groupList            from "./components/groupList.vue";
 
 const routes = [
     {
         name: 'groupList',
         path: '/',
-        component: ExampleComponent,
+        component: groupList,
     },
     {
         name: 'NoticeListUp',

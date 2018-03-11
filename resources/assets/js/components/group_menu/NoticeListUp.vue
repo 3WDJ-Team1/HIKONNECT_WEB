@@ -45,7 +45,7 @@
         }),
         beforeMount() {
             // get object of notice information
-            axios.get('http://localhost:8000/notice/0/5')
+            axios.get(Laravel.host + '/notice/0/5')
                 .then(response => {
                     this.notices = response.data;
                 });
@@ -60,7 +60,7 @@
             },
             api: function () {
                 this.loading = true;
-                axios.get('http://localhost:8000/notice/' + (this.page - 1) * 5 + '/' + this.page * 5)
+                axios.get(Laravel.host + '/notice/' + (this.page - 1) * 5 + '/' + this.page * 5)
                 .then(response => {
                     this.notices = response.data;
                     this.loading = false;
