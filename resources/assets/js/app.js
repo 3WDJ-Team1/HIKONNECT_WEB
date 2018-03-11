@@ -64,7 +64,6 @@ const routes = [
                             modify: NoticeModifyBtn,
                             delete: NoticeDeleteBtn
                         },
-        
                         children: [
                             {
                                 path: '/group',

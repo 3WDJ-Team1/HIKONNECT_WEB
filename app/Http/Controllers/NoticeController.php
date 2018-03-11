@@ -108,9 +108,10 @@ class NoticeController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id = null)
     {
-        return $this->_notice_model->updateNotification($request->input(), $id);
+        return $request->input();
+        // return $this->_notice_model->updateNotification($request->input(), $id);
     }
 
     /**
