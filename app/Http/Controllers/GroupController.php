@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Group;
+use App\Models\Group;
 use Illuminate\Http\Request;
 
     /**
@@ -10,13 +10,13 @@ use Illuminate\Http\Request;
      */
 class GroupController extends Controller
 {
-    private $model = null;
+    private $groupModel = null;
     /**
      * Constructor for GroupController
      */
     public function __construct()
     {
-        $this->model = new Group();
+        $this->groupModel = new Group();
     }
     
     /**
