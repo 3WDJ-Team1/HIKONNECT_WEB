@@ -29,6 +29,7 @@
         "vue-axios": "^2.0.2",
         "vue-loader": "^14.2.1",
         "vue-router": "^3.0.1",
+        "vue-spinner": "^1.0.3",
         "vuejs-dialog": "^0.8.0",
         "vuetify": "^1.0.5"
     }

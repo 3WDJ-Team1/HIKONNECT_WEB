@@ -37,9 +37,12 @@ import VueAxios     from 'vue-axios';
 import axios        from 'axios';
 Vue.use(VueAxios, axios);
 
+Vue.component('sync-loader', require('vue-spinner/src/SyncLoader.vue'));
+
 Vue.prototype.$EventBus = new Vue();
 
 import ExampleComponent     from "./components/ExampleComponent.vue";
+import GroupMenuTab         from "./components/group_menu/GroupMenuTab.vue";
 import NoticeListUp         from "./components/group_menu/NoticeListUp.vue";
 import App                  from './components/App.vue';
 import NoticeWriteBtn       from './components/group_menu/NoticeWriteBtn.vue';
@@ -57,25 +60,32 @@ const routes = [
         component: groupList,
     },
     {
-        name: 'NoticeListUp',
-        path: '/notice',
-        component: NoticeListUp,
-
+        name: 'GroupMenu',
+        path: '/group',
+        component: GroupMenuTab,
         children: [
             {
-                path : '/notice',
-                components : {
-                    write : NoticeWriteBtn,
-                    modify: NoticeModifyBtn,
-                    delete: NoticeDeleteBtn
+                path: '/group',
+                components: {
+                    notice: NoticeListUp,
                 },
-
+        
                 children: [
                     {
-                        path: '/notice',
-                        components: {
-                            form : NoticeFormInside
-                        }
+                        path : '/group',
+                        components : {
+                            write : NoticeWriteBtn,
+                            modify: NoticeModifyBtn,
+                            delete: NoticeDeleteBtn
+                        },
+                        children: [
+                            {
+                                path: '/group',
+                                components: {
+                                    form : NoticeFormInside
+                                }
+                            }
+                        ]
                     }
                 ]
             }

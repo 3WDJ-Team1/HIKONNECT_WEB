@@ -1,70 +1,148 @@
+<!-- 
+    @file   NoticeListUp.vue
+    @brief  A component to show notices in group
+    @author Sungeun Kang
+    @todo   insert buttons
+ -->
 <template>
-    <!-- the wrapper of notice list -->
+    <!-- @div#group_notice  the wrapper of notice list -->
     <div class="text-center" id="group_notice">
         <!-- show the name of group -->
-        <h1>{{ groupName }}</h1>
-        <h2>Group notice</h2>
-        <br>
+        <!-- <h1>{{ groupName }}</h1> -->
+        <!-- <h2>Group notice</h2> -->
+        <!-- <br> -->
+        <!-- @router-view   'write' floating button -->
         <router-view name="write"></router-view>
-        <!-- Use infinite scroll for pagination -->
+        <!-- @div           notice list area -->
         <div>
-            <!-- notice div are formed automatically by data.notices -->
+            <!-- @div       A card of notice
+                            notice div are formed automatically by data.notices -->
             <div v-for="notice in notices">
-                <!-- the wrapper of notice card -->
+                <!-- @div   the wrapper of notice card -->
                 <div class="card_wrapper">
-                    <!-- if you click this div, -->
+                    <!-- @div   The title and author of a notice
+                                if you click this, b-collapse will be shown. -->
                     <div v-b-toggle="'n' + notice.uuid" class="m-1">
                         <h3 class="card-title">{{ notice.title }}</h3>
                         <p class="card-text">writer : {{ notice.nickname }} | hits : {{ notice.hits }}</p>
                     
                     </div>
-                    <!-- this will be shown. -->
+                    <!-- @div(b-collapse)   The contents of a notice. -->
                     <b-collapse v-bind:id="'n' + notice.uuid">
                         <div class="notice_text">
                             {{ notice.content }}
                         </div>
-                        <!-- send notice.uuid to children components -->
+                        <!-- @router-view   'delete' button component
+                                            porpsNotice will send notice.uuid to children components -->
+                                            
                         <router-view name="delete" v-bind:propsNotice="notice"></router-view>
+                        <!-- @router-view   'modify(edit)' button component
+                                            porpsNotice will send notice.uuid to children components -->
                         <router-view name="modify" v-bind:propsNotice="notice"></router-view>
                     </b-collapse>
                 </div>
             </div>
         </div>
+        <!-- @sync-loader   An animation will be shown while the infinite-loading -->
+        <sync-loader class="loader" :color="loader.color" :loading="loader.loading" :margin="loader.margin" :size="loader.size"></sync-loader>
     </div>
 </template>
 
 <script>
     export default {
-        data : ()  => ({
-            // groupName and notices will be changed by http response. (now there're dump data)
+        data : ()  => ({ 
+            /**
+             * groupName    (String)        the name of group
+             * notices      (Array)         the array of notices object
+             * page         (Integer)       current page of loading
+             * size         (Integer)       how much response data we need
+             * bottom       (Boolean)       is scroll in bottom of page?
+             * httpAddr     (String)        the address for axios request
+             * loader       (Object)        the Settings for loading icon
+             *      loading (Boolean)       is now loading?
+             *      color   (String)        color of icon
+             *      margin  (String)        margin of each div of icon
+             *      size    (String)        size of each div
+             */
+            // groupName and notices will be changed by http response.
             groupName : "3WDJ-Team1",
             notices : [
                 // the type of notices is 'object' certainly.
             ],
-            page: 1
+            page: 1,
+            size: 5,
+            bottom: false,
+            httpAddr: Laravel.host,
+            loader: {
+                loading: true,
+                color: "#4df1e1",
+                margin: "2px",
+                size: "10px"
+            }
         }),
-        beforeMount() {
-            // get object of notice information
-            axios.get(Laravel.host + '/notice/0/5')
+        // When this component was created,
+        created() {
+            // add event listener for 'scroll' --> for infinite loading
+            window.addEventListener('scroll', () => {
+                // store value(boolean) about 'is bottom Visible'
+                this.bottom = this.bottomVisible()
+            });
+            // request
+            axios.get(this.httpAddr + '/notice/0/10')
                 .then(response => {
+                    // update this.notices with response data
                     this.notices = response.data;
+                    // make icon hidden
+                    this.loader.loading = false;
                 });
         },
         methods: {
-            nextPage: function () {
-                const scrollY = window.scrollY;
-                const visible = document.documentElement.clientHeight;
-                const pageHeight = document.documentElement.scrollHeight;
-                const bottomOfPage = visible + scrollY >= pageHeight
-                return bottomOfPage || pageHeight < visible
+            /**
+             * @function    bottomVisible
+             * @brief       check is bottom visible with the value of scroll position
+             */
+            bottomVisible: function () {
+                const scrollY       = window.scrollY;
+                const visible       = document.documentElement.clientHeight;
+                const pageHeight    = document.documentElement.scrollHeight;
+                const bottomOfPage  = visible + scrollY + 1 >= pageHeight;
+
+                return bottomOfPage || pageHeight < visible;
             },
-            api: function () {
-                this.loading = true;
-                axios.get(Laravel.host + '/notice/' + (this.page - 1) * 5 + '/' + this.page * 5)
+            /**
+             * @function    addNotice
+             * @brief       send http request to server, and update this.notice
+             */
+            addNotices() {
+                this.loader.loading     = true;
+                let url                 = this.httpAddr + '/notice/' + ((this.page - 1) * this.size + 10)
+                                          + '/' + (this.page * this.size + 10);
+                
+                axios.get(url)
                 .then(response => {
-                    this.notices = response.data;
-                    this.loading = false;
+                    if (response.data.length == 0) {
+                        this.loader.loading = false;
+                        return;
+                    }
+                    for (let i = 0 ; i < this.size ; i++) {
+                        this.notices.push(response.data[i]);
+                    }
+                    this.loader.loading = false;
                 });
+                this.page++;
+            }
+        },
+        watch: {
+            /**
+             * @function    bottom
+             * @argument    this.bottom
+             * @brief       watch the value of this.bottom.
+             *              if the value is true, addNotice function is invoked.
+             */
+            bottom(bottom) {
+                if (bottom) {
+                    this.addNotices();
+                }
             }
         }
     }
@@ -87,9 +165,11 @@
     margin: 0 auto;
     word-break: keep-all;
 }
-
-.scroll_div {
-    height: 100%;
-    overflow-y: scroll;
+#group_notice {
+    width: 99.5%;
+    margin-bottom: 8%;
+}
+.loader {
+    margin-top: 2%
 }
 </style>
