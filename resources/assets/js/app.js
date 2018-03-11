@@ -66,44 +66,42 @@ const routes = [
         name: 'main',
         path: '/',
         component: main,
-        children: [
-            {
-                name: 'mainbody',
-                path: '/main',
-                component: mainbody
-            },
-            {
-                name: 'test',
-                path: '/test',
-                component: test
-            },
-            {
-                name: 'register',
-                path: '/register',
-                component: register
-            },
-            {
-                name: 'login',
-                path: '/login',
-                component: login
-            }
-            ,
-            {
-                name: 'mypage',
-                path: '/mypage',
-                component: mypage
-            },
-            {
-                name: 'modify',
-                path: '/modify',
-                component: modify
-            },
-            {
-                name: 'graph',
-                path: '/graph',
-                component: graph
-            }
-        ]
+    },
+    {
+        name: 'mainbody',
+        path: '/main',
+        component: mainbody
+    },
+    {
+        name: 'test',
+        path: '/test',
+        component: test
+    },
+    {
+        name: 'register',
+        path: '/register',
+        component: register
+    },
+    {
+        name: 'login',
+        path: '/login',
+        component: login
+    }
+    ,
+    {
+        name: 'mypage',
+        path: '/mypage',
+        component: mypage
+    },
+    {
+        name: 'modify',
+        path: '/modify',
+        component: modify
+    },
+    {
+        name: 'graph',
+        path: '/graph',
+        component: graph
     },
     {
         name: 'NoticeListUp',
