@@ -1,6 +1,6 @@
 <!-- 
     @file   NoticeListUp.vue
-    @brief  A component for show notices in group
+    @brief  A component to show notices in group
     @author Sungeun Kang
     @todo   insert buttons
  -->
@@ -72,7 +72,7 @@
             page: 1,
             size: 5,
             bottom: false,
-            httpAddr: 'http://localhost:8000',
+            httpAddr: Laravel.host,
             loader: {
                 loading: true,
                 color: "#4df1e1",

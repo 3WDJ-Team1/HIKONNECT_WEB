@@ -20,7 +20,7 @@
             /**
              * httpAddr     (String)        the address for axios request
              */
-            httpAddr: 'http://localhost:8000'
+            httpAddr: Laravel.host
         }),
         /**
          * @prop    propsNotice

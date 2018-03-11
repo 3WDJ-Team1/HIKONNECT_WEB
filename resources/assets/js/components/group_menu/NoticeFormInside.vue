@@ -69,7 +69,7 @@
                 text => !!text || 'Text is required.'
             ],
             mode: '',
-            httpAddr: 'http://localhost:8000'
+            httpAddr: Laravel.host
         }),
         methods: {
             /**
