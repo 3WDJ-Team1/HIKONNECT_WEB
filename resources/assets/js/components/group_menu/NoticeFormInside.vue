@@ -85,7 +85,8 @@
                                 writer:'', // user's uuid,
                                 title: this.title,
                                 content: this.text
-                            })
+                            });
+                            this.$parent.close();
                         }
                     break;
                     case "write":
@@ -96,6 +97,7 @@
                                 title: this.title,
                                 content: this.text
                             })
+                            this.$parent.close();
                         }
                     break;
                 }

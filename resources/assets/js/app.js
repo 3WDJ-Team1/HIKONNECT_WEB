@@ -38,6 +38,7 @@ import NoticeWriteBtn       from './components/group_menu/NoticeWriteBtn.vue';
 import NoticeModifyBtn      from './components/group_menu/NoticeModifyBtn.vue';
 import NoticeDeleteBtn      from './components/group_menu/NoticeDeleteBtn.vue';
 import NoticeFormInside     from './components/group_menu/NoticeFormInside.vue';
+import GroupPlan            from './components/group_menu/GroupPlan.vue';
 
 const routes = [
     {
@@ -54,6 +55,7 @@ const routes = [
                 path: '/group',
                 components: {
                     notice: NoticeListUp,
+                    plan: GroupPlan
                 },
         
                 children: [

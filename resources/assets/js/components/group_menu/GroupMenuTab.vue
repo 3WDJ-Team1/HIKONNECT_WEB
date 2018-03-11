@@ -42,7 +42,7 @@
                 :id="'tab-' + 2"
             >
                 <v-card flat>
-                    <!-- <router-view name="notice"></router-view> -->
+                    <router-view name="plan"></router-view>
                 </v-card>
             </v-tab-item>
             <v-tab-item

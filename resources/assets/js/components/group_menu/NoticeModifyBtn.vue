@@ -36,8 +36,8 @@
                 this.$refs.modify.open();
                 this.$EventBus.$emit('noticeData', this.propsNotice);
                 this.$EventBus.$emit('modalMode', 'edit');
-            },
-        },
+            }
+        }
     }
 </script>
 
