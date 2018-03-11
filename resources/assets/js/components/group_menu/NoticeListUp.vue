@@ -120,12 +120,15 @@
                 
                 axios.get(url)
                 .then(response => {
+                    if (response.data.length == 0) {
+                        this.loader.loading = false;
+                        return;
+                    }
                     for (let i = 0 ; i < this.size ; i++) {
                         this.notices.push(response.data[i]);
                     }
+                    this.loader.loading = false;
                 });
-
-                this.loader.loading = false;
                 this.page++;
             }
         },
