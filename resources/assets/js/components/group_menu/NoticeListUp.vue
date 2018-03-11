@@ -123,9 +123,9 @@
                     for (let i = 0 ; i < this.size ; i++) {
                         this.notices.push(response.data[i]);
                     }
-                    this.loader.loading = false;
                 });
 
+                this.loader.loading = false;
                 this.page++;
             }
         },
