@@ -53,7 +53,6 @@
                             window.location.reload();
 
 
-
                         }
                     });
                 }
