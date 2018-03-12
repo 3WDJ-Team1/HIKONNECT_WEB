@@ -57355,16 +57355,17 @@ var render = function() {
       { staticClass: "navbar navbar-default", staticStyle: { width: "700px" } },
       [
         _c("div", { staticClass: "container-fluid" }, [
-          _c(
-            "div",
-            { staticClass: "nav navbar-nav" },
-            [
-              _c("router-link", { attrs: { to: { name: "main" } } }, [
-                _vm._v("홈으로")
-              ])
-            ],
-            1
-          ),
+          _c("div", { staticClass: "nav navbar-nav" }, [
+            _c(
+              "li",
+              [
+                _c("router-link", { attrs: { to: { name: "main" } } }, [
+                  _vm._v("홈으로")
+                ])
+              ],
+              1
+            )
+          ]),
           _vm._v(" "),
           _c("div", [
             _c("ul", { staticClass: "nav navbar-nav" }, [
@@ -57612,16 +57613,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
-/* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            hello: 'sbs_cms/WE/2017/08/04/WE68468406_ori.jpg'
-        };
-    }
-});
+/* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
 /* 272 */
@@ -57631,15 +57625,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("img", {
-      attrs: {
-        src:
-          "http://img2.sbs.co.kr/img/sbs_cms/WE/2017/08/04/WE68468406_ori.jpg",
-        width: "200"
-      }
-    })
-  ])
+  return _c("div")
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -57787,21 +57773,9 @@ var render = function() {
     [
       _c("mainbar"),
       _vm._v(" "),
-      _c("mainbanner", {
-        staticStyle: {
-          width: "1140px",
-          height: "200px",
-          "background-color": "red"
-        }
-      }),
+      _c("mainbanner", { staticStyle: { width: "1140px", height: "200px" } }),
       _vm._v(" "),
-      _c("mainbody", {
-        staticStyle: {
-          width: "1140px",
-          height: "600px",
-          "background-color": "yellow"
-        }
-      }),
+      _c("mainbody", { staticStyle: { width: "1140px", height: "600px" } }),
       _vm._v(" "),
       _c("lore", {
         staticStyle: {
@@ -58148,13 +58122,85 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         alert('비밀번호가 틀렸습니다');
                     } else {
                         alert('로그인 완료');
+
                         var datavalue = Object.values(response.data);
+                        var scope = datavalue[0].scope;
+                        var scv = 0;
+                        var phonesc = 0;
+                        var gendersc = 0;
+                        var agesc = 0;
+                        var agegroup = datavalue[0].age_group;
+                        var age = '';
+                        var gendergroup = datavalue[0].gender;
+                        var gender = '';
+
+                        if (gendergroup == 0) {
+                            gender = '남자';
+                        } else gender = '여자';
+
+                        switch (agegroup) {
+                            case 10:
+                                age = '10대';
+                                break;
+                            case 20:
+                                age = '20대';
+                                break;
+                            case 30:
+                                age = '30대';
+                                break;
+                            case 40:
+                                age = '40대';
+                                break;
+                            case 50:
+                                age = '50대';
+                                break;
+                            case 60:
+                                age = '60대 이상';
+                                break;
+
+                        }
+
+                        if (scope / 10000 >= 1) {
+                            scv = 'all';
+                            scope = scope - 10000;
+                        } else {
+                            scv = 'group';
+                            scope = scope - 1000;
+                        }
+
+                        if (scope / 100 >= 1) {
+                            phonesc = 'true';
+                            scope = scope - 100;
+                        } else {
+                            phonesc = 'false';
+                        }
+
+                        if (scope / 10 >= 1) {
+                            gendersc = 'true';
+                            scope = scope - 10;
+                        } else {
+                            gendersc = 'false';
+                        }
+
+                        if (scope == 1) {
+                            agesc = 'true';
+                        } else {
+                            agesc = 'false';
+                        }
+
                         sessionStorage.setItem('userid', $('#id').val());
                         sessionStorage.setItem('phone', datavalue[0].phone);
+                        sessionStorage.setItem('uuid', datavalue[0].uuid);
+                        sessionStorage.setItem('password', datavalue[0].password);
                         sessionStorage.setItem('nickname', datavalue[0].nickname);
-                        sessionStorage.setItem('gender', datavalue[0].gender);
-                        sessionStorage.setItem('age_group', datavalue[0].age_group);
+                        sessionStorage.setItem('phonesc', phonesc);
+                        sessionStorage.setItem('gendersc', gendersc);
+                        sessionStorage.setItem('agesc', agesc);
+                        sessionStorage.setItem('scv', scv);
+                        sessionStorage.setItem('gender', gender);
+                        sessionStorage.setItem('age', age);
                         sessionStorage.setItem('image_path', datavalue[0].image_path);
+
                         _this.$router.push({ name: 'main' });
                         window.location.reload();
                     }
@@ -58802,8 +58848,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("input", {
                     staticClass: "btn btn-primary",
-                    attrs: { type: "button", value: "확인" },
-                    on: { click: _vm.regist }
+                    attrs: { type: "button", click: _vm.regist, value: "확인" }
                   }),
                   _vm._v(" "),
                   _c(
@@ -58915,7 +58960,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     methods: {
         verifysession: function verifysession() {
-            if (sessionStorage.getItem('login') != null) {
+            if (sessionStorage.getItem('userid') != null) {
                 return 'true';
             }
         }
@@ -59119,21 +59164,93 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    mounted: function mounted() {
+
+        var c = sessionStorage.getItem('password');
+        $('#pwvc').val(c);
+    },
+
     data: function data() {
+
+        var a = 0;
+        var b = 0;
+        var c = 0;
+
+        if (sessionStorage.getItem('phonesc') == 'true') {
+            a = true;
+        } else a = false;
+        if (sessionStorage.getItem('gendersc') == 'true') {
+            b = true;
+        } else b = false;
+        if (sessionStorage.getItem('agesc') == 'true') {
+            c = true;
+        } else c = false;
+
         return {
-            item: {}
+            item: {
+                idv: sessionStorage.getItem('userid'),
+                gender: sessionStorage.getItem('gender'),
+                age: sessionStorage.getItem('age'),
+                nn: sessionStorage.getItem('nickname'),
+                phone: sessionStorage.getItem('phone'),
+                pwv: sessionStorage.getItem('password'),
+                scv: sessionStorage.getItem('scv'),
+
+                phonesc: a,
+                gendersc: b,
+                agesc: c
+
+            }
         };
     },
 
     methods: {
-        login: function login() {
-            var uri = 'http://localhost:8000/user/1';
-            this.axios.patch(uri, sessionStorage.getItem('login')).then(function (response) {
-                console.log(response);
-            });
+        dd: function dd() {
+            item.gendersc = false;
+        },
+        update: function update() {
+            var _this = this;
+
+            var uri = 'http://localhost:8000/user/' + sessionStorage.getItem('uuid');
+            if ($('#id').val() == "" || $('#pw').val() == "" || $('#pwvc').val() == "" || $('#nn').val() == "") {
+                alert('값이 비어있습니다');
+            } else if ($('#pw').val() != $('#pwvc').val()) {
+                alert('비밀 번호와 비밀번호 확인이 다릅니다');
+            } else {
+                this.axios.put(uri, this.item).then(function (response) {
+                    if (response.data == 'true') {
+                        alert('회원가입 완료');
+                        _this.$router.push({ name: 'main' });
+                    } else if (response.data == 'false') alert('이미 존재하는 아이디 입니다.');
+                    _this.$router.push({ name: 'main' });
+                });
+            }
         }
     }
 });
@@ -59156,10 +59273,12 @@ var render = function() {
             "div",
             {
               staticClass: "panel panel-default",
-              staticStyle: { "margin-top": "150px" }
+              staticStyle: { "margin-top": "80px" }
             },
             [
-              _c("div", { staticClass: "panel-heading" }, [_vm._v("로그인")]),
+              _c("div", { staticClass: "panel-heading" }, [
+                _vm._v("정보 수정")
+              ]),
               _vm._v(" "),
               _c(
                 "div",
@@ -59175,6 +59294,7 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control",
+                    staticStyle: { "margin-top": "10px" },
                     attrs: { type: "text", placeholder: "Enter id", id: "id" },
                     domProps: { value: _vm.item.idv },
                     on: {
@@ -59187,20 +59307,370 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.item.pwv,
+                        expression: "item.pwv"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    staticStyle: { "margin-top": "10px" },
+                    attrs: {
+                      type: "password",
+                      placeholder: "Enter password",
+                      id: "pw"
+                    },
+                    domProps: { value: _vm.item.pwv },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.item, "pwv", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    staticStyle: { "margin-top": "10px" },
+                    attrs: {
+                      type: "password",
+                      placeholder: "Enter password again",
+                      id: "pwvc"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.item.nn,
+                        expression: "item.nn"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    staticStyle: { "margin-top": "10px" },
+                    attrs: {
+                      type: "text",
+                      placeholder: "Enter nickname",
+                      id: "nn"
+                    },
+                    domProps: { value: _vm.item.nn },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.item, "nn", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.item.phone,
+                        expression: "item.phone"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    staticStyle: { "margin-top": "10px" },
+                    attrs: {
+                      type: "text",
+                      placeholder: "Enter phone",
+                      id: "phone"
+                    },
+                    domProps: { value: _vm.item.phone },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.item, "phone", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("label", [_vm._v("번호 공개 여부")]),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.item.phonesc,
+                        expression: "item.phonesc"
+                      }
+                    ],
+                    staticStyle: { "margin-top": "10px" },
+                    attrs: { type: "checkbox", id: "phonesc" },
+                    domProps: {
+                      checked: Array.isArray(_vm.item.phonesc)
+                        ? _vm._i(_vm.item.phonesc, null) > -1
+                        : _vm.item.phonesc
+                    },
+                    on: {
+                      change: function($event) {
+                        var $$a = _vm.item.phonesc,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = null,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 && (_vm.item.phonesc = $$a.concat([$$v]))
+                          } else {
+                            $$i > -1 &&
+                              (_vm.item.phonesc = $$a
+                                .slice(0, $$i)
+                                .concat($$a.slice($$i + 1)))
+                          }
+                        } else {
+                          _vm.$set(_vm.item, "phonesc", $$c)
+                        }
+                      }
+                    }
+                  }),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("label", [_vm._v("성별 선택")]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.item.gender,
+                          expression: "item.gender"
+                        }
+                      ],
+                      attrs: { id: "gender" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.item,
+                            "gender",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    [
+                      _c("option", [_vm._v(" 남자 ")]),
+                      _vm._v(" "),
+                      _c("option", [_vm._v(" 여자 ")])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("label", [_vm._v("성별 공개 여부")]),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.item.gendersc,
+                        expression: "item.gendersc"
+                      }
+                    ],
+                    staticStyle: { "margin-top": "10px" },
+                    attrs: { type: "checkbox", id: "gendersc" },
+                    domProps: {
+                      checked: Array.isArray(_vm.item.gendersc)
+                        ? _vm._i(_vm.item.gendersc, null) > -1
+                        : _vm.item.gendersc
+                    },
+                    on: {
+                      change: function($event) {
+                        var $$a = _vm.item.gendersc,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = null,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 && (_vm.item.gendersc = $$a.concat([$$v]))
+                          } else {
+                            $$i > -1 &&
+                              (_vm.item.gendersc = $$a
+                                .slice(0, $$i)
+                                .concat($$a.slice($$i + 1)))
+                          }
+                        } else {
+                          _vm.$set(_vm.item, "gendersc", $$c)
+                        }
+                      }
+                    }
+                  }),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("label", [_vm._v("연령대 선택")]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.item.age,
+                          expression: "item.age"
+                        }
+                      ],
+                      attrs: { id: "age" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.item,
+                            "age",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    [
+                      _c("option", [_vm._v(" 10대 ")]),
+                      _vm._v(" "),
+                      _c("option", [_vm._v(" 20대 ")]),
+                      _vm._v(" "),
+                      _c("option", [_vm._v(" 30대 ")]),
+                      _vm._v(" "),
+                      _c("option", [_vm._v(" 40대 ")]),
+                      _vm._v(" "),
+                      _c("option", [_vm._v(" 50대 ")]),
+                      _vm._v(" "),
+                      _c("option", [_vm._v(" 60대 이상 ")])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("label", [_vm._v("연령 공개 여부")]),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.item.agesc,
+                        expression: "item.agesc"
+                      }
+                    ],
+                    staticStyle: { "margin-top": "10px" },
+                    attrs: { type: "checkbox", id: "agesc" },
+                    domProps: {
+                      checked: Array.isArray(_vm.item.agesc)
+                        ? _vm._i(_vm.item.agesc, null) > -1
+                        : _vm.item.agesc
+                    },
+                    on: {
+                      change: function($event) {
+                        var $$a = _vm.item.agesc,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = null,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 && (_vm.item.agesc = $$a.concat([$$v]))
+                          } else {
+                            $$i > -1 &&
+                              (_vm.item.agesc = $$a
+                                .slice(0, $$i)
+                                .concat($$a.slice($$i + 1)))
+                          }
+                        } else {
+                          _vm.$set(_vm.item, "agesc", $$c)
+                        }
+                      }
+                    }
+                  }),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("label", [_vm._v("전체 공개")]),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.item.scv,
+                        expression: "item.scv"
+                      }
+                    ],
+                    staticStyle: { "margin-top": "10px" },
+                    attrs: { type: "radio", value: "all", name: "sc" },
+                    domProps: { checked: _vm._q(_vm.item.scv, "all") },
+                    on: {
+                      change: function($event) {
+                        _vm.$set(_vm.item, "scv", "all")
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("label", [_vm._v("그룹 공개")]),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.item.scv,
+                        expression: "item.scv"
+                      }
+                    ],
+                    staticStyle: { "margin-top": "10px" },
+                    attrs: { type: "radio", value: "group", name: "sc" },
+                    domProps: { checked: _vm._q(_vm.item.scv, "group") },
+                    on: {
+                      change: function($event) {
+                        _vm.$set(_vm.item, "scv", "group")
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
                   _c("br"),
                   _vm._v(" "),
                   _c("input", {
                     staticClass: "btn btn-primary",
-                    attrs: { type: "button", value: "로그인" },
-                    on: { click: _vm.login }
+                    attrs: { type: "button", click: _vm.update, value: "확인" }
                   }),
                   _vm._v(" "),
                   _c(
                     "router-link",
                     {
                       staticClass: "btn btn-primary",
-                      staticStyle: { "margin-left": "298px" },
-                      attrs: { to: { name: "main" } }
+                      staticStyle: { "margin-left": "270px" },
+                      attrs: { to: { name: "main" } },
+                      model: {
+                        value: _vm.item.pwv,
+                        callback: function($$v) {
+                          _vm.$set(_vm.item, "pwv", $$v)
+                        },
+                        expression: "item.pwv"
+                      }
                     },
                     [_vm._v(" 취소")]
                   )
@@ -59419,7 +59889,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
@@ -59431,7 +59900,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_c("button", { on: { click: _vm.info } }, [_vm._v("sad")])])
+  return _c("div")
 }
 var staticRenderFns = []
 render._withStripped = true

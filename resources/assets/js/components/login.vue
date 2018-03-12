@@ -42,13 +42,94 @@
                         }
                         else  {
                             alert('로그인 완료');
+
                             var datavalue = Object.values(response.data);
+                            var scope = datavalue[0].scope;
+                            var scv = 0;
+                            var phonesc = 0;
+                            var gendersc = 0;
+                            var agesc = 0;
+                            var agegroup = datavalue[0].age_group;
+                            var age = '';
+                            var gendergroup = datavalue[0].gender;
+                            var gender = '';
+
+
+                            if (gendergroup == 0) {
+                                gender = '남자'
+                            }
+                            else
+                                gender = '여자';
+
+
+                            switch (agegroup) {
+                                case 10 :
+                                    age = '10대';
+                                    break;
+                                case 20 :
+                                    age = '20대';
+                                    break;
+                                case 30 :
+                                    age = '30대';
+                                    break;
+                                case 40 :
+                                    age = '40대';
+                                    break;
+                                case 50 :
+                                    age = '50대';
+                                    break;
+                                case 60 :
+                                    age = '60대 이상';
+                                    break;
+
+                            }
+
+                            if(scope / 10000 >= 1 ) {
+                                scv = 'all';
+                                scope = scope - 10000;
+                            }
+                            else {
+                                scv = 'group';
+                                scope = scope - 1000;
+                            }
+
+                            if(scope / 100 >= 1 ) {
+                                phonesc = 'true';
+                                scope = scope - 100;
+                            }
+                            else {
+                                phonesc = 'false';
+                            }
+
+                            if(scope / 10 >= 1 ) {
+                                gendersc = 'true';
+                                scope = scope - 10;
+                            }
+                            else {
+                                gendersc = 'false';
+                            }
+
+                            if(scope == 1 ) {
+                                agesc = 'true';
+                            }
+                            else {
+                                agesc = 'false';
+                            }
+
                             sessionStorage.setItem('userid',$('#id').val());
                             sessionStorage.setItem('phone',datavalue[0].phone);
+                            sessionStorage.setItem('uuid',datavalue[0].uuid);
+                            sessionStorage.setItem('password',datavalue[0].password);
                             sessionStorage.setItem('nickname',datavalue[0].nickname);
-                            sessionStorage.setItem('gender',datavalue[0].gender);
-                            sessionStorage.setItem('age_group',datavalue[0].age_group);
+                            sessionStorage.setItem('phonesc',phonesc);
+                            sessionStorage.setItem('gendersc',gendersc);
+                            sessionStorage.setItem('agesc',agesc);
+                            sessionStorage.setItem('scv',scv);
+                            sessionStorage.setItem('gender',gender);
+                            sessionStorage.setItem('age',age);
                             sessionStorage.setItem('image_path',datavalue[0].image_path);
+
+
                             this.$router.push({ name: 'main'});
                             window.location.reload();
 

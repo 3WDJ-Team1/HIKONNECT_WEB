@@ -1,15 +1,38 @@
 <template>
-    <div class="container" style="margin-left: 130px;" >
+    <div class="container" style="margin-left: 130px" >
         <div class="row">
             <div class="col-md-5 col-md-offset-2">
-                <div class="panel panel-default" style="margin-top: 150px">
-                    <div class="panel-heading">로그인</div>
+                <div class="panel panel-default" style="margin-top: 80px">
+                    <div class="panel-heading">정보 수정</div>
 
                     <div class="panel-body">
-                        <input type="text" v-model="item.idv" class="form-control" placeholder="Enter id" id="id"/>
+                        <input type="text"     style="margin-top: 10px" v-model="item.idv" class="form-control" placeholder="Enter id" id="id"/>
+                        <input type="password" style="margin-top: 10px" v-model="item.pwv" class="form-control" placeholder="Enter password" id="pw"/>
+                        <input type="password" style="margin-top: 10px" class="form-control" placeholder="Enter password again" id="pwvc"/>
+                        <input type="text" style="margin-top: 10px" v-model="item.nn" class="form-control" placeholder="Enter nickname" id="nn"/>
+                        <input type="text" style="margin-top: 10px" v-model="item.phone" class="form-control" placeholder="Enter phone" id="phone"/>
+                        <label>번호 공개 여부</label><input type="checkbox" style="margin-top: 10px" v-model="item.phonesc"  id="phonesc"/><br>
+                        <label>성별 선택</label>
+                        <select id="gender" v-model="item.gender">
+                            <option> 남자 </option>
+                            <option> 여자 </option>
+                        </select>
+                        <label>성별 공개 여부</label><input type="checkbox" style="margin-top: 10px" v-model="item.gendersc"  id="gendersc"/><br>
+                        <label>연령대 선택</label>
+                        <select id="age" v-model="item.age">
+                            <option> 10대 </option>
+                            <option> 20대 </option>
+                            <option> 30대 </option>
+                            <option> 40대 </option>
+                            <option> 50대 </option>
+                            <option> 60대 이상 </option>
+                        </select>
+                        <label>연령 공개 여부</label><input type="checkbox" style="margin-top: 10px" v-model="item.agesc"   id="agesc"/><br>
+                        <label>전체 공개</label><input type="radio" value="all" name="sc" style="margin-top: 10px" v-model="item.scv" />
+                        <label>그룹 공개</label><input type="radio" value="group" name="sc" style="margin-top: 10px" v-model="item.scv" />
                         <br>
-                        <input type='button' class="btn btn-primary" v-on:click="login" value="로그인">
-                        <router-link style='margin-left: 298px' :to="{ name: 'main' }" class = "btn btn-primary"> 취소</router-link>
+                        <input type='button'  class="btn btn-primary" :click="update" value="확인">
+                        <router-link style='margin-left: 270px' :to="{ name: 'main' }" v-model="item.pwv" class = "btn btn-primary"> 취소</router-link>
                     </div>
                 </div>
             </div>
@@ -20,17 +43,79 @@
 <script>
 
     export default {
+        mounted: function () {
+
+            var c = sessionStorage.getItem('password');
+            $('#pwvc').val(c);
+
+        },
+
         data(){
+
+            var a = 0;
+            var b = 0;
+            var c = 0;
+
+            if(sessionStorage.getItem('phonesc') == 'true') {
+                a = true;
+            }
+            else
+                a = false;
+            if(sessionStorage.getItem('gendersc') == 'true') {
+                b = true;
+
+            }
+            else
+                b = false;
+            if(sessionStorage.getItem('agesc') == 'true') {
+                c = true;
+            }
+            else
+                c = false;
+
             return{
-                item:{}
+                item:{
+                    idv : sessionStorage.getItem('userid'),
+                    gender : sessionStorage.getItem('gender'),
+                    age : sessionStorage.getItem('age'),
+                    nn : sessionStorage.getItem('nickname'),
+                    phone : sessionStorage.getItem('phone'),
+                    pwv : sessionStorage.getItem('password'),
+                    scv : sessionStorage.getItem('scv'),
+
+                    phonesc : a,
+                    gendersc : b,
+                    agesc : c,
+
+
+                }
             }
         },
         methods: {
-            login() {
-                    let uri = 'http://localhost:8000/user/1';
-                this.axios.patch(uri, sessionStorage.getItem('login')).then((response) => {
-                    console.log(response);
-                });
+            dd() {
+                item.gendersc = false;
+            },
+            update() {
+                let uri= 'http://localhost:8000/user/'+sessionStorage.getItem('uuid');
+                if($('#id').val() == "" || $('#pw').val() == ""
+                    || $('#pwvc').val() == "" || $('#nn').val() == "") {
+                    alert('값이 비어있습니다');
+                }
+                else if($('#pw').val() != $('#pwvc').val()) {
+                    alert('비밀 번호와 비밀번호 확인이 다릅니다')
+                }
+                else {
+                    this.axios.put(uri, this.item).then((response) => {
+                        if(response.data == 'true') {
+                            alert('회원가입 완료');
+                            this.$router.push({ name: 'main'});
+                        }
+                        else if(response.data == 'false')
+                            alert('이미 존재하는 아이디 입니다.');
+                        this.$router.push({ name: 'main'});
+
+                    })
+                }
             }
         }
     }
