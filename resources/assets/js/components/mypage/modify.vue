@@ -1,11 +1,12 @@
 <template>
     <div class="container" style="margin-left: 130px" >
-        <div class="row">
+
             <div class="col-md-5 col-md-offset-2">
                 <div class="panel panel-default" style="margin-top: 80px">
                     <div class="panel-heading">정보 수정</div>
-
-                    <div class="panel-body">
+                    <span> <img :src="imageSrc" class="image" style="width: 400px; height: 400px">
+                    <input @change="uploadImage" type="file" name="photo" accept="image/*"></span>
+                    <span class="panel-body">
                         <input type="text"     style="margin-top: 10px" v-model="item.idv" class="form-control" placeholder="Enter id" id="id"/>
                         <input type="password" style="margin-top: 10px" v-model="item.pwv" class="form-control" placeholder="Enter password" id="pw"/>
                         <input type="password" style="margin-top: 10px" class="form-control" placeholder="Enter password again" id="pwvc"/>
@@ -32,11 +33,10 @@
                         <label>그룹 공개</label><input type="radio" value="group" name="sc" style="margin-top: 10px" v-model="item.scv" />
                         <br>
                         <input type='button'  class="btn btn-primary" :click="update" value="확인">
-                        <router-link style='margin-left: 270px' :to="{ name: 'main' }" v-model="item.pwv" class = "btn btn-primary"> 취소</router-link>
-                    </div>
+                        <router-link style='margin-left: 270px' :to="{ name: 'mypage' }" v-model="item.pwv" class = "btn btn-primary"> 취소</router-link>
+                    </span>
                 </div>
             </div>
-        </div>
     </div>
 </template>
 
@@ -56,67 +56,79 @@
             var b = 0;
             var c = 0;
 
-            if(sessionStorage.getItem('phonesc') == 'true') {
+            if (sessionStorage.getItem('phonesc') == 'true') {
                 a = true;
             }
             else
                 a = false;
-            if(sessionStorage.getItem('gendersc') == 'true') {
+            if (sessionStorage.getItem('gendersc') == 'true') {
                 b = true;
 
             }
             else
                 b = false;
-            if(sessionStorage.getItem('agesc') == 'true') {
+            if (sessionStorage.getItem('agesc') == 'true') {
                 c = true;
             }
             else
                 c = false;
 
-            return{
-                item:{
-                    idv : sessionStorage.getItem('userid'),
-                    gender : sessionStorage.getItem('gender'),
-                    age : sessionStorage.getItem('age'),
-                    nn : sessionStorage.getItem('nickname'),
-                    phone : sessionStorage.getItem('phone'),
-                    pwv : sessionStorage.getItem('password'),
-                    scv : sessionStorage.getItem('scv'),
+            return {
+                imageSrc: 'http://nahmdong.com/vitalhill/img/default.png',
+                item: {
+                    idv: sessionStorage.getItem('userid'),
+                    gender: sessionStorage.getItem('gender'),
+                    age: sessionStorage.getItem('age'),
+                    nn: sessionStorage.getItem('nickname'),
+                    phone: sessionStorage.getItem('phone'),
+                    pwv: sessionStorage.getItem('password'),
+                    scv: sessionStorage.getItem('scv'),
 
-                    phonesc : a,
-                    gendersc : b,
-                    agesc : c,
+                    phonesc: a,
+                    gendersc: b,
+                    agesc: c,
 
 
                 }
             }
         },
         methods: {
-            dd() {
-                item.gendersc = false;
+            uploadImage: function (e) {
+                var files = e.target.files;
+                if (!files[0]) {
+                    return;
+                }
+                var data = new FormData();
+                data.append('media', files[0]);
+                var reader = new FileReader();
+                reader.onload = (e) => {
+                    this.imageSrc = e.target.result;
+                };
+                reader.readAsDataURL(files[0]);
             },
-            update() {
-                let uri= 'http://localhost:8000/user/'+sessionStorage.getItem('uuid');
-                if($('#id').val() == "" || $('#pw').val() == ""
+            update: function() {
+                let uri = 'http://localhost:8000/user/' + sessionStorage.getItem('uuid');
+                if ($('#id').val() == "" || $('#pw').val() == ""
                     || $('#pwvc').val() == "" || $('#nn').val() == "") {
                     alert('값이 비어있습니다');
                 }
-                else if($('#pw').val() != $('#pwvc').val()) {
+                else if ($('#pw').val() != $('#pwvc').val()) {
                     alert('비밀 번호와 비밀번호 확인이 다릅니다')
                 }
                 else {
                     this.axios.put(uri, this.item).then((response) => {
-                        if(response.data == 'true') {
+                        if (response.data == 'true') {
                             alert('회원가입 완료');
-                            this.$router.push({ name: 'main'});
+                            this.$router.push({name: 'main'});
                         }
-                        else if(response.data == 'false')
+                        else if (response.data == 'false')
                             alert('이미 존재하는 아이디 입니다.');
-                        this.$router.push({ name: 'main'});
+                        this.$router.push({name: 'main'});
 
                     })
                 }
             }
         }
     }
+
 </script>

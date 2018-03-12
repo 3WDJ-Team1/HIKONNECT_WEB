@@ -12565,6 +12565,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_mypage_modify_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_mypage_modify_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_mypage_graph_vue__ = __webpack_require__(299);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_mypage_graph_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_mypage_graph_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_mypage_level_vue__ = __webpack_require__(679);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_mypage_level_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13__components_mypage_level_vue__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -12583,6 +12585,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_
 
 /*import VueChart from 'vuechart';
 Vue.component(VueChart.name,VueChart);*/
+
 
 
 
@@ -12626,6 +12629,10 @@ var routes = [{
         name: 'graph',
         path: '/graph',
         component: __WEBPACK_IMPORTED_MODULE_12__components_mypage_graph_vue___default.a
+    }, {
+        name: 'level',
+        path: '/level',
+        component: __WEBPACK_IMPORTED_MODULE_13__components_mypage_level_vue___default.a
     }]
 }];
 
@@ -57248,7 +57255,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -57773,8 +57779,6 @@ var render = function() {
     [
       _c("mainbar"),
       _vm._v(" "),
-      _c("mainbanner", { staticStyle: { width: "1140px", height: "200px" } }),
-      _vm._v(" "),
       _c("mainbody", { staticStyle: { width: "1140px", height: "600px" } }),
       _vm._v(" "),
       _c("lore", {
@@ -58189,6 +58193,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         }
 
                         sessionStorage.setItem('userid', $('#id').val());
+                        sessionStorage.setItem('uuid', datavalue[0].uuid);
                         sessionStorage.setItem('phone', datavalue[0].phone);
                         sessionStorage.setItem('uuid', datavalue[0].uuid);
                         sessionStorage.setItem('password', datavalue[0].password);
@@ -58949,7 +58954,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
+
 
 
 
@@ -59027,6 +59032,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
@@ -59038,29 +59063,85 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c(
-        "router-link",
-        { staticClass: "btn btn-primary", attrs: { to: { name: "modify" } } },
-        [_vm._v(" 수정")]
-      ),
-      _vm._v(" "),
-      _c(
-        "router-link",
-        { staticClass: "btn btn-primary", attrs: { to: { name: "graph" } } },
-        [_vm._v(" 그래프")]
-      ),
-      _vm._v(" "),
-      _c(
-        "router-link",
-        { staticClass: "btn btn-primary", attrs: { to: { name: "main" } } },
-        [_vm._v(" 확인")]
-      )
-    ],
-    1
-  )
+  return _c("div", [
+    _c("h1", [_vm._v("마이페이지")]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "container", staticStyle: { "margin-left": "130px" } },
+      [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-5 col-md-offset-2" }, [
+            _c(
+              "div",
+              {
+                staticClass: "panel panel-default",
+                staticStyle: { "margin-top": "150px" }
+              },
+              [
+                _c(
+                  "div",
+                  { staticClass: "panel-body" },
+                  [
+                    _c("label", [_vm._v("닉네임")]),
+                    _c("h3"),
+                    _vm._v(" "),
+                    _c("label", [_vm._v("닉네임")]),
+                    _c("h3"),
+                    _vm._v(" "),
+                    _c("label", [_vm._v("닉네임")]),
+                    _c("h3"),
+                    _vm._v(" "),
+                    _c("label", [_vm._v("닉네임")]),
+                    _c("h3"),
+                    _vm._v(" "),
+                    _c("label", [_vm._v("닉네임")]),
+                    _c("h3"),
+                    _vm._v(" "),
+                    _c("label", [_vm._v("닉네임")]),
+                    _c("h3"),
+                    _vm._v(" "),
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { to: { name: "graph" } }
+                      },
+                      [_vm._v(" 이전 등산기록")]
+                    ),
+                    _vm._v(" "),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { to: { name: "modify" } }
+                      },
+                      [_vm._v(" 수정")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "btn btn-primary",
+                        staticStyle: { "margin-left": "298px" },
+                        attrs: { to: { name: "main" } }
+                      },
+                      [_vm._v(" 취소")]
+                    )
+                  ],
+                  1
+                )
+              ]
+            )
+          ])
+        ])
+      ]
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -59213,6 +59294,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         } else c = false;
 
         return {
+            imageSrc: 'http://nahmdong.com/vitalhill/img/default.png',
             item: {
                 idv: sessionStorage.getItem('userid'),
                 gender: sessionStorage.getItem('gender'),
@@ -59231,11 +59313,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
-        dd: function dd() {
-            item.gendersc = false;
+        uploadImage: function uploadImage(e) {
+            var _this = this;
+
+            var files = e.target.files;
+            if (!files[0]) {
+                return;
+            }
+            var data = new FormData();
+            data.append('media', files[0]);
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                _this.imageSrc = e.target.result;
+            };
+            reader.readAsDataURL(files[0]);
         },
         update: function update() {
-            var _this = this;
+            var _this2 = this;
 
             var uri = 'http://localhost:8000/user/' + sessionStorage.getItem('uuid');
             if ($('#id').val() == "" || $('#pw').val() == "" || $('#pwvc').val() == "" || $('#nn').val() == "") {
@@ -59246,9 +59340,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.axios.put(uri, this.item).then(function (response) {
                     if (response.data == 'true') {
                         alert('회원가입 완료');
-                        _this.$router.push({ name: 'main' });
+                        _this2.$router.push({ name: 'main' });
                     } else if (response.data == 'false') alert('이미 존재하는 아이디 입니다.');
-                    _this.$router.push({ name: 'main' });
+                    _this2.$router.push({ name: 'main' });
                 });
             }
         }
@@ -59267,419 +59361,428 @@ var render = function() {
     "div",
     { staticClass: "container", staticStyle: { "margin-left": "130px" } },
     [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-5 col-md-offset-2" }, [
-          _c(
-            "div",
-            {
-              staticClass: "panel panel-default",
-              staticStyle: { "margin-top": "80px" }
-            },
-            [
-              _c("div", { staticClass: "panel-heading" }, [
-                _vm._v("정보 수정")
-              ]),
+      _c("div", { staticClass: "col-md-5 col-md-offset-2" }, [
+        _c(
+          "div",
+          {
+            staticClass: "panel panel-default",
+            staticStyle: { "margin-top": "80px" }
+          },
+          [
+            _c("div", { staticClass: "panel-heading" }, [_vm._v("정보 수정")]),
+            _vm._v(" "),
+            _c("span", [
+              _c("img", {
+                staticClass: "image",
+                staticStyle: { width: "400px", height: "400px" },
+                attrs: { src: _vm.imageSrc }
+              }),
               _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "panel-body" },
-                [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.item.idv,
-                        expression: "item.idv"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    staticStyle: { "margin-top": "10px" },
-                    attrs: { type: "text", placeholder: "Enter id", id: "id" },
-                    domProps: { value: _vm.item.idv },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.item, "idv", $event.target.value)
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.item.pwv,
-                        expression: "item.pwv"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    staticStyle: { "margin-top": "10px" },
-                    attrs: {
-                      type: "password",
-                      placeholder: "Enter password",
-                      id: "pw"
-                    },
-                    domProps: { value: _vm.item.pwv },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.item, "pwv", $event.target.value)
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("input", {
-                    staticClass: "form-control",
-                    staticStyle: { "margin-top": "10px" },
-                    attrs: {
-                      type: "password",
-                      placeholder: "Enter password again",
-                      id: "pwvc"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.item.nn,
-                        expression: "item.nn"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    staticStyle: { "margin-top": "10px" },
-                    attrs: {
-                      type: "text",
-                      placeholder: "Enter nickname",
-                      id: "nn"
-                    },
-                    domProps: { value: _vm.item.nn },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.item, "nn", $event.target.value)
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.item.phone,
-                        expression: "item.phone"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    staticStyle: { "margin-top": "10px" },
-                    attrs: {
-                      type: "text",
-                      placeholder: "Enter phone",
-                      id: "phone"
-                    },
-                    domProps: { value: _vm.item.phone },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.item, "phone", $event.target.value)
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("label", [_vm._v("번호 공개 여부")]),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.item.phonesc,
-                        expression: "item.phonesc"
-                      }
-                    ],
-                    staticStyle: { "margin-top": "10px" },
-                    attrs: { type: "checkbox", id: "phonesc" },
-                    domProps: {
-                      checked: Array.isArray(_vm.item.phonesc)
-                        ? _vm._i(_vm.item.phonesc, null) > -1
-                        : _vm.item.phonesc
-                    },
-                    on: {
-                      change: function($event) {
-                        var $$a = _vm.item.phonesc,
-                          $$el = $event.target,
-                          $$c = $$el.checked ? true : false
-                        if (Array.isArray($$a)) {
-                          var $$v = null,
-                            $$i = _vm._i($$a, $$v)
-                          if ($$el.checked) {
-                            $$i < 0 && (_vm.item.phonesc = $$a.concat([$$v]))
-                          } else {
-                            $$i > -1 &&
-                              (_vm.item.phonesc = $$a
-                                .slice(0, $$i)
-                                .concat($$a.slice($$i + 1)))
-                          }
-                        } else {
-                          _vm.$set(_vm.item, "phonesc", $$c)
-                        }
-                      }
-                    }
-                  }),
-                  _c("br"),
-                  _vm._v(" "),
-                  _c("label", [_vm._v("성별 선택")]),
-                  _vm._v(" "),
-                  _c(
-                    "select",
+              _c("input", {
+                attrs: { type: "file", name: "photo", accept: "image/*" },
+                on: { change: _vm.uploadImage }
+              })
+            ]),
+            _vm._v(" "),
+            _c(
+              "span",
+              { staticClass: "panel-body" },
+              [
+                _c("input", {
+                  directives: [
                     {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.item.gender,
-                          expression: "item.gender"
-                        }
-                      ],
-                      attrs: { id: "gender" },
-                      on: {
-                        change: function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.$set(
-                            _vm.item,
-                            "gender",
-                            $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          )
-                        }
-                      }
-                    },
-                    [
-                      _c("option", [_vm._v(" 남자 ")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v(" 여자 ")])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("label", [_vm._v("성별 공개 여부")]),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.item.gendersc,
-                        expression: "item.gendersc"
-                      }
-                    ],
-                    staticStyle: { "margin-top": "10px" },
-                    attrs: { type: "checkbox", id: "gendersc" },
-                    domProps: {
-                      checked: Array.isArray(_vm.item.gendersc)
-                        ? _vm._i(_vm.item.gendersc, null) > -1
-                        : _vm.item.gendersc
-                    },
-                    on: {
-                      change: function($event) {
-                        var $$a = _vm.item.gendersc,
-                          $$el = $event.target,
-                          $$c = $$el.checked ? true : false
-                        if (Array.isArray($$a)) {
-                          var $$v = null,
-                            $$i = _vm._i($$a, $$v)
-                          if ($$el.checked) {
-                            $$i < 0 && (_vm.item.gendersc = $$a.concat([$$v]))
-                          } else {
-                            $$i > -1 &&
-                              (_vm.item.gendersc = $$a
-                                .slice(0, $$i)
-                                .concat($$a.slice($$i + 1)))
-                          }
-                        } else {
-                          _vm.$set(_vm.item, "gendersc", $$c)
-                        }
-                      }
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.item.idv,
+                      expression: "item.idv"
                     }
-                  }),
-                  _c("br"),
-                  _vm._v(" "),
-                  _c("label", [_vm._v("연령대 선택")]),
-                  _vm._v(" "),
-                  _c(
-                    "select",
+                  ],
+                  staticClass: "form-control",
+                  staticStyle: { "margin-top": "10px" },
+                  attrs: { type: "text", placeholder: "Enter id", id: "id" },
+                  domProps: { value: _vm.item.idv },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.item, "idv", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
                     {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.item.age,
-                          expression: "item.age"
-                        }
-                      ],
-                      attrs: { id: "age" },
-                      on: {
-                        change: function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.$set(
-                            _vm.item,
-                            "age",
-                            $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          )
-                        }
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.item.pwv,
+                      expression: "item.pwv"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  staticStyle: { "margin-top": "10px" },
+                  attrs: {
+                    type: "password",
+                    placeholder: "Enter password",
+                    id: "pw"
+                  },
+                  domProps: { value: _vm.item.pwv },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
                       }
-                    },
-                    [
-                      _c("option", [_vm._v(" 10대 ")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v(" 20대 ")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v(" 30대 ")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v(" 40대 ")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v(" 50대 ")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v(" 60대 이상 ")])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("label", [_vm._v("연령 공개 여부")]),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.item.agesc,
-                        expression: "item.agesc"
+                      _vm.$set(_vm.item, "pwv", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  staticStyle: { "margin-top": "10px" },
+                  attrs: {
+                    type: "password",
+                    placeholder: "Enter password again",
+                    id: "pwvc"
+                  }
+                }),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.item.nn,
+                      expression: "item.nn"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  staticStyle: { "margin-top": "10px" },
+                  attrs: {
+                    type: "text",
+                    placeholder: "Enter nickname",
+                    id: "nn"
+                  },
+                  domProps: { value: _vm.item.nn },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
                       }
-                    ],
-                    staticStyle: { "margin-top": "10px" },
-                    attrs: { type: "checkbox", id: "agesc" },
-                    domProps: {
-                      checked: Array.isArray(_vm.item.agesc)
-                        ? _vm._i(_vm.item.agesc, null) > -1
-                        : _vm.item.agesc
-                    },
-                    on: {
-                      change: function($event) {
-                        var $$a = _vm.item.agesc,
-                          $$el = $event.target,
-                          $$c = $$el.checked ? true : false
-                        if (Array.isArray($$a)) {
-                          var $$v = null,
-                            $$i = _vm._i($$a, $$v)
-                          if ($$el.checked) {
-                            $$i < 0 && (_vm.item.agesc = $$a.concat([$$v]))
-                          } else {
-                            $$i > -1 &&
-                              (_vm.item.agesc = $$a
-                                .slice(0, $$i)
-                                .concat($$a.slice($$i + 1)))
-                          }
+                      _vm.$set(_vm.item, "nn", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.item.phone,
+                      expression: "item.phone"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  staticStyle: { "margin-top": "10px" },
+                  attrs: {
+                    type: "text",
+                    placeholder: "Enter phone",
+                    id: "phone"
+                  },
+                  domProps: { value: _vm.item.phone },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.item, "phone", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", [_vm._v("번호 공개 여부")]),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.item.phonesc,
+                      expression: "item.phonesc"
+                    }
+                  ],
+                  staticStyle: { "margin-top": "10px" },
+                  attrs: { type: "checkbox", id: "phonesc" },
+                  domProps: {
+                    checked: Array.isArray(_vm.item.phonesc)
+                      ? _vm._i(_vm.item.phonesc, null) > -1
+                      : _vm.item.phonesc
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.item.phonesc,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = null,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 && (_vm.item.phonesc = $$a.concat([$$v]))
                         } else {
-                          _vm.$set(_vm.item, "agesc", $$c)
+                          $$i > -1 &&
+                            (_vm.item.phonesc = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
                         }
+                      } else {
+                        _vm.$set(_vm.item, "phonesc", $$c)
                       }
                     }
-                  }),
-                  _c("br"),
-                  _vm._v(" "),
-                  _c("label", [_vm._v("전체 공개")]),
-                  _c("input", {
+                  }
+                }),
+                _c("br"),
+                _vm._v(" "),
+                _c("label", [_vm._v("성별 선택")]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
                     directives: [
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.item.scv,
-                        expression: "item.scv"
+                        value: _vm.item.gender,
+                        expression: "item.gender"
                       }
                     ],
-                    staticStyle: { "margin-top": "10px" },
-                    attrs: { type: "radio", value: "all", name: "sc" },
-                    domProps: { checked: _vm._q(_vm.item.scv, "all") },
+                    attrs: { id: "gender" },
                     on: {
                       change: function($event) {
-                        _vm.$set(_vm.item, "scv", "all")
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.item,
+                          "gender",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
                       }
                     }
-                  }),
-                  _vm._v(" "),
-                  _c("label", [_vm._v("그룹 공개")]),
-                  _c("input", {
+                  },
+                  [
+                    _c("option", [_vm._v(" 남자 ")]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v(" 여자 ")])
+                  ]
+                ),
+                _vm._v(" "),
+                _c("label", [_vm._v("성별 공개 여부")]),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.item.gendersc,
+                      expression: "item.gendersc"
+                    }
+                  ],
+                  staticStyle: { "margin-top": "10px" },
+                  attrs: { type: "checkbox", id: "gendersc" },
+                  domProps: {
+                    checked: Array.isArray(_vm.item.gendersc)
+                      ? _vm._i(_vm.item.gendersc, null) > -1
+                      : _vm.item.gendersc
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.item.gendersc,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = null,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 && (_vm.item.gendersc = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.item.gendersc = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.$set(_vm.item, "gendersc", $$c)
+                      }
+                    }
+                  }
+                }),
+                _c("br"),
+                _vm._v(" "),
+                _c("label", [_vm._v("연령대 선택")]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
                     directives: [
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.item.scv,
-                        expression: "item.scv"
+                        value: _vm.item.age,
+                        expression: "item.age"
                       }
                     ],
-                    staticStyle: { "margin-top": "10px" },
-                    attrs: { type: "radio", value: "group", name: "sc" },
-                    domProps: { checked: _vm._q(_vm.item.scv, "group") },
+                    attrs: { id: "age" },
                     on: {
                       change: function($event) {
-                        _vm.$set(_vm.item, "scv", "group")
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.item,
+                          "age",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
                       }
                     }
-                  }),
-                  _vm._v(" "),
-                  _c("br"),
-                  _vm._v(" "),
-                  _c("input", {
+                  },
+                  [
+                    _c("option", [_vm._v(" 10대 ")]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v(" 20대 ")]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v(" 30대 ")]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v(" 40대 ")]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v(" 50대 ")]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v(" 60대 이상 ")])
+                  ]
+                ),
+                _vm._v(" "),
+                _c("label", [_vm._v("연령 공개 여부")]),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.item.agesc,
+                      expression: "item.agesc"
+                    }
+                  ],
+                  staticStyle: { "margin-top": "10px" },
+                  attrs: { type: "checkbox", id: "agesc" },
+                  domProps: {
+                    checked: Array.isArray(_vm.item.agesc)
+                      ? _vm._i(_vm.item.agesc, null) > -1
+                      : _vm.item.agesc
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.item.agesc,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = null,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 && (_vm.item.agesc = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.item.agesc = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.$set(_vm.item, "agesc", $$c)
+                      }
+                    }
+                  }
+                }),
+                _c("br"),
+                _vm._v(" "),
+                _c("label", [_vm._v("전체 공개")]),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.item.scv,
+                      expression: "item.scv"
+                    }
+                  ],
+                  staticStyle: { "margin-top": "10px" },
+                  attrs: { type: "radio", value: "all", name: "sc" },
+                  domProps: { checked: _vm._q(_vm.item.scv, "all") },
+                  on: {
+                    change: function($event) {
+                      _vm.$set(_vm.item, "scv", "all")
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", [_vm._v("그룹 공개")]),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.item.scv,
+                      expression: "item.scv"
+                    }
+                  ],
+                  staticStyle: { "margin-top": "10px" },
+                  attrs: { type: "radio", value: "group", name: "sc" },
+                  domProps: { checked: _vm._q(_vm.item.scv, "group") },
+                  on: {
+                    change: function($event) {
+                      _vm.$set(_vm.item, "scv", "group")
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "button", click: _vm.update, value: "확인" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "router-link",
+                  {
                     staticClass: "btn btn-primary",
-                    attrs: { type: "button", click: _vm.update, value: "확인" }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "router-link",
-                    {
-                      staticClass: "btn btn-primary",
-                      staticStyle: { "margin-left": "270px" },
-                      attrs: { to: { name: "main" } },
-                      model: {
-                        value: _vm.item.pwv,
-                        callback: function($$v) {
-                          _vm.$set(_vm.item, "pwv", $$v)
-                        },
-                        expression: "item.pwv"
-                      }
-                    },
-                    [_vm._v(" 취소")]
-                  )
-                ],
-                1
-              )
-            ]
-          )
-        ])
+                    staticStyle: { "margin-left": "270px" },
+                    attrs: { to: { name: "mypage" } },
+                    model: {
+                      value: _vm.item.pwv,
+                      callback: function($$v) {
+                        _vm.$set(_vm.item, "pwv", $$v)
+                      },
+                      expression: "item.pwv"
+                    }
+                  },
+                  [_vm._v(" 취소")]
+                )
+              ],
+              1
+            )
+          ]
+        )
       ])
     ]
   )
@@ -59805,6 +59908,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -59817,8 +59921,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 sets: [{
                     generators: [Object(__WEBPACK_IMPORTED_MODULE_1_d2b__["svgArea"])(), Object(__WEBPACK_IMPORTED_MODULE_1_d2b__["svgLine"])(), Object(__WEBPACK_IMPORTED_MODULE_1_d2b__["svgScatter"])()],
                     graphs: [{
-                        label: 'area 1',
-                        values: [{ x: 1, y: 25 }, { x: 2, y: 38 }, { x: 3, y: 24 }, { x: 4, y: 60 }, { x: 5, y: 22 }]
+                        values: [{ x: 1, y: 25 }, { x: 2, y: 38 }, { x: 3, y: 24 }, { x: 4, y: 60 }, { x: 5, y: 22 }, { x: 6, y: 25 }, { x: 7, y: 38 }, { x: 8, y: 24 }, { x: 9, y: 60 }, { x: 10, y: 22 }, { x: 11, y: 25 }, { x: 12, y: 38 }]
                     }]
                 }]
             }
@@ -85234,6 +85337,8 @@ var render = function() {
     "div",
     { staticClass: "chart" },
     [
+      _c("h1", [_vm._v("월별 등산기록")]),
+      _vm._v(" "),
       _c("link", {
         attrs: {
           href:
@@ -85270,6 +85375,94 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 670 */,
+/* 671 */,
+/* 672 */,
+/* 673 */,
+/* 674 */,
+/* 675 */,
+/* 676 */,
+/* 677 */,
+/* 678 */,
+/* 679 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(4)
+/* script */
+var __vue_script__ = __webpack_require__(680)
+/* template */
+var __vue_template__ = __webpack_require__(681)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\mypage\\level.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-761827fa", Component.options)
+  } else {
+    hotAPI.reload("data-v-761827fa", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 680 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/***/ }),
+/* 681 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div")
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-761827fa", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
