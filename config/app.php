@@ -177,6 +177,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        'Nathanmac\Utilities\Parser\ParserServiceProvider',
     ],
 
     /*
@@ -226,6 +227,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        'Parser' => Nathanmac\Utilities\Parser\Facades\Parser::class,
     ],
 
 ];

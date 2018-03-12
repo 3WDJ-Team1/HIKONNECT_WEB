@@ -11,6 +11,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+use Nathanmac\Utilities\Parser\Facades\Parser;
 use App\Request;
 
 /**
@@ -35,8 +37,21 @@ class HikingPlan extends Model
      */
     public function xmlToJson()
     {
-        $gpxPaths = Storage::get('maps/PMNTN_소백산_비로봉_438001301.gpx');
+        if (Storage::disk('local')->exists('mount.gpx')) {
+            $hikingPath =  Parser::xml(Storage::disk('local')->get('mount.gpx'));
+        }
 
-        return $gpxPaths;
+        $hikingPaths = [];
+
+        foreach ($hikingPath['trk'][0]['trkseg'] as $paths) {
+            foreach ($paths as $inx => $path) {
+                $location["lat"] = $path["@lat"];
+                $location["lng"] = $path["@lon"];
+
+                $hikingPaths[$inx] = $location;
+            }
+        }
+
+        return json_encode($hikingPaths);
     }
 }

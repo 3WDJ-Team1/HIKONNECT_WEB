@@ -41,6 +41,9 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
+
+$app->register('Nathanmac\Utilities\Parser\ParserServiceProvider');
+
 /*
 |--------------------------------------------------------------------------
 | Return The Application

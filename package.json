@@ -23,11 +23,17 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
-        "bootstrap-vue": "^2.0.0-rc.1",
+        "bootstrap-select": "^1.12.4",
+        "bootstrap-vue": "^2.0.0-rc.2",
         "sweet-modal-vue": "^2.0.0",
         "vue-axios": "^2.0.2",
+        "vue-loader": "^14.2.1",
         "vue-router": "^3.0.1",
+        "vue-spinner": "^1.0.3",
         "vuejs-dialog": "^0.8.0",
-        "vuetify": "^1.0.5"
+        "vuetify": "^1.0.5",
+        "d3": "^4.13.0",
+        "vue-d2b": "^1.0.11",
+        "vuechart": "^18.3.1"
     }
 }
