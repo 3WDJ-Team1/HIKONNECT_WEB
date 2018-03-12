@@ -22,15 +22,13 @@ window.Vue.use(VueRouter);
  
 import ExampleComponent from "./components/ExampleComponent.vue";
 import App from './components/App.vue';
-import listShow from "./components/listShow.vue";
-import listSerch from "./components/listSerch.vue";
-import groupList from "./components/groupList.vue";
+import groups_list from './components/groups_list/main.vue'
 
 const routes = [
     {
-        name: 'groupList',
+        name: 'groups_list',
         path: '/',
-        component: groupList
+        component: groups_list
     }
 ];
 
