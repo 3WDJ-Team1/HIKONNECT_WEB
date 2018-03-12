@@ -20,6 +20,10 @@ $factory->define(
             'hiking_plan'   => App\Models\HikingPlan::pluck('uuid')->random(),
             'avg_speed'     => rand(0.00, 20.00),
             'rank'          => rand(0, 50),
+            'created_at'        => $faker->dateTimeBetween(
+                '-2 years',
+                date_default_timezone_get()
+            )
         ];
     }
 );
