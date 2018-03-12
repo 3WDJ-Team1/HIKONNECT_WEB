@@ -44,6 +44,7 @@
                             alert('로그인 완료');
                             var datavalue = Object.values(response.data);
                             sessionStorage.setItem('userid',$('#id').val());
+                            sessionStorage.setItem('uuid',datavalue[0].uuid);
                             sessionStorage.setItem('phone',datavalue[0].phone);
                             sessionStorage.setItem('nickname',datavalue[0].nickname);
                             sessionStorage.setItem('gender',datavalue[0].gender);
@@ -51,9 +52,6 @@
                             sessionStorage.setItem('image_path',datavalue[0].image_path);
                             this.$router.push({ name: 'main'});
                             window.location.reload();
-
-
-
                         }
                     });
                 }
