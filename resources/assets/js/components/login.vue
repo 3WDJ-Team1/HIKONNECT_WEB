@@ -117,6 +117,7 @@
                             }
 
                             sessionStorage.setItem('userid',$('#id').val());
+                            sessionStorage.setItem('uuid',datavalue[0].uuid);
                             sessionStorage.setItem('phone',datavalue[0].phone);
                             sessionStorage.setItem('uuid',datavalue[0].uuid);
                             sessionStorage.setItem('password',datavalue[0].password);
@@ -132,9 +133,6 @@
 
                             this.$router.push({ name: 'main'});
                             window.location.reload();
-
-
-
                         }
                     });
                 }
