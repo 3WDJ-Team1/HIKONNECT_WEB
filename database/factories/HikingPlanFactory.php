@@ -20,6 +20,10 @@ $factory->define(
             'starting_point'    => '[]',
             'stopover'          => '[]',
             'end_point'         => '[]',
+            'created_at'        => $faker->dateTimeBetween(
+                '-2 years',
+                date_default_timezone_get()
+            )
         ];
     }
 );
