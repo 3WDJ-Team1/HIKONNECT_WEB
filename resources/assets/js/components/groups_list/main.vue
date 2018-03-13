@@ -36,7 +36,7 @@
         method: {
             fetchItem()
             {
-                this.axios.post('http://localhost:8000/list')
+                this.axios.post('http://localhost:8000/group')
                     .then(response => {
                         console.log(response.data);
                     })

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Group;
+use App\Models\Hiking_group;
 use Illuminate\Http\Request;
 
     /**
@@ -10,13 +10,13 @@ use Illuminate\Http\Request;
      */
 class GroupController extends Controller
 {
-    private $groupModel = null;
+    private $group_model = null;
     /**
      * Constructor for GroupController
      */
     public function __construct()
     {
-        $this->groupModel = new Group();
+        $this->group_model = new Hiking_group();
     }
     
     /**
@@ -24,11 +24,12 @@ class GroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($pageIndex, $perPage)
     {
-        $groupInformations  = $this->model->getGroupInformations($pageIndex, $perPage);
-        $countOfPeople      = $this->model->getCountOfPeople();
-        return view('layouts/app', ['groups' => $groupInformations, 'persons' => $countOfPeople]);
+        $groupInformations  = $this->group_model->getGroupInformations($pageIndex, $perPage);
+        return $groupInformations;
+        //$countOfPeople      = $this->group_model->getCountOfPeople();
+        //return view('layouts/app', ['groups' => $groupInformations, 'persons' => $countOfPeople]);
     }
 
     /**
@@ -50,7 +51,7 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-    
+        return $this->group_model->insertHikingGroup($request->filter_input());
     }
 
     /**
@@ -87,7 +88,7 @@ class GroupController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        return $this->group_model->insertHikingGroup($request->filter_input());
     }
 
     /**
@@ -99,6 +100,6 @@ class GroupController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return $this->group_model->insertHikingGroup($request->filter_input());
     }
 }

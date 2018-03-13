@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="card" v-for="group_imformation in list">
+        <div class="card" v-for="group_information in list">
             <div class="card-header">
                 {{ group_imformation.name }}
             </div>
