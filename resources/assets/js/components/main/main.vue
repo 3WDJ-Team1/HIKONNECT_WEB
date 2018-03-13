@@ -6,6 +6,7 @@
         <lore style="position: absolute; margin-left: 1000px; margin-top: -870px"></lore>
 
     </div>
+
 </template>
 <script>
     import mainbar from './mainbar.vue'
