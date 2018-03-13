@@ -4,8 +4,8 @@
             <div class="col-md-5 col-md-offset-2">
                 <div class="panel panel-default" style="margin-top: 80px">
                     <div class="panel-heading">정보 수정</div>
-                    <span> <img :src="imageSrc" class="image" style="width: 400px; height: 400px">
-                    <input @change="uploadImage" type="file" name="photo" accept="image/*"></span>
+                    <span> <img :src="item.imageSrc" class="image" style="width: 400px; height: 400px">
+                    <input  @change="uploadImage" type="file" name="photo" accept="image/*"></span>
                     <span class="panel-body">
                         <input type="text"     style="margin-top: 10px" v-model="item.idv" class="form-control" placeholder="Enter id" id="id"/>
                         <input type="password" style="margin-top: 10px" v-model="item.pwv" class="form-control" placeholder="Enter password" id="pw"/>
@@ -32,7 +32,7 @@
                         <label>전체 공개</label><input type="radio" value="all" name="sc" style="margin-top: 10px" v-model="item.scv" />
                         <label>그룹 공개</label><input type="radio" value="group" name="sc" style="margin-top: 10px" v-model="item.scv" />
                         <br>
-                        <input type='button'  class="btn btn-primary" :click="update" value="확인">
+                        <input type='button'  class="btn btn-primary" @click="tt" value="확인">
                         <router-link style='margin-left: 270px' :to="{ name: 'mypage' }" v-model="item.pwv" class = "btn btn-primary"> 취소</router-link>
                     </span>
                 </div>
@@ -74,8 +74,9 @@
                 c = false;
 
             return {
-                imageSrc: 'http://nahmdong.com/vitalhill/img/default.png',
+
                 item: {
+                    imageSrc: sessionStorage.getItem('image_path'),
                     idv: sessionStorage.getItem('userid'),
                     gender: sessionStorage.getItem('gender'),
                     age: sessionStorage.getItem('age'),
@@ -83,6 +84,7 @@
                     phone: sessionStorage.getItem('phone'),
                     pwv: sessionStorage.getItem('password'),
                     scv: sessionStorage.getItem('scv'),
+                    path: sessionStorage.getItem('image_path'),
 
                     phonesc: a,
                     gendersc: b,
@@ -93,6 +95,9 @@
             }
         },
         methods: {
+            tt : function () {
+                console.log(this.imageSrc);
+            },
             uploadImage: function (e) {
                 var files = e.target.files;
                 if (!files[0]) {

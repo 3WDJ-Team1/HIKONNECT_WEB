@@ -57256,6 +57256,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -58208,6 +58209,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         sessionStorage.setItem('gender', gender);
                         sessionStorage.setItem('age', age);
                         sessionStorage.setItem('image_path', datavalue[0].image_path);
+                        console.log(response.data);
 
                         _this.$router.push({ name: 'main' });
                         window.location.reload();
@@ -59297,8 +59299,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         } else c = false;
 
         return {
-            imageSrc: 'http://nahmdong.com/vitalhill/img/default.png',
+
             item: {
+                imageSrc: sessionStorage.getItem('image_path'),
                 idv: sessionStorage.getItem('userid'),
                 gender: sessionStorage.getItem('gender'),
                 age: sessionStorage.getItem('age'),
@@ -59306,6 +59309,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 phone: sessionStorage.getItem('phone'),
                 pwv: sessionStorage.getItem('password'),
                 scv: sessionStorage.getItem('scv'),
+                path: sessionStorage.getItem('image_path'),
 
                 phonesc: a,
                 gendersc: b,
@@ -59316,6 +59320,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
+        tt: function tt() {
+            console.log(this.imageSrc);
+        },
         uploadImage: function uploadImage(e) {
             var _this = this;
 
@@ -59378,7 +59385,7 @@ var render = function() {
               _c("img", {
                 staticClass: "image",
                 staticStyle: { width: "400px", height: "400px" },
-                attrs: { src: _vm.imageSrc }
+                attrs: { src: _vm.item.imageSrc }
               }),
               _vm._v(" "),
               _c("input", {
@@ -59762,7 +59769,8 @@ var render = function() {
                 _vm._v(" "),
                 _c("input", {
                   staticClass: "btn btn-primary",
-                  attrs: { type: "button", click: _vm.update, value: "확인" }
+                  attrs: { type: "button", value: "확인" },
+                  on: { click: _vm.tt }
                 }),
                 _vm._v(" "),
                 _c(

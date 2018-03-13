@@ -129,6 +129,7 @@
                             sessionStorage.setItem('gender',gender);
                             sessionStorage.setItem('age',age);
                             sessionStorage.setItem('image_path',datavalue[0].image_path);
+                            console.log(response.data);
 
 
                             this.$router.push({ name: 'main'});
