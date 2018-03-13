@@ -47,6 +47,10 @@
 
             var c = sessionStorage.getItem('password');
             $('#pwvc').val(c);
+            let uri = 'http://localhost:8000/user/' + sessionStorage.getItem('uuid');
+            this.axios.post(uri, this.item).then((response) => {
+               this.item.imageSrc =  response.data;
+            })
 
         },
 
@@ -95,6 +99,7 @@
             }
         },
         methods: {
+
             uploadImage: function (e) {
                 var files = e.target.files;
                 if (!files[0]) {
@@ -119,15 +124,14 @@
                 }
                 else {
                     this.axios.put(uri, this.item).then((response) => {
-                        this.item.imageSrc = response.data;
                         if (response.data == 'true') {
                             alert('회원가입 완료');
                             this.$router.push({name: 'main'});
                         }
-                        else if (response.data == 'false'){
+                        else if (response.data == 'false')
                             alert('이미 존재하는 아이디 입니다.');
                         this.$router.push({name: 'main'});
-                        }
+
                     })
                 }
             }

@@ -1,9 +1,8 @@
 <template>
     <div>
         <mainbar></mainbar>
-        <mainbanner style="width: 1140px; height: 200px;"></mainbanner>
         <mainbody style="width: 1140px; height: 600px;"></mainbody>
-        <lore style="position: absolute; margin-left: 1000px; margin-top: -870px"></lore>
+        <lore style="position: absolute; margin-left: 1000px; margin-top: -670px"></lore>
 
     </div>
 
