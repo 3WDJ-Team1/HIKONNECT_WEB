@@ -146,7 +146,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $image = Storage::get('userprofile/'.$id.'.png');
+        return response()->json($image);
 
     }
 
@@ -188,10 +189,5 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function getImage($id) {
-        $image = User_Profile::where('user',$id)->select('image_path')->get();
-        return response()->json($image);
     }
 }
