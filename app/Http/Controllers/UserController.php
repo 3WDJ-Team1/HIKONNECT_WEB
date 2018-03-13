@@ -7,6 +7,8 @@ use App\User_Profile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -168,11 +170,16 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $password = $request->get('pwv');
+/*        $password = $request->get('pwv');
         $this->usermodel->userUpdate($password,$id);
-        $this->userfilmodel->userUpdate($request,$id,$this->gender,$this->age_group,$this->scope);
+        $this->userfilmodel->userUpdate($request,$id,$this->gender,$this->age_group,$this->scope);*/
 
-        return response()->json($id);
+        //File Save
+        if ($request->hasFile('imageSrc')) {
+            return 'yes';
+        }
+/*
+        return response()->json($id);*/
     }
 
     /**

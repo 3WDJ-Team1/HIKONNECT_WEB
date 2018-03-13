@@ -113,25 +113,26 @@
             },
             update: function() {
                 let uri = 'http://localhost:8000/user/' + sessionStorage.getItem('uuid');
-                if ($('#id').val() == "" || $('#pw').val() == ""
+                /*if ($('#id').val() == "" || $('#pw').val() == ""
                     || $('#pwvc').val() == "" || $('#nn').val() == "") {
                     alert('값이 비어있습니다');
                 }
                 else if ($('#pw').val() != $('#pwvc').val()) {
                     alert('비밀 번호와 비밀번호 확인이 다릅니다')
                 }
-                else {
+                else {*/
                     this.axios.put(uri, this.item).then((response) => {
-                        if (response.data == 'true') {
+                        console.log(response.data);
+                        /*if (response.data == 'true') {
                             alert('회원가입 완료');
                             this.$router.push({name: 'main'});
                         }
-                        else if (response.data == 'false')
+                        else if (response.data == 'false'){
                             alert('이미 존재하는 아이디 입니다.');
                         this.$router.push({name: 'main'});
-
+                        }*/
                     })
-                }
+                /*}*/
             }
         }
     }
