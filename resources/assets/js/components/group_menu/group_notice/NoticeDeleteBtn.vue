@@ -8,7 +8,7 @@
     <!-- @div   A container of this component -->
     <div class='edit_button'>
         <!-- @v-btn     button for invoking delete function -->
-        <v-btn style="height: 100%;" flat v-on:click="deleteNotice">
+        <v-btn style="height: 100%;" flat @click="deleteNotice">
              <v-icon dark>remove</v-icon>&nbsp;delete
         </v-btn>
     </div>
@@ -26,8 +26,8 @@
          * @prop    propsNotice
          * @brief   the object of selected notice.
          */
-        props: ['propsNotice'],
-        methods: {
+        props   : ['propsNotice'],
+        methods : {
             /**
              * @function    deleteNotice
              * @brief       if button is clicked, send http request.

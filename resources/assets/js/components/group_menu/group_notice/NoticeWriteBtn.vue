@@ -11,9 +11,9 @@
             fab
             dark
             large
-            class="btn--bottom btn--floating btn--fixed btn--right"
-            color="cyan"
-            v-on:click="openWriteModal()">
+            class       ="btn--bottom btn--floating btn--fixed btn--right"
+            color       ="cyan"
+            @click      ="openWriteModal()">
             <v-icon color="white">add</v-icon>
         </v-btn>
         <!-- @sweet-modal   the modal which have form script for writing notices -->

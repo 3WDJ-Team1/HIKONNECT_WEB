@@ -8,7 +8,10 @@
     <!-- @div   A container of this component -->
     <div class='edit_button'>
         <!-- @v-btn         button for deciding to open modal -->
-        <v-btn style="height: 100%;" flat v-on:click="openModifyModal();">
+        <v-btn
+            style   ="height: 100%;"
+            flat
+            @click  ="openModifyModal();">
              <v-icon dark>edit</v-icon>&nbsp;edit
         </v-btn>
         <!-- @sweet-modal   a modal which have input form script -->
@@ -25,7 +28,7 @@
          * @prop    propsNotice
          * @brief   the object of selected notice.
          */
-        props: ['propsNotice'],
+        props   : ['propsNotice'],
         methods : {
             /**
              * @function    openModifyModal

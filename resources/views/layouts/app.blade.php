@@ -13,6 +13,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
+</script>
 </head>
 <body>
     <div id="app">
@@ -24,6 +25,13 @@
             'host'      => env('APP_URL')
         ]); ?>;
     </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBAxuXFnvSopsfKoJjoXKXnm-BnjNdzAYk"
+    async defer></script>
     <script src="{{ asset('js/app.js') }}"></script>  
 </body>
+<style>
+    body{
+        height:
+    }
+</style>
 </html>
