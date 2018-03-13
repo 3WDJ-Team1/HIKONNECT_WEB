@@ -47,6 +47,10 @@
 
             var c = sessionStorage.getItem('password');
             $('#pwvc').val(c);
+            let uri = 'http://localhost:8000/user/' + sessionStorage.getItem('uuid');
+            this.axios.post(uri, this.item).then((response) => {
+               this.item.imageSrc =  response.data;
+            })
 
         },
 
