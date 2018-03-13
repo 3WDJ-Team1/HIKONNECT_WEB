@@ -176,7 +176,6 @@ class UserController extends Controller
         $password = $request->get('pwv');
         $this->usermodel->userUpdate($password,$id);
         $this->userfilmodel->userUpdate($request,$id,$this->gender,$this->age_group,$this->scope,$image_path);
-
         return response()->json('true');
     }
 
