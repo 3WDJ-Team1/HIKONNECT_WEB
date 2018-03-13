@@ -170,16 +170,14 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-/*        $password = $request->get('pwv');
-        $this->usermodel->userUpdate($password,$id);
-        $this->userfilmodel->userUpdate($request,$id,$this->gender,$this->age_group,$this->scope);*/
-
         //File Save
-        if ($request->hasFile('imageSrc')) {
-            return 'yes';
-        }
-/*
-        return response()->json($id);*/
+        Storage::put('userprofile/'.$id.'.png',$request->get('imageSrc'));
+        $image_path = 'userprofile/'.$id.'.png';
+        $password = $request->get('pwv');
+        $this->usermodel->userUpdate($password,$id);
+        $this->userfilmodel->userUpdate($request,$id,$this->gender,$this->age_group,$this->scope,$image_path);
+
+        return response()->json('true');
     }
 
     /**
@@ -191,5 +189,10 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getImage($id) {
+        $image = User_Profile::where('user',$id)->select('image_path')->get();
+        return response()->json($image);
     }
 }

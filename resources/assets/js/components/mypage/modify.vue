@@ -32,7 +32,7 @@
                         <label>전체 공개</label><input type="radio" value="all" name="sc" style="margin-top: 10px" v-model="item.scv" />
                         <label>그룹 공개</label><input type="radio" value="group" name="sc" style="margin-top: 10px" v-model="item.scv" />
                         <br>
-                        <input type='button'  class="btn btn-primary" @click="tt" value="확인">
+                        <input type='button'  class="btn btn-primary" @click="update" value="확인">
                         <router-link style='margin-left: 270px' :to="{ name: 'mypage' }" v-model="item.pwv" class = "btn btn-primary"> 취소</router-link>
                     </span>
                 </div>
@@ -95,9 +95,6 @@
             }
         },
         methods: {
-            tt : function () {
-                console.log(this.imageSrc);
-            },
             uploadImage: function (e) {
                 var files = e.target.files;
                 if (!files[0]) {
@@ -107,32 +104,32 @@
                 data.append('media', files[0]);
                 var reader = new FileReader();
                 reader.onload = (e) => {
-                    this.imageSrc = e.target.result;
+                    this.item.imageSrc = e.target.result;
                 };
                 reader.readAsDataURL(files[0]);
             },
             update: function() {
                 let uri = 'http://localhost:8000/user/' + sessionStorage.getItem('uuid');
-                /*if ($('#id').val() == "" || $('#pw').val() == ""
+                if ($('#id').val() == "" || $('#pw').val() == ""
                     || $('#pwvc').val() == "" || $('#nn').val() == "") {
                     alert('값이 비어있습니다');
                 }
                 else if ($('#pw').val() != $('#pwvc').val()) {
                     alert('비밀 번호와 비밀번호 확인이 다릅니다')
                 }
-                else {*/
+                else {
                     this.axios.put(uri, this.item).then((response) => {
-                        console.log(response.data);
-                        /*if (response.data == 'true') {
+                        this.item.imageSrc = response.data;
+                        if (response.data == 'true') {
                             alert('회원가입 완료');
                             this.$router.push({name: 'main'});
                         }
                         else if (response.data == 'false'){
                             alert('이미 존재하는 아이디 입니다.');
                         this.$router.push({name: 'main'});
-                        }*/
+                        }
                     })
-                /*}*/
+                }
             }
         }
     }

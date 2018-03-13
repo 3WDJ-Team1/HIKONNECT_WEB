@@ -33,8 +33,9 @@ class LoginController extends Controller
         }
         if ($userinfo->password == $request->get('pwv')) {
             $sessionVal = User::join('user_profile', 'user_profile.user', '=', 'user.uuid')->select('user_profile.nickname', 'user_profile.image_path', 'user_profile.phone',
-                'user_profile.gender', 'user_profile.age_group', 'user_profile.scope', 'user.uuid', 'user.password')
+                'user_profile.gender', 'user_profile.age_group', 'user_profile.scope', 'user.uuid', 'user.password', 'user_profile.image_path')
                 ->where('id', $request->get('idv'))->get();
+            $image = $sessionVal[8];
             return response()->json($sessionVal);
            }
         else

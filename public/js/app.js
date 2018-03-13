@@ -59320,9 +59320,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
-        tt: function tt() {
-            console.log(this.imageSrc);
-        },
         uploadImage: function uploadImage(e) {
             var _this = this;
 
@@ -59334,32 +59331,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             data.append('media', files[0]);
             var reader = new FileReader();
             reader.onload = function (e) {
-                _this.imageSrc = e.target.result;
+                _this.item.imageSrc = e.target.result;
             };
             reader.readAsDataURL(files[0]);
         },
         update: function update() {
+            var _this2 = this;
+
             var uri = 'http://localhost:8000/user/' + sessionStorage.getItem('uuid');
-            /*if ($('#id').val() == "" || $('#pw').val() == ""
-                || $('#pwvc').val() == "" || $('#nn').val() == "") {
+            if ($('#id').val() == "" || $('#pw').val() == "" || $('#pwvc').val() == "" || $('#nn').val() == "") {
                 alert('값이 비어있습니다');
+            } else if ($('#pw').val() != $('#pwvc').val()) {
+                alert('비밀 번호와 비밀번호 확인이 다릅니다');
+            } else {
+                this.axios.put(uri, this.item).then(function (response) {
+                    _this2.item.imageSrc = response.data;
+                    if (response.data == 'true') {
+                        alert('회원가입 완료');
+                        _this2.$router.push({ name: 'main' });
+                    } else if (response.data == 'false') {
+                        alert('이미 존재하는 아이디 입니다.');
+                        _this2.$router.push({ name: 'main' });
+                    }
+                });
             }
-            else if ($('#pw').val() != $('#pwvc').val()) {
-                alert('비밀 번호와 비밀번호 확인이 다릅니다')
-            }
-            else {*/
-            this.axios.put(uri, this.item).then(function (response) {
-                console.log(response.data);
-                /*if (response.data == 'true') {
-                    alert('회원가입 완료');
-                    this.$router.push({name: 'main'});
-                }
-                else if (response.data == 'false'){
-                    alert('이미 존재하는 아이디 입니다.');
-                this.$router.push({name: 'main'});
-                }*/
-            });
-            /*}*/
         }
     }
 });
@@ -59775,7 +59770,7 @@ var render = function() {
                 _c("input", {
                   staticClass: "btn btn-primary",
                   attrs: { type: "button", value: "확인" },
-                  on: { click: _vm.tt }
+                  on: { click: _vm.update }
                 }),
                 _vm._v(" "),
                 _c(

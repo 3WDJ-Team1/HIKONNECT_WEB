@@ -64,13 +64,14 @@ class User_Profile extends Model
     }
 
     //User_Profile Infomation Update
-    public function userUpdate(Request $request,$id,$gender,$age_group,$scope) {
+    public function userUpdate(Request $request,$id,$gender,$age_group,$scope,$image_path) {
         User_Profile::where('user',$id)->update([
-            'nickname' => $request->get('nn'),
-            'phone'     => $request->get('phone'),
-            'gender'    => $gender,
-            'age_group' => $age_group,
-            'scope'     => $scope
+            'nickname'      => $request->get('nn'),
+            'phone'         => $request->get('phone'),
+            'image_path'    => $image_path,
+            'gender'        => $gender,
+            'age_group'     => $age_group,
+            'scope'         => $scope
             ]);
     }
 
