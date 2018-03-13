@@ -57256,7 +57256,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -57781,15 +57780,13 @@ var render = function() {
     [
       _c("mainbar"),
       _vm._v(" "),
-      _c("mainbanner", { staticStyle: { width: "1140px", height: "200px" } }),
-      _vm._v(" "),
       _c("mainbody", { staticStyle: { width: "1140px", height: "600px" } }),
       _vm._v(" "),
       _c("lore", {
         staticStyle: {
           position: "absolute",
           "margin-left": "1000px",
-          "margin-top": "-870px"
+          "margin-top": "-670px"
         }
       })
     ],
@@ -59056,9 +59053,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
-
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mounted: function mounted() {}
+});
 
 /***/ }),
 /* 294 */
@@ -59088,23 +59087,23 @@ var render = function() {
                   "div",
                   { staticClass: "panel-body" },
                   [
-                    _c("label", [_vm._v("닉네임")]),
-                    _c("h3"),
+                    _c("label", [_vm._v("아이디")]),
+                    _c("h3", { attrs: { id: "userid" } }),
                     _vm._v(" "),
                     _c("label", [_vm._v("닉네임")]),
-                    _c("h3"),
+                    _c("h3", { attrs: { id: "nickname" } }),
                     _vm._v(" "),
-                    _c("label", [_vm._v("닉네임")]),
-                    _c("h3"),
+                    _c("label", [_vm._v("산행등급")]),
+                    _c("h3", { attrs: { id: "level" } }),
                     _vm._v(" "),
-                    _c("label", [_vm._v("닉네임")]),
-                    _c("h3"),
+                    _c("label", [_vm._v("총 산행 시간")]),
+                    _c("h3", { attrs: { id: "hour" } }),
                     _vm._v(" "),
-                    _c("label", [_vm._v("닉네임")]),
-                    _c("h3"),
+                    _c("label", [_vm._v("평균 등산 속도")]),
+                    _c("h3", { attrs: { id: "speed" } }),
                     _vm._v(" "),
-                    _c("label", [_vm._v("닉네임")]),
-                    _c("h3"),
+                    _c("label", [_vm._v("최근 등산 기록")]),
+                    _c("h3", { attrs: { id: "history" } }),
                     _vm._v(" "),
                     _c(
                       "router-link",
@@ -59320,9 +59319,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
-        tt: function tt() {
-            console.log(this.imageSrc);
-        },
+
         uploadImage: function uploadImage(e) {
             var _this = this;
 
@@ -59334,7 +59331,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             data.append('media', files[0]);
             var reader = new FileReader();
             reader.onload = function (e) {
-                _this.imageSrc = e.target.result;
+                _this.item.imageSrc = e.target.result;
             };
             reader.readAsDataURL(files[0]);
         },
@@ -59770,7 +59767,7 @@ var render = function() {
                 _c("input", {
                   staticClass: "btn btn-primary",
                   attrs: { type: "button", value: "확인" },
-                  on: { click: _vm.tt }
+                  on: { click: _vm.update }
                 }),
                 _vm._v(" "),
                 _c(
@@ -59932,7 +59929,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 sets: [{
                     generators: [Object(__WEBPACK_IMPORTED_MODULE_1_d2b__["svgArea"])(), Object(__WEBPACK_IMPORTED_MODULE_1_d2b__["svgLine"])(), Object(__WEBPACK_IMPORTED_MODULE_1_d2b__["svgScatter"])()],
                     graphs: [{
-                        values: [{ x: 1, y: 25 }, { x: 2, y: 38 }, { x: 3, y: 24 }, { x: 4, y: 60 }, { x: 5, y: 22 }, { x: 6, y: 25 }, { x: 7, y: 38 }, { x: 8, y: 24 }, { x: 9, y: 60 }, { x: 10, y: 22 }, { x: 11, y: 25 }, { x: 12, y: 38 }]
+                        values: [{ x: 1, y: 3 }, { x: 2, y: 1 }, { x: 3, y: 0 }, { x: 4, y: 2 }, { x: 5, y: 1 }, { x: 6, y: 0 }, { x: 7, y: 0 }, { x: 8, y: 3 }, { x: 9, y: 2 }, { x: 10, y: 1 }, { x: 11, y: 1 }, { x: 12, y: 0 }]
                     }]
                 }]
             }
