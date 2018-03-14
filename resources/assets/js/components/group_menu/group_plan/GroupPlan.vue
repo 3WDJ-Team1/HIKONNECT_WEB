@@ -5,10 +5,14 @@
     @todo   write plz
  -->
 <template>
-    <div>
-        목적지 : 어딘지 들어가요
+    <div class="text-center">
+        <div class="plan_title">
+            <h1 style="fontWeight: bold;">Destination</h1>
+        </div>
         <router-view name="map"></router-view>
-        일정
+        <div class="plan_title">
+            <h1 style="fontWeight: bold;">Schedule</h1>
+        </div>
         <router-view name="calendar"></router-view>
     </div>
 </template>
@@ -20,5 +24,7 @@
 </script>
 
 <style>
-
+.plan_title {
+    padding: 1%
+}
 </style>

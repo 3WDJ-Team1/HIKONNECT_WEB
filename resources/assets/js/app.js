@@ -33,7 +33,16 @@ Vue.use(VueAxios, axios);
 // vue-spinner
 Vue.component('sync-loader', require('vue-spinner/src/SyncLoader.vue'));
 
+// event bus
 Vue.prototype.$EventBus = new Vue();
+
+// vue-event-calendar
+import 'vue-event-calendar/dist/style.css';
+import vueEventCalendar     from 'vue-event-calendar';
+Vue.use(vueEventCalendar, {
+    locale: 'en',
+    color: 'lightskyblue',
+});
 
 import App                  from './components/App.vue';
 import ExampleComponent     from "./components/ExampleComponent.vue";

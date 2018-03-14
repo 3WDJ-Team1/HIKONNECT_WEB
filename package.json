@@ -26,6 +26,7 @@
         "bootstrap-vue": "^2.0.0-rc.1",
         "sweet-modal-vue": "^2.0.0",
         "vue-axios": "^2.0.2",
+        "vue-event-calendar": "^1.5.2",
         "vue-router": "^3.0.1",
         "vue-spinner": "^1.0.3",
         "vuejs-dialog": "^0.8.0",
