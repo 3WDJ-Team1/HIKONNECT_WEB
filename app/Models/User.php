@@ -8,7 +8,7 @@
  * @license  MIT license
  * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB
  */
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,4 +24,14 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Model
 {
     protected $table = 'user';
+
+    /**
+     * Get user list
+     * 
+     * @return Array
+     */
+    public function getUserList()
+    {
+        return User::skip(0)->take(5)->get();
+    }
 }

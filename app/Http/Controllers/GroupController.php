@@ -2,21 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Group;
 use Illuminate\Http\Request;
+use App\Models\Hiking_group;
+use App\Models\User;
 
     /**
      * @var Model $model       A reference variable for Group model
      */
 class GroupController extends Controller
 {
-    private $groupModel = null;
+    private $group_model = null;
+    private $user_model = null;
+
     /**
      * Constructor for GroupController
      */
     public function __construct()
     {
-        $this->groupModel = new Group();
+        $this->group_model = new Hiking_group();
+        $this->user_model = new User();
     }
     
     /**
@@ -24,11 +28,11 @@ class GroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($pageIndex, $perPage)
     {
-        $groupInformations  = $this->model->getGroupInformations($pageIndex, $perPage);
-        $countOfPeople      = $this->model->getCountOfPeople();
-        return view('layouts/app', ['groups' => $groupInformations, 'persons' => $countOfPeople]);
+        $groupInformations  = $this->group_model->getGroupInformations($pageIndex, $perPage);
+        $countOfPeople      = $this->group_model->getCountOfPeople($pageIndex, $perPage);
+        return compact('groupInformations', 'countOfPeople');
     }
 
     /**
@@ -50,7 +54,7 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-    
+        return $this->group_model->insertHikingGroup($request->filter_input());
     }
 
     /**
@@ -87,7 +91,7 @@ class GroupController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        return $this->group_model->insertHikingGroup($request->filter_input());
     }
 
     /**
@@ -99,6 +103,6 @@ class GroupController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return $this->group_model->insertHikingGroup($request->filter_input());
     }
 }

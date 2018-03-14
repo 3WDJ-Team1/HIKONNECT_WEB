@@ -6,6 +6,7 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
+        "doctrine/dbal": "^2.5",
         "fideloper/proxy": "~3.3",
         "illuminate/filesystem": "^5.0",
         "illuminate/support": "^5.0",
