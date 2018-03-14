@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Hiking_group;
 use Illuminate\Http\Request;
+use App\Models\Hiking_group;
+use App\Models\User;
 
     /**
      * @var Model $model       A reference variable for Group model
@@ -11,12 +12,15 @@ use Illuminate\Http\Request;
 class GroupController extends Controller
 {
     private $group_model = null;
+    private $user_model = null;
+
     /**
      * Constructor for GroupController
      */
     public function __construct()
     {
         $this->group_model = new Hiking_group();
+        $this->user_model = new User();
     }
     
     /**
@@ -27,9 +31,8 @@ class GroupController extends Controller
     public function index($pageIndex, $perPage)
     {
         $groupInformations  = $this->group_model->getGroupInformations($pageIndex, $perPage);
-        return $groupInformations;
-        //$countOfPeople      = $this->group_model->getCountOfPeople();
-        //return view('layouts/app', ['groups' => $groupInformations, 'persons' => $countOfPeople]);
+        $countOfPeople      = $this->group_model->getCountOfPeople($pageIndex, $perPage);
+        return compact('groupInformations', 'countOfPeople');
     }
 
     /**
