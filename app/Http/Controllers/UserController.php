@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\hiking_plan;
 use App\Models\hiking_record;
 use App\User;
 use App\User_Profile;
@@ -208,15 +209,38 @@ class UserController extends Controller
             $grade = '에베레스트';
 
         // Total Hiking Time Setting
-        $startTime = hiking_record::select(
-            DB::raw('timestampdiff(minute, created_at, updated_at)'))
-            ->where('uuid', '00cbdfed-ec47-3c4d-9459-5bc7b99ea6ba')
-            ->get();
-        //        $startTime = hiking_record::raw('select timestampdiff(minute, created_at, updated_at) from hiking_record where uuid = "00cbdfed-ec47-3c4d-9459-5bc7b99ea6ba"');
+        $all_time = 0;
+        $hiking_time = hiking_record::select(
+            DB::raw('timestampdiff(minute, created_at, updated_at) as HikingTime'))
+            ->where('owner', 'c82db144-d135-30d7-b103-3dd4dd4ec0fb')->get();
+        foreach ($hiking_time as $hiking) {
+            $all_time += $hiking->HikingTime;
+        }
+        $all_time = $all_time / 60;
 
         // Average Hiking Speed Setting
-        $avgspeed = hiking_record::where('uuid','00cbdfed-ec47-3c4d-9459-5bc7b99ea6ba')->select('avg_speed')->first();
-        $avg = $avgspeed->avg_speed;
-        return response()->json($startTime);
+        $total_speed = 0;
+        $row_count = hiking_record::where('owner','c82db144-d135-30d7-b103-3dd4dd4ec0fb')->count();
+        $avg_speed = hiking_record::where('owner','c82db144-d135-30d7-b103-3dd4dd4ec0fb')->select('avg_speed')->get();
+        foreach ($avg_speed as $speed) {
+            $total_speed += $speed->avg_speed;
+        }
+        $avg_speed = $total_speed / $row_count;
+
+        // Recent Hiking Record Setting
+        $hiking_plan_value = hiking_record::where('owner', 'c82db144-d135-30d7-b103-3dd4dd4ec0fb')->select('hiking_plan')->orderBy('created_at')->first();
+        $hiking_plan = $hiking_plan_value->hiking_plan;
+        $recent_hiking = hiking_plan::join('hiking_record', 'hiking_plan.uuid', '=', 'hiking_record.hiking_plan')
+            ->select('hiking_record.created_at')
+            ->join('hiking_group','hiking_plan.hiking_group', '=', 'hiking_group.uuid')
+            ->where('hiking_record.uuid', $hiking_plan)->get();
+
+        $profile_value = array([
+            'grade' => $grade,
+            'avg_speed' => $avg_speed,
+            'hiking_time' => $all_time
+        ]);
+
+        return response()->json($profile_value);
     }
 }
