@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\hiking_record;
 use App\User;
 use App\User_Profile;
 use Illuminate\Http\Request;
@@ -9,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -148,7 +150,6 @@ class UserController extends Controller
     {
         $image = Storage::get('userprofile/'.$id.'.png');
         return response()->json($image);
-
     }
 
     /**
@@ -189,5 +190,33 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function showUserData($id) {
+        // UserGrade Setting
+        $hiking_count = hiking_record::where('uuid',$id)->count();
+        $grade = '';
+        if ($hiking_count < 5)
+            $grade = '동네 뒷산';
+        elseif ($hiking_count > 5 && $hiking_count < 10)
+            $grade = '팔공산';
+        elseif ($hiking_count > 10 && $hiking_count < 20)
+            $grade = '한라산';
+        elseif ($hiking_count > 20 && $hiking_count < 50)
+            $grade = '백두산';
+        else
+            $grade = '에베레스트';
+
+        // Total Hiking Time Setting
+        $startTime = hiking_record::select(
+            DB::raw('timestampdiff(minute, created_at, updated_at)'))
+            ->where('uuid', '00cbdfed-ec47-3c4d-9459-5bc7b99ea6ba')
+            ->get();
+        //        $startTime = hiking_record::raw('select timestampdiff(minute, created_at, updated_at) from hiking_record where uuid = "00cbdfed-ec47-3c4d-9459-5bc7b99ea6ba"');
+
+        // Average Hiking Speed Setting
+        $avgspeed = hiking_record::where('uuid','00cbdfed-ec47-3c4d-9459-5bc7b99ea6ba')->select('avg_speed')->first();
+        $avg = $avgspeed->avg_speed;
+        return response()->json($startTime);
     }
 }

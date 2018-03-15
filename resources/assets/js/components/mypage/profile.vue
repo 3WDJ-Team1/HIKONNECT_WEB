@@ -28,7 +28,12 @@
 <script>
     export default {
         mounted: function () {
-
+            let uri = 'http://localhost:8000/mypage/' + sessionStorage.getItem('uuid');
+            this.axios.get(uri, this.item).then((response) => {
+                console.log(response.data);
+                var grade = response.data;
+                $('#userid').val(grade);
+            })
         }
     }
 </script>

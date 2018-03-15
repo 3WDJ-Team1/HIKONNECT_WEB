@@ -22,3 +22,4 @@ Route::post('/login','LoginController@login')->name('login');
 Route::post('/loginprocess','LoginController@loginprocess')->name('loginprocess');
 Route::post('/logout','LoginController@logout')->name('logout');
 Route::get('/user/{id}','UserController@getImage')->name('getImage');
+Route::get('/mypage/{id}','UserController@showUserData')->name('UserData');
