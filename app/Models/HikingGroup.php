@@ -27,4 +27,11 @@ class HikingGroup extends Model
 {
     protected $table = 'hiking_group';
 
+    /**
+     * 
+     */
+    public function getGroupMembers()
+    {
+        
+    }
 }
