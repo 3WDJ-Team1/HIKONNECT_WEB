@@ -57256,7 +57256,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -57781,15 +57780,13 @@ var render = function() {
     [
       _c("mainbar"),
       _vm._v(" "),
-      _c("mainbanner", { staticStyle: { width: "1140px", height: "200px" } }),
-      _vm._v(" "),
       _c("mainbody", { staticStyle: { width: "1140px", height: "600px" } }),
       _vm._v(" "),
       _c("lore", {
         staticStyle: {
           position: "absolute",
           "margin-left": "1000px",
-          "margin-top": "-870px"
+          "margin-top": "-670px"
         }
       })
     ],
@@ -59056,9 +59053,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
+/* harmony default export */ __webpack_exports__["default"] = ({
+    created: function created() {
+        var uri = 'http://localhost:8000/mypage/' + sessionStorage.getItem('uuid');
+        this.axios.get(uri).then(function (response) {
 
-/* harmony default export */ __webpack_exports__["default"] = ({});
+            var datavalue = Object.values(response.data);
+            console.log(response.data);
+            $('#userid').append('&nbsp;&nbsp;&nbsp;&nbsp;' + sessionStorage.getItem('userid'));
+            $('#nickname').append('&nbsp;&nbsp;&nbsp;&nbsp;' + sessionStorage.getItem('nickname'));
+            $('#level').append('&nbsp;&nbsp;&nbsp;&nbsp;' + datavalue[0].grade);
+            $('#hour').append('&nbsp;&nbsp;&nbsp;&nbsp;' + datavalue[0].hiking_time);
+            $('#speed').append('&nbsp;&nbsp;&nbsp;&nbsp;' + datavalue[0].avg_speed + ' km/h');
+            $('#history').append('&nbsp;&nbsp;&nbsp;&nbsp;' + datavalue[0].recent_hiking.created_at.substring(0, 10) + '/' + datavalue[0].hiking_group_name + '/');
+        });
+    }
+});
 
 /***/ }),
 /* 294 */
@@ -59088,23 +59100,23 @@ var render = function() {
                   "div",
                   { staticClass: "panel-body" },
                   [
-                    _c("label", [_vm._v("닉네임")]),
-                    _c("h3"),
+                    _vm._m(0),
+                    _c("br"),
                     _vm._v(" "),
-                    _c("label", [_vm._v("닉네임")]),
-                    _c("h3"),
+                    _vm._m(1),
+                    _c("br"),
                     _vm._v(" "),
-                    _c("label", [_vm._v("닉네임")]),
-                    _c("h3"),
+                    _vm._m(2),
+                    _c("br"),
                     _vm._v(" "),
-                    _c("label", [_vm._v("닉네임")]),
-                    _c("h3"),
+                    _vm._m(3),
+                    _c("br"),
                     _vm._v(" "),
-                    _c("label", [_vm._v("닉네임")]),
-                    _c("h3"),
+                    _vm._m(4),
+                    _c("br"),
                     _vm._v(" "),
-                    _c("label", [_vm._v("닉네임")]),
-                    _c("h3"),
+                    _vm._m(5),
+                    _c("br"),
                     _vm._v(" "),
                     _c(
                       "router-link",
@@ -59148,7 +59160,56 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { attrs: { id: "userid" } }, [
+      _c("label", [_vm._v("아이디")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { attrs: { id: "nickname" } }, [
+      _c("label", [_vm._v("닉네임")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { attrs: { id: "level" } }, [
+      _c("label", [_vm._v("산행등급")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { attrs: { id: "hour" } }, [
+      _c("label", [_vm._v("총 산행 시간")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { attrs: { id: "speed" } }, [
+      _c("label", [_vm._v("평균 등산 속도")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { attrs: { id: "history" } }, [
+      _c("label", [_vm._v("최근 등산 기록")])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -59277,9 +59338,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
+        var _this = this;
 
         var c = sessionStorage.getItem('password');
         $('#pwvc').val(c);
+        var uri = 'http://localhost:8000/user/' + sessionStorage.getItem('uuid');
+        this.axios.post(uri, this.item).then(function (response) {
+            _this.item.imageSrc = response.data;
+        });
     },
 
     data: function data() {
@@ -59320,8 +59386,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
+
         uploadImage: function uploadImage(e) {
-            var _this = this;
+            var _this2 = this;
 
             var files = e.target.files;
             if (!files[0]) {
@@ -59331,12 +59398,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             data.append('media', files[0]);
             var reader = new FileReader();
             reader.onload = function (e) {
-                _this.item.imageSrc = e.target.result;
+                _this2.item.imageSrc = e.target.result;
             };
             reader.readAsDataURL(files[0]);
         },
         update: function update() {
-            var _this2 = this;
+            var _this3 = this;
 
             var uri = 'http://localhost:8000/user/' + sessionStorage.getItem('uuid');
             if ($('#id').val() == "" || $('#pw').val() == "" || $('#pwvc').val() == "" || $('#nn').val() == "") {
@@ -59345,14 +59412,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 alert('비밀 번호와 비밀번호 확인이 다릅니다');
             } else {
                 this.axios.put(uri, this.item).then(function (response) {
-                    _this2.item.imageSrc = response.data;
                     if (response.data == 'true') {
                         alert('회원가입 완료');
-                        _this2.$router.push({ name: 'main' });
-                    } else if (response.data == 'false') {
-                        alert('이미 존재하는 아이디 입니다.');
-                        _this2.$router.push({ name: 'main' });
-                    }
+                        _this3.$router.push({ name: 'main' });
+                    } else if (response.data == 'false') alert('이미 존재하는 아이디 입니다.');
+                    _this3.$router.push({ name: 'main' });
                 });
             }
         }
@@ -59926,13 +59990,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    methods: {
+        /*  graph() {
+              let uri = 'http://localhost:8000/mypage/' + sessionStorage.getItem('uuid');
+              this.axios.get(uri).then((response) => {
+                  var datavalue = Object.values(response.data);
+                  console.log(response.data);
+                  $('#userid').val(datavalue[0]);
+              })
+          }*/
+
+    },
     data: function data() {
         return {
+
             chartData: {
                 sets: [{
                     generators: [Object(__WEBPACK_IMPORTED_MODULE_1_d2b__["svgArea"])(), Object(__WEBPACK_IMPORTED_MODULE_1_d2b__["svgLine"])(), Object(__WEBPACK_IMPORTED_MODULE_1_d2b__["svgScatter"])()],
                     graphs: [{
-                        values: [{ x: 1, y: 25 }, { x: 2, y: 38 }, { x: 3, y: 24 }, { x: 4, y: 60 }, { x: 5, y: 22 }, { x: 6, y: 25 }, { x: 7, y: 38 }, { x: 8, y: 24 }, { x: 9, y: 60 }, { x: 10, y: 22 }, { x: 11, y: 25 }, { x: 12, y: 38 }]
+                        values: [{ x: 1, y: a[0] }, { x: 2, y: a[1] }, { x: 3, y: a[2] }, { x: 4, y: a[3] }, { x: 5, y: a[4] }, { x: 6, y: a[5] }, { x: 7, y: a[6] }, { x: 8, y: a[7] }, { x: 9, y: a[8] }, { x: 10, y: a[9] }, { x: 11, y: a[10] }, { x: 12, y: a[11] }]
                     }]
                 }]
             }
