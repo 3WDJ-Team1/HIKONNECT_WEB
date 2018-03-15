@@ -13,6 +13,12 @@
     import { ChartAxis } from 'vue-d2b'
 
     export default {
+        mounted: function () {
+            let uri = 'http://localhost:8000/graph/' + sessionStorage.getItem('uuid');
+            this.axios.post(uri, this.item).then((response) => {
+                console.log(response.data);
+            })
+        },
 
         data () {
             return {

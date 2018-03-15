@@ -216,7 +216,9 @@ class UserController extends Controller
         foreach ($hiking_time as $hiking) {
             $all_time += $hiking->HikingTime;
         }
-        $all_time = $all_time % 60;
+        $hour = intval($all_time / 60);
+        $minute = $all_time % 60;
+        $all_time = $hour.'시간 '.$minute.'분';
 
         // Average Hiking Speed Setting
         $total_speed = 0;
@@ -248,6 +250,7 @@ class UserController extends Controller
         return response()->json($profile_value);
     }
 
+    //Graph's Information
     public function graph(Request $request,$id) {
 
         return response()->json('dfsdaf');
