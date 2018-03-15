@@ -22,51 +22,40 @@
         },
         data()  {
             return  {
+                pageIndex: 0,
                 search_imformations: {
                     mountain_name: '',
                     writer: '',
                     date: ''
                 },
-                items: [],
-                groups_list_imformation:    [
-                    {name: '1'},
-                    {name: '2'},
-                    {name: '3'},
-                    {name: '4'},
-                    {name: '5'},
-                    {name: '6'},
-                    {name: '7'}
-                ]
+                groups_list_imformation:    []
             }
         },
         created: function ()
         {
+            this.fetchItem();
             window.addEventListener('scroll', this.handleScroll);
             EventBus.$on('input_serch', function (mountain_name, writer, date) {
                 this.mountain_name = mountain_name;
                 this.writer = writer;
                 this.date = date;
             })
-            // this.fetchItems();
         },
         destroyed () {
             window.removeEventListener('scroll', this.handleScroll);
         },
         methods: {
-            handleScroll () {
-                this.scrolled = window.screenY > 0;
+            handleScroll() {
+                // this.scrolled = window.screenY > 0;
+                this.pageIndex += 10;
+            },
+            fetchItem() {
+                axios.get('http://localhost:8000/group', this.pageIndex)
+                    .then(response => {
+                        // console.log(response.data);
+                        this.groups_list_imformation = response.data;
+                    })
             }
-        },
-        fetchItem()
-        {
-            this.axios.post('http://localhost:8000/list')
-                .then(response => {
-                    // console.log(response.data);
-                    this.items = response.data;
-                })
-                .catch(e => {
-                    this.errors.push(e)
-                })
         }
     }
 </script>

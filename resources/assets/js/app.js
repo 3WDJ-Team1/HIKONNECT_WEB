@@ -27,9 +27,9 @@ import group_make from './components/group_make/group_make'
 
 const routes = [
     {
-        name: 'group_make',
+        name: 'groups_list',
         path: '/',
-        component: group_make
+        component: groups_list
     }
 ];
 
