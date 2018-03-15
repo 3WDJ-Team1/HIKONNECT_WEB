@@ -60021,20 +60021,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.axios.post(uri, this.item).then(function (response) {
                 var datavalue = Object.values(response.data);
                 console.log(response.data);
-                _this.yvalue = datavalue[0];
-                alert(_this.yvalue);
+                _this.yvalue = datavalue;
+                sessionStorage.setItem('1', 5);
             });
         }
     },
     data: function data() {
         return {
-            item: {},
-            yvalue: 0,
+            item: {
+                year: 0
+            },
+            yvalue: 10,
             chartData: {
                 sets: [{
+                    tes: this.yvalue,
                     generators: [Object(__WEBPACK_IMPORTED_MODULE_1_d2b__["svgArea"])(), Object(__WEBPACK_IMPORTED_MODULE_1_d2b__["svgLine"])(), Object(__WEBPACK_IMPORTED_MODULE_1_d2b__["svgScatter"])()],
                     graphs: [{
-                        values: [{ x: 1, y: 0 }, { x: 2, y: 1 }, { x: 3, y: 2 }, { x: 4, y: 0 }, { x: 5, y: 0 }, { x: 6, y: 1 }, { x: 7, y: 4 }, { x: 8, y: 7 }, { x: 9, y: 4 }, { x: 10, y: 5 }, { x: 11, y: 2 }, { x: 12, y: 1 }]
+                        values: [{ x: 1, y: sessionStorage.getItem('aa') * 10 / 10 }, { x: 2, y: 2 * 10 / 10 }, { x: 3, y: 6 * 10 / 10 }, { x: 4, y: 8 * 10 / 10 }, { x: 5, y: 7 * 10 / 10 }, { x: 6, y: 6 * 10 / 10 }, { x: 7, y: 5 * 10 / 10 }, { x: 8, y: 4 * 10 / 10 }, { x: 9, y: 3 * 10 / 10 }, { x: 10, y: 5 * 10 / 10 }, { x: 11, y: 7 * 10 / 10 }, { x: 12, y: 9 * 10 / 10 }]
                     }]
                 }]
             }
