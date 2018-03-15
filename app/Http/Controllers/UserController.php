@@ -254,7 +254,6 @@ class UserController extends Controller
         $year = $request->get('year');
         $month = array();
         for($i = 1; $i <= 12; $i++) {
-
             if($i == 1 || 3 || 5 || 7 || 8 || 10 || 12) {
                 $count = hiking_record::where('owner',$id)
                     ->where('created_at','>=', $year.'-'.$i.'-01')
