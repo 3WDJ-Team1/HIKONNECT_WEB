@@ -1,19 +1,49 @@
 <?php
 /**
+ * PHP version 7.0
  * 
+ * @category Controller
+ * @package  Global
+ * @author   bs Kwon <rnjs9957@gmail.com>
+ * @license  MIT License
+ * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB/
  */
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 use App\Models\HikingGroup;
 
 /**
  * Controller for Group
+ * 
+ * @category Controller
+ * @package  Global
+ * @author   bs Kwon <rnjs9957@gmail.com>
+ * @license  MIT License
+ * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB/
  */
 class HikingGroupController extends Controller
 {
     private $_group_model = null;
+
+    /**
+     * Get group member list from database.
+     * 
+     * @param String $groupUuid Reference key(Group's UUID) Search
+     *                          for group members
+     * 
+     * @return Array
+     */
+    public function getGroupMembers(String $groupUuid)
+    {
+        if ($res = $this->_group_model->getGroupMembers($groupUuid) == null) {
+            return $res;
+        }
+
+        return response('Could not found group id', 206);
+    }
 
     /**
      * Constructor for GroupController

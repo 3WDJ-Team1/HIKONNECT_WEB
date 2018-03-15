@@ -19,6 +19,6 @@ Route::get(
 Route::resource('notice', 'NoticeController');
 Route::get('notice/{pageIndex?}/{perPage?}', 'NoticeController@index');
 Route::resource('hiking-group', 'HikingGroupController');
+Route::get('groupMembers/{groupUuid?}', 'HikingGroupController@getGroupMembers');
 
-
-Route::get('xmltesting', 'HikingPlanController@index');
+Route::get('testing', 'HikingGroupController@getGroupMembers');

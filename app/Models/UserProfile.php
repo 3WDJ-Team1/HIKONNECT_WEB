@@ -26,5 +26,4 @@ use App\Request;
 class UserProfile extends Model
 {
     protected $table = 'user_profile';
-
 }
