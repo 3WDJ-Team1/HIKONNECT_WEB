@@ -254,6 +254,6 @@ class UserController extends Controller
     public function graph(Request $request,$id) {
 
 
-        return response()->json(11);
+        return response()->json('dfsdaf');
     }
 }
