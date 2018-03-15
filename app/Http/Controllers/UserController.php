@@ -67,8 +67,7 @@ class UserController extends Controller
                 $this->age_group = 40;
                 break;
             case '50대':
-                $this->age_group = 50;
-                break;
+                 break;
             case '60대 이상':
                 $this->age_group = 60;
                 break;
@@ -241,7 +240,7 @@ class UserController extends Controller
 
         $profile_value = array([
             'grade' => $grade,
-            'avg_speed' => $avg_speed,
+            'avg_speed' => intval($avg_speed),
             'hiking_time' => $all_time,
             'recent_hiking' => $recent_hiking,
             'hiking_group_name' => $hiking_group_name
@@ -253,32 +252,33 @@ class UserController extends Controller
     //Graph's Information
     public function graph(Request $request,$id) {
         $year = $request->get('year');
-        for($i = 0; $i <= 12; $i++) {
-            switch ($i) {
-                case 1 || 3 || 5 || 7 || 8 || 10 || 12 :
-                    $count = hiking_record::where('owner',$id)
-                        ->where('created_at','>=', $year.'-'.$i.'-01')
-                        ->where('created_at','<=', $year.'-'.$i.'-31')
-                        ->count();
-                    break;
-                case 2:
-                    $count = hiking_record::where('owner',$id)
-                        ->where('created_at','>=', $year.'-'.$i.'-01')
-                        ->where('created_at','<=', $year.'-'.$i.'-28')
-                        ->count();
-                    break;
-                case 4 || 6 || 9 || 11 :
-                    $count = hiking_record::where('owner',$id)
-                        ->where('created_at','>=', $year.'-'.$i.'-01')
-                        ->where('created_at','<=', $year.'-'.$i.'-30')
-                        ->count();
-                    break;
+        $month = array();
+        for($i = 1; $i <= 12; $i++) {
+
+            if($i == 1 || 3 || 5 || 7 || 8 || 10 || 12) {
+                $count = hiking_record::where('owner',$id)
+                    ->where('created_at','>=', $year.'-'.$i.'-01')
+                    ->where('created_at','<=', $year.'-'.$i.'-30')
+                    ->count();
             }
-            $month = array([
-                $i => $count
-            ]);
+            elseif ($i == 2) {
+                $count = hiking_record::where('owner', $id)
+                    ->where('created_at', '>=', $year . '-' . $i . '-01')
+                    ->where('created_at', '<=', $year . '-' . $i . '-28')
+                    ->count();
+            }
+            else {
+                $count = hiking_record::where('owner',$id)
+                    ->where('created_at','>=', $year.'-'.$i.'-01')
+                    ->where('created_at','<=', $year.'-'.$i.'-30')
+                    ->count();
+            }
+            $month[$i] = $count;
         }
+
 
         return response()->json($month);
     }
+
+
 }
