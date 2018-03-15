@@ -216,7 +216,7 @@ class UserController extends Controller
         foreach ($hiking_time as $hiking) {
             $all_time += $hiking->HikingTime;
         }
-        $all_time = $all_time / 60;
+        $all_time = $all_time % 60;
 
         // Average Hiking Speed Setting
         $total_speed = 0;
@@ -228,21 +228,28 @@ class UserController extends Controller
         $avg_speed = $total_speed / $row_count;
 
         // Recent Hiking Record Setting
+        $recent_hiking = hiking_record::where('owner', 'c82db144-d135-30d7-b103-3dd4dd4ec0fb')->select('created_at')->orderBy('created_at')->first();
         $hiking_plan_value = hiking_record::where('owner', 'c82db144-d135-30d7-b103-3dd4dd4ec0fb')->select('hiking_plan')->orderBy('created_at')->first();
         $hiking_plan = $hiking_plan_value->hiking_plan;
-        $recent_hiking = hiking_plan::leftjoin('hiking_group', 'hiking_plan.hiking_group', '=', 'hiking_group.uuid')
+        $hiking_group = hiking_plan::leftjoin('hiking_group', 'hiking_plan.hiking_group', '=', 'hiking_group.uuid')
             ->select('hiking_group.name')
             ->where('hiking_plan.uuid','b05673c3-bfb0-3c23-950c-eb7dd3b43d41')
             ->first();
-        $hiking_group_name = $recent_hiking->name;
+        $hiking_group_name = $hiking_group->name;
 
         $profile_value = array([
             'grade' => $grade,
             'avg_speed' => $avg_speed,
             'hiking_time' => $all_time,
+            'recent_hiking' => $recent_hiking,
             'hiking_group_name' => $hiking_group_name
         ]);
 
         return response()->json($profile_value);
+    }
+
+    public function graph(Request $request,$id) {
+
+        return response()->json('dfsdaf');
     }
 }
