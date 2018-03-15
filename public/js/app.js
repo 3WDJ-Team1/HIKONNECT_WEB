@@ -59054,6 +59054,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     created: function created() {
@@ -59106,7 +59109,22 @@ var render = function() {
                     _vm._m(1),
                     _c("br"),
                     _vm._v(" "),
-                    _vm._m(2),
+                    _c(
+                      "span",
+                      [
+                        _vm._m(2),
+                        _vm._v(" "),
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "btn btn-primary",
+                            attrs: { to: { name: "level" } }
+                          },
+                          [_vm._v(" !")]
+                        )
+                      ],
+                      1
+                    ),
                     _c("br"),
                     _vm._v(" "),
                     _vm._m(3),
@@ -59984,6 +60002,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -59991,24 +60014,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     methods: {
-        /*  graph() {
-              let uri = 'http://localhost:8000/mypage/' + sessionStorage.getItem('uuid');
-              this.axios.get(uri).then((response) => {
-                  var datavalue = Object.values(response.data);
-                  console.log(response.data);
-                  $('#userid').val(datavalue[0]);
-              })
-          }*/
+        graph: function graph() {
+            var _this = this;
 
+            var uri = 'http://localhost:8000/graph/' + sessionStorage.getItem('uuid');
+            this.axios.post(uri, this.item).then(function (response) {
+                var datavalue = Object.values(response.data);
+                console.log(response.data);
+                _this.yvalue = datavalue[0];
+                alert(_this.yvalue);
+            });
+        }
     },
     data: function data() {
         return {
-
+            item: {},
+            yvalue: 0,
             chartData: {
                 sets: [{
                     generators: [Object(__WEBPACK_IMPORTED_MODULE_1_d2b__["svgArea"])(), Object(__WEBPACK_IMPORTED_MODULE_1_d2b__["svgLine"])(), Object(__WEBPACK_IMPORTED_MODULE_1_d2b__["svgScatter"])()],
                     graphs: [{
-                        values: [{ x: 1, y: a[0] }, { x: 2, y: a[1] }, { x: 3, y: a[2] }, { x: 4, y: a[3] }, { x: 5, y: a[4] }, { x: 6, y: a[5] }, { x: 7, y: a[6] }, { x: 8, y: a[7] }, { x: 9, y: a[8] }, { x: 10, y: a[9] }, { x: 11, y: a[10] }, { x: 12, y: a[11] }]
+                        values: [{ x: 1, y: 0 }, { x: 2, y: 1 }, { x: 3, y: 2 }, { x: 4, y: 0 }, { x: 5, y: 0 }, { x: 6, y: 1 }, { x: 7, y: 4 }, { x: 8, y: 7 }, { x: 9, y: 4 }, { x: 10, y: 5 }, { x: 11, y: 2 }, { x: 12, y: 1 }]
                     }]
                 }]
             }
@@ -85425,6 +85451,44 @@ var render = function() {
     { staticClass: "chart" },
     [
       _c("h1", [_vm._v("월별 등산기록")]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.item.year,
+              expression: "item.year"
+            }
+          ],
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.$set(
+                _vm.item,
+                "year",
+                $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+              )
+            }
+          }
+        },
+        [_c("option", [_vm._v("2018")])]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", on: { click: _vm.graph } },
+        [_vm._v(" 확인")]
+      ),
       _vm._v(" "),
       _c("link", {
         attrs: {

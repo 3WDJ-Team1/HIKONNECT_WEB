@@ -9,7 +9,10 @@
 
                             <span id="userid"><label>아이디</label></span><br>
                             <span id="nickname"> <label>닉네임</label></span><br>
-                            <span id="level"><label>산행등급</label></span><br>
+                            <span>
+                            <span id="level"><label>산행등급</label></span>
+                            <router-link  :to="{ name: 'level' }" class = "btn btn-primary"> !</router-link>
+                            </span><br>
                             <span id="hour"> <label>총 산행 시간</label></span><br>
                             <span id="speed"><label>평균 등산 속도</label></span><br>
                             <span id="history"><label>최근 등산 기록</label></span><br>
