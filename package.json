@@ -24,6 +24,7 @@
     },
     "dependencies": {
         "bootstrap-vue": "^2.0.0-rc.1",
+        "element-ui": "^2.2.2",
         "sweet-modal-vue": "^2.0.0",
         "vue-axios": "^2.0.2",
         "vue-event-calendar": "^1.5.2",

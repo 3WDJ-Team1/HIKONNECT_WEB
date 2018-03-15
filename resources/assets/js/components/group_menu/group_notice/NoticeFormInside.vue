@@ -1,7 +1,7 @@
 <!-- 
     @file   NoticeFormInside.vue
     @brief  A component that is inner of 'write or edit' modal
-    @author Sungeun Kang
+    @author Sungeun Kang <kasueu0814@gmail.com>
     @todo   error test
  -->
 <template>

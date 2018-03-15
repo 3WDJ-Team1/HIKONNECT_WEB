@@ -1,3 +1,9 @@
+<!-- 
+    @file   GroupPlanMap.vue
+    @brief  A component of map
+    @author Sungeun Kang <kasueu0814@gmail.com>
+    @todo   write plz
+ -->
 <template>
     <!-- here's a map -->
     <div id="map" class="google_map">
@@ -77,7 +83,7 @@
 
 <style>
     .google_map {
-        height          : 600px;
+        height          : 500px;
         width           : 90%;
         margin          : 0 auto;
         background-color: white;

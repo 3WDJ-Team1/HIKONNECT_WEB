@@ -1,7 +1,7 @@
 <!-- 
     @file   NoticeModifyBtn.vue
     @brief  A component that is an editButton of each notice
-    @author Sungeun Kang
+    @author Sungeun Kang <kasueu0814@gmail.com>
     @todo   error test
  -->
 <template>

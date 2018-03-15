@@ -1,7 +1,7 @@
 <!-- 
     @file   GroupMenuTab.vue
     @brief  A component of group menu tab
-    @author Sungeun Kang
+    @author Sungeun Kang <kasueu0814@gmail.com>
     @todo   update children components
  -->
 <template>
@@ -54,7 +54,7 @@
                 :key    ="3"
                 :id     ="'tab-' + 3">
                 <v-card flat>
-                    <!-- <router-view name="notice"></router-view> -->
+                    <router-view name="member_list"></router-view>
                 </v-card>
             </v-tab-item>
         </v-tabs>

@@ -48,15 +48,20 @@ import App                  from './components/App.vue';
 import ExampleComponent     from "./components/ExampleComponent.vue";
 import GroupMenuTab         from "./components/group_menu/GroupMenuTab.vue";
 
+// group notice
 import NoticeListUp         from "./components/group_menu/group_notice/NoticeListUp.vue";
 import NoticeWriteBtn       from './components/group_menu/group_notice/NoticeWriteBtn.vue';
 import NoticeModifyBtn      from './components/group_menu/group_notice/NoticeModifyBtn.vue';
 import NoticeDeleteBtn      from './components/group_menu/group_notice/NoticeDeleteBtn.vue';
 import NoticeFormInside     from './components/group_menu/group_notice/NoticeFormInside.vue';
 
+// group plan
 import GroupPlan            from './components/group_menu/group_plan/GroupPlan.vue';
 import GroupPlanMap         from './components/group_menu/group_plan/GroupPlanMap.vue';
 import GroupPlanCalendar    from './components/group_menu/group_plan/GroupPlanCalendar.vue';
+
+// group member list
+import GroupMemberList      from './components/group_menu/group_member/GroupMemberList.vue';
 
 // routing structure
 const routes = [
@@ -76,8 +81,9 @@ const routes = [
             {
                 path        : '/group',
                 components  : {
-                    notice  : NoticeListUp,
-                    plan    : GroupPlan
+                    notice      : NoticeListUp,
+                    plan        : GroupPlan,
+                    member_list : GroupMemberList,
                 },
                 children: [
                     {
@@ -88,8 +94,8 @@ const routes = [
                             modify  : NoticeModifyBtn,
                             delete  : NoticeDeleteBtn,
                             // components in GroupPlan
-                            map     : GroupPlanMap,
-                            calendar: GroupPlanCalendar
+                            map         : GroupPlanMap,
+                            calendar    : GroupPlanCalendar,
                         },
                         children: [
                             {

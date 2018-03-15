@@ -1,7 +1,7 @@
 <!-- 
     @file   NoticeWriteBtn.vue
     @brief  A component of floating write Button
-    @author Sungeun Kang
+    @author Sungeun Kang <kasueu0814@gmail.com>
     @todo   error test
  -->
 <template>

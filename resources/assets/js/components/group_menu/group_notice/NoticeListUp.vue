@@ -1,7 +1,7 @@
 <!-- 
     @file   NoticeListUp.vue
     @brief  A component to show notices in group
-    @author Sungeun Kang
+    @author Sungeun Kang <kasueu0814@gmail.com>
     @todo   insert buttons
  -->
 <template>

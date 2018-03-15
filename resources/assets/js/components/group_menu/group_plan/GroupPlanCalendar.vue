@@ -1,3 +1,9 @@
+<!-- 
+    @file   GroupPlanCalendar.vue
+    @brief  A component of calendar
+    @author Sungeun Kang <kasueu0814@gmail.com>
+    @todo   write plz
+ -->
 <template>
     <v-card flat>
         <vue-event-calendar
