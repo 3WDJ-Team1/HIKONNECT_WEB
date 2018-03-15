@@ -253,6 +253,7 @@ class UserController extends Controller
     //Graph's Information
     public function graph(Request $request,$id) {
 
+
         return response()->json('dfsdaf');
     }
 }
