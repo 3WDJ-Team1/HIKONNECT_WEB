@@ -230,15 +230,17 @@ class UserController extends Controller
         // Recent Hiking Record Setting
         $hiking_plan_value = hiking_record::where('owner', 'c82db144-d135-30d7-b103-3dd4dd4ec0fb')->select('hiking_plan')->orderBy('created_at')->first();
         $hiking_plan = $hiking_plan_value->hiking_plan;
-        $recent_hiking = hiking_plan::join('hiking_record', 'hiking_plan.uuid', '=', 'hiking_record.hiking_plan')
-            ->select('hiking_record.created_at')
-            ->join('hiking_group','hiking_plan.hiking_group', '=', 'hiking_group.uuid')
-            ->where('hiking_record.uuid', $hiking_plan)->get();
+        $recent_hiking = hiking_plan::leftjoin('hiking_group', 'hiking_plan.hiking_group', '=', 'hiking_group.uuid')
+            ->select('hiking_group.name')
+            ->where('hiking_plan.uuid','b05673c3-bfb0-3c23-950c-eb7dd3b43d41')
+            ->first();
+        $hiking_group_name = $recent_hiking->name;
 
         $profile_value = array([
             'grade' => $grade,
             'avg_speed' => $avg_speed,
-            'hiking_time' => $all_time
+            'hiking_time' => $all_time,
+            'hiking_group_name' => $hiking_group_name
         ]);
 
         return response()->json($profile_value);
