@@ -41,6 +41,7 @@
                 $('#history').append('&nbsp;&nbsp;&nbsp;&nbsp;'
                     +datavalue[0].recent_hiking.created_at.substring(0,10) + '/' + datavalue[0].hiking_group_name
                     +'/');
+
             })
         }
     }

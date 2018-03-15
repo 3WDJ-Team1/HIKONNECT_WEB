@@ -59343,7 +59343,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var c = sessionStorage.getItem('password');
         $('#pwvc').val(c);
         var uri = 'http://localhost:8000/user/' + sessionStorage.getItem('uuid');
-        this.axios.post(uri, this.item).then(function (response) {
+        this.axios.get(uri, this.item).then(function (response) {
             _this.item.imageSrc = response.data;
         });
     },
