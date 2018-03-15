@@ -238,6 +238,7 @@ class UserController extends Controller
             ->first();
         $hiking_group_name = $hiking_group->name;
 
+
         $profile_value = array([
             'grade' => $grade,
             'avg_speed' => intval($avg_speed),
