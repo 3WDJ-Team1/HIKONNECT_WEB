@@ -222,20 +222,20 @@ class UserController extends Controller
 
         // Average Hiking Speed Setting
         $total_speed = 0;
-        $row_count = hiking_record::where('owner','c82db144-d135-30d7-b103-3dd4dd4ec0fb')->count();
-        $avg_speed = hiking_record::where('owner','c82db144-d135-30d7-b103-3dd4dd4ec0fb')->select('avg_speed')->get();
+        $row_count = hiking_record::where('owner',$id)->count();
+        $avg_speed = hiking_record::where('owner',$id)->select('avg_speed')->get();
         foreach ($avg_speed as $speed) {
             $total_speed += $speed->avg_speed;
         }
         $avg_speed = $total_speed / $row_count;
 
         // Recent Hiking Record Setting
-        $recent_hiking = hiking_record::where('owner', 'c82db144-d135-30d7-b103-3dd4dd4ec0fb')->select('created_at')->orderBy('created_at')->first();
-        $hiking_plan_value = hiking_record::where('owner', 'c82db144-d135-30d7-b103-3dd4dd4ec0fb')->select('hiking_plan')->orderBy('created_at')->first();
+        $recent_hiking = hiking_record::where('owner', $id)->select('created_at')->orderBy('created_at')->first();
+        $hiking_plan_value = hiking_record::where('owner', $id)->select('hiking_plan')->orderBy('created_at')->first();
         $hiking_plan = $hiking_plan_value->hiking_plan;
         $hiking_group = hiking_plan::leftjoin('hiking_group', 'hiking_plan.hiking_group', '=', 'hiking_group.uuid')
             ->select('hiking_group.name')
-            ->where('hiking_plan.uuid','b05673c3-bfb0-3c23-950c-eb7dd3b43d41')
+            ->where('hiking_plan.uuid',$hiking_plan)
             ->first();
         $hiking_group_name = $hiking_group->name;
 
@@ -252,8 +252,33 @@ class UserController extends Controller
 
     //Graph's Information
     public function graph(Request $request,$id) {
+        $year = $request->get('year');
+        for($i = 0; $i <= 12; $i++) {
+            switch ($i) {
+                case 1 || 3 || 5 || 7 || 8 || 10 || 12 :
+                    $count = hiking_record::where('owner',$id)
+                        ->where('created_at','>=', $year.'-'.$i.'-01')
+                        ->where('created_at','<=', $year.'-'.$i.'-31')
+                        ->count();
+                    break;
+                case 2:
+                    $count = hiking_record::where('owner',$id)
+                        ->where('created_at','>=', $year.'-'.$i.'-01')
+                        ->where('created_at','<=', $year.'-'.$i.'-28')
+                        ->count();
+                    break;
+                case 4 || 6 || 9 || 11 :
+                    $count = hiking_record::where('owner',$id)
+                        ->where('created_at','>=', $year.'-'.$i.'-01')
+                        ->where('created_at','<=', $year.'-'.$i.'-30')
+                        ->count();
+                    break;
+            }
+            $month = array([
+                $i => $count
+            ]);
+        }
 
-
-        return response()->json('dfsdaf');
+        return response()->json($month);
     }
 }
