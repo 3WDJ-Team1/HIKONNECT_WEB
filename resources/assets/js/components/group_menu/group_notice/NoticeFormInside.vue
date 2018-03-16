@@ -1,7 +1,7 @@
 <!-- 
     @file   NoticeFormInside.vue
     @brief  A component that is inner of 'write or edit' modal
-    @author Sungeun Kang
+    @author Sungeun Kang <kasueu0814@gmail.com>
     @todo   error test
  -->
 <template>
@@ -12,29 +12,29 @@
             <v-subheader style="font-size: 20px;">title</v-subheader>
             <!-- @v-text-field#notice_input_title       text of title will be input -->
             <v-text-field
-                name="notice_title"
-                v-model="title"
-                id="notice_input_title"
-                v-bind:rules="titleRules"
+                name        ="notice_title"
+                v-model     ="title"
+                id          ="notice_input_title"
+                :rules      ="titleRules"
                 required
             ></v-text-field>
             <br>
             <v-subheader style="font-size: 20px;">text</v-subheader>
             <!-- @v-text-field#notice_input_textarea    text of content will be input -->
             <v-text-field
-                name="notice_text"
-                v-model="text"
-                v-bind:rules="textRules"
+                name        ="notice_text"
+                v-model     ="text"
+                :rules      ="textRules"
                 textarea
-                rows="12"
-                id="notice_input_textarea"
+                rows        ="12"
+                id          ="notice_input_textarea"
                 required
             ></v-text-field>
             <!-- v-btn      button for submit -->
             <v-btn
-                v-on:click="submit"
-                style="height: 100%; color: white;"
-                color="cyan"
+                @click      ="submit"
+                style       ="height: 100%; color: white;"
+                color       ="cyan"
             >
                 submit
             </v-btn>
@@ -58,18 +58,18 @@
              * mode         (String)    the mode of modal (edit or write)
              * httpAddr     (String)    the address for http request
              */
-            title: '',
-            text: '',
-            noticeUuid: '',
-            valid: false,
-            titleRules: [
+            title       : '',
+            text        : '',
+            noticeUuid  : '',
+            valid       : false,
+            titleRules  : [
                 title => !!title || 'Title is required.'
             ],
-            textRules: [
+            textRules   : [
                 text => !!text || 'Text is required.'
             ],
-            mode: '',
-            httpAddr: Laravel.host
+            mode        : '',
+            httpAddr    : Laravel.host
         }),
         methods: {
             /**
@@ -82,20 +82,22 @@
                         if(this.$refs.form.validate()) {
                             axios.patch(this.httpAddr + '/notice/' + this.noticeUuid, {
                                 // nickname: this.nickname,
-                                writer:'', // user's uuid,
-                                title: this.title,
-                                content: this.text
-                            })
+                                writer  :'', // user's uuid,
+                                title   : this.title,
+                                content : this.text
+                            });
+                            this.$parent.close();
                         }
                     break;
                     case "write":
                         if(this.$refs.form.validate()) {
                             axios.post(this.httpAddr + '/notice', {
                                 // nickname: this.nickname,
-                                writer:'', // user's uuid,
-                                title: this.title,
-                                content: this.text
+                                writer  :'', // user's uuid,
+                                title   : this.title,
+                                content : this.text
                             })
+                            this.$parent.close();
                         }
                     break;
                 }
@@ -108,12 +110,12 @@
          */
         created() {
             this.$EventBus.$on('noticeData', (data) => {
-                this.title = data.title;
-                this.text = data.content;
+                this.title      = data.title;
+                this.text       = data.content;
                 this.noticeUuid = data.uuid;
             });
             this.$EventBus.$on('modalMode', (modalMode) => {
-                this.mode = modalMode;
+                this.mode       = modalMode;
             });
         }
             

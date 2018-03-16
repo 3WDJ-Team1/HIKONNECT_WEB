@@ -9,6 +9,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use Faker as Faker;
+
 Route::get(
     '/',
     function () {
@@ -19,6 +21,8 @@ Route::get(
 Route::resource('notice', 'NoticeController');
 Route::get('notice/{pageIndex?}/{perPage?}', 'NoticeController@index');
 Route::resource('hiking-group', 'HikingGroupController');
+Route::get('groupMembers/{groupUuid?}', 'HikingGroupController@getGroupMembers');
+Route::get('userProfile/{userUuid}', 'UserProfileController@getUserProfile');
 
 
 Route::get('xmltesting', 'HikingPlanController@index');
@@ -31,3 +35,19 @@ Route::resource('/user', 'UserController');
 Route::post('/login', 'LoginController@login')->name('login');
 Route::post('/loginprocess', 'LoginController@loginprocess')->name('loginprocess');
 Route::post('/logout', 'LoginController@logout')->name('logout');
+
+Route::get(
+    '/testing',
+    function () {
+        $faker = Faker\Factory::create();
+
+        return $created_date->format("Y-m-d H:m:s") . "<br />" . $updated_date->format("Y-m-d H:m:s");
+    }
+);
+
+Route::get(
+    '/mountain/{mntCode?}/{fileName?}',
+    function () {
+        return '1234';
+    }
+);

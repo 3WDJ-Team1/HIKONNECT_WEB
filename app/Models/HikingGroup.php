@@ -12,6 +12,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Request;
+use Illuminate\Support\Facades\DB;
+
+use App\Models\HikingGroup;
 
 /**
  * Model for Notification
@@ -27,4 +30,20 @@ class HikingGroup extends Model
 {
     protected $table = 'hiking_group';
 
+    /**
+     * 
+     */
+    public function getGroupMembers(String $groupUuid)
+    {
+        $queryRes = DB::table('entry_info')
+            ->select('user as uuid')
+            ->where(
+                [
+                    ['hiking_group', $groupUuid],
+                    ['is_accepted', '1'],
+                ]
+            )->get();
+
+        return $queryRes;
+    }
 }

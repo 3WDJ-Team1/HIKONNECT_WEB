@@ -37,23 +37,40 @@ class HikingPlan extends Model
      */
     public function xmlToJson()
     {
-        if (Storage::disk('local')->exists('mount.gpx')) {
-            $hikingPath =  Parser::xml(Storage::disk('local')->get('mount.gpx'));
-        }
+        // if (Storage::disk('local')->exists('mount.gpx')) {
+        //     $hikingPath =  Parser::xml(Storage::disk('local')->get('mount.gpx'));
+        // }
 
-        $hikingPaths = [];
+        // return $hikingPath;
+        // $hikingPaths = [];
 
-        foreach ($hikingPath['trk'][0]['trkseg'] as $paths) {
-	    foreach ($paths as $inx => $path) {
-                return $path;
-                $location["lat"] = $path['@lat'];
-                $location["lng"] = $path['@lon'];
+        // foreach ($hikingPath['trk'][0]['trkseg'] as $paths) {
+        //     foreach ($paths as $inx => $path) {
+        //         $location["lat"] = $path["@lat"];
+        //         $location["lng"] = $path["@lon"];
 
-                $hikingPaths[$inx] = $location;
-            }
-        }
+        //         $hikingPaths[$inx] = $location;
+        //     }
+        // }
 
-        return json_encode($hikingPaths);
+        // return $hikingPaths;
+        return $this->getGeoPath();
     }
+
+    public function getGeoPath()
+    {
+        return $mountainPaths = Storage::disk('local')->get("mountain/111100101_geojson/PMNTN_SPOT_북악산_111100101.json");
+        $mountCode = '11100101';
+
+        if (Storage::disk('local')->exists('mountain/111100101_geojson/PMNTN_북악산_111100101.json')) {
+            
+        }
+
+        return var_dump($mountainPaths['features'][0]['PMNTN_NM']);
+    }
+<<<<<<< HEAD
 }
 
+=======
+}
+>>>>>>> c752c80ca5ea187b754f22c1526e48d1559dda6d
