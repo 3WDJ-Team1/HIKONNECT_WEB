@@ -20,5 +20,8 @@ Route::resource('notice', 'NoticeController');
 Route::get('notice/{pageIndex?}/{perPage?}', 'NoticeController@index');
 Route::resource('hiking-group', 'HikingGroupController');
 Route::get('groupMembers/{groupUuid?}', 'HikingGroupController@getGroupMembers');
+Route::get('userProfile/{userUuid}', 'UserProfileController@getUserProfile');
+
 
 Route::get('testing', 'HikingGroupController@getGroupMembers');
+

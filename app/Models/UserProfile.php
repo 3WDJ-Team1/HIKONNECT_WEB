@@ -26,4 +26,25 @@ use App\Request;
 class UserProfile extends Model
 {
     protected $table = 'user_profile';
+
+    /**
+     * Get user's profile reference by User's UUID
+     * 
+     * @param String $userUuid User's UUID
+     * 
+     * @return Array
+     */
+    public function getUserProfile(String $userUuid)
+    {
+        $queryRes = UserProfile::select(
+            'user as uuid',
+            'nickname as name',
+            'gender',
+            'phone',
+            'image_path as profilePic'
+        )->where('user', $userUuid)
+        ->get();
+
+        return $queryRes;
+    }
 }

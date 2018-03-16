@@ -36,13 +36,14 @@ class HikingGroup extends Model
     public function getGroupMembers(String $groupUuid)
     {
         $queryRes = DB::table('entry_info')
-            ->leftJoin('hiking_group', 'hiking_group.uuid', 'entry_info.hiking_group')
-            ->leftJoin('user', 'entry_info.user', 'user.uuid')
-            ->leftJoin('user_profile', 'user.uuid', 'user_profile.user')
-            ->select('hiking_group.uuid as groupUUID', 'hiking_group.name as groupName', 'user_profile.nickname as userNickname', 'user_profile.gender as userGender')
-            ->where('hiking_group.uuid', $groupUuid)
-            // ->orderBy('userNickname', 'desc')
-            ->get();
+            ->select('user as uuid')
+            ->where(
+                [
+                    ['hiking_group', $groupUuid],
+                    ['is_accepted', '1'],
+                ]
+            )->get();
+
         return $queryRes;
     }
 }
