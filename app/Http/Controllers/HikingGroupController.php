@@ -38,11 +38,12 @@ class HikingGroupController extends Controller
      */
     public function getGroupMembers(String $groupUuid)
     {
-        if ($res = $this->_group_model->getGroupMembers($groupUuid) == null) {
-            return $res;
+        $res = $this->_group_model->getGroupMembers($groupUuid);
+        if ($res == null) {
+            return response('Could not found group id', 206);
         }
 
-        return response('Could not found group id', 206);
+        return $res;
     }
 
     /**
