@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Mockery\Exception;
 
 class UserController extends Controller
 {
@@ -192,60 +193,67 @@ class UserController extends Controller
         //
     }
 
-    public function showUserData($id) {
-        // UserGrade Setting
-        $hiking_count = hiking_record::where('uuid',$id)->count();
-        $grade = '';
-        if ($hiking_count < 5)
-            $grade = '동네 뒷산';
-        elseif ($hiking_count > 5 && $hiking_count < 10)
-            $grade = '팔공산';
-        elseif ($hiking_count > 10 && $hiking_count < 20)
-            $grade = '한라산';
-        elseif ($hiking_count > 20 && $hiking_count < 50)
-            $grade = '백두산';
-        else
-            $grade = '에베레스트';
-
-        // Total Hiking Time Setting
-        $all_time = 0;
-        $hiking_time = hiking_record::select(
-            DB::raw('timestampdiff(minute, created_at, updated_at) as HikingTime'))
-            ->where('owner', 'c82db144-d135-30d7-b103-3dd4dd4ec0fb')->get();
-        foreach ($hiking_time as $hiking) {
-            $all_time += $hiking->HikingTime;
+    public function showUserData($id)
+    {
+        if (hiking_record::where('owner', $id)->count() == 0) {
+            $profile_value = array([
+                'grade' => '동네 뒷산',
+            ]);
+            return response()->json($profile_value);
         }
-        $hour = intval($all_time / 60);
-        $minute = $all_time % 60;
-        $all_time = $hour.'시간 '.$minute.'분';
+        else{
+            // UserGrade Setting
+            $hiking_count = hiking_record::where('uuid', $id)->count();
+            if ($hiking_count < 5)
+                $grade = '동네 뒷산';
+            elseif ($hiking_count > 5 && $hiking_count < 10)
+                $grade = '팔공산';
+            elseif ($hiking_count > 10 && $hiking_count < 20)
+                $grade = '한라산';
+            elseif ($hiking_count > 20 && $hiking_count < 50)
+                $grade = '백두산';
+            else
+                $grade = '에베레스트';
 
-        // Average Hiking Speed Setting
-        $total_speed = 0;
-        $row_count = hiking_record::where('owner',$id)->count();
-        $avg_speed = hiking_record::where('owner',$id)->select('avg_speed')->get();
-        foreach ($avg_speed as $speed) {
-            $total_speed += $speed->avg_speed;
+            // Total Hiking Time Setting
+            $all_time = 0;
+            $hiking_time = hiking_record::select(
+                DB::raw('timestampdiff(minute, created_at, updated_at) as HikingTime'))
+                ->where('owner', 'c82db144-d135-30d7-b103-3dd4dd4ec0fb')->get();
+            foreach ($hiking_time as $hiking) {
+                $all_time += $hiking->HikingTime;
+            }
+            $hour = intval($all_time / 60);
+            $minute = $all_time % 60;
+            $all_time = $hour . '시간 ' . $minute . '분';
+
+            // Average Hiking Speed Setting
+            $total_speed = 0;
+            $row_count = hiking_record::where('owner', $id)->count();
+            $avg_speed = hiking_record::where('owner', $id)->select('avg_speed')->get();
+            foreach ($avg_speed as $speed) {
+                $total_speed += $speed->avg_speed;
+            }
+            $avg_speed = $total_speed / $row_count;
+
+            // Recent Hiking Record Setting
+            $recent_hiking = hiking_record::where('owner', $id)->select('created_at')->orderBy('created_at')->first();
+            $hiking_plan_value = hiking_record::where('owner', $id)->select('hiking_plan')->orderBy('created_at')->first();
+            $hiking_plan = $hiking_plan_value->hiking_plan;
+            $hiking_group = hiking_plan::leftjoin('hiking_group', 'hiking_plan.hiking_group', '=', 'hiking_group.uuid')
+                ->select('hiking_group.name')
+                ->where('hiking_plan.uuid', $hiking_plan)
+                ->first();
+            $hiking_group_name = $hiking_group->name;
+
+            $profile_value = array([
+                'grade' => $grade,
+                'avg_speed' => intval($avg_speed),
+                'hiking_time' => $all_time,
+                'recent_hiking' => $recent_hiking,
+                'hiking_group_name' => $hiking_group_name
+            ]);
         }
-        $avg_speed = $total_speed / $row_count;
-
-        // Recent Hiking Record Setting
-        $recent_hiking = hiking_record::where('owner', $id)->select('created_at')->orderBy('created_at')->first();
-        $hiking_plan_value = hiking_record::where('owner', $id)->select('hiking_plan')->orderBy('created_at')->first();
-        $hiking_plan = $hiking_plan_value->hiking_plan;
-        $hiking_group = hiking_plan::leftjoin('hiking_group', 'hiking_plan.hiking_group', '=', 'hiking_group.uuid')
-            ->select('hiking_group.name')
-            ->where('hiking_plan.uuid',$hiking_plan)
-            ->first();
-        $hiking_group_name = $hiking_group->name;
-
-        $profile_value = array([
-            'grade' => $grade,
-            'avg_speed' => intval($avg_speed),
-            'hiking_time' => $all_time,
-            'recent_hiking' => $recent_hiking,
-            'hiking_group_name' => $hiking_group_name
-        ]);
-
         return response()->json($profile_value);
     }
 
@@ -274,10 +282,6 @@ class UserController extends Controller
             }
             $month[$i] = $count;
         }
-
-
         return response()->json($month);
     }
-
-
 }
