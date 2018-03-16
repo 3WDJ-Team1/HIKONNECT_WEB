@@ -44,9 +44,10 @@ class HikingPlan extends Model
         $hikingPaths = [];
 
         foreach ($hikingPath['trk'][0]['trkseg'] as $paths) {
-            foreach ($paths as $inx => $path) {
-                $location["lat"] = $path["@lat"];
-                $location["lng"] = $path["@lon"];
+	    foreach ($paths as $inx => $path) {
+                return $path;
+                $location["lat"] = $path['@lat'];
+                $location["lng"] = $path['@lon'];
 
                 $hikingPaths[$inx] = $location;
             }
@@ -55,3 +56,4 @@ class HikingPlan extends Model
         return json_encode($hikingPaths);
     }
 }
+
