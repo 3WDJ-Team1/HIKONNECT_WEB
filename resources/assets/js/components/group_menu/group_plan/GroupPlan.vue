@@ -53,10 +53,10 @@
         }),
         methods: {
             getHikingPath() {
-                axios.get('http://hikonnect.ga:3000/mountain/',
-                (response) => {
-                    console.log(response);
-                });
+                // axios.get('http://hikonnect.ga:3000/mountain/',
+                // (response) => {
+                //     console.log(response);
+                // });
             }
         },
         created() {
