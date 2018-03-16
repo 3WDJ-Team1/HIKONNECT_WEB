@@ -1,59 +1,59 @@
 <template>
     <div class="container">
         <list_search></list_search>
-        <list_show v-bind:list="groups_list_imformation"></list_show>
-    </div>
+        <vue-data-loading :loading=false :listens="['pull-down', 'infinite-scroll']" @infinite-scroll="handleScroll" @pull-down="handleScroll">
+            <list_show v-bind:list="groups_list_imformation.groupInformations"></list_show>
+        </vue-data-loading></div>
 </template>
 <script>
-
-    import { EventBus } from './event_bus.js';
     import Vue from 'vue'
+    import VueDataLoading from 'vue-data-loading'
+    import { EventBus } from './event_bus.js';
     import list_search from './list_search.vue'
     import list_show from './list_show.vue'
 
-    EventBus.$on('i-got-clicked', clickCount => {
-        console.log(`Oh, that's nice. It's gotten ${clickCount} clicks! :)`)
-    });
-
     export default {
         components: {
+            VueDataLoading,
             'list_search'    :   list_search,
             'list_show'     :   list_show
         },
         data()  {
             return  {
                 pageIndex: 0,
+                loading: true,
                 search_imformations: {
                     mountain_name: '',
                     writer: '',
                     date: ''
                 },
-                groups_list_imformation:    []
+                groups_list_imformation:{}
             }
         },
         created: function ()
         {
             this.fetchItem();
-            window.addEventListener('scroll', this.handleScroll);
             EventBus.$on('input_serch', function (mountain_name, writer, date) {
                 this.mountain_name = mountain_name;
                 this.writer = writer;
                 this.date = date;
-            })
-        },
-        destroyed () {
-            window.removeEventListener('scroll', this.handleScroll);
+            });
         },
         methods: {
             handleScroll() {
-                // this.scrolled = window.screenY > 0;
-                this.pageIndex += 10;
+                console.log('dfasdfasdf');
+                // this.pageIndex += 10;
+                // this.fetchItem();
             },
             fetchItem() {
-                axios.get('http://localhost:8000/group', this.pageIndex)
+                axios.get('http://localhost:8000/group/'+ this.pageIndex + '/10')
+                //axios.get('http://localhost:8000/group/10000/10')
                     .then(response => {
-                        // console.log(response.data);
                         this.groups_list_imformation = response.data;
+                    })
+                    .catch(error => {
+                        console.log('asdfasdfadfsdfsdfdsfsdf');
+                        this.loading = false;
                     })
             }
         }
