@@ -27,6 +27,7 @@ import register from './components/register.vue';
 import mypage from './components/mypage/mypagemain.vue';
 import modify from './components/mypage/modify.vue';
 import graph  from  './components/mypage/graph.vue';
+import update from  './components/mypage/update.vue';
 import level  from  './components/mypage/level.vue';
 
 
@@ -79,6 +80,11 @@ const routes = [
                 name: 'level',
                 path: '/level',
                 component: level
+            },
+            {
+                name: 'update',
+                path: '/update',
+                component: update
             }
         ]
     }
