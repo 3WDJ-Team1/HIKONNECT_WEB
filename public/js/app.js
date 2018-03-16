@@ -58861,7 +58861,8 @@ var render = function() {
                   _vm._v(" "),
                   _c("input", {
                     staticClass: "btn btn-primary",
-                    attrs: { type: "button", click: _vm.regist, value: "확인" }
+                    attrs: { type: "button", value: "확인" },
+                    on: { click: _vm.regist }
                   }),
                   _vm._v(" "),
                   _c(
