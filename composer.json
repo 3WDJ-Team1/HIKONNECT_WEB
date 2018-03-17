@@ -13,7 +13,8 @@
         "laraeast/artisan-scaffolding": "^1.1",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
-        "mmieluch/laravel-vfs-provider": "^1.0"
+        "mmieluch/laravel-vfs-provider": "^1.0",
+        "nathanmac/Parser": "^4.3"
     },
     "require-dev": {
         "way/generators": "^3.0",
