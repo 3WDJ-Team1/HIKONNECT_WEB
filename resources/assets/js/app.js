@@ -18,9 +18,15 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 
 window.Vue = require('vue');
+import VueRouter from 'vue-router';
 
-import VueRouter    from 'vue-router';
+export const eventBus = new Vue();
 window.Vue.use(VueRouter);
+import ExampleComponent from "./components/ExampleComponent.vue";
+import App from './components/App.vue';
+import groups_list from './components/groups_list/main.vue'
+import group_make from './components/group_make/group_make'
+import notice from './components/notice/main'
 
 // bootstrap-vue
 import Bootstrap    from 'bootstrap-vue';
@@ -123,8 +129,12 @@ const routes = [
         name: 'login',
         path: '/login',
         component: login
-    }
-    ,
+    },
+    {
+        name: 'notice',
+        path: '/',
+        component: notice
+    },
     {
         name: 'mypage',
         path: '/mypage',
