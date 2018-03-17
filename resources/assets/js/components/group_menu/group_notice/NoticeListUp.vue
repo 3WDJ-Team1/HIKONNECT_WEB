@@ -1,16 +1,12 @@
 <!-- 
     @file   NoticeListUp.vue
     @brief  A component to show notices in group
-    @author Sungeun Kang
+    @author Sungeun Kang <kasueu0814@gmail.com>
     @todo   insert buttons
  -->
 <template>
     <!-- @div#group_notice  the wrapper of notice list -->
     <div class="text-center" id="group_notice">
-        <!-- show the name of group -->
-        <!-- <h1>{{ groupName }}</h1> -->
-        <!-- <h2>Group notice</h2> -->
-        <!-- <br> -->
         <!-- @router-view   'write' floating button -->
         <router-view name="write"></router-view>
         <!-- @div           notice list area -->
@@ -22,23 +18,23 @@
                 <div class="card_wrapper">
                     <!-- @div   The title and author of a notice
                                 if you click this, b-collapse will be shown. -->
-                    <div v-b-toggle="'n' + notice.uuid" class="m-1">
-                        <h3 class="card-title">{{ notice.title }}</h3>
-                        <p class="card-text">writer : {{ notice.nickname }} | hits : {{ notice.hits }}</p>
+                    <div v-b-toggle ="'n' + notice.uuid" class="m-1">
+                        <h3 class   ="card-title">{{ notice.title }}</h3>
+                        <p  class   ="card-text">writer : {{ notice.nickname }} | hits : {{ notice.hits }}</p>
                     
                     </div>
                     <!-- @div(b-collapse)   The contents of a notice. -->
-                    <b-collapse v-bind:id="'n' + notice.uuid">
-                        <div class="notice_text">
+                    <b-collapse :id="'n' + notice.uuid">
+                        <div class  ="notice_text">
                             {{ notice.content }}
                         </div>
                         <!-- @router-view   'delete' button component
                                             porpsNotice will send notice.uuid to children components -->
                                             
-                        <router-view name="delete" v-bind:propsNotice="notice"></router-view>
+                        <router-view name="delete" :propsNotice="notice"></router-view>
                         <!-- @router-view   'modify(edit)' button component
                                             porpsNotice will send notice.uuid to children components -->
-                        <router-view name="modify" v-bind:propsNotice="notice"></router-view>
+                        <router-view name="modify" :propsNotice="notice"></router-view>
                     </b-collapse>
                 </div>
             </div>
@@ -65,15 +61,15 @@
              *      size    (String)        size of each div
              */
             // groupName and notices will be changed by http response.
-            groupName : "3WDJ-Team1",
-            notices : [
+            groupName   : "3WDJ-Team1",
+            notices     : [
                 // the type of notices is 'object' certainly.
             ],
-            page: 1,
-            size: 5,
-            bottom: false,
-            httpAddr: Laravel.host,
-            loader: {
+            page        : 1,
+            size        : 5,
+            bottom      : false,
+            httpAddr    : Laravel.host,
+            loader      : {
                 loading: true,
                 color: "#4df1e1",
                 margin: "2px",
