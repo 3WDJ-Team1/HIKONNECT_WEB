@@ -28,7 +28,7 @@ use PhpParser\Node\Scalar\String_;
 class User extends Model
 {
     protected $table = 'user';
-
+    //User Regist
     public function userReg(Request $request) {
         User::insert([
             'uuid'           => '',
@@ -39,11 +39,12 @@ class User extends Model
         ]);
     }
 
-
-    public function userUpdate(Array $userinfo,$id) {
-        User::where('id',$id)->update([$userinfo]);
+    //User Update
+    public function userUpdate($password,$id) {
+        User::where('uuid',$id)->update(['password' => $password]);
     }
 
+    //User Delete
     public function userDelete($id) {
         User::where('id',$id)->delete();
     }
@@ -52,6 +53,7 @@ class User extends Model
 class User_Profile extends Model
 {
     protected $table = 'user_profile';
+    //User_Profile Information Regist
     public function userProReg(Array $userproinfo) {
         User_Profile::insert($userproinfo);
     }
@@ -61,10 +63,19 @@ class User_Profile extends Model
             ->where('user.id',$userid)->get();
     }
 
-    public function userUpdate(Array $userinfo,$id) {
-        User_Profile::where('id',$id)->update([$userinfo]);
+    //User_Profile Infomation Update
+    public function userUpdate(Request $request,$id,$gender,$age_group,$scope,$image_path) {
+        User_Profile::where('user',$id)->update([
+            'nickname'      => $request->get('nn'),
+            'phone'         => $request->get('phone'),
+            'image_path'    => $image_path,
+            'gender'        => $gender,
+            'age_group'     => $age_group,
+            'scope'         => $scope
+            ]);
     }
 
+    //User_Profile Infomation Delete
     public function userDelete($id) {
         User_Profile::where('id',$id)->delete();
     }

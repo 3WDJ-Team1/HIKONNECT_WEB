@@ -22,6 +22,7 @@ Route::resource('hiking-group', 'HikingGroupController');
 Route::get('groupMembers/{groupUuid?}', 'HikingGroupController@getGroupMembers');
 Route::get('userProfile/{userUuid}', 'UserProfileController@getUserProfile');
 
+<<<<<<< HEAD
 
 Route::get('xmltesting', 'HikingPlanController@index');
  
@@ -34,3 +35,12 @@ Route::post('/login', 'LoginController@login')->name('login');
 Route::post('/loginprocess', 'LoginController@loginprocess')->name('loginprocess');
 Route::post('/logout', 'LoginController@logout')->name('logout');
 Route::get('testing', 'HikingGroupController@getGroupMembers');
+=======
+Route::resource('/user','UserController');
+Route::post('/login','LoginController@login')->name('login');
+Route::post('/loginprocess','LoginController@loginprocess')->name('loginprocess');
+Route::post('/logout','LoginController@logout')->name('logout');
+Route::get('/user/{id}','UserController@getImage')->name('getImage');
+Route::get('/mypage/{id}','UserController@showUserData')->name('UserData');
+Route::post('/graph/{id}','UserController@graph')->name('graph');
+>>>>>>> origin/jungyusol

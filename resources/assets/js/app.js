@@ -22,8 +22,6 @@ import VueRouter from 'vue-router';
 
 export const eventBus = new Vue();
 window.Vue.use(VueRouter);
-import ExampleComponent from "./components/ExampleComponent.vue";
-import App from './components/App.vue';
 import groups_list from './components/groups_list/main.vue'
 import group_make from './components/group_make/group_make'
 import notice from './components/notice/main'
@@ -53,9 +51,7 @@ Vue.component('sync-loader', require('vue-spinner/src/SyncLoader.vue'));
 // event bus
 Vue.prototype.$EventBus = new Vue();
 
-import listShow             from "./components/listShow.vue";
 import listSerch            from "./components/listSerch.vue";
-import groupList            from "./components/groupList.vue";
 
 import main                 from './components/main/main.vue';
 import mainbody             from './components/main/mainbody.vue';
@@ -77,13 +73,13 @@ Vue.use(vueEventCalendar, {
 import ElementUI            from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
+import level  from  './components/mypage/level.vue';
 
 // vue-toasted
 import Toasted              from 'vue-toasted';
 Vue.use(Toasted);
 
 import App                  from './components/App.vue';
-import ExampleComponent     from "./components/ExampleComponent.vue";
 import GroupMenuTab         from "./components/group_menu/GroupMenuTab.vue";
 
 // group notice
@@ -189,6 +185,16 @@ const routes = [
                         ]
                     }
                 ]
+            },
+            {
+                name: 'graph',
+                path: '/graph',
+                component: graph
+            },
+            {
+                name: 'level',
+                path: '/level',
+                component: level
             }
         ]
     },

@@ -23,6 +23,7 @@ class LoginController extends Controller
 
     public function loginprocess(Request $request)
     {
+        //Login
         try {
             $userinfo = User::where('id', $request->get('idv'))->first();
             if ($userinfo == false)
