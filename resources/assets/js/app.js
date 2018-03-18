@@ -7,19 +7,22 @@
 require('./bootstrap');
 
 import Vue from 'vue'
-import BootstrapVue from 'bootstrap-vue'
+window.Vue = require('vue');
 
+import VueRouter from 'vue-router';
+window.Vue.use(VueRouter);
+
+import 'D:/HIKONNECT_WEB/fontawesome-free-5.0.8/svg-with-js/js/fontawesome-all.min'
+
+import BootstrapVue from 'bootstrap-vue'
 Vue.use(BootstrapVue);
 
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 
-window.Vue = require('vue');
-import VueRouter from 'vue-router';
 
-export const eventBus = new Vue();
-window.Vue.use(VueRouter);
+
+// export const eventBus = new Vue();
+
 import ExampleComponent from "./components/ExampleComponent.vue";
 import App from './components/App.vue';
 import groups_list from './components/groups_list/main.vue'
