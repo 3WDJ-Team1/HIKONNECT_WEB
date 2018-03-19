@@ -12,16 +12,14 @@ window.Vue = require('vue');
 import VueRouter from 'vue-router';
 window.Vue.use(VueRouter);
 
-import 'D:/HIKONNECT_WEB/fontawesome-free-5.0.8/svg-with-js/js/fontawesome-all.min'
+
+
+//import 'D:/HIKONNECT_WEB/fontawesome-free-5.0.8/svg-with-js/js/fontawesome-all.min'
 
 import BootstrapVue from 'bootstrap-vue'
 Vue.use(BootstrapVue);
 
-
-
-
-
-// export const eventBus = new Vue();
+export const eventBus = new Vue();
 
 import ExampleComponent from "./components/ExampleComponent.vue";
 import App from './components/App.vue';
@@ -31,9 +29,9 @@ import notice from './components/notice/main'
 
 const routes = [
     {
-        name: 'notice',
+        name: 'group_make',
         path: '/',
-        component: notice
+        component: group_make
     }
 ];
 
