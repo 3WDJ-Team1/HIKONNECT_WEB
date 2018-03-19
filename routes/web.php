@@ -22,7 +22,6 @@ Route::resource('hiking-group', 'HikingGroupController');
 Route::get('groupMembers/{groupUuid?}', 'HikingGroupController@getGroupMembers');
 Route::get('userProfile/{userUuid}', 'UserProfileController@getUserProfile');
 
-<<<<<<< HEAD
 
 Route::get('xmltesting', 'HikingPlanController@index');
  
@@ -31,16 +30,22 @@ Route::resource('group', 'GroupController');
 Route::post('/list', 'GroupController@jiyoon');
 
 Route::resource('/user', 'UserController');
+
 Route::post('/login', 'LoginController@login')->name('login');
+
+/**
+ * Login process using Socialite
+ * 
+ * Line     = enabled
+ * Kakao    = disabled
+ */
+Route::get('/login/{providerName}', 'LoginController@redirectToProvider');
+Route::get('/login/{providerName}/redirect', 'LoginController@handleProviderCallback');
+
 Route::post('/loginprocess', 'LoginController@loginprocess')->name('loginprocess');
 Route::post('/logout', 'LoginController@logout')->name('logout');
+Route::get('/user/{id}', 'UserController@getImage')->name('getImage');
+Route::get('/mypage/{id}', 'UserController@showUserData')->name('UserData');
+Route::post('/graph/{id}', 'UserController@graph')->name('graph');
+
 Route::get('testing', 'HikingGroupController@getGroupMembers');
-=======
-Route::resource('/user','UserController');
-Route::post('/login','LoginController@login')->name('login');
-Route::post('/loginprocess','LoginController@loginprocess')->name('loginprocess');
-Route::post('/logout','LoginController@logout')->name('logout');
-Route::get('/user/{id}','UserController@getImage')->name('getImage');
-Route::get('/mypage/{id}','UserController@showUserData')->name('UserData');
-Route::post('/graph/{id}','UserController@graph')->name('graph');
->>>>>>> origin/jungyusol

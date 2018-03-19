@@ -12,13 +12,10 @@
         "illuminate/support": "^5.0",
         "laraeast/artisan-scaffolding": "^1.1",
         "laravel/framework": "5.5.*",
+        "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
         "mmieluch/laravel-vfs-provider": "^1.0",
-<<<<<<< HEAD
-        "nathanmac/parser": "^4.3"
-=======
         "nathanmac/Parser": "^4.3"
->>>>>>> 2c22f42af5aef542c4f0597dbb506a3d9fff7996
     },
     "require-dev": {
         "way/generators": "^3.0",

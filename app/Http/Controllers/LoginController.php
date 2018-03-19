@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Mockery\Exception;
+use Socialite;
 
 class LoginController extends Controller
 {
@@ -39,5 +40,21 @@ class LoginController extends Controller
            }
         else
             return response()->json('pwfalse');
+    }
+
+    public function redirectToProvider($providerName)
+    {
+        if ($providerName == "line") {
+            return Socialite::with('line')->redirect();
+        }
+    }
+
+    public function handleProviderCallback($providerName)
+    {
+        if ($providerName == "line") {
+            $user = Socialite::with('line')->user();
+        }
+
+        return $user;
     }
 }

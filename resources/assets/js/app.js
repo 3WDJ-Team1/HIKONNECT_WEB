@@ -73,14 +73,6 @@ Vue.use(vueEventCalendar, {
 import ElementUI            from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
-<<<<<<< HEAD
-=======
-import login from './components/login.vue';
-import register from './components/register.vue';
-import mypage from './components/mypage/mypagemain.vue';
-import modify from './components/mypage/modify.vue';
-import graph  from  './components/mypage/graph.vue';
->>>>>>> 2c22f42af5aef542c4f0597dbb506a3d9fff7996
 import level  from  './components/mypage/level.vue';
 
 // vue-toasted
