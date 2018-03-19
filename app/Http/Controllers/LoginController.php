@@ -55,6 +55,6 @@ class LoginController extends Controller
             $user = Socialite::with('line')->user();
         }
 
-        return $user;
+        return var_dump($user);
     }
 }
