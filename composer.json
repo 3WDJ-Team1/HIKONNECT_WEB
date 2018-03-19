@@ -6,11 +6,13 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
+        "doctrine/dbal": "^2.5",
         "fideloper/proxy": "~3.3",
         "illuminate/filesystem": "^5.0",
         "illuminate/support": "^5.0",
         "laraeast/artisan-scaffolding": "^1.1",
         "laravel/framework": "5.5.*",
+        "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
         "mmieluch/laravel-vfs-provider": "^1.0",
         "nathanmac/Parser": "^4.3"

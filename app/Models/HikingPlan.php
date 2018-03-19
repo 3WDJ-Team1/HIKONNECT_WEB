@@ -68,9 +68,4 @@ class HikingPlan extends Model
 
         return var_dump($mountainPaths['features'][0]['PMNTN_NM']);
     }
-<<<<<<< HEAD
 }
-
-=======
-}
->>>>>>> c752c80ca5ea187b754f22c1526e48d1559dda6d

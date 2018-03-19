@@ -3,7 +3,7 @@
         <nav class="navbar navbar-default" style="width: 700px">
             <div class="container-fluid" >
                 <div class="nav navbar-nav">
-                   <router-link  :to="{ name : 'main'}">홈으로</router-link>
+                   <li><router-link  :to="{ name : 'main'}">홈으로</router-link></li>
                 </div>
                 <div>
                     <ul class="nav navbar-nav">

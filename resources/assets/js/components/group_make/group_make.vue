@@ -3,23 +3,23 @@
         <table class="table">
             <tbody>
             <tr>
-                <th>제목</th>
-                <td>Doe</td>
+                <td>제목</td>
+                <td><input type="text" place class="form-control" id="usr"></td>
             </tr>
             <tr>
-                <th>모집 내용</th>
-                <td>Moe</td>
+                <td>모집 내용</td>
+                <td><textarea class="form-control" rows="5" id="comment"></textarea></td>
             </tr>
             <tr>
-                <th>등산 경로</th>
+                <td>등산 경로</td>
                 <td>Dooley</td>
             </tr>
             <tr>
-                <th>등산 일정</th>
+                <td>등산 일정</td>
                 <td>Dooley</td>
             </tr>
             <tr>
-                <th>모집 인원</th>
+                <td>모집 인원</td>
                 <td>Dooley</td>
             </tr>
             </tbody>

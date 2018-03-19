@@ -107,7 +107,7 @@ return [
     'key' => env('APP_KEY'),
 
     'cipher' => 'AES-256-CBC',
-
+    
     /*
     |--------------------------------------------------------------------------
     | Logging Configuration
@@ -176,6 +176,11 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+        /**
+         * Add SocialLite plug-in 
+         */
+        \SocialiteProviders\Manager\ServiceProvider::class,
 
         'Nathanmac\Utilities\Parser\ParserServiceProvider',
     ],

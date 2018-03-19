@@ -18,9 +18,13 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 
 window.Vue = require('vue');
+import VueRouter from 'vue-router';
 
-import VueRouter    from 'vue-router';
+export const eventBus = new Vue();
 window.Vue.use(VueRouter);
+import groups_list from './components/groups_list/main.vue'
+import group_make from './components/group_make/group_make'
+import notice from './components/notice/main'
 
 // bootstrap-vue
 import Bootstrap    from 'bootstrap-vue';
@@ -47,17 +51,7 @@ Vue.component('sync-loader', require('vue-spinner/src/SyncLoader.vue'));
 // event bus
 Vue.prototype.$EventBus = new Vue();
 
-<<<<<<< HEAD
-import GroupMenuTab         from "./components/group_menu/GroupMenuTab.vue";
-import NoticeListUp         from "./components/group_menu/NoticeListUp.vue";
-import App                  from './components/App.vue';
-import NoticeWriteBtn       from './components/group_menu/NoticeWriteBtn.vue';
-import NoticeModifyBtn      from './components/group_menu/NoticeModifyBtn.vue';
-import NoticeDeleteBtn      from './components/group_menu/NoticeDeleteBtn.vue';
-import NoticeFormInside     from './components/group_menu/NoticeFormInside.vue';
-import listShow             from "./components/listShow.vue";
 import listSerch            from "./components/listSerch.vue";
-import groupList            from "./components/groupList.vue";
 
 import main                 from './components/main/main.vue';
 import mainbody             from './components/main/mainbody.vue';
@@ -67,7 +61,7 @@ import register             from './components/register.vue';
 import mypage               from './components/mypage/mypagemain.vue';
 import modify               from './components/mypage/modify.vue';
 import graph                from  './components/mypage/graph.vue';
-=======
+
 // vue-event-calendar
 import 'vue-event-calendar/dist/style.css';
 import vueEventCalendar     from 'vue-event-calendar';
@@ -76,10 +70,18 @@ Vue.use(vueEventCalendar, {
     color: 'lightskyblue',
 });
 
+// ElementUI
+import ElementUI            from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+Vue.use(ElementUI);
+import level  from  './components/mypage/level.vue';
+
+// vue-toasted
+import Toasted              from 'vue-toasted';
+Vue.use(Toasted);
+
 import App                  from './components/App.vue';
-import ExampleComponent     from "./components/ExampleComponent.vue";
 import GroupMenuTab         from "./components/group_menu/GroupMenuTab.vue";
->>>>>>> notice_function
 
 // group notice
 import NoticeListUp         from "./components/group_menu/group_notice/NoticeListUp.vue";
@@ -95,6 +97,7 @@ import GroupPlanCalendar    from './components/group_menu/group_plan/GroupPlanCa
 
 // group member list
 import GroupMemberList      from './components/group_menu/group_member/GroupMemberList.vue';
+import GroupMemberDetail    from './components/group_menu/group_member/GroupMemberDetail.vue';
 
 // routing structure
 const routes = [
@@ -123,8 +126,12 @@ const routes = [
         name: 'login',
         path: '/login',
         component: login
-    }
-    ,
+    },
+    {
+        name: 'notice',
+        path: '/',
+        component: notice
+    },
     {
         name: 'mypage',
         path: '/mypage',
@@ -165,6 +172,8 @@ const routes = [
                             // components in GroupPlan
                             map         : GroupPlanMap,
                             calendar    : GroupPlanCalendar,
+                            // component in GroupMemberList
+                            member_detail   : GroupMemberDetail,
                         },
                         children: [
                             {
@@ -177,6 +186,16 @@ const routes = [
                         ]
                     }
                 ]
+            },
+            {
+                name: 'graph',
+                path: '/graph',
+                component: graph
+            },
+            {
+                name: 'level',
+                path: '/level',
+                component: level
             }
         ]
     },

@@ -53,7 +53,7 @@
             <v-tab-item
                 :key    ="3"
                 :id     ="'tab-' + 3">
-                <v-card flat>
+                <v-card flat style="background-color: white; border: 1px soild whitesmoke;" class="tab_full">
                     <router-view name="member_list"></router-view>
                 </v-card>
             </v-tab-item>
@@ -69,5 +69,8 @@
 </script>
 
 <style>
-
+.tab_full {
+    display: inline-block;
+    width: 100%;
+}
 </style>
