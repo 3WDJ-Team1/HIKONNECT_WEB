@@ -28,8 +28,8 @@ class GroupController extends Controller
      */
     public function index($pageIndex)
     {
-        $groupInformations  = $this->group_model->getGroupInformations($pageIndex);
-        $countOfPeople      = $this->group_model->getCountOfPeople($pageIndex);
+        $groupInformations  = $this->group_model->getGroupInformations($pageIndex, 'default');
+        $countOfPeople      = $this->group_model->getCountOfPeople($pageIndex, 'default');
         return compact('groupInformations', 'countOfPeople');
     }
 
@@ -108,17 +108,33 @@ class GroupController extends Controller
      * Listup Grouplist by selected method.
      *
      * @param \Illuminate\Http\Request $request 
+     * @param int                      $pageIndex
      * @param String                   $method 
      * 
      * @return \Illuminate\Http\Response
      */
-    public function listUp(Request $request, $method)
+    public function listUp($pageIndex, $method)
     {
-        //
+        // $countOfPeople          = $this->group_model->getCountOfPeople($pageIndex, $method);
+        // $groupInformations      = $this->group_model->getGroupInformations($pageIndex, $method);
+        //  return compact('listUpData', 'countOfPeople');
+        $listupGroupData           = $this->group_model->listUp($pageIndex, $method);
+        return $listupGroupData;
     }
 
-    public function findData($method, $data)
+    /**
+     * Find Grouplist by selected method and corrected inputData.
+     *
+     * @param \Illuminate\Http\Request $request 
+     * @param String                   $method 
+     * @param String                   $inputData
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function findData($method, $inputData)
     {
-        //
+        // 목적지, 작성자, 날짜
+        $findedGroupData           = $this->group_model->findData($method, $inputData);
+        return $findedGroupData;
     }
 }
