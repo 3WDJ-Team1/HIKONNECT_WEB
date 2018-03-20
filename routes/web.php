@@ -48,4 +48,6 @@ Route::get('/user/{id}', 'UserController@getImage')->name('getImage');
 Route::get('/mypage/{id}', 'UserController@showUserData')->name('UserData');
 Route::post('/graph/{id}', 'UserController@graph')->name('graph');
 
-Route::get('testing', 'HikingGroupController@getGroupMembers');
+// 나중에 삭제 할 것 ============
+Route::get('testing/{key?}', 'GroupController@testing');
+// ==============================

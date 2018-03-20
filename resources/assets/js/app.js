@@ -7,9 +7,10 @@
 require('./bootstrap');
 
 import Vue from 'vue'
-import BootstrapVue from 'bootstrap-vue'
+window.Vue = require('vue');
 
-Vue.use(BootstrapVue);
+import VueRouter from 'vue-router';
+window.Vue.use(VueRouter);
 
 
 
@@ -17,13 +18,15 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 
-window.Vue = require('vue');
-import VueRouter from 'vue-router';
+//import 'D:/HIKONNECT_WEB/fontawesome-free-5.0.8/svg-with-js/js/fontawesome-all.min'
+
+import BootstrapVue from 'bootstrap-vue'
+Vue.use(BootstrapVue);
 
 export const eventBus = new Vue();
 window.Vue.use(VueRouter);
 import groups_list from './components/groups_list/main.vue'
-import group_make from './components/group_make/group_make'
+import group_make from './components/group_make/group_make_main'
 import notice from './components/notice/main'
 
 // bootstrap-vue

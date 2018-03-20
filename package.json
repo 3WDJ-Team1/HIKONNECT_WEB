@@ -31,8 +31,16 @@
         "bootstrap-vue": "^2.0.0-rc.2",
         "d3": "^4.13.0",
         "element-ui": "^2.2.2",
-        "luxon": "^0.5.6",
         "sweet-modal-vue": "^2.0.0",
+        "child_process": "^1.0.2",
+        "fs": "0.0.1-security",
+        "jQuery": "^1.7.4",
+        "jsdom": "^11.6.2",
+        "location": "0.0.1",
+        "luxon": "^0.5.6",
+        "navigator": "^1.0.1",
+        "net": "^1.0.2",
+        "tls": "0.0.1",
         "vue-axios": "^2.0.2",
         "vue-d2b": "^1.0.11",
         "vue-data-loading": "^0.2.4",
@@ -43,8 +51,10 @@
         "vue-spinner": "^1.0.3",
         "vue-toasted": "^1.1.24",
         "vuechart": "^18.3.1",
+        "vuejs-auto-complete": "^0.6.5",
         "vuejs-dialog": "^0.8.0",
         "vuetify": "^1.0.5",
-        "weekstart": "^1.0.0"
+        "weekstart": "^1.0.0",
+        "xmlhttprequest": "^1.8.0"
     }
 }
