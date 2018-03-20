@@ -18,7 +18,6 @@ Route::get(
 
 Route::resource('notice', 'NoticeController');
 Route::get('group/{pageIndex?}', 'GroupController@index');
-Route::get('group/{method?}/{inputData?}', 'GroupController@findData');
 Route::get('group/{pageIndex?}/{method?}', 'GroupController@listUp');
-Route::get('group/{method?}/{data?}','GroupController@findData');
+Route::get('group/{method?}/{inputData?}', 'GroupController@findData');
 Route::resource('group', 'GroupController');

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Hiking_group;
+use App\Models\HikingGroup;
 use App\Models\User;
 
     /**
@@ -18,7 +18,7 @@ class GroupController extends Controller
      */
     public function __construct()
     {
-        $this->group_model = new Hiking_group();
+        $this->group_model = new HikingGroup();
     }
     
     /**
@@ -52,7 +52,7 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        return $this->group_model->insertHikingGroup($request->filter_input());
+        return $this->group_model->insertHikingGroup($request);
     }
 
     /**
@@ -133,7 +133,7 @@ class GroupController extends Controller
      */
     public function findData($method, $inputData)
     {
-        // 목적지, 작성자, 날짜
+        // 
         $findedGroupData           = $this->group_model->findData($method, $inputData);
         return $findedGroupData;
     }
