@@ -10,16 +10,17 @@
         <!-- @v-tabs    there is information of tabs here -->
         <v-tabs
             icons-and-text
-            centered color  ="white"
+            centered color  ="grey lighten-4"
             style           ="width: 100%;"
             grow>
             <!-- @v-tab-slider      the slider of tabs on top -->
             <v-tabs-slider
-                color="cyan accent-1"
+                color="light-green accent-3"
                 style="height: 5px;">
             </v-tabs-slider>
             <!-- @v-tab             the tabs in slider -->
-            <v-tab href="#tab-1">
+            <v-tab
+                href="#tab-1">
             notices
                 <v-icon>announcement</v-icon>
             </v-tab>
@@ -53,7 +54,7 @@
             <v-tab-item
                 :key    ="3"
                 :id     ="'tab-' + 3">
-                <v-card flat>
+                <v-card flat style="background-color: white; border: 1px soild whitesmoke;" class="tab_full">
                     <router-view name="member_list"></router-view>
                 </v-card>
             </v-tab-item>
@@ -69,5 +70,8 @@
 </script>
 
 <style>
-
+.tab_full {
+    display: inline-block;
+    width: 100%;
+}
 </style>

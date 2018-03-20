@@ -44,6 +44,15 @@ Vue.use(vueEventCalendar, {
     color: 'lightskyblue',
 });
 
+// ElementUI
+import ElementUI            from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+Vue.use(ElementUI);
+
+// vue-toasted
+import Toasted              from 'vue-toasted';
+Vue.use(Toasted);
+
 import App                  from './components/App.vue';
 import ExampleComponent     from "./components/ExampleComponent.vue";
 import GroupMenuTab         from "./components/group_menu/GroupMenuTab.vue";
@@ -62,6 +71,7 @@ import GroupPlanCalendar    from './components/group_menu/group_plan/GroupPlanCa
 
 // group member list
 import GroupMemberList      from './components/group_menu/group_member/GroupMemberList.vue';
+import GroupMemberDetail    from './components/group_menu/group_member/GroupMemberDetail.vue';
 
 // routing structure
 const routes = [
@@ -96,6 +106,8 @@ const routes = [
                             // components in GroupPlan
                             map         : GroupPlanMap,
                             calendar    : GroupPlanCalendar,
+                            // component in GroupMemberList
+                            member_detail   : GroupMemberDetail,
                         },
                         children: [
                             {

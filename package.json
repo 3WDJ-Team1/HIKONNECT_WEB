@@ -29,8 +29,8 @@
         "vue-axios": "^2.0.2",
         "vue-event-calendar": "^1.5.2",
         "vue-router": "^3.0.1",
-        "vue-slideout": "^1.7.0",
         "vue-spinner": "^1.0.3",
+        "vue-toasted": "^1.1.24",
         "vuejs-dialog": "^0.8.0",
         "vuetify": "^1.0.5"
     }
