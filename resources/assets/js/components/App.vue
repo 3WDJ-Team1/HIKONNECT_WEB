@@ -92,9 +92,22 @@
                 </router-view>
             </v-flex>
             </v-layout>
+            <sweet-modal
+                icon="error"
+                title="ERROR"
+                blocking
+                ref="pModal">
+                {{ modalErrorMsg }}
+            </sweet-modal>
+            <sweet-modal
+                icon="success"
+                title="SUCCESS"
+                blocking
+                ref="cModal">
+                Complited!
+            </sweet-modal>
         </v-container>
         </v-content>
-
     </v-app>
 </template>
 
@@ -146,7 +159,8 @@
                 { picture: 48, text: 'Xbox Ahoy' },
                 { picture: 58, text: 'Nokia' },
                 { picture: 78, text: 'MKBHD' }
-            ]
+            ],
+            modalErrorMsg: ""
         }),
         components: {
             'login' : Login,
@@ -156,9 +170,15 @@
             changeDrawerRightMode(argValue) {
                 this.drawerRightMode = argValue;
             },
-            open() {
-                this.$refs.modal.open();
-            }
         },
+        created() {
+            this.$EventBus.$on('errorModalOpen', (message) => {
+                this.modalErrorMsg = message;
+                this.$refs.pModal.open();
+            })
+            this.$EventBus.$on('complitedModalOpen', (value) => {
+                this.$refs.cModal.open();
+            })
+        }
     }
 </script>

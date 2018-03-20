@@ -15,22 +15,30 @@
             style="font-weight: bold;">
             SIGN IN
         </h1>
-        <br>
-        <br>
-        <br>
-        <div class="panel-body">
-        <input type="text" v-model="item.idv" class="form-control" placeholder="Enter id" id="id"/>
-        <input type="password" style="margin-top: 10px" v-model="item.pwv" class="form-control" placeholder="Enter password" id="pw"/>
-        <br>
+        <v-form>
+            <v-text-field
+                label="Enter ID"
+                v-model="userId"
+                :rules="rules.isBlanked"
+                prepend-icon="person"
+                required>
+            </v-text-field>
+            <v-text-field
+                label="Enter password"
+                v-model="userPw"
+                :rules="rules.isBlanked"
+                prepend-icon="lock"
+                required>
+            </v-text-field>
+        </v-form>
         <v-btn
             @click="login"
             block
             color="light-green"
             dark
-            style="padding: 0;">
+            style="padding: 0; margin: 0 5%;">
             sign in!
         </v-btn>
-        </div>
     </v-container>
 </template>
 
@@ -38,7 +46,13 @@
 
     export default {
         data: () => ({
-            item: {},
+            userId: "",
+            userPw: "",
+            rules: {
+                isBlanked: [
+                    v => !!v || 'This is required',
+                ]
+            },
             httpAddr: Laravel.host,
         }),
         methods: {
