@@ -19,7 +19,6 @@
 </template>
 
 <script>
-    import VueDataLoading from './main'
     export default {
         props: ['list']
     }

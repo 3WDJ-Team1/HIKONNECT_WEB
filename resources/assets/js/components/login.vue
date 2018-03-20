@@ -116,6 +116,7 @@
                                 agesc = 'false';
                             }
 
+                            sessionStorage.setItem('year',2018);
                             sessionStorage.setItem('userid',$('#id').val());
                             sessionStorage.setItem('uuid',datavalue[0].uuid);
                             sessionStorage.setItem('phone',datavalue[0].phone);
@@ -129,9 +130,6 @@
                             sessionStorage.setItem('gender',gender);
                             sessionStorage.setItem('age',age);
                             sessionStorage.setItem('image_path',datavalue[0].image_path);
-                            console.log(response.data);
-
-
                             this.$router.push({ name: 'main'});
                             window.location.reload();
                         }
