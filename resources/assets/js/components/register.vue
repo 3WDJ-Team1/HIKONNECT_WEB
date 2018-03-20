@@ -31,7 +31,7 @@
                         <label>전체 공개</label><input type="radio" value="all" name="sc" style="margin-top: 10px" v-model="item.scv" />
                         <label>그룹 공개</label><input type="radio" value="group" name="sc" style="margin-top: 10px" v-model="item.scv" />
                         <br>
-                        <input type='button'  class="btn btn-primary" :click="regist" value="확인">
+                        <input type='button'  class="btn btn-primary" @click="regist" value="확인">
                         <router-link style='margin-left: 270px' :to="{ name: 'main' }" v-model="item.pwv" class = "btn btn-primary"> 취소</router-link>
                     </div>
                 </div>

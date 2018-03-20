@@ -124,7 +124,7 @@
                 else {
                     this.axios.put(uri, this.item).then((response) => {
                         if (response.data == 'true') {
-                            alert('회원가입 완료');
+                            alert('수정 완료');
                             this.$router.push({name: 'main'});
                         }
                         else if (response.data == 'false')

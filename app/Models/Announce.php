@@ -1,30 +1,21 @@
 <?php
-/**
- * PHP version 7.0
- * 
- * @category Model
- * @package  App\Models
- * @author   bs Kwon <rnjs9957@gamil.com>
- * @license  MIT license
- * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB
- */
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Request;
 
 /**
- * Model for Notification
- * 
+ * Model class for Announce
+ *
  * @category Model
  * @package  App
- * @author   bs Kwon <rnjs9957@gmail.com>
+ * @author   Sol Song <thdthf159@naver.com>
  * @license  MIT license
  * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB
  */
 
-class Announce extends Model
+class announce extends Model
 {
     protected $table = 'announce';
-
 }
+

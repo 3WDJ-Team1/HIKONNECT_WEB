@@ -21,7 +21,7 @@ use PhpParser\Node\Scalar\String_;
  * 
  * @category Model
  * @package  App
- * @author   bs Kwon <rnjs9957@gmail.com>
+ * @author   Sol Song <thdthf159@naver.com>
  * @license  MIT license
  * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB
  */
@@ -71,7 +71,8 @@ class User_Profile extends Model
             'image_path'    => $image_path,
             'gender'        => $gender,
             'age_group'     => $age_group,
-            'scope'         => $scope
+            'scope'         => $scope,
+            'updated_at'    => Carbon::now()->format('Y-m-d H:i:s')
             ]);
     }
 

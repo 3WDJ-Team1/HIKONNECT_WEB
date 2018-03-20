@@ -64,6 +64,7 @@ import register             from './components/register.vue';
 import mypage               from './components/mypage/mypagemain.vue';
 import modify               from './components/mypage/modify.vue';
 import graph                from  './components/mypage/graph.vue';
+import update from  './components/mypage/update.vue';
 // vue-event-calendar
 import 'vue-event-calendar/dist/style.css';
 import vueEventCalendar     from 'vue-event-calendar';
@@ -198,6 +199,11 @@ const routes = [
                 name: 'level',
                 path: '/level',
                 component: level
+            },
+            {
+                name: 'update',
+                path: '/update',
+                component: update
             }
         ]
     },
