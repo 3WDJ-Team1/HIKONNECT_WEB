@@ -80,105 +80,6 @@
             ],
             userDataArr: [
                 // { Capitol: A }
-                {
-                    uuid: '1234',
-                    name: 'AAA',
-                    grade: 'test',
-                    gender: 'female',
-                    phone: '000-0000-0000',
-                    avgSpeed: '3km/h',
-                    profilePic: '',
-                    permission: {
-                        target: 'all',
-                        _phone: true,
-                        _age: true,
-                        _gender: true,
-                    }
-                },
-                {
-                    uuid: '1235',
-                    name: 'ABB',
-                    grade: 'test',
-                    gender: 'female',
-                    phone: '000-0000-0000',
-                    avgSpeed: '3km/h',
-                    permission: {
-                        target: 'all',
-                        _phone: true,
-                        _age: true,
-                        _gender: true,
-                    }
-                },
-                {
-                    uuid: '1236',
-                    name: 'BBB',
-                    grade: 'test',
-                    gender: 'female',
-                    phone: '000-0000-0000',
-                    avgSpeed: '3km/h',
-                    permission: {
-                        target: 'all',
-                        _phone: true,
-                        _age: true,
-                        _gender: true,
-                    }
-                },
-                {
-                    uuid: '1237',
-                    name: 'FFF',
-                    grade: 'test',
-                    gender: 'female',
-                    phone: '000-0000-0000',
-                    avgSpeed: '3km/h',
-                    permission: {
-                        target: 'all',
-                        _phone: true,
-                        _age: true,
-                        _gender: true,
-                    }
-                },
-                {
-                    uuid: '1238',
-                    name: 'KKK',
-                    grade: 'test',
-                    gender: 'female',
-                    phone: '000-0000-0000',
-                    avgSpeed: '3km/h',
-                    permission: {
-                        target: 'all',
-                        _phone: true,
-                        _age: true,
-                        _gender: true,
-                    }
-                },
-                {
-                    uuid: '1239',
-                    name: 'OOOO',
-                    grade: 'test',
-                    gender: 'female',
-                    phone: '000-0000-0000',
-                    avgSpeed: '3km/h',
-                    permission: {
-                        target: 'all',
-                        _phone: true,
-                        _age: true,
-                        _gender: true,
-                    }
-                },
-                {
-                    uuid: '1240',
-                    name: 'ZZZZZ',
-                    grade: 'test',
-                    gender: 'female',
-                    phone: '000-0000-0000',
-                    avgSpeed: '3km/h',
-                    permission: {
-                        target: 'all',
-                        _phone: true,
-                        _age: true,
-                        _gender: true,
-                    }
-                },
             ],
             alphabets: [
                 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
@@ -200,6 +101,17 @@
         },
         created() {
             // this.getGroupUserData();
+            // httpAddr+/groupMembers/groupUUID
+            axios.get('http://hikonnect.ga/groupMembers/0847f4bd-3a59-3d20-863b-b6d2c2301a3b')
+            .then(response => {
+                this.memberList = response.data;
+            });
+            for ( let i = 0 ; i < this.memberList.length ; i++){
+                axios.get(this.httpAddr + '/userProfile/' + this.memberList[i])
+                .then(response => {
+                    this.userDataArr.push()
+                });
+            }
         },
     }
 </script>
