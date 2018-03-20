@@ -4,7 +4,6 @@
             <div class="col-md-5 col-md-offset-2">
                 <div class="panel panel-default" style="margin-top: 80px">
                     <div class="panel-heading">회원가입</div>
-
                     <div class="panel-body">
                         <input type="text"     style="margin-top: 10px" v-model="item.idv" class="form-control" placeholder="Enter id" id="id"/>
                         <input type="password" style="margin-top: 10px" v-model="item.pwv" class="form-control" placeholder="Enter password" id="pw"/>
@@ -52,7 +51,6 @@
         },
         methods: {
             regist() {
-
                 let uri= 'http://localhost:8000/user';
                 if($('#id').val() == "" || $('#pw').val() == ""
                     || $('#pwvc').val() == "" || $('#nn').val() == "") {
