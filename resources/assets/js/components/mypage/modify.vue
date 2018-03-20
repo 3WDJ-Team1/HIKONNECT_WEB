@@ -114,11 +114,11 @@
             },
             update: function() {
                 let uri = 'http://localhost:8000/user/' + sessionStorage.getItem('uuid');
-                if ($('#id').val() == "" || $('#pw').val() == ""
-                    || $('#pwvc').val() == "" || $('#nn').val() == "") {
+                if(this.item.idv == "" || this.item.pwv == ""
+                    || this.item.pwvc == "" || this.item.nn == "") {
                     alert('값이 비어있습니다');
                 }
-                else if ($('#pw').val() != $('#pwvc').val()) {
+                else if(this.item.pwv != this.item.pwvc) {
                     alert('비밀 번호와 비밀번호 확인이 다릅니다')
                 }
                 else {
