@@ -19,3 +19,7 @@ Route::get(
 Route::resource('notice', 'NoticeController');
 Route::get('group/{pageIndex?}/{perPage?}', 'GroupController@index');
 Route::resource('group', 'GroupController');
+
+// 나중에 삭제 할 것 ============
+Route::get('testing/{key?}', 'GroupController@testing');
+// ==============================

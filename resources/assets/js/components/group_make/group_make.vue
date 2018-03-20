@@ -13,13 +13,14 @@
             <tr>
                 <td>등산 경로</td>
                 <td>
+
+                    <!--autocomplete featured example-->
                     <autocomplete
                             ref="autocomplete"
-                            placeholder="Search Distribution Groups"
-                            source="https://api.github.com/search/repositories?q="
-                            results-property="items"
-                            results-display="full_name"
+                            placeholder="Search Distribution Groups(name)"
+                            :source="distributionGroupsEndpoint"
                             input-class="form-control"
+                            results-property="data"
                             :results-display="formattedDisplay"
                             @selected="addDistributionGroup">
                     </autocomplete>
@@ -41,30 +42,31 @@
 <script>
     import Autocomplete from 'vuejs-auto-complete'
     export default {
+        props: ['list'],
         data()   {
             return  {
-                show:   [{id:1,name:'설악산'},{id:2,name:'팔공산'},{id:3,name:'화장실'},{id:4,name:'청소기'},{id:5,name:'고구마'}]
+                mountain_para : ''
             }
         },
         components: {
-            Autocomplete
+            Autocomplete,
         },
         methods: {
-            distributionGroupsEndpoint () {
-                return process.env.API + '/distribution/search?query='
+            input_para(n) {
+                this.mountain_para = n;
+                console.log(n)
+            },
+            distributionGroupsEndpoint (n) {
+                //return process.env.API + '/distribution/search?query='
+                return 'http://localhost:8000/testing/' + n;
             },
             addDistributionGroup (group) {
                 this.group = group
                 // access the autocomplete component methods from the parent
                 this.$refs.autocomplete.clearValues()
             },
-            authHeaders () {
-                return {
-                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1Ni....'
-                }
-            },
             formattedDisplay (result) {
-                return result.name
+                return result.name;
             }
         }
     }

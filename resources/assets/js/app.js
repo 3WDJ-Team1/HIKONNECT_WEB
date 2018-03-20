@@ -24,14 +24,14 @@ export const eventBus = new Vue();
 import ExampleComponent from "./components/ExampleComponent.vue";
 import App from './components/App.vue';
 import groups_list from './components/groups_list/main.vue'
-import group_make from './components/group_make/group_make'
+import group_make from './components/group_make/group_make_main'
 import notice from './components/notice/main'
 
 const routes = [
     {
-        name: 'group_make',
+        name: 'notice',
         path: '/',
-        component: group_make
+        component: notice
     }
 ];
 
