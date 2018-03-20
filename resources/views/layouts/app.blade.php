@@ -30,8 +30,8 @@
     <script src="{{ asset('js/app.js') }}"></script>  
 </body>
 <style>
-    body{
-        height:
+    #app{
+        width: 100%;
     }
 </style>
 </html>
