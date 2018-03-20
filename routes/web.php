@@ -29,8 +29,29 @@ Route::resource('group', 'GroupController');
 
 Route::post('/list', 'GroupController@jiyoon');
 
+// 나중에 삭제 할 것 ============
+Route::get('testing/{key?}', 'GroupController@testing');
+// ==============================
+
+// Login Routings
 Route::resource('/user', 'UserController');
 Route::post('/login', 'LoginController@login')->name('login');
 Route::post('/loginprocess', 'LoginController@loginprocess')->name('loginprocess');
+/**
+ * Login process using Socialite
+ * 
+ * Line     = enabled
+ * Kakao    = disabled
+ */
+Route::get('/login/{providerName}', 'LoginController@redirectToProvider');
+Route::get('/login/{providerName}/redirect', 'LoginController@handleProviderCallback');
+
 Route::post('/logout', 'LoginController@logout')->name('logout');
+<<<<<<< HEAD
 Route::get('testing', 'HikingGroupController@getGroupMembers');
+=======
+Route::get('/user/{id}', 'UserController@getImage')->name('getImage');
+Route::get('/mypage/{id}', 'UserController@showUserData')->name('UserData');
+Route::post('/graph/{id}', 'UserController@graph')->name('graph');
+Route::get('main/{id}', 'MainController@get_Announce_Count')->name('Announce_Count');
+>>>>>>> 7322c00bfd0336767cda98b19c5c412576e9d1c3

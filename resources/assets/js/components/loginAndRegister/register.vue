@@ -116,7 +116,8 @@
             <!-- @v-btn         button for submit -->
             <v-btn
                 @click      ="regist"
-                :disabled   ="!valid">
+                :disabled   ="!valid"
+                style       ="padding: 0;">
                 SUBMIT
             </v-btn>
             <!-- @v-btn         button for clear -->
