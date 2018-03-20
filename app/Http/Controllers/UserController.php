@@ -14,8 +14,25 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Mockery\Exception;
 
+/**
+ * Controller class for User's Information
+ *
+ * @category Controllers
+ * @package  App
+ * @author   Sol Song <thdthf159@naver.com>
+ * @license  MIT license
+ * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB
+ */
+
 class UserController extends Controller
 {
+    /**
+     * scope             (Integer)       User's Open Scope
+     * gender            (Integer)       User's Gender
+     * age_group         (Integer)       User's Age Group
+     * uuid              (String)        User's Primary Key Value
+     * nickname          (String)        User's Nickname
+     */
     private $usermodel = null;
     private $userfilmodel = null;
     private $scope;
@@ -23,12 +40,17 @@ class UserController extends Controller
     private $age_group;
     private $uuid;
     private $nickname;
+
+    /**
+     * UserController constructor.
+     * @param Request $request
+     */
     public function __construct(Request $request)
     {
         $this->usermodel = new User();
         $this->userfilmodel = new User_Profile();
 
-        //scope 설정
+        //Scope Setting
         if ($request->get('phonesc') == true) {
             $this->scope += 100;
         }
@@ -96,14 +118,14 @@ class UserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
+     * @function    store
+     * @brief       User Regist
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)     //회원가입
+    public function store(Request $request)
     {
-        //아이디 닉네임 중복 검사
+        //ID, Nickname Double Check
         $usercheck = User::all();
         foreach ($usercheck as $user) {
             if ($user->idv == $request->get('idv')) {
@@ -119,11 +141,12 @@ class UserController extends Controller
             else
                 continue;
         }
-        //user 테이블 insert
+
+        //user table insert
         $this->usermodel->userReg($request);
-        //가입 시 uuid 가져오기
         $this->uuid = User::where('id',$request->get('idv'))->pluck('uuid');
-        //user_profile 테이블에 insert
+
+        //user_profile table insert
         $userproinfo = array([
             'uuid'          => '',
             'user'          => $this->uuid[0],
@@ -137,7 +160,7 @@ class UserController extends Controller
             'updated_at'    => Carbon::now()->format('Y-m-d H:i:s')
         ]);
         $this->userfilmodel->userProReg($userproinfo);
-        //true 반환
+
         return response()->json('true');
     }
 
@@ -149,8 +172,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $image = Storage::get('userprofile/'.$id.'.png');
-        return response()->json($image);
+        //
     }
 
     /**
@@ -165,15 +187,15 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
+     * @function    update
+     * @brief       User Information Update
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //File Save
+        //UserProfile Picture File Save
         Storage::put('userprofile/'.$id.'.png',$request->get('imageSrc'));
         $image_path = 'userprofile/'.$id.'.png';
         $password = $request->get('pwv');
@@ -193,6 +215,12 @@ class UserController extends Controller
         //
     }
 
+    /**
+     * @function    showUserData
+     * @brief       Get User's Information
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function showUserData($id)
     {
         if (hiking_record::where('owner', $id)->count() == 0) {
@@ -219,7 +247,7 @@ class UserController extends Controller
             $all_time = 0;
             $hiking_time = hiking_record::select(
                 DB::raw('timestampdiff(minute, created_at, updated_at) as HikingTime'))
-                ->where('owner', 'c82db144-d135-30d7-b103-3dd4dd4ec0fb')->get();
+                ->where('owner', $id)->get();
             foreach ($hiking_time as $hiking) {
                 $all_time += $hiking->HikingTime;
             }
@@ -257,7 +285,13 @@ class UserController extends Controller
         return response()->json($profile_value);
     }
 
-    //Graph's Information
+    /**
+     * @funtion     graph
+     * @brief       Get Graph's Information
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function graph(Request $request,$id) {
         $year = $request->get('year');
         $month = array();

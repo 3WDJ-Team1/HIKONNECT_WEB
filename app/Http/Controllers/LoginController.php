@@ -7,10 +7,23 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Mockery\Exception;
 
+/**
+ * Controller class for Login
+ *
+ * @category Controllers
+ * @package  App
+ * @author   Sol Song <thdthf159@naver.com>
+ * @license  MIT license
+ * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB
+ */
+
 class LoginController extends Controller
 {
     private $model = null;
 
+    /**
+     * LoginController constructor.
+     */
     public function __construct()
     {
         $this->model = new User();
@@ -21,6 +34,10 @@ class LoginController extends Controller
         return view('/login');
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function loginprocess(Request $request)
     {
         //Login
