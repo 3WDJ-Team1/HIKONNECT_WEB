@@ -24,3 +24,4 @@ Route::post('/logout','LoginController@logout')->name('logout');
 Route::get('/mypage/{id}','UserController@showUserData')->name('UserData');
 Route::post('/graph/{id}','UserController@graph')->name('graph');
 Route::get('main/{id}','MainController@get_Announce_Count')->name('Announce_Count');
+Route::get('/record/{id}','Usercontroller@get_Hiking_record')->name('Get Hiking Record');

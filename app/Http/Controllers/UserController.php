@@ -318,4 +318,47 @@ class UserController extends Controller
         }
         return response()->json($month);
     }
+
+    public function get_Hiking_record() {
+        $hiking_record_count    = hiking_record::where('owner','b5c9d6d1-2440-11e8-9fe4-42010a8c003e')->count();
+        $avg_speed              = hiking_record::where('owner','b5c9d6d1-2440-11e8-9fe4-42010a8c003e')->select('avg_speed')->get();
+        $hiking_date            = hiking_record::join('hiking_plan','hiking_record.hiking_plan','=','hiking_plan.uuid')
+                                            ->where('owner','b5c9d6d1-2440-11e8-9fe4-42010a8c003e')
+                                            ->select('hiking_plan.start_date')
+                                            ->get();
+        $hiking_group_uuid      = hiking_record::join('hiking_plan','hiking_record.hiking_plan','=','hiking_plan.uuid')
+                                            ->where('owner','b5c9d6d1-2440-11e8-9fe4-42010a8c003e')
+                                            ->select('hiking_plan.hiking_group')
+                                            ->get();
+        $hiking_time = hiking_record::select(
+            DB::raw('timestampdiff(minute, created_at, updated_at) as HikingTime'))
+            ->where('owner','b5c9d6d1-2440-11e8-9fe4-42010a8c003e')->get();
+
+        for($i = 0; $i <= $hiking_record_count - 1; $i++) {
+            $hiking_group_name[$i] = hiking_plan::join('hiking_group','hiking_group.uuid','=','hiking_plan.hiking_group')
+                    ->where('hiking_group',$hiking_group_uuid[$i]->hiking_group)
+                    ->select('hiking_group.name')
+                    ->first()->name;
+            $hour = intval($hiking_time[$i]->HikingTime / 60);
+            $minute = $hiking_time[$i]->HikingTime % 60;
+            if ($hour == 0)
+                $all_time = $minute.' minute';
+            elseif ($minute == 0)
+                $all_time = $hour.' hour';
+            else
+                $all_time = $hour . ' hour ' . $minute . ' minute';
+            $hiking_record_value[$i] = [
+                'hiking_date' => $hiking_date[$i]->start_date,
+                'hiking_group_uuid' => $hiking_group_uuid[$i]->hiking_group,
+                'hiking_group_name' => $hiking_group_name[$i],
+                'hiking_time'       => $all_time,
+                'avg_speed'         => $avg_speed[$i]->avg_speed
+            ];
+        }
+        $mountain_name  = 1;
+
+        return response()->json($hiking_record_value);
+
+
+    }
 }
