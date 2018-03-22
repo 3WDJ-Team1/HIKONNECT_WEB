@@ -14,13 +14,16 @@ import VueAxios from 'vue-axios';
 import axios from 'axios';
 Vue.use(VueAxios, axios) ;
 
-/*import VueChart from 'vuechart';
-Vue.component(VueChart.name,VueChart);*/
+import lodash from 'lodash'
+import VueLodash from 'vue-lodash'
+Vue.use(VueLodash, lodash);
+
+import Vuetify from 'vuetify'
+Vue.use(Vuetify);
 
  
 import main from './components/main/main.vue';
 import mainbody from './components/main/mainbody.vue';
-import test from './components/main/test.vue';
 import App from './components/App.vue';
 import login from './components/login.vue';
 import register from './components/register.vue';
@@ -44,11 +47,6 @@ const routes = [
                 name: 'mainbody',
                 path: '/main',
                 component: mainbody
-            },
-            {
-                name: 'test',
-                path: '/test',
-                component: test
             },
             {
                 name: 'register',

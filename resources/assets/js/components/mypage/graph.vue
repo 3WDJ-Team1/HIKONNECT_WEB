@@ -1,3 +1,7 @@
+<!--@funtion
+graph() 그래프에 데이터를 넣는 함수
+
+-->
 <template>
     <div id='cc' class='chart'>
         <h1>월별 등산기록</h1>

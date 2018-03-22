@@ -1,7 +1,13 @@
+<!--
+@function
+
+sessionver 세션이 있는지 없는지 확인
+logout     로그아웃 하는 함수
+
+-->
 <template>
     <div>
-
-        <span v-if="sessionver() == 'true'" v-on:click ="logout">&nbsp;&nbsp;<a href="#">로그아웃 </a> </span>
+        <span v-if="sessionver() == 'true'" v-on:click ="logout">&nbsp;&nbsp;<a href="#">로그아웃 </a></span>
         <span v-else>
             <span><router-link :to ="{ name: 'register'}">회원가입&nbsp;&nbsp;</router-link></span>
             <router-link :to ="{ name: 'login'}">&nbsp;&nbsp;로그인</router-link></span>
@@ -10,6 +16,7 @@
 <script>
     export default {
         methods: {
+
             sessionver() {
                 if(sessionStorage.getItem('userid') != null) {
                     return 'true';
