@@ -54,8 +54,9 @@ Vue.component('sync-loader', require('vue-spinner/src/SyncLoader.vue'));
 // event bus
 Vue.prototype.$EventBus = new Vue();
 
-import listSerch            from "./components/listSerch.vue";
 
+<<<<<<< HEAD
+=======
 import main                 from './components/main/main.vue';
 import mainbody             from './components/main/mainbody.vue';
 import test                 from './components/main/test.vue';
@@ -65,6 +66,7 @@ import mypage               from './components/mypage/mypagemain.vue';
 import modify               from './components/mypage/modify.vue';
 import graph                from  './components/mypage/graph.vue';
 import update from  './components/mypage/update.vue';
+>>>>>>> 7322c00bfd0336767cda98b19c5c412576e9d1c3
 // vue-event-calendar
 import 'vue-event-calendar/dist/style.css';
 import vueEventCalendar     from 'vue-event-calendar';
@@ -83,7 +85,19 @@ import level  from  './components/mypage/level.vue';
 import Toasted              from 'vue-toasted';
 Vue.use(Toasted);
 
+// main
+import Main                 from "./components/main/MainPage.vue"
+import listSerch            from "./components/listSerch.vue";
+
+// login and register
+import login                from './components/loginAndRegister/login.vue';
+import register             from './components/loginAndRegister/register.vue';
+
+import mypage               from './components/mypage/mypagemain.vue';
+import modify               from './components/mypage/modify.vue';
+import graph                from  './components/mypage/graph.vue';
 import App                  from './components/App.vue';
+
 import GroupMenuTab         from "./components/group_menu/GroupMenuTab.vue";
 
 // group notice
@@ -108,27 +122,7 @@ const routes = [
     {
         name: 'main',
         path: '/',
-        component: main,
-    },
-    {
-        name: 'mainbody',
-        path: '/main',
-        component: mainbody
-    },
-    {
-        name: 'test',
-        path: '/test',
-        component: test
-    },
-    {
-        name: 'register',
-        path: '/register',
-        component: register
-    },
-    {
-        name: 'login',
-        path: '/login',
-        component: login
+        component: Main,
     },
     {
         name: 'notice',
@@ -144,11 +138,6 @@ const routes = [
         name: 'modify',
         path: '/modify',
         component: modify
-    },
-    {
-        name: 'graph',
-        path: '/graph',
-        component: graph
     },
     // group menu
     {
@@ -190,6 +179,9 @@ const routes = [
                     }
                 ]
             },
+<<<<<<< HEAD
+            
+=======
             {
                 name: 'graph',
                 path: '/graph',
@@ -205,11 +197,22 @@ const routes = [
                 path: '/update',
                 component: update
             }
+>>>>>>> 7322c00bfd0336767cda98b19c5c412576e9d1c3
         ]
     },
+    {
+        name: 'graph',
+        path: '/graph',
+        component: graph
+    },
+    {
+        name: 'level',
+        path: '/level',
+        component: level
+    }
 ];
  
-const router = new VueRouter({ mode: 'history', routes:routes });
+const router = new VueRouter({ routes:routes });
  
 // view-router 와 직접적인 관련이 있다.
 new Vue(Vue.util.extend({ router }, App)).$mount('#app');
