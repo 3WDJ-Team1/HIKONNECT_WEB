@@ -1,69 +1,60 @@
 <template>
     <div class="container">
-        <table class="table">
-            <tbody>
-            <tr>
-                <td>제목</td>
-                <td><input type="text" place class="form-control" id="usr"></td>
-            </tr>
-            <tr>
-                <td>모집 내용</td>
-                <td><textarea class="form-control" rows="5" id="comment"></textarea></td>
-            </tr>
-            <tr>
-                <td>등산 경로</td>
-                <td>
+        <!-- https://github.com/charliekassel/vuejs-autocomplete -->
+        <autocomplete
+                ref="autocomplete"
+                placeholder="Search Distribution Groups(name)"
+                :source="distributionGroupsEndpoint"
+                input-class="form-control"
+                results-property="data"
+                :results-display="formattedDisplay"
+                @selected="addDistributionGroup">
+        </autocomplete>
 
-                    <!--autocomplete featured example-->
-                    <autocomplete
-                            ref="autocomplete"
-                            placeholder="Search Distribution Groups(name)"
-                            :source="distributionGroupsEndpoint"
-                            input-class="form-control"
-                            results-property="data"
-                            :results-display="formattedDisplay"
-                            @selected="addDistributionGroup">
-                    </autocomplete>
-                </td>
-            </tr>
-            <tr>
-                <td>등산 일정</td>
-                <td>Dooley</td>
-            </tr>
-            <tr>
-                <td>모집 인원</td>
-                <td>Dooley</td>
-            </tr>
-            </tbody>
-        </table>
+
+        <!--map modal-->
+        <div>
+            <b-btn v-b-modal.modal1>지도보기</b-btn>
+
+            <!-- Modal Component -->
+            <b-modal id="modal1" v-bind:title=mountain_para>
+                <p class="my-4">
+                    <group_map></group_map>
+                </p>
+            </b-modal>
+        </div>
     </div>
 </template>
 
 <script>
+    import { EventBus } from './event_bus.js';
     import Autocomplete from 'vuejs-auto-complete'
+
     export default {
-        props: ['list'],
         data()   {
             return  {
-                mountain_para : ''
+                mountain_para: ""
             }
         },
         components: {
             Autocomplete,
+            "group_map": group_map
         },
         methods: {
-            input_para(n) {
-                this.mountain_para = n;
-                console.log(n)
+            // 이벤트 보내기
+            send_serch() {
+                // '이벤트명', 데이터
+                EventBus.$emit('mountain_code', this.mountain_para);
             },
             distributionGroupsEndpoint (n) {
                 //return process.env.API + '/distribution/search?query='
                 return 'http://localhost:8000/testing/' + n;
             },
             addDistributionGroup (group) {
-                this.group = group
-                // access the autocomplete component methods from the parent
-                this.$refs.autocomplete.clearValues()
+                //this.mountain_para = group.selectedObject.display;
+                this.mountain_para = group.display;
+                this.$refs.autocomplete.clearValues();
+                this.$refs.autocomplete.value = group.display;
             },
             formattedDisplay (result) {
                 return result.name;
@@ -71,17 +62,3 @@
         }
     }
 </script>
-<style>
-    th  {
-        width: 80px;
-        text-align: center;
-    }
-    td  {
-        width: 450px;
-    }
-    .content    {
-        display: table;
-        margin-left: auto;
-        margin-right: auto;
-    }
-</style>

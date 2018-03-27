@@ -25,16 +25,12 @@
 </template>
 
 <script>
-    import { EventBus } from './event_bus.js';
-    import Vue from 'vue'
-    import Datetime from 'vue-datetime'
-    import 'vue-datetime/dist/vue-datetime.css'
-    Vue.use(Datetime);
-
-
+    import { EventBus } from './event_bus'
     export default {
+
         data()  {
             return  {
+
                 mountain_name: "",
                 writer: "",
                 date: ""

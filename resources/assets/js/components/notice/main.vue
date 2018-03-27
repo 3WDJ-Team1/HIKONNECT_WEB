@@ -1,14 +1,10 @@
 <template>
-    <notice_information v-bind:list="notice_information.groupInformations"></notice_information>
+    <router-view name="body" v-bind:list="notice_information.groupInformations"></router-view>
 </template>
 
 <script>
-    import notice_information from './notice_information'
     export default {
         name: "notice_main",
-        components: {
-          'notice_information': notice_information
-        },
         data()  {
             return  {
                 notice_information:{}

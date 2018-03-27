@@ -19,6 +19,9 @@
     </div>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    {{--<script async defer--}}
+            {{--src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">--}}
+    {{--</script>--}}
     <script>
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
