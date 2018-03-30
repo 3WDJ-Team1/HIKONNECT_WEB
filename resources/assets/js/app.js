@@ -47,7 +47,7 @@ import notice_information from './components/notice/notice_information'
 const routes = [
     // group menu
     {
-        path: '/',
+        path: '/list',
         component: groups_list,
         children: [
             {

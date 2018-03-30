@@ -31,6 +31,16 @@
                 list: [],
             };
         },
+        created: function ()
+        {
+            // 이벤트 받기
+            // '이벤트 명', function(받을 데이터)
+            EventBus.$on('input_serch', function (mountain, write, date) {
+                this.mountain_para =  mountain;
+                this.writer = write;
+                this.date = date;
+            });
+        },
         methods: {
             infiniteHandler($state) {
                 let url = 'http://localhost:8000/group/' + this.list_num + '/10'

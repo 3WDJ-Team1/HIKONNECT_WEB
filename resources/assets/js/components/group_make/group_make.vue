@@ -8,21 +8,11 @@
                 input-class="form-control"
                 results-property="data"
                 :results-display="formattedDisplay"
-                @selected="addDistributionGroup">
+                @selected="addDistributionGroup"
+                style="width: 200px">
         </autocomplete>
-
-
-        <!--map modal-->
-        <div>
-            <b-btn v-b-modal.modal1>지도보기</b-btn>
-
-            <!-- Modal Component -->
-            <b-modal id="modal1" v-bind:title=mountain_para>
-                <p class="my-4">
-                    <group_map></group_map>
-                </p>
-            </b-modal>
-        </div>
+        <b-btn v-b-modal.modal1 v-on:click="initMap">지도보기</b-btn>
+        <div id="map" style="height: 200px"></div>
     </div>
 </template>
 
@@ -33,31 +23,56 @@
     export default {
         data()   {
             return  {
-                mountain_para: ""
+                path: {},
+                mountain_para: ''
             }
         },
         components: {
-            Autocomplete,
-            "group_map": group_map
+            Autocomplete
         },
         methods: {
-            // 이벤트 보내기
             send_serch() {
-                // '이벤트명', 데이터
-                EventBus.$emit('mountain_code', this.mountain_para);
+                EventBus.$emit('mountain_name', this.mountain_para,);
+            },
+            initMap()   {
+                let map = new window.google.maps.Map(document.getElementById('map'), {
+                    zoom: 20,
+                    center: {lat: this.path[0][0].lat, lng: this.path[0][0].lng},
+                    mapTypeId: 'terrain'
+                });
+
+                let flightPlanCoordinates = this.path[0];
+                let flightPath = new window.google.maps.Polyline({
+                    path: flightPlanCoordinates,
+                    geodesic: true,
+                    strokeColor: '#FF0000',
+                    strokeOpacity: 1.0,
+                    strokeWeight: 2
+                });
+
+                flightPath.setMap(map);
             },
             distributionGroupsEndpoint (n) {
-                //return process.env.API + '/distribution/search?query='
-                return 'http://localhost:8000/testing/' + n;
+                return 'http://127.0.0.1:8000/testing/' + n;
             },
             addDistributionGroup (group) {
                 //this.mountain_para = group.selectedObject.display;
                 this.mountain_para = group.display;
+                this.getData(group.selectedObject.code);
                 this.$refs.autocomplete.clearValues();
                 this.$refs.autocomplete.value = group.display;
             },
             formattedDisplay (result) {
                 return result.name;
+            },
+            getData (n)  {
+                axios.get('http://hikonnect.ga:3000/paths/'+ n + '/0')
+                    .then(response => {
+                        this.path = response.data.geometry.paths;
+                        console.log(this.path[0]);
+                    }
+
+                )
             }
         }
     }
