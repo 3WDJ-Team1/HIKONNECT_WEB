@@ -18,17 +18,26 @@ Route::get(
     }
 );
 
+Route::post(
+    '/', 
+    function () {
+        return 'hello~~~';
+    }
+);
+
+// Notification Routings
 Route::resource('notice', 'NoticeController');
 Route::get('notice/{pageIndex?}/{perPage?}', 'NoticeController@index');
+
+// Hiking group Routings
 Route::resource('hiking-group', 'HikingGroupController');
 Route::get('groupMembers/{groupUuid?}', 'HikingGroupController@getGroupMembers');
+
+// User Profile Routings
 Route::get('userProfile/{userUuid}', 'UserProfileController@getUserProfile');
-
-Route::get('xmltesting', 'HikingPlanController@index');
  
-Route::resource('group', 'GroupController');
-
-Route::post('/list', 'GroupController@jiyoon');
+// Route::resource('group', 'GroupController');
+// Route::post('/list', 'GroupController@jiyoon');
 
 // 나중에 삭제 할 것 ============
 Route::get('testing/{key?}', 'GroupController@testing');
