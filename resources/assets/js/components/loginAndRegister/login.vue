@@ -159,11 +159,6 @@
                             sessionStorage.setItem('gender',gender);
                             sessionStorage.setItem('age',age);
                             sessionStorage.setItem('image_path',datavalue[0].image_path);
-<<<<<<< HEAD:resources/assets/js/components/loginAndRegister/login.vue
-                            console.log(response.data);
-
-=======
->>>>>>> 7322c00bfd0336767cda98b19c5c412576e9d1c3:resources/assets/js/components/login.vue
                             this.$router.push({ name: 'main'});
                             window.location.reload();
                         }

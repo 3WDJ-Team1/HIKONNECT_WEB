@@ -15,7 +15,8 @@
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
         "mmieluch/laravel-vfs-provider": "^1.0",
-        "nathanmac/Parser": "^4.3"
+        "nathanmac/Parser": "^4.3",
+        "socialiteproviders/line": "^1.0"
     },
     "require-dev": {
         "way/generators": "^3.0",

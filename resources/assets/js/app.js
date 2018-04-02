@@ -55,18 +55,15 @@ Vue.component('sync-loader', require('vue-spinner/src/SyncLoader.vue'));
 Vue.prototype.$EventBus = new Vue();
 
 
-<<<<<<< HEAD
-=======
-import main                 from './components/main/main.vue';
-import mainbody             from './components/main/mainbody.vue';
-import test                 from './components/main/test.vue';
-import login                from './components/login.vue';
-import register             from './components/register.vue';
-import mypage               from './components/mypage/mypagemain.vue';
-import modify               from './components/mypage/modify.vue';
-import graph                from  './components/mypage/graph.vue';
+// import main                 from './components/main/main.vue';
+// import mainbody             from './components/main/mainbody.vue';
+// import test                 from './components/main/test.vue';
+// import login                from './components/login.vue';
+// import register             from './components/register.vue';
+// import mypage               from './components/mypage/mypagemain.vue';
+// import modify               from './components/mypage/modify.vue';
+// import graph                from  './components/mypage/graph.vue';
 import update from  './components/mypage/update.vue';
->>>>>>> 7322c00bfd0336767cda98b19c5c412576e9d1c3
 // vue-event-calendar
 import 'vue-event-calendar/dist/style.css';
 import vueEventCalendar     from 'vue-event-calendar';
@@ -179,9 +176,6 @@ const routes = [
                     }
                 ]
             },
-<<<<<<< HEAD
-            
-=======
             {
                 name: 'graph',
                 path: '/graph',
@@ -197,7 +191,6 @@ const routes = [
                 path: '/update',
                 component: update
             }
->>>>>>> 7322c00bfd0336767cda98b19c5c412576e9d1c3
         ]
     },
     {
