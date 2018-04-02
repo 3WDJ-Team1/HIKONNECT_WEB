@@ -1,15 +1,32 @@
 <template>
-    <v-container fluid grid-list-md class="member-detail-wrapper">
-        <v-layout row wrap style="vertical-align:middle;">
-            <v-flex d-flex xs12 sm6 md4 class="vertical-center">
+    <v-container
+        fluid
+        grid-list-md
+        class="member-detail-wrapper">
+        <v-layout
+            row
+            wrap
+            style="vertical-align:middle;">
+            <v-flex
+                d-flex
+                xs12
+                sm6
+                md4
+                class="vertical-center">
                 <v-avatar
                     size="150"
                     slot="activator">
-                    <img src="http://localhost:8000/tmp/3f88711059fc7b50ae3ebd9a326fe2c91504071410_watermark.jpg">
+                    <img :src='memberData.profilePic'>
                 </v-avatar>
             </v-flex>
-            <v-flex d-flex xs12 sm6 md8>
-                <v-container row  wrap>
+            <v-flex
+                d-flex
+                xs12
+                sm6
+                md8>
+                <v-container
+                    row
+                    wrap>
                     <v-flex d-flex>
                         <v-card class="detail-wrapper">
                             <v-card-text>
@@ -17,7 +34,7 @@
                                 GENDER
                                 </div>
                                 <div class="detail-content">
-                                {{ memberData.gender }}
+                                {{ memberData.gender == 0 ? 'male' : 'female' }}
                                 </div>
                             </v-card-text>
                         </v-card>
@@ -25,12 +42,12 @@
                     <v-flex d-flex>
                             <v-card class="detail-wrapper">
                             <v-card-text>
-                                <div class="detail-category">
+                                <!-- <div class="detail-category">
                                 SPEED
                                 </div>
                                 <div class="detail-content">
                                 {{ memberData.speed }}
-                                </div>
+                                </div> -->
                             </v-card-text>
                             </v-card>
                     </v-flex>
@@ -56,6 +73,7 @@
     export default {
         data: () => ({
             memberData: {},
+            httpAddr: Laravel.host,
         }),
         created() {
             this.$EventBus.$on('memberData', (event) => {

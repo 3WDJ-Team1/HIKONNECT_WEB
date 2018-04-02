@@ -55,6 +55,6 @@
         "vuejs-dialog": "^0.8.0",
         "vuetify": "^1.0.5",
         "weekstart": "^1.0.0",
-        "xmlhttprequest": "^1.8.0",
+        "xmlhttprequest": "^1.8.0"
     }
 }

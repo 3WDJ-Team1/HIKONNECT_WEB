@@ -1,7 +1,7 @@
 <!-- 
     @file   login.vue
     @brief  A component of sign in page
-    @author Jungyu Choi <wnsrb0147@naver.com>, Sungeun Kang <kasueu0814@gmail.com>
+    @author Jungyu Choi <wnsrb0147@naver.com>
     @todo   change design
  -->
 <template>
@@ -57,10 +57,7 @@
         }),
         methods: {
             login() {
-                if($('#id').val() == "" || $('#pw').val() == "") {
-                    alert('아이디 또는 비밀번호에 값이 비었습니다.');
-                }
-                else {
+                
                     let uri = 'http://localhost:8000/loginprocess';
                     this.axios.post(uri, this.item).then((response) => {
                         if (response.data == 'false') {
@@ -145,7 +142,6 @@
                                 agesc = 'false';
                             }
 
-                            sessionStorage.setItem('year',2018);
                             sessionStorage.setItem('userid',$('#id').val());
                             sessionStorage.setItem('uuid',datavalue[0].uuid);
                             sessionStorage.setItem('phone',datavalue[0].phone);
@@ -159,16 +155,13 @@
                             sessionStorage.setItem('gender',gender);
                             sessionStorage.setItem('age',age);
                             sessionStorage.setItem('image_path',datavalue[0].image_path);
-<<<<<<< HEAD:resources/assets/js/components/loginAndRegister/login.vue
                             console.log(response.data);
 
-=======
->>>>>>> 7322c00bfd0336767cda98b19c5c412576e9d1c3:resources/assets/js/components/login.vue
                             this.$router.push({ name: 'main'});
                             window.location.reload();
                         }
                     });
-                }
+                
             },
             onSlideStart(slide) {
                 this.sliding = true;
