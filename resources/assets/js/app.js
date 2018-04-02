@@ -23,11 +23,12 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import BootstrapVue from 'bootstrap-vue'
 Vue.use(BootstrapVue);
 
-export const eventBus = new Vue();
 window.Vue.use(VueRouter);
-import groups_list from './components/groups_list/main.vue'
-import group_make from './components/group_make/group_make_main'
-import notice from './components/notice/main'
+
+// making group
+import groups_list  from './components/groups_list/main.vue'
+import group_make   from './components/group_make/group_make_main'
+import notice       from './components/notice/main'
 
 // bootstrap-vue
 import Bootstrap    from 'bootstrap-vue';
@@ -54,29 +55,20 @@ Vue.component('sync-loader', require('vue-spinner/src/SyncLoader.vue'));
 // event bus
 Vue.prototype.$EventBus = new Vue();
 
-
-// import main                 from './components/main/main.vue';
-// import mainbody             from './components/main/mainbody.vue';
-// import test                 from './components/main/test.vue';
-// import login                from './components/login.vue';
-// import register             from './components/register.vue';
-// import mypage               from './components/mypage/mypagemain.vue';
-// import modify               from './components/mypage/modify.vue';
-// import graph                from  './components/mypage/graph.vue';
-import update from  './components/mypage/update.vue';
 // vue-event-calendar
 import 'vue-event-calendar/dist/style.css';
 import vueEventCalendar     from 'vue-event-calendar';
 Vue.use(vueEventCalendar, {
-    locale: 'en',
-    color: 'lightskyblue',
+    locale  : 'en',
+    color   : 'lightskyblue',
 });
 
 // ElementUI
 import ElementUI            from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
-import level  from  './components/mypage/level.vue';
+
+import level                from  './components/mypage/level.vue';
 
 // vue-toasted
 import Toasted              from 'vue-toasted';
@@ -92,7 +84,7 @@ import register             from './components/loginAndRegister/register.vue';
 
 import mypage               from './components/mypage/mypagemain.vue';
 import modify               from './components/mypage/modify.vue';
-import graph                from  './components/mypage/graph.vue';
+import graph                from './components/mypage/graph.vue';
 import App                  from './components/App.vue';
 
 import GroupMenuTab         from "./components/group_menu/GroupMenuTab.vue";
@@ -176,21 +168,7 @@ const routes = [
                     }
                 ]
             },
-            {
-                name: 'graph',
-                path: '/graph',
-                component: graph
-            },
-            {
-                name: 'level',
-                path: '/level',
-                component: level
-            },
-            {
-                name: 'update',
-                path: '/update',
-                component: update
-            }
+            
         ]
     },
     {

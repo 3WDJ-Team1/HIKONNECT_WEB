@@ -5,9 +5,9 @@
     @todo   update everything
  -->
 <template>
-    <div style="position: relative;" v-scroll="">
+    <div style="position: relative;">
         <div
-            style="display: inline_block;"
+            style="display: inline_block; background-color: whitesmoke;"
             v-for="alphabet in alphabets">
             <h2
                 class="text-center"
@@ -19,9 +19,9 @@
                 v-for="userData in userDataArr" v-if="userData.name.charAt(0) == alphabet">
                 <b-card-header
                     header-tag="header"
-                    class="p-1"
                     role="tab"
-                    @click="sendMemberData(userData)">
+                    @click="sendMemberData(userData)"
+                    class='member_list_card_header'>
                     <div
                         href="#"
                         v-b-toggle ="'n' + userData.uuid">
@@ -37,7 +37,7 @@
                                     slot="activator"
                                     style="margin-top: 3%;"
                                     >
-                                    <img src="http://localhost:8000/tmp/3f88711059fc7b50ae3ebd9a326fe2c91504071410_watermark.jpg">
+                                    <img :src="userData.profilePic">
                                 </v-avatar>
                             </v-flex>
                             <v-flex
@@ -77,6 +77,19 @@
             groupUuid: '',
             memberList: [
                 // { uuid: ~~~~ }, 
+                "001316ba-9cd4-3301-a605-54816b8f9229",
+                "0453de25-933f-3cef-810d-db577e001b59",
+                "1899b9ca-4516-3cdc-9d34-4d20ab72653d",
+                "2c6546b0-e79e-392c-924f-797c5f573699",
+                "31a06654-2ddd-3dd2-8f65-e97b4e0245ce",
+                "31dce0c7-39e1-33cf-97c8-694e9a8bb039",
+                "8bef132f-3f05-35f4-b8a9-c5bd56d6577e",
+                "b9d7df2f-eac3-3dc8-8980-ca7c9675fb97",
+                "d353bdfd-b44b-3b98-b5eb-bfa19916940f",
+                "f42f795e-0701-3772-90c9-d1b9e697fb3e",
+                "f9ffd59f-f71e-3578-b37d-03112df229dd",
+                "fa796add-910e-3bbb-a4d0-50b47760b8c8",
+                "fd4b4476-1b7b-3d2a-a12f-21d339102a88",
             ],
             userDataArr: [
                 // { Capitol: A }
@@ -89,10 +102,16 @@
         }),
         methods: {
             getGroupUserData(argGroupUuid) {
-                // axios.get(this.httpAddr)
-                // .then( response => {
-                //     this.userData = response.data;
-                // })
+                axios.get(this.httpAddr + "/groupMembers/" + argGroupUuid)
+                .then( response => {
+                    this.memberList = response.data;
+                })
+            },
+            getMembersData(argMemberUuid) {
+                axios.get(this.httpAddr + "/userProfile/" + argMemberUuid)
+                .then( response => {
+                    this.userDataArr.push(response.data[0]);
+                })
             },
             sendMemberData(argObj) {
                 this.$EventBus.$emit('memberData', argObj);
@@ -102,15 +121,9 @@
         created() {
             // this.getGroupUserData();
             // httpAddr+/groupMembers/groupUUID
-            axios.get('http://hikonnect.ga/groupMembers/0847f4bd-3a59-3d20-863b-b6d2c2301a3b')
-            .then(response => {
-                this.memberList = response.data;
-            });
+            // this.getGroupUserData("02b1790f-5b77-3e54-877f-8612c0b9865b");
             for ( let i = 0 ; i < this.memberList.length ; i++){
-                axios.get(this.httpAddr + '/userProfile/' + this.memberList[i])
-                .then(response => {
-                    this.userDataArr.push()
-                });
+                this.getMembersData(this.memberList[i]);
             }
         },
     }
@@ -121,9 +134,13 @@
     background-color: white;
     border-bottom: 1px solid whitesmoke;
     box-shadow: none;
+    margin-top: 0;
+    margin-bottom: 0;
 }
-.give_padding {
-    padding: 1%;
-    display: inline-block;
+.member_list_card_header {
+    background-color: white;
+    border: 0;
+    margin: 0;
+    padding: 0;
 }
 </style>

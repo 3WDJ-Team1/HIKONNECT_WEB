@@ -150,9 +150,8 @@
     display: inline-block;
     width: 100%;
     margin: 0.3%;
-    padding: 0.1%;
-    border: 1px solid darkgrey;
-    border-radius: 2%;
+    padding: 3%;
+    border: 2px solid whitesmoke;
     background-color: white;
 }
 /* class for inner text of notice cards */
@@ -162,8 +161,9 @@
     word-break: keep-all;
 }
 #group_notice {
-    width: 99.5%;
+    width: 98%;
     margin-bottom: 8%;
+    margin: 0 auto;
 }
 .loader {
     margin-top: 2%

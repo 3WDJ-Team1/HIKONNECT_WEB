@@ -45,8 +45,8 @@
             </v-text-field>
             <!-- @b-tooltip     a tooltip to show users alert -->
             <b-tooltip
-                target="inputPwCk"
-                v-if="isTooltipShown"
+                target  ="inputPwCk"
+                v-if    ="isTooltipShown"
                 triggers="focus hover">
                 Check your password!
             </b-tooltip>
@@ -169,15 +169,15 @@
             selectedAgeGroup: "",
             isAgeGroupShown : false,
             openRange       : "",
-            rules: {
+            rules   : {
                 isBlanked   : [
                     v => !!v || 'This is required',
                 ],
             },
-            options: {
+            options : {
                 genderOpt   : ['female','male'],
                 ageGroupOpt : ['10대', '20대', '30대', '40대', '50대', '60대 이상'],
-                openOpt  : ['all', 'group']
+                openOpt     : ['all', 'group']
             },
             httpAddr        : Laravel.host,
             isTooltipShown  : false
@@ -195,9 +195,9 @@
                 }
                 if (this.$refs.form.validate()) {
                     axios.post(this.httpAddr + '/user', {
-                        name: this.name,
-                        email: this.email,
-                        select: this.select,
+                        name    : this.name,
+                        email   : this.email,
+                        select  : this.select,
                         checkbox: this.checkbox
                     }).then(response => {
                         if (response.data == 'true')
