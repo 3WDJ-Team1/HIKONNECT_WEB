@@ -16,8 +16,18 @@ Route::get(
     }
 );
 
+Route::post(
+    '/', 
+    function () {
+        return 'hello~~~';
+    }
+);
+
+// Notification Routings
 Route::resource('notice', 'NoticeController');
 Route::get('notice/{pageIndex?}/{perPage?}', 'NoticeController@index');
+
+// Hiking group Routings
 Route::resource('hiking-group', 'HikingGroupController');
 Route::get('groupMembers/{groupUuid?}', 'HikingGroupController@getGroupMembers');
 Route::get('userProfile/{userUuid}', 'UserProfileController@getUserProfile');
