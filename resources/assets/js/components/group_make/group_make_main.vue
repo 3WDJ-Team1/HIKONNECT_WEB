@@ -26,7 +26,7 @@
             </tr>
             </tbody>
         </table>
-        <button v-on:click="make_group">제출</button>
+        <button v-on:click="send_data">제출</button>
     </div>
 
 </template>
@@ -35,25 +35,33 @@
     import { EventBus } from './event_bus'
     export default {
         name: "group_make_main",
-        created: function ()
-        {
-            // 이벤트 받기
-            // '이벤트 명', function(받을 데이터)
-            EventBus.$on('mountain_name', function (para) {
-
-            });
-        },
         data()  {
             return {
                 title: '',
                 content: '',
                 date: '',
-                member_num: ''
+                member_num: '',
+                mountain_path: [],
+                mountain_num: '',
             }
         },
-        methods: {
-            make_group()  {
-
+        created: function ()
+        {
+            // 이벤트 받기
+            // '이벤트 명', function(받을 데이터)
+            EventBus.$on('mountain_path', function (path, num) {
+                this.mountain_path = path;
+                this.mountain_num = num;
+            });
+        },
+        methods:    {
+            send_data() {
+                console.log(this.title);
+                console.log(this.content);
+                console.log(this.date);
+                console.log(this.member_num);
+                console.log(this.mountain_path);
+                console.log(this.mountain_num);
             }
         }
     }
