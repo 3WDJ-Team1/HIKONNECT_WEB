@@ -56,7 +56,6 @@
              * titleRules   (Array)     array of functions about rules of title. (not null)
              * textRules    (Array)     array of functions about rules of content. (not null)
              * mode         (String)    the mode of modal (edit or write)
-             * httpAddr     (String)    the address for http request
              */
             title       : '',
             text        : '',
@@ -69,7 +68,6 @@
                 text => !!text || 'Text is required.'
             ],
             mode        : '',
-            httpAddr    : Laravel.host
         }),
         methods: {
             /**
@@ -80,7 +78,7 @@
                 switch(this.mode) {
                     case "edit":
                         if(this.$refs.form.validate()) {
-                            axios.patch(this.httpAddr + '/notice/' + this.noticeUuid, {
+                            axios.patch(this$HttpAddr + '/notice/' + this.noticeUuid, {
                                 // nickname: this.nickname,
                                 writer  :'', // user's uuid,
                                 title   : this.title,
@@ -91,7 +89,7 @@
                     break;
                     case "write":
                         if(this.$refs.form.validate()) {
-                            axios.post(this.httpAddr + '/notice', {
+                            axios.post(this.$HttpAddr + '/notice', {
                                 // nickname: this.nickname,
                                 writer  :'', // user's uuid,
                                 title   : this.title,

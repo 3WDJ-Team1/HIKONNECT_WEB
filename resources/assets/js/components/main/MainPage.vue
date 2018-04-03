@@ -2,13 +2,13 @@
     <v-app dark>
         <v-content style="padding: 0;">
         <section>
-            <v-parallax src="http://localhost:8000/images/mountain_1.jpg" height="650">
+            <v-parallax :src="httpAddr + '/images/mountain_1.jpg'" height="650">
             <v-layout
                 column
                 align-center
                 justify-center
                 class="white--text">
-                <img src="http://localhost:8000/images/hikonnect.png" alt="Vuetify.js" height="100">
+                <img :src="httpAddr + '/images/hikonnect.png'" alt="Vuetify.js" height="100">
                 <h1 class="white--text mb-2 display-1 text-xs-center">Group hiking</h1>
                 <div class="subheading mb-3 text-xs-center">by Ganbariya</div>
                 <v-btn
@@ -30,7 +30,10 @@
             class="my-5"
             align-center
             >
-            <v-flex xs12 sm4 class="my-3">
+            <v-flex
+                xs12
+                sm4
+                class="my-3">
                 <div class="text-xs-center">
                 <h2 class="headline">The best way to start developing</h2>
                 <span class="subheading">
@@ -40,13 +43,22 @@
             </v-flex>
             <v-flex xs12>
                 <v-container grid-list-xl>
-                <v-layout row wrap align-center>
-                    <v-flex xs12 md4>
+                <v-layout
+                    row
+                    wrap
+                    align-center>
+                    <v-flex
+                        xs12
+                        md4>
                     <v-card class="elevation-0 transparent">
                         <v-card-text class="text-xs-center">
-                        <v-icon x-large class="blue--text text--lighten-2">color_lens</v-icon>
+                        <v-icon
+                            x-large
+                            class="blue--text text--lighten-2">color_lens</v-icon>
                         </v-card-text>
-                        <v-card-title primary-title class="layout justify-center">
+                        <v-card-title
+                            primary-title
+                            class="layout justify-center">
                         <div class="headline text-xs-center">Material Design</div>
                         </v-card-title>
                         <v-card-text>
@@ -56,12 +68,18 @@
                         </v-card-text>
                     </v-card>
                     </v-flex>
-                    <v-flex xs12 md4>
+                    <v-flex
+                        xs12
+                        md4>
                     <v-card class="elevation-0 transparent">
                         <v-card-text class="text-xs-center">
-                        <v-icon x-large class="blue--text text--lighten-2">flash_on</v-icon>
+                        <v-icon
+                            x-large
+                            class="blue--text text--lighten-2">flash_on</v-icon>
                         </v-card-text>
-                        <v-card-title primary-title class="layout justify-center">
+                        <v-card-title
+                            primary-title
+                            class="layout justify-center">
                         <div class="headline">Fast development</div>
                         </v-card-title>
                         <v-card-text>
@@ -71,12 +89,18 @@
                         </v-card-text>
                     </v-card>
                     </v-flex>
-                    <v-flex xs12 md4>
+                    <v-flex
+                        xs12
+                        md4>
                     <v-card class="elevation-0 transparent">
                         <v-card-text class="text-xs-center">
-                        <v-icon x-large class="blue--text text--lighten-2">build</v-icon>
+                        <v-icon
+                            x-large
+                            class="blue--text text--lighten-2">build</v-icon>
                         </v-card-text>
-                        <v-card-title primary-title class="layout justify-center">
+                        <v-card-title
+                            primary-title
+                            class="layout justify-center">
                         <div class="headline text-xs-center">Completely Open Sourced</div>
                         </v-card-title>
                         <v-card-text>
@@ -93,8 +117,13 @@
         </section>
 
         <section>
-            <v-parallax src="http://localhost:8000/images/mountain_2.jpg" height="500">
-            <v-layout column align-center justify-center>
+            <v-parallax
+                :src="httpAddr + '/images/mountain_2.jpg'"
+                height="500">
+            <v-layout
+                column
+                align-center
+                justify-center>
                 <div class="headline white--text mb-3 text-xs-center">
                     Find or create your group, and enjoy it!
                 </div>
@@ -113,10 +142,18 @@
 
         <section>
             <v-container grid-list-xl>
-            <v-layout row wrap justify-center class="my-5">
-                <v-flex xs12 sm4>
+            <v-layout
+                row
+                wrap
+                justify-center
+                class="my-5">
+                <v-flex
+                    xs12
+                    sm4>
                 <v-card class="elevation-0 transparent">
-                    <v-card-title primary-title class="layout justify-center">
+                    <v-card-title
+                        primary-title
+                        class="layout justify-center">
                     <div class="headline">Company info</div>
                     </v-card-title>
                     <v-card-text>
@@ -126,9 +163,14 @@
                     </v-card-text>
                 </v-card>
                 </v-flex>
-                <v-flex xs12 sm4 offset-sm1>
+                <v-flex
+                    xs12
+                    sm4
+                    offset-sm1>
                 <v-card class="elevation-0 transparent">
-                    <v-card-title primary-title class="layout justify-center">
+                    <v-card-title
+                        primary-title
+                        class="layout justify-center">
                     <div class="headline">Contact us</div>
                     </v-card-title>
                     <v-card-text>
@@ -183,10 +225,9 @@
 </template>
 <script>
     export default {
-        data () {
-        return {
-            title: 'Your Logo'
-        }
-        }
+        data: () => ({
+            title   : 'Your Logo',
+            httpAddr: Laravel.host
+        })
     }
  </script>

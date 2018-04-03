@@ -53,7 +53,6 @@
              * page         (Integer)       current page of loading
              * size         (Integer)       how much response data we need
              * bottom       (Boolean)       is scroll in bottom of page?
-             * httpAddr     (String)        the address for axios request
              * loader       (Object)        the Settings for loading icon
              *      loading (Boolean)       is now loading?
              *      color   (String)        color of icon
@@ -68,7 +67,6 @@
             page        : 1,
             size        : 5,
             bottom      : false,
-            httpAddr    : Laravel.host,
             loader      : {
                 loading: true,
                 color: "#4df1e1",
@@ -84,7 +82,7 @@
                 this.bottom = this.bottomVisible()
             });
             // request
-            axios.get(this.httpAddr + '/notice/0/10')
+            axios.get(this.$HttpAddr + '/notice/0/10')
                 .then(response => {
                     // update this.notices with response data
                     this.notices = response.data;
@@ -111,7 +109,7 @@
              */
             addNotices() {
                 this.loader.loading     = true;
-                let url                 = this.httpAddr + '/notice/' + ((this.page - 1) * this.size + 10)
+                let url                 = this.$HttpAddr + '/notice/' + ((this.page - 1) * this.size + 10)
                                           + '/' + (this.page * this.size + 10);
                 
                 axios.get(url)

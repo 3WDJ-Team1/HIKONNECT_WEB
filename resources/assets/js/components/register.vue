@@ -53,7 +53,7 @@
         methods: {
             regist() {
 
-                let uri= 'http://localhost:8000/user';
+                let uri= this.$HttpAddr + '/user';
                 if($('#id').val() == "" || $('#pw').val() == ""
                     || $('#pwvc').val() == "" || $('#nn').val() == "") {
                     alert('값이 비어있습니다');

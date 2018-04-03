@@ -21,11 +21,10 @@ Route::get('notice/{pageIndex?}/{perPage?}', 'NoticeController@index');
 Route::resource('hiking-group', 'HikingGroupController');
 Route::get('groupMembers/{groupUuid?}', 'HikingGroupController@getGroupMembers');
 Route::get('userProfile/{userUuid}', 'UserProfileController@getUserProfile');
-
-
 Route::get('xmltesting', 'HikingPlanController@index');
  
 Route::resource('group', 'GroupController');
+Route::get('group/{pageIndex?}/{perPage?}', 'GroupController@index');
 
 Route::post('/list', 'GroupController@jiyoon');
 

@@ -1,28 +1,59 @@
 <template>
-    <group_make v-bind:list="baby"></group_make>
+    <div class="container">
+        <table class="table">
+            <tbody>
+            <tr>
+                <td>제목</td>
+                <td><input type="text" place class="form-control" id="usr" v-model="title"></td>
+            </tr>
+            <tr>
+                <td>모집 내용</td>
+                <td><textarea class="form-control" rows="5" v-model="content" id="comment"></textarea></td>
+            </tr>
+            <tr>
+                <td>등산 경로</td>
+                <td>
+                    <router-view name="make"></router-view>
+                </td>
+            </tr>
+            <tr>
+                <td>등산 일정</td>
+                <td><datetime v-model="date" placeholder="산행일자"></datetime></td>
+            </tr>
+            <tr>
+                <td>모집 인원</td>
+                <td><input type="text" place class="모집 인원 수" v-model="member_num"></td>
+            </tr>
+            </tbody>
+        </table>
+        <button v-on:click="make_group">제출</button>
+    </div>
+
 </template>
 
 <script>
-    import group_make from './group_make'
+    import { EventBus } from './event_bus'
     export default {
         name: "group_make_main",
-        components: {
-            "group_make": group_make
+        created: function ()
+        {
+            // 이벤트 받기
+            // '이벤트 명', function(받을 데이터)
+            EventBus.$on('mountain_name', function (para) {
+
+            });
         },
         data()  {
             return {
-                baby: {
-                    "items": [
-                        {"full_name": "팔공산"},
-                        {"full_name": "산기적"},
-                        {"full_name": "송솔"},
-                        {"full_name": "디져라"},
-                        {"full_name": "씨부랄"},
-                        {"full_name": "개새끼"},
-                        {"full_name": "디져라"},
-                        {"full_name": "썅"},
-                    ]
-                }
+                title: '',
+                content: '',
+                date: '',
+                member_num: ''
+            }
+        },
+        methods: {
+            make_group()  {
+
             }
         }
     }

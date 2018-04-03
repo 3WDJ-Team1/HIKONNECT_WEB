@@ -73,7 +73,6 @@
     export default {
         data: () => ({
             memberData: {},
-            httpAddr: Laravel.host,
         }),
         created() {
             this.$EventBus.$on('memberData', (event) => {
