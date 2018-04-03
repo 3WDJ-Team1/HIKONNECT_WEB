@@ -18,7 +18,14 @@
             </tr>
             <tr>
                 <td>등산 일정</td>
-                <td><datetime v-model="date" placeholder="산행일자"></datetime></td>
+                <td>
+                    <p>
+                        <datetime v-model="date" placeholder="산행일자"></datetime>
+                        <vue-timepicker></vue-timepicker>
+                        <span> to </span>
+                        <vue-timepicker></vue-timepicker>
+                    </p>
+                </td>
             </tr>
             <tr>
                 <td>모집 인원</td>
@@ -32,8 +39,12 @@
 </template>
 
 <script>
+    import VueTimepicker from 'vue2-timepicker'
     import { EventBus } from './event_bus'
     export default {
+        components: {
+            VueTimepicker
+        },
         name: "group_make_main",
         data()  {
             return {
@@ -42,7 +53,7 @@
                 date: '',
                 member_num: '',
                 mountain_path: [],
-                mountain_num: '',
+                mountain_num: ''
             }
         },
         created: function ()
