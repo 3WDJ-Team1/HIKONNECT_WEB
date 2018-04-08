@@ -1,5 +1,5 @@
 <template>
-    <v-app dark>
+    <v-app>
         <v-content style="padding: 0;">
         <section>
             <v-parallax :src="httpAddr + '/images/mountain_1.jpg'" height="650">
