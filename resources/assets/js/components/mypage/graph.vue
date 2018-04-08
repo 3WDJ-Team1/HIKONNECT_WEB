@@ -53,7 +53,7 @@
                           ]
                       }
                   ]
-              }
+              },
           }
         },
         components: {
@@ -62,7 +62,7 @@
         },
         methods:  {
         graph() {
-            let uri = 'http://localhost:8000/graph/' + sessionStorage.getItem('uuid');
+            let uri = this.$HttpAddr + '/graph/' + sessionStorage.getItem('uuid');
             this.axios.post(uri,this.item).then((response) => {
                 var datavalue = Object.values(response.data);
                 console.log(response.data);

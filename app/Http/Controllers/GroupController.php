@@ -12,7 +12,6 @@ use App\Models\User;
 class GroupController extends Controller
 {
     private $group_model = null;
-    private $user_model = null;
 
     /**
      * Constructor for GroupController

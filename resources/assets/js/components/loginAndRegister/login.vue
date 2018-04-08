@@ -53,12 +53,11 @@
                     v => !!v || 'This is required',
                 ]
             },
-            httpAddr: Laravel.host,
         }),
         methods: {
             login() {
                 
-                    let uri = 'http://localhost:8000/loginprocess';
+                    let uri = this.$HttpAddr + '/loginprocess';
                     this.axios.post(uri, this.item).then((response) => {
                         if (response.data == 'false') {
                             alert('아이디가 없습니다.');

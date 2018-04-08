@@ -9,10 +9,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 Route::get(
     '/',
     function () {

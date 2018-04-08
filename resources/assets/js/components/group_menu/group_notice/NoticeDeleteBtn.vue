@@ -17,10 +17,7 @@
 <script>
     export default {
         data: () => ({
-            /**
-             * httpAddr     (String)        the address for axios request
-             */
-            httpAddr: Laravel.host
+
         }),
         /**
          * @prop    propsNotice
@@ -33,7 +30,7 @@
              * @brief       if button is clicked, send http request.
              */
             deleteNotice: function () {
-                axios.delete(this.httpAddr + '/notice/' + this.propsNotice.uuid, {});
+                axios.delete(this.$HttpAddr + '/notice/' + this.propsNotice.uuid, {});
             }
         }
     }

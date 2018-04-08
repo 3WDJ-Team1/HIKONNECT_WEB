@@ -47,7 +47,7 @@
 
             var c = sessionStorage.getItem('password');
             $('#pwvc').val(c);
-            let uri = 'http://localhost:8000/user/' + sessionStorage.getItem('uuid');
+            let uri = this.$HttpAddr + '/user/' + sessionStorage.getItem('uuid');
             this.axios.get(uri, this.item).then((response) => {
                this.item.imageSrc =  response.data;
             })
@@ -92,8 +92,6 @@
                     phonesc: a,
                     gendersc: b,
                     agesc: c,
-
-
                 }
             }
         },
@@ -113,7 +111,7 @@
                 reader.readAsDataURL(files[0]);
             },
             update: function() {
-                let uri = 'http://localhost:8000/user/' + sessionStorage.getItem('uuid');
+                let uri = this.$HttpAddr + '/user/' + sessionStorage.getItem('uuid');
                 if ($('#id').val() == "" || $('#pw').val() == ""
                     || $('#pwvc').val() == "" || $('#nn').val() == "") {
                     alert('값이 비어있습니다');
