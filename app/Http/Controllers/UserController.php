@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\hiking_plan;
 use App\Models\hiking_record;
-use App\User;
-use App\User_Profile;
+use App\Models\User;
+use App\Models\UserProfile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
@@ -27,12 +27,15 @@ use Mockery\Exception;
 class UserController extends Controller
 {
     /**
-     * scope             (Integer)       User's Open Scope
-     * gender            (Integer)       User's Gender
-     * age_group         (Integer)       User's Age Group
-     * uuid              (String)        User's Primary Key Value
-     * nickname          (String)        User's Nickname
+     * Aq
+     * 
+     * @var Integer   scope       User's Open Scope
+     * @var Integer   gender      User's Gender
+     * @var Integer   age_group   User's Age Group
+     * @var String    uuid        User's Primary Key Value
+     * @var nickname  nickname    User's Nickname
      */
+
     private $usermodel = null;
     private $userfilmodel = null;
     private $scope;
@@ -43,57 +46,63 @@ class UserController extends Controller
 
     /**
      * UserController constructor.
-     * @param Request $request
+     * 
+     * @param Request $request 
      */
     public function __construct(Request $request)
     {
         $this->usermodel = new User();
-        $this->userfilmodel = new User_Profile();
+        $this->userfilmodel = new UserProfile();
 
         //Scope Setting
         if ($request->get('phonesc') == true) {
             $this->scope += 100;
         }
+
         if ($request->get('gendersc') == true) {
             $this->scope += 10;
         }
+
         if ($request->get('agesc') == true) {
             $this->scope += 1;
         }
+
         switch ($request->get('scv')) {
-            case 'all':
-                $this->scope += 10000;
-                break;
-            case 'group':
-                $this->scope += 1000;
-                break;
+        case 'all':
+            $this->scope += 10000;
+            break;
+        case 'group':
+            $this->scope += 1000;
+            break;
         }
+
         switch ($request->get('gender')) {
-            case '남자' :
-                $this->gender = 0;
-                break;
-            case "여자" :
-                $this->gender = 1;
-                break;
+        case '남자' :
+            $this->gender = 0;
+            break;
+        case "여자" :
+            $this->gender = 1;
+            break;
         }
+
         switch ($request->get('age')) {
-            case '10대':
-                $this->age_group = 10;
-                break;
-            case '20대':
-                $this->age_group = 20;
-                break;
-            case '30대':
-                $this->age_group = 30;
-                break;
-            case '40대':
-                $this->age_group = 40;
-                break;
-            case '50대':
-                 break;
-            case '60대 이상':
-                $this->age_group = 60;
-                break;
+        case '10대':
+            $this->age_group = 10;
+            break;
+        case '20대':
+            $this->age_group = 20;
+            break;
+        case '30대':
+            $this->age_group = 30;
+            break;
+        case '40대':
+            $this->age_group = 40;
+            break;
+        case '50대':
+            break;
+        case '60대 이상':
+            $this->age_group = 60;
+            break;
         }
     }
 
@@ -120,7 +129,9 @@ class UserController extends Controller
     /**
      * @function    store
      * @brief       User Regist
-     * @param  \Illuminate\Http\Request  $request
+     * 
+     * @param \Illuminate\Http\Request $request 
+     * 
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -130,21 +141,25 @@ class UserController extends Controller
         foreach ($usercheck as $user) {
             if ($user->idv == $request->get('idv')) {
                 return response()->json('false');
+            } else {
+                continue;
             }
-            else
-                continue;
         }
-        $usercheck = User_Profile::all();
+        $usercheck = UserProfile::all();
         foreach ($usercheck as $user) {
-            if ($user->nickname == $request->get('nn'))
+            if ($user->nickname == $request->get('nn')) {
                 return response()->json('nnfalse');
-            else
+            } else {
                 continue;
+            }
         }
 
         //user table insert
         $this->usermodel->userReg($request);
-        $this->uuid = User::where('id',$request->get('idv'))->pluck('uuid');
+        $this->uuid = User::where(
+            'id',
+            $request->get('idv')
+        )->pluck('uuid');
 
         //user_profile table insert
         $userproinfo = array([
@@ -196,11 +211,21 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //UserProfile Picture File Save
-        Storage::put('userprofile/'.$id.'.png',$request->get('imageSrc'));
+        Storage::put(
+            'userprofile/' . $id . '.png',
+            $request->get('imageSrc')
+        );
         $image_path = 'userprofile/'.$id.'.png';
         $password = $request->get('pwv');
-        $this->usermodel->userUpdate($password,$id);
-        $this->userfilmodel->userUpdate($request,$id,$this->gender,$this->age_group,$this->scope,$image_path);
+        $this->usermodel->userUpdate($password, $id);
+        $this->userfilmodel->userUpdate(
+            $request,
+            $id,
+            $this->gender,
+            $this->age_group,
+            $this->scope,
+            $image_path
+        );
         return response()->json('true');
     }
 
@@ -228,37 +253,51 @@ class UserController extends Controller
                 'grade' => '동네 뒷산',
             ]);
             return response()->json($profile_value);
-        }
-        else{
+        } else {
             // UserGrade Setting
             $hiking_count = hiking_record::where('uuid', $id)->count();
-            if ($hiking_count < 5)
+            if ($hiking_count < 5) {
                 $grade = '동네 뒷산';
-            elseif ($hiking_count > 5 && $hiking_count < 10)
+            } elseif ($hiking_count > 5 && $hiking_count < 10) {
                 $grade = '팔공산';
-            elseif ($hiking_count > 10 && $hiking_count < 20)
+            } elseif ($hiking_count > 10 && $hiking_count < 20) {
                 $grade = '한라산';
-            elseif ($hiking_count > 20 && $hiking_count < 50)
+            } elseif ($hiking_count > 20 && $hiking_count < 50) {
                 $grade = '백두산';
-            else
+            } else {
                 $grade = '에베레스트';
+            }
 
             // Total Hiking Time Setting
             $all_time = 0;
             $hiking_time = hiking_record::select(
-                DB::raw('timestampdiff(minute, created_at, updated_at) as HikingTime'))
-                ->where('owner', $id)->get();
+                DB::raw(
+                    'timestampdiff(minute, created_at, updated_at) as HikingTime'
+                )
+            )->where(
+                'owner', 
+                $id
+            )->get();
+
             foreach ($hiking_time as $hiking) {
                 $all_time += $hiking->HikingTime;
             }
+
             $hour = intval($all_time / 60);
             $minute = $all_time % 60;
             $all_time = $hour . '시간 ' . $minute . '분';
 
             // Average Hiking Speed Setting
             $total_speed = 0;
-            $row_count = hiking_record::where('owner', $id)->count();
-            $avg_speed = hiking_record::where('owner', $id)->select('avg_speed')->get();
+            $row_count = hiking_record::where(
+                'owner', 
+                $id
+            )->count();
+            $avg_speed = hiking_record::where(
+                'owner', 
+                $id
+            )->select('avg_speed')
+            ->get();
             foreach ($avg_speed as $speed) {
                 $total_speed += $speed->avg_speed;
             }
@@ -288,34 +327,63 @@ class UserController extends Controller
     /**
      * @funtion     graph
      * @brief       Get Graph's Information
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * 
+     * @param \Illuminate\Http\Request $request 
+     * @param int                      $id 
+     * 
      * @return \Illuminate\Http\Response
      */
-    public function graph(Request $request,$id) {
+    public function graph(Request $request,$id) 
+    {
         $year = $request->get('year');
         $month = array();
-        for($i = 1; $i <= 12; $i++) {
-            if($i == 1 || 3 || 5 || 7 || 8 || 10 || 12) {
-                $count = hiking_record::where('owner',$id)
-                    ->where('created_at','>=', $year.'-'.$i.'-01')
-                    ->where('created_at','<=', $year.'-'.$i.'-30')
-                    ->count();
-            }
-            elseif ($i == 2) {
+        for ($i = 1; $i <= 12; $i++) {
+            if ($i == 1 || 3 || 5 || 7 || 8 || 10 || 12) {
+                $count = hiking_record::where(
+                    'owner',
+                    $id
+                )->where(
+                    'created_at',
+                    '>=', 
+                    $year . '-' . $i . '-01'
+                )->where(
+                    'created_at',
+                    '<=', 
+                    $year . '-' . $i . '-30'
+                )->count();
+            } elseif ($i == 2) {
                 $count = hiking_record::where('owner', $id)
                     ->where('created_at', '>=', $year . '-' . $i . '-01')
                     ->where('created_at', '<=', $year . '-' . $i . '-28')
                     ->count();
-            }
-            else {
-                $count = hiking_record::where('owner',$id)
-                    ->where('created_at','>=', $year.'-'.$i.'-01')
-                    ->where('created_at','<=', $year.'-'.$i.'-30')
-                    ->count();
+            } else {
+                $count = hiking_record::where(
+                    'owner',
+                    $id
+                )->where(
+                    'created_at',
+                    '>=', 
+                    $year . '-' . $i . '-01'
+                )->where(
+                    'created_at',
+                    '<=', 
+                    $yea . '-' . $i . '-30'
+                )->count();
             }
             $month[$i] = $count;
         }
         return response()->json($month);
+    }
+
+    /**
+     * Get User's profile data set
+     * 
+     * @param String $userUuid 
+     * 
+     * @return Array
+     */
+    public function getUserProfile(String $userUuid)
+    {
+        return $this->_userProfile_model->getUserProfile($userUuid);
     }
 }

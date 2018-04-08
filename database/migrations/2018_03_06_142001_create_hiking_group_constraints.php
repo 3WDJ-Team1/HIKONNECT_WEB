@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGroupConstraints extends Migration
+class CreateHikingGroupConstraints extends Migration
 {
     private $_table = 'hiking_group';
 

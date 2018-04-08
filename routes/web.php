@@ -9,53 +9,13 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 Route::get(
     '/',
     function () {
         return view('layouts/app');
     }
 );
-
-Route::post(
-    '/', 
-    function () {
-        return 'hello~~~';
-    }
-);
-
-// Notification Routings
-Route::resource('notice', 'NoticeController');
-Route::get('notice/{pageIndex?}/{perPage?}', 'NoticeController@index');
-
-// Hiking group Routings
-Route::resource('hiking-group', 'HikingGroupController');
-Route::get('groupMembers/{groupUuid?}', 'HikingGroupController@getGroupMembers');
-
-// User Profile Routings
-Route::get('userProfile/{userUuid}', 'UserProfileController@getUserProfile');
- 
-// Route::resource('group', 'GroupController');
-// Route::post('/list', 'GroupController@jiyoon');
-
-// 나중에 삭제 할 것 ============
-Route::get('testing/{key?}', 'GroupController@testing');
-// ==============================
-
-// Login Routings
-Route::resource('/user', 'UserController');
-Route::post('/login', 'LoginController@login')->name('login');
-Route::post('/loginprocess', 'LoginController@loginprocess')->name('loginprocess');
-/**
- * Login process using Socialite
- * 
- * Line     = enabled
- * Kakao    = disabled
- */
-Route::get('/login/{providerName}', 'LoginController@redirectToProvider');
-Route::get('/login/{providerName}/redirect', 'LoginController@handleProviderCallback');
-
-Route::post('/logout', 'LoginController@logout')->name('logout');
-Route::get('/user/{id}', 'UserController@getImage')->name('getImage');
-Route::get('/mypage/{id}', 'UserController@showUserData')->name('UserData');
-Route::post('/graph/{id}', 'UserController@graph')->name('graph');
-Route::get('main/{id}', 'MainController@get_Announce_Count')->name('Announce_Count');

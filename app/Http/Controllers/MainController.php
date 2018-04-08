@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\announce;
+use App\Models\Announce;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -18,16 +18,16 @@ use App\Http\Controllers\Controller;
 
 class MainController extends Controller
 {
-    private $announce = null;
+    private $Announce = null;
     public function __construct()
     {
-        $this->announce = new announce();
+        $this->Announce = new Announce();
     }
 
     public function get_Announce_Count($id) {
         //Get Announce Count
-        $announce_count = announce::where('addressee',$id)
+        $Announce_count = Announce::where('addressee',$id)
             ->whereColumn('created_at','=','updated_at')->count();
-        return response()->json($announce_count);
+        return response()->json($Announce_count);
     }
 }

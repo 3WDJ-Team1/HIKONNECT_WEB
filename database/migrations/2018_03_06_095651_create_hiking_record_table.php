@@ -21,8 +21,8 @@ class CreateHikingRecordTable extends Migration
                 $table->uuid('uuid')->primary();
                 $table->uuid('owner');
                 $table->uuid('hiking_plan');
-                $table->decimal('avg_speed', 5, 2)->nullable();
-                $table->smallInteger('rank')->unsigned()->nullable();
+                $table->decimal('avg_speed', 5, 2);
+                $table->smallInteger('rank')->unsigned();
                 $table->timestamps();
             }
         );

@@ -20,6 +20,7 @@ use Faker as Faker;
  * @license  MIT license
  * @link     https://github.com/3wdj-team1/HIKONNECT_WEB
  */
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -29,6 +30,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+<<<<<<< Updated upstream
         // factory(App\Models\User::class, 100)->create();
         // factory(App\Models\HikingGroup::class, 100)->create();
         // factory(App\Models\Announce::class, 100)->create();
@@ -70,5 +72,20 @@ class DatabaseSeeder extends Seeder
         }
 
         DB::table('user_profile')->insert($data);
+=======
+        // $this->call(DummyDataSeeder::class);
+
+        factory(App\Models\UserProfile::class, 100)->create();
+        factory(App\Models\HikingGroup::class, 100)->create();
+        factory(App\Models\Announce::class, 100)->create();
+        factory(App\Models\EntryInfo::class, 100)->create();
+        factory(App\Models\HikingPlan::class, 100)->create();
+        factory(App\Models\HikingRecord::class, 100)->create();
+        factory(App\Models\LocationMemo::class, 100)->create();
+        factory(App\Models\Notification::class, 100)->create();
+        factory(App\Models\RadiogramLog::class, 100)->create();
+        factory(App\Models\Recruitment::class, 100)->create();
+        factory(App\Models\UserPosition::class, 100)->create();
+>>>>>>> Stashed changes
     }
 }

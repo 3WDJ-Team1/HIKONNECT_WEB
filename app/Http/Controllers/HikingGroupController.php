@@ -36,11 +36,23 @@ class HikingGroupController extends Controller
      * 
      * @return Array
      */
-    public function getGroupMembers(String $groupUuid)
+    public function getGroupMembers($groupUuid, $idx = 0, $perIdx = 10)
     {
-        $res = $this->_group_model->getGroupMembers($groupUuid);
-        if ($res == null) {
-            return response('Could not found group id', 206);
+        if ($idx && $perIdx) {
+            if (!$idx = intval($idx) || !$perIdx = intval($perIdx)) {
+                return response('Wrong request parameter type: $idx and $perIdx are must be Interger Type');
+            }
+        }
+
+        $res = $this->_group_model
+            ->getGroupMembers(
+                $groupUuid,
+                $idx,
+                $perIdx
+            );
+
+        if ($res->isEmpty()) {
+            return response("Query result is empty", 206);
         }
 
         return $res;
