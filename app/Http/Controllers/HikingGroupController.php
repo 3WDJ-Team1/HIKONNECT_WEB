@@ -29,36 +29,6 @@ class HikingGroupController extends Controller
     private $_group_model = null;
 
     /**
-     * Get group member list from database.
-     * 
-     * @param String $groupUuid Reference key(Group's UUID) Search
-     *                          for group members
-     * 
-     * @return Array
-     */
-    public function getGroupMembers($groupUuid, $idx = 0, $perIdx = 10)
-    {
-        if ($idx && $perIdx) {
-            if (!$idx = intval($idx) || !$perIdx = intval($perIdx)) {
-                return response('Wrong request parameter type: $idx and $perIdx are must be Interger Type');
-            }
-        }
-
-        $res = $this->_group_model
-            ->getGroupMembers(
-                $groupUuid,
-                $idx,
-                $perIdx
-            );
-
-        if ($res->isEmpty()) {
-            return response("Query result is empty", 206);
-        }
-
-        return $res;
-    }
-
-    /**
      * Constructor for GroupController
      */
     public function __construct()
@@ -175,5 +145,35 @@ class HikingGroupController extends Controller
     public function destroy($id)
     {
         return $this->_notice_model->where('uuid', $id)->delete();
+    }
+
+        /**
+     * Get group member list from database.
+     * 
+     * @param String $groupUuid Reference key(Group's UUID) Search
+     *                          for group members
+     * 
+     * @return Array
+     */
+    public function getGroupMembers($groupUuid, $idx = 0, $perIdx = 10)
+    {
+        if ($idx && $perIdx) {
+            if (!$idx = intval($idx) || !$perIdx = intval($perIdx)) {
+                return response('Wrong request parameter type: $idx and $perIdx are must be Interger Type');
+            }
+        }
+
+        $res = $this->_group_model
+            ->getGroupMembers(
+                $groupUuid,
+                $idx,
+                $perIdx
+            );
+
+        if ($res->isEmpty()) {
+            return response("Query result is empty", 206);
+        }
+
+        return $res;
     }
 }
