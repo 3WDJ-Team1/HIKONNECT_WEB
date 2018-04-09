@@ -17,11 +17,3 @@ Route::get(
 );
 
 
-Route::resource('/user','UserController');
-Route::post('/login','LoginController@login')->name('login');
-Route::post('/loginprocess','LoginController@loginprocess')->name('loginprocess');
-Route::post('/logout','LoginController@logout')->name('logout');
-Route::get('/mypage/{id}','UserController@showUserData')->name('UserData');
-Route::post('/graph/{id}','UserController@graph')->name('graph');
-Route::get('main/{id}','MainController@get_Announce_Count')->name('Announce_Count');
-Route::get('/record/{id}','Usercontroller@get_Hiking_record')->name('Get Hiking Record');
