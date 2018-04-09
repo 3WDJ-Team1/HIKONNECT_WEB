@@ -16,15 +16,14 @@
         "babel-plugin-syntax-dynamic-import": "^6.18.0",
         "babel-preset-env": "^1.6.1",
         "bootstrap-sass": "^3.3.7",
-        "cross-env": "^5.1",
+        "cross-env": "^5.1.4",
         "laravel-mix": "^1.0",
         "lodash": "^4.17.4",
         "node-sass": "^4.7.2",
         "sass-loader": "^6.0.7",
-        "vue": "^2.5.7"
+        "vue": "^2.5.16"
     },
     "dependencies": {
-        "vue-loader": "^14.2.1",
         "ajv": "^6.0.0",
         "ajv-keywords": "^3.1.0",
         "bootstrap-select": "^1.12.4",
@@ -33,7 +32,7 @@
         "d3": "^4.13.0",
         "element-ui": "^2.2.2",
         "fs": "0.0.1-security",
-        "jQuery": "^1.7.4",
+        "jquery": "^1.7.4",
         "jsdom": "^11.6.2",
         "location": "0.0.1",
         "luxon": "^0.3.1",
@@ -41,7 +40,7 @@
         "net": "^1.0.2",
         "sweet-modal-vue": "^2.0.0",
         "tls": "0.0.1",
-        "vue-axios": "^2.0.2",
+        "vue-axios": "^2.1.1",
         "vue-d2b": "^1.0.11",
         "vue-data-loading": "^0.2.4",
         "vue-datetime": "^1.0.0-beta.3",
@@ -54,7 +53,7 @@
         "vuechart": "^18.3.1",
         "vuejs-auto-complete": "^0.6.5",
         "vuejs-dialog": "^0.8.0",
-        "vuetify": "^1.0.5",
+        "vuetify": "^1.0.13",
         "weekstart": "^1.0.0",
         "xmlhttprequest": "^1.8.0"
     }

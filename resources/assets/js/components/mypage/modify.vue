@@ -4,7 +4,7 @@
             <div class="col-md-5 col-md-offset-2">
                 <div class="panel panel-default" style="margin-top: 80px">
                     <div class="panel-heading">정보 수정</div>
-                    <span> <img :src="item.imageSrc" class="image" style="width: 400px; height: 400px">
+                    <span> <img :src="item.path" class="image" style="width: 400px; height: 400px">
                     <input  @change="uploadImage" type="file" name="photo" accept="image/*"></span>
                     <span class="panel-body">
                         <input type="text"     style="margin-top: 10px" v-model="item.idv" class="form-control" placeholder="Enter id" id="id"/>
@@ -49,7 +49,7 @@
             $('#pwvc').val(c);
             let uri = this.$HttpAddr + '/user/' + sessionStorage.getItem('uuid');
             this.axios.get(uri, this.item).then((response) => {
-               this.item.imageSrc =  response.data;
+               this.item.path =  response.data;
             })
         },
 
