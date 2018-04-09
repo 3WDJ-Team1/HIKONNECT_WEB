@@ -1,6 +1,20 @@
 <template>
     <v-app
         id="inspire">
+        <!-- 최상단 이동 버튼 -->
+        <a name="#"></a>
+        <v-btn
+              color="red"
+              dark
+              midiuem
+              fixed
+              right
+              bottom
+              fab
+              href="#">
+                <v-icon>keyboard_arrow_up</v-icon>
+        </v-btn>
+        <!-- #최상단 이동 버튼 -->
         <v-navigation-drawer
             fixed
             v-model="drawerRight"
@@ -58,7 +72,13 @@
             <v-icon style="margin-bottom: 0.5em;">menu</v-icon>
         </v-btn>
         <v-toolbar-title class="mr-5 align-center">
-            <span style="font-size: 1.4em;">HIKONNECT</span>
+            <span 
+            style="
+                font-size: 1.4em;
+                cursor:pointer;"
+            @click="goToHome()">
+            HIKONNECT
+            </span>
         </v-toolbar-title>
         <v-layout
             row
@@ -173,6 +193,9 @@
             changeDrawerRightMode(argValue) {
                 this.drawerRightMode = argValue;
             },
+            goToHome() {
+                location.href='/#/';
+            }
         },
         created() {
             this.$EventBus.$on('errorModalOpen', (message) => {
@@ -182,6 +205,11 @@
             this.$EventBus.$on('complitedModalOpen', (value) => {
                 this.$refs.cModal.open();
             })
-        }
+            this.$EventBus.$on('clickGettingStartBtn', () => {
+                console.log('button cliked!');
+                this.changeDrawerRightMode('login');
+                this.drawerRight = !this.drawerRight;
+            })
+        },
     }
 </script>

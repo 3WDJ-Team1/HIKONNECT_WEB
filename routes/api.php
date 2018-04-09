@@ -30,6 +30,7 @@ Route::group(
 
         // Hiking group Routings
         Route::resource('hiking-group', 'HikingGroupController');
+        
         Route::get(
             'groupMembers/{groupUuid}/{idx?}/{perIdx?}', 
             'HikingGroupController@getGroupMembers'

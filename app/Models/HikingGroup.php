@@ -64,7 +64,7 @@ class HikingGroup extends Model
     /**
      * Get group member's location
      * 
-     * @param Request $req 
+     * @param String $hiking_group 
      * 
      * @return void
      */
@@ -75,6 +75,28 @@ class HikingGroup extends Model
             ->select('user', 'position')
             ->where('hiking_gruop', $hiking_group)
             ->get();
+
+        return $queryRes;
+    }
+
+    /**
+     * Get Group's detail infomation.
+     * 
+     * 
+     */
+    public function getGroupDetail(String $hiking_group) 
+    {
+        $queryRes = DB::table('hiking_group')
+            ->join(
+                'hiking_plan',
+                'hiking_group.uuid',
+                'hiking_plan.hiking_group'
+            )->select(
+                '*'
+            )->where(
+                'hiking_group.uuid', 
+                $hiking_group
+            )->get();
 
         return $queryRes;
     }

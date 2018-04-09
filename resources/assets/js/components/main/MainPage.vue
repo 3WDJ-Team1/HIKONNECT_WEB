@@ -15,8 +15,7 @@
                 class="cyan mt-5"
                 dark
                 large
-                href="/login"
-                >
+                @click="login()">
                 GETTING START
                 </v-btn>
             </v-layout>
@@ -35,7 +34,7 @@
                 sm4
                 class="my-3">
                 <div class="text-xs-center">
-                <h2 class="headline">The best way to start developing</h2>
+                <h2 class="headline">The best way to start group hiking</h2>
                 <span class="subheading">
                     Cras facilisis mi vitae nunc 
                 </span>
@@ -132,7 +131,7 @@
                 class="red darken-1 mt-5"
                 dark
                 large
-                href="/pre-made-themes"
+                href="/#/list"
                 >
                 FIND GROUPS
                 </v-btn>
@@ -228,6 +227,11 @@
         data: () => ({
             title   : 'Your Logo',
             httpAddr: Laravel.host
-        })
+        }),
+        methods: {
+            login: function() {
+                this.$EventBus.$emit('clickGettingStartBtn');
+            },
+        }
     }
  </script>
