@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Hiking_group;
-// 삭제 할 것 =============
-use App\Models\mountain;
-// ========================
 use App\Models\User;
 
     /**
@@ -14,9 +11,7 @@ use App\Models\User;
      */
 class GroupController extends Controller
 {
-    private $mountain_model = null;
     private $group_model = null;
-    private $user_model = null;
 
     /**
      * Constructor for GroupController
@@ -25,7 +20,6 @@ class GroupController extends Controller
     {
         $this->group_model = new Hiking_group();
         $this->user_model = new User();
-        $this->mountain_model = new mountain();
     }
 
     public function testing($key)

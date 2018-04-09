@@ -25,16 +25,12 @@
 </template>
 
 <script>
-    import { EventBus } from './event_bus.js';
-    import Vue from 'vue'
-    import Datetime from 'vue-datetime'
-    import 'vue-datetime/dist/vue-datetime.css'
-    Vue.use(Datetime);
-
-
+    import { EventBus } from './event_bus'
     export default {
+
         data()  {
             return  {
+
                 mountain_name: "",
                 writer: "",
                 date: ""
@@ -48,7 +44,7 @@
     }
 </script>
 <style>
-    .input-group > .input-group-prepend > .btn, .input-group > .input-group-prepend > .input-group-text, .input-group > .input-group-append:not(:last-child) > .btn, .input-group > .input-group-append:not(:last-child) > .input-group-text, .input-group > .input-group-append:last-child > .btn:not(:last-child):not(.dropdown-toggle), .input-group > .input-group-append:last-child > .input-group-text:not(:last-child)   {
+    /* .input-group > .input-group-prepend > .btn, .input-group > .input-group-prepend > .input-group-text, .input-group > .input-group-append:not(:last-child) > .btn, .input-group > .input-group-append:not(:last-child) > .input-group-text, .input-group > .input-group-append:last-child > .btn:not(:last-child):not(.dropdown-toggle), .input-group > .input-group-append:last-child > .input-group-text:not(:last-child)   {
         padding-right: 20px;
     }
     .serch_option  {
@@ -64,6 +60,6 @@
          height: 400px;
          font-size: 12px;
          display: inline;
-     }
+     } */
 </style>
 

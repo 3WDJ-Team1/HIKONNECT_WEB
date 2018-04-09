@@ -45,10 +45,15 @@ class NoticeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($pageIndex, $perPage)
+    public function index($groupUuid, $pageIndex = 0, $perPage = 0)
     {
         $notifications = $this->_notice_model
-            ->getNotifications($pageIndex, $perPage);
+            ->getNotifications(
+                $groupUuid, 
+                $pageIndex, 
+                $perPage
+            );
+
         return $notifications;
         // return view('notice', ['userList' => $notifications]);
     }

@@ -14,8 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB
  */
 
-class announce extends Model
+class Announce extends Model
 {
     protected $table = 'announce';
 }
-

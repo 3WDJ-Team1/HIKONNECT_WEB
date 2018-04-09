@@ -20,7 +20,7 @@ class CreateHikingPlanTable extends Migration
             function (Blueprint $table) {
                 $table->uuid('uuid')->primary();
                 $table->uuid('hiking_group');
-                $table->datetime('start_date')->nullable();
+                $table->datetime('start_date');
                 $table->jsonb('starting_point');
                 $table->jsonb('stopover');
                 $table->jsonb('end_point');

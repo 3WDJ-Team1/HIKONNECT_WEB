@@ -23,7 +23,7 @@
                 tag="v-list-tile"
                 v-for="item in items"
                 :key="item.text"
-                to="/">
+                :to="item.path">
                 <v-list-tile-action>
                     <v-icon>{{ item.icon }}</v-icon>
                 </v-list-tile-action>
@@ -60,31 +60,36 @@
         <v-toolbar-title class="mr-5 align-center">
             <span style="font-size: 1.4em;">HIKONNECT</span>
         </v-toolbar-title>
-        <v-layout row align-center style="margin-left: 65em; padding: 0;">
-            <v-flex
-                xs2
-                sm3
-                md4
-                style="font-size: 1em; margin-right: 2em;"
+        <v-layout
+            row
+            fluid
+            align-content-end
+            align-end
+            justify-end
+            style="padding: 0;">
+            <v-btn
+                style="padding: 0; background-color: transparent;"
+                flat
                 @click.stop="drawerRight = !drawerRight"
                 @click="changeDrawerRightMode('login')">
                 <v-icon color="white">lock</v-icon>
                 SIGN IN
-            </v-flex>
-            <v-flex
-                xs2
-                sm3
-                md4
-                style="font-size: 1em;"
+            </v-btn>
+            <v-btn
+                style="padding: 0; background-color: transparent;"
+                flat
                 @click.stop="drawerRight = !drawerRight"
                 @click="changeDrawerRightMode('register')">
                 <v-icon color="white">assignment_ind</v-icon>
                 SIGN UP
-            </v-flex>
+            </v-btn>
         </v-layout>
         </v-toolbar>
         <v-content>
-        <v-container fill-height fluid style="padding: 0;">
+        <v-container
+            fill-height
+            fluid
+            style="padding: 0;">
             <v-layout fluid>
             <v-flex>
                 <router-view
@@ -147,7 +152,7 @@
                 {
                     icon: 'group_add',
                     text: 'JOIN HIKING GROUP',
-                    path: '/'
+                    path: '/list'
                 },
                 {
                     icon: 'account_circle',
@@ -156,11 +161,7 @@
                 },
             ],
             items2: [
-                { picture: 28, text: 'Joseph' },
-                { picture: 38, text: 'Apple' },
-                { picture: 48, text: 'Xbox Ahoy' },
-                { picture: 58, text: 'Nokia' },
-                { picture: 78, text: 'MKBHD' }
+                
             ],
             modalErrorMsg: ""
         }),

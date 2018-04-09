@@ -98,17 +98,16 @@
                 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
                 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
                 'W', 'X', 'Y', 'Z', '#'],
-            httpAddr: Laravel.host,
         }),
         methods: {
             getGroupUserData(argGroupUuid) {
-                axios.get(this.httpAddr + "/groupMembers/" + argGroupUuid)
+                axios.get(this.$HttpAddr + "/groupMembers/" + argGroupUuid)
                 .then( response => {
                     this.memberList = response.data;
                 })
             },
             getMembersData(argMemberUuid) {
-                axios.get(this.httpAddr + "/userProfile/" + argMemberUuid)
+                axios.get(this.$HttpAddr + "/userProfile/" + argMemberUuid)
                 .then( response => {
                     this.userDataArr.push(response.data[0]);
                 })

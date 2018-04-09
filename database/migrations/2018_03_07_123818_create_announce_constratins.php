@@ -7,6 +7,7 @@ use Illuminate\Database\Migrations\Migration;
 class CreateAnnounceConstratins extends Migration
 {
     private $_table = 'announce';
+
     /**
      * Run the migrations.
      *

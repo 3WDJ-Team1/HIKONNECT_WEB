@@ -14,7 +14,6 @@
     export default {
         data: () => ({
             /**
-             * httpAddr                 (String)    The http address of server
              * options                  (Object)    The options used for creating a map
              *      - center            (Object)    The location of center of map
              *              - lat       (Number)    The latitude of the location
@@ -30,7 +29,6 @@
              *      - strokeWeight      (Number)    The weight of stroke
              * hikingPath               (Object)    Created Polyline object
              */
-            httpAddr                : Laravel.host,
             options                 : {
                                         center  : { lat: 36.9579208734, lng: 128.4 },
                                         zoom    : 15
@@ -55,7 +53,7 @@
         }),
         methods: {
             getMountainLocationFromServer () {
-                // axios.get(this.httpAddr + '/xmltesting')
+                // axios.get(this.$HttpAddr + '/xmltesting')
                 // .then(response => {
                 //     this.hikingPathCoordinates = response.data;
                 // });

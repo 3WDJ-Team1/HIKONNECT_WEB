@@ -7,6 +7,7 @@ use Illuminate\Database\Migrations\Migration;
 class CreateUserTable extends Migration
 {
     private $_table = 'user';
+    
     /**
      * Run the migrations.
      *

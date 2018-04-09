@@ -117,12 +117,16 @@
             <v-btn
                 @click      ="regist"
                 :disabled   ="!valid"
-                style       ="padding: 0;">
+                style       ="padding: 0;"
+                color       ="light-blue darken-1"
+                dark>
                 SUBMIT
             </v-btn>
             <!-- @v-btn         button for clear -->
             <v-btn
-                @click      ="clear">
+                @click      ="clear"
+                dark
+                style       ="padding: 0;">
                 CLEAR
             </v-btn>
         </v-form>
@@ -154,7 +158,6 @@
              *      - genderOpt     (Array)     The options for selecting gender
              *      - ageGroupOpt   (Array)     The options for selecting age group
              *      - openOpt       (Array)     The options for selecting open range
-             * httpAddr         (String)        The address of server
              * isTooltipShown   (Boolean)       Is tooltip to show user alert now floating
              */
             valid           : true,
@@ -179,7 +182,6 @@
                 ageGroupOpt : ['10대', '20대', '30대', '40대', '50대', '60대 이상'],
                 openOpt     : ['all', 'group']
             },
-            httpAddr        : Laravel.host,
             isTooltipShown  : false
         }),
         methods: {
@@ -194,7 +196,7 @@
                     return;
                 }
                 if (this.$refs.form.validate()) {
-                    axios.post(this.httpAddr + '/user', {
+                    axios.post(this.$HttpAddr + '/user', {
                         name    : this.name,
                         email   : this.email,
                         select  : this.select,

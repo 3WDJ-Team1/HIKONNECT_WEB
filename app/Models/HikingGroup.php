@@ -33,16 +33,48 @@ class HikingGroup extends Model
     /**
      * 
      */
-    public function getGroupMembers(String $groupUuid)
+    public function getGroupMembers(String $groupUuid, $idx, $perIdx)
     {
+        if (is_int($idx) xor is_int($perIdx)) {
+            return 0;
+        }
         $queryRes = DB::table('entry_info')
-            ->select('user as uuid')
-            ->where(
+            ->select(
+                'user_profile.nickname',
+                'user_profile.image_path',
+                'user_profile.phone',
+                'user_profile.gender',
+                'user_profile.age_group',
+                'user_profile.scope'
+            )->leftJoin(
+                'user_profile', 
+                'entry_info.user', 
+                'user_profile.user'
+            )->where(
                 [
                     ['hiking_group', $groupUuid],
-                    ['is_accepted', '1'],
                 ]
-            )->get();
+            )->skip($idx)
+            ->take($perIdx)
+            ->get();
+
+        return $queryRes;
+    }
+
+    /**
+     * Get group member's location
+     * 
+     * @param Request $req 
+     * 
+     * @return void
+     */
+    public function getMembersLocation(String $hiking_group) 
+    {
+
+        $queryRes = DB::table('user_position')
+            ->select('user', 'position')
+            ->where('hiking_gruop', $hiking_group)
+            ->get();
 
         return $queryRes;
     }

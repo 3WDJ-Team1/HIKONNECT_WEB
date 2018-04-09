@@ -44,19 +44,36 @@ class LoginController extends Controller
         //Login
         try {
             $userinfo = User::where('id', $request->get('idv'))->first();
-            if ($userinfo == false)
+            if ($userinfo == false) {
                 throw new Exception('존재하지 않는 ID');
+            }
         } catch (\Exception $e) {
             return response()->json('false');
         }
         if ($userinfo->password == $request->get('pwv')) {
-            $sessionVal = User::join('user_profile', 'user_profile.user', '=', 'user.uuid')->select('user_profile.nickname', 'user_profile.image_path', 'user_profile.phone',
-                'user_profile.gender', 'user_profile.age_group', 'user_profile.scope', 'user.uuid', 'user.password')
-                ->where('id', $request->get('idv'))->get();
+            $sessionVal = User::join(
+                'user_profile', 
+                'user_profile.user', 
+                '=', 
+                'user.uuid'
+            )->select(
+                'user_profile.nickname', 
+                'user_profile.image_path', 
+                'user_profile.phone',
+                'user_profile.gender', 
+                'user_profile.age_group', 
+                'user_profile.scope', 
+                'user.uuid', 
+                'user.password'
+            )->where(
+                'id', 
+                $request->get('idv')
+            )->get();
+            
             return response()->json($sessionVal);
-           }
-        else
+        } else {
             return response()->json('pwfalse');
+        }
     }
 
     public function redirectToProvider($providerName)

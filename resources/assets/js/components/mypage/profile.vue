@@ -31,7 +31,7 @@
 <script>
     export default {
         created: function () {
-            let uri = 'http://localhost:8000/mypage/' + sessionStorage.getItem('uuid');
+            let uri = this.$HttpAddr + '/mypage/' + sessionStorage.getItem('uuid');
             this.axios.get(uri).then((response) => {
 
                 var datavalue = Object.values(response.data);
@@ -46,6 +46,6 @@
                     +'/');
 
             })
-        }
+        },
     }
 </script>
