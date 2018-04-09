@@ -178,7 +178,7 @@
                 ],
             },
             options : {
-                genderOpt   : ['female','male'],
+                genderOpt   : ['여자','남자'],
                 ageGroupOpt : ['10대', '20대', '30대', '40대', '50대', '60대 이상'],
                 openOpt     : ['all', 'group']
             },
@@ -197,14 +197,16 @@
                 }
                 if (this.$refs.form.validate()) {
                     axios.post(this.$HttpAddr + '/user', {
-                        name    : this.name,
-                        email   : this.email,
-                        select  : this.select,
-                        checkbox: this.checkbox
+                        idv: this.inputId,
+                        nn: this.inputNickname,
+                        pwv: this.inputPw,
+                        phone: this.inputPhoneNo,
+                        gender: this.selectedGender,
+                        age: this.selectedAgeGroup,
                     }).then(response => {
                         if (response.data == 'true')
                         {
-                            $this.$EventBus.$emit('complitedModalOpen', 'true');
+                            this.$EventBus.$emit('complitedModalOpen', 'true');
                         }
                         else
                         {

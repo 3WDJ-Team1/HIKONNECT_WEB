@@ -38,7 +38,7 @@ class UserController extends Controller
 
     private $usermodel = null;
     private $userfilmodel = null;
-    private $scope;
+    private $scope = 0;
     private $gender;
     private $age_group;
     private $uuid;
@@ -140,11 +140,11 @@ class UserController extends Controller
         $usercheck = User::all();
         foreach ($usercheck as $user) {
             if ($user->idv == $request->get('idv')) {
-                return response()->json('false');
+                return response()->json('idvfalse');
             } else {
                 continue;
             }
-        }
+        };
         $usercheck = UserProfile::all();
         foreach ($usercheck as $user) {
             if ($user->nickname == $request->get('nn')) {
@@ -166,7 +166,7 @@ class UserController extends Controller
             'uuid'          => '',
             'user'          => $this->uuid[0],
             'nickname'     =>  $request->get('nn'),
-            'image_path'   => 'https://lorempixe.com/640/400/?66549',
+            'image_path'   => 'https://lorempixel.com/640/400/?66549',
             'phone'         => $request->get('phone'),
             'gender'        => $this->gender,
             'age_group'     => $this->age_group,
@@ -367,7 +367,7 @@ class UserController extends Controller
                 )->where(
                     'created_at',
                     '<=', 
-                    $yea . '-' . $i . '-30'
+                    $year . '-' . $i . '-30'
                 )->count();
             }
             $month[$i] = $count;

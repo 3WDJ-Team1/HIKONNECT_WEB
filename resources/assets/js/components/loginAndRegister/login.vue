@@ -58,7 +58,11 @@
             login() {
                 
                     let uri = this.$HttpAddr + '/loginprocess';
-                    this.axios.post(uri, this.item).then((response) => {
+
+                    this.axios.post(uri, {
+                        idv: this.userId,
+                        pwv: this.userPw
+                    }).then((response) => {
                         if (response.data == 'false') {
                             alert('아이디가 없습니다.');
                         }
