@@ -37,11 +37,14 @@ class Notification extends Model
     public function getNotifications($groupUuid, int $pageIndex = 0, int $perPage = 5)
     {
         return Notification::
-            leftJoin(
+            join(
                 'user_profile', 
                 'notification.writer', 
-                '=', 
                 'user_profile.user'
+            )->join(
+                'entry_info',
+                'notification.writer',
+                'entry_info.user'
             )->select(
                 'notification.uuid', 
                 'user_profile.nickname', 
@@ -51,7 +54,7 @@ class Notification extends Model
                 'notification.created_at',
                 'notification.updated_at'
             )->where(
-                'user_profile.hiking_group',
+                'hiking_group',
                 $groupUuid
             )->skip($pageIndex)
             ->take($perPage)
