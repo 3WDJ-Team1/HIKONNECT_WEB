@@ -68,7 +68,7 @@ Vue.use(Toasted);
 import App                  from './components/App.vue';
 
 // set httpAddr all Vue components
-Vue.prototype.$HttpAddr = Laravel.host;
+Vue.prototype.$HttpAddr = Laravel.host + "/api";
 
 const router = new VueRouter({ routes:routes });
  
