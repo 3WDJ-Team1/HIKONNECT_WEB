@@ -34,11 +34,15 @@ class Notification extends Model
      * 
      * @return Array
      */
-    public function getNotifications(int $pageIndex = 0, int $perPage = 5)
+    public function getNotifications($groupUuid, int $pageIndex = 0, int $perPage = 5)
     {
         return Notification::
-            leftJoin('user_profile', 'notification.writer', '=', 'user_profile.user')
-            ->select(
+            leftJoin(
+                'user_profile', 
+                'notification.writer', 
+                '=', 
+                'user_profile.user'
+            )->select(
                 'notification.uuid', 
                 'user_profile.nickname', 
                 'notification.title', 
@@ -46,8 +50,12 @@ class Notification extends Model
                 'notification.hits',
                 'notification.created_at',
                 'notification.updated_at'
-            )
-            ->skip($pageIndex)->take($perPage)->get();
+            )->where(
+                'user_profile.hiking_group',
+                $groupUuid
+            )->skip($pageIndex)
+            ->take($perPage)
+            ->get();
     }
 
     /**

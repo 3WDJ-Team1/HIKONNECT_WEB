@@ -39,12 +39,20 @@ class HikingGroup extends Model
             return 0;
         }
         $queryRes = DB::table('entry_info')
-            ->select('user as uuid')
-            ->leftJoin('user_profile', 'entry_info.user', 'user_profile.user')
-            ->where(
+            ->select(
+                'user_profile.nickname',
+                'user_profile.image_path',
+                'user_profile.phone',
+                'user_profile.gender',
+                'user_profile.age_group',
+                'user_profile.scope'
+            )->leftJoin(
+                'user_profile', 
+                'entry_info.user', 
+                'user_profile.user'
+            )->where(
                 [
                     ['hiking_group', $groupUuid],
-                    ['is_accepted', '1'],
                 ]
             )->skip($idx)
             ->take($perIdx)

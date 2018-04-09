@@ -23,13 +23,15 @@ Route::group(
     function () {
         // Notification Routings
         Route::resource('notice', 'NoticeController');
-        Route::get('notice/{pageIndex?}/{perPage?}', 'NoticeController@index')
-        ->name('noticePagination');
+        Route::get(
+            'notice/{groupUuid}/{pageIndex?}/{perPage?}', 
+            'NoticeController@index'
+        )->name('noticePagination');
 
         // Hiking group Routings
         Route::resource('hiking-group', 'HikingGroupController');
         Route::get(
-            'groupMembers/{groupUuid?}/{idx?}/{perIdx?}', 
+            'groupMembers/{groupUuid}/{idx?}/{perIdx?}', 
             'HikingGroupController@getGroupMembers'
         )->name('groupMemberList');
 
