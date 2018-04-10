@@ -30,22 +30,32 @@
 </template>
 <script>
     export default {
+        data()  {
+            return {
+                userid : '',
+                nickname: '',
+                rank : '',
+                mttime : '',
+                avgspeed : '',
+                history : '',
+            }
+        },
         created: function () {
-            let uri = this.$HttpAddr + '/mypage/' + sessionStorage.getItem('uuid');
+            let uri = 'http://localhost:8000/mypage/' + sessionStorage.getItem('uuid');
             this.axios.get(uri).then((response) => {
 
                 var datavalue = Object.values(response.data);
                 console.log(response.data);
-                $('#userid').append('&nbsp;&nbsp;&nbsp;&nbsp;'+sessionStorage.getItem('userid'));
-                $('#nickname').append('&nbsp;&nbsp;&nbsp;&nbsp;'+sessionStorage.getItem('nickname'));
-                $('#level').append('&nbsp;&nbsp;&nbsp;&nbsp;'+datavalue[0].grade);
-                $('#hour').append('&nbsp;&nbsp;&nbsp;&nbsp;'+datavalue[0].hiking_time);
-                $('#speed').append('&nbsp;&nbsp;&nbsp;&nbsp;'+datavalue[0].avg_speed+' km/h');
-                $('#history').append('&nbsp;&nbsp;&nbsp;&nbsp;'
+                this.userid = sessionStorage.getItem('userid');
+                this.nickname = sessionStorage.getItem('nickname');
+                this.rank = datavalue[0].grade;
+                this.mttime = datavalue[0].hiking_time;
+                this.avgspeed = datavalue[0].avg_speed + ' km/h';
+                this.history = '&nbsp;&nbsp;&nbsp;&nbsp;'
                     +datavalue[0].recent_hiking.created_at.substring(0,10) + '/' + datavalue[0].hiking_group_name
-                    +'/');
+                    +'/';
 
             })
-        },
+        }
     }
 </script>
