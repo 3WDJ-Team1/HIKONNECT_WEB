@@ -77,42 +77,43 @@ class HikingGroup extends Model
 	 * 
 	 * @return Array
 	 */
-	public function getCountOfPeople(int $pageIndex, String $method) {
-		if ($method == 'default') {
-			return $countOfPeople = DB::table('entry_info')
-										->select(
-											'entry_info.hiking_group',
-											DB::raw('count(*) as total')
-										)
-										->groupBy('entry_info.hiking_group')
-										->get();
-		} else if ($method == 'NumberOfParticipants') {
-			return $countOfPeople 	= DB::table('entry_info')
-										->select(
-											'entry_info.hiking_group',
-											DB::raw('count(*) as total')
-										)
-										->groupBy('entry_info.hiking_group')
-										->orderBy('total', 'desc')
-										->get();
-			}
-	}
+	// public function getCountOfPeople(int $pageIndex, String $method) {
+	// 	if ($method == 'default') {
+	// 		return $countOfPeople = DB::table('entry_info')
+	// 									->select(
+	// 										'entry_info.hiking_group',
+	// 										DB::raw('count(*) as total')
+	// 									)
+	// 									->groupBy('entry_info.hiking_group')
+	// 									->get();
+	// 	} else if ($method == 'NumberOfParticipants') {
+	// 		return $countOfPeople 	= DB::table('entry_info')
+	// 									->select(
+	// 										'entry_info.hiking_group',
+	// 										DB::raw('count(*) as total')
+	// 									)
+	// 									->groupBy('entry_info.hiking_group')
+	// 									->orderBy('total', 'desc')
+	// 									->get();
+	// 		}
+	// }
 
-	public function listUp($pageIndex, $method) {
-		/**
-		 * Get groupList from database, and then listUp all of grouplist by selected method.
-		 * <Sort of listup method>
-		 * 1. Latest
-		 * 2. NumberOfParticipants
-		 * 
-		 * @return Array
-		 */
-		if ($method == 'Latest') {
-			return $listupGroupData = $this->getGroupInformations($pageIndex, 'default');
-		} else if ($method == 'NumberOfParticipants') {
-			return $listupGroupData = $this->getGroupInformations($pageIndex, 'NumberOfParticipants');
-		}
-	}
+	// public function listUp($pageIndex, $method) {
+	// 	/**
+	// 	 * Get groupList from database, and then listUp all of grouplist by selected method.
+	// 	 * <Sort of listup method>
+	// 	 * 1. Latest
+	// 	 * 2. NumberOfParticipants
+	// 	 * 
+	// 	 * @return Array
+	// 	 */
+	// 	if ($method == 'Latest') {
+	// 		$listupGroupInfoData 	= $this->getGroupInformations($pageIndex, 'default');
+	// 		$litupCountOfPeople		= $this->getCountOfPeople($pageIndex, 'default');
+	// 	} else if ($method == 'NumberOfParticipants') {
+	// 		return $listupGroupData = $this->getGroupInformations($pageIndex, 'NumberOfParticipants');
+	// 	}
+	// }
 
 	public function findData($method, $inputData) {
 		/**
@@ -120,7 +121,7 @@ class HikingGroup extends Model
 		 * 
 		 * @return Array
 		 */
-		if ($method == 'destination') {
+		if ($method == 'mnt_name') {
 			return $findedData		= HikingGroup::leftJoin('recruitment', 'hiking_group.uuid', '=', 'recruitment.hiking_group')
 													->leftJoin('hiking_plan', 'recruitment.hiking_group', '=', 'hiking_plan.hiking_group')
 													->select (
@@ -132,12 +133,11 @@ class HikingGroup extends Model
 														'hiking_group.min_members',
 														'hiking_group.max_members'
 													)
-													->where('hiking_plan.end_point', '=', 'destination')
-													->skip($pageIndex)->take(10)->get();
+													->where('mountain.mnt_name', '=', $inputData)
+													->get();
 		} else if ($method == 'writer') {
 			return $findedData		= HikingGroup::leftJoin('recruitment', 'hiking_group.uuid', '=', 'recruitment.hiking_group')
 													->leftJoin('hiking_plan', 'recruitment.hiking_group', '=', 'hiking_plan.hiking_group')
-													->leftJoin('user_profile', '')
 													->select (
 														'recruitment.hiking_group',
 														'recruitment.title',
@@ -147,8 +147,9 @@ class HikingGroup extends Model
 														'hiking_group.min_members',
 														'hiking_group.max_members'
 													)
-													->where('hiking_group_owner', '=', 'writer')
-													->skip($pageIndex)->take(10)->get();
+													->where('hiking_group.owner', '=', $inputData)
+													->get();
+
 		} else if ($method == 'date') {
 			return $findedData		= HikingGroup::leftJoin('recruitment', 'hiking_group.uuid', '=', 'recruitment.hiking_group')
 													->leftJoin('hiking_plan', 'recruitment.hiking_group', '=', 'hiking_plan.hiking_group')
@@ -161,19 +162,90 @@ class HikingGroup extends Model
 														'hiking_group.min_members',
 														'hiking_group.max_members'
 													)
-													->where('hiking_plan.start_date', '=', 'date')
-													->skip($pageIndex)->take(10)->get();
+													->where('hiking_plan.start_date', '=', $inputData)
+													->get();
 		}
 	}
 
-	public function insertHikingGroup() {
+	public function showSelectedGroupInfo(String $uuid) {
 		/**
-		 * insert inputData in hiking_group table.
+		 * show HikingGroupInfo by correspond selected uuid. 
 		 * 
 		 * @return Array
 		 */
-		$Success;
-		return $Success;
+		return $selectedHikingGroupInfo 	=  HikingGroup::leftJoin('recruitment', 'hiking_group.uuid', '=', 'recruitment.hiking_group')
+															->leftJoin('hiking_plan', 'recruitment.hiking_group', '=', 'hiking_plan.hiking_group')
+															->select (
+																'recruitment.title',
+																'recruitment.content',
+																'hiking_plan.starting_point',
+																'hiking_plan.stopover',
+																'hiking_plan.end_point',
+																'hiking_plan.start_date',
+																'hiking_group.min_members',
+																'hiking_group.max_members'
+															)
+															->where('hiking_group.uuid', '=', $uuid)
+															->get();
 	}
 
+	public function insertHikingGroup($title, $content, $starting_point, $stopover,
+									  $end_point, $start_date, $min_members, $max_members) {
+		/**
+		 * insert HikingGroupInfo by correspond selected uuid.
+		 * 
+		 */
+		DB::table('recruitment')->insert([
+			'title' 	 		=> $title,
+			'content' 	 		=> $content
+		]);
+		DB::table('hiking_plan')->insert([
+			'starting_point' 	=> $starting_point,
+			'stopover' 			=> $stopover,
+			'end_point' 		=> $end_point,
+			'start_date' 		=> $start_date
+		]);
+		HikingGroup::insert([
+			'min_memebers'      => $min_members,
+			'max_memebers'      => $max_members
+		]);
+
+	}
+
+	public function updateSelectedGroupInfo(Array $inputData, String $uuid) {
+		/**
+		 * update HikingGroupInfo by correspond selected uuid.
+		 * 
+		 */
+		DB::table('recruitment')->where('uuid', '=', $uuid)
+								->update([
+								'title' => $request->get('title'),
+								'content' => $request->get('content')
+								]);
+		DB::table('hiking_plan')->where('uuid', '=', $uuid)
+								->insert([
+								'starting_point' => $request->get('starting_point'),
+								'stopover' => $request->get('stopover'),
+								'end_point' => $request->get('end_point'),
+								'start_date' => $request->get('start_date')
+								]);
+		HikingGroup::where('uuid', '=', $uuid)
+					->update([
+					'min_members' => $request->get('min_members'),
+					'max_members' => $request->get('max_member')
+					]);
+	}
+
+	public function deleteHikingGroupInfo(String $uuid) {
+		/**
+		 * delete HikingGroupInfo by correspond selected uuid.
+		 * 
+		 */
+		DB::table('recruitment')->where('uuid', '=', $uuid)                      
+								->delete();
+		DB::table('hiking_plan')->where('uuid', '=', $uuid)
+								->delete();
+		HikingGroup::where('uuid', '=', $uuid)
+					->delete();                             
+	}
 }

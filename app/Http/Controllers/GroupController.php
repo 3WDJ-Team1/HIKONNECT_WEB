@@ -29,8 +29,9 @@ class GroupController extends Controller
     public function index($pageIndex)
     {
         $groupInformations  = $this->group_model->getGroupInformations($pageIndex, 'default');
-        $countOfPeople      = $this->group_model->getCountOfPeople($pageIndex, 'default');
-        return compact('groupInformations', 'countOfPeople');
+        //$countOfPeople      = $this->group_model->getCountOfPeople($pageIndex, 'default');
+        //return compact('groupInformations', 'countOfPeople');
+        return $groupInformations;
     }
 
     /**
@@ -52,19 +53,30 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        return $this->group_model->insertHikingGroup($request);
+        $title              = $request->input('title');
+        $content            = $request->input('content');
+        $starting_point     = $request->input('stPoint');
+        $stopover           = $request->input('spOver');
+        $end_point          = $request->input('ePoint');
+        $start_date         = $request->input('date');
+        $min_members        = $request->input('min');
+        $max_members        = $request->input('max');
+
+        $this->group_model->insertHikingGroup($title, $content, $starting_point, $stopover,
+                                              $end_point, $start_date, $min_members, $max_members);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param int $id 
+     * @param int $uuid 
      * 
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($uuid)
     {
-        //
+        $selectedHikingGroupInfo      = $this->group_model->showSelectedGroupInfo($uuid);
+        return $selectedHikingGroupInfo;
     }
 
     /**
@@ -74,7 +86,7 @@ class GroupController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($uuid)
     {
         //
     }
@@ -82,26 +94,27 @@ class GroupController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request 
-     * @param int                      $id 
+     * @param \Illuminate\Http\Request $request
+     * @param String                   $updateData 
+     * @param int                      $uuid 
      * 
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Array $inputData, $uuid)
     {
-        return $this->group_model->insertHikingGroup($request->filter_input());
+        return $this->group_model->updateSelectedGroupInfo($inputData, $uuid);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id 
+     * @param int $uuid 
      * 
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($uuid)
     {
-        return $this->group_model->insertHikingGroup($request->filter_input());
+        $this->group_model->deleteHikingGroupInfo($uuid);
     }
 
     /**
@@ -113,14 +126,14 @@ class GroupController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function listUp($pageIndex, $method)
-    {
-        // $countOfPeople          = $this->group_model->getCountOfPeople($pageIndex, $method);
-        // $groupInformations      = $this->group_model->getGroupInformations($pageIndex, $method);
-        //  return compact('listUpData', 'countOfPeople');
-        $listupGroupData           = $this->group_model->listUp($pageIndex, $method);
-        return $listupGroupData;
-    }
+    // public function listUp($pageIndex, $method)
+    // {
+    //     // $countOfPeople          = $this->group_model->getCountOfPeople($pageIndex, $method);
+    //     // $groupInformations      = $this->grou p_model->getGroupInformations($pageIndex, $method);
+    //     //  return compact('listUpData', 'countOfPeople');
+    //     $listupGroupData           = $this->group_model->listUp($pageIndex, $method);
+    //     return $listupGroupData;
+    // }
 
     /**
      * Find Grouplist by selected method and corrected inputData.
@@ -132,9 +145,20 @@ class GroupController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function findData($method, $inputData)
-    {
-        // 
+    { 
         $findedGroupData           = $this->group_model->findData($method, $inputData);
         return $findedGroupData;
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param int $id 
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function groupNotification() 
+    {
+        //
     }
 }

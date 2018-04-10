@@ -17,7 +17,12 @@ Route::get(
 );
 
 Route::resource('notice', 'NoticeController');
-Route::get('group/{pageIndex?}', 'GroupController@index');
-Route::get('group/{pageIndex?}/{method?}', 'GroupController@listUp');
-Route::get('group/{method?}/{inputData?}', 'GroupController@findData');
-Route::resource('group', 'GroupController');
+Route::get('group/index/{pageIndex?}', 'GroupController@index');
+Route::get('group/listUp/{pageIndex?}/{method?}', 'GroupController@listUp');
+Route::get('group/findData/{method?}/{inputData?}', 'GroupController@findData');
+Route::get('group/show/{uuid?}', 'GroupController@show');
+Route::post('group/store', 'GroupController@store');
+Route::get('group/update/{uuid?}/{inputData?}', 'GroupController@update');
+Route::get('group/destroy/{uuid?}', 'GroupController@destroy');
+Route::get('group/groupNotification/{uuid?}', 'GroupController@groupNotification');
+Route::resource('group', 'GroupController');                       
