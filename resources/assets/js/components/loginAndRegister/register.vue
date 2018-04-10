@@ -207,6 +207,7 @@
                         if (response.data == 'true')
                         {
                             this.$EventBus.$emit('complitedModalOpen', 'true');
+                            this.$EventBus.$emit('setRightDrawerFlipped', 'true');
                         }
                         else
                         {

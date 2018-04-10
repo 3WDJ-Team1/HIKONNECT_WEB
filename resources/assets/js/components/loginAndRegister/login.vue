@@ -17,26 +17,27 @@
         </h1>
         <v-form>
             <v-text-field
-                label="Enter ID"
-                v-model="userId"
-                :rules="rules.isBlanked"
+                label       ="Enter ID"
+                v-model     ="userId"
+                :rules      ="rules.isBlanked"
                 prepend-icon="person"
                 required>
             </v-text-field>
             <v-text-field
-                label="Enter password"
-                v-model="userPw"
-                :rules="rules.isBlanked"
+                label       ="Enter password"
+                v-model     ="userPw"
+                type        ="password"
+                :rules      ="rules.isBlanked"
                 prepend-icon="lock"
                 required>
             </v-text-field>
         </v-form>
         <v-btn
-            @click="login"
+            @click  ="login"
             block
-            color="light-green"
+            color   ="light-green"
             dark
-            style="padding: 0; margin: 0 5%;">
+            style   ="padding: 0; margin: 0 5%;">
             sign in!
         </v-btn>
     </v-container>
@@ -64,13 +65,13 @@
                         pwv: this.userPw
                     }).then((response) => {
                         if (response.data == 'false') {
-                            alert('아이디가 없습니다.');
+                            this.$EventBus.$emit('errorModalOpen', '아이디가 바르지 않습니다');
                         }
                         else if(response.data == 'pwfalse') {
-                            alert('비밀번호가 틀렸습니다');
+                            this.$EventBus.$emit('errorModalOpen', '올바른 비밀번호를 입력하세요');
                         }
                         else  {
-                            alert('로그인 완료');
+                            this.$EventBus.$emit('complitedModalOpen', 'true');
 
                             var datavalue   = Object.values(response.data);
                             var scope       = datavalue[0].scope;
@@ -148,7 +149,6 @@
                             sessionStorage.setItem('userid',$('#id').val());
                             sessionStorage.setItem('uuid',datavalue[0].uuid);
                             sessionStorage.setItem('phone',datavalue[0].phone);
-                            sessionStorage.setItem('uuid',datavalue[0].uuid);
                             sessionStorage.setItem('password',datavalue[0].password);
                             sessionStorage.setItem('nickname',datavalue[0].nickname);
                             sessionStorage.setItem('phonesc',phonesc);
@@ -158,10 +158,10 @@
                             sessionStorage.setItem('gender',gender);
                             sessionStorage.setItem('age',age);
                             sessionStorage.setItem('image_path',datavalue[0].image_path);
-                            console.log(response.data);
 
-                            this.$router.push({ name: 'main'});
-                            window.location.reload();
+                            // this.$router.push({ name: 'main'});
+                            this.$EventBus.$emit('isLogined', 'true');
+                            this.$EventBus.$emit('setRightDrawerFlipped', 'true');
                         }
                     });
                 
