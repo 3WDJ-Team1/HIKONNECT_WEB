@@ -37,7 +37,8 @@
                 tag="v-list-tile"
                 v-for="item in items"
                 :key="item.text"
-                :to="item.path">
+                :to="item.path"
+                v-if="item.text == 'MY PAGE' ? isLogined : true">
                 <v-list-tile-action>
                     <v-icon>{{ item.icon }}</v-icon>
                 </v-list-tile-action>
@@ -47,12 +48,18 @@
                     </v-list-tile-title>
                 </v-list-tile-content>
             </router-link>
-            <v-subheader class="mt-3 grey--text text--darken-1">
+            <v-subheader
+                v-if="isLogined"
+                class="mt-3 grey--text text--darken-1">
                 <v-icon color="grey darken-1">star</v-icon>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 BOOK MARKS
             </v-subheader>
             <v-list>
-            <v-list-tile v-for="item in items2" :key="item.text" avatar>
+            <v-list-tile 
+                v-if="isLogined"
+                v-for="item in items2"
+                :key="item.text"
+                avatar>
                 <v-list-tile-avatar>
                 <img :src="`https://randomuser.me/api/portraits/men/${item.picture}.jpg`" alt="">
                 </v-list-tile-avatar>
@@ -88,6 +95,7 @@
             justify-end
             style="padding: 0;">
             <v-btn
+                v-if="!isLogined"
                 style="padding: 0; background-color: transparent;"
                 flat
                 @click.stop="drawerRight = !drawerRight"
@@ -96,6 +104,15 @@
                 SIGN IN
             </v-btn>
             <v-btn
+                v-if="isLogined"
+                style="padding: 0; background-color: transparent;"
+                flat
+                @click="logout('test')">
+                <v-icon color="white">lock_open</v-icon>
+                LOGOUT
+            </v-btn>
+            <v-btn
+                v-if="!isLogined"
                 style="padding: 0; background-color: transparent;"
                 flat
                 @click.stop="drawerRight = !drawerRight"
@@ -178,12 +195,13 @@
                     icon: 'account_circle',
                     text: 'MY PAGE',
                     path: '/mypage'
-                },
+                }
             ],
             items2: [
                 
             ],
-            modalErrorMsg: ""
+            modalErrorMsg: "",
+            isLogined: false
         }),
         components: {
             'login' : Login,
@@ -195,6 +213,15 @@
             },
             goToHome() {
                 location.href='/#/';
+            },
+            logout(userId) {
+                sessionStorage.clear();
+                this.isLogined = false;
+            },
+            isUserLogined() {
+                if (sessionStorage.userid != undefined) {
+                    this.isLogined = true;
+                }
             }
         },
         created() {
@@ -206,10 +233,16 @@
                 this.$refs.cModal.open();
             })
             this.$EventBus.$on('clickGettingStartBtn', () => {
-                console.log('button cliked!');
                 this.changeDrawerRightMode('login');
                 this.drawerRight = !this.drawerRight;
             })
+            this.$EventBus.$on('setRightDrawerFlipped', (value) => {
+                this.drawerRight = false;
+            })
+            this.$EventBus.$on('isLogined', (v) => {
+                this.isLogined = true;
+            })
+            this.isUserLogined();
         },
     }
 </script>
