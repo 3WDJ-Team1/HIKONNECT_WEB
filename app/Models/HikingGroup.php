@@ -222,7 +222,7 @@ class HikingGroup extends Model
 		DB::table('hiking_plan')->insert([
 			'uuid'				=> $uuid,
 			'hiking_group'		=> '',
-			'start_date' 		=> '',
+			'start_date' 		=> $start_date,
 			'starting_point' 	=> '',
 			'stopover' 			=> '',
 			'end_point' 		=> '',
