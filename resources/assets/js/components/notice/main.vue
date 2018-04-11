@@ -16,7 +16,7 @@
         },
         methods: {
             fetchItem() {
-                axios.get('http://localhost:8000/group/0/10')
+                axios.get('http://localhost:8000/group/store')
                 //axios.get('http://localhost:8000/group/10000/10')
                     .then(response => {
                         this.notice_information = response.data;

@@ -55,7 +55,8 @@
                 });
 
                 // 위도와 경도 불러오기
-                axios.get('http://hikonnect.ga:3000/paths/' + this.mountain_num)
+                //axios.get('http://hikonnect.ga:3000/paths/' + this.mountain_num)
+                axios.get('http://hikonnect.ga:3000/paths/281100601')
                     .then(response => {
                             // 지도의 중심 지점 변수지정
                             this.mountain_center = response.data[0].geometry.paths[0][0];

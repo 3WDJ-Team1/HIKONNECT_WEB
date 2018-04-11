@@ -28,8 +28,12 @@
                 </td>
             </tr>
             <tr>
-                <td>모집 인원</td>
-                <td><input type="text" place class="모집 인원 수" v-model="member_num"></td>
+                <td>최대 모집 인원</td>
+                <td><input type="text" place v-model="max_num"></td>
+            </tr>
+            <tr>
+                <td>최소 모집 인원</td>
+                <td><input type="text" place v-model="min_num"></td>
             </tr>
             </tbody>
         </table>
@@ -51,9 +55,11 @@
                 title: '',
                 content: '',
                 date: '',
-                member_num: '',
-                mountain_path: [],
-                mountain_num: ''
+                max_num: '',
+                // mountain_path: [],
+                mountain_num: '281100601',
+                min_num: ''
+
             }
         },
         created: function ()
@@ -70,9 +76,28 @@
                 console.log(this.title);
                 console.log(this.content);
                 console.log(this.date);
-                console.log(this.member_num);
-                console.log(this.mountain_path);
+                console.log(this.date.substring(0, 4));
+                console.log(this.date.substring(5, 7));
+                console.log(this.date.substring(8, 10));
                 console.log(this.mountain_num);
+                console.log(this.min_num);
+                console.log(this.max_num);
+            },
+            infiniteHandler() {
+                axios.post('http://localhost:8000/group/0/10',{
+                    tt: this.title,
+                    ct: this.content,
+                    min: parseInt(this.min_num),
+                    max: parseInt(this.max_num),
+                    stDate: this.date.substring(0, 4)+"-"+this.date.substring(5, 7)+"-"+this.date.substring(8, 10)+" "
+                })
+                .then(response => {
+                    if(response.data == true)    {
+                        alert('성공적으로 저장 되었습니다.');
+                    } else {
+                        alert('저장을 실패하였습니다.');
+                    }
+                })
             }
         }
     }

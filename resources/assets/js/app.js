@@ -72,11 +72,11 @@ const routes = [
         ]
     },
     {
-        path: '/',
+        path: '/make',
         component: group_make_main,
         children: [
             {
-                path: '/',
+                path: '/make',
                 components: {
                     make: group_make
                 }

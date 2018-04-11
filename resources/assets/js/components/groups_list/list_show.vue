@@ -6,11 +6,9 @@
             </div>
             <div class="card-body">
                 <p>{{ group_information.owner }} = 작성자</p>
-                <p>{{ group_information.end_point }} = 목적지</p>
-                <p>{{ group_information.startdate }} = 산행일자 </p>
-                <p>{{ group_information.min_members }} = 최소인원수</p>
-                <p>{{ group_information.max_members }} = 최대인원수</p>
             </div>
+            <b-button style="width: 100px" href="http://localhost:8000/#/make">그룹페이지로 이동</b-button>
+            <b-button style="width: 80px" href="#">등산 참가</b-button>
         </div>
         <infinite-loading @infinite="infiniteHandler"></infinite-loading>
     </div>
@@ -18,7 +16,6 @@
 
 <script>
     import InfiniteLoading from 'vue-infinite-loading';
-
     export default {
         data() {
             return {
@@ -43,10 +40,10 @@
         },
         methods: {
             infiniteHandler($state) {
-                let url = 'http://localhost:8000/group/' + this.list_num + '/10'
+                let url = 'http://localhost:8000/group/index/' + this.list_num;
                 axios.get(url).then(response => {
                     if(response)    {
-                        this.list = this.list.concat(response.data.groupInformations);
+                        this.list = this.list.concat(response.data);
                         $state.loaded();
                     }
                     else {
