@@ -7,7 +7,7 @@
             <div class="card-body">
                 <p>{{ group_information.owner }} = 작성자</p>
             </div>
-            <b-button style="width: 100px" href="http://localhost:8000/#/make">그룹페이지로 이동</b-button>
+            <b-button style="width: 20em" href="http://localhost:8000/#/make">그룹페이지로 이동</b-button>
             <b-button style="width: 80px" href="#">등산 참가</b-button>
         </div>
         <infinite-loading @infinite="infiniteHandler"></infinite-loading>
@@ -32,11 +32,11 @@
         {
             // 이벤트 받기
             // '이벤트 명', function(받을 데이터)
-            EventBus.$on('input_serch', function (mountain, write, date) {
-                this.mountain_para =  mountain;
-                this.writer = write;
-                this.date = date;
-            });
+            // EventBus.$on('input_serch', function (mountain, write, date) {
+            //     this.mountain_para =  mountain;
+            //     this.writer = write;
+            //     this.date = date;
+            // });
         },
         methods: {
             infiniteHandler($state) {
