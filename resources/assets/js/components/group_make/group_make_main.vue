@@ -49,6 +49,7 @@
         components: {
             VueTimepicker
         },
+        //
         name: "group_make_main",
         data()  {
             return {
