@@ -57,7 +57,7 @@
                 content: '',
                 date: '',
                 max_num: '',
-                mountain_path: [],
+                mountain_path: '',
                 mountain_num: '',
                 min_num: '',
                 yourData: {
@@ -75,8 +75,6 @@
             EventBus.$on('mountain_path', function (path, num) {
                 this.mountain_path = path;
                 this.mountain_num = num;
-                console.log(this.mountain_num);
-                console.log(this.mountain_path);
             });
         },
         methods:    {

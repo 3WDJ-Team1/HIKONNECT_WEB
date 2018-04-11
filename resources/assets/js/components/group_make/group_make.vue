@@ -39,6 +39,8 @@
 
                 mouseover_out: true,
 
+                mountain_path_string: null
+
             }
         },
         components: {
@@ -121,7 +123,16 @@
                                             }
                                         }
                                     }
-                                    EventBus.$emit('mountain_path', path, mountain_num);
+
+                                    this.mountain_path_string = null
+                                    console.log(this.mountain_path_string);
+                                    for(let i = 0; i < path.length; i++)    {
+                                        this.mountain_path_string += path[i];
+                                        if(i < path.length - 1) {
+                                            this.mountain_path_string += "/";
+                                        }
+                                    }
+                                    EventBus.$emit('mountain_path', this.mountain_path_string, mountain_num);
                                 });
 
                                 // 경로에서 마우스가 벗어났을 때 이벤트
