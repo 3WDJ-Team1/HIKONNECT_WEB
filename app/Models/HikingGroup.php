@@ -22,7 +22,6 @@ class HikingGroup extends Model
 {
 
 	protected 	$table 		= 'hiking_group';
-	protected 	$uuid 		= 
 
 	/**
 	 * Get groupId, postTitle, end_point, groupOwner, start_date, 
@@ -36,35 +35,47 @@ class HikingGroup extends Model
 	 * 
 	 * @return Array
 	 */
-	public function getGroupInformations(int $pageIndex, String $method) {
-		if ($method == 'default') {
-			return $allGroupInfo 	= 	HikingGroup::leftJoin('recruitment', 'hiking_group.uuid', '=', 'recruitment.hiking_group')
-													->leftJoin('hiking_plan', 'recruitment.hiking_group', '=', 'hiking_plan.hiking_group')
-													->select (
-														'hiking_plan.hiking_group',
-														'recruitment.title',
-														'hiking_plan.end_point',
-														'hiking_group.owner',
-														'hiking_plan.start_date',
-														'hiking_group.min_members',
-														'hiking_group.max_members'
-													)
-													->orderBy('hiking_plan.created_at', 'desc')
-													->skip($pageIndex)->take(10)->get();
-		} else if ($method == 'NumberOfParticipants') {
-			return $allGroupInfo 	= 	HikingGroup::leftJoin('recruitment', 'hiking_group.uuid', '=', 'recruitment.hiking_group')
-													->leftJoin('hiking_plan', 'recruitment.hiking_group', '=', 'hiking_plan.hiking_group')
-													->select (
-														'recruitment.title',
-														'hiking_plan.end_point',
-														'hiking_group.owner',
-														'hiking_plan.created_at',
-														'hiking_plan.start_date',
-														'hiking_group.min_members',
-														'hiking_group.max_members'
-													)
-													->skip($pageIndex)->take(10)->get();
-		}
+	public function getGroupInformations(int $pageIndex) {
+		// if ($method == 'default') {
+		// 	return $allGroupInfo 	= 	HikingGroup::leftJoin('recruitment', 'hiking_group.uuid', '=', 'recruitment.hiking_group')
+		// 											->leftJoin('hiking_plan', 'recruitment.hiking_group', '=', 'hiking_plan.hiking_group')
+		// 											->select (
+		// 												'hiking_plan.hiking_group',
+		// 												'recruitment.title',
+		// 												'hiking_plan.end_point',
+		// 												'hiking_group.owner',
+		// 												'hiking_plan.start_date',
+		// 												'hiking_group.min_members',
+		// 												'hiking_group.max_members'
+		// 											)
+		// 											->orderBy('hiking_plan.created_at', 'desc')
+		// 											->skip($pageIndex)->take(10)->get();
+		// } else if ($method == 'NumberOfParticipants') {
+		// 	return $allGroupInfo 	= 	HikingGroup::leftJoin('recruitment', 'hiking_group.uuid', '=', 'recruitment.hiking_group')
+		// 											->leftJoin('hiking_plan', 'recruitment.hiking_group', '=', 'hiking_plan.hiking_group')
+		// 											->select (
+		// 												'recruitment.title',
+		// 												'hiking_plan.end_point',
+		// 												'hiking_group.owner',
+		// 												'hiking_plan.created_at',
+		// 												'hiking_plan.start_date',
+		// 												'hiking_group.min_members',
+		// 												'hiking_group.max_members'
+		// 											)
+		// 											->skip($pageIndex)->take(10)->get();
+		// }
+		return HikingGroup::leftJoin('recruitment', 'hiking_group.uuid', '=', 'recruitment.hiking_group')
+							->leftJoin('hiking_plan', 'recruitment.hiking_group', '=', 'hiking_plan.hiking_group')
+							->select (
+										'hiking_plan.hiking_group',
+										'recruitment.title',
+										'hiking_plan.end_point',
+										'hiking_group.owner',
+										'hiking_plan.start_date',
+										'hiking_group.min_members',
+										'hiking_group.max_members'
+									)
+							->skip($pageIndex)->take(10)->get();
 	}
 
 	/**

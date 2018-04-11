@@ -21,7 +21,7 @@ class GroupController extends Controller
     {
         $this->group_model = new HikingGroup();
         $this->user_model = new User();
-        $this->mountain_model = new mountain();
+        //$this->mountain_model = new mountain();
     }
 
     public function testing($key)
@@ -36,10 +36,10 @@ class GroupController extends Controller
      */
     public function index($pageIndex)
     {
-        $groupInformations  = $this->group_model->getGroupInformations($pageIndex, 'default');
+        //$groupInformations  = $this->group_model->getGroupInformations($pageIndex);
         //$countOfPeople      = $this->group_model->getCountOfPeople($pageIndex, 'default');
         //return compact('groupInformations', 'countOfPeople');
-        return $groupInformations;
+        return $this->group_model->getGroupInformations($pageIndex);
     }
 
     /**
