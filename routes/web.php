@@ -39,3 +39,7 @@ Route::get('group/findData/{method?}/{inputData?}', 'GroupController@findData');
 Route::post('group/store', 'GroupController@store'); //???????
 
 
+// 산 이름 가져오는 URL (프론트 엔드에서 사용함)
+Route::get('testing/{key?}', 'GroupController@testing');
+
+

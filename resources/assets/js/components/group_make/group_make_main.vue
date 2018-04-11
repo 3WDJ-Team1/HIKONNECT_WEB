@@ -21,23 +21,23 @@
                 <td>
                     <p>
                         <datetime v-model="date" placeholder="산행일자"></datetime>
-                        <vue-timepicker></vue-timepicker>
-                        <span> to </span>
-                        <vue-timepicker></vue-timepicker>
+                        <vue-timepicker :format="yourFormat" v-model="yourData"></vue-timepicker>
+                        <!--<span> to </span>-->
+                        <!--<vue-timepicker format="HH:mm:ss"></vue-timepicker>-->
                     </p>
                 </td>
             </tr>
             <tr>
-                <td>최대 모집 인원</td>
+                <td>최소 모집 인원</td>
                 <td><input type="text" place v-model="max_num"></td>
             </tr>
             <tr>
-                <td>최소 모집 인원</td>
+                <td>최대 모집 인원</td>
                 <td><input type="text" place v-model="min_num"></td>
             </tr>
             </tbody>
         </table>
-        <button v-on:click="send_data">제출</button>
+        <button v-on:click="infiniteHandler">제출</button>
     </div>
 
 </template>
@@ -52,13 +52,19 @@
         name: "group_make_main",
         data()  {
             return {
+                yourFormat: 'hh:mm:ss',
                 title: '',
                 content: '',
                 date: '',
                 max_num: '',
-                // mountain_path: [],
-                mountain_num: '281100601',
-                min_num: ''
+                mountain_path: [],
+                mountain_num: '',
+                min_num: '',
+                yourData: {
+                    hh: '',
+                    mm: '',
+                    ss: ''
+                }
 
             }
         },
@@ -69,27 +75,25 @@
             EventBus.$on('mountain_path', function (path, num) {
                 this.mountain_path = path;
                 this.mountain_num = num;
+                console.log(this.mountain_num);
+                console.log(this.mountain_path);
             });
         },
         methods:    {
-            send_data() {
-                console.log(this.title);
-                console.log(this.content);
-                console.log(this.date);
-                console.log(this.date.substring(0, 4));
-                console.log(this.date.substring(5, 7));
-                console.log(this.date.substring(8, 10));
-                console.log(this.mountain_num);
-                console.log(this.min_num);
-                console.log(this.max_num);
-            },
             infiniteHandler() {
-                axios.post('http://localhost:8000/group/0/10',{
+                axios.post('http://localhost:8000/group/store',{
+                    owner: 'f6487325-828b-3b10-9479-71847c1e06ef'
+                    /*
+                        @todo localStorage.getItem('userUuid')
+                    */,
                     tt: this.title,
                     ct: this.content,
                     min: parseInt(this.min_num),
                     max: parseInt(this.max_num),
-                    stDate: this.date.substring(0, 4)+"-"+this.date.substring(5, 7)+"-"+this.date.substring(8, 10)+" "
+                    stDate: this.date.substring(0, 4)+"-"+this.date.substring(5, 7)+"-"+this.date.substring(8, 10)+
+                        " "+this.yourData['hh']+":"+this.yourData['mm']+":"+this.yourData['ss'],
+                    mountain_num: this.mountain_num,
+                    mountain_path: this.mountain_path
                 })
                 .then(response => {
                     if(response.data == true)    {
@@ -102,7 +106,3 @@
         }
     }
 </script>
-
-<style scoped>
-
-</style>

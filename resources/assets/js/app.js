@@ -19,8 +19,6 @@ Vue.use(BootstrapVue);
 
 import 'bootstrap/dist/css/bootstrap.css'
 
-
-
 // vue-datatime
 import Datetime from 'vue-datetime'
 import 'vue-datetime/dist/vue-datetime.css'
