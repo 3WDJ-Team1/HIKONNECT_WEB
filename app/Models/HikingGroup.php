@@ -22,6 +22,7 @@ class HikingGroup extends Model
 {
 
 	protected 	$table 		= 'hiking_group';
+	protected 	$uuid 		= 
 
 	/**
 	 * Get groupId, postTitle, end_point, groupOwner, start_date, 
@@ -195,8 +196,12 @@ class HikingGroup extends Model
 		 * insert HikingGroupInfo by correspond selected uuid.
 		 * 
 		 */
+		$uuid = sprintf('%08x-%04x-%04x-%04x-%04x%08x',
+						mt_rand(0, 0xffffffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff), 
+						mt_rand(0, 0xffff),mt_rand(0, 0xffff), mt_rand(0, 0xffffffff)
+						);
 		DB::table('recruitment')->insert([
-			'uuid'				=> '',
+			'uuid'				=> $uuid,
 			'hiking_group'		=> '',
 			'title' 	 		=> $title,
 			'content' 	 		=> $content,
@@ -205,7 +210,7 @@ class HikingGroup extends Model
 			'updated_at'		=> Carbon::now()->format('Y-m-d H:i:s')
 		]);
 		DB::table('hiking_plan')->insert([
-			'uuid'				=> '',
+			'uuid'				=> $uuid,
 			'hiking_group'		=> '',
 			'start_date' 		=> $start_date,
 			'starting_point' 	=> $starting_point,
@@ -215,7 +220,7 @@ class HikingGroup extends Model
 			'updated_at'		=> Carbon::now()->format('Y-m-d H:i:s')
 		]);
 		HikingGroup::insert([
-			'uuid'				=> '',
+			'uuid'				=> $uuid,
 			'name'				=> '',
 			'owner'				=> '',
 			'min_memebers'      => $min_members,
