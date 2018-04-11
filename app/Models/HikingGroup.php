@@ -201,7 +201,7 @@ class HikingGroup extends Model
 															->get();
 	}
 
-	public function insertHikingGroup($title, $content, $start_date, $min_members, $max_members) {
+	public function insertHikingGroup($request) {
 		/**
 		 * insert HikingGroupInfo by correspond selected uuid.
 		 * 
@@ -213,8 +213,8 @@ class HikingGroup extends Model
 		DB::table('recruitment')->insert([
 			'uuid'				=> $uuid,
 			'hiking_group'		=> '',
-			'title' 	 		=> $title,
-			'content' 	 		=> $content,
+			'title' 	 		=> $request->get['tt'],
+			'content' 	 		=> $request->get['ct'],
 			'hits'				=> '',
 			'created_at'		=> Carbon::now()->format('Y-m-d H:i:s'),
 			'updated_at'		=> Carbon::now()->format('Y-m-d H:i:s')
@@ -222,7 +222,7 @@ class HikingGroup extends Model
 		DB::table('hiking_plan')->insert([
 			'uuid'				=> $uuid,
 			'hiking_group'		=> '',
-			'start_date' 		=> $start_date,
+			'start_date' 		=> $request->get['stDate'],
 			'starting_point' 	=> '',
 			'stopover' 			=> '',
 			'end_point' 		=> '',
@@ -233,8 +233,8 @@ class HikingGroup extends Model
 			'uuid'				=> $uuid,
 			'name'				=> '',
 			'owner'				=> '',
-			'min_memebers'      => $min_members,
-			'max_memebers'      => $max_members,
+			'min_memebers'      => $request->get['min'],
+			'max_memebers'      => $request->get['max'],
 			'created_at'		=> Carbon::now()->format('Y-m-d H:i:s'),
 			'updated_at'		=> Carbon::now()->format('Y-m-d H:i:s')
 		]);

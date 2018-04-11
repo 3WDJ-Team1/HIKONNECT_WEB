@@ -61,13 +61,7 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        $title              = $request->input('title');
-        $content            = $request->input('content');
-        $start_date         = $request->input('date');
-        $min_members        = $request->input('min');
-        $max_members        = $request->input('max');
-
-        $this->group_model->insertHikingGroup($title, $content, $start_date, $min_members, $max_members);
+        $this->group_model->insertHikingGroup($request);
     }
 
     /**
