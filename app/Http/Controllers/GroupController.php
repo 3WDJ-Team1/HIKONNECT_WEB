@@ -64,14 +64,10 @@ class GroupController extends Controller
         $title              = $request->input('title');
         $content            = $request->input('content');
         $start_date         = $request->input('date');
-        $starting_point     = $request->input('stPoint');
-        $stopover           = $request->input('spOver');
-        $end_point          = $request->input('ePoint');
         $min_members        = $request->input('min');
         $max_members        = $request->input('max');
 
-        $this->group_model->insertHikingGroup($title, $content, $start_date, $starting_point, 
-                                              $stopover, $end_point, $min_members, $max_members);
+        $this->group_model->insertHikingGroup($title, $content, $start_date, $min_members, $max_members);
     }
 
     /**

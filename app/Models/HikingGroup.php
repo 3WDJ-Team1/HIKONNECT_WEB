@@ -201,8 +201,7 @@ class HikingGroup extends Model
 															->get();
 	}
 
-	public function insertHikingGroup($title, $content, $start_date, $starting_point, 
-	 								  $stopover, $end_point, $min_members, $max_members) {
+	public function insertHikingGroup($title, $content, $start_date, $min_members, $max_members) {
 		/**
 		 * insert HikingGroupInfo by correspond selected uuid.
 		 * 
@@ -223,10 +222,10 @@ class HikingGroup extends Model
 		DB::table('hiking_plan')->insert([
 			'uuid'				=> $uuid,
 			'hiking_group'		=> '',
-			'start_date' 		=> $start_date,
-			'starting_point' 	=> $starting_point,
-			'stopover' 			=> $stopover,
-			'end_point' 		=> $end_point,
+			'start_date' 		=> '',
+			'starting_point' 	=> '',
+			'stopover' 			=> '',
+			'end_point' 		=> '',
 			'created_at'		=> Carbon::now()->format('Y-m-d H:i:s'),
 			'updated_at'		=> Carbon::now()->format('Y-m-d H:i:s')
 		]);
