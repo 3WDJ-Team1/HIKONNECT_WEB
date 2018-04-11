@@ -62,7 +62,6 @@ class LoginController extends Controller
         $userinfo = User::where('id', $request->get('id'))->first();
         if ($userinfo == false)
             echo "false";
-
         else {
             if($userinfo->password == $request->get('pw'))
                 echo "true";

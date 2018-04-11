@@ -49,31 +49,23 @@ class testcontroller extends Controller
     public function store(Request $request)
     {
         $user_id    = $request->get('user_id');
-        $lat        = $request->get('lat');
-        $lng        = $request->get('lng');
-        $location   = array(['latitude' => $lat, 'longitude' => $lng]);
-        json_encode($location);
 
         $uuid = User::where('id',$user_id)->select('uuid')->get()[0]['uuid'];
-        $nickname = User_Profile::where('user',$uuid)->select('nickname')->get()[0]['nickname'];
         $hiking_group = entry_info::where('user',$uuid)->select('hiking_group')->get()[0]['hiking_group'];
 
-        $lm_info = array([
+        location_memo::insert([
             'uuid'          => '',
             'writer'        => $uuid,
             'hiking_group'  => $hiking_group,
-            'position'      => $location,
+            'latitude'      => $request->get('lat'),
+            'longitude'     => $request->get('lng'),
             'title'         => $request->get('title'),
             'content'       => $request->get('content'),
             'image_path'    => $request->get('image_path'),
-            'nickname'      => $nickname/*
-            'created_at'    => '2018-04-07 23:35:05',
-            'updated_at'    => '2018-04-07 23:35:05'*/
-            ]);
-
-        /*$this->location_memo->Insert($lm_info);*/
-
-        print json_encode($lm_info);
+            'created_at'    => $request->get('created_at'),
+            'updated_at'    => $request->get('updated_at')
+        ]);
+        echo $uuid;
     }
 
     /**
@@ -119,5 +111,14 @@ class testcontroller extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function get_Memo_Info(Request $request) {
+        $uuid = User::where('id',$request->get('id'))->select('uuid')->get()[0]['uuid'];
+        $hiking_group = entry_info::where('user',$uuid)->select('hiking_group')->get()[0]['hiking_group'];
+
+        $row = location_memo::where('hiking_group',$hiking_group)->get()->toArray();
+
+        print json_encode($row);
     }
 }
