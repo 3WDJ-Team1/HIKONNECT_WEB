@@ -43,15 +43,16 @@ class HikingGroupController extends Controller
      */
     public function index()
     {
-        $groupList = $this->_group_model->getGroupList();
+        // return $this->request;
+        // $groupList = $this->_group_model->getGroupList();
 
-        $returnTag = "";
+        // $returnTag = "";
 
-        foreach ($groupList as $index => $record) {
-            $returnTag .= "<a href='/group/" . $record['uuid'] . "'>" . $record['uuid'] . "</a><br />";
-        }
+        // foreach ($groupList as $index => $record) {
+        //     $returnTag .= "<a href='/group/" . $record['uuid'] . "'>" . $record['uuid'] . "</a><br />";
+        // }
         
-        return $returnTag;
+        // return $returnTag;
     }
 
     /**
@@ -173,6 +174,23 @@ class HikingGroupController extends Controller
         if ($res->isEmpty()) {
             return response("Query result is empty", 206);
         }
+
+        return $res;
+    }
+
+    /**
+     * 
+     */
+    public function getGroupList($idx, $perIdx, $orderBy = 'name') 
+    {
+        if ($idx && $perIdx) {
+            if (!$idx = intval($idx) || !$perIdx = intval($perIdx)) {
+                return response('Wrong request parameter type: $idx and $perIdx are must be Interger Type');
+            }
+        }
+
+        $res = $this->_group_model
+            ->getGroupList($idx, $perIdx, $orderBy);
 
         return $res;
     }

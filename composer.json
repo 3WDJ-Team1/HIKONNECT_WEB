@@ -10,6 +10,7 @@
         "fideloper/proxy": "~3.3",
         "illuminate/filesystem": "^5.0",
         "illuminate/support": "^5.0",
+        "ixudra/curl": "^6.16",
         "laraeast/artisan-scaffolding": "^1.1",
         "laravel/framework": "5.5.*",
         "laravel/socialite": "^3.0",

@@ -99,7 +99,6 @@ $factory->define(
             'uuid'          => $faker->uuid(),
             'writer'        => App\Models\User::pluck('uuid')->random(),
             'hiking_group'  => App\Models\HikingGroup::pluck('uuid')->random(),
-            'position'      => '[]',
             'title'         => $faker->realText(20),
             'content'       => $faker->realText(200),
             'image_path'    => 'File_path'
@@ -150,7 +149,7 @@ $factory->define(
     function (Faker $faker) {
         return [
             'uuid'              => $faker->uuid(),
-            'id'                => $faker->userName(),
+            'id'                => $faker->firstName(),
             'password'          => $faker->password(),
         ];
     }
