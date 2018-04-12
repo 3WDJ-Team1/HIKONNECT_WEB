@@ -8,7 +8,8 @@
     <div style="position: relative;">
         <div
             style="display: inline_block; background-color: whitesmoke;"
-            v-for="alphabet in alphabets">
+            v-for="alphabet in alphabets"
+            :key="alphabet">
             <h2
                 class="text-center"
                 :id="alphabet">
@@ -16,7 +17,9 @@
             </h2>
             <b-card
                 class='member_list_card'
-                v-for="userData in userDataArr" v-if="userData.name.charAt(0) == alphabet">
+                v-for="userData in userDataArr"
+                :key="userData.uuid"
+                v-if="userData.name.charAt(0) == alphabet">
                 <b-card-header
                     header-tag="header"
                     role="tab"

@@ -13,7 +13,7 @@
         <div>
             <!-- @div       A card of notice
                             notice div are formed automatically by data.notices -->
-            <div v-for="notice in notices">
+            <div v-for="notice in notices" :key="notice.uuid">
                 <!-- @div   the wrapper of notice card -->
                 <div class="card_wrapper">
                     <!-- @div   The title and author of a notice
@@ -40,7 +40,7 @@
             </div>
         </div>
         <!-- @sync-loader   An animation will be shown while the infinite-loading -->
-        <sync-loader class="loader" :color="loader.color" :loading="loader.loading" :margin="loader.margin" :size="loader.size"></sync-loader>
+        <!-- <sync-loader class="loader" :color="loader.color" :loading="loader.loading" :margin="loader.margin" :size="loader.size"></sync-loader> -->
     </div>
 </template>
 
@@ -72,7 +72,8 @@
                 color: "#4df1e1",
                 margin: "2px",
                 size: "10px"
-            }
+            },
+            groupId: "33db3b54-435b-357e-8093-c8ea865b2c54"
         }),
         // When this component was created,
         created() {
@@ -82,7 +83,7 @@
                 this.bottom = this.bottomVisible()
             });
             // request
-            axios.get(this.$HttpAddr + '/notice/0/10')
+            axios.get(this.$HttpAddr + '/notice/'+ this.groupId + '/0/10')
                 .then(response => {
                     // update this.notices with response data
                     this.notices = response.data;
@@ -109,7 +110,7 @@
              */
             addNotices() {
                 this.loader.loading     = true;
-                let url                 = this.$HttpAddr + '/notice/' + ((this.page - 1) * this.size + 10)
+                let url                 = this.$HttpAddr + '/notice/' + this.groupId + "/" + ((this.page - 1) * this.size + 10)
                                           + '/' + (this.page * this.size + 10);
                 
                 axios.get(url)

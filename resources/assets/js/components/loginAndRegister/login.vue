@@ -173,6 +173,14 @@
                 this.sliding = false;
             }
         },
+        created() {
+            this.$EventBus.$on("openDrawer", (value) => {
+                if (value === "login") {
+                    this.userId = "";
+                    this.userPw = "";
+                }
+            });
+        }
     }
 </script>
 <style>

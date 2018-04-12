@@ -75,14 +75,3 @@ const router = new VueRouter({ routes:routes });
 // view-router 와 직접적인 관련이 있다.
 new Vue(Vue.util.extend({ router }, App)).$mount('#app');
 
-//         component   : group_make_main,
-//         children    : [
-//             {
-//                 path: '/',
-//                 components: {
-//                     make: group_make
-//                 }
-//             }
-//         ]
-//     }
-// ];

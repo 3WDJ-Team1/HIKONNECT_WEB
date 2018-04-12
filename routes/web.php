@@ -17,3 +17,14 @@ Route::get(
         return view('layouts/app');
     }
 );
+
+Route::resource('notice', 'NoticeController');
+Route::get('group/index/{pageIndex?}', 'GroupController@index');
+Route::get('group/listUp/{pageIndex?}/{method?}', 'GroupController@listUp');
+Route::get('group/findData/{method?}/{inputData?}', 'GroupController@findData');
+Route::get('group/show/{uuid?}', 'GroupController@show');
+Route::post('group/store', 'GroupController@store');
+Route::get('group/update/{uuid?}/{inputData?}', 'GroupController@update');
+Route::get('group/destroy/{uuid?}', 'GroupController@destroy');
+Route::get('group/groupNotification/{uuid?}', 'GroupController@groupNotification');
+Route::resource('group', 'GroupController');                       
