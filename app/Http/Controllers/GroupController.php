@@ -163,4 +163,8 @@ class GroupController extends Controller
     {
         //
     }
+
+    public function request(Request $request) {
+        return "true";
+    }
 }
