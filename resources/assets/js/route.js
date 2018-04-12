@@ -19,6 +19,7 @@ import notice_information   from './components/notice/notice_information'
 import mypage               from './components/mypage/profile.vue';
 import modify               from './components/mypage/modify.vue';
 import graph                from './components/mypage/graph.vue';
+import update                from './components/mypage/update.vue';
 
 // group menu tab
 import GroupMenuTab         from "./components/group_menu/GroupMenuTab.vue";
@@ -88,6 +89,11 @@ const routes = [
         name: 'graph',
         path: '/graph',
         component: graph
+    },
+    {
+        name: 'update',
+        path: '/update',
+        component: update
     },
     {
         name: 'level',
