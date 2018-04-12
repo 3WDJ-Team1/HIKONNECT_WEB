@@ -1,6 +1,7 @@
 <template>
     <div id='cc' class='chart'>
-        <h1>월별 등산기록</h1>
+        <h1>월별 등산 그래프</h1>
+        <label>년도 선택</label>
         <select v-model="item.year" @change="graph" id="year">
             <option>2018</option>
             <option>2017</option>
@@ -22,6 +23,11 @@
 
 
     export default {
+        mounted:
+            function () {
+                console.log(sessionStorage.getItem('year'));
+            }
+        ,
         data() {
           return {
               item: {
@@ -64,9 +70,9 @@
         graph() {
             let uri = this.$HttpAddr + '/graph/' + sessionStorage.getItem('uuid');
             this.axios.post(uri,this.item).then((response) => {
-                var datavalue = Object.values(response.data);
                 console.log(response.data);
-                sessionStorage.setItem('year',$('#year').val());
+                var datavalue = Object.values(response.data);
+                sessionStorage.setItem('year',this.item.year);
                 sessionStorage.setItem('1',datavalue[0]);
                 sessionStorage.setItem('2',datavalue[1]);
                 sessionStorage.setItem('3',datavalue[2]);

@@ -74,8 +74,9 @@
                         else  {
                             this.$EventBus.$emit('complitedModalOpen', 'true');
 
+                            console.log(this.idv);
                             var datavalue   = Object.values(response.data);
-                            var userid      = datavalue[0].id;
+                            var userid      = this.userId;
                             var scope       = datavalue[0].scope;
                             var scv         = 0;
                             var phonesc     = 0;

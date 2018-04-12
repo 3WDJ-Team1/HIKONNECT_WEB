@@ -63,11 +63,11 @@ class LoginController extends Controller
                 'user_profile.gender', 
                 'user_profile.age_group', 
                 'user_profile.scope',
-                'user.id',
                 'user.uuid',
-                'user.password'
+                'user.password',
+                'user.id'
             )->where(
-                'id', 
+                'id',
                 $request->get('idv')
             )->get();
             
