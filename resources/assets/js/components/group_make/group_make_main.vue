@@ -75,7 +75,6 @@
             EventBus.$on('mountain_path', (path, num) => {
                 this.mountain_path = path;
                 this.mountain_num = num;
-                console.log(this.mountain_path);
             });
         },
         methods:    {
