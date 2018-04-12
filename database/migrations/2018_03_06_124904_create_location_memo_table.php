@@ -21,7 +21,8 @@ class CreateLocationMemoTable extends Migration
                 $table->uuid('uuid')->primary();
                 $table->uuid('writer');
                 $table->uuid('hiking_group');
-                $table->json('position');
+                $table->double('latitude')->default(0.0);
+                $table->double('longitude')->default(0.0);
                 $table->string('title', 20);
                 $table->string('content', 200);
                 $table->string('image_path', 200);

@@ -35,7 +35,7 @@
         {
             // 이벤트 받기
             // '이벤트 명', function(받을 데이터)
-            EventBus.$on('input_serch', function (mountain, write, date) {
+            this.$EventBus.$on('input_serch', function (mountain, write, date) {
                 this.mountain_para =  mountain;
                 this.writer = write;
                 this.date = date;
@@ -43,7 +43,7 @@
         },
         methods: {
             infiniteHandler($state) {
-                let url = this.$HttpAddr + '/group/' + this.list_num + '/10'
+                let url = this.$HttpAddr + '/hiking_group/' + this.list_num + '/10'
                 axios.get(url).then(response => {
                     if(response)    {
                         this.list = this.list.concat(response.data.groupInformations);

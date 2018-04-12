@@ -38,6 +38,7 @@ class HikingGroup extends Model
         if (is_int($idx) xor is_int($perIdx)) {
             return 0;
         }
+
         $queryRes = DB::table('entry_info')
             ->select(
                 'user_profile.nickname',
@@ -57,20 +58,18 @@ class HikingGroup extends Model
             )->skip($idx)
             ->take($perIdx)
             ->get();
-
         return $queryRes;
     }
 
     /**
      * Get group member's location
      * 
-     * @param String $hiking_group 
+     * @param String $hiking_group
      * 
      * @return void
      */
     public function getMembersLocation(String $hiking_group) 
     {
-
         $queryRes = DB::table('user_position')
             ->select('user', 'position')
             ->where('hiking_gruop', $hiking_group)
@@ -97,6 +96,21 @@ class HikingGroup extends Model
                 'hiking_group.uuid', 
                 $hiking_group
             )->get();
+
+        return $queryRes;
+    }
+
+    /**
+     * 
+     */
+    public function getGroupList($idx, $perIdx, $orderBy)
+    {
+        $queryRes = DB::table('hiking_group')
+            ->select('*')
+            ->skip($idx)
+            ->take($perIdx)
+            ->orderBy($orderBy, 'esc')
+            ->get();
 
         return $queryRes;
     }
