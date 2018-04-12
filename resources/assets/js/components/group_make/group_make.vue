@@ -124,8 +124,7 @@
                                         }
                                     }
 
-                                    this.mountain_path_string = null
-                                    console.log(this.mountain_path_string);
+                                    this.mountain_path_string = null;
                                     for(let i = 0; i < path.length; i++)    {
                                         this.mountain_path_string += path[i];
                                         if(i < path.length - 1) {

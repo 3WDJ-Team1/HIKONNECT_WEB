@@ -37,7 +37,7 @@
             </tr>
             </tbody>
         </table>
-        <button v-on:click="infiniteHandler">제출</button>
+        <button v-on:click="sendData">제출</button>
     </div>
 
 </template>
@@ -72,13 +72,14 @@
         {
             // 이벤트 받기
             // '이벤트 명', function(받을 데이터)
-            EventBus.$on('mountain_path', function (path, num) {
+            EventBus.$on('mountain_path', (path, num) => {
                 this.mountain_path = path;
                 this.mountain_num = num;
+                console.log(this.mountain_path);
             });
         },
         methods:    {
-            infiniteHandler() {
+            sendData() {
                 axios.post('http://localhost:8000/group/store',{
                     owner: 'f6487325-828b-3b10-9479-71847c1e06ef'
                     /*
@@ -100,6 +101,7 @@
                         alert('저장을 실패하였습니다.');
                     }
                 })
+
             }
         }
     }
