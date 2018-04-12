@@ -62,8 +62,9 @@ class LoginController extends Controller
                 'user_profile.phone',
                 'user_profile.gender', 
                 'user_profile.age_group', 
-                'user_profile.scope', 
-                'user.uuid', 
+                'user_profile.scope',
+                'user.id',
+                'user.uuid',
                 'user.password'
             )->where(
                 'id', 
