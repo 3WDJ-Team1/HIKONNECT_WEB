@@ -31,14 +31,44 @@
             app      
             clipped  
             class="nav-drawer">
+            <router-link
+                tag="v-layout"
+                :to="mypageRoute.path"
+                v-if="isLogined"
+                class="my-page-route">
+                <v-flex
+                    xs4
+                    sm4
+                    md4>
+                    <v-avatar
+                        class="grey lighten-4"
+                        size="56"
+                        slot="activator">
+                        <img :src="mypageRoute.imagePath" alt="avatar"/>
+                    </v-avatar>
+                </v-flex>
+                <v-flex 
+                    xs6
+                    sm6
+                    md6
+                    style="line-height: 300%; font-size: 1.5em;">
+                    {{ userNickname }}
+                </v-flex>
+                <v-flex
+                    xs2
+                    sm2
+                    md2
+                    style="margin-top:5%">
+                    <v-icon x-large>keyboard_arrow_right</v-icon>
+                </v-flex>
+            </router-link>
         <v-list
             dense>
             <router-link
                 tag="v-list-tile"
                 v-for="item in items"
                 :key="item.text"
-                :to="item.path"
-                v-if="item.text == 'MY PAGE' ? isLogined : true">
+                :to="item.path">
                 <v-list-tile-action>
                     <v-icon>{{ item.icon }}</v-icon>
                 </v-list-tile-action>
@@ -69,12 +99,13 @@
         </v-list>
         </v-navigation-drawer>
         <v-toolbar
-            color="teal lighten-1"
+            color="blue-grey darken-4"
             fixed
             clipped-left
             app
             dark
-            flat>
+            flat
+            scroll-off-screen>
         <v-btn icon  @click.stop="drawer = !drawer">
             <v-icon style="margin-bottom: 0.5em;">menu</v-icon>
         </v-btn>
@@ -169,6 +200,12 @@
     body v-app {
         overflow: hidden;
     }
+    .my-page-route {
+        padding: 3% 10%;
+    }
+    .my-page-route:hover {
+        background-color: rgb(226, 226, 226);
+    }
 </style>
 
 <script>
@@ -177,9 +214,16 @@
 
     export default{
         data: () => ({
+            userNickname: sessionStorage.getItem('nickname'),
             drawer: false,
             drawerRight: false,
             drawerRightMode: 'login',
+            mypageRoute : {
+                    icon: 'account_circle',
+                    text: 'MY PAGE',
+                    path: '/mypage',
+                    imagePath: sessionStorage.getItem('image_path')
+            },
             items: [
                 { 
                     icon: 'home',
@@ -191,11 +235,6 @@
                     text: 'JOIN HIKING GROUP',
                     path: '/list'
                 },
-                {
-                    icon: 'account_circle',
-                    text: 'MY PAGE',
-                    path: '/mypage'
-                }
             ],
             items2: [
                 

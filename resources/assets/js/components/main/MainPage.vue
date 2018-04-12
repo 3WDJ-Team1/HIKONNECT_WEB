@@ -2,7 +2,7 @@
     <v-app>
         <v-content style="padding: 0;">
         <section>
-            <v-parallax :src="httpAddr + '/images/mountain_1.jpg'" height="650">
+            <v-parallax :src="httpAddr + '/images/main_2.jpeg'" height="650">
             <v-layout
                 column
                 align-center
