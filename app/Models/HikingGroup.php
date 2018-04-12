@@ -64,7 +64,7 @@ class HikingGroup extends Model
     /**
      * Get group member's location
      * 
-     * @param String $hiking_group 
+     * @param String $hiking_group
      * 
      * @return void
      */
