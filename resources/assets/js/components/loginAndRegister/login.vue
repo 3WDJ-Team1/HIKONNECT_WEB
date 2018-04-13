@@ -64,6 +64,7 @@
                         idv: this.userId,
                         pwv: this.userPw
                     }).then((response) => {
+                        console.log(response.data);
                         if (response.data == 'false') {
                             this.$EventBus.$emit('errorModalOpen', '아이디가 바르지 않습니다');
                         }
@@ -73,7 +74,9 @@
                         else  {
                             this.$EventBus.$emit('complitedModalOpen', 'true');
 
+                            console.log(this.idv);
                             var datavalue   = Object.values(response.data);
+                            var userid      = this.userId;
                             var scope       = datavalue[0].scope;
                             var scv         = 0;
                             var phonesc     = 0;
@@ -145,8 +148,7 @@
                             else {
                                 agesc = 'false';
                             }
-
-                            sessionStorage.setItem('userid',$('#id').val());
+                            sessionStorage.setItem('userid',userid);
                             sessionStorage.setItem('uuid',datavalue[0].uuid);
                             sessionStorage.setItem('phone',datavalue[0].phone);
                             sessionStorage.setItem('password',datavalue[0].password);
