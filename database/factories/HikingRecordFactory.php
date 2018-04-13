@@ -14,6 +14,17 @@ use Faker\Generator as Faker;
 $factory->define(
     App\Models\HikingRecord::class, 
     function (Faker $faker) {
+        $created_date = $faker->dateTimeBetween(
+            '-2 years',
+            date_default_timezone_get()
+        );
+
+        $updated_date = (
+            new DateTime(
+                $created_date->format("Y-m-d H:m:s")
+            )
+        )->modify("+1 hour");
+
         return [
             'uuid'          => $faker->uuid(),
             'owner'         => App\Models\User::pluck('uuid')->random(),
