@@ -1,36 +1,38 @@
 <template>
     <div class="container">
         <div class="serch_option">
-            <ul>
-                <li>
-                    <div class="card card-body">
-                        <input type="text" class="form-control" v-model="mountain_name" placeholder="산이름" aria-label="산이름" aria-describedby="basic-addon2">
-                    </div>
-                </li>
-                <li>
-                    <div class="card card-body">
-                        <input type="text" class="form-control" v-model="writer" placeholder="작성자" aria-label=작성자 aria-describedby="basic-addon2">
-                    </div>
-                </li>
-                <li>
-                    <datetime v-model="date" placeholder="산행일자"></datetime>
-                    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-                </li>
-                <li>
-                    <button type="button" class="btn btn-secondary btn-lg" v-on:click="send_serch()"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                </li>
-            </ul>
+            <div class="card card-body">
+                <input
+                    type="text"
+                    class="form-control"
+                    v-model="mountain_name"
+                    placeholder="산이름"
+                    aria-label="산이름"
+                    aria-describedby="basic-addon2">
+            </div>
+            <div class="card card-body">
+                <input
+                    type="text"
+                    class="form-control"
+                    v-model="writer"
+                    placeholder="작성자"
+                    aria-label=작성자
+                    aria-describedby="basic-addon2">
+            </div>
+            <datetime v-model="date" placeholder="산행일자"></datetime>
+            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+            <button type="button" class="btn btn-secondary btn-lg" @click="send_serch()">
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            </button>
         </div>
     </div>
 </template>
 
 <script>
-    import { EventBus } from './event_bus'
     export default {
 
         data()  {
             return  {
-
                 mountain_name: "",
                 writer: "",
                 date: ""
@@ -38,7 +40,7 @@
         },
         methods:    {
             send_serch() {
-                EventBus.$emit('input_serch', this.mountain_name, this.writer, this.date);
+                this.$EventBus.$emit('input_serch', this.mountain_name, this.writer, this.date);
             }
         }
     }

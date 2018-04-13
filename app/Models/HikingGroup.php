@@ -116,36 +116,52 @@ class HikingGroup extends Model
 	 * 
 	 * @return Array
 	 */
-	public function getGroupInformations(int $pageIndex, String $method) {
-		if ($method == 'default') {
-			return $allGroupInfo 	= 	HikingGroup::leftJoin('recruitment', 'hiking_group.uuid', '=', 'recruitment.hiking_group')
-													->leftJoin('hiking_plan', 'recruitment.hiking_group', '=', 'hiking_plan.hiking_group')
-													->select (
-														'hiking_plan.hiking_group',
-														'recruitment.title',
-														'hiking_plan.end_point',
-														'hiking_group.owner',
-														'hiking_plan.start_date',
-														'hiking_group.min_members',
-														'hiking_group.max_members'
-													)
-													->orderBy('hiking_plan.created_at', 'desc')
-													->skip($pageIndex)->take(10)->get();
-		} else if ($method == 'NumberOfParticipants') {
-			return $allGroupInfo 	= 	HikingGroup::leftJoin('recruitment', 'hiking_group.uuid', '=', 'recruitment.hiking_group')
-													->leftJoin('hiking_plan', 'recruitment.hiking_group', '=', 'hiking_plan.hiking_group')
-													->select (
-														'recruitment.title',
-														'hiking_plan.end_point',
-														'hiking_group.owner',
-														'hiking_plan.created_at',
-														'hiking_plan.start_date',
-														'hiking_group.min_members',
-														'hiking_group.max_members'
-													)
-													->skip($pageIndex)->take(10)->get();
-		}
+	public function getGroupInformations(int $pageIndex) {
+	// 	if ($method == 'default') {
+	// 		return $allGroupInfo 	= 	HikingGroup::leftJoin('recruitment', 'hiking_group.uuid', '=', 'recruitment.hiking_group')
+	// 												->leftJoin('hiking_plan', 'recruitment.hiking_group', '=', 'hiking_plan.hiking_group')
+	// 												->select (
+	// 													'hiking_plan.hiking_group',
+	// 													'recruitment.title',
+	// 													'hiking_plan.end_point',
+	// 													'hiking_group.owner',
+	// 													'hiking_plan.start_date',
+	// 													'hiking_group.min_members',
+	// 													'hiking_group.max_members'
+	// 												)
+	// 												->orderBy('hiking_plan.created_at', 'desc')
+	// 												->skip($pageIndex)->take(10)->get();
+	// 	} else if ($method == 'NumberOfParticipants') {
+	// 		return $allGroupInfo 	= 	HikingGroup::leftJoin('recruitment', 'hiking_group.uuid', '=', 'recruitment.hiking_group')
+	// 												->leftJoin('hiking_plan', 'recruitment.hiking_group', '=', 'hiking_plan.hiking_group')
+	// 												->select (
+	// 													'recruitment.title',
+	// 													'hiking_plan.end_point',
+	// 													'hiking_group.owner',
+	// 													'hiking_plan.created_at',
+	// 													'hiking_plan.start_date',
+	// 													'hiking_group.min_members',
+	// 													'hiking_group.max_members'
+	// 												)
+	// 												->skip($pageIndex)->take(10)->get();
+	return HikingGroup::leftJoin('recruitment', 'hiking_group.uuid', '=', 'recruitment.hiking_group')
+			->leftJoin('hiking_plan', 'recruitment.hiking_group', '=', 'hiking_plan.hiking_group')
+			->select (
+				'recruitment.title',
+				'hiking_plan.end_point',
+				'hiking_plan.created_at',
+				'hiking_plan.start_date',
+				'hiking_group.min_members',
+				'hiking_group.max_members'
+			)
+			->skip($pageIndex)->take(10)->get();
 	}
+
+    public function getWriters($pageIndex){
+		return DB::table('user_profile')->leftJoin('hiking_group', 'user_profile.uuid', '=', 'hiking_group.owner')
+								->select('user_profile.nickname')
+								->skip($pageIndex)->take(10)->get();
+	 }
 
 	/**
 	 * Get current application people from database by selected method.
@@ -196,57 +212,57 @@ class HikingGroup extends Model
 	// 	}
 	// }
 
-	public function findData($method, $inputData) {
-		/**
-		 * Get groupList from database by selected method and inputData
-		 * 
-		 * @return Array
-		 */
-		if ($method == 'mnt_name') {
-			return $findedData		= HikingGroup::leftJoin('recruitment', 'hiking_group.uuid', '=', 'recruitment.hiking_group')
-													->leftJoin('hiking_plan', 'recruitment.hiking_group', '=', 'hiking_plan.hiking_group')
-													->select (
-														'recruitment.hiking_group',
-														'recruitment.title',
-														'hiking_plan.end_point',
-														'hiking_group.owner',
-														'hiking_plan.start_date',
-														'hiking_group.min_members',
-														'hiking_group.max_members'
-													)
-													->where('mountain.mnt_name', '=', $inputData)
-													->get();
-		} else if ($method == 'writer') {
-			return $findedData		= HikingGroup::leftJoin('recruitment', 'hiking_group.uuid', '=', 'recruitment.hiking_group')
-													->leftJoin('hiking_plan', 'recruitment.hiking_group', '=', 'hiking_plan.hiking_group')
-													->select (
-														'recruitment.hiking_group',
-														'recruitment.title',
-														'hiking_plan.end_point',
-														'hiking_group.owner',
-														'hiking_plan.start_date',
-														'hiking_group.min_members',
-														'hiking_group.max_members'
-													)
-													->where('hiking_group.owner', '=', $inputData)
-													->get();
+	// public function findData($method, $inputData) {
+	// 	/**
+	// 	 * Get groupList from database by selected method and inputData
+	// 	 * 
+	// 	 * @return Array
+	// 	 */
+	// 	if ($method == 'mnt_name') {
+	// 		return $findedData		= HikingGroup::leftJoin('recruitment', 'hiking_group.uuid', '=', 'recruitment.hiking_group')
+	// 												->leftJoin('hiking_plan', 'recruitment.hiking_group', '=', 'hiking_plan.hiking_group')
+	// 												->select (
+	// 													'recruitment.hiking_group',
+	// 													'recruitment.title',
+	// 													'hiking_plan.end_point',
+	// 													'hiking_group.owner',
+	// 													'hiking_plan.start_date',
+	// 													'hiking_group.min_members',
+	// 													'hiking_group.max_members'
+	// 												)
+	// 												->where('mountain.mnt_name', '=', $inputData)
+	// 												->get();
+	// 	} else if ($method == 'writer') {
+	// 		return $findedData		= HikingGroup::leftJoin('recruitment', 'hiking_group.uuid', '=', 'recruitment.hiking_group')
+	// 												->leftJoin('hiking_plan', 'recruitment.hiking_group', '=', 'hiking_plan.hiking_group')
+	// 												->select (
+	// 													'recruitment.hiking_group',
+	// 													'recruitment.title',
+	// 													'hiking_plan.end_point',
+	// 													'hiking_group.owner',
+	// 													'hiking_plan.start_date',
+	// 													'hiking_group.min_members',
+	// 													'hiking_group.max_members'
+	// 												)
+	// 												->where('hiking_group.owner', '=', $inputData)
+	// 												->get();
 
-		} else if ($method == 'date') {
-			return $findedData		= HikingGroup::leftJoin('recruitment', 'hiking_group.uuid', '=', 'recruitment.hiking_group')
-													->leftJoin('hiking_plan', 'recruitment.hiking_group', '=', 'hiking_plan.hiking_group')
-													->select (
-														'recruitment.hiking_group',
-														'recruitment.title',
-														'hiking_plan.end_point',
-														'hiking_group.owner',
-														'hiking_plan.start_date',
-														'hiking_group.min_members',
-														'hiking_group.max_members'
-													)
-													->where('hiking_plan.start_date', '=', $inputData)
-													->get();
-		}
-	}
+	// 	} else if ($method == 'date') {
+	// 		return $findedData		= HikingGroup::leftJoin('recruitment', 'hiking_group.uuid', '=', 'recruitment.hiking_group')
+	// 												->leftJoin('hiking_plan', 'recruitment.hiking_group', '=', 'hiking_plan.hiking_group')
+	// 												->select (
+	// 													'recruitment.hiking_group',
+	// 													'recruitment.title',
+	// 													'hiking_plan.end_point',
+	// 													'hiking_group.owner',
+	// 													'hiking_plan.start_date',
+	// 													'hiking_group.min_members',
+	// 													'hiking_group.max_members'
+	// 												)
+	// 												->where('hiking_plan.start_date', '=', $inputData)
+	// 												->get();
+	// 	}
+	// }
 
 	public function showSelectedGroupInfo(String $uuid) {
 		/**

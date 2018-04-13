@@ -6,13 +6,12 @@
 
 <script>
     import Vue from 'vue'
-    import { EventBus } from './event_bus.js';
     export default {
         beforeCreate: function ()
         {
             // 이벤트 받기
             // '이벤트 명', function(받을 데이터)
-            EventBus.$on('mountain_code', function (para) {
+            this.$EventBus.$on('mountain_code', function (para) {
                 this.mountain_para =  para;
                 console.log(para);
             });
@@ -116,7 +115,6 @@
 
 <script>
     import InfiniteLoading from 'vue-infinite-loading';
-    import {EventBus} from './event_bus'
 
     export default {
         data() {
@@ -133,7 +131,7 @@
         },
         created: function () {
             this.fetchItem();
-            EventBus.$on('input_serch', function (mountain_name, writer, date) {
+            this.$EventBus.$on('input_serch', function (mountain_name, writer, date) {
                 this.mountain_name = mountain_name;
                 this.writer = writer;
                 this.date = date;

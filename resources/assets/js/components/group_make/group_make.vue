@@ -17,7 +17,6 @@
 </template>
 
 <script>
-    import {EventBus} from './event_bus.js';
     import Autocomplete from 'vuejs-auto-complete'
 
     export default {
@@ -121,7 +120,7 @@
                                             }
                                         }
                                     }
-                                    EventBus.$emit('mountain_path', path);
+                                    this.$EventBus.$emit('mountain_path', path);
                                 });
 
                                 // 경로에서 마우스가 벗어났을 때 이벤트

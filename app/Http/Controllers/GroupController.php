@@ -34,10 +34,9 @@ class GroupController extends Controller
      */
     public function index($pageIndex)
     {
-        $groupInformations  = $this->group_model->getGroupInformations($pageIndex, 'default');
-        //$countOfPeople      = $this->group_model->getCountOfPeople($pageIndex, 'default');
-        //return compact('groupInformations', 'countOfPeople');
-        return $groupInformations;
+        $groupInformations  = $this->group_model->getGroupInformations($pageIndex);
+        $writers            = $this->group_model->getWriters($pageIndex);
+        return compact('groupInformations', 'writers');
     }
 
     /**
