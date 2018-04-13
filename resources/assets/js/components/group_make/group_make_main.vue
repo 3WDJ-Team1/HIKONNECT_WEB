@@ -57,7 +57,7 @@
                 content: '',
                 date: '',
                 max_num: '',
-                mountain_path: '',
+                mountain_path: [],
                 mountain_num: '',
                 min_num: '',
                 yourData: {
@@ -79,7 +79,8 @@
         },
         methods:    {
             sendData() {
-                axios.post('http://localhost:8000/group/store',{
+                console.log(this.mountain_path);
+                axios.post('http://localhost:8000/group/',{
                     owner: 'f6487325-828b-3b10-9479-71847c1e06ef'
                     /*
                         @todo localStorage.getItem('userUuid')
@@ -90,8 +91,7 @@
                     max: parseInt(this.max_num),
                     stDate: this.date.substring(0, 4)+"-"+this.date.substring(5, 7)+"-"+this.date.substring(8, 10)+
                         " "+this.yourData['hh']+":"+this.yourData['mm']+":"+this.yourData['ss'],
-                    mountain_num: this.mountain_num,
-                    mountain_path: this.mountain_path
+                    mountP: this.mountain_path
                 })
                 .then(response => {
                     if(response.data == true)    {
