@@ -88,7 +88,7 @@ class HikingGroupController extends Controller
      */
     public function store(Request $request)
     {
-        return ;
+        return $this->group_model->insertHikingGroup($request);
     }
 
     /**

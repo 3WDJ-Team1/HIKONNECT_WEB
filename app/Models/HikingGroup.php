@@ -10,11 +10,9 @@
  */
 namespace App\Models;
 
-use DB;
 use Illuminate\Database\Eloquent\Model;
 use App\Request;
 use Illuminate\Support\Facades\DB;
-
 use App\Models\HikingGroup;
 
 /**
@@ -115,9 +113,6 @@ class HikingGroup extends Model
 
         return $queryRes;
     }
-}
-	protected 	$table 		= 'hiking_group';
-
 	protected $fillable = ['uuid', 'title', 'content', 'name', 'owner', 'min_members',
 						   'max_members', 'created_at', 'updated_at', 'hiking_group', 
 						   'hits', 'start_date', 'starting_point', 'stopover', 'end_point'];
@@ -314,7 +309,7 @@ class HikingGroup extends Model
 						mt_rand(0, 0xffffffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff), 
 						mt_rand(0, 0xffff),mt_rand(0, 0xffff), mt_rand(0, 0xffffffff)
 						);
-		$resHikGrp 	= HikingGroup::create([
+		$resHikGrp 	= HikingGroup::insert([
 											'uuid'				=> $uuidHG,
 											'name'				=> '',
 											'owner'				=> $request->session()->get('idv'),
