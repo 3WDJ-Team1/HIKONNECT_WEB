@@ -165,12 +165,18 @@ class HikingGroup extends Model
 										'hiking_plan.hiking_group',
 										'recruitment.title',
 										'hiking_plan.end_point',
-										'hiking_group.owner',
+										'hiking_plan.end_point',
 										'hiking_plan.start_date',
 										'hiking_group.min_members',
 										'hiking_group.max_members'
 									)
 							->skip($pageIndex)->take(10)->get();
+	}
+
+	public function getWriters($pageIndex){
+		return DB::table('user_profile')->leftJoin('hiking_group', 'user_profile.uuid', '=', 'hiking_group.owner')
+										->select('user_profile.nickname')
+										->skip($pageIndex)->take(10)->get();
 	}
 
 	/**
@@ -296,40 +302,11 @@ class HikingGroup extends Model
 															->get();
 	}
 
-	public function insertHikingGroup($request) {
+	public function insertHikingGroup(Request $request) {
 		/**
 		 * insert HikingGroupInfo by correspond selected uuid.
 		 * 
 		 */
-		$uuid 		= 	sprintf('%08x-%04x-%04x-%04x-%04x%08x',
-						mt_rand(0, 0xffffffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff), 
-						mt_rand(0, 0xffff),mt_rand(0, 0xffff), mt_rand(0, 0xffffffff)
-						);
-		$resRec 	= DB::table('recruitment')->insert([
-														'uuid'				=> $uuidHG,
-														'hiking_group'		=> '',
-														'title' 	 		=> $request->get['tt'],
-														'content' 	 		=> $request->get['ct'],
-														'hits'				=> '',
-														'created_at'		=> Carbon::now()->format('Y-m-d H:i:s'),
-														'updated_at'		=> Carbon::now()->format('Y-m-d H:i:s')
-													]);
-
-		$uuid 		= 	sprintf('%08x-%04x-%04x-%04x-%04x%08x',
-						mt_rand(0, 0xffffffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff), 
-						mt_rand(0, 0xffff),mt_rand(0, 0xffff), mt_rand(0, 0xffffffff)
-						);
-		$resHikPlan = 	DB::table('hiking_plan')->insert([
-															'uuid'				=> $uuid,
-															'hiking_group'		=> '',
-															'start_date' 		=> $request->get['stDate'],
-															'starting_point' 	=> '',
-															'stopover' 			=> '',
-															'end_point' 		=> '',
-															'created_at'		=> Carbon::now()->format('Y-m-d H:i:s'),
-															'updated_at'		=> Carbon::now()->format('Y-m-d H:i:s')
-														]);
-
 		$uuidHG 	= 	sprintf('%08x-%04x-%04x-%04x-%04x%08x',
 						mt_rand(0, 0xffffffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff), 
 						mt_rand(0, 0xffff),mt_rand(0, 0xffff), mt_rand(0, 0xffffffff)
@@ -337,12 +314,44 @@ class HikingGroup extends Model
 		$resHikGrp 	= HikingGroup::insert([
 											'uuid'				=> $uuidHG,
 											'name'				=> '',
-											'owner'				=> '',
+											'owner'				=> $request->session()->get('idv'),
 											'min_memebers'      => $request->get['min'],
 											'max_memebers'      => $request->get['max'],
 											'created_at'		=> Carbon::now()->format('Y-m-d H:i:s'),
 											'updated_at'		=> Carbon::now()->format('Y-m-d H:i:s')
 										]);
+
+		$uuidRC 	= 	sprintf('%08x-%04x-%04x-%04x-%04x%08x',
+						mt_rand(0, 0xffffffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff), 
+						mt_rand(0, 0xffff),mt_rand(0, 0xffff), mt_rand(0, 0xffffffff)
+						);
+		$resRec 	= DB::table('recruitment')->insert([
+														'uuid'				=> $uuidRC,
+														'hiking_group'		=> $uuidHG,
+														'title' 	 		=> $request->get['tt'],
+														'content' 	 		=> $request->get['ct'],
+														'hits'				=> 1,
+														'created_at'		=> Carbon::now()->format('Y-m-d H:i:s'),
+														'updated_at'		=> Carbon::now()->format('Y-m-d H:i:s')
+													]);
+
+		$uuidHP 	= 	sprintf('%08x-%04x-%04x-%04x-%04x%08x',
+						mt_rand(0, 0xffffffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff), 
+						mt_rand(0, 0xffff),mt_rand(0, 0xffff), mt_rand(0, 0xffffffff)
+						);
+		$mountain_path = $request->get['mountP'];
+		$starting_point = json_encode($mountain_path);
+		$null = '[]';
+		$resHikPlan = 	DB::table('hiking_plan')->insert([
+															'uuid'				=> $uuidHP,
+															'hiking_group'		=> $uuidHG,
+															'start_date' 		=> $request->get['stDate'],
+															'starting_point' 	=> $starting_point,
+															'stopover' 			=> $null,
+															'end_point' 		=> $null,
+															'created_at'		=> Carbon::now()->format('Y-m-d H:i:s'),
+															'updated_at'		=> Carbon::now()->format('Y-m-d H:i:s')
+														]);
 		return 'true';
 	}
 
