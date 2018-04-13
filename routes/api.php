@@ -13,3 +13,9 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('testing/{key?}', function ($mnt_name) {
+    return DB::table('mountain')
+        ->where('mnt_name', 'LIKE', "%" . $mnt_name . "%")
+        ->get();
+});

@@ -204,24 +204,24 @@
                         }
                     );
             },
+
             // pull autocomplete data
             distributionGroupsEndpoint(n) {
-                //return process.env.API + '/distribution/search?query='
-                return 'http://localhost:8000/testing/' + n;
+                return 'http://localhost:8000/api/testing/' + n;
             },
             // drop down이 보여지도록
             addDistributionGroup(group) {
                 // 산 코드
-                this.mountain_num = group.selectedObject.code;
+                this. mountain_num= group.selectedObject.mnt_code;
                 // input에 썼던 text지우기
                 this.$refs.autocomplete.clearValues();
                 // 내가 클릭한 text로 채우기
-                this.$refs.autocomplete.value = group.display;
+                this.$refs.autocomplete.value = group.selectedObject.mnt_name;
             },
 
             // drop down에 보여질 text
             formattedDisplay(result) {
-                return result.name;
+                return result.mnt_name;
             }
         }
     }

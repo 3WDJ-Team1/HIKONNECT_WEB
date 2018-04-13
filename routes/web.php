@@ -27,4 +27,3 @@ Route::post('group/store', 'GroupController@store');
 Route::post('group/request', 'GroupController@request');
 Route::get('group/index/{pageIndex?}', 'GroupController@index');
 Route::get('group/findData/{method?}/{inputData?}', 'GroupController@findData');
-Route::get('testing/{key?}', 'GroupController@testing');
