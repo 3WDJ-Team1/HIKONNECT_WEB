@@ -118,6 +118,9 @@ class HikingGroup extends Model
 }
 	protected 	$table 		= 'hiking_group';
 
+	protected $fillable = ['uuid', 'title', 'content', 'name', 'owner', 'min_members',
+						   'max_members', 'created_at', 'updated_at', 'hiking_group', 
+						   'hits', 'start_date', 'starting_point', 'stopover', 'end_point'];
 	/**
 	 * Get groupId, postTitle, end_point, groupOwner, start_date, 
 	 * min_members, max_members from database by selected method.
@@ -311,7 +314,7 @@ class HikingGroup extends Model
 						mt_rand(0, 0xffffffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff), 
 						mt_rand(0, 0xffff),mt_rand(0, 0xffff), mt_rand(0, 0xffffffff)
 						);
-		$resHikGrp 	= HikingGroup::insert([
+		$resHikGrp 	= HikingGroup::create([
 											'uuid'				=> $uuidHG,
 											'name'				=> '',
 											'owner'				=> $request->session()->get('idv'),
