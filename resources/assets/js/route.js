@@ -89,6 +89,11 @@ const routes = [
         component: graph
     },
     {
+        name: 'update',
+        path: '/update',
+        component: update
+    },
+    {
         name: 'level',
         path: '/level',
         component: level
