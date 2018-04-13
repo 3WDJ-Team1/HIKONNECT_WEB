@@ -4,7 +4,7 @@
  * 
  * @category Model
  * @package  App\Models
- * @author   bs Kwon <rnjs9957@gamil.com>
+ * @author   bs Kwon <rnjs9957@gamil.com>, Areum Lee <leear5799@gmail.com>
  * @license  MIT license
  * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB
  */

@@ -21,6 +21,7 @@
                 </li>
             </ul>
         </div>
+        <b-button href="http://localhost:8000/#/make">그룹 만들기</b-button>
     </div>
 </template>
 
