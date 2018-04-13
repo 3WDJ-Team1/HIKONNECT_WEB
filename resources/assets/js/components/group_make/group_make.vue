@@ -26,12 +26,6 @@
                 // 산 코드
                 mountain_num: "",
 
-                // 지도에 표시될 중심 지점
-                mountain_center: "",
-
-                // 산마다 배정되는 등산 경로의 배열
-                flightPlanCoordinates: [],
-
                 // 등산 경로마다 지도에 찍기 위한 속성 적용
                 flightPath: [],
 
@@ -49,28 +43,32 @@
         methods: {
             // 지도 api
             initMap() {
+                // 산마다 배정되는 등산 경로의 배열
+                let mountain_center = '';
+                let flightPlanCoordinates = [];
+                let alert_mes = true;
                 let mountain_num = this.mountain_num;
                 let path = new Array;
+                let send_data = [];
                 let map = new window.google.maps.Map(document.getElementById('map'), {
                     zoom: 11,
                     mapTypeId: 'terrain'
                 });
-
                 // 위도와 경도 불러오기
                 axios.get('http://hikonnect.ga:3000/paths/' + this.mountain_num)
                     .then(response => {
                             // 지도의 중심 지점 변수지정
-                            this.mountain_center = response.data[0].geometry.paths[0][0];
+                            mountain_center = response.data[0].geometry.paths[0][0];
 
                             // 산마다 배정되는 경로의 개수만큼 지도에 찍는 for문
                             for (let i = 0; i < response.data.length; i++) {
                                 // 각 경로 배당
-                                this.flightPlanCoordinates[i] = response.data[i].geometry.paths[0];
+                                flightPlanCoordinates[i] = response.data[i].geometry.paths[0];
 
                                 // 각 경로마다 속성 적용
                                 this.flightPath[i] = new window.google.maps.Polyline({
                                     // 적용될 경로의 배열
-                                    path: this.flightPlanCoordinates[i],
+                                    path: flightPlanCoordinates[i],
                                     // 마우스가 이미 지나쳤는지 아닌지
                                     mouseover_out: true,
                                     // 경로를 보여줄지 안 보여줄지
@@ -96,43 +94,46 @@
                                             }
                                         );
                                 });
-
                                 // 경로를 클릭 했을 때 이벤트
                                 this.flightPath[i].addListener('click', function () {
-                                    if (this.mouseover_out == true) {
-                                        this.setOptions({
-                                                strokeColor: '#000000',
-                                                strokeWeight: 5,
-                                                mouseover_out: false
-                                            }
-                                        );
-                                        // group_make_main에 보내줄 최종 경로에 추가
-                                        path.push(i);
+                                    let fir_lat = flightPlanCoordinates[i][0].lat;
+                                    let fir_lng = flightPlanCoordinates[i][0].lng;
+                                    let end_lat = flightPlanCoordinates[i][flightPlanCoordinates[i].length - 1].lat;
+                                    let end_lng = flightPlanCoordinates[i][flightPlanCoordinates[i].length - 1].lng;
+                                    alert_mes = true;
+                                    if (send_data.length == 0) {
+                                        send_data.push({course: [{fir_lat, fir_lng}, {end_lat, end_lng}]});
+                                        console.log(send_data[0].course[0].fir_lat);
+                                        console.log(send_data[0].course[0].fir_lng);
+                                        console.log(send_data[0].course[1].end_lat);
+                                        console.log(send_data[0].course[1].end_lng);
+                                        alert('처음');
                                     }
                                     else {
-                                        this.setOptions({
-                                                strokeColor: '#FF0000',
-                                                strokeWeight: 5,
-                                                mouseover_out: true
+                                        for (let r = 0; r < send_data.length; i++) {
+                                            if(send_data[r].course[0].fir_lat == fir_lat && send_data[0].course[0].fir_lng == fir_lng) {
+                                                alert_mes = false;
+                                                console.log('ok')
                                             }
-                                        );
-                                        // group_make_main에 보내줄 최종 경로에서 삭제
-                                        for (let n = 0; n < path.length; n++) {
-                                            if (path[n] == i) {
-                                                path.splice(n, 1)
+                                            else if(send_data[r].course[0].fir_lat == end_lat && send_data[0].course[0].fir_lng == end_lng) {
+                                                alert_mes = false;
+                                                console.log('ok')
+                                            }
+                                            else if(send_data[r].course[1].end_lat == fir_lat && send_data[0].course[1].end_lng == fir_lng) {
+                                                alert_mes = false;
+                                                console.log('ok')
+                                            }
+                                            else if(send_data[r].course[1].end_lat == end_lat && send_data[0].course[1].end_lng == end_lng) {
+                                                alert_mes = false;
+                                                console.log('ok')
                                             }
                                         }
-                                    }
-
-                                    this.mountain_path_string = null;
-                                    for(let i = 0; i < path.length; i++)    {
-                                        this.mountain_path_string += path[i];
-                                        if(i < path.length - 1) {
-                                            this.mountain_path_string += "/";
+                                        if(alert_mes == true)   {
+                                            alert('No');
                                         }
                                     }
-                                    EventBus.$emit('mountain_path', this.mountain_path_string, mountain_num);
                                 });
+
 
                                 // 경로에서 마우스가 벗어났을 때 이벤트
                                 this.flightPath[i].addListener('mouseout', function () {
@@ -154,17 +155,15 @@
                                 this.flightPath[i].setMap(map);
                             }
                             // 지도의 중심 위도, 경도 입력
-                            map.setCenter({lat: this.mountain_center.lat, lng: this.mountain_center.lng});
+                            map.setCenter({lat: mountain_center.lat, lng: mountain_center.lng});
                         }
                     );
             },
-
             // pull autocomplete data
             distributionGroupsEndpoint(n) {
                 //return process.env.API + '/distribution/search?query='
                 return 'http://localhost:8000/testing/' + n;
             },
-
             // drop down이 보여지도록
             addDistributionGroup(group) {
                 // 산 코드
