@@ -38,7 +38,7 @@ import axios        from 'axios';
 Vue.use(VueAxios, axios);
 
 // // vue-spinner
-// Vue.component('sync-loader', require('vue-spinner/src/SyncLoader.vue'));
+Vue.component('sync-loader', require('vue-spinner/src/SyncLoader.vue'));
 
 // event bus
 Vue.prototype.$EventBus = new Vue();

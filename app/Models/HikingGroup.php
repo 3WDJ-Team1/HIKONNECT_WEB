@@ -147,6 +147,7 @@ class HikingGroup extends Model
 	return HikingGroup::leftJoin('recruitment', 'hiking_group.uuid', '=', 'recruitment.hiking_group')
 			->leftJoin('hiking_plan', 'recruitment.hiking_group', '=', 'hiking_plan.hiking_group')
 			->select (
+				'hiking_group.uuid',
 				'recruitment.title',
 				'hiking_plan.end_point',
 				'hiking_plan.created_at',
@@ -286,41 +287,56 @@ class HikingGroup extends Model
 															->get();
 	}
 
-	public function insertHikingGroup($title, $content, $start_date, $starting_point, 
-	 								  $stopover, $end_point, $min_members, $max_members) {
+	public function insertHikingGroup($request) {
 		/**
 		 * insert HikingGroupInfo by correspond selected uuid.
 		 * 
 		 */
-		DB::table('recruitment')->insert([
-			'uuid'				=> '',
-			'hiking_group'		=> '',
-			'title' 	 		=> $title,
-			'content' 	 		=> $content,
-			'hits'				=> '',
-			'created_at'		=> Carbon::now()->format('Y-m-d H:i:s'),
-			'updated_at'		=> Carbon::now()->format('Y-m-d H:i:s')
-		]);
-		DB::table('hiking_plan')->insert([
-			'uuid'				=> '',
-			'hiking_group'		=> '',
-			'start_date' 		=> $start_date,
-			'starting_point' 	=> $starting_point,
-			'stopover' 			=> $stopover,
-			'end_point' 		=> $end_point,
-			'created_at'		=> Carbon::now()->format('Y-m-d H:i:s'),
-			'updated_at'		=> Carbon::now()->format('Y-m-d H:i:s')
-		]);
-		HikingGroup::insert([
-			'uuid'				=> '',
+		$uuidHG = sprintf('%08x-%04x-%04x-%04x-%04x%08x',
+						mt_rand(0, 0xffffffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff), 
+						mt_rand(0, 0xffff),mt_rand(0, 0xffff), mt_rand(0, 0xffffffff)
+						);
+
+		$resHikGrp = HikingGroup::insert([
+			'uuid'				=> $uuidHG,
 			'name'				=> '',
-			'owner'				=> '',
-			'min_memebers'      => $min_members,
-			'max_memebers'      => $max_members,
+			'owner'				=> $request->input('owner'),
+			'min_members'      => $request->input('min'),
+			'max_members'      => $request->input('max'),
 			'created_at'		=> Carbon::now()->format('Y-m-d H:i:s'),
 			'updated_at'		=> Carbon::now()->format('Y-m-d H:i:s')
 		]);
 
+        $uuid = sprintf('%08x-%04x-%04x-%04x-%04x%08x',
+            mt_rand(0, 0xffffffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff),
+            mt_rand(0, 0xffff),mt_rand(0, 0xffff), mt_rand(0, 0xffffffff)
+        );
+        $resRec = DB::table('recruitment')->insert([
+            'uuid'				=> $uuid,
+            'hiking_group'		=> $uuidHG,
+            'title' 	 		=> $request->input('tt'),
+            'content' 	 		=> $request->input('ct'),
+            'hits'				=> 0,
+            'created_at'		=> Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'		=> Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        $uuid = sprintf('%08x-%04x-%04x-%04x-%04x%08x',
+            mt_rand(0, 0xffffffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff),
+            mt_rand(0, 0xffff),mt_rand(0, 0xffff), mt_rand(0, 0xffffffff)
+        );
+        $resHikPlan = DB::table('hiking_plan')->insert([
+            'uuid'				=> $uuid,
+            'hiking_group'		=> $uuidHG,
+            'start_date' 		=> $request->input('stDate'),
+            'starting_point' 	=> '{}',
+            'stopover' 	    => '{}',
+            'end_point' 		=> '{}',
+            'created_at'		=> Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'		=> Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        return 'true';
 	}
 
 	public function updateSelectedGroupInfo(Array $inputData, String $uuid) {

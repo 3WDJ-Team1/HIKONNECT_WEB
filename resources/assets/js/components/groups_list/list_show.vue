@@ -3,14 +3,25 @@
         <div class="card" v-for="item in list" :key="item.owner">
             <div class="card-header">
                 <h4 class="title inlineBlocks">{{ item.title }}(n/{{ item.max_members }})</h4>
-                <div class="min_members inlineBlocks">최소인원수: {{ item.min_members }}</div>
-                <div class="max_members inlineBlocks">최대인원수: {{ item.max_members }}</div>
+                <h5>{{ item.owner }}</h5>
             </div>
             <div class="card-body">
-                {{ item.owner }}
+                <div class="member-count-wrapper">
+                    <div class="min_members inlineBlocks">최소인원수: {{ item.min_members }}</div>
+                    <div class="max_members inlineBlocks">최대인원수: {{ item.max_members }}</div>
+                </div>
                 <div class="end_point inlineBlocks">목적지: {{ item.end_point }}</div>
                 <div class="startdate inlineBlocks">산행일자: {{ item.startdate }}</div>
             </div>
+            <router-link
+                tag="b-button"
+                style="width: 20em"
+                :to="toGroupDetail + '/' + item.uuid"
+                >
+                그룹 페이지로 이동
+            </router-link>
+            <!-- <b-button style="width: 20em" href="http://localhost:8000/#/make">그룹페이지로 이동</b-button> -->
+            <b-button style="width: 80px" href="#">등산 참가</b-button>
         </div>
         <infinite-loading @infinite="infiniteHandler"></infinite-loading>
     </v-container>
@@ -18,7 +29,6 @@
 
 <script>
     import InfiniteLoading from 'vue-infinite-loading';
-
     export default {
         data() {
             return {
@@ -27,9 +37,10 @@
                     writer: '',
                     date: ''
                 },
-                list_num    : 0,
-                list        : [],
-                HttpAddr    : "http://localhost:8000",
+                list_num        : 0,
+                list            : [],
+                HttpAddr        : "http://localhost:8000",
+                toGroupDetail   : '/group',
             };
         },
         created()
@@ -49,6 +60,7 @@
                     if(response) {
                         for(let i = 0 ; i < 10 ; i++) {
                             this.list.push({
+                                uuid: response.data.groupInformations[i].uuid,
                                 title: response.data.groupInformations[i].title,
                                 owner: response.data.writers[i].nickname,
                                 end_point: response.data.groupInformations[i].end_point,
@@ -75,11 +87,11 @@
     .inlineBlocks {
         display: inline-block; 
     }
-    .min_members {
-        margin-left: 55%;
-    }
     .max_members {
         align-self: flex-end;
         margin-left: 3%;
+    }
+    .member-count-wrapper {
+        text-align: end;
     }
 </style>

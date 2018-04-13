@@ -16,7 +16,7 @@
                 <v-avatar
                     size="150"
                     slot="activator">
-                    <img :src='memberData.profilePic'>
+                    <img :src='memberData.image_path'>
                 </v-avatar>
             </v-flex>
             <v-flex
@@ -39,18 +39,18 @@
                             </v-card-text>
                         </v-card>
                     </v-flex>
-                    <v-flex d-flex>
+                    <!-- <v-flex d-flex>
                             <v-card class="detail-wrapper">
-                            <v-card-text>
+                            <v-card-text> -->
                                 <!-- <div class="detail-category">
                                 SPEED
                                 </div>
                                 <div class="detail-content">
                                 {{ memberData.speed }}
                                 </div> -->
-                            </v-card-text>
+                            <!-- </v-card-text>
                             </v-card>
-                    </v-flex>
+                    </v-flex> -->
                     <v-flex d-flex>
                             <v-card class="detail-wrapper">
                             <v-card-text>

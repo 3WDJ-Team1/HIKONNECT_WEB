@@ -39,7 +39,6 @@ import GroupPlanCalendar    from './components/group_menu/group_plan/GroupPlanCa
 import GroupMemberList      from './components/group_menu/group_member/GroupMemberList.vue';
 import GroupMemberDetail    from './components/group_menu/group_member/GroupMemberDetail.vue';
 
-
 // routing structure
 const routes = [
     // main page
@@ -102,7 +101,7 @@ const routes = [
         children    : [
             // tab of group menu
             {
-                path        : '/group',
+                path        : '/group/:groupid',
                 components  : {
                     notice      : NoticeListUp,
                     plan        : GroupPlan,
@@ -110,7 +109,7 @@ const routes = [
                 },
                 children: [
                     {
-                        path        : '/group',
+                        path        : '/group/:groupid',
                         components  : {
                             // write, modify, delete button of NoticeListUp
                             write   : NoticeWriteBtn,
@@ -124,7 +123,7 @@ const routes = [
                         },
                         children: [
                             {
-                                path        : '/group',
+                                path        : '/group/:groupid',
                                 components  : {
                                     // inner form component of modal(NoticeWriteBtn, NoticeModifyBtn)
                                     form : NoticeFormInside
@@ -137,6 +136,32 @@ const routes = [
             
         ]
     },
+    // group menu
+    {
+        path: '/list',
+        component: groups_list,
+        children: [
+            {
+                path: '/list',
+                components: {
+                    header: list_search,
+                    body: list_show,
+                }
+            }
+        ]
+    },
+    {
+        path: '/make',
+        component: group_make_main,
+        children: [
+            {
+                path: '/make',
+                components: {
+                    make: group_make
+                }
+            }
+        ]
+    }
 ];
 
 export default routes;

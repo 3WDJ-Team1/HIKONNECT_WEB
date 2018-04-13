@@ -40,7 +40,7 @@
             </div>
         </div>
         <!-- @sync-loader   An animation will be shown while the infinite-loading -->
-        <!-- <sync-loader class="loader" :color="loader.color" :loading="loader.loading" :margin="loader.margin" :size="loader.size"></sync-loader> -->
+        <sync-loader class="loader" :color="loader.color" :loading="loader.loading" :margin="loader.margin" :size="loader.size"></sync-loader>
     </div>
 </template>
 
@@ -73,10 +73,13 @@
                 margin: "2px",
                 size: "10px"
             },
-            groupId: "33db3b54-435b-357e-8093-c8ea865b2c54"
+            groupId: ""
         }),
         // When this component was created,
         created() {
+            // url에서 그룹 아이디 받아오기
+            console.log(this.$route.params);
+            this.groupId = this.$route.params.groupid;
             // add event listener for 'scroll' --> for infinite loading
             window.addEventListener('scroll', () => {
                 // store value(boolean) about 'is bottom Visible'
@@ -138,6 +141,9 @@
                 if (bottom) {
                     this.addNotices();
                 }
+            },
+            '$route' (to, from) {
+                this.groupId = this.$route.params.groupid;
             }
         }
     }

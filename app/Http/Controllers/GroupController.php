@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\HikingGroup;
 use App\Models\User;
 
+// 산 이름 리스트 가져오는 모델(Front-end랑 협의 후 지울 것)
+use App\Models\Mountain;
+//
+
     /**
      * @var Model $group_model       A reference variable for Hiking_group model
      */
@@ -58,17 +62,7 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        $title              = $request->input('title');
-        $content            = $request->input('content');
-        $start_date         = $request->input('date');
-        $starting_point     = $request->input('stPoint');
-        $stopover           = $request->input('spOver');
-        $end_point          = $request->input('ePoint');
-        $min_members        = $request->input('min');
-        $max_members        = $request->input('max');
-
-        $this->group_model->insertHikingGroup($title, $content, $start_date, $starting_point, 
-                                              $stopover, $end_point, $min_members, $max_members);
+        return $this->group_model->insertHikingGroup($request);
     }
 
     /**
