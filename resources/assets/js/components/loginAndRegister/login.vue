@@ -64,6 +64,7 @@
                         idv: this.userId,
                         pwv: this.userPw
                     }).then((response) => {
+                        console.log(response.data);
                         if (response.data == 'false') {
                             this.$EventBus.$emit('errorModalOpen', '아이디가 바르지 않습니다');
                         }
