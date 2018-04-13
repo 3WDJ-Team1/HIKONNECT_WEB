@@ -68,6 +68,7 @@
                 let uri = this.$HttpAddr + '/graph/' + sessionStorage.getItem('uuid');
                 this.axios.post(uri,this.item).then((response) => {
                     console.log(response.data);
+
                     var datavalue = Object.values(response.data);
                     sessionStorage.setItem('year',this.item.year);
                     sessionStorage.setItem('1',datavalue[0]);
