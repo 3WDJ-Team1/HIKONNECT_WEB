@@ -91,7 +91,6 @@
                     max: parseInt(this.max_num),
                     stDate: this.date.substring(0, 4)+"-"+this.date.substring(5, 7)+"-"+this.date.substring(8, 10)+
                         " "+this.yourData['hh']+":"+this.yourData['mm']+":"+this.yourData['ss'],
-                    mountain_num: this.mountain_num,
                     mountain_path: this.mountain_path
                 })
                 .then(response => {
