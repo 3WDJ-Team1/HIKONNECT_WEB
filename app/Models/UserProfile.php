@@ -11,6 +11,7 @@
 
 namespace App\Models;
 
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -49,13 +50,9 @@ class UserProfile extends Model
     }
 
     //UserProfile Infomation Update
-    public function userUpdate(Request $request, $id, $gender, $age_group, $scope,$image_path) 
+    public function userUpdate(Request $request,$id,$gender,$age_group,$scope,$image_path)
     {
-        UserProfile::where(
-            'user',
-            $id
-        )->update(
-            [
+        UserProfile::where('user',$id)->update([
             'nickname'      => $request->get('nn'),
             'phone'         => $request->get('phone'),
             'image_path'    => $image_path,
@@ -63,8 +60,7 @@ class UserProfile extends Model
             'age_group'     => $age_group,
             'scope'         => $scope,
             'updated_at'    => Carbon::now()->format('Y-m-d H:i:s')
-            ]
-        );
+        ]);
     }
 
     //UserProfile Infomation Delete

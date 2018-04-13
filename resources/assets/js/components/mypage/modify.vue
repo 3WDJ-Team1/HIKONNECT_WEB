@@ -110,6 +110,7 @@
                 }
                 else {
                     this.axios.put(uri, this.item).then((response) => {
+                        console.log(response.data);
                         if (response.data == 'true') {
                             alert('수정 완료');
                             this.$router.push({name: 'main'});

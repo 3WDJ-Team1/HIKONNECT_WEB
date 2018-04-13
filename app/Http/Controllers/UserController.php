@@ -212,20 +212,15 @@ class UserController extends Controller
     {
         //UserProfile Picture File Save
         Storage::put(
-            'userprofile/' . $id . '.png',
+            'userprofile/'.$id.'.png',
             $request->get('imageSrc')
         );
         $image_path = 'userprofile/'.$id.'.png';
         $password = $request->get('pwv');
         $this->usermodel->userUpdate($password, $id);
-        $this->userfilmodel->userUpdate(
-            $request,
-            $id,
-            $this->gender,
-            $this->age_group,
-            $this->scope,
-            $image_path
-        );
+
+        $this->userfilmodel->userUpdate($request,$id,$this->gender,$this->age_group,$this->scope);
+
         return response()->json('true');
     }
 
@@ -249,10 +244,7 @@ class UserController extends Controller
     public function showUserData($id)
     {
         if (hiking_record::where('owner', $id)->count() == 0) {
-            $profile_value = array([
-                'grade' => '동네 뒷산',
-            ]);
-            return response()->json($profile_value);
+            return response()->json('false');
         } else {
             // UserGrade Setting
             $hiking_count = hiking_record::where('uuid', $id)->count();
