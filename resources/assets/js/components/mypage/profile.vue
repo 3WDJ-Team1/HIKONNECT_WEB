@@ -6,7 +6,6 @@
                 <div class="col-md-5 col-md-offset-2">
                     <div class="panel panel-default" style="margin-top: 150px">
                         <div class="panel-body">
-
                             <span id="userid"><label>아이디</label></span><br>
                             <span id="nickname"> <label>닉네임</label></span><br>
                             <span>
