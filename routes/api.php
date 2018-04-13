@@ -119,6 +119,19 @@ Route::group(
             'main/{id}', 
             'MainController@get_Announce_Count'
         )->name('Announce_Count');
+
+        // 지울 것. 산 정보 가져오는 URL
+        Route::get('testing/{mnt_name}', function ($mnt_name) {
+
+            // 지우기
+            echo $mnt_name;
+            // ----- 
+
+            return DB::table('mountain')
+                ->where('mnt_name', $mnt_name)
+                ->get();
+        })->name('testing');
+        // 지울 것/
     }
 );
 

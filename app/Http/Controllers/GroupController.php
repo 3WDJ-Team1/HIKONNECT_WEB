@@ -24,13 +24,11 @@ class GroupController extends Controller
     {
         $this->group_model = new HikingGroup();
         $this->user_model = new User();
-        //$this->mountain_model = new mountain();
     }
 
     public function testing($key)
     {
-        return $this->mountain_model
-            ->getMountainNames($key);
+        return 1234;
     }
     /**
      * Display a listing of the resource.
