@@ -11,7 +11,7 @@
             fab
             dark
             large
-            class       ="btn--bottom btn--floating btn--fixed btn--right"
+            class       ="btn--bottom btn--floating btn--fixed btn--center"
             color       ="cyan"
             @click      ="openWriteModal()">
             <v-icon color="white">add</v-icon>
