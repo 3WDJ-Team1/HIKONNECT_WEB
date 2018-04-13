@@ -24,6 +24,10 @@ class GroupController extends Controller
     {
         $this->group_model = new HikingGroup();
         $this->user_model = new User();
+<<<<<<< HEAD
+=======
+        //$this->mountain_model = new mountain();
+>>>>>>> 45be18aae1ecd9f2de8ea0e9abde5f8be201da07
     }
 
     public function testing($key)

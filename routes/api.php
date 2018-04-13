@@ -123,8 +123,6 @@ Route::group(
         // 지울 것. 산 정보 가져오는 URL
         Route::get('testing/{mnt_name}', function ($mnt_name) {
 
-            // 지우기
-            echo $mnt_name;
             // ----- 
 
             return DB::table('mountain')
