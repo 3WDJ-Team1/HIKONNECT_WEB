@@ -46,12 +46,10 @@ class User extends Model
     //User Update
     public function userUpdate($password,$id) 
     {
-        User::where(
-            'uuid',
-            $id
-        )->update(
-            ['password' => $password]
-        );
+        User::where('uuid',$id)
+            ->update([
+                'password'      => $password,
+                'updated_at'    => Carbon::now()->format('Y-m-d H:i:s')]);
     }
 
     //User Delete
