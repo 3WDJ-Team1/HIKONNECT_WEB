@@ -31,7 +31,6 @@
 
 <script>
     export default {
-
         data()  {
             return  {
                 mountain_name: "",

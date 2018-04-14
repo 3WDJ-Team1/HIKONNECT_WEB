@@ -7,19 +7,11 @@
 <template>
     <div style="position: relative;">
         <div
-            style="display: inline_block; background-color: whitesmoke;"
-            v-for="alphabet in alphabets"
-            :key="alphabet">
-            <h2
-                class="text-center"
-                :id="alphabet">
-                {{ alphabet }}
-            </h2>
+            style="display: inline_block; background-color: white;">
             <b-card
                 class='member_list_card'
                 v-for="userData in memberList"
-                :key="userData.nickname"
-                v-if="userData.nickname.charAt(0) == alphabet">
+                :key="userData.nickname">
                 <b-card-header
                     header-tag="header"
                     role="tab"
@@ -69,44 +61,43 @@
                     </b-card-body>
                 </b-collapse>
             </b-card>
+            <infinite-loading @infinite="infiniteHandler" spinner="bubbles"></infinite-loading>
         </div>
     </div>
 </template>
 
 <script>
-    
+    import InfiniteLoading from 'vue-infinite-loading';
     export default {
+        components: {
+            InfiniteLoading,
+        },
         data: () => ({
-            groupUuid: "",
-            memberList: [
-                // { uuid: ~~~~ }, 
-                
-            ],
-            userDataArr: [
-                // { Capitol: A }
-            ],
-            alphabets: [
-                'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
-                'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
-                'W', 'X', 'Y', 'Z', '#'],
+            groupUuid   : "",
+            memberList  : [],
+            page        : 0,
         }),
         methods: {
-            getGroupUserData(argGroupUuid) {
-                axios.get(this.$HttpAddr + "/groupMembers/" + argGroupUuid)
-                .then( response => {
-                    this.memberList = response.data;
-                })
-            },
             sendMemberData(argObj) {
                 this.$EventBus.$emit('memberData', argObj);
                 isDetailShown = !isDetailShown;
             },
+            infiniteHandler($state) {
+                axios.get(this.$HttpAddr + "/groupMembers/" + this.groupUuid + "/" + this.page + "/" + 10)
+                .then( response => {
+                    if (response) {
+                        this.memberList.concat(response.data);
+                        $state.loaded();
+                    } else {
+                        $state.complete();
+                    }
+                })
+            }
         },
         created() {
             // this.getGroupUserData();
             // httpAddr+/groupMembers/groupUUID
             this.groupUuid = this.$route.params.groupid;
-            this.getGroupUserData(this.groupUuid);
         },
         watch: {
             '$route' (to, from) {

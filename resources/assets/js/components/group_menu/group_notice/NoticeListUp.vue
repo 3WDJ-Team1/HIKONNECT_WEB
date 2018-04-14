@@ -19,8 +19,8 @@
                     <!-- @div   The title and author of a notice
                                 if you click this, b-collapse will be shown. -->
                     <div v-b-toggle ="'n' + notice.uuid" class="m-1">
-                        <h3 class   ="card-title">{{ notice.title }}</h3>
-                        <p  class   ="card-text">writer : {{ notice.nickname }} | hits : {{ notice.hits }}</p>
+                        <h3 class="card-title">{{ notice.title }}</h3>
+                        <p  class="card-text">writer : {{ notice.nickname }} | hits : {{ notice.hits }}</p>
                     
                     </div>
                     <!-- @div(b-collapse)   The contents of a notice. -->
@@ -39,13 +39,16 @@
                 </div>
             </div>
         </div>
-        <!-- @sync-loader   An animation will be shown while the infinite-loading -->
-        <sync-loader class="loader" :color="loader.color" :loading="loader.loading" :margin="loader.margin" :size="loader.size"></sync-loader>
+        <infinite-loading @infinite="infiniteHandler" spinner="bubbles"></infinite-loading>
     </div>
 </template>
 
 <script>
+    import InfiniteLoading from 'vue-infinite-loading';
     export default {
+        components: {
+            InfiniteLoading,
+        },
         data : ()  => ({ 
             /**
              * groupName    (String)        the name of group
@@ -64,35 +67,21 @@
             notices     : [
                 // the type of notices is 'object' certainly.
             ],
-            page        : 1,
+            page        : 0,
             size        : 5,
             bottom      : false,
             loader      : {
-                loading: true,
-                color: "#4df1e1",
-                margin: "2px",
-                size: "10px"
+                loading : true,
+                color   : "#4df1e1",
+                margin  : "2px",
+                size    : "10px"
             },
             groupId: ""
         }),
         // When this component was created,
         created() {
             // url에서 그룹 아이디 받아오기
-            console.log(this.$route.params);
             this.groupId = this.$route.params.groupid;
-            // add event listener for 'scroll' --> for infinite loading
-            window.addEventListener('scroll', () => {
-                // store value(boolean) about 'is bottom Visible'
-                this.bottom = this.bottomVisible()
-            });
-            // request
-            axios.get(this.$HttpAddr + '/notice/'+ this.groupId + '/0/10')
-                .then(response => {
-                    // update this.notices with response data
-                    this.notices = response.data;
-                    // make icon hidden
-                    this.loader.loading = false;
-                });
         },
         methods: {
             /**
@@ -111,21 +100,17 @@
              * @function    addNotice
              * @brief       send http request to server, and update this.notice
              */
-            addNotices() {
-                this.loader.loading     = true;
-                let url                 = this.$HttpAddr + '/notice/' + this.groupId + "/" + ((this.page - 1) * this.size + 10)
+            infiniteHandler($state) {
+                let url = this.$HttpAddr + '/notice/' + this.groupId + "/" + ((this.page - 1) * this.size + 10)
                                           + '/' + (this.page * this.size + 10);
-                
                 axios.get(url)
                 .then(response => {
-                    if (response.data.length == 0) {
-                        this.loader.loading = false;
-                        return;
+                    if (response) {
+                            this.notices.concat(response.data);
+                        $state.loaded();
+                    }else {
+                        $state.complete();
                     }
-                    for (let i = 0 ; i < this.size ; i++) {
-                        this.notices.push(response.data[i]);
-                    }
-                    this.loader.loading = false;
                 });
                 this.page++;
             }
@@ -137,11 +122,6 @@
              * @brief       watch the value of this.bottom.
              *              if the value is true, addNotice function is invoked.
              */
-            bottom(bottom) {
-                if (bottom) {
-                    this.addNotices();
-                }
-            },
             '$route' (to, from) {
                 this.groupId = this.$route.params.groupid;
             }
