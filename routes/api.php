@@ -40,6 +40,10 @@ Route::group(
             'groupList/{idx}/{perIdx}/{orderBy?}',
             'HikingGroupController@getGroupList'
         )->name('groupList');
+        Route::get(
+            'isOwner/{groupId}/{userId}',
+            'HikingGroupController@isOwner'
+        )->name('isOwner');
 
         // Entry info Routings
         Route::post(
