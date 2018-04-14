@@ -252,7 +252,7 @@ class UserController extends Controller
             $profile_value = array([
                 'grade' => '동네 뒷산',
             ]);
-            return response()->json($profile_value);
+            return response()->json('false');
         } else {
             // UserGrade Setting
             $hiking_count = hiking_record::where('uuid', $id)->count();

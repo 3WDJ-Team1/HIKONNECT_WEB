@@ -63,27 +63,25 @@
             ChartAxis
         },
         methods:  {
-            graph() {
-                console.log(sessionStorage.getItem('year'));
-                let uri = this.$HttpAddr + '/graph/' + sessionStorage.getItem('uuid');
-                this.axios.post(uri,this.item).then((response) => {
-                    console.log(response.data);
-
-                    var datavalue = Object.values(response.data);
-                    sessionStorage.setItem('year',this.item.year);
-                    sessionStorage.setItem('1',datavalue[0]);
-                    sessionStorage.setItem('2',datavalue[1]);
-                    sessionStorage.setItem('3',datavalue[2]);
-                    sessionStorage.setItem('4',datavalue[3]);
-                    sessionStorage.setItem('5',datavalue[4]);
-                    sessionStorage.setItem('6',datavalue[5]);
-                    sessionStorage.setItem('7',datavalue[6]);
-                    sessionStorage.setItem('8',datavalue[7]);
-                    sessionStorage.setItem('9',datavalue[8]);
-                    sessionStorage.setItem('10',datavalue[9]);
-                    sessionStorage.setItem('11',datavalue[10]);
-                    sessionStorage.setItem('12',datavalue[11]);
-                    this.$router.push({name : 'update'})
+        graph() {
+            let uri = this.$HttpAddr + '/graph/' + sessionStorage.getItem('uuid');
+            this.axios.post(uri,this.item).then((response) => {
+                console.log(response.data);
+                var datavalue = Object.values(response.data);
+                sessionStorage.setItem('year',this.item.year);
+                sessionStorage.setItem('1',datavalue[0]);
+                sessionStorage.setItem('2',datavalue[1]);
+                sessionStorage.setItem('3',datavalue[2]);
+                sessionStorage.setItem('4',datavalue[3]);
+                sessionStorage.setItem('5',datavalue[4]);
+                sessionStorage.setItem('6',datavalue[5]);
+                sessionStorage.setItem('7',datavalue[6]);
+                sessionStorage.setItem('8',datavalue[7]);
+                sessionStorage.setItem('9',datavalue[8]);
+                sessionStorage.setItem('10',datavalue[9]);
+                sessionStorage.setItem('11',datavalue[10]);
+                sessionStorage.setItem('12',datavalue[11]);
+                this.$router.push({name : 'update'})
                 });
             }
         }

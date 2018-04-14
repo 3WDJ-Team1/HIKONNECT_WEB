@@ -183,6 +183,11 @@ return [
         \SocialiteProviders\Manager\ServiceProvider::class,
 
         'Nathanmac\Utilities\Parser\ParserServiceProvider',
+
+        /**
+         * Add CURL library for Laravel.
+         */
+        Ixudra\Curl\CurlServiceProvider::class,
     ],
 
     /*
@@ -233,6 +238,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Parser' => Nathanmac\Utilities\Parser\Facades\Parser::class,
+
+        'Curl' => Ixudra\Curl\Facades\Curl::class,
     ],
 
 ];

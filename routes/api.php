@@ -22,29 +22,67 @@ Route::group(
     [], 
     function () {
         // Notification Routings
-        Route::resource('notice', 'NoticeController');
+        Route::resource(
+            'notice', 
+            'NoticeController'
+        );
         Route::get(
             'notice/{groupUuid}/{pageIndex?}/{perPage?}', 
             'NoticeController@index'
         )->name('noticePagination');
 
         // Hiking group Routings
-        Route::resource('hiking-group', 'HikingGroupController');
-        
+        Route::resource(
+            'hikingGroup', 
+            'HikingGroupController'
+        );
+        Route::get(
+            'groupList/{idx}/{perIdx}/{orderBy?}',
+            'HikingGroupController@getGroupList'
+        )->name('groupList');
+
+        // Entry info Routings
+        Route::post(
+            'entryGroup',
+            'EntryInfoController@entryGroup'
+        )->name('entryGroup');
+        Route::patch(
+            'replyUserEntry',
+            'EntryInfoController@replyUserEntry'
+        )->name('replyUserEntry');
+        Route::get(
+            'appliedUsers/{groupUuid}',
+            'EntryInfoController@appliedUsers'
+        )->name('appliedUsers');
+        Route::delete(
+            'rejectUserEntry',
+            'EntryInfoController@rejectUserEntry'
+        )->name('rejectUserEntry');
+   
         Route::get(
             'groupMembers/{groupUuid}/{idx?}/{perIdx?}', 
             'HikingGroupController@getGroupMembers'
         )->name('groupMemberList');
 
         // User Profile Routings
-        Route::get('userProfile/{userUuid}', 'UserProfileController@getUserProfile');
+        Route::get(
+            'userProfile/{userUuid}', 
+            'UserProfileController@getUserProfile'
+        );
 
         // Login Routings
-        Route::resource('/user', 'UserController');
-        Route::post('/login', 'LoginController@login')
-        ->name('login');
-        Route::post('/loginprocess', 'LoginController@loginprocess')
-        ->name('loginprocess');
+        Route::resource(
+            '/user', 
+            'UserController'
+        );
+        Route::post(
+            '/login', 
+            'LoginController@login'
+        )->name('login');
+        Route::post(
+            '/loginprocess', 
+            'LoginController@loginprocess'
+        )->name('loginprocess');
 
         /**
          * Login process using Socialite
@@ -52,18 +90,44 @@ Route::group(
          * Line     = enabled
          * Kakao    = disabled
          */
-        Route::get('/login/{providerName}', 'LoginController@redirectToProvider');
-        Route::get('/login/{providerName}/redirect', 'LoginController@handleProviderCallback');
+        Route::get(
+            '/login/{providerName}', 
+            'LoginController@redirectToProvider'
+        )->name('SNSLogin');
+        Route::get(
+            '/login/{providerName}/redirect', 
+            'LoginController@handleProviderCallback'
+        )->name('SNSLoginRedirect');
 
-        Route::post('/logout', 'LoginController@logout')
-        ->name('logout');
-        Route::get('/user/{id}', 'UserController@getImage')
-        ->name('getImage');
-        Route::get('/mypage/{id}', 'UserController@showUserData')
-        ->name('UserData');
-        Route::post('/graph/{id}', 'UserController@graph')
-        ->name('graph');
-        Route::get('main/{id}', 'MainController@get_Announce_Count')
-        ->name('Announce_Count');
+        Route::post(
+            '/logout', 
+            'LoginController@logout'
+        )->name('logout');
+        Route::get(
+            '/user/{id}', 
+            'UserController@getImage'
+        )->name('getImage');
+        Route::get(
+            '/mypage/{id}', 
+            'UserController@showUserData'
+        )->name('UserData');
+        Route::post(
+            '/graph/{id}', 
+            'UserController@graph'
+        )->name('graph');
+        Route::get(
+            'main/{id}', 
+            'MainController@get_Announce_Count'
+        )->name('Announce_Count');
+    }
+);
+
+Route::group(
+    ['prefix' => 'fcm'], 
+    function () {
+        Route::post(
+            'pushNotification', 
+            'FCMController@pushNotification'
+        );
     }
 );

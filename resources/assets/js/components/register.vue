@@ -1,14 +1,13 @@
 <template>
-    <div class="container" style="margin-left: 130px" >
+    <div class="container">
         <div class="row">
             <div class="col-md-5 col-md-offset-2">
                 <div class="panel panel-default" style="margin-top: 80px">
                     <div class="panel-heading">회원가입</div>
-
                     <div class="panel-body">
                         <input type="text"     style="margin-top: 10px" v-model="item.idv" class="form-control" placeholder="Enter id" id="id"/>
                         <input type="password" style="margin-top: 10px" v-model="item.pwv" class="form-control" placeholder="Enter password" id="pw"/>
-                        <input type="password" style="margin-top: 10px" class="form-control" placeholder="Enter password again" id="pwvc"/>
+                        <input type="password" style="margin-top: 10px" v-model="item.pwvc" class="form-control" placeholder="Enter password again" id="pwvc"/>
                         <input type="text" style="margin-top: 10px" v-model="item.nn" class="form-control" placeholder="Enter nickname" id="nn"/>
                         <input type="text" style="margin-top: 10px" v-model="item.phone" class="form-control" placeholder="Enter phone" id="phone"/>
                         <label>번호 공개 여부</label><input type="checkbox" style="margin-top: 10px" v-model="item.phonesc"  id="phonesc"/><br>
@@ -47,18 +46,30 @@
     export default {
         data(){
             return{
-                item:{}
+                item:{
+                    idv : '',
+                    pwv : '',
+                    pwvc : '',
+                    nn  : '',
+                    phone : '',
+                    phonesc : '',
+                    gender : '',
+                    gendersc : '',
+                    agesc : '',
+
+
+
+                }
             }
         },
         methods: {
             regist() {
-
-                let uri= this.$HttpAddr + '/user';
-                if($('#id').val() == "" || $('#pw').val() == ""
-                    || $('#pwvc').val() == "" || $('#nn').val() == "") {
+                let uri= 'http://localhost:8000/user';
+                if(this.item.idv == "" || this.item.pwv == ""
+                    || this.item.pwvc == "" || this.item.nn == "") {
                     alert('값이 비어있습니다');
                 }
-                else if($('#pw').val() != $('#pwvc').val()) {
+                else if(this.item.pwv != this.item.pwvc) {
                     alert('비밀 번호와 비밀번호 확인이 다릅니다')
                 }
                 else {
@@ -69,7 +80,7 @@
                         }
                         else if(response.data == 'false')
                             alert('이미 존재하는 아이디 입니다.');
-                            this.$router.push({ name: 'main'});
+                        this.$router.push({ name: 'main'});
 
                     })
                 }
