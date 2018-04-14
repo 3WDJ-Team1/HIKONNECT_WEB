@@ -2,19 +2,26 @@
     <v-container
         fluid
         grid-list-md
+        align-center
+        align-content-center
+        justify-center
         class="member-detail-wrapper">
         <v-layout
             row
             wrap
-            style="vertical-align:middle;">
+            align-center
+            align-content-center
+            justify-center>
             <v-flex
                 d-flex
                 xs12
                 sm6
-                md4
-                class="vertical-center">
+                md3
+                align-center
+                align-content-center
+                justify-center>
                 <v-avatar
-                    size="150"
+                    size="140"
                     slot="activator">
                     <img :src='memberData.image_path'>
                 </v-avatar>
@@ -23,11 +30,24 @@
                 d-flex
                 xs12
                 sm6
-                md8>
+                md9
+                align-center
+                align-content-center
+                justify-center>
                 <v-container
                     row
-                    wrap>
-                    <v-flex d-flex>
+                    wrap
+                    align-center
+                    align-content-center
+                    justify-center>
+                    <v-flex
+                        d-flex
+                        xs12
+                        sm12
+                        md12
+                        align-center
+                        align-content-center
+                        justify-center>
                         <v-card class="detail-wrapper">
                             <v-card-text>
                                 <div class="detail-category">
@@ -51,7 +71,14 @@
                             <!-- </v-card-text>
                             </v-card>
                     </v-flex> -->
-                    <v-flex d-flex>
+                    <v-flex
+                        d-flex
+                        xs12
+                        sm12
+                        md12
+                        align-center
+                        align-content-center
+                        justify-center>
                             <v-card class="detail-wrapper">
                             <v-card-text>
                                 <div class="detail-category">
@@ -84,14 +111,9 @@
 
 <style>
 .member-detail-wrapper {
-    background-color: rgb(221, 221, 221);
-    padding: 3%;
+    background-color: rgb(240, 240, 240);
     width: 90%;
-    margin: 0 auto;
     border-radius: 10px;
-}
-.vertical-center {
-    margin-top: 3.5em;
 }
 .detail-wrapper {
     background-color: white;

@@ -76,7 +76,7 @@
                 switch(this.mode) {
                     case "edit":
                         if(this.$refs.form.validate()) {
-                            axios.patch(this$HttpAddr + '/notice/' + this.noticeUuid, {
+                            axios.patch(this.$HttpAddr + '/notice/' + this.noticeUuid, {
                                 // nickname: this.nickname,
                                 writer  :'', // user's uuid,
                                 title   : this.title,

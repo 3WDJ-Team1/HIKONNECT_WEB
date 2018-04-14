@@ -19,7 +19,7 @@
                     class='member_list_card_header'>
                     <div
                         href="#"
-                        v-b-toggle ="'n' + userData.phone">
+                        v-b-toggle ="'n' + userData.nickname">
                         <!-- need to insert profile pic -->
                         <v-layout row>
                             <v-flex
@@ -51,7 +51,7 @@
                     </div>
                 </b-card-header>
                 <b-collapse
-                    :id="'n' + userData.uuid"
+                    :id="'n' + userData.nickname"
                     accordion="member_list"
                     role="tabpanel">
                     <b-card-body>
@@ -61,7 +61,7 @@
                     </b-card-body>
                 </b-collapse>
             </b-card>
-            <infinite-loading @infinite="infiniteHandler" spinner="bubbles"></infinite-loading>
+            <!-- <infinite-loading @infinite="infiniteHandlerMember" spinner="bubbles"></infinite-loading> -->
         </div>
     </div>
 </template>
@@ -80,16 +80,18 @@
         methods: {
             sendMemberData(argObj) {
                 this.$EventBus.$emit('memberData', argObj);
-                isDetailShown = !isDetailShown;
             },
-            infiniteHandler($state) {
+            infiniteHandlerMember($state) {
                 axios.get(this.$HttpAddr + "/groupMembers/" + this.groupUuid + "/" + this.page + "/" + 10)
                 .then( response => {
                     if (response) {
-                        this.memberList.concat(response.data);
-                        $state.loaded();
+                        console.log(response);
+                        console.log(this.memberList);
+                        this.memberList = this.memberList.concat(response.data);
+                        console.log(this.memberList);
+                        // $state.loaded();
                     } else {
-                        $state.complete();
+                        // $state.complete();
                     }
                 })
             }
@@ -98,6 +100,8 @@
             // this.getGroupUserData();
             // httpAddr+/groupMembers/groupUUID
             this.groupUuid = this.$route.params.groupid;
+            this.groupUuid = "16f78874-b51c-3ad0-9b91-5d35f22a412b";
+            this.infiniteHandlerMember();
         },
         watch: {
             '$route' (to, from) {
