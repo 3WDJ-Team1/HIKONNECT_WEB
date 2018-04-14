@@ -18,6 +18,12 @@ Route::middleware('auth:api')
     }
 );
 
+Route::get('testing/{key?}', function ($mnt_name) {
+    return  DB::table('mountain')
+            ->where('mnt_name', 'LIKE', "%" . $mnt_name . "%")
+            ->get();
+});
+
 Route::group(
     [], 
     function () {

@@ -56,7 +56,7 @@
                 content: '',
                 date: '',
                 max_num: '',
-                mountain_path: '',
+                mountain_path: [],
                 mountain_num: '',
                 min_num: '',
                 yourData: {
@@ -64,33 +64,28 @@
                     mm: '',
                     ss: ''
                 }
-
             }
         },
         created: function ()
         {
             // 이벤트 받기
             // '이벤트 명', function(받을 데이터)
-            this.$EventBus.$on('mountain_path', function (path, num) {
+            this.$EventBus.$on('mountain_path', (path, num) => {
                 this.mountain_path = path;
                 this.mountain_num = num;
             });
         },
         methods:    {
             sendData() {
-                axios.post('http://localhost:8000/group/store',{
-                    owner: 'f6487325-828b-3b10-9479-71847c1e06ef'
-                    /*
-                        @todo localStorage.getItem('userUuid')
-                    */,
+                axios.post('http://localhost:8000/group',{
+                    owner: sessionStorage.getItem('uuid'),
                     tt: this.title,
                     ct: this.content,
                     min: parseInt(this.min_num),
                     max: parseInt(this.max_num),
                     stDate: this.date.substring(0, 4)+"-"+this.date.substring(5, 7)+"-"+this.date.substring(8, 10)+
                         " "+this.yourData['hh']+":"+this.yourData['mm']+":"+this.yourData['ss'],
-                    mountain_num: this.mountain_num,
-                    mountain_path: this.mountain_path
+                    mountP: JSON.stringify(this.mountain_path)
                 })
                 .then(response => {
                     if(response.data == true)    {
@@ -99,7 +94,6 @@
                         alert('저장을 실패하였습니다.');
                     }
                 })
-
             }
         }
     }
