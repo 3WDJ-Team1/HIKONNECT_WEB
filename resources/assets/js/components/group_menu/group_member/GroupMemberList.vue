@@ -6,6 +6,7 @@
  -->
 <template>
     <div style="position: relative;">
+        <router-view name="waiting_member"></router-view>
         <div
             style="display: inline_block; background-color: white;">
             <b-card

@@ -32,7 +32,12 @@ class EntryInfo extends Model
     public function getAppliedUsers(String $groupUuid)
     {
         return DB::table('entry_info')
-        ->where('hiking_group', $groupUuid)
+        ->select('user_profile.nickname', 'user_profile.image_path', 'user_profile.phone', 'user_profile.gender', 'user_profile.age_group', 'user_profile.scope')
+        ->join('user_profile', 'entry_info.user', '=', 'user_profile.user')
+        ->where([
+            ['entry_info.hiking_group', '=', $groupUuid],
+            ['entry_info.is_accepted', '=', '0']
+        ])
         ->get();
     }
 

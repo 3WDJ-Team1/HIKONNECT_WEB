@@ -39,6 +39,8 @@ import GroupPlanCalendar    from './components/group_menu/group_plan/GroupPlanCa
 // group member list
 import GroupMemberList      from './components/group_menu/group_member/GroupMemberList.vue';
 import GroupMemberDetail    from './components/group_menu/group_member/GroupMemberDetail.vue';
+// wating member list
+import WaitingMemberList     from './components/group_menu/group_member/WaitingMemberList.vue';
 
 // routing structure
 const routes = [
@@ -132,7 +134,8 @@ const routes = [
                                 path        : '/group/:groupid',
                                 components  : {
                                     // inner form component of modal(NoticeWriteBtn, NoticeModifyBtn)
-                                    form : NoticeFormInside
+                                    form            : NoticeFormInside,
+                                    waiting_member   : WaitingMemberList,
                                 }
                             }
                         ]
