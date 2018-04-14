@@ -50,7 +50,7 @@ class UserProfile extends Model
     }
 
     //UserProfile Infomation Update
-    public function userUpdate($user_info,$id)
+    public function userProUpdate(Array $user_info,$id)
     {
         UserProfile::where('user',$id)
             ->update($user_info);
