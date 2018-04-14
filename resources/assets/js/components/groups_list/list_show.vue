@@ -78,15 +78,9 @@
                 this.list_num += 10;
             },
             joinGroup(groupId) {
-                axios.post(/*this.$HttpAddr*/'http://hikonnect.ga/api/entryGroup', {
+                axios.post(this.$HttpAddr + '/entryGroup', {
                     userUuid: sessionStorage.uuid,
                     groupUuid: groupId
-                }, {
-                    // headers: {
-                    //     'Access-Control-Allow-Headers' : 'Origin, Content-Type, X-Auth-Token',
-                    //     'Access-Control-Allow-Origin': '*'
-                    // }
-                    crossdomain: true
                 })
                 .then(response => {
                     console.log(response);

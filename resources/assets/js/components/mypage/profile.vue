@@ -49,9 +49,8 @@
                     this.rank = datavalue[0].grade;
                     this.mttime = datavalue[0].hiking_time;
                     this.avgspeed = datavalue[0].avg_speed + ' km/h';
-                    this.history =
-                        datavalue[0].recent_hiking.created_at.substring(0, 10) + '/' + datavalue[0].hiking_group_name
-                        + '/';
+                    this.history = datavalue[0].recent_hiking.created_at.substring(0, 10) + '/' + datavalue[0].hiking_group_name
+                    + '/';
                 }
             })
         }

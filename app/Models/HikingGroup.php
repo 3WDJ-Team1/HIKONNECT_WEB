@@ -41,6 +41,7 @@ class HikingGroup extends Model
         if (is_int($idx) xor is_int($perIdx)) {
             return 0;
         }
+
         $queryRes = DB::table('entry_info')
             ->select(
                 'user_profile.nickname',
@@ -60,20 +61,18 @@ class HikingGroup extends Model
             )->skip($idx)
             ->take($perIdx)
             ->get();
-
         return $queryRes;
     }
 
     /**
      * Get group member's location
      * 
-     * @param String $hiking_group 
+     * @param String $hiking_group
      * 
      * @return void
      */
     public function getMembersLocation(String $hiking_group) 
     {
-
         $queryRes = DB::table('user_position')
             ->select('user', 'position')
             ->where('hiking_gruop', $hiking_group)
@@ -301,8 +300,8 @@ class HikingGroup extends Model
 			'uuid'				=> $uuidHG,
 			'name'				=> '',
 			'owner'				=> $request->input('owner'),
-			'min_members'      => $request->input('min'),
-			'max_members'      => $request->input('max'),
+			'min_members'      	=> $request->input('min'),
+			'max_members'      	=> $request->input('max'),
 			'created_at'		=> Carbon::now()->format('Y-m-d H:i:s'),
 			'updated_at'		=> Carbon::now()->format('Y-m-d H:i:s')
 		]);

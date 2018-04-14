@@ -156,6 +156,10 @@
                 this.sliding = false;
             }
         },
+        created() {
+            this.userId = "";
+            this.userPw = "";
+        }
     }
 </script>
 <style>

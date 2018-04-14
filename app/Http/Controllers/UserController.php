@@ -212,30 +212,21 @@ class UserController extends Controller
     {
         //UserProfile Picture File Save
         Storage::put(
-            'userprofile/'.$id.'.png',
+            'userprofile/' . $id . '.png',
             $request->get('imageSrc')
         );
         $image_path = 'userprofile/'.$id.'.png';
         $password = $request->get('pwv');
         $this->usermodel->userUpdate($password, $id);
-
-        UserProfile::where('user',$id)
-            ->update(['nickname'      => $request->get('nn'),
-                'phone'         => $request->get('phone'),
-                'image_path'    => $image_path,
-                'gender'        => $this->gender,
-                'age_group'     => $this->age_group,
-                'scope'         => $this->scope,
-                'updated_at'    => Carbon::now()->format('Y-m-d H:i:s')]);
-
-        $user_info = array([
-            'nickname'      => $request->get('nn'),
-            'phone'         => $request->get('phone'),
-            'image_path'    => $image_path,
-            'gender'        => $this->gender,
-            'age_group'     => $this->age_group,
-            'scope'         => $this->scope]);
-        return response()->json($user_info);
+        $this->userfilmodel->userUpdate(
+            $request,
+            $id,
+            $this->gender,
+            $this->age_group,
+            $this->scope,
+            $image_path
+        );
+        return response()->json('true');
     }
 
     /**
@@ -258,7 +249,10 @@ class UserController extends Controller
     public function showUserData($id)
     {
         if (hiking_record::where('owner', $id)->count() == 0) {
-            return response()->json('false');
+            $profile_value = array([
+                'grade' => '동네 뒷산',
+            ]);
+            return response()->json($profile_value);
         } else {
             // UserGrade Setting
             $hiking_count = hiking_record::where('uuid', $id)->count();
