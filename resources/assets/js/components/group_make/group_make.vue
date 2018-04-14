@@ -29,7 +29,7 @@
                 // 등산 경로마다 지도에 찍기 위한 속성 적용
                 flightPath: [],
                 mountain_path: [],
-                mouseover_out: true
+                mouseover_out: true,
             }
         },
         components: {
@@ -48,6 +48,24 @@
                 let map = new window.google.maps.Map(document.getElementById('map'), {
                     zoom: 11,
                     mapTypeId: 'terrain'
+                });
+                axios.get('http://hikonnect.ga:3000/spots/' + mountain_num).then(response => {
+                    for (let p = 0; p < response.data.length; p++) {
+                        if (response.data[p].attributes.DETAIL_SPO == "시종점") {
+                            let pos_lat_a = response.data[p].geometry.lat.toString().split(".");
+                            let pos_lat = pos_lat_a[1].substring(0, 10);
+                            pos_lat_a = pos_lat_a[0] + "." + pos_lat;
+                            let pos_lng_a = response.data[p].geometry.lng.toString().split(".");
+                            let pos_lng = pos_lng_a[1].substring(0, 10);
+                            pos_lng_a = pos_lng_a[0] + "." + pos_lng;
+                            let marker = new google.maps.Marker({
+                                map: map,
+                                draggable: true,
+                                animation: google.maps.Animation.DROP,
+                                position: {lat: Number(pos_lat_a), lng: Number(pos_lng_a)}
+                            });
+                        }
+                    }
                 });
                 // 위도와 경도 불러오기
                 axios.get('http://hikonnect.ga:3000/paths/' + this.mountain_num)
@@ -93,7 +111,6 @@
 
                                 // 경로를 클릭 했을 때 이벤트
                                 this.flightPath[i].addListener('click', function () {
-
                                     // 현재 경로의 앞 lat값
                                     let fir_lat = flightPlanCoordinates[i][0].lat;
                                     // 현재 경로의 앞 lng값
@@ -105,42 +122,90 @@
                                     // 경로 선택 시 이어지지 않으면 에러 발생
                                     let alert_mes = true;
                                     let alert_mes_r = true;
+                                    let destination;
                                     // 경로 지울 때 이어지지 않으면 에러 발생
                                     let remove_path = 0;
                                     // 시작점일 시
                                     if (send_data.length == 0) {
-                                        
-                                        this.setOptions({
-                                                strokeColor: '#000000',
-                                                strokeWeight: 5,
-                                                mouseover_out: false
+                                        let fir_end_B = true;
+                                        // 시작 lat 소수점 뒤의 두자리 없애기
+                                        let fir_lat_c_a = fir_lat.toString().split(".");
+                                        let fir_lat_c = fir_lat_c_a[1].substring(0, 10);
+                                        fir_lat_c_a = Number(fir_lat_c_a[0] + "." + fir_lat_c);
+
+                                        let fir_lng_c_a = fir_lng.toString().split(".");
+                                        let fir_lng_c = fir_lng_c_a[1].substring(0, 10);
+                                        fir_lng_c_a = Number(fir_lng_c_a[0] + "." + fir_lng_c);
+
+                                        let end_lat_c_a = end_lat.toString().split(".");
+                                        let end_lat_c = end_lat_c_a[1].substring(0, 10);
+                                        end_lat_c_a = Number(end_lat_c_a[0] + "." + end_lat_c);
+
+                                        let end_lng_c_a = end_lng.toString().split(".");
+                                        let end_lng_c = end_lng_c_a[1].substring(0, 10);
+                                        end_lng_c_a = Number(end_lng_c_a[0] + "." + end_lng_c);
+
+                                        axios.get('http://hikonnect.ga:3000/spots/' + mountain_num).then(response => {
+                                            if (response) {
+                                                destination = response.data;
+                                                for (let p = 0; p < destination.length; p++) {
+                                                    if (destination[p].attributes.DETAIL_SPO == "시종점") {
+                                                        let pos_lat_a = destination[p].geometry.lat.toString().split(".");
+                                                        let pos_lat = pos_lat_a[1].substring(0, 10);
+                                                        pos_lat_a = pos_lat_a[0] + "." + pos_lat;
+                                                        let pos_lng_a = destination[p].geometry.lng.toString().split(".");
+                                                        let pos_lng = pos_lng_a[1].substring(0, 10);
+                                                        pos_lng_a = pos_lng_a[0] + "." + pos_lng;
+                                                        if(pos_lat_a == fir_lat_c_a && pos_lng_a == fir_lng_c_a)    {
+                                                            fir_end_B = true;
+                                                        } else if (pos_lat_a == end_lat_c_a && pos_lng_a == end_lng_c_a) {
+                                                            fir_end_B = true;
+                                                        }
+                                                    }
+                                                }
                                             }
-                                        );
-                                        // group_make_main에 보내줄 최종 경로에 추가
-                                        path.push(i);
-                                        EventBus.$emit('mountain_path', path, mountain_num);
-                                        send_data.push({course: [{fir_lat, fir_lng}, {end_lat, end_lng}]});
+                                        });
+                                        if(fir_end_B == true)  {
+                                            this.setOptions({
+                                                    strokeColor: '#000000',
+                                                    strokeWeight: 5,
+                                                    mouseover_out: false
+                                                }
+                                            );
+                                            // group_make_main에 보내줄 최종 경로에 추가
+                                            path.push(i);
+                                            EventBus.$emit('mountain_path', path, mountain_num);
+                                            send_data.push({course: [{fir_lat, fir_lng}, {end_lat, end_lng}]});
+                                        } else {
+                                            alert('시종점이 아닙니다.')
+                                        }
                                     }
                                     // 시작점이 아닐 시
                                     else {
                                         // 이전의 경로와 일치하는 지점이 있다면 이어지므로 경로 추가를 승낙한다.
                                         for (let r = 0; r < send_data.length; r++) {
-                                            if (send_data[r].course[0].fir_lat == fir_lat && send_data[r].course[0].fir_lng == fir_lng) {
-                                                if (send_data[r].course[1].end_lat == end_lat && send_data[r].course[1].end_lng == end_lng) {
+                                            if (send_data[r].course[0].fir_lat == fir_lat
+                                                && send_data[r].course[0].fir_lng == fir_lng) {
+                                                if (send_data[r].course[1].end_lat == end_lat
+                                                    && send_data[r].course[1].end_lng == end_lng) {
                                                     alert_mes_r = false;
                                                     // 경로가 완전히 일치한다면 클릭시 다시 빨간색 선으로 고친다.
                                                     send_data_r = send_data;
                                                     send_data_r.splice(r, 1);
                                                     // 이어지는게 두개밖에 없다면 끊어지므로
                                                     for (let a = 0; a < send_data_r.length; a++) {
-                                                        if (send_data_r[a].course[0].fir_lat == fir_lat && send_data_r[a].course[0].fir_lng == fir_lng) {
+                                                        if (send_data_r[a].course[0].fir_lat == fir_lat
+                                                            && send_data_r[a].course[0].fir_lng == fir_lng) {
                                                             remove_path++;
-                                                        } else if (send_data_r[a].course[0].fir_lat == end_lat && send_data_r[a].course[0].fir_lng == end_lng) {
+                                                        } else if (send_data_r[a].course[0].fir_lat == end_lat
+                                                            && send_data_r[a].course[0].fir_lng == end_lng) {
                                                             remove_path++;
-                                                        } else if (send_data_r[a].course[1].end_lat == fir_lat && send_data_r[a].course[1].end_lng == fir_lng) {
+                                                        } else if (send_data_r[a].course[1].end_lat == fir_lat
+                                                            && send_data_r[a].course[1].end_lng == fir_lng) {
                                                             remove_path++;
                                                         }
-                                                        else if (send_data_r[a].course[1].end_lat == end_lat && send_data_r[a].course[1].end_lng == end_lng) {
+                                                        else if (send_data_r[a].course[1].end_lat == end_lat
+                                                            && send_data_r[a].course[1].end_lng == end_lng) {
                                                             remove_path++;
                                                         }
                                                     }
@@ -148,19 +213,22 @@
                                                 } else alert_mes = false;
                                             }
                                             // 경로가 일치 하지 않으므로 경로 추가 승낙
-                                            else if (send_data[r].course[0].fir_lat == end_lat && send_data[r].course[0].fir_lng == end_lng) {
+                                            else if (send_data[r].course[0].fir_lat == end_lat
+                                                && send_data[r].course[0].fir_lng == end_lng) {
                                                 alert_mes = false;
                                             }
                                             // 경로가 일치 하지 않으므로 경로 추가 승낙
-                                            else if (send_data[r].course[1].end_lat == fir_lat && send_data[r].course[1].end_lng == fir_lng) {
+                                            else if (send_data[r].course[1].end_lat == fir_lat
+                                                && send_data[r].course[1].end_lng == fir_lng) {
                                                 alert_mes = false;
                                             }
                                             // 경로가 일치 하지 않으므로 경로 추가 승낙
-                                            else if (send_data[r].course[1].end_lat == end_lat && send_data[r].course[1].end_lng == end_lng) {
+                                            else if (send_data[r].course[1].end_lat == end_lat
+                                                && send_data[r].course[1].end_lng == end_lng) {
                                                 alert_mes = false;
                                             }
                                         }
-                                        if (remove_path == 2)   alert('경로가 끊어집니다.');
+                                        if (remove_path == 2) alert('경로가 끊어집니다.');
                                         else {
                                             if (this.mouseover_out == false) {
                                                 this.setOptions({
@@ -180,18 +248,24 @@
                                         // 잘못된 경로라는 에러메시지 출력
                                         if (alert_mes == true && alert_mes_r == true) {
                                             alert('잘못된 경로입니다.');
-                                        } else if(alert_mes == false && alert_mes_r == true) {
+                                        } else if (alert_mes == false && alert_mes_r == true) {
+                                            // 시종점이라면 경로를 더 이상 클릭할 수 없도록 지정 해야 한다.
+
                                             let double_path = 0;
                                             // 갈림길 방지: 하나의 지점을 1번 넘게 참조하면 안된다.
                                             for (let a = 0; a < send_data.length; a++) {
-                                                if (send_data[a].course[0].fir_lat == fir_lat && send_data[a].course[0].fir_lng == fir_lng) {
+                                                if (send_data[a].course[0].fir_lat == fir_lat
+                                                    && send_data[a].course[0].fir_lng == fir_lng) {
                                                     double_path++;
-                                                } else if (send_data[a].course[0].fir_lat == end_lat && send_data[a].course[0].fir_lng == end_lng) {
+                                                } else if (send_data[a].course[0].fir_lat == end_lat
+                                                    && send_data[a].course[0].fir_lng == end_lng) {
                                                     double_path++;
-                                                } else if (send_data[a].course[1].end_lat == fir_lat && send_data[a].course[1].end_lng == fir_lng) {
+                                                } else if (send_data[a].course[1].end_lat == fir_lat
+                                                    && send_data[a].course[1].end_lng == fir_lng) {
                                                     double_path++;
                                                 }
-                                                else if (send_data[a].course[1].end_lat == end_lat && send_data[a].course[1].end_lng == end_lng) {
+                                                else if (send_data[a].course[1].end_lat == end_lat
+                                                    && send_data[a].course[1].end_lng == end_lng) {
                                                     double_path++;
                                                 }
                                             }
