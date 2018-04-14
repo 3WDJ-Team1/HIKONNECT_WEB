@@ -219,9 +219,23 @@ class UserController extends Controller
         $password = $request->get('pwv');
         $this->usermodel->userUpdate($password, $id);
 
-        $this->userfilmodel->userUpdate($request,$id,$this->gender,$this->age_group,$this->scope);
+        UserProfile::where('user',$id)
+            ->update(['nickname'      => $request->get('nn'),
+                'phone'         => $request->get('phone'),
+                'image_path'    => $image_path,
+                'gender'        => $this->gender,
+                'age_group'     => $this->age_group,
+                'scope'         => $this->scope,
+                'updated_at'    => Carbon::now()->format('Y-m-d H:i:s')]);
 
-        return response()->json('true');
+        $user_info = array([
+            'nickname'      => $request->get('nn'),
+            'phone'         => $request->get('phone'),
+            'image_path'    => $image_path,
+            'gender'        => $this->gender,
+            'age_group'     => $this->age_group,
+            'scope'         => $this->scope]);
+        return response()->json($user_info);
     }
 
     /**

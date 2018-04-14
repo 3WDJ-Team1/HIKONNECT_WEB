@@ -50,17 +50,10 @@ class UserProfile extends Model
     }
 
     //UserProfile Infomation Update
-    public function userUpdate(Request $request,$id,$gender,$age_group,$scope,$image_path)
+    public function userUpdate($user_info,$id)
     {
-        UserProfile::where('user',$id)->update([
-            'nickname'      => $request->get('nn'),
-            'phone'         => $request->get('phone'),
-            'image_path'    => $image_path,
-            'gender'        => $gender,
-            'age_group'     => $age_group,
-            'scope'         => $scope,
-            'updated_at'    => Carbon::now()->format('Y-m-d H:i:s')
-        ]);
+        UserProfile::where('user',$id)
+            ->update($user_info);
     }
 
     //UserProfile Infomation Delete
