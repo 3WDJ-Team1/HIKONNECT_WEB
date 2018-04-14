@@ -389,4 +389,20 @@ class HikingGroup extends Model
 		HikingGroup::where('uuid', '=', $uuid)
 					->delete();                             
 	}
+
+	public function insertRecordingData(String $id, String $group) {
+		$uuidR 	= 	sprintf('%08x-%04x-%04x-%04x-%04x%08x',
+				mt_rand(0, 0xffffffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff), 
+				mt_rand(0, 0xffff),mt_rand(0, 0xffff), mt_rand(0, 0xffffffff)
+				);
+
+		DB::table('radiogram_log')->insert([
+			'uuid' => $uuidR,
+			'hiking_group' => $group,
+			'sender' => $id,
+			'radiogram_path' => '',
+			'created_at'		=> Carbon::now()->format('Y-m-d H:i:s'),
+		    'updated_at'		=> Carbon::now()->format('Y-m-d H:i:s')
+		]);
+	}
 }

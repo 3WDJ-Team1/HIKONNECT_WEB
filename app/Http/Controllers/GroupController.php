@@ -162,7 +162,9 @@ class GroupController extends Controller
         //
     }
 
-    public function request(Request $request) {
+    public function sendData(Request $request) {
+        $Id = $request->get['uuid'];
+        $Group = $request->get['hiking_group'];
         return "true";
     }
 }

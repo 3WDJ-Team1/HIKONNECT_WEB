@@ -44,7 +44,7 @@ Route::group(
         Route::post(
             'group/store',
             'HikingGroupController@store'
-        )->name(makeGroup);
+        )->name('makeGroup');
 
         // Entry info Routings
         Route::post(
@@ -124,14 +124,18 @@ Route::group(
             'main/{id}', 
             'MainController@get_Announce_Count'
         )->name('Announce_Count');
-
+        
         // 지울 것. 산 정보 가져오는 URL
         Route::get('testing/{mnt_name}', function ($mnt_name) {
             return DB::table('mountain')
                 ->where('mnt_name', $mnt_name)
                 ->get();
         })->name('testing');
-        
+
+        Route::post(
+            '/HttpRequest',
+            'GroupController@sendData'
+        )->name('HttpRequest');
     }
 );
 
