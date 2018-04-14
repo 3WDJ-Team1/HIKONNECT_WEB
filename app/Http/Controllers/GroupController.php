@@ -1,20 +1,17 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\HikingGroup;
 use App\Models\User;
-
 // 산 이름 리스트 가져오는 모델(Front-end랑 협의 후 지울 것)
 use App\Models\Mountain;
 //
-
     /**
      * @var Model $group_model       A reference variable for Hiking_group model
      */
 class GroupController extends Controller
 {
+    private $mountain_model = null;
     private $group_model = null;
    
     /**
@@ -24,11 +21,13 @@ class GroupController extends Controller
     {
         $this->group_model = new HikingGroup();
         $this->user_model = new User();
+        $this->mountain_model = new mountain();
     }
-
     public function testing($key)
     {
-        return 1234;
+        $value = $this->mountain_model
+            ->getMountainNames($key);
+        return response()->json($value);
     }
     /**
      * Display a listing of the resource.
@@ -43,7 +42,6 @@ class GroupController extends Controller
         //$countOfPeople      = $this->group_model->getCountOfPeople($pageIndex, 'default');
         //return compact('groupInformations', 'countOfPeople');
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -53,7 +51,6 @@ class GroupController extends Controller
     {
         //
     }
-
     /**
      * Store a newly created resource in storage.
      * 
@@ -65,7 +62,6 @@ class GroupController extends Controller
     {
         return $this->group_model->insertHikingGroup($request);
     }
-
     /**
      * Display the specified resource.
      *
@@ -78,7 +74,6 @@ class GroupController extends Controller
         $selectedHikingGroupInfo      = $this->group_model->showSelectedGroupInfo($uuid);
         return $selectedHikingGroupInfo;
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -90,7 +85,6 @@ class GroupController extends Controller
     {
         //
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -104,7 +98,6 @@ class GroupController extends Controller
     {
         return $this->group_model->updateSelectedGroupInfo($request->input(), $uuid);
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -116,7 +109,6 @@ class GroupController extends Controller
     {
         $this->group_model->deleteHikingGroupInfo($uuid);
     }
-
     /**
      * Listup Grouplist by selected method.
      *
@@ -134,7 +126,6 @@ class GroupController extends Controller
     //     $listupGroupData           = $this->group_model->listUp($pageIndex, $method);
     //     return $listupGroupData;
     // }
-
     /**
      * Find Grouplist by selected method and corrected inputData.
      *
@@ -149,7 +140,6 @@ class GroupController extends Controller
         $findedGroupData           = $this->group_model->findData($method, $inputData);
         return $findedGroupData;
     }
-
     /**
      * Display the specified resource.
      *
@@ -161,7 +151,7 @@ class GroupController extends Controller
     {
         //
     }
-
+    
     public function sendData(Request $request) {
         $Id = $request->get['uuid'];
         $Group = $request->get['hiking_group'];
