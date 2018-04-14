@@ -110,6 +110,7 @@
                     if (response) {
                         this.notices = this.notices.concat(response.data);
                         $state.loaded();
+                        // 백엔드에서 넘어오는 값에 같은 값이 잇음!
                     }else {
                         $state.complete();
                     }

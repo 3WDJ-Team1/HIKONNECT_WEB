@@ -4,14 +4,14 @@
         <!-- 최상단 이동 버튼 -->
         <a name="#"></a>
         <v-btn
-              color="red"
-              dark
-              midiuem
-              fixed
-              right
-              bottom
-              fab
-              href="#">
+            color="grey darken-4"
+            dark
+            midiuem
+            fixed
+            right
+            bottom
+            fab
+            href="#">
                 <v-icon>keyboard_arrow_up</v-icon>
         </v-btn>
         <!-- #최상단 이동 버튼 -->

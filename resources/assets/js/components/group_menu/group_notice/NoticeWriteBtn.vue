@@ -10,11 +10,11 @@
         <v-btn
             fab
             dark
-            large
-            class       ="btn--bottom btn--floating btn--fixed btn--center"
+            class       ="btn--right btn--floating btn--fixed btn--bottom"
             color       ="cyan"
-            @click      ="openWriteModal()">
-            <v-icon color="white">add</v-icon>
+            @click      ="openWriteModal()"
+            style       ="margin-bottom: 10%;">
+            <v-icon color="white">mode_edit</v-icon>
         </v-btn>
         <!-- @sweet-modal   the modal which have form script for writing notices -->
         <sweet-modal ref="write" blocking>

@@ -19,7 +19,7 @@
                     class='member_list_card_header'>
                     <div
                         href="#"
-                        v-b-toggle ="'n' + userData.nickname">
+                        v-b-toggle ="'n' + userData.nickname"> 
                         <!-- need to insert profile pic -->
                         <v-layout row>
                             <v-flex

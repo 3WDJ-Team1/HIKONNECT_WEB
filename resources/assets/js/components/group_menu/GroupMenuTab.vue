@@ -7,6 +7,18 @@
 <template>
     <!-- @div       wrapper of this component -->
     <div>
+        <v-btn
+            style="margin-bottom: 5%;"
+            color="red"
+            dark
+            midiuem
+            fixed
+            right
+            bottom
+            fab
+            @click="enterGroup()">
+            <v-icon>person_add</v-icon>
+        </v-btn>
         <!-- @v-tabs    there is information of tabs here -->
         <v-tabs
             icons-and-text
@@ -65,7 +77,31 @@
 
 <script>
     export default {
-        
+        data: () => ({
+            groupId: '',
+        }),
+        created() {
+            this.groupId = this.$route.params.groupid;
+            // 가라
+            this.groupId = '16f78874-b51c-3ad0-9b91-5d35f22a412b';
+        }
+        ,
+        methods: {
+            enterGroup() {
+                axios.post(this.$HttpAddr + '/entryGroup', {
+                    userUuid: sessionStorage.uuid,
+                    groupUuid: this.groupId
+                })
+                .then(response => {
+                    console.log(response);
+                    if (response) {
+                        this.$EventBus.$emit('complitedModalOpen', true);
+                    } else {
+                        this.$EventBus.$emit('errorModalOpen', '잘못된 접근입니다.');
+                    }
+                });
+            }
+        }
     }
 </script>
 
