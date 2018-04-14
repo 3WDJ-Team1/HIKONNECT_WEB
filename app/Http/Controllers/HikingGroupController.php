@@ -194,4 +194,15 @@ class HikingGroupController extends Controller
 
         return $res;
     }
+
+    public function isOwner(String $groupId, String $userId) {
+        $result = $this->_group_model
+            ->isOwner($groupId, $userId);
+
+        if (count($result) == 0) {
+            return 'false';
+        }
+
+        return 'true';
+    }
 }
