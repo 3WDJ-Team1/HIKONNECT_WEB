@@ -17,7 +17,7 @@ Route::get(
 );
 
 Route::resource('notice', 'NoticeController');
-Route::resource('group', 'GroupController');
+Route::resource('group/', 'GroupController');
 Route::get('group/listUp/{pageIndex?}/{method?}', 'GroupController@listUp');
 Route::get('group/show/{uuid?}', 'GroupController@show');
 Route::get('group/update/{uuid?}/{inputData?}', 'GroupController@update');

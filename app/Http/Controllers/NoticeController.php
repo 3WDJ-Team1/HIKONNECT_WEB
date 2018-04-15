@@ -11,7 +11,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Notice;
+use App\Models\Notice;
 
 /**
  * Controller for Notification
