@@ -27,6 +27,11 @@ Route::get('testing/{key?}', function ($mnt_name) {
 Route::group(
     [], 
     function () {
+        // Radios Routing
+        Route::get(
+            'radioGram/{groupId}',
+            'RadioGramContoller@getGroupRadios'
+        )->name('radios');
         // Notification Routings
         Route::resource(
             'notice', 
