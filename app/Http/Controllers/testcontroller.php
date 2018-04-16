@@ -149,7 +149,7 @@ class testcontroller extends Controller
             (6371 * acos(cos(deg2rad($request->get('lat'))) * cos(deg2rad($row[$i]->latitude)) * cos(deg2rad($row[$i]->longitude)
                         - deg2rad($request->get('lng'))) + sin(deg2rad($request->get('lat'))) * sin(deg2rad($row[$i]->latitude))));
 
-            if ($distance < 0.3) {
+            if ($distance < 0.05) {
                 array_push($post_data, $row[$i]);
             }
             else
