@@ -120,34 +120,32 @@ class testcontroller extends Controller
             'id',
             $request->get('id')
         )->select('uuid')
-        ->get()[0]['uuid'];
+        ->get()[0]->uuid;
 
         $hiking_group = DB::table('entry_info')->where(
             'user',
             $uuid
         )->select(
             'hiking_group'
-        )->get()[0]['hiking_group'];
+        )->get()[0]->hiking_group;
 
-        $row = location_memo::where(
+        $row = DB::table('location_memo')->where(
             'hiking_group',
             $hiking_group
-        )->get()
-        ->toArray();
-
-        $post_data = array();
-        $row_count = location_memo::where(
+        )->get();
+        json_encode($row);
+        $row_count = DB::table('location_memo')->where(
             'hiking_group',
             $hiking_group
         )->count();
-
+        $post_data = array();
         for ($i = 0; $i < $row_count; $i++) {
             $distance = 
-            (6371 * acos(cos(deg2rad($request->get('lat'))) * cos(deg2rad($row[$i]['latitude'])) * cos(deg2rad($row[$i]['longitude'])
-                        - deg2rad($request->get('lng'))) + sin(deg2rad($request->get('lat'))) * sin(deg2rad($row[$i]['latitude']))));
+            (6371 * acos(cos(deg2rad($request->get('lat'))) * cos(deg2rad($row[$i]->latitude)) * cos(deg2rad($row[$i]->longitude)
+                        - deg2rad($request->get('lng'))) + sin(deg2rad($request->get('lat'))) * sin(deg2rad($row[$i]->latitude))));
 
             if ($distance < 0.3) {
-                array_push($post_data, $row[$i]);
+                array_push($post_data, $row);
             }
             else
                 continue;
