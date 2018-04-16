@@ -62,21 +62,7 @@ class HikingGroupController extends Controller
      */
     public function create()
     {
-        return "
-        <input /><br />
-        <input /><br />
-        <input /><br />
-        <input /><br />
-        <input /><br />
-        <button onclick='createGroup()'>create</button>
-        <script>
-            function createGroup(){
-                $.ajax({
-                    method: 'post'
-                });
-            }
-        </script>
-        ";
+        return;
     }
 
     /**
@@ -148,7 +134,7 @@ class HikingGroupController extends Controller
         return $this->_notice_model->where('uuid', $id)->delete();
     }
 
-        /**
+    /**
      * Get group member list from database.
      * 
      * @param String $groupUuid Reference key(Group's UUID) Search
@@ -181,7 +167,7 @@ class HikingGroupController extends Controller
     /**
      * 
      */
-    public function getGroupList($idx, $perIdx, $orderBy = 'name') 
+    public function getGroupList($idx, $perIdx, $orderBy = 'created_at') 
     {
         if ($idx && $perIdx) {
             if (!$idx = intval($idx) || !$perIdx = intval($perIdx)) {
@@ -195,6 +181,9 @@ class HikingGroupController extends Controller
         return $res;
     }
 
+    /**
+     * 
+     */
     public function isOwner(String $groupId, String $userId) {
         $result = $this->_group_model
             ->isOwner($groupId, $userId);
