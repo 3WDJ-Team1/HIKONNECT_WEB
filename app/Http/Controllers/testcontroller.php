@@ -51,8 +51,8 @@ class testcontroller extends Controller
     {
         $user_id    = $request->get('user_id');
 
-        $uuid = DB::table('user')->where('id',$user_id)->select('uuid')->get()[0]['uuid'];
-        $hiking_group = DB::table('entry_info')->where('user',$uuid)->select('hiking_group')->get()[0]['hiking_group'];
+        $uuid = DB::table('user')->where('id',$user_id)->select('uuid')->get()[0]->uuid;
+        $hiking_group = DB::table('entry_info')->where('user',$uuid)->select('hiking_group')->get()[0]->hiking_group;
 
         DB::table('location_memo')->insert([
             'uuid'          => '',
@@ -66,6 +66,7 @@ class testcontroller extends Controller
             'created_at'    => $request->get('created_at'),
             'updated_at'    => $request->get('updated_at')
         ]);
+        
         echo $uuid;
     }
 
