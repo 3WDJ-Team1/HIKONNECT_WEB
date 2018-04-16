@@ -128,6 +128,7 @@ const routes = [
                             calendar    : GroupPlanCalendar,
                             // component in GroupMemberList
                             member_detail   : GroupMemberDetail,
+                            waiting_member   : WaitingMemberList,
                         },
                         children: [
                             {
@@ -135,7 +136,6 @@ const routes = [
                                 components  : {
                                     // inner form component of modal(NoticeWriteBtn, NoticeModifyBtn)
                                     form            : NoticeFormInside,
-                                    waiting_member   : WaitingMemberList,
                                 }
                             }
                         ]

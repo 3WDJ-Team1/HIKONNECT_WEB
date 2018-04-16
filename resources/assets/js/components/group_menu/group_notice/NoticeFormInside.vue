@@ -78,22 +78,24 @@
                         if(this.$refs.form.validate()) {
                             axios.patch(this.$HttpAddr + '/notice/' + this.noticeUuid, {
                                 // nickname: this.nickname,
-                                writer  :'', // user's uuid,
+                                writer  : sessionStorage.uuid, // user's uuid,
                                 title   : this.title,
                                 content : this.text
                             });
                             this.$parent.close();
+                            this.$EventBus.$emit('newNoticeWrited', true);
                         }
                     break;
                     case "write":
                         if(this.$refs.form.validate()) {
                             axios.post(this.$HttpAddr + '/notice', {
                                 // nickname: this.nickname,
-                                writer  :'', // user's uuid,
+                                writer  : sessionStorage.uuid, // user's uuid,
                                 title   : this.title,
                                 content : this.text
                             })
                             this.$parent.close();
+                            this.$EventBus.$emit('newNoticeWrited', true);
                         }
                     break;
                 }

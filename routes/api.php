@@ -36,6 +36,10 @@ Route::group(
             'notice/{groupUuid}/{pageIndex?}/{perPage?}', 
             'NoticeController@index'
         )->name('noticePagination');
+        Route::delete(
+            'notice', 
+            'NoticeController@destroy'
+        )->name('deleteNotice');
 
         // Hiking group Routings
         Route::resource(

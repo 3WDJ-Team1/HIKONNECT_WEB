@@ -60,6 +60,7 @@ class HikingGroup extends Model
             )->where(
                 [
                     ['hiking_group', $groupUuid],
+                    ['is_accepted', '1']
                 ]
             )->skip($idx)
             ->take($perIdx)
