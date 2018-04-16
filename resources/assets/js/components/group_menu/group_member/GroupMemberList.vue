@@ -6,6 +6,7 @@
  -->
 <template>
     <div style="position: relative;">
+        <router-view name="waiting_member"></router-view>
         <div
             style="display: inline_block; background-color: white;">
             <b-card
@@ -85,10 +86,7 @@
                 axios.get(this.$HttpAddr + "/groupMembers/" + this.groupUuid + "/" + this.page + "/" + 10)
                 .then( response => {
                     if (response) {
-                        console.log(response);
-                        console.log(this.memberList);
                         this.memberList = this.memberList.concat(response.data);
-                        console.log(this.memberList);
                         // $state.loaded();
                     } else {
                         // $state.complete();

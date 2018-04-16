@@ -93,9 +93,9 @@
                     groupUuid: this.groupId
                 })
                 .then(response => {
-                    console.log(response);
                     if (response) {
                         this.$EventBus.$emit('complitedModalOpen', true);
+                        this.$EventBus.$emit('reloadMember', true);
                     } else {
                         this.$EventBus.$emit('errorModalOpen', '잘못된 접근입니다.');
                     }

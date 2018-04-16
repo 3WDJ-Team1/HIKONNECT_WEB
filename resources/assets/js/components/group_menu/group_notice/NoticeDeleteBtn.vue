@@ -30,7 +30,10 @@
              * @brief       if button is clicked, send http request.
              */
             deleteNotice: function () {
-                axios.delete(this.$HttpAddr + '/notice/' + this.propsNotice.uuid, {});
+                axios.delete(this.$HttpAddr + '/notice',  {
+                    uuid: this.propsNotice.uuid
+                });
+                this.$router.push('/group');
             }
         }
     }

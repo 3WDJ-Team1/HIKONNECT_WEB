@@ -84,6 +84,9 @@
             this.groupId = this.$route.params.groupid;
             // 가라
             this.groupId = "16f78874-b51c-3ad0-9b91-5d35f22a412b";
+            this.$EventBus.$on('newNoticeWrited', () => {
+                this.$router.push('/group');
+            })
         },
         methods: {
             /**
