@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\entry_info;
-use App\Models\location_memo;
+use App\Models\LocationMemo;
 use App\Models\test;
-use App\User;
-use App\User_Profile;
+use DB;
+// use App\User;
+// use App\User_Profile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -17,7 +18,7 @@ class testcontroller extends Controller
 
     public function __construct()
     {
-        $this->location_memo = new location_memo();
+        $this->location_memo = new LocationMemo();
     }
 
     /**
@@ -50,8 +51,8 @@ class testcontroller extends Controller
     {
         $user_id    = $request->get('user_id');
 
-        $uuid = User::where('id',$user_id)->select('uuid')->get()[0]['uuid'];
-        $hiking_group = entry_info::where('user',$uuid)->select('hiking_group')->get()[0]['hiking_group'];
+        $uuid = DB::table('user')->where('id',$user_id)->select('uuid')->get()[0]['uuid'];
+        $hiking_group = DB::table('entry_info')->where('user',$uuid)->select('hiking_group')->get()[0]['hiking_group'];
 
         location_memo::insert([
             'uuid'          => '',
@@ -114,13 +115,14 @@ class testcontroller extends Controller
     }
 
     public function get_Memo_Info(Request $request) {
-        $uuid = User::where(
+        $uuid = DB::table('user')
+        ->where(
             'id',
             $request->get('id')
         )->select('uuid')
         ->get()[0]['uuid'];
 
-        $hiking_group = entry_info::where(
+        $hiking_group = DB::table('entry_info')->where(
             'user',
             $uuid
         )->select(
