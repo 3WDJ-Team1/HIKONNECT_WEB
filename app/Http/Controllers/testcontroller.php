@@ -116,10 +116,19 @@ class testcontroller extends Controller
     public function get_Memo_Info(Request $request) {
         $uuid = User::where('id',$request->get('id'))->select('uuid')->get()[0]['uuid'];
         $hiking_group = entry_info::where('user',$uuid)->select('hiking_group')->get()[0]['hiking_group'];
-
         $row = location_memo::where('hiking_group',$hiking_group)->get()->toArray();
-
-        print json_encode($row);
+        $post_data = array();
+        $row_count = location_memo::where('hiking_group',$hiking_group)->count();
+        for($i = 0; $i < $row_count; $i++) {
+            $distance = (6371 * acos(cos(deg2rad($request->get('lat'))) * cos(deg2rad($row[$i]['latitude'])) * cos(deg2rad($row[$i]['longitude'])
+                        - deg2rad($request->get('lng'))) + sin(deg2rad($request->get('lat'))) * sin(deg2rad($row[$i]['latitude']))));
+            if ($distance < 0.3){
+                array_push($post_data,$row[$i]);
+            }
+            else
+                continue;
+        }
+        printf(json_encode($post_data));
     }
 
     public function send_image_path(Request $request) {
