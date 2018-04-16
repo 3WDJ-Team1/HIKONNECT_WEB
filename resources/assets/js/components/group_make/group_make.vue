@@ -12,6 +12,7 @@
                 style="width: 200px">
         </autocomplete>
         <b-btn v-b-modal.modal1 v-on:click="initMap">지도보기</b-btn>
+        <b-btn v-b-modal.modal1 v-on:click="initMap">경로 초기화</b-btn>
         <div id="map" style="height: 500px"></div>
     </div>
 </template>
@@ -37,13 +38,12 @@
             // 지도 api
             initMap() {
                 // 산마다 배정되는 등산 경로의 배열
-                let mountain_center         = '';
-                let send_data_r             = [];
-                let flightPlanCoordinates   = [];
-                let mountain_num            = this.mountain_num;
-                let path                    = [];
-                let send_data               = [];
-                
+                let mountain_center = '';
+                let send_data_r = [];
+                let flightPlanCoordinates = [];
+                let mountain_num = this.mountain_num;
+                let path = [];
+                let send_data = [];
                 let map = new window.google.maps.Map(document.getElementById('map'), {
                     zoom: 11,
                     mapTypeId: 'terrain'
@@ -85,6 +85,8 @@
                                             }
                                         );
                                 });
+
+
                                 // 경로를 클릭 했을 때 이벤트
                                 this.flightPath[i].addListener('click', function () {
                                     // 현재 경로의 앞 lat값
@@ -111,7 +113,7 @@
                                         );
                                         // group_make_main에 보내줄 최종 경로에 추가
                                         path.push(i);
-                                        this.$EventBus.$emit('mountain_path', path, mountain_num);
+                                        EventBus.$emit('mountain_path', path, mountain_num);
                                         send_data.push({course: [{fir_lat, fir_lng}, {end_lat, end_lng}]});
                                     }
                                     // 시작점이 아닐 시
@@ -201,7 +203,7 @@
                                                     path.push(i);
                                                     send_data.push({course: [{fir_lat, fir_lng}, {end_lat, end_lng}]});
                                                 }
-                                                this.$EventBus.$emit('mountain_path', path, mountain_num);
+                                                EventBus.$emit('mountain_path', path, mountain_num);
                                             }
                                         }
                                     }
@@ -230,6 +232,7 @@
                         }
                     );
             },
+
             // pull autocomplete data
             distributionGroupsEndpoint(n) {
                 return 'http://localhost:8000/api/testing/' + n;
