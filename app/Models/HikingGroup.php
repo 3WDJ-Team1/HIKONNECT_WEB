@@ -398,7 +398,7 @@ class HikingGroup extends Model
 	}
 
 	public function findSender(Request $request) {
-		$sender = Session::get('idv');
+		$sender = $request->get('id');
 									
 		return DB::table('user')->leftJoin('entry_info', 'user.uuid', '=', 'entry_info.uuid')
 								->select('user.uuid', 'entry_info.hiking_group')
