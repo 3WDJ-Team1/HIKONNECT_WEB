@@ -121,4 +121,11 @@ class testcontroller extends Controller
 
         print json_encode($row);
     }
+
+    public function send_image_path(Request $request) {
+        $path = location_memo::where('latitude',$request->get('lat'))->
+        where('longitude',$request->get('lng'))->get();
+
+        print json_encode($path);
+    }
 }

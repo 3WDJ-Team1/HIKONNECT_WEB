@@ -27,4 +27,5 @@ Route::group([], function () {
     Route::get('/record/{id}','Usercontroller@get_Hiking_record')->name('Get Hiking Record');
     Route::resource('/test','testcontroller');
     Route::post('/getlm','testcontroller@get_Memo_Info')->name('Get Memo Information');
+    Route::post('/position','testcontroller@send_image_path')->name('sendimage');
 });
