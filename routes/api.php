@@ -133,6 +133,14 @@ Route::group(
             'main/{id}', 
             'MainController@get_Announce_Count'
         )->name('Announce_Count');
+        Route::resource(
+            '/groupPlan',
+            'GroupPlanController'
+        );
+        Route::get(
+            '/hikingPlan/{id}',
+            'HikingPlanController@getGroupPlan'
+        )->name('getGroupPlan');
     }
 );
 

@@ -44,6 +44,7 @@
 
 <script>
     import VueTimepicker from 'vue2-timepicker'
+    import {EventBus} from './event-bus.js'
     export default {
         components: {
             VueTimepicker
@@ -66,19 +67,22 @@
                 }
             }
         },
-        created: function ()
+        created ()
         {
             // 이벤트 받기
             // '이벤트 명', function(받을 데이터)
-            this.$EventBus.$on('mountain_path', (path, num) => {
+            EventBus.$on('mountain_path', (path, num) => {
                 this.mountain_path = path;
                 this.mountain_num = num;
             });
         },
         methods:    {
             sendData() {
-                axios.post('http://localhost:8000/group',{
-                    owner: sessionStorage.getItem('uuid'),
+                axios.post('http://localhost:8000/group/store',{
+                    owner: 'f6487325-828b-3b10-9479-71847c1e06ef'
+                    /*
+                        @todo localStorage.getItem('userUuid')
+                    */,
                     tt: this.title,
                     ct: this.content,
                     min: parseInt(this.min_num),

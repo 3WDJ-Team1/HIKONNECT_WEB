@@ -54,7 +54,7 @@
             props:['list'],
             methods:{
             accept(){
-                axios.get('http://localhost:8000/group/index/0')
+                axios.get(this.$HttpAddr +'/group/index/0')
                 //axios.get('http://localhost:8000/group/10000/10')
                     .then(response=>{
                         this.notice_information=response.data;
