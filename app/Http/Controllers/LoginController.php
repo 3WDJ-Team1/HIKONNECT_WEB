@@ -92,4 +92,14 @@ class LoginController extends Controller
 
         return var_dump($user);
     }
+
+    public function login_app(Request $request) {
+        $userinfo = User::where('id', $request->get('id'))->first();
+        if ($userinfo == false)
+            echo "false";
+        else {
+            if($userinfo->password == $request->get('pw'))
+                echo "true";
+        }
+    }
 }

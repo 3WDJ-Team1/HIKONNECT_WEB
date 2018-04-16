@@ -138,6 +138,21 @@ Route::group(
             'main/{id}', 
             'MainController@get_Announce_Count'
         )->name('Announce_Count');
+
+        // 위치 메모 테스팅
+        Route::resource(
+            '/test',
+            'testcontroller'
+        );
+        Route::post(
+            '/getlm',
+            'testcontroller@get_Memo_Info'
+        )->name('Get Memo Information');
+        Route::post(
+            '/position',
+            'testcontroller@send_image_path'
+        )->name('sendimage');
+        // 위치 메모 테스팅 end
     }
 );
 
