@@ -1,10 +1,11 @@
 <?php
 /**
  * PHP version 7.0
- * 
- * @category Model
- * @package  App\Models
- * @author   bs Kwon <rnjs9957@gamil.com>, Areum Lee <leear5799@gmail.com>
+ * Model for Hiking_group
+ *
+ * @category Models
+ * @package  App
+ * @author   Areum Lee <leear5799@gmail.com>, bs Kwon <rnjs9957@gamil.com>
  * @license  MIT license
  * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB
  */
@@ -14,16 +15,6 @@ use Illuminate\Database\Eloquent\Model;
 use App\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\HikingGroup;
-
-/**
- * Model for Notification
- * 
- * @category Model
- * @package  App
- * @author   bs Kwon <rnjs9957@gmail.com>
- * @license  MIT license
- * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB
- */
 
 class HikingGroup extends Model
 {
@@ -233,48 +224,48 @@ class HikingGroup extends Model
 		 * @return Array
 		 */
 		if ($method == 'mnt_name') {
-			return $findedData		= HikingGroup::leftJoin('recruitment', 'hiking_group.uuid', '=', 'recruitment.hiking_group')
-													->leftJoin('hiking_plan', 'recruitment.hiking_group', '=', 'hiking_plan.hiking_group')
-													->select (
-														'recruitment.hiking_group',
-														'recruitment.title',
-														'hiking_plan.end_point',
-														'hiking_group.owner',
-														'hiking_plan.start_date',
-														'hiking_group.min_members',
-														'hiking_group.max_members'
-													)
-													->where('mountain.mnt_name', '=', $inputData)
-													->get();
+			return HikingGroup::leftJoin('recruitment', 'hiking_group.uuid', '=', 'recruitment.hiking_group')
+								->leftJoin('hiking_plan', 'recruitment.hiking_group', '=', 'hiking_plan.hiking_group')
+								->select(
+											'recruitment.hiking_group',
+											'recruitment.title',
+											'hiking_plan.end_point',
+											'hiking_group.owner',
+											'hiking_plan.start_date',
+											'hiking_group.min_members',
+											'hiking_group.max_members'
+								)
+								->where('mountain.mnt_name', '=', $inputData)
+								->get();
 		} else if ($method == 'writer') {
-			return $findedData		= HikingGroup::leftJoin('recruitment', 'hiking_group.uuid', '=', 'recruitment.hiking_group')
-													->leftJoin('hiking_plan', 'recruitment.hiking_group', '=', 'hiking_plan.hiking_group')
-													->select (
-														'recruitment.hiking_group',
-														'recruitment.title',
-														'hiking_plan.end_point',
-														'hiking_group.owner',
-														'hiking_plan.start_date',
-														'hiking_group.min_members',
-														'hiking_group.max_members'
-													)
-													->where('hiking_group.owner', '=', $inputData)
-													->get();
+			return HikingGroup::leftJoin('recruitment', 'hiking_group.uuid', '=', 'recruitment.hiking_group')
+								->leftJoin('hiking_plan', 'recruitment.hiking_group', '=', 'hiking_plan.hiking_group')
+								->select (
+											'recruitment.hiking_group',
+											'recruitment.title',
+											'hiking_plan.end_point',
+											'hiking_group.owner',
+											'hiking_plan.start_date',
+											'hiking_group.min_members',
+											'hiking_group.max_members'
+										)
+								->where('hiking_group.owner', '=', $inputData)
+								->get();
 
 		} else if ($method == 'date') {
-			return $findedData		= HikingGroup::leftJoin('recruitment', 'hiking_group.uuid', '=', 'recruitment.hiking_group')
-													->leftJoin('hiking_plan', 'recruitment.hiking_group', '=', 'hiking_plan.hiking_group')
-													->select (
-														'recruitment.hiking_group',
-														'recruitment.title',
-														'hiking_plan.end_point',
-														'hiking_group.owner',
-														'hiking_plan.start_date',
-														'hiking_group.min_members',
-														'hiking_group.max_members'
-													)
-													->where('hiking_plan.start_date', '=', $inputData)
-													->get();
+			return HikingGroup::leftJoin('recruitment', 'hiking_group.uuid', '=', 'recruitment.hiking_group')
+								->leftJoin('hiking_plan', 'recruitment.hiking_group', '=', 'hiking_plan.hiking_group')
+								->select (
+											'recruitment.hiking_group',
+											'recruitment.title',
+											'hiking_plan.end_point',
+											'hiking_group.owner',
+											'hiking_plan.start_date',
+											'hiking_group.min_members',
+											'hiking_group.max_members'
+										)
+								->where('hiking_plan.start_date', '=', $inputData)
+								->get();
 		}
 	}
 

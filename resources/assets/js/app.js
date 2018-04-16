@@ -19,6 +19,7 @@ import routes from './route.js';
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+// bootstrap-vue
 import BootstrapVue from 'bootstrap-vue'
 Vue.use(BootstrapVue);
 
@@ -86,6 +87,8 @@ import group_make_main from './components/group_make/group_make_main'
 // notice
 import notice from './components/notice/main'
 import notice_information from './components/notice/notice_information'
+
+// Vue.prototype.$HttpAddr = Laravel.host + "/api";
 
 const routes = [
     // group menu

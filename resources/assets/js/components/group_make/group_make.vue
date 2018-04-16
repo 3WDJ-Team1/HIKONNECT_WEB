@@ -28,7 +28,7 @@
                 mountain_num: "",
                 // 등산 경로마다 지도에 찍기 위한 속성 적용
                 flightPath: [],
-                mountain_path: [],
+                // 경로 색깔을 위해
                 mouseover_out: true,
             }
         },
@@ -36,19 +36,26 @@
             Autocomplete
         },
         methods: {
-            // 지도 api
+            ///////////////////////////////////////// 지도 api
             initMap() {
-                // 산마다 배정되는 등산 경로의 배열
-                let mountain_center = '';
-                let send_data_r = [];
-                let flightPlanCoordinates = [];
-                let mountain_num = this.mountain_num;
-                let path = [];
-                let send_data = [];
-                let map = new window.google.maps.Map(document.getElementById('map'), {
+                // 지도의 중간지점
+                var mountain_center = '';
+                // 산 코스를 담을 배열
+                var send_data = [];
+                // 산 코스를 지우기 위해 지정한 배열
+                var send_data_r = [];
+                // 각 경로 배열
+                var flightPlanCoordinates = [];
+                // 산 코드번호
+                var mountain_num = this.mountain_num;
+                // 데이터이스로 보낼 산 코스 배열
+                var path = [];
+                var map = new window.google.maps.Map(document.getElementById('map'), {
                     zoom: 11,
                     mapTypeId: 'terrain'
                 });
+
+                ////////////////////////////////시종점 마커
                 axios.get('http://hikonnect.ga:3000/spots/' + mountain_num).then(response => {
                     for (let p = 0; p < response.data.length; p++) {
                         if (response.data[p].attributes.DETAIL_SPO == "시종점") {
@@ -67,7 +74,8 @@
                         }
                     }
                 });
-                // 위도와 경도 불러오기
+
+                //////////////////////////////////////////////// 위도와 경도 불러오기
                 axios.get('http://hikonnect.ga:3000/paths/' + this.mountain_num)
                     .then(response => {
                             // 지도의 중심 지점 변수지정
@@ -91,8 +99,7 @@
                                     // 경로 선 굵기
                                     strokeWeight: 5
                                 });
-
-                                // 경로에 마우스를 올릴 때 이벤트
+                                //////////////////////////////////////////////// 경로에 마우스를 올릴 때 이벤트
                                 this.flightPath[i].addListener('mouseover', function () {
                                     if (this.mouseover_out == true)
                                         this.setOptions({
@@ -107,9 +114,7 @@
                                             }
                                         );
                                 });
-
-
-                                // 경로를 클릭 했을 때 이벤트
+                                ////////////////////////////////////////////////// 경로를 클릭 했을 때 이벤트
                                 this.flightPath[i].addListener('click', function () {
                                     // 현재 경로의 앞 lat값
                                     let fir_lat = flightPlanCoordinates[i][0].lat;
@@ -122,63 +127,65 @@
                                     // 경로 선택 시 이어지지 않으면 에러 발생
                                     let alert_mes = true;
                                     let alert_mes_r = true;
-                                    let destination;
+                                    let destination = '';
                                     // 경로 지울 때 이어지지 않으면 에러 발생
                                     let remove_path = 0;
-                                    // 시작점일 시
+
+                                    let fir_lat_c_a = fir_lat.toString().split(".");
+                                    let fir_lat_c = fir_lat_c_a[1].substring(0, 10);
+                                    fir_lat_c_a = Number(fir_lat_c_a[0] + "." + fir_lat_c);
+
+                                    let fir_lng_c_a = fir_lng.toString().split(".");
+                                    let fir_lng_c = fir_lng_c_a[1].substring(0, 10);
+                                    fir_lng_c_a = Number(fir_lng_c_a[0] + "." + fir_lng_c);
+
+                                    let end_lat_c_a = end_lat.toString().split(".");
+                                    let end_lat_c = end_lat_c_a[1].substring(0, 10);
+                                    end_lat_c_a = Number(end_lat_c_a[0] + "." + end_lat_c);
+
+                                    let end_lng_c_a = end_lng.toString().split(".");
+                                    let end_lng_c = end_lng_c_a[1].substring(0, 10);
+                                    end_lng_c_a = Number(end_lng_c_a[0] + "." + end_lng_c);
+
+                                    //////////////////////////////////////////////////////////// 시작점일 시
                                     if (send_data.length == 0) {
                                         let fir_end_B = true;
-                                        // 시작 lat 소수점 뒤의 두자리 없애기
-                                        let fir_lat_c_a = fir_lat.toString().split(".");
-                                        let fir_lat_c = fir_lat_c_a[1].substring(0, 10);
-                                        fir_lat_c_a = Number(fir_lat_c_a[0] + "." + fir_lat_c);
-
-                                        let fir_lng_c_a = fir_lng.toString().split(".");
-                                        let fir_lng_c = fir_lng_c_a[1].substring(0, 10);
-                                        fir_lng_c_a = Number(fir_lng_c_a[0] + "." + fir_lng_c);
-
-                                        let end_lat_c_a = end_lat.toString().split(".");
-                                        let end_lat_c = end_lat_c_a[1].substring(0, 10);
-                                        end_lat_c_a = Number(end_lat_c_a[0] + "." + end_lat_c);
-
-                                        let end_lng_c_a = end_lng.toString().split(".");
-                                        let end_lng_c = end_lng_c_a[1].substring(0, 10);
-                                        end_lng_c_a = Number(end_lng_c_a[0] + "." + end_lng_c);
-
                                         axios.get('http://hikonnect.ga:3000/spots/' + mountain_num).then(response => {
                                             if (response) {
-                                                destination = response.data;
-                                                for (let p = 0; p < destination.length; p++) {
-                                                    if (destination[p].attributes.DETAIL_SPO == "시종점") {
-                                                        let pos_lat_a = destination[p].geometry.lat.toString().split(".");
+                                                for (let p = 0; p < response.data.length; p++) {
+                                                    if (response.data[p].attributes.DETAIL_SPO == "시종점") {
+                                                        let pos_lat_a = response.data[p].geometry.lat.toString().split(".");
                                                         let pos_lat = pos_lat_a[1].substring(0, 10);
-                                                        pos_lat_a = pos_lat_a[0] + "." + pos_lat;
-                                                        let pos_lng_a = destination[p].geometry.lng.toString().split(".");
+                                                        pos_lat_a = Number(pos_lat_a[0] + "." + pos_lat);
+
+                                                        let pos_lng_a = response.data[p].geometry.lng.toString().split(".");
                                                         let pos_lng = pos_lng_a[1].substring(0, 10);
-                                                        pos_lng_a = pos_lng_a[0] + "." + pos_lng;
-                                                        if(pos_lat_a == fir_lat_c_a && pos_lng_a == fir_lng_c_a)    {
-                                                            fir_end_B = true;
+                                                        pos_lng_a = Number(pos_lng_a[0] + "." + pos_lng);
+                                                        // 시종점과 경로가 일치 한다면 배열에 넘어주기
+                                                        if (pos_lat_a == fir_lat_c_a && pos_lng_a == fir_lng_c_a) {
+                                                            fir_end_B = false;
                                                         } else if (pos_lat_a == end_lat_c_a && pos_lng_a == end_lng_c_a) {
-                                                            fir_end_B = true;
+                                                            fir_end_B = false;
                                                         }
                                                     }
                                                 }
+                                                // 시종점과 경로가 일치하므로 배열에 넣어준다.
+                                                if (fir_end_B == false) {
+                                                    this.setOptions({
+                                                            strokeColor: '#000000',
+                                                            strokeWeight: 5,
+                                                            mouseover_out: false
+                                                        }
+                                                    );
+                                                    // group_make_main에 보내줄 최종 경로에 추가
+                                                    path.push(i);
+                                                    EventBus.$emit('mountain_path', path, mountain_num);
+                                                    send_data.push({course: [{fir_lat, fir_lng}, {end_lat, end_lng}]});
+                                                } else {
+                                                    alert('시종점이 아닙니다.')
+                                                }
                                             }
                                         });
-                                        if(fir_end_B == true)  {
-                                            this.setOptions({
-                                                    strokeColor: '#000000',
-                                                    strokeWeight: 5,
-                                                    mouseover_out: false
-                                                }
-                                            );
-                                            // group_make_main에 보내줄 최종 경로에 추가
-                                            path.push(i);
-                                            EventBus.$emit('mountain_path', path, mountain_num);
-                                            send_data.push({course: [{fir_lat, fir_lng}, {end_lat, end_lng}]});
-                                        } else {
-                                            alert('시종점이 아닙니다.')
-                                        }
                                     }
                                     // 시작점이 아닐 시
                                     else {
@@ -228,7 +235,7 @@
                                                 alert_mes = false;
                                             }
                                         }
-                                        if (remove_path == 2) alert('경로가 끊어집니다.');
+                                        if (remove_path >= 2) alert('경로가 끊어집니다.');
                                         else {
                                             if (this.mouseover_out == false) {
                                                 this.setOptions({
@@ -244,13 +251,29 @@
                                                     }
                                                 }
                                             }
+                                            EventBus.$emit('mountain_path', path, mountain_num);
                                         }
                                         // 잘못된 경로라는 에러메시지 출력
                                         if (alert_mes == true && alert_mes_r == true) {
                                             alert('잘못된 경로입니다.');
                                         } else if (alert_mes == false && alert_mes_r == true) {
-                                            // 시종점이라면 경로를 더 이상 클릭할 수 없도록 지정 해야 한다.
+                                            // 종착지도 시종점 중 하나여야 겠죵?
+                                            axios.get('http://hikonnect.ga:3000/spots/' + mountain_num).then(response => {
+                                                if (response) {
+                                                    for (let p = 0; p < response.data.length; p++) {
+                                                        if (response.data[p].attributes.DETAIL_SPO == "시종점") {
+                                                            let pos_lat_a = response.data[p].geometry.lat.toString().split(".");
+                                                            let pos_lat = pos_lat_a[1].substring(0, 10);
+                                                            pos_lat_a = Number(pos_lat_a[0] + "." + pos_lat);
 
+                                                            let pos_lng_a = response.data[p].geometry.lng.toString().split(".");
+                                                            let pos_lng = pos_lng_a[1].substring(0, 10);
+                                                            pos_lng_a = Number(pos_lng_a[0] + "." + pos_lng);
+
+                                                        }
+                                                    }
+                                                }
+                                            });
                                             let double_path = 0;
                                             // 갈림길 방지: 하나의 지점을 1번 넘게 참조하면 안된다.
                                             for (let a = 0; a < send_data.length; a++) {
@@ -287,6 +310,7 @@
                                             }
                                         }
                                     }
+
                                 });
 
 

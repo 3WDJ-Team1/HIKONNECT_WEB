@@ -135,10 +135,11 @@ class GroupController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function findData($method, $inputData)
+    public function findData(Request $request)
     { 
-        $findedGroupData           = $this->group_model->findData($method, $inputData);
-        return $findedGroupData;
+        $method     = $request->get('md');
+        $inputData  = $request->get('inputD');
+        return $this->group_model->findData($method, $inputData);
     }
     /**
      * Display the specified resource.
