@@ -102,7 +102,10 @@ Route::group(
             '/loginprocess', 
             'LoginController@loginprocess'
         )->name('loginprocess');
-
+        Route::post(
+            '/login_app',
+            'LoginController@login_app'
+        )->name('login_app');
         /**
          * Login process using Socialite
          * 
