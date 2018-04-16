@@ -136,6 +136,11 @@ Route::group(
             '/HttpRequest',
             'GroupController@sendData'
         )->name('HttpRequest');
+
+        Route::post(
+            '/findSender',
+            'GroupController@findSender'
+        )->name('finSender');
     }
 );
 

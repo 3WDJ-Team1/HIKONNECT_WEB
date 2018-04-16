@@ -381,7 +381,7 @@ class HikingGroup extends Model
 					->delete();                             
 	}
 
-	public function insertRecordingData(String $id, String $group) {
+	public function insertRecordingData(String $sender, String $hiking_group) {
 		$uuidR 	= 	sprintf('%08x-%04x-%04x-%04x-%04x%08x',
 				mt_rand(0, 0xffffffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff), 
 				mt_rand(0, 0xffff),mt_rand(0, 0xffff), mt_rand(0, 0xffffffff)
@@ -389,11 +389,20 @@ class HikingGroup extends Model
 
 		DB::table('radiogram_log')->insert([
 			'uuid' => $uuidR,
-			'hiking_group' => $group,
-			'sender' => $id,
+			'hiking_group' => $hiking_group,
+			'sender' => $sender,
 			'radiogram_path' => '',
 			'created_at'		=> Carbon::now()->format('Y-m-d H:i:s'),
 		    'updated_at'		=> Carbon::now()->format('Y-m-d H:i:s')
 		]);
+	}
+
+	public function findSender(Request $request) {
+		$sender = Session::get('idv');
+									
+		return DB::table('user')->leftJoin('entry_info', 'user.uuid', '=', 'entry_info.uuid')
+								->select('user.uuid', 'entry_info.hiking_group')
+								->where('user.id', '=', $sender)
+								->get();
 	}
 }

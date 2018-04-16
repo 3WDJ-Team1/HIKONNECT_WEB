@@ -154,8 +154,12 @@ class GroupController extends Controller
     }
     
     public function sendData(Request $request) {
-        $Id = $request->get['uuid'];
-        $Group = $request->get['hiking_group'];
+        $sender         = $request->get['SD'];
+        $hiking_group   = $request->get['HG'];
         return "true";
+    }
+
+    public function findSender(Request $request) {
+        return $this->group_model->findSender($request);
     }
 }
