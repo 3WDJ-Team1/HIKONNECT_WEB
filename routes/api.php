@@ -21,6 +21,11 @@ Route::middleware('auth:api')
 Route::group(
     [], 
     function () {
+        // Radios Routing
+        Route::get(
+            'radioGram/{groupId}',
+            'RadioGramContoller@getGroupRadios'
+        )->name('radios');
         // Notification Routings
         Route::resource(
             'notice', 
