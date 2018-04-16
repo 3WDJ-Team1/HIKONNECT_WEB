@@ -152,6 +152,10 @@ Route::group(
             'testcontroller@get_Memo_Info'
         )->name('Get Memo Information');
         Route::post(
+            '/send',
+            'FCMController@pushNotification'
+        )->name('SendNotification');
+        Route::post(
             '/position',
             'testcontroller@send_image_path'
         )->name('sendimage');
