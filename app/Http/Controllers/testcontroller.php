@@ -54,7 +54,7 @@ class testcontroller extends Controller
         $uuid = DB::table('user')->where('id',$user_id)->select('uuid')->get()[0]['uuid'];
         $hiking_group = DB::table('entry_info')->where('user',$uuid)->select('hiking_group')->get()[0]['hiking_group'];
 
-        location_memo::insert([
+        DB::table('location_memo')->insert([
             'uuid'          => '',
             'writer'        => $uuid,
             'hiking_group'  => $hiking_group,
