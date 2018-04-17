@@ -111,6 +111,7 @@ class HikingGroup extends Model
     {
         return DB::table('hiking_group as hg')
             ->select(
+                'hg.uuid',
                 'hg.name as title',
                 'uf.nickname',
                 'hp.end_point',
