@@ -64,7 +64,7 @@
         },
         methods: {
             regist() {
-                let uri= 'http://localhost:8000/user';
+                let uri= this.$HttpAddr + '/user';
                 if(this.item.idv == "" || this.item.pwv == ""
                     || this.item.pwvc == "" || this.item.nn == "") {
                     alert('값이 비어있습니다');

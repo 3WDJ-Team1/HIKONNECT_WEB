@@ -87,9 +87,9 @@
 <script>
     export default {
         data: () => ({
-            groupId: '',
-            waitingMembers: [],
-            isPushed: false,
+            groupId         : '',
+            waitingMembers  : [],
+            isPushed        : false,
         }),
         methods: {
             getWaitingMembers() {
@@ -100,43 +100,41 @@
                 });
             },
             applyUser(userUuid) {
-                console.log(userUuid + "," + this.groupId);
                 axios.patch(this.$HttpAddr + '/replyUserEntry', {
-                    groupUuid : this.groupId,
-                    userUuid : userUuid,
-                    isAccept : 1
+                    groupUuid   : this.groupId,
+                    userUuid    : userUuid,
+                    isAccept    : 1
                 }).then (response => {
                     this.isPushed = true;
                     if (response) {
-                        this.$router.push('/group');
+                        location.reload();
                     }
                 });
             },
-            rejectUser(userUuid) {
+            rejectUser(argUserUuid) {
                 axios.delete(this.$HttpAddr + '/rejectUserEntry', {
-                    groupId : this.groupId,
-                    userId : userUuid
+                    groupUuid : this.groupId,
+                    userUuid  : argUserUuid
                 }).then (response => {
                     this.isPushed = true;
                     if (response) {
-                        this.$router.push('/group');
+                        location.reload();
                     }
                 });
             }
         },
         created() {
             this.groupId = this.$route.params.groupid;
-            this.groupId = '16f78874-b51c-3ad0-9b91-5d35f22a412b';
             this.getWaitingMembers();
             this.$EventBus.$on('reloadMember', () => {
                 this.created();
             });
         },
-        // watch: {
-        //     '$route' (to, from) {
-        //         this.groupId = this.$route.params.groupid;
-        //     }
-        // }
+        watch: {
+            '$route' (to, from) {
+                this.groupId = this.$route.params.groupid;
+            }
+        }
     }
 </script>
 <style>

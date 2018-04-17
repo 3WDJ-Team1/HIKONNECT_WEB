@@ -79,13 +79,11 @@
 <script>
     export default {
         data: () => ({
-            groupId: '',
-            isLogined: false,
+            groupId     : '',
+            isLogined   : false,
         }),
         created() {
             this.groupId = this.$route.params.groupid;
-            // 가라
-            this.groupId = '16f78874-b51c-3ad0-9b91-5d35f22a412b';
             this.$EventBus.$on('isLogined', () => {
                 this.isLogined = true;
             });
@@ -96,8 +94,8 @@
         methods: {
             enterGroup() {
                 axios.post(this.$HttpAddr + '/entryGroup', {
-                    userUuid: sessionStorage.uuid,
-                    groupUuid: this.groupId
+                    userUuid    : sessionStorage.uuid,
+                    groupUuid   : this.groupId
                 })
                 .then(response => {
                     if (response) {
@@ -106,7 +104,13 @@
                     } else {
                         this.$EventBus.$emit('errorModalOpen', '잘못된 접근입니다.');
                     }
+                    location.reload();
                 });
+            }
+        },
+        watch: {
+            '$route' (to, from) {
+                this.groupUuid = this.$route.params.groupid;
             }
         }
     }

@@ -98,7 +98,6 @@
             // this.getGroupUserData();
             // httpAddr+/groupMembers/groupUUID
             this.groupUuid = this.$route.params.groupid;
-            this.groupUuid = "16f78874-b51c-3ad0-9b91-5d35f22a412b";
             this.infiniteHandlerMember();
         },
         watch: {

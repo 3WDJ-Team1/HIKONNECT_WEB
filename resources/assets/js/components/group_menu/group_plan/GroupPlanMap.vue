@@ -31,7 +31,7 @@
              */
             options                 : {
                                         center  : { lat: 36.9579208734, lng: 128.4 },
-                                        zoom    : 15
+                                        zoom    : 11
                                       },
                                       
             map                     : {},

@@ -39,7 +39,7 @@
             }
         },
         created: function () {
-            let uri = 'http://localhost:8000/api/mypage/' + sessionStorage.getItem('uuid');
+            let uri = this.$HttpAddr + '/api/mypage/' + sessionStorage.getItem('uuid');
             this.axios.get(uri).then((response) => {
                 var datavalue = Object.values(response.data);
                 console.log(response.data);

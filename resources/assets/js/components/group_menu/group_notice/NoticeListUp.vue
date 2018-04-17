@@ -91,10 +91,8 @@
         created() {
             // url에서 그룹 아이디 받아오기
             this.groupId = this.$route.params.groupid;
-            // 가라
-            this.groupId = "16f78874-b51c-3ad0-9b91-5d35f22a412b";
             this.$EventBus.$on('newNoticeWrited', () => {
-                this.$router.push('/group/:groupid');
+                this.$router.push('/group/' + this.groupId);
             })
             this.isGroupOwner();
         },

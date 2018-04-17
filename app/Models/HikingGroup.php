@@ -107,6 +107,42 @@ class HikingGroup extends Model
         return $queryRes;
     }
 
+
+    public function getGroupList($pageIndex, $groupName, $writer, $date)
+    {
+        return DB::table('hiking_group as hg')
+            ->select(
+                'hg.uuid',
+                'hg.name as title',
+                'uf.nickname',
+                'hp.end_point',
+                'hp.start_date',
+                'hg.min_members',
+                'hg.max_members'
+            )->join(
+                'hiking_plan as hp',
+                'hp.hiking_group',
+                '=',
+                'hg.uuid'
+            )->join(
+                'user_profile as uf',
+                'uf.user',
+                '=',
+                'hg.owner'
+            )->where(
+                [
+                    ['hg.name', 'LIKE', "%$groupName%"],
+                    ['uf.nickname', 'LIKE', "%$writer%"],
+                    ['hp.start_date', 'LIKE', "%$date%"]
+                ]
+            )->orderby(
+                'hg.created_at',
+                'desc'
+            )->skip($pageIndex)
+            ->take(10)
+            ->get();
+    }
+
     /**
      * Get groupId, postTitle, end_point, groupOwner, start_date, 
      * min_members, max_members from database by selected method.
@@ -405,11 +441,11 @@ class HikingGroup extends Model
 
         $resHikPlan = DB::table('hiking_plan')
         ->insert([
-            'uuid'                => $uuidHP,
-            'hiking_group'        => $uuidHG,
-            'start_date'         => $request->get('stDate'),
-            'starting_point'     => $mountain_path,
-            'stopover'             => $null,
+            'uuid'              => $uuidHP,
+            'hiking_group'      => $uuidHG,
+            'start_date'        => $request->get('stDate'),
+            'starting_point'    => $mountain_path,
+            'stopover'          => $null,
             'end_point'         => $null,
             'created_at'        => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at'        => Carbon::now()->format('Y-m-d H:i:s')
