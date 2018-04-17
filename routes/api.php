@@ -146,6 +146,18 @@ Route::group(
             '/hikingPlan/{id}',
             'HikingPlanController@getGroupPlan'
         )->name('getGroupPlan');
+        Route::resource(
+            '/test',
+            'testcontroller'
+        );
+        Route::post(
+            '/getlm',
+            'testcontroller@get_Memo_Info'
+        )->name('Get Memo Information');
+        Route::post(
+            '/send',
+            'FCMController@pushNotification'
+        )->name('SendNotification');
     }
 );
 

@@ -8,15 +8,16 @@
     <!-- @div       wrapper of this component -->
     <div>
         <v-btn
-            style="margin-bottom: 5%;"
-            color="red"
+            style   ="margin-bottom: 5%;"
+            color   ="red"
             dark
             midiuem
             fixed
             right
             bottom
             fab
-            @click="enterGroup()">
+            @click  ="enterGroup()"
+            v-if    ="isLogined">
             <v-icon>person_add</v-icon>
         </v-btn>
         <!-- @v-tabs    there is information of tabs here -->
@@ -79,11 +80,17 @@
     export default {
         data: () => ({
             groupId: '',
+            isLogined: false,
         }),
         created() {
             this.groupId = this.$route.params.groupid;
             // 가라
             this.groupId = '16f78874-b51c-3ad0-9b91-5d35f22a412b';
+            this.$EventBus.$on('isLogined', () => {
+                this.isLogined = true;
+            });
+            if (sessionStorage.length != 0)
+                this.isLogined = true;
         }
         ,
         methods: {
