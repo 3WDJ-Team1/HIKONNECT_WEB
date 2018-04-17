@@ -79,7 +79,7 @@
         methods:    {
             sendData() {
                 axios.post('http://localhost:8000/group/store',{
-                    owner: 'f6487325-828b-3b10-9479-71847c1e06ef'
+                    owner: "2569fc51-41c8-11e8-9fe4-42010a8c003e"
                     /*
                         @todo localStorage.getItem('userUuid')
                     */,
