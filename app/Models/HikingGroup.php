@@ -157,13 +157,14 @@ class HikingGroup extends Model
                 'hiking_plan.start_date',
                 'hiking_group.min_members',
                 'hiking_group.max_members'
-            )
+            )->orderby('created_at', 'desc')
             ->skip($pageIndex)->take(10)->get();
     }
 
     public function getWriters($pageIndex){
-        return DB::table('user_profile')->leftJoin('hiking_group', 'user_profile.uuid', '=', 'hiking_group.owner')
+        return DB::table('user_profile')->join('hiking_group', 'user_profile.user', '=', 'hiking_group.owner')
                                 ->select('user_profile.nickname')
+                                ->orderby('hiking_group.created_at', 'desc')
                                 ->skip($pageIndex)->take(10)->get();
      }
 
