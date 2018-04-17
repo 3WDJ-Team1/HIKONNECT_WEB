@@ -39,11 +39,13 @@ class GroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($pageIndex)
+    public function index($pageIndex = 0, $groupName = "", $writer = "", $date = "")
     {
-        $groupInformations  = $this->group_model->getGroupInformations($pageIndex);
+        /*$groupInformations  = $this->group_model->getGroupInformations($pageIndex);
         $writers            = $this->group_model->getWriters($pageIndex);
-        return compact('groupInformations', 'writers');
+        return compact('groupInformations', 'writers');*/
+        return $this->group_model
+            ->getGroupList($pageIndex, $groupName, $writer, $date);
     }
 
     /**

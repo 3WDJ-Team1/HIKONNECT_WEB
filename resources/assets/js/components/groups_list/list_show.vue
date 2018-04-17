@@ -60,13 +60,13 @@
                     if(response) {
                         for(let i = 0 ; i < 10 ; i++) {
                             this.list.push({
-                                uuid: response.data.groupInformations[i].uuid,
-                                title: response.data.groupInformations[i].title,
-                                owner: response.data.writers[i].nickname,
-                                end_point: response.data.groupInformations[i].end_point,
-                                startdate: response.data.groupInformations[i].start_date,
-                                min_members: response.data.groupInformations[i].min_members,
-                                max_members: response.data.groupInformations[i].max_members
+                                uuid: response.data[i].uuid,
+                                title: response.data[i].title,
+                                owner: response.data[i].nickname,
+                                end_point: response.data[i].end_point,
+                                startdate: response.data[i].start_date,
+                                min_members: response.data[i].min_members,
+                                max_members: response.data[i].max_members
                             });
                         }
                         $state.loaded();

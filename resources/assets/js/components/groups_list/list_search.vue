@@ -39,9 +39,10 @@
                 httpAddr: Laravel.host
             }
         },
-        methods:    {
+        methods: {
             send_serch() {
                 this.$EventBus.$emit('input_serch', this.mountain_name, this.writer, this.date);
+                axios.post(Laravel.host + "/group/index");
             }
         }
     }

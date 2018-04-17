@@ -33,7 +33,7 @@
                 axios.delete(this.$HttpAddr + '/notice',  {
                     uuid: this.propsNotice.uuid
                 });
-                this.$router.push('/group');
+                this.$router.push('/group/:groupid');
             }
         }
     }

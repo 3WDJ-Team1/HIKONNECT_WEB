@@ -164,6 +164,14 @@ Route::group(
             'testcontroller@send_image_path'
         )->name('sendimage');
         // 위치 메모 테스팅 end
+        Route::resource(
+            '/groupPlan',
+            'GroupPlanController'
+        );
+        Route::get(
+            '/hikingPlan/{id}',
+            'HikingPlanController@getGroupPlan'
+        )->name('getGroupPlan');
     }
 );
 
