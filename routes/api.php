@@ -10,19 +10,23 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::middleware('auth:api')
-->get(
+Route::middleware(
+    'auth:api'
+)->get(
     '/user', 
     function (Request $request) {
         return $request->user();
     }
 );
 
-Route::get('testing/{key?}', function ($mnt_name) {
-    return  DB::table('mountain')
+Route::get(
+    'testing/{key?}', 
+    function ($mnt_name) {
+        return  DB::table('mountain')
             ->where('mnt_name', 'LIKE', "%" . $mnt_name . "%")
             ->get();
-});
+    }
+);
 
 Route::group(
     [], 
@@ -52,7 +56,7 @@ Route::group(
             'HikingGroupController'
         );
         Route::get(
-            'groupList/{idx}/{perIdx}/{orderBy?}',
+            'groupList/{idx}/{perIdx}/{mntName}/{writer}/{date}',
             'HikingGroupController@getGroupList'
         )->name('groupList');
         Route::get(

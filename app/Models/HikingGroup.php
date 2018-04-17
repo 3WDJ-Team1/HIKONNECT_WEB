@@ -5,7 +5,7 @@
  * 
  * @category Models
  * @package  App
- * @author   Areum Lee <leear5799@gmail.com>, bs Kwon <rnjs9957@gamil.com>
+ * @author   Areum Lee <leear5799@gmail.com>, Bs Kwon <rnjs9957@gamil.com>
  * @license  MIT license
  * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB
  */
@@ -168,6 +168,35 @@ class HikingGroup extends Model
                                 ->skip($pageIndex)->take(10)->get();
      }
 
+     public function getGroupList($idx, $perIdx, $groupName, $writer, $date)
+     {
+        return DB::table('hiking_group as hg')
+            ->select(
+                'hg.uuid',
+                'hg.name',
+                'hp.end_point',
+                'uf.nickname'
+            )->join(
+                'hiking_plan as hf',
+                'hg.uuid',
+                '=',
+                'hp.hiking_group'
+            )->join(
+                'user_profile as uf',
+                'uf.user',
+                '=',
+                'hg.owner'
+            )->skip($idx)
+            ->take($perIdx)
+            ->orderby(
+                'hg.created_at', 
+                'desc'
+            )->get();
+    }
+
+     /**
+      * 
+      */
 	public function isOwner (String $groupId, String $userId)
 	{
 		try {
