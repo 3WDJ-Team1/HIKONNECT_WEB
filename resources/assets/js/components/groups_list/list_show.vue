@@ -3,7 +3,7 @@
         <div class="card" v-for="item in list" :key="item.owner">
             <div class="card-header">
                 <h4 class="title inlineBlocks">{{ item.title }} </h4>
-                <h5>{{ item.owner }}</h5>
+                <h5>{{ item.nickname }}</h5>
             </div>
             <div class="card-body">
                 <div class="member-count-wrapper">
@@ -11,7 +11,7 @@
                     <div class="max_members inlineBlocks">최대인원수: {{ item.max_members }}</div>
                 </div>
                 <div class="end_point inlineBlocks">목적지: {{ item.end_point }}</div>
-                <div class="startdate inlineBlocks">산행일자: {{ item.startdate }}</div>
+                <div class="startdate inlineBlocks">산행일자: {{ item.start_date }}</div>
             </div>
             <router-link
                 tag="b-button"
@@ -33,9 +33,9 @@
         data() {
             return {
                 search_imformations: {
-                    mountain_name: '',
-                    writer: '',
-                    date: ''
+                    mountain_name   : '',
+                    writer          : '',
+                    date            : ''
                 },
                 list_num        : 0,
                 list            : [],
@@ -47,28 +47,22 @@
         {
             // 이벤트 받기
             // '이벤트 명', function(받을 데이터)
-            this.$EventBus.$on('input_serch', (mountain, write, date) => {
-                this.mountain_para =  mountain;
-                this.writer = write;
-                this.date = date;
+            this.$EventBus.$on('input_search', (mountain, write, date) => {
+                this.mountain_para  =  mountain;
+                this.writer         = write;
+                this.date           = date;
             });
         },
         methods: {
+            /**
+             * 그룹 리스트 받아오기
+             * @author      Jiyoon Lee, Sungeun Kang <kasueu0814@gmail.com>
+             * @augments    $state state of infinite-loading */
             infiniteHandler($state) {
-                let url = this.HttpAddr + '/group/index/' + this.list_num
+                let url = this.HttpAddr + '/group/index/' + this.list_num;
                 axios.get(url).then(response => {
                     if(response) {
-                        for(let i = 0 ; i < 10 ; i++) {
-                            this.list.push({
-                                uuid: response.data[i].uuid,
-                                title: response.data[i].title,
-                                owner: response.data[i].nickname,
-                                end_point: response.data[i].end_point,
-                                startdate: response.data[i].start_date,
-                                min_members: response.data[i].min_members,
-                                max_members: response.data[i].max_members
-                            });
-                        }
+                        this.list = this.list.concat(response.data);
                         $state.loaded();
                     }
                     else {
@@ -77,10 +71,15 @@
                 });
                 this.list_num += 10;
             },
+            /**
+             * 그룹 참여 쿼리를 보내는 함수
+             * @author      Sungeun Kang
+             * @augments    groupId : uuid of groups
+             */
             joinGroup(groupId) {
                 axios.post(this.$HttpAddr + '/entryGroup', {
-                    userUuid: sessionStorage.uuid,
-                    groupUuid: groupId
+                    userUuid    : sessionStorage.uuid,  // user의 uuid
+                    groupUuid   : groupId               // group의 uuid
                 })
                 .then(response => {
                     console.log(response);

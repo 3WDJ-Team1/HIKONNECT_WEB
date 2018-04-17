@@ -276,11 +276,11 @@ class HikingGroup extends Model
 
         $resHikPlan = DB::table('hiking_plan')
         ->insert([
-            'uuid'                => $uuidHP,
-            'hiking_group'        => $uuidHG,
-            'start_date'         => $request->get('stDate'),
-            'starting_point'     => $mountain_path,
-            'stopover'             => $null,
+            'uuid'              => $uuidHP,
+            'hiking_group'      => $uuidHG,
+            'start_date'        => $request->get('stDate'),
+            'starting_point'    => $mountain_path,
+            'stopover'          => $null,
             'end_point'         => $null,
             'created_at'        => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at'        => Carbon::now()->format('Y-m-d H:i:s')

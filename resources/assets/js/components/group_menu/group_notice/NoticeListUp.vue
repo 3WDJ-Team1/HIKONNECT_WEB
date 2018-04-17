@@ -8,7 +8,9 @@
     <!-- @div#group_notice  the wrapper of notice list -->
     <div class="text-center" id="group_notice">
         <!-- @router-view   'write' floating button -->
-        <router-view name="write"></router-view>
+        <router-view
+            v-if="isOwner"
+            name="write"></router-view>
         <!-- @div           notice list area -->
         <div>
             <!-- @div       A card of notice
@@ -31,10 +33,16 @@
                         <!-- @router-view   'delete' button component
                                             porpsNotice will send notice.uuid to children components -->
                                             
-                        <router-view name="delete" :propsNotice="notice"></router-view>
+                        <router-view
+                            name="delete"
+                            :propsNotice="notice"
+                            v-if="isOwner"></router-view>
                         <!-- @router-view   'modify(edit)' button component
                                             porpsNotice will send notice.uuid to children components -->
-                        <router-view name="modify" :propsNotice="notice"></router-view>
+                        <router-view
+                            name="modify"
+                            :propsNotice="notice"
+                            v-if="isOwner"></router-view>
                     </b-collapse>
                 </div>
             </div>
@@ -76,17 +84,17 @@
                 margin  : "2px",
                 size    : "10px"
             },
-            groupId: ""
+            groupId: "",
+            isOwner: false,
         }),
         // When this component was created,
         created() {
             // url에서 그룹 아이디 받아오기
             this.groupId = this.$route.params.groupid;
-            // 가라
-            this.groupId = "16f78874-b51c-3ad0-9b91-5d35f22a412b";
             this.$EventBus.$on('newNoticeWrited', () => {
-                this.$router.push('/group/:groupid');
+                this.$router.push('/group/' + this.groupId);
             })
+            this.isGroupOwner();
         },
         methods: {
             /**
@@ -119,7 +127,14 @@
                     }
                 });
                 this.page++;
-            }
+            },
+            isGroupOwner() {
+                axios.get(this.$HttpAddr + '/isOwner/' + this.groupId + "/" + sessionStorage.getItem('uuid'))
+                .then( response => {
+                    this.$EventBus.$emit('isOwner', response); 
+                    this.isOwner = response.data;
+                });
+            },
         },
         watch: {
             /**
