@@ -232,7 +232,7 @@
             },
             // pull autocomplete data
             distributionGroupsEndpoint(n) {
-                return 'http://localhost:8000/api/testing/' + n;
+                return Laravel.host + '/api/testing/' + n;
             },
             // drop down이 보여지도록
             addDistributionGroup(group) {

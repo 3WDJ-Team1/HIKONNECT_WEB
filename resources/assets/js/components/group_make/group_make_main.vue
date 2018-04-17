@@ -77,7 +77,7 @@
         },
         methods:    {
             sendData() {
-                axios.post('http://localhost:8000/group',{
+                axios.post(Laravel.host + '/group',{
                     owner: sessionStorage.getItem('uuid'),
                     tt: this.title,
                     ct: this.content,

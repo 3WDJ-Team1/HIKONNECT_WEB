@@ -43,7 +43,7 @@
 <script>
     export default {
         mounted: function () {
-            let uri = 'http://localhost:8000/api/user/' + sessionStorage.getItem('uuid');
+            let uri = Laravel.host + '/api/user/' + sessionStorage.getItem('uuid');
             this.axios.get(uri, this.item).then((response) => {
                 this.item.imageSrc =  response.data;
             })
@@ -100,7 +100,7 @@
                 reader.readAsDataURL(files[0]);
             },
             update: function() {
-                let uri = 'http://localhost:8000/api/user/' + sessionStorage.getItem('uuid');
+                let uri = Laravel.host + '/api/user/' + sessionStorage.getItem('uuid');
                 if(this.item.idv == "" || this.item.pwv == ""
                     || this.item.pwvc == "" || this.item.nn == "") {
                     alert('값이 비어있습니다');

@@ -36,7 +36,7 @@
                 mountain_name: "",
                 writer: "",
                 date: "",
-                httpAddr: "http://localhost:8000"
+                httpAddr: Laravel.host
             }
         },
         methods:    {

@@ -15,7 +15,7 @@
     export default {
         method: {
             input: function()   {
-                this.axios.post('http://localhost:8000/list')
+                this.axios.post(Laravel.host + '/list')
                     .then(response => {
                         console.log(response.data);
                     })

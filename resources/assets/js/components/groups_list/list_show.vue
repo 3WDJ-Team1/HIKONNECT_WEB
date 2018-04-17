@@ -39,7 +39,7 @@
                 },
                 list_num        : 0,
                 list            : [],
-                HttpAddr        : "http://localhost:8000",
+                HttpAddr        : Laravel.host,
                 toGroupDetail   : '/group',
             };
         },
