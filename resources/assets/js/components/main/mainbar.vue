@@ -7,7 +7,6 @@
                 </div>
                 <div>
                     <ul class="nav navbar-nav">
-
                         <li><router-link :to ="{ name: 'test'}">공지사항</router-link></li>
                         <li><router-link :to="{ name : '#'}">그룹방 조회 & 생성</router-link></li>
                         <li><router-link :to="{ name : '#'}">나의 그룹</router-link></li>

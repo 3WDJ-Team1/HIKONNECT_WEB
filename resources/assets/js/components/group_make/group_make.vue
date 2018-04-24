@@ -11,18 +11,13 @@
                 @selected       ="addDistributionGroup"
                 style           ="width: 200px">
         </autocomplete>
-        <b-btn
-            v-b-modal.modal1
-            @click="initMap">지도보기
-        </b-btn>
-        <b-btn
-            v-b-modal.modal1
-            @click="initMap">경로 초기화
-        </b-btn>
-        <div
-            id="map"
-            style="height: 500px">
-        </div>
+        <vue-modaltor  :visible="open" @hide="hideModal">
+            <div
+                    id="map"
+                    style="height: 600px">
+            </div>
+        </vue-modaltor>
+        <b-btn @click="initMap">지도보기</b-btn>
     </div>
 </template>
 
@@ -33,6 +28,8 @@
     export default {
         data() {
             return {
+                open: false,
+                flag: false,
                 // 산 코드
                 mountain_num    : "",
                 // 등산 경로마다 지도에 찍기 위한 속성 적용
@@ -47,6 +44,7 @@
         methods: {
             ///////////////////////////////////////// 지도 api
             initMap() {
+                this.open = true;
                 // 지도의 중간지점
                 var mountain_center = '';
                 // 산 코스를 담을 배열
@@ -122,10 +120,10 @@
                                     let fir_lat = flightPlanCoordinates[i][0].lat;
                                     let fir_lng = flightPlanCoordinates[i][0].lng;
 
-                                    // 현재 경로의 가장 뒤 지점의 lat, lng 
+                                    // 현재 경로의 가장 뒤 지점의 lat, lng
                                     let end_lat = flightPlanCoordinates[i][flightPlanCoordinates[i].length - 1].lat;
                                     let end_lng = flightPlanCoordinates[i][flightPlanCoordinates[i].length - 1].lng;
-                                    
+
                                     // 경로 선택 시 이어지지 않으면 에러 발생
                                     let alert_mes   = true;
                                     let alert_mes_r = true;
@@ -333,6 +331,9 @@
             // pull autocomplete data
             distributionGroupsEndpoint(n) {
                 return Laravel.host + '/api/testing/' + n;
+            },
+            hideModal() {
+                this.open = false;
             },
             // drop down이 보여지도록
             addDistributionGroup(group) {

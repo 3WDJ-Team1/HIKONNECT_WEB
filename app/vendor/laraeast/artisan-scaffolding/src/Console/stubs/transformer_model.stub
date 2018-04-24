@@ -1,0 +1,21 @@
+<?php
+
+namespace DummyNamespace;
+
+use Laraeast\Artisan\Scaffolding\Transformers\Transformer;
+
+class DummyClass extends Transformer
+{
+    /**
+	 * Transform a DummyModelVariable instance.
+	 *
+	 * @param \DummyFullModelClass $DummyModelVariable
+	 * @return array
+	 */
+	public function model($DummyModelVariable)
+	{
+		return [
+			//
+		];
+	}
+}

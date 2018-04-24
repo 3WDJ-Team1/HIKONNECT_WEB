@@ -1,0 +1,7 @@
+.idea
+vendor
+build/log
+build/docs
+build/dist
+tmp
+package.xml

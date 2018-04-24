@@ -26,6 +26,13 @@ Vue.use(BootstrapVue);
 import SweetModal   from 'sweet-modal-vue/src/plugin.js';
 Vue.use(SweetModal);
 
+
+import VueModalTor from 'vue-modaltor'
+Vue.use(VueModalTor)
+
+
+
+
 // vuetify
 import Vuetify      from 'vuetify';
 Vue.use(Vuetify);

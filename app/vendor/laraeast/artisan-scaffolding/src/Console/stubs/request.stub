@@ -1,0 +1,78 @@
+<?php
+
+namespace DummyNamespace;
+
+use Laraeast\Artisan\Scaffolding\Requests\FormRequest;
+
+class DummyClass extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules for get method that apply to the request.
+     *
+     * @return array
+     */
+    public function getRules()
+    {
+        return [];
+    }
+
+    /**
+     * Get the validation rules for post method that apply to the request.
+     *
+     * @return array
+     */
+    public function postRules()
+    {
+        return [];
+    }
+
+    /**
+     * Get the validation rules for put method that apply to the request.
+     *
+     * @return array
+     */
+    public function putRules()
+    {
+        return [];
+    }
+
+    /**
+     * Get the validation rules for patch method that apply to the request.
+     *
+     * @return array
+     */
+    public function patchRules()
+    {
+        return [];
+    }
+
+    /**
+     * Get the validation rules for delete method that apply to the request.
+     *
+     * @return array
+     */
+    public function deleteRules()
+    {
+        return [];
+    }
+
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [];
+    }
+}

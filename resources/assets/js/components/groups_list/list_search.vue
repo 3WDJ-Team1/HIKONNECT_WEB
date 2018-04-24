@@ -58,22 +58,5 @@
     }
 </script>
 <style>
-    /* .input-group > .input-group-prepend > .btn, .input-group > .input-group-prepend > .input-group-text, .input-group > .input-group-append:not(:last-child) > .btn, .input-group > .input-group-append:not(:last-child) > .input-group-text, .input-group > .input-group-append:last-child > .btn:not(:last-child):not(.dropdown-toggle), .input-group > .input-group-append:last-child > .input-group-text:not(:last-child)   {
-        padding-right: 20px;
-    }
-    .serch_option  {
-        background-color: #ccd0d2;
-    }
-    ul  {
-        list-style:none;
-    }
-    li  {
-        float: left;
-    }
-     .dropdown-menu a  {
-         height: 400px;
-         font-size: 12px;
-         display: inline;
-     } */
 </style>
 

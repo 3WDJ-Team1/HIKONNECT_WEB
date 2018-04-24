@@ -234,9 +234,16 @@
                     text: 'JOIN HIKING GROUP',
                     path: '/list'
                 },
-            ],
-            items2: [
-                
+                {
+                    icon: 'account_box',
+                    text: 'MY PAGE',
+                    path: '/mypage'
+                },
+                {
+                    icon: 'group',
+                    text: 'MY GROUPS',
+                    path: '/'
+                }
             ],
             modalErrorMsg: "",
             isLogined: false

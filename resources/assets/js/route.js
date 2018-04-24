@@ -42,6 +42,9 @@ import GroupMemberDetail    from './components/group_menu/group_member/GroupMemb
 // wating member list
 import WaitingMemberList     from './components/group_menu/group_member/WaitingMemberList.vue';
 
+
+import goo from './components/goo.vue';
+
 // routing structure
 const routes = [
     // main page

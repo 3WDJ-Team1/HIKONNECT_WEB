@@ -22,6 +22,13 @@
             </router-link>
             <!-- <b-button style="width: 20em" href="http://localhost:8000/#/make">그룹페이지로 이동</b-button> -->
             <b-button style="width: 80px" @click="joinGroup(item.uuid)">등산 참가</b-button>
+            <router-link
+                    tag="b-button"
+                    style="width: 20em"
+                    :to="toGroupDetail + '/' + item.uuid"
+            >
+                수정하기
+            </router-link>
         </div>
         <infinite-loading @infinite="infiniteHandler"></infinite-loading>
     </v-container>

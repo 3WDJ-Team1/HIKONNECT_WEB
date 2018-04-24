@@ -1,0 +1,70 @@
+<?php
+
+namespace DummyNamespace;
+
+use DummyRootNamespaceUser;
+use NamespaceDocDummyModel;
+use Illuminate\Auth\Access\HandlesAuthorization;
+
+class DummyClass
+{
+    use HandlesAuthorization;
+
+    /**
+	 * Determine whether the user can view dummyPluralModel list.
+	 *
+	 * @param  \DummyRootNamespaceUser  $DummyUserVariable
+	 * @return bool
+	 */
+	public function listing(User $DummyUserVariable)
+	{
+		//
+	}
+
+    /**
+     * Determine whether the user can view the dummyModel.
+     *
+     * @param  \DummyRootNamespaceUser  $DummyUserVariable
+     * @param  \NamespaceDocDummyModel  $dummyModel
+     * @return bool
+     */
+    public function view(User $DummyUserVariable, DummyModel $dummyModel)
+    {
+        //
+    }
+
+    /**
+     * Determine whether the user can create dummyPluralModel.
+     *
+     * @param  \DummyRootNamespaceUser  $DummyUserVariable
+     * @return bool
+     */
+    public function create(User $DummyUserVariable)
+    {
+        //
+    }
+
+    /**
+     * Determine whether the user can update the dummyModel.
+     *
+     * @param  \DummyRootNamespaceUser  $DummyUserVariable
+     * @param  \NamespaceDocDummyModel  $dummyModel
+     * @return bool
+     */
+    public function update(User $DummyUserVariable, DummyModel $dummyModel)
+    {
+        //
+    }
+
+    /**
+     * Determine whether the user can delete the dummyModel.
+     *
+     * @param  \DummyRootNamespaceUser  $DummyUserVariable
+     * @param  \NamespaceDocDummyModel  $dummyModel
+     * @return bool
+     */
+    public function delete(User $DummyUserVariable, DummyModel $dummyModel)
+    {
+        //
+    }
+}

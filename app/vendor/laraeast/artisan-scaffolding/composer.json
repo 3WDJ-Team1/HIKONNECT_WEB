@@ -1,0 +1,31 @@
+{
+    "name": "laraeast/artisan-scaffolding",
+    "type": "package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ahmed Fathy",
+            "email": "aliraqi.dev@gmail.com"
+        },
+        {
+            "name": "Sven Luijten",
+            "email": "svenluijten1995@gmail.com",
+            "homepage": "https://svenluijten.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Laraeast\\Artisan\\Scaffolding\\": "src/"
+        },
+        "files": [
+            "src/Support/helpers.php"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Laraeast\\Artisan\\Scaffolding\\Providers\\ServiceProvider"
+            ]
+        }
+    }
+}
