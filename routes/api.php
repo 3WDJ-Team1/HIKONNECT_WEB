@@ -10,17 +10,32 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::middleware('auth:api')
-->get(
+Route::middleware(
+    'auth:api'
+)->get(
     '/user', 
     function (Request $request) {
         return $request->user();
     }
 );
 
+Route::get(
+    'testing/{key?}', 
+    function ($mnt_name) {
+        return  DB::table('mountain')
+            ->where('mnt_name', 'LIKE', "%" . $mnt_name . "%")
+            ->get();
+    }
+);
+
 Route::group(
     [], 
     function () {
+        // Radios Routing
+        Route::get(
+            'radioGram/{groupId}',
+            'RadioGramContoller@getGroupRadios'
+        )->name('radios');
         // Notification Routings
         Route::resource(
             'notice', 
@@ -30,6 +45,10 @@ Route::group(
             'notice/{groupUuid}/{pageIndex?}/{perPage?}', 
             'NoticeController@index'
         )->name('noticePagination');
+        Route::delete(
+            'notice', 
+            'NoticeController@destroy'
+        )->name('deleteNotice');
 
         // Hiking group Routings
         Route::resource(
@@ -37,9 +56,13 @@ Route::group(
             'HikingGroupController'
         );
         Route::get(
-            'groupList/{idx}/{perIdx}/{orderBy?}',
+            'groupList/{idx}/{perIdx}/{mntName}/{writer}/{date}',
             'HikingGroupController@getGroupList'
         )->name('groupList');
+        Route::get(
+            'isOwner/{groupId}/{userId}',
+            'HikingGroupController@isOwner'
+        )->name('isOwner');
 
         // Entry info Routings
         Route::post(
@@ -83,7 +106,10 @@ Route::group(
             '/loginprocess', 
             'LoginController@loginprocess'
         )->name('loginprocess');
-
+        Route::post(
+            '/login_app',
+            'LoginController@login_app'
+        )->name('login_app');
         /**
          * Login process using Socialite
          * 
@@ -119,6 +145,45 @@ Route::group(
             'main/{id}', 
             'MainController@get_Announce_Count'
         )->name('Announce_Count');
+
+        // 위치 메모 테스팅
+        Route::resource(
+            '/test',
+            'testcontroller'
+        );
+        Route::post(
+            '/getlm',
+            'testcontroller@get_Memo_Info'
+        )->name('Get Memo Information');
+        Route::post(
+            '/send',
+            'FCMController@pushNotification'
+        )->name('SendNotification');
+        Route::post(
+            '/position',
+            'testcontroller@send_image_path'
+        )->name('sendimage');
+        // 위치 메모 테스팅 end
+        Route::resource(
+            '/groupPlan',
+            'GroupPlanController'
+        );
+        Route::get(
+            '/hikingPlan/{id}',
+            'HikingPlanController@getGroupPlan'
+        )->name('getGroupPlan');
+        Route::resource(
+            '/test',
+            'testcontroller'
+        );
+        Route::post(
+            '/getlm',
+            'testcontroller@get_Memo_Info'
+        )->name('Get Memo Information');
+        Route::post(
+            '/send',
+            'FCMController@pushNotification'
+        )->name('SendNotification');
     }
 );
 

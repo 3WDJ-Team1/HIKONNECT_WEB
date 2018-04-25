@@ -14,7 +14,6 @@
             <v-text-field
                 name        ="notice_title"
                 v-model     ="title"
-                id          ="notice_input_title"
                 :rules      ="titleRules"
                 required
             ></v-text-field>
@@ -27,7 +26,6 @@
                 :rules      ="textRules"
                 textarea
                 rows        ="12"
-                id          ="notice_input_textarea"
                 required
             ></v-text-field>
             <!-- v-btn      button for submit -->
@@ -78,24 +76,26 @@
                 switch(this.mode) {
                     case "edit":
                         if(this.$refs.form.validate()) {
-                            axios.patch(this$HttpAddr + '/notice/' + this.noticeUuid, {
+                            axios.patch(this.$HttpAddr + '/notice/' + this.noticeUuid, {
                                 // nickname: this.nickname,
-                                writer  :'', // user's uuid,
+                                writer  : sessionStorage.uuid, // user's uuid,
                                 title   : this.title,
                                 content : this.text
                             });
                             this.$parent.close();
+                            this.$EventBus.$emit('newNoticeWrited', true);
                         }
                     break;
                     case "write":
                         if(this.$refs.form.validate()) {
                             axios.post(this.$HttpAddr + '/notice', {
                                 // nickname: this.nickname,
-                                writer  :'', // user's uuid,
+                                writer  : sessionStorage.uuid, // user's uuid,
                                 title   : this.title,
                                 content : this.text
                             })
                             this.$parent.close();
+                            this.$EventBus.$emit('newNoticeWrited', true);
                         }
                     break;
                 }
@@ -121,14 +121,14 @@
 </script>
 
 <style>
-    #notice_input_title {
+    /* #notice_input_title {
         border-bottom: 1px solid gray;
-    }
+    } */
 
     #notice_input_textarea {
-        border: 1px solid gray;
+        /* border: 1px solid gray; */
     }
     #notice_input_textarea:focus {
-        border: 2px solid darkslategrey;
+        /* border: 2px solid darkslategrey; */
     }
 </style>

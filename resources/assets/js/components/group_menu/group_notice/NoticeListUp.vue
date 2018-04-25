@@ -8,19 +8,21 @@
     <!-- @div#group_notice  the wrapper of notice list -->
     <div class="text-center" id="group_notice">
         <!-- @router-view   'write' floating button -->
-        <router-view name="write"></router-view>
+        <router-view
+            v-if="isOwner"
+            name="write"></router-view>
         <!-- @div           notice list area -->
         <div>
             <!-- @div       A card of notice
                             notice div are formed automatically by data.notices -->
-            <div v-for="notice in notices">
+            <div v-for="notice in notices" :key="notice.uuid">
                 <!-- @div   the wrapper of notice card -->
                 <div class="card_wrapper">
                     <!-- @div   The title and author of a notice
                                 if you click this, b-collapse will be shown. -->
                     <div v-b-toggle ="'n' + notice.uuid" class="m-1">
-                        <h3 class   ="card-title">{{ notice.title }}</h3>
-                        <p  class   ="card-text">writer : {{ notice.nickname }} | hits : {{ notice.hits }}</p>
+                        <h3 class="card-title">{{ notice.title }}</h3>
+                        <p  class="card-text">writer : {{ notice.nickname }} | hits : {{ notice.hits }}</p>
                     
                     </div>
                     <!-- @div(b-collapse)   The contents of a notice. -->
@@ -31,21 +33,30 @@
                         <!-- @router-view   'delete' button component
                                             porpsNotice will send notice.uuid to children components -->
                                             
-                        <router-view name="delete" :propsNotice="notice"></router-view>
+                        <router-view
+                            name="delete"
+                            :propsNotice="notice"
+                            v-if="isOwner"></router-view>
                         <!-- @router-view   'modify(edit)' button component
                                             porpsNotice will send notice.uuid to children components -->
-                        <router-view name="modify" :propsNotice="notice"></router-view>
+                        <router-view
+                            name="modify"
+                            :propsNotice="notice"
+                            v-if="isOwner"></router-view>
                     </b-collapse>
                 </div>
             </div>
         </div>
-        <!-- @sync-loader   An animation will be shown while the infinite-loading -->
-        <sync-loader class="loader" :color="loader.color" :loading="loader.loading" :margin="loader.margin" :size="loader.size"></sync-loader>
+        <infinite-loading @infinite="infiniteHandler" spinner="bubbles"></infinite-loading>
     </div>
 </template>
 
 <script>
+    import InfiniteLoading from 'vue-infinite-loading';
     export default {
+        components: {
+            InfiniteLoading,
+        },
         data : ()  => ({ 
             /**
              * groupName    (String)        the name of group
@@ -64,31 +75,26 @@
             notices     : [
                 // the type of notices is 'object' certainly.
             ],
-            page        : 1,
+            page        : 0,
             size        : 5,
             bottom      : false,
             loader      : {
-                loading: true,
-                color: "#4df1e1",
-                margin: "2px",
-                size: "10px"
-            }
+                loading : true,
+                color   : "#4df1e1",
+                margin  : "2px",
+                size    : "10px"
+            },
+            groupId: "",
+            isOwner: false,
         }),
         // When this component was created,
         created() {
-            // add event listener for 'scroll' --> for infinite loading
-            window.addEventListener('scroll', () => {
-                // store value(boolean) about 'is bottom Visible'
-                this.bottom = this.bottomVisible()
-            });
-            // request
-            axios.get(this.$HttpAddr + '/notice/0/10')
-                .then(response => {
-                    // update this.notices with response data
-                    this.notices = response.data;
-                    // make icon hidden
-                    this.loader.loading = false;
-                });
+            // url에서 그룹 아이디 받아오기
+            this.groupId = this.$route.params.groupid;
+            this.$EventBus.$on('newNoticeWrited', () => {
+                this.$router.push('/group/' + this.groupId);
+            })
+            this.isGroupOwner();
         },
         methods: {
             /**
@@ -107,24 +113,28 @@
              * @function    addNotice
              * @brief       send http request to server, and update this.notice
              */
-            addNotices() {
-                this.loader.loading     = true;
-                let url                 = this.$HttpAddr + '/notice/' + ((this.page - 1) * this.size + 10)
+            infiniteHandler($state) {
+                let url = this.$HttpAddr + '/notice/' + this.groupId + "/" + ((this.page - 1) * this.size + 10)
                                           + '/' + (this.page * this.size + 10);
-                
                 axios.get(url)
                 .then(response => {
-                    if (response.data.length == 0) {
-                        this.loader.loading = false;
-                        return;
+                    if (response) {
+                        this.notices = this.notices.concat(response.data);
+                        $state.loaded();
+                        // 백엔드에서 넘어오는 값에 같은 값이 잇음!
+                    }else {
+                        $state.complete();
                     }
-                    for (let i = 0 ; i < this.size ; i++) {
-                        this.notices.push(response.data[i]);
-                    }
-                    this.loader.loading = false;
                 });
                 this.page++;
-            }
+            },
+            isGroupOwner() {
+                axios.get(this.$HttpAddr + '/isOwner/' + this.groupId + "/" + sessionStorage.getItem('uuid'))
+                .then( response => {
+                    this.$EventBus.$emit('isOwner', response); 
+                    this.isOwner = response.data;
+                });
+            },
         },
         watch: {
             /**
@@ -133,10 +143,8 @@
              * @brief       watch the value of this.bottom.
              *              if the value is true, addNotice function is invoked.
              */
-            bottom(bottom) {
-                if (bottom) {
-                    this.addNotices();
-                }
+            '$route' (to, from) {
+                this.groupId = this.$route.params.groupid;
             }
         }
     }

@@ -249,6 +249,13 @@
                     this.isTooltipShown = true;
                 }
             }
+        },
+        created() {
+            this.$EventBus.$on("openDrawer", (value) => {
+                if (value !== "login") {
+                    this.clear();
+                }
+            });
         }
     }
 </script>

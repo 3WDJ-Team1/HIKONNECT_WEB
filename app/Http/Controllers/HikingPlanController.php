@@ -22,4 +22,8 @@ class HikingPlanController extends Controller
     {
         return $this->_model_HikingPlan->xmlToJson();
     }
+
+    public function getGroupPlan($id) {
+        return $this->_model_HikingPlan->getPlanPath($id);
+    }
 }

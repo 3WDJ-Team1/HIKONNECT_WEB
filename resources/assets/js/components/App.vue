@@ -4,19 +4,18 @@
         <!-- 최상단 이동 버튼 -->
         <a name="#"></a>
         <v-btn
-              color="red"
-              dark
-              midiuem
-              fixed
-              right
-              bottom
-              fab
-              href="#">
+            color="grey darken-4"
+            dark
+            midiuem
+            fixed
+            right
+            bottom
+            fab
+            href="#">
                 <v-icon>keyboard_arrow_up</v-icon>
         </v-btn>
         <!-- #최상단 이동 버튼 -->
         <v-navigation-drawer
-            fixed
             v-model="drawerRight"
             right
             app
@@ -31,14 +30,44 @@
             app      
             clipped  
             class="nav-drawer">
+            <router-link
+                tag="v-layout"
+                :to="mypageRoute.path"
+                v-if="isLogined"
+                class="my-page-route">
+                <v-flex
+                    xs4
+                    sm4
+                    md4>
+                    <v-avatar
+                        class="grey lighten-4"
+                        size="56"
+                        slot="activator">
+                        <img :src="mypageRoute.imagePath" alt="avatar"/>
+                    </v-avatar>
+                </v-flex>
+                <v-flex 
+                    xs6
+                    sm6
+                    md6
+                    style="line-height: 300%; font-size: 1.5em;">
+                    {{ userNickname }}
+                </v-flex>
+                <v-flex
+                    xs2
+                    sm2
+                    md2
+                    style="margin-top:5%">
+                    <v-icon x-large>keyboard_arrow_right</v-icon>
+                </v-flex>
+            </router-link>
         <v-list
             dense>
             <router-link
                 tag="v-list-tile"
                 v-for="item in items"
                 :key="item.text"
-                :to="item.path"
-                v-if="item.text == 'MY PAGE' ? isLogined : true">
+                :to="item.path">
                 <v-list-tile-action>
                     <v-icon>{{ item.icon }}</v-icon>
                 </v-list-tile-action>
@@ -49,16 +78,16 @@
                 </v-list-tile-content>
             </router-link>
             <v-subheader
-                v-if="isLogined"
-                class="mt-3 grey--text text--darken-1">
+                v-if    ="isLogined"
+                class   ="mt-3 grey--text text--darken-1">
                 <v-icon color="grey darken-1">star</v-icon>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 BOOK MARKS
             </v-subheader>
             <v-list>
             <v-list-tile 
-                v-if="isLogined"
-                v-for="item in items2"
-                :key="item.text"
+                v-if    ="isLogined"
+                v-for   ="item in items2"
+                :key    ="item.text"
                 avatar>
                 <v-list-tile-avatar>
                 <img :src="`https://randomuser.me/api/portraits/men/${item.picture}.jpg`" alt="">
@@ -69,12 +98,13 @@
         </v-list>
         </v-navigation-drawer>
         <v-toolbar
-            color="teal lighten-1"
+            color="blue-grey darken-4"
             fixed
             clipped-left
             app
             dark
-            flat>
+            flat
+            scroll-off-screen>
         <v-btn icon  @click.stop="drawer = !drawer">
             <v-icon style="margin-bottom: 0.5em;">menu</v-icon>
         </v-btn>
@@ -95,11 +125,11 @@
             justify-end
             style="padding: 0;">
             <v-btn
-                v-if="!isLogined"
-                style="padding: 0; background-color: transparent;"
+                v-if        ="!isLogined"
+                style       ="padding: 0; background-color: transparent;"
                 flat
-                @click.stop="drawerRight = !drawerRight"
-                @click="changeDrawerRightMode('login')">
+                @click.stop ="drawerRight = !drawerRight"
+                @click      ="changeDrawerRightMode('login')">
                 <v-icon color="white">lock</v-icon>
                 SIGN IN
             </v-btn>
@@ -135,17 +165,17 @@
             </v-flex>
             </v-layout>
             <sweet-modal
-                icon="error"
-                title="ERROR"
+                icon    ="error"
+                title   ="ERROR"
                 blocking
-                ref="pModal">
+                ref     ="pModal">
                 {{ modalErrorMsg }}
             </sweet-modal>
             <sweet-modal
-                icon="success"
-                title="SUCCESS"
+                icon    ="success"
+                title   ="SUCCESS"
                 blocking
-                ref="cModal">
+                ref     ="cModal">
                 Complited!
             </sweet-modal>
         </v-container>
@@ -169,6 +199,12 @@
     body v-app {
         overflow: hidden;
     }
+    .my-page-route {
+        padding: 3% 10%;
+    }
+    .my-page-route:hover {
+        background-color: rgb(226, 226, 226);
+    }
 </style>
 
 <script>
@@ -177,9 +213,16 @@
 
     export default{
         data: () => ({
+            userNickname: sessionStorage.getItem('nickname'),
             drawer: false,
             drawerRight: false,
             drawerRightMode: 'login',
+            mypageRoute : {
+                    icon: 'account_circle',
+                    text: 'MY PAGE',
+                    path: '/mypage',
+                    imagePath: sessionStorage.getItem('image_path')
+            },
             items: [
                 { 
                     icon: 'home',
@@ -191,11 +234,6 @@
                     text: 'JOIN HIKING GROUP',
                     path: '/list'
                 },
-                {
-                    icon: 'account_circle',
-                    text: 'MY PAGE',
-                    path: '/mypage'
-                }
             ],
             items2: [
                 
@@ -210,6 +248,7 @@
         methods: {
             changeDrawerRightMode(argValue) {
                 this.drawerRightMode = argValue;
+                this.$EventBus.$emit("openDrawer", this.drawerRightMode);
             },
             goToHome() {
                 location.href='/#/';
@@ -241,8 +280,11 @@
             })
             this.$EventBus.$on('isLogined', (v) => {
                 this.isLogined = true;
+                this.userNickname = sessionStorage.getItem('nickname');
             })
             this.isUserLogined();
+            this.userNickname = sessionStorage.getItem('nickname');
+            this.mypageRoute.imagePath = sessionStorage.getItem('image_path');
         },
     }
 </script>

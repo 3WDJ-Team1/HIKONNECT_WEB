@@ -68,4 +68,11 @@ class HikingPlan extends Model
 
         return var_dump($mountainPaths['features'][0]['PMNTN_NM']);
     }
+
+    public function getPlanPath($groupUuid)
+    {
+        return HikingPlan::select('start_date', 'starting_point')
+                ->where('hiking_group', '=', $groupUuid)
+                ->get();
+    }
 }

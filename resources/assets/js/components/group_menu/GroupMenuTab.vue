@@ -7,6 +7,19 @@
 <template>
     <!-- @div       wrapper of this component -->
     <div>
+        <v-btn
+            style   ="margin-bottom: 5%;"
+            color   ="red"
+            dark
+            midiuem
+            fixed
+            right
+            bottom
+            fab
+            @click  ="enterGroup()"
+            v-if    ="isLogined">
+            <v-icon>person_add</v-icon>
+        </v-btn>
         <!-- @v-tabs    there is information of tabs here -->
         <v-tabs
             icons-and-text
@@ -65,7 +78,41 @@
 
 <script>
     export default {
-        
+        data: () => ({
+            groupId     : '',
+            isLogined   : false,
+        }),
+        created() {
+            this.groupId = this.$route.params.groupid;
+            this.$EventBus.$on('isLogined', () => {
+                this.isLogined = true;
+            });
+            if (sessionStorage.length != 0)
+                this.isLogined = true;
+        }
+        ,
+        methods: {
+            enterGroup() {
+                axios.post(this.$HttpAddr + '/entryGroup', {
+                    userUuid    : sessionStorage.uuid,
+                    groupUuid   : this.groupId
+                })
+                .then(response => {
+                    if (response) {
+                        this.$EventBus.$emit('complitedModalOpen', true);
+                        this.$EventBus.$emit('reloadMember', true);
+                    } else {
+                        this.$EventBus.$emit('errorModalOpen', '잘못된 접근입니다.');
+                    }
+                    location.reload();
+                });
+            }
+        },
+        watch: {
+            '$route' (to, from) {
+                this.groupUuid = this.$route.params.groupid;
+            }
+        }
     }
 </script>
 

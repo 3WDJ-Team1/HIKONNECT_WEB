@@ -1,15 +1,15 @@
 <template>
     <div id='cc' class='chart'>
         <h1>월별 등산 그래프</h1>
-        <label>년도 선택</label>
-        <select v-model="item.year" @change="graph" id="year">
+        <label><h3>년도 선택:</h3></label>
+        <select v-model="item.year" @change="graph" id="year" >
             <option>2018</option>
             <option>2017</option>
             <option>2016</option>
             <option>2015</option>
         </select>
         <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
-            <history></history>
+        <history></history>
 
         <router-link  :to="{ name: 'mypage' }" class = "btn btn-primary"> 뒤로</router-link>
         <chart-axis :data='chartData' id="a"></chart-axis>
@@ -20,8 +20,6 @@
     import history from './history.vue';
     import { svgArea, svgLine, svgScatter } from 'd2b'
     import { ChartAxis } from 'vue-d2b'
-
-
     export default {
         mounted:
             function () {
@@ -29,38 +27,36 @@
             }
         ,
         data() {
-          return {
-              item: {
-                  year : sessionStorage.getItem('year')
-              },
-              chartData: {
-                  sets: [
-                      {
-
-                          generators: [svgArea(), svgLine(), svgScatter()],
-                          graphs: [
-                              {
-                                  values: [
-                                      {x: 1, y: sessionStorage.getItem('1')*10/10},
-                                      {x: 2, y: sessionStorage.getItem('2')*10/10},
-                                      {x: 3, y: sessionStorage.getItem('3')*10/10},
-                                      {x: 4, y: sessionStorage.getItem('4')*10/10},
-                                      {x: 5, y: sessionStorage.getItem('5')*10/10},
-                                      {x: 6, y: sessionStorage.getItem('6')*10/10},
-                                      {x: 7, y: sessionStorage.getItem('7')*10/10},
-                                      {x: 8, y: sessionStorage.getItem('8')*10/10},
-                                      {x: 9, y: sessionStorage.getItem('9')*10/10},
-                                      {x: 10, y: sessionStorage.getItem('10')*10/10},
-                                      {x: 11, y: sessionStorage.getItem('11')*10/10},
-                                      {x: 12, y: sessionStorage.getItem('12')*10/10}
-
-                                  ]
-                              }
-                          ]
-                      }
-                  ]
-              },
-          }
+            return {
+                item: {
+                    year : sessionStorage.getItem('year')
+                },
+                chartData: {
+                    sets: [
+                        {
+                            generators: [svgArea(), svgLine(), svgScatter()],
+                            graphs: [
+                                {
+                                    values: [
+                                        {x: 1, y: sessionStorage.getItem('1')*10/10},
+                                        {x: 2, y: sessionStorage.getItem('2')*10/10},
+                                        {x: 3, y: sessionStorage.getItem('3')*10/10},
+                                        {x: 4, y: sessionStorage.getItem('4')*10/10},
+                                        {x: 5, y: sessionStorage.getItem('5')*10/10},
+                                        {x: 6, y: sessionStorage.getItem('6')*10/10},
+                                        {x: 7, y: sessionStorage.getItem('7')*10/10},
+                                        {x: 8, y: sessionStorage.getItem('8')*10/10},
+                                        {x: 9, y: sessionStorage.getItem('9')*10/10},
+                                        {x: 10, y: sessionStorage.getItem('10')*10/10},
+                                        {x: 11, y: sessionStorage.getItem('11')*10/10},
+                                        {x: 12, y: sessionStorage.getItem('12')*10/10}
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+            }
         },
         components: {
             'history'   : history,
@@ -86,11 +82,8 @@
                 sessionStorage.setItem('11',datavalue[10]);
                 sessionStorage.setItem('12',datavalue[11]);
                 this.$router.push({name : 'update'})
-
-
-
-            });
-        }
+                });
+            }
         }
     }
 </script>

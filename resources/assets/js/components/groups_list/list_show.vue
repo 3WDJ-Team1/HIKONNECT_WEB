@@ -1,17 +1,30 @@
 <template>
-    <div class="container">
-        <div class="card" v-for="group_information in list">
+    <v-container>
+        <div class="card" v-for="item in list" :key="item.owner">
             <div class="card-header">
-                {{ group_information.title }}
+                <h4 class="title inlineBlocks">{{ item.title }} </h4>
+                <h5>{{ item.nickname }}</h5>
             </div>
             <div class="card-body">
-                <p>{{ group_information.owner }} = 작성자</p>
+                <div class="member-count-wrapper">
+                    <div class="min_members inlineBlocks">최소인원수: {{ item.min_members }}</div>
+                    <div class="max_members inlineBlocks">최대인원수: {{ item.max_members }}</div>
+                </div>
+                <div class="end_point inlineBlocks">목적지: {{ item.end_point }}</div>
+                <div class="startdate inlineBlocks">산행일자: {{ item.start_date }}</div>
             </div>
-            <b-button style="width: 20em" href="http://localhost:8000/#/make">그룹페이지로 이동</b-button>
-            <b-button style="width: 80px" href="#">등산 참가</b-button>
+            <router-link
+                tag="b-button"
+                style="width: 20em"
+                :to="toGroupDetail + '/' + item.uuid"
+                >
+                그룹 페이지로 이동
+            </router-link>
+            <!-- <b-button style="width: 20em" href="http://localhost:8000/#/make">그룹페이지로 이동</b-button> -->
+            <b-button style="width: 80px" @click="joinGroup(item.uuid)">등산 참가</b-button>
         </div>
         <infinite-loading @infinite="infiniteHandler"></infinite-loading>
-    </div>
+    </v-container>
 </template>
 
 <script>
@@ -20,29 +33,35 @@
         data() {
             return {
                 search_imformations: {
-                    mountain_name: '',
-                    writer: '',
-                    date: ''
+                    mountain_name   : '',
+                    writer          : '',
+                    date            : ''
                 },
-                list_num    : 0,
-                list        : [],
+                list_num        : 0,
+                list            : [],
+                HttpAddr        : Laravel.host,
+                toGroupDetail   : '/group',
             };
         },
-        created: function ()
+        created()
         {
             // 이벤트 받기
             // '이벤트 명', function(받을 데이터)
-            this.$EventBus.$on('input_serch', function (mountain, write, date) {
-                this.mountain_para =  mountain;
-                this.writer = write;
-                this.date = date;
+            this.$EventBus.$on('input_search', (mountain, write, date) => {
+                this.mountain_para  =  mountain;
+                this.writer         = write;
+                this.date           = date;
             });
         },
         methods: {
+            /**
+             * 그룹 리스트 받아오기
+             * @author      Jiyoon Lee, Sungeun Kang <kasueu0814@gmail.com>
+             * @augments    $state state of infinite-loading */
             infiniteHandler($state) {
-                let url = this.$HttpAddr + '/hiking_group/' + this.list_num + '/10'
+                let url = this.HttpAddr + '/group/index/' + this.list_num;
                 axios.get(url).then(response => {
-                    if(response)    {
+                    if(response) {
                         this.list = this.list.concat(response.data);
                         $state.loaded();
                     }
@@ -51,6 +70,25 @@
                     }
                 });
                 this.list_num += 10;
+            },
+            /**
+             * 그룹 참여 쿼리를 보내는 함수
+             * @author      Sungeun Kang
+             * @augments    groupId : uuid of groups
+             */
+            joinGroup(groupId) {
+                axios.post(this.$HttpAddr + '/entryGroup', {
+                    userUuid    : sessionStorage.uuid,  // user의 uuid
+                    groupUuid   : groupId               // group의 uuid
+                })
+                .then(response => {
+                    console.log(response);
+                    if (response) {
+                        this.$EventBus.$emit('complitedModalOpen', true);
+                    } else {
+                        this.$EventBus.$emit('errorModalOpen', '잘못된 접근입니다.');
+                    }
+                });
             }
         },
         components: {
@@ -58,3 +96,15 @@
         },
     }
 </script>
+<style>
+    .inlineBlocks {
+        display: inline-block; 
+    }
+    .max_members {
+        align-self: flex-end;
+        margin-left: 3%;
+    }
+    .member-count-wrapper {
+        text-align: end;
+    }
+</style>

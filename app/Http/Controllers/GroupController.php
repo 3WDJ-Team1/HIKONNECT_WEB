@@ -15,6 +15,7 @@ use App\Models\Mountain;
      */
 class GroupController extends Controller
 {
+    private $mountain_model = null;
     private $group_model = null;
    
     /**
@@ -24,24 +25,27 @@ class GroupController extends Controller
     {
         $this->group_model = new HikingGroup();
         $this->user_model = new User();
+        // $this->mountain_model = new mountain();
     }
 
     public function testing($key)
     {
-        return $this->mountain_model
+        $value = $this->mountain_model
             ->getMountainNames($key);
+        return response()->json($value);
     }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($pageIndex)
+    public function index($pageIndex = 0, $groupName = "", $writer = "", $date = "")
     {
-        //$groupInformations  = $this->group_model->getGroupInformations($pageIndex);
-        //$countOfPeople      = $this->group_model->getCountOfPeople($pageIndex, 'default');
-        //return compact('groupInformations', 'countOfPeople');
-        return $this->group_model->getGroupInformations($pageIndex);
+        /*$groupInformations  = $this->group_model->getGroupInformations($pageIndex);
+        $writers            = $this->group_model->getWriters($pageIndex);
+        return compact('groupInformations', 'writers');*/
+        return $this->group_model
+            ->getGroupList($pageIndex, $groupName, $writer, $date);
     }
 
     /**
@@ -160,5 +164,9 @@ class GroupController extends Controller
     public function groupNotification() 
     {
         //
+    }
+
+    public function request(Request $request) {
+        return "true";
     }
 }

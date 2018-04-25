@@ -39,7 +39,8 @@ import GroupPlanCalendar    from './components/group_menu/group_plan/GroupPlanCa
 // group member list
 import GroupMemberList      from './components/group_menu/group_member/GroupMemberList.vue';
 import GroupMemberDetail    from './components/group_menu/group_member/GroupMemberDetail.vue';
-
+// wating member list
+import WaitingMemberList     from './components/group_menu/group_member/WaitingMemberList.vue';
 
 // routing structure
 const routes = [
@@ -108,7 +109,7 @@ const routes = [
         children    : [
             // tab of group menu
             {
-                path        : '/group',
+                path        : '/group/:groupid',
                 components  : {
                     notice      : NoticeListUp,
                     plan        : GroupPlan,
@@ -116,7 +117,7 @@ const routes = [
                 },
                 children: [
                     {
-                        path        : '/group',
+                        path        : '/group/:groupid',
                         components  : {
                             // write, modify, delete button of NoticeListUp
                             write   : NoticeWriteBtn,
@@ -127,13 +128,14 @@ const routes = [
                             calendar    : GroupPlanCalendar,
                             // component in GroupMemberList
                             member_detail   : GroupMemberDetail,
+                            waiting_member   : WaitingMemberList,
                         },
                         children: [
                             {
-                                path        : '/group',
+                                path        : '/group/:groupid',
                                 components  : {
                                     // inner form component of modal(NoticeWriteBtn, NoticeModifyBtn)
-                                    form : NoticeFormInside
+                                    form            : NoticeFormInside,
                                 }
                             }
                         ]
@@ -143,6 +145,32 @@ const routes = [
             
         ]
     },
+    // group menu
+    {
+        path: '/list',
+        component: groups_list,
+        children: [
+            {
+                path: '/list',
+                components: {
+                    header: list_search,
+                    body: list_show,
+                }
+            }
+        ]
+    },
+    {
+        path: '/make',
+        component: group_make_main,
+        children: [
+            {
+                path: '/make',
+                components: {
+                    make: group_make
+                }
+            }
+        ]
+    }
 ];
 
 export default routes;

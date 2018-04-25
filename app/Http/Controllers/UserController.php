@@ -211,22 +211,34 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //UserProfile Picture File Save
-        Storage::put(
-            'userprofile/' . $id . '.png',
-            $request->get('imageSrc')
-        );
-        $image_path = 'userprofile/'.$id.'.png';
-        $password = $request->get('pwv');
-        $this->usermodel->userUpdate($password, $id);
-        $this->userfilmodel->userUpdate(
-            $request,
-            $id,
-            $this->gender,
-            $this->age_group,
-            $this->scope,
-            $image_path
-        );
-        return response()->json('true');
+        // Storage::put(
+        //     'userprofile/' . $id . '.png',
+        //     $request->get('imageSrc')
+        // );
+        // $image_path = 'userprofile/'.$id.'.png';
+        // $password = $request->get('pwv');
+        // $this->usermodel->userUpdate($password,$id);
+
+        // $user_info = array([
+        //     'nickname'  => $request->get('nn'),
+        //     'phone'     => $request->get('phone'),
+        //     'scope'     => $this->scope,
+        //     'gender'    => $this->gender,
+        //     'age_group' => $this->age_group,
+        //     'image_path'=> $image_path
+        // ]);
+
+        // UserProfile::where('user',$id)
+        //     ->update([
+        //         'nickname'  => $request->get('nn'),
+        //         'phone'     => $request->get('phone'),
+        //         'scope'     => $this->scope,
+        //         'gender'    => $this->gender,
+        //         'age_group' => $this->age_group,
+        //         'image_path'=> $image_path,
+        //         'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
+        //     ]);
+        // return response()->json('true');
     }
 
     /**
@@ -252,7 +264,7 @@ class UserController extends Controller
             $profile_value = array([
                 'grade' => '동네 뒷산',
             ]);
-            return response()->json('false');
+            return response()->json($profile_value);
         } else {
             // UserGrade Setting
             $hiking_count = hiking_record::where('uuid', $id)->count();
