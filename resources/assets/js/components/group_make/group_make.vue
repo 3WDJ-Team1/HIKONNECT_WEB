@@ -29,7 +29,6 @@
         data() {
             return {
                 open: false,
-                flag: false,
                 // 산 코드
                 mountain_num    : "",
                 // 등산 경로마다 지도에 찍기 위한 속성 적용

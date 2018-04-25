@@ -12,6 +12,9 @@ import list_show            from './components/groups_list/list_show'
 import group_make           from './components/group_make/group_make'
 import group_make_main      from './components/group_make/group_make_main'
 
+// group_update
+import group_upadate        from './components/group_make/updateGroup'
+
 // notice
 import notice               from './components/notice/main'
 import notice_information   from './components/notice/notice_information'
@@ -88,6 +91,11 @@ const routes = [
         name: 'modify',
         path: '/modify',
         component: modify
+    },
+    {
+        name: 'group_update',
+        path: '/group_update/:groupid',
+        component: group_upadate
     },
     {
         name: 'graph',

@@ -245,6 +245,9 @@
                     path: '/'
                 }
             ],
+            items2: [
+
+            ],
             modalErrorMsg: "",
             isLogined: false
         }),

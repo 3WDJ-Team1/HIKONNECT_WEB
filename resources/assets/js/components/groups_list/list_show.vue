@@ -25,7 +25,7 @@
             <router-link
                     tag="b-button"
                     style="width: 20em"
-                    :to="toGroupDetail + '/' + item.uuid"
+                    :to="toUpdate + '/' + item.uuid"
             >
                 수정하기
             </router-link>
@@ -48,6 +48,7 @@
                 list            : [],
                 HttpAddr        : Laravel.host,
                 toGroupDetail   : '/group',
+                toUpdate        : '/group_update'
             };
         },
         created()

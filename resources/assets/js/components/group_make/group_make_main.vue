@@ -31,11 +31,13 @@
             </tr>
             <tr>
                 <td colspan='1'>등산 일정</td>
-                <td colspan='3'>
+                <td colspan='1.5'>
                     <datetime
                             v-model="date"
                             placeholder="산행일자">
                     </datetime>
+                </td>
+                <td colspan='1.5'>
                     <vue-timepicker
                             :format="yourFormat"
                             v-model="yourData">
@@ -81,9 +83,7 @@
         name: "group_make_main",
         data() {
             return {
-                time: 0,
-                duration: 5000,
-                yourFormat: 'hh:mm:ss',
+                yourFormat: 'HH:mm:ss',
                 title: '',
                 content: '',
                 date: '',
@@ -108,18 +108,6 @@
             });
         },
         methods: {
-            beforeOpen(event) {
-                console.log(event)
-                // Set the opening time of the modal
-                this.time = Date.now()
-            },
-            beforeClose(event) {
-                console.log(event)
-                // If modal was open less then 5000 ms - prevent closing it
-                if (this.time + this.duration < Date.now()) {
-                    event.stop()
-                }
-            },
             sendData() {
                 axios.post(Laravel.host + '/group/store', {
                     owner: sessionStorage.getItem('uuid')
