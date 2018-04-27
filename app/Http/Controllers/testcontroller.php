@@ -181,6 +181,7 @@ class testcontroller extends Controller
             'latitude'      => $request->get('lat'),
             'longitude'     => $request->get('lng')
         ]);*/
+
         $userid = user_position::where('user',$request->get('id'))->first();
         try{
             if($userid == null) {
