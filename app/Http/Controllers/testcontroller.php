@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\entry_info;
 use App\Models\location_memo;
 use App\Models\test;
+use App\Models\user_position;
 use App\User;
 use App\User_Profile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Mockery\Exception;
 
 class testcontroller extends Controller
 {
@@ -65,7 +67,11 @@ class testcontroller extends Controller
             'created_at'    => $request->get('created_at'),
             'updated_at'    => $request->get('updated_at')
         ]);
-        echo $uuid;
+
+
+        $result = location_memo::where('hiking_group',$hiking_group)->get()->toArray();
+
+        print json_encode($result);
     }
 
     /**
@@ -127,5 +133,39 @@ class testcontroller extends Controller
         where('longitude',$request->get('lng'))->get();
 
         print json_encode($path);
+    }
+    public function store_send(Request $request) {
+        $uuid = User::where('id',$request->get('id'))->select('uuid')->get()[0]['uuid'];
+        $hiking_group = entry_info::where('user',$uuid)->select('hiking_group')->get()[0]['hiking_group'];
+        /*user_position::insert([
+            'uuid'          => '',
+            'user'          => $uuid,
+            'hiking_group'  => $hiking_group,
+            'latitude'      => $request->get('lat'),
+            'longitude'     => $request->get('lng')
+        ]);*/
+        $userid = user_position::where('user',$request->get('id'))->first();
+        try{
+            if($userid == null) {
+                user_position::insert([
+                    'uuid'          => '',
+                    'user'          => $uuid,
+                    'hiking_group'  => $hiking_group,
+                    'latitude'      => $request->get('lat'),
+                    'longitude'     => $request->get('lng')
+                ]);
+            }
+            else
+                throw new Exception("ASdasd");
+
+        }catch (\Exception $e) {
+            user_position::where('user',$request->get('id'))->update([
+                'latitude'      => $request->get('lat'),
+                'longitude'     => $request->get('lng')
+            ]);
+        }
+
+        $result = user_position::where('hiking_group',$hiking_group)->get()->toArray();
+        print json_encode($result);
     }
 }
