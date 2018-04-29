@@ -1,58 +1,120 @@
 <template>
     <div class="container">
-        <div class="serch_option">
-            <div class="card card-body">
-                <input
-                    type            ="text"
-                    class           ="form-control"
-                    v-model         ="mountain_name"
-                    placeholder     ="산이름"
-                    aria-label      ="산이름"
-                    aria-describedby="basic-addon2"
-                    style           ="margin-bottom: 1%;">
-
-                <input
-                    type            ="text"
-                    class           ="form-control"
-                    v-model         ="writer"
-                    placeholder     ="작성자"
-                    aria-label      =작성자
-                    aria-describedby="basic-addon2">
-
-                <datetime v-model="date" placeholder="산행일자"></datetime>
-                <span
-                    class="glyphicon glyphicon-calendar"
-                    aria-hidden="true">
-                </span>
-                <button
-                    type="button"
-                    class="btn btn-secondary btn-lg"
-                    @click="send_search()">
-                    <span
-                        class="glyphicon glyphicon-search"
-                        aria-hidden="true">
-                    </span>
-                </button>
-                <b-button :href="httpAddr + '/#/make'">그룹 만들기</b-button>
-            </div>
+        <div>
+            <v-tabs
+                    color="cyan"
+                    dark
+                    slider-color="yellow"
+            >
+                <v-tab
+                        v-for="item in items"
+                        :key="item.title"
+                        ripple
+                >
+                    {{ item.title }}
+                </v-tab>
+                <v-tab-item>
+                    <v-card flat>
+                        <v-card-text>
+                            <b-input-group>
+                            <b-form-input
+                                    v-model="mountain_name"
+                                    placeholder="산이름"></b-form-input>
+                            <b-input-group-append>
+                                <b-btn variant="outline-success" @click="send_name()">
+                                        <span
+                                                class="glyphicon glyphicon-search"
+                                                aria-hidden="true">
+                                        </span>
+                                </b-btn>
+                            </b-input-group-append>
+                        </b-input-group>
+                        </v-card-text>
+                    </v-card>
+                </v-tab-item>
+                <v-tab-item>
+                    <v-card flat>
+                        <v-card-text>
+                            <b-input-group>
+                                <b-form-input
+                                        v-model="writer"
+                                        placeholder="작성자"></b-form-input>
+                                <b-input-group-append>
+                                    <b-btn variant="outline-success" @click="send_writer()">
+                                        <span
+                                                class="glyphicon glyphicon-search"
+                                                aria-hidden="true">
+                                        </span>
+                                    </b-btn>
+                                </b-input-group-append>
+                            </b-input-group>
+                        </v-card-text>
+                    </v-card>
+                </v-tab-item>
+                <v-tab-item>
+                    <v-card flat>
+                        <v-card-text>
+                            <div style="border: 3px solid #777777; width: 15%;" > <datetime style="margin: 5px" v-model="date" placeholder="산행일자"></datetime> </div>
+                            <button
+                                    type="button"
+                                    class="btn btn-secondary btn-lg"
+                                    @click="send_date()">
+                                <span
+                                        class="glyphicon glyphicon-search"
+                                        aria-hidden="true">
+                                </span>
+                            </button>
+                        </v-card-text>
+                    </v-card>
+                </v-tab-item>
+            </v-tabs>
         </div>
+        <v-btn
+                absolute
+                style="bottom: 100px; right: 20px;"
+                dark
+                fab
+                top
+                right
+                color="pink"
+                @click="make_group_button"
+        >
+            <v-icon>add</v-icon>
+        </v-btn>
     </div>
 </template>
 
 <script>
     export default {
-        data()  {
-            return  {
+        data() {
+            return {
                 mountain_name: "",
                 writer: "",
                 date: "",
-                httpAddr: Laravel.host
+                httpAddr: Laravel.host,
+                items: [
+                    {title: 'DESTINATION'},
+                    {title: 'WRITER'},
+                    {title: 'DATE'}
+                    ]
             }
         },
         methods: {
-            send_serch() {
-                this.$EventBus.$emit('input_serch', this.mountain_name, this.writer, this.date);
-                axios.post(Laravel.host + "/group/index");
+            make_group_button() {
+                if (sessionStorage.userid == undefined) {
+                    alert('로그인 이후 이용가능합니다.')
+                } else {
+                    this.$router.push('make');
+                }
+            },
+            send_name() {
+                this.$EventBus.$emit('input_name', "name", this.mountain_name);
+            },
+            send_writer()   {
+                this.$EventBus.$emit('input_writer', "writer", this.writer);
+            },
+            send_date() {
+                this.$EventBus.$emit('input_date', "date", this.date);
             }
         }
     }

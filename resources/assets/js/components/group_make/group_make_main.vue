@@ -109,6 +109,8 @@
         },
         methods: {
             sendData() {
+                console.log(this.mountain_path);
+
                 axios.post(Laravel.host + '/group/store', {
                     owner: sessionStorage.getItem('uuid')
                     /*

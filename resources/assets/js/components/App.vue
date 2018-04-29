@@ -78,6 +78,18 @@
                 </v-list-tile-content>
             </router-link>
             <v-subheader
+                    v-if    ="isLogined"
+                    class   ="mt-3 grey--text text--darken-1">
+                <v-icon color="grey darken-1">account_box</v-icon>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                MY PAGE
+            </v-subheader>
+            <v-subheader
+                    v-if    ="isLogined"
+                    class   ="mt-3 grey--text text--darken-1">
+                <v-icon color="grey darken-1">group</v-icon>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                MY GROUPS
+            </v-subheader>
+            <v-subheader
                 v-if    ="isLogined"
                 class   ="mt-3 grey--text text--darken-1">
                 <v-icon color="grey darken-1">star</v-icon>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -124,6 +136,10 @@
             align-end
             justify-end
             style="padding: 0;">
+            <v-badge color="red">
+                <span slot="badge">!</span>
+                <v-icon large color="grey">mail</v-icon>
+            </v-badge>
             <v-btn
                 v-if        ="!isLogined"
                 style       ="padding: 0; background-color: transparent;"
@@ -233,16 +249,6 @@
                     icon: 'group_add',
                     text: 'JOIN HIKING GROUP',
                     path: '/list'
-                },
-                {
-                    icon: 'account_box',
-                    text: 'MY PAGE',
-                    path: '/mypage'
-                },
-                {
-                    icon: 'group',
-                    text: 'MY GROUPS',
-                    path: '/'
                 }
             ],
             items2: [
@@ -277,17 +283,17 @@
             this.$EventBus.$on('errorModalOpen', (message) => {
                 this.modalErrorMsg = message;
                 this.$refs.pModal.open();
-            })
+            });
             this.$EventBus.$on('complitedModalOpen', (value) => {
                 this.$refs.cModal.open();
-            })
+            });
             this.$EventBus.$on('clickGettingStartBtn', () => {
                 this.changeDrawerRightMode('login');
                 this.drawerRight = !this.drawerRight;
-            })
+            });
             this.$EventBus.$on('setRightDrawerFlipped', (value) => {
                 this.drawerRight = false;
-            })
+            });
             this.$EventBus.$on('isLogined', (v) => {
                 this.isLogined = true;
                 this.userNickname = sessionStorage.getItem('nickname');

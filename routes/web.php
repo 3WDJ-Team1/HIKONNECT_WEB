@@ -15,7 +15,6 @@ Route::get(
         return view('layouts/app');
     }
 );
-
 Route::resource('notice', 'NoticeController');
 Route::resource('group', 'GroupController');
 Route::get('group/listUp/{pageIndex?}/{method?}', 'GroupController@listUp');

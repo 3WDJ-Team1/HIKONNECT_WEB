@@ -21,14 +21,14 @@
                 그룹 페이지로 이동
             </router-link>
             <!-- <b-button style="width: 20em" href="http://localhost:8000/#/make">그룹페이지로 이동</b-button> -->
-            <b-button style="width: 80px" @click="joinGroup(item.uuid)">등산 참가</b-button>
-            <router-link
-                    tag="b-button"
+            <b-button v-if="isWriterJoin" style="width: 80px" @click="joinAlert()">등산 참가</b-button>
+            <b-button
                     style="width: 20em"
                     :to="toUpdate + '/' + item.uuid"
+                    v-if="isWriterUpdate"
             >
                 수정하기
-            </router-link>
+            </b-button>
         </div>
         <infinite-loading @infinite="infiniteHandler"></infinite-loading>
     </v-container>
@@ -39,14 +39,15 @@
     export default {
         data() {
             return {
-                search_imformations: {
-                    mountain_name   : '',
-                    writer          : '',
-                    date            : ''
-                },
-                list_num        : 0,
-                list            : [],
-                HttpAddr        : Laravel.host,
+                select: "",
+                isWriterJoin: true,
+                isWriterUpdate: false,
+                mountain_name: '',
+                writer: '',
+                date: '',
+                list_num: 0,
+                list: [],
+                HttpAddr: Laravel.host,
                 toGroupDetail   : '/group',
                 toUpdate        : '/group_update'
             };
@@ -55,19 +56,59 @@
         {
             // 이벤트 받기
             // '이벤트 명', function(받을 데이터)
-            this.$EventBus.$on('input_search', (mountain, write, date) => {
-                this.mountain_para  =  mountain;
-                this.writer         = write;
+            this.$EventBus.$on('input_name', (sel, mountain) => {
+                this.select = sel;
+                this.mountain_name  =  mountain;
+                this.infiniteHandler();
+            });
+            this.$EventBus.$on('input_writer', (writer) => {
+                this.select = sel;
+                this.writer         = writer;
+                this.infiniteHandler();
+            });
+            this.$EventBus.$on('input_date', (date) => {
+                this.select = sel;
                 this.date           = date;
+                this.infiniteHandler();
             });
         },
         methods: {
+            joinAlert() {
+              if(sessionStorage.userid != undefined)    {
+                  // 로그인 되어 있으면
+                  this.joinGroup(sessionStorage.uuid)
+              } else    {
+                  alert('로그인 후 이용가능 합니다.');
+              }
+            },
+            isWriterLogined() {
+                // 작성자 일 경우
+                if (sessionStorage.userid == this.writer) {
+                    // 수정버튼 생기기
+                    this.isWriterUpdate = true;
+                    // 등산 참가버튼 없애기
+                    this.isWriterJoin = false;
+                }
+
+            },
             /**
              * 그룹 리스트 받아오기
              * @author      Jiyoon Lee, Sungeun Kang <kasueu0814@gmail.com>
              * @augments    $state state of infinite-loading */
             infiniteHandler($state) {
-                let url = this.HttpAddr + '/group/index/' + this.list_num;
+                let url;
+                if(this.mountain_name != "")    {
+                    console.log(this.mountain_name);
+                    url = this.HttpAddr + '/groupList/' + this.list_num + "/" + this.select + "/" + this.mountain_name;
+                } else if(this.writer != "")    {
+                    console.log(this.writer);
+                    url = this.HttpAddr + '/groupList/' + this.list_num + "/" + this.select + "/" + this.writer;
+                } else if(this.date != "")    {
+                    console.log(this.date);
+                    url = this.HttpAddr + '/groupList/' + this.list_num + "/" + this.select + "/" + this.date;
+                } else  {
+                    url = this.HttpAddr + '/group/index/' + this.list_num;
+                }
                 axios.get(url).then(response => {
                     if(response) {
                         this.list = this.list.concat(response.data);

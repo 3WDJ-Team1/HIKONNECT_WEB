@@ -28,6 +28,8 @@ Route::get(
     }
 );
 
+
+
 Route::group(
     [], 
     function () {
@@ -56,7 +58,7 @@ Route::group(
             'HikingGroupController'
         );
         Route::get(
-            'groupList/{idx}/{perIdx}/{mntName}/{writer}/{date}',
+            'groupList/{idx}/{select}/{input}',
             'HikingGroupController@getGroupList'
         )->name('groupList');
         Route::get(
