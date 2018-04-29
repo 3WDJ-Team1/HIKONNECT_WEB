@@ -297,7 +297,7 @@
             this.$EventBus.$on('isLogined', (v) => {
                 this.isLogined = true;
                 this.userNickname = sessionStorage.getItem('nickname');
-            })
+            });
             this.isUserLogined();
             this.userNickname = sessionStorage.getItem('nickname');
             this.mypageRoute.imagePath = sessionStorage.getItem('image_path');

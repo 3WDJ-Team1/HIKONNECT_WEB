@@ -102,7 +102,7 @@
         created() {
             // 이벤트 받기
             // '이벤트 명', function(받을 데이터)
-            EventBus.$on('mountain_path', (path, num) => {
+            this.$EventBus.$on('mountain_path', (path, num) => {
                 this.mountain_path = path;
                 this.mountain_num = num;
             });

@@ -1,9 +1,9 @@
 <template>
-        <!--<div-->
-                <!--id="map"-->
-                <!--style="height: 600px">-->
-        <!--</div>-->
     <div>
+        <div
+                id="map"
+                style="height: 600px">
+        </div>
     </div>
 </template>
 
@@ -23,11 +23,12 @@
         created()   {
             this.$EventBus.$on('group_map', (num) => {
                 this.mountain_num = num;
-                console.log(this.mountain_num);
+                this.makeMap();
             });
         },
-        methods:    {
-            makeMpa()   {
+        methods: {
+            makeMap() {
+                var event = this.$EventBus;
                 // 지도의 중간지점
                 var mountain_center = '';
                 // 산 코스를 담을 배열
@@ -165,7 +166,7 @@
 
                                                     // group_make_main에 보내줄 최종 경로에 추가
                                                     path.push(i);
-                                                    EventBus.$emit('mountain_path', path, mountain_num);
+                                                    event.$emit('mountain_path', path, mountain_num);
                                                     send_data.push({ course: [{ fir_lat, fir_lng }, { end_lat, end_lng }] });
                                                 } else {
                                                     alert('시종점이 아닙니다.')
@@ -237,7 +238,7 @@
                                                     }
                                                 }
                                             }
-                                            EventBus.$emit('mountain_path', path, mountain_num);
+                                            event.$emit('mountain_path', path, mountain_num);
                                         }
                                         // 잘못된 경로라는 에러메시지 출력
                                         if ( alert_mes == true && alert_mes_r == true ) {
@@ -289,7 +290,7 @@
                                                     path.push(i);
                                                     send_data.push({ course : [{ fir_lat, fir_lng }, { end_lat, end_lng }] });
                                                 }
-                                                EventBus.$emit('mountain_path', path, mountain_num);
+                                                event.$emit('mountain_path', path, mountain_num);
                                             }
                                         }
                                     }

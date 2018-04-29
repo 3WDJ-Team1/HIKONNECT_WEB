@@ -17,12 +17,13 @@
     </div>
 </template>
 <script>
+    // import {EventBus}   from './event-bus.js';
     import Autocomplete from 'vuejs-auto-complete'
     export default {
         data() {
             return {
                 // 산 코드
-                mountain_num    : "",
+                mountain_num: ""
             }
         },
         components: {

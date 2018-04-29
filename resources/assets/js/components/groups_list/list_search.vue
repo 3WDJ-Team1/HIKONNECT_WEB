@@ -1,22 +1,21 @@
 <template>
     <div class="container">
-        <div>
-            <v-tabs
-                    color="cyan"
-                    dark
-                    slider-color="yellow"
+        <v-tabs
+                color="cyan"
+                dark
+                slider-color="yellow"
+        >
+            <v-tab
+                    v-for="item in items"
+                    :key="item.title"
+                    ripple
             >
-                <v-tab
-                        v-for="item in items"
-                        :key="item.title"
-                        ripple
-                >
-                    {{ item.title }}
-                </v-tab>
-                <v-tab-item>
-                    <v-card flat>
-                        <v-card-text>
-                            <b-input-group>
+                {{ item.title }}
+            </v-tab>
+            <v-tab-item>
+                <v-card flat>
+                    <v-card-text>
+                        <b-input-group>
                             <b-form-input
                                     v-model="mountain_name"
                                     placeholder="산이름"></b-form-input>
@@ -29,58 +28,47 @@
                                 </b-btn>
                             </b-input-group-append>
                         </b-input-group>
-                        </v-card-text>
-                    </v-card>
-                </v-tab-item>
-                <v-tab-item>
-                    <v-card flat>
-                        <v-card-text>
-                            <b-input-group>
-                                <b-form-input
-                                        v-model="writer"
-                                        placeholder="작성자"></b-form-input>
-                                <b-input-group-append>
-                                    <b-btn variant="outline-success" @click="send_writer()">
+                    </v-card-text>
+                </v-card>
+            </v-tab-item>
+            <v-tab-item>
+                <v-card flat>
+                    <v-card-text>
+                        <b-input-group>
+                            <b-form-input
+                                    v-model="writer"
+                                    placeholder="작성자"></b-form-input>
+                            <b-input-group-append>
+                                <b-btn variant="outline-success" @click="send_writer()">
                                         <span
                                                 class="glyphicon glyphicon-search"
                                                 aria-hidden="true">
                                         </span>
-                                    </b-btn>
-                                </b-input-group-append>
-                            </b-input-group>
-                        </v-card-text>
-                    </v-card>
-                </v-tab-item>
-                <v-tab-item>
-                    <v-card flat>
-                        <v-card-text>
-                            <div style="border: 3px solid #777777; width: 15%;" > <datetime style="margin: 5px" v-model="date" placeholder="산행일자"></datetime> </div>
-                            <button
-                                    type="button"
-                                    class="btn btn-secondary btn-lg"
-                                    @click="send_date()">
+                                </b-btn>
+                            </b-input-group-append>
+                        </b-input-group>
+                    </v-card-text>
+                </v-card>
+            </v-tab-item>
+            <v-tab-item>
+                <v-card flat>
+                    <v-card-text>
+                        <div style="border: 3px solid #777777; width: 15%;">
+                            <datetime style="margin: 5px" v-model="date" placeholder="산행일자"></datetime>
+                        </div>
+                        <button
+                                type="button"
+                                class="btn btn-secondary btn-lg"
+                                @click="send_date()">
                                 <span
                                         class="glyphicon glyphicon-search"
                                         aria-hidden="true">
                                 </span>
-                            </button>
-                        </v-card-text>
-                    </v-card>
-                </v-tab-item>
-            </v-tabs>
-        </div>
-        <v-btn
-                absolute
-                style="bottom: 100px; right: 20px;"
-                dark
-                fab
-                top
-                right
-                color="pink"
-                @click="make_group_button"
-        >
-            <v-icon>add</v-icon>
-        </v-btn>
+                        </button>
+                    </v-card-text>
+                </v-card>
+            </v-tab-item>
+        </v-tabs>
     </div>
 </template>
 
@@ -96,7 +84,7 @@
                     {title: 'DESTINATION'},
                     {title: 'WRITER'},
                     {title: 'DATE'}
-                    ]
+                ]
             }
         },
         methods: {
@@ -110,7 +98,7 @@
             send_name() {
                 this.$EventBus.$emit('input_name', "name", this.mountain_name);
             },
-            send_writer()   {
+            send_writer() {
                 this.$EventBus.$emit('input_writer', "writer", this.writer);
             },
             send_date() {
