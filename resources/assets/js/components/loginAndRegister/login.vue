@@ -131,7 +131,6 @@
                             agesc = 'false';
                         }
                         sessionStorage.setItem('userid',userid);
-                        sessionStorage.setItem('uuid',datavalue[0].uuid);
                         sessionStorage.setItem('phone',datavalue[0].phone);
                         sessionStorage.setItem('password',datavalue[0].password);
                         sessionStorage.setItem('nickname',datavalue[0].nickname);
@@ -141,7 +140,8 @@
                         sessionStorage.setItem('scv',scv);
                         sessionStorage.setItem('gender',gender);
                         sessionStorage.setItem('age',age);
-                        sessionStorage.setItem('image_path',datavalue[0].image_path);
+                        sessionStorage.setItem('image_path',datavalue[0].profile);
+                        console.log(datavalue);
                         // this.$router.push({ name: 'main'});
                         this.$EventBus.$emit('isLogined', 'true');
                         this.$EventBus.$emit('setRightDrawerFlipped', 'true');

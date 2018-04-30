@@ -203,6 +203,11 @@
                         phone: this.inputPhoneNo,
                         gender: this.selectedGender,
                         age: this.selectedAgeGroup,
+                        phonesc: this.isPhoneNoShown,
+                        gendersc: this.isGenderShown,
+                        agesc: this.isAgeGroupShown,
+                        groupsc: this.openRange
+
                     }).then(response => {
                         if (response.data == 'true')
                         {
@@ -211,7 +216,8 @@
                         }
                         else
                         {
-                            this.$EventBus.$emit('errorModalOpen', 'The user ID already exists!');
+                            console.log(response.data);
+                            /*this.$EventBus.$emit('errorModalOpen', 'The user ID already exists!');*/
                         }
                     })
                 }

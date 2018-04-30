@@ -21,11 +21,11 @@
                 그룹 페이지로 이동
             </router-link>
             <!-- <b-button style="width: 20em" href="http://localhost:8000/#/make">그룹페이지로 이동</b-button> -->
-            <b-button v-if="joinVisible(item.nickname)" style="width: 80px" @click="joinAlert()">등산 참가</b-button>
+            <b-button v-if="isWriterJoin" style="width: 80px" @click="joinAlert()">등산 참가</b-button>
             <b-button
                     style="width: 20em"
                     :to="toUpdate + '/' + item.uuid"
-                    v-if="updateVisible(item.nickname)"
+                    v-if="isWriterUpdate"
             >
                 수정하기
             </b-button>
@@ -40,6 +40,8 @@
         data() {
             return {
                 select: "",
+                isWriterJoin: true,
+                isWriterUpdate: false,
                 mountain_name: '',
                 writer: '',
                 date: '',
@@ -59,42 +61,33 @@
                 this.mountain_name  =  mountain;
                 this.infiniteHandler();
             });
-            this.$EventBus.$on('input_writer', (sel, writer) => {
+            this.$EventBus.$on('input_writer', (writer) => {
                 this.select = sel;
                 this.writer         = writer;
                 this.infiniteHandler();
             });
-            this.$EventBus.$on('input_date', (sel, date) => {
+            this.$EventBus.$on('input_date', (date) => {
                 this.select = sel;
-                this.date           = date.substring(0, 4) + "-" + date.substring(5, 7) + "-" + date.substring(8, 10);
+                this.date           = date;
                 this.infiniteHandler();
             });
         },
         methods: {
-            updateVisible(writer)   {
-                if(sessionStorage.userid != undefined)    {
-                    // 로그인 되어 있으면
-                    if (sessionStorage.getItem('nickname') == writer) {
-                        // 등산 참가버튼 없애기
-                        return true;
-                    }
-                }
-            },
             joinAlert() {
               if(sessionStorage.userid != undefined)    {
                   // 로그인 되어 있으면
-                  this.joinGroup(sessionStorage.uuid);
+                  this.joinGroup(sessionStorage.uuid)
               } else    {
                   alert('로그인 후 이용가능 합니다.');
               }
             },
-            joinVisible(writer) {
+            isWriterLogined() {
                 // 작성자 일 경우
-                if (sessionStorage.getItem('nickname') == writer) {
+                if (sessionStorage.userid == this.writer) {
+                    // 수정버튼 생기기
+                    this.isWriterUpdate = true;
                     // 등산 참가버튼 없애기
-                    return false;
-                } else {
-                    return true;
+                    this.isWriterJoin = false;
                 }
 
             },
@@ -105,6 +98,7 @@
             infiniteHandler($state) {
                 let url;
                 if(this.mountain_name != "")    {
+                    console.log(this.mountain_name);
                     url = this.HttpAddr + '/groupList/' + this.list_num + "/" + this.select + "/" + this.mountain_name;
                 } else if(this.writer != "")    {
                     console.log(this.writer);

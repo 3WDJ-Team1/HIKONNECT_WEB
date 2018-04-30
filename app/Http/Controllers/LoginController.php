@@ -43,7 +43,7 @@ class LoginController extends Controller
     {
         //Login
         try {
-            $userinfo = User::where('id', $request->get('idv'))->first();
+            $userinfo = User::where('userid', $request->get('idv'))->first();
             if ($userinfo == false) {
                 throw new Exception('존재하지 않는 ID');
             }
@@ -51,26 +51,9 @@ class LoginController extends Controller
             return response()->json('false');
         }
         if ($userinfo->password == $request->get('pwv')) {
-            $sessionVal = User::join(
-                'user_profile', 
-                'user_profile.user', 
-                '=', 
-                'user.uuid'
-            )->select(
-                'user_profile.nickname', 
-                'user_profile.image_path', 
-                'user_profile.phone',
-                'user_profile.gender', 
-                'user_profile.age_group', 
-                'user_profile.scope',
-                'user.uuid',
-                'user.password',
-                'user.id'
-            )->where(
-                'id',
-                $request->get('idv')
-            )->get();
-            
+            $sessionVal = User::where('userid',$request->get('idv'))->select(
+                'userid','nickname','gender','age_group','scope','profile','phone','rank'
+            )->first();
             return response()->json($sessionVal);
         } else {
             return response()->json('pwfalse');

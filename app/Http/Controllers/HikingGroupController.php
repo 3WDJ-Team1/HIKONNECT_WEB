@@ -194,4 +194,9 @@ class HikingGroupController extends Controller
 
         return 'true';
     }
+
+    public function searchGroup($page_num,$select,$input) {
+        if ($select == 'name')
+            return response()->json($this->_group_model->searchGroup($page_num,$input));
+    }
 }

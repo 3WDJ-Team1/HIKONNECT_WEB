@@ -162,4 +162,28 @@ class testcontroller extends Controller
 
         print json_encode($path);
     }
+
+    public function store_send(Request $request) {
+        $uuid = User::where('id',$request->get('id'))->select('uuid')->get()[0]['uuid'];
+        $hiking_group = entry_info::where('user',$uuid)->select('hiking_group')->get()[0]['hiking_group'];
+        $userid = user_position::where('user',$request->get('id'))->count();
+            if($userid == null) {
+                user_position::insert([
+                    'uuid'          => '',
+                    'user'          => $uuid,
+                    'hiking_group'  => $hiking_group,
+                    'latitude'      => $request->get('lat'),
+                    'longitude'     => $request->get('lng')
+                ]);
+            }
+            else {
+                user_position::where('user',$request->get('id'))->update([
+                    'latitude'      => $request->get('lat'),
+                    'longitude'     => $request->get('lng')
+                ]);
+            }
+
+        $result = user_position::where('hiking_group',$hiking_group)->get()->toArray();
+        print json_encode($result);
+    }
 }

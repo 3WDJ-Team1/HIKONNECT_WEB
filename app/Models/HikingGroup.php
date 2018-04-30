@@ -113,8 +113,7 @@ class HikingGroup extends Model
                 '=',
                 'hg.uuid'
             )->join(
-                'user_profile as uf',
-                'uf.user',
+                'user.userid',
                 '=',
                 'hg.owner'
             )->where(
@@ -122,6 +121,42 @@ class HikingGroup extends Model
                     ['hg.name', 'LIKE', "%$groupName%"],
                     ['uf.nickname', 'LIKE', "%$writer%"],
                     ['hp.start_date', 'LIKE', "%$date%"]
+                ]
+            )->orderby(
+                'hg.created_at',
+                'desc'
+            )->skip($pageIndex)
+            ->take(10)
+            ->get();
+    }
+
+    public function searchGroup($pageIndex, $input) {
+        return DB::table('hiking_group as hg')
+            ->select(
+                're.title',
+                'uf.nickname',
+                'hp.end_point',
+                'hp.start_date',
+                'hg.min_members',
+                'hg.max_members'
+            )->join(
+                'hiking_plan as hp',
+                'hp.hiking_group',
+                '=',
+                'hg.uuid'
+            )->join(
+                'user_profile as uf',
+                'uf.user',
+                '=',
+                'hg.owner'
+            )->join(
+               'recruitment as re',
+               're.hiking_group',
+               '=',
+               'hg.uuid'
+            )->where(
+                [
+                    ['uf.nickname', 'LIKE', "%$input%"]
                 ]
             )->orderby(
                 'hg.created_at',

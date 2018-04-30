@@ -15,6 +15,7 @@ Route::get(
         return view('layouts/app');
     }
 );
+Route::resource('user','UserController');
 Route::resource('notice', 'NoticeController');
 Route::resource('group', 'GroupController');
 Route::get('group/listUp/{pageIndex?}/{method?}', 'GroupController@listUp');
@@ -26,3 +27,7 @@ Route::post('group/store', 'GroupController@store');
 Route::post('group/request', 'GroupController@request');
 Route::get('group/index/{pageIndex?}/{groupName?}/{writer?}/{date?}', 'GroupController@index');
 Route::get('group/findData/{method?}/{inputData?}', 'GroupController@findData');
+Route::get(
+    'searchGroup/{idx}/{select}/{input}',
+    'HikingGroupController@searchGroup'
+)->name('searchGroup');

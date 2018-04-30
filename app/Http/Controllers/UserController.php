@@ -67,7 +67,7 @@ class UserController extends Controller
             $this->scope += 1;
         }
 
-        switch ($request->get('scv')) {
+        switch ($request->get('groupsc')) {
         case 'all':
             $this->scope += 10000;
             break;
@@ -99,6 +99,7 @@ class UserController extends Controller
             $this->age_group = 40;
             break;
         case '50대':
+            $this->age_group = 50;
             break;
         case '60대 이상':
             $this->age_group = 60;
@@ -136,46 +137,21 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //ID, Nickname Double Check
-        $usercheck = User::all();
-        foreach ($usercheck as $user) {
-            if ($user->idv == $request->get('idv')) {
-                return response()->json('idvfalse');
-            } else {
-                continue;
-            }
-        };
-        $usercheck = UserProfile::all();
-        foreach ($usercheck as $user) {
-            if ($user->nickname == $request->get('nn')) {
-                return response()->json('nnfalse');
-            } else {
-                continue;
-            }
-        }
-
         //user table insert
-        $this->usermodel->userReg($request);
-        $this->uuid = User::where(
-            'id',
-            $request->get('idv')
-        )->pluck('uuid');
-
-        //user_profile table insert
-        $userproinfo = array([
-            'uuid'          => '',
-            'user'          => $this->uuid[0],
+        $userinfo = array([
+            'userid'        => $request->get('idv'),
+            'password'      => $request->get('pwv'),
             'nickname'     =>  $request->get('nn'),
-            'image_path'   => 'https://lorempixel.com/640/400/?66549',
-            'phone'         => $request->get('phone'),
             'gender'        => $this->gender,
             'age_group'     => $this->age_group,
             'scope'         => $this->scope,
+            'profile'       => 'https://lorempixel.com/640/400/?66549',
+            'phone'         => $request->get('phone'),
+            'rank'          => '동네 뒷산',
             'created_at'    => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at'    => Carbon::now()->format('Y-m-d H:i:s')
         ]);
-        $this->userfilmodel->userProReg($userproinfo);
-
+        $this->usermodel->userReg($userinfo);
         return response()->json('true');
     }
 

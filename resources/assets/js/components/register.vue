@@ -74,13 +74,14 @@
                 }
                 else {
                     this.axios.post(uri, this.item).then((response) => {
-                        if(response.data == 'true') {
+                        console.log(response.data)
+                        /*if(response.data == 'true') {
                             alert('회원가입 완료');
                             this.$router.push({ name: 'main'});
                         }
                         else if(response.data == 'false')
                             alert('이미 존재하는 아이디 입니다.');
-                        this.$router.push({ name: 'main'});
+                        this.$router.push({ name: 'main'});*/
 
                     })
                 }

@@ -30,16 +30,10 @@ class User extends Model
     protected $table = 'user';
     
     //User Regist
-    public function userReg(Request $request) 
+    public function userReg(Array $userinfo)
     {
         User::insert(
-            [
-                'uuid'           => '',
-                'id'             => $request->get('idv'),
-                'password'      => $request->get('pwv'),
-                'created_at'    => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at'    => Carbon::now()->format('Y-m-d H:i:s')
-            ]
+            $userinfo
         );
     }
 

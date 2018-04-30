@@ -62,6 +62,10 @@ Route::group(
             'HikingGroupController@getGroupList'
         )->name('groupList');
         Route::get(
+            'searchGroup/{idx}/{select}/{input}',
+            'HikingGroupController@searchGroup'
+        )->name('searchGroup');
+        Route::get(
             'isOwner/{groupId}/{userId}',
             'HikingGroupController@isOwner'
         )->name('isOwner');

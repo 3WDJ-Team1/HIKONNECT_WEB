@@ -26,5 +26,4 @@ use App\Request;
 class Recruitment extends Model
 {
     protected $table = 'recruitment';
-
 }
