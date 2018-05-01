@@ -61,7 +61,7 @@
                     :key    ="2"
                     :id     ="'tab-' + 2">
                 <v-card flat style="background-color: white; border: 1px soild whitesmoke;">
-                    <router-view name="item"></router-view>
+                    <router-view name="plan"></router-view>
                 </v-card>
             </v-tab-item>
             <v-tab-item

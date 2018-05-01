@@ -39,14 +39,14 @@ import NoticeFormInside     from './components/group_menu/group_notice/NoticeFor
 
 
 //group event
-import groupEvent           from './components/group_menu/group_event/eventItem'
 import makeEvent            from './components/group_menu/group_event/makeEvent'
+import plan_main            from './components/group_menu/group_event/plan_main'
+import GroupPlanCalendar    from './components/group_menu/group_event/GroupPlanCalendar.vue';
 
 
 // group plan
 import GroupPlan            from './components/group_menu/group_plan/GroupPlan.vue';
 import GroupPlanMap         from './components/group_menu/group_plan/GroupPlanMap.vue';
-import GroupPlanCalendar    from './components/group_menu/group_plan/GroupPlanCalendar.vue';
 
 // group member list
 import GroupMemberList      from './components/group_menu/group_member/GroupMemberList.vue';
@@ -129,28 +129,30 @@ const routes = [
         children    : [
             // tab of group menu
             {
-                path        : ':groupid/event',
+                path        : 'event',
                 component   : event_make_main
             },
             {
                 path        : ':groupid',
                 components  : {
                     notice      : NoticeListUp,
-                    plan        : GroupPlan,
-                    item        : groupEvent,
+                    plan        : plan_main,
+                    calendar    : GroupPlanCalendar,
                     member_list : GroupMemberList,
                 },
                 children: [
                     {
                         path        : '',
                         components  : {
+                            item    : GroupPlanCalendar,
+                            make        : event_make_main,
                             // write, modify, delete button of NoticeListUp
                             write   : NoticeWriteBtn,
                             modify  : NoticeModifyBtn,
                             delete  : NoticeDeleteBtn,
                             // components in GroupPlan
-                            // map         : GroupPlanMap,
-                            // calendar    : GroupPlanCalendar,
+                            map         : GroupPlanMap,
+                            calendar    : GroupPlanCalendar,
                             // component in GroupMemberList
                             member_detail   : GroupMemberDetail,
                             waiting_member   : WaitingMemberList,
@@ -161,13 +163,13 @@ const routes = [
                                 components  : {
                                     // inner form component of modal(NoticeWriteBtn, NoticeModifyBtn)
                                     form            : NoticeFormInside,
-                                    autocomplete: autocomplete
+                                    autocomplete    : autocomplete
                                 },
                                 children:   [
                                     {
                                         path: '',
                                         components: {
-                                            map: event_map
+                                            map: event_map,
                                         }
                                     }
                                 ]

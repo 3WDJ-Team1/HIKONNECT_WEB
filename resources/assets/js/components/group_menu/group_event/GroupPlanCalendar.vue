@@ -8,7 +8,7 @@
     <v-card flat>
         <vue-event-calendar
             :events="hikingEvents"
-            style="width: 90%; margin: 0 auto;">
+            style="width: 70%; margin: 0 auto;">
         </vue-event-calendar>
     </v-card>
 </template>

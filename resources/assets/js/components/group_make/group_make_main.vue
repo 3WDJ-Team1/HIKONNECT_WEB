@@ -26,7 +26,7 @@
             <tr>
                 <td colspan='1'>등산 경로</td>
                 <td colspan='3'>
-                    <!--<router-view name="autocomplete"></router-view>-->
+                    <router-view name="autocomplete"></router-view>
                 </td>
             </tr>
             <tr>
@@ -42,8 +42,6 @@
                             :format="yourFormat"
                             v-model="yourData">
                     </vue-timepicker>
-                    <!--<span> to </span>-->
-                    <!--<vue-timepicker format="HH:mm:ss"></vue-timepicker>-->
                 </td>
             </tr>
             </tbody>
@@ -67,10 +65,8 @@
                 title: '',
                 content: '',
                 date: '',
-                max_num: '',
                 mountain_path: [],
                 mountain_num: '',
-                min_num: '',
                 yourData: {
                     hh: '',
                     mm: '',
@@ -89,8 +85,6 @@
         },
         methods: {
             sendData() {
-                console.log(this.mountain_path);
-
                 axios.post(Laravel.host + '/group/store', {
                     owner: sessionStorage.getItem('uuid')
                     /*
@@ -98,8 +92,6 @@
                     */,
                     tt: this.title,
                     ct: this.content,
-                    min: parseInt(this.min_num),
-                    max: parseInt(this.max_num),
                     stDate: this.date.substring(0, 4) + "-" + this.date.substring(5, 7) + "-" + this.date.substring(8, 10) +
                     " " + this.yourData['hh'] + ":" + this.yourData['mm'] + ":" + this.yourData['ss'],
                     mountP: JSON.stringify(this.mountain_path)
