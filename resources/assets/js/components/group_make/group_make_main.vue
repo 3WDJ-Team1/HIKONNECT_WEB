@@ -26,7 +26,7 @@
             <tr>
                 <td colspan='1'>등산 경로</td>
                 <td colspan='3'>
-                    <router-view name="make"></router-view>
+                    <router-view name="autocomplete"></router-view>
                 </td>
             </tr>
             <tr>

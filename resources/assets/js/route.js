@@ -9,9 +9,10 @@ import list_search          from './components/groups_list/list_search'
 import list_show            from './components/groups_list/list_show'
 
 // group_make
-import group_make           from './components/group_make/group_make'
+import autocomplete         from './components/group_make/autocomplete'
 import group_make_main      from './components/group_make/group_make_main'
 import group_map            from './components/group_make/group_map'
+import group_make      from './components/group_make/group_make'
 
 // group_update
 import group_upadate        from './components/group_make/updateGroup'
@@ -57,7 +58,6 @@ const routes = [
         path: '/',
         component: Main,
     },
-    // group menu
     {
         path: '/list',
         component: groups_list,
@@ -67,6 +67,7 @@ const routes = [
                 components: {
                     header: list_search,
                     body: list_show,
+                    make: group_make
                 }
             }
         ]
@@ -157,20 +158,6 @@ const routes = [
             
         ]
     },
-    // group menu
-    {
-        path: '/list',
-        component: groups_list,
-        children: [
-            {
-                path: '/list',
-                components: {
-                    header: list_search,
-                    body: list_show,
-                }
-            }
-        ]
-    },
     {
         path: '/make',
         component: group_make_main,
@@ -178,7 +165,7 @@ const routes = [
             {
                 path: '/make',
                 components: {
-                    make: group_make
+                    autocomplete: autocomplete
                 },
                 children:   [
                     {

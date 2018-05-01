@@ -1,9 +1,6 @@
 <template>
     <div class="container">
-        <!--<header></header>-->
-        <!--<body v-bind:list="groups_list_imformation.groupInformations"></body>-->
         <router-view name="header"></router-view>
-        <router-view name="body"></router-view>
         <v-btn
                 style="margin-bottom: 5%;"
                 dark
@@ -13,22 +10,21 @@
                 bottom
                 fab
                 color="pink"
-                @click="make_group_button"
+                @click="openWriteModal()"
         >
             <v-icon>add</v-icon>
         </v-btn>
+        <sweet-modal ref="write" blocking>
+            <router-view name="make"></router-view>
+        </sweet-modal>
     </div>
 </template>
 
 <script>
     export default {
         methods: {
-            make_group_button() {
-                if (sessionStorage.userid == undefined) {
-                    alert('로그인 이후 이용가능합니다.')
-                } else {
-                    this.$router.push('make');
-                }
+            openWriteModal() {
+                this.$refs.write.open();
             }
         }
     }

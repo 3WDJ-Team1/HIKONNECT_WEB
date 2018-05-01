@@ -136,10 +136,6 @@
             align-end
             justify-end
             style="padding: 0;">
-            <v-badge color="red">
-                <span slot="badge">!</span>
-                <v-icon large color="grey">mail</v-icon>
-            </v-badge>
             <v-btn
                 v-if        ="!isLogined"
                 style       ="padding: 0; background-color: transparent;"

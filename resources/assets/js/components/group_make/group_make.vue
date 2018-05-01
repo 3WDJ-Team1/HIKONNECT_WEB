@@ -1,60 +1,83 @@
 <template>
-    <div class="container">
-        <autocomplete
-                ref             ="autocomplete"
-                placeholder     ="Search Distribution Groups(name)"
-                :source         ="distributionGroupsEndpoint"
-                input-class     ="form-control"
-                results-property="data"
-                :results-display="formattedDisplay"
-                @selected       ="addDistributionGroup"
-                style           ="width: 200px">
-        </autocomplete>
-        <sweet-modal ref="map" blocking>
-            <router-view name="map"></router-view>
-        </sweet-modal>
-        <b-btn @click="initMap">지도보기</b-btn>
+    <div>
+        <v-subheader style="font-size: 18px;">Type the group name</v-subheader>
+        <v-text-field
+                name="notice_title"
+                v-model="title"
+                :rules="titleRules"
+                required
+        ></v-text-field>
+        <v-subheader style="font-size: 18px;">Fill the recruit notice</v-subheader>
+        <v-text-field
+                name="notice_text"
+                v-model="text"
+                :rules="textRules"
+                textarea
+                rows="7"
+                required
+        ></v-text-field>
+        <div style="display: flex;">
+            <div style="margin: 5px; flex-grow: 1;">
+                <v-subheader style="font-size: 15px;">Fill minimun number of member</v-subheader>
+                <v-text-field
+                        name="minimum"
+                        v-model="min"
+                        :rules="minRules"
+                        required
+                ></v-text-field>
+            </div>
+            <div style="margin: 5px; flex-grow: 1;">
+                <v-subheader style="font-size: 15px;">Fill minimun number of member</v-subheader>
+                <v-text-field
+                        name="maximum"
+                        v-model="max"
+                        :rules="maxRules"
+                        required
+                ></v-text-field>
+            </div>
+        </div>
+        <v-btn
+                @click="submit"
+                style="height: 100%; color: white;"
+                color="cyan"
+        >
+            submit
+        </v-btn>
     </div>
 </template>
+
 <script>
-    // import {EventBus}   from './event-bus.js';
-    import Autocomplete from 'vuejs-auto-complete'
     export default {
-        data() {
-            return {
-                // 산 코드
-                mountain_num: ""
-            }
-        },
-        components: {
-            Autocomplete
-        },
+        data: () => ({
+            title: '',
+            text: '',
+            max: '',
+            min: '',
+            titleRules: [
+                title => !!title || 'Title is required.'
+            ],
+            textRules: [
+                text => !!text || 'Text is required.'
+            ],
+            minRules: [
+                min => !!min || 'number is required.'
+            ],
+            maxRules: [
+                max => !!max || 'number is required.'
+            ]
+        }),
         methods: {
-            ///////////////////////////////////////// 지도 api
-            initMap() {
-                this.$refs.map.open();
-                this.$EventBus.$emit('group_map', this.mountain_num);
-            },
-            // pull autocomplete data
-            distributionGroupsEndpoint(n) {
-                return Laravel.host + '/api/testing/' + n;
-            },
-            hideModal() {
-                this.open = false;
-            },
-            // drop down이 보여지도록
-            addDistributionGroup(group) {
-                // 산 코드
-                this.mountain_num = group.selectedObject.mnt_code;
-                // input에 썼던 text지우기
-                this.$refs.autocomplete.clearValues();
-                // 내가 클릭한 text로 채우기
-                this.$refs.autocomplete.value = group.selectedObject.mnt_name;
-            },
-            // drop down에 보여질 text
-            formattedDisplay(result) {
-                return result.mnt_name;
+            submit() {
+                axios.post(this.$HttpAddr + '/notice', {
+                    // nickname: this.nickname,
+                    writer: sessionStorage.uuid, // user's uuid,
+                    title: this.title,
+                    content: this.text
+                });
+                this.$parent.close();
             }
         }
     }
-</script>                         
+</script>
+<style>
+</style>
