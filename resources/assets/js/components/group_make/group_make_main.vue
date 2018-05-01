@@ -85,25 +85,19 @@
         },
         methods: {
             sendData() {
-                axios.post(Laravel.host + '/schedule', {
+                axios.post(Laravel.host + '/api/schedule', {
                     uuid : this.$route.params.groupid,
-                    owner: sessionStorage.getItem('userid')
-                    /*
-                        @todo localStorage.getItem('userUuid')
-                    */,
-                    code: this.mountain_num,
+                    owner: sessionStorage.getItem('userid'),
                     tt: this.title,
                     ct: this.content,
                     stDate: this.date.substring(0, 4) + "-" + this.date.substring(5, 7) + "-" + this.date.substring(8, 10) +
-                    " " + this.yourData['hh'] + ":" + this.yourData['mm'] + ":" + this.yourData['ss'],
-                    mountP: JSON.stringify(this.mountain_path)
+                    " " + this.yourData['hh'] + ":" + this.yourData['mm'] + ":" + this.yourData['ss']
                 })
                     .then(response => {
                         console.log(response.data);
-                        if (response.data == true) {
+                        if (response.data == 'true') {
                             alert('성공적으로 저장 되었습니다.');
                             this.$router.push('/list');
-
                         } else {
                             alert('저장을 실패하였습니다.');
                         }
