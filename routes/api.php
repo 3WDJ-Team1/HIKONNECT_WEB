@@ -190,7 +190,7 @@ Route::group(
             '/send',
             'FCMController@pushNotification'
         )->name('SendNotification');
-        /*Route::resource('/schedule','ScheduleController');*/
+        Route::resource('/schedule','ScheduleController');
     }
 );
 
