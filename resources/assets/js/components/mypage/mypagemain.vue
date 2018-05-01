@@ -41,7 +41,7 @@
                 <v-card flat>
                     <!-- @router-vue(notice)          routing component whose name is notice.
                          @use                         app.js -->
-                    <router-view name="notice"></router-view>
+                    <router-view name="graph"></router-view>
                 </v-card>
             </v-tab-item>
             <v-tab-item
@@ -55,7 +55,7 @@
                     :key    ="3"
                     :id     ="'tab-' + 3">
                 <v-card flat style="background-color: white; border: 1px soild whitesmoke;" class="tab_full">
-                    <router-view name="member_list"></router-view>
+                    <router-view name="profile"></router-view>
                 </v-card>
             </v-tab-item>
         </v-tabs>

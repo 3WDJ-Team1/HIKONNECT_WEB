@@ -95,7 +95,16 @@ const routes = [
     {
         name: 'mypage',
         path: '/mypage',
-        component: myPage
+        component: myPage,
+        children:   [
+            {
+                path: '',
+                components: {
+                    graph: graph,
+                    profile: profile,
+                }
+            }
+        ]
     },
     {
         name: 'modify',
