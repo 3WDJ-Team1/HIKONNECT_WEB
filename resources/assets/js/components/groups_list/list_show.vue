@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <v-card v-for="item in list" :key="item.owner">
-            <v-card-title primary-title >
+            <v-card-title primary-title>
                 <div>
                     <div class="headline">{{ item.title }}</div>
                     <span class="grey--text">{{ item.nickname }}</span>
@@ -26,7 +26,11 @@
                 </v-card-text>
             </v-slide-y-transition>
         </v-card>
-        <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+        <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading">
+             <span slot="no-more">
+                There is no more Hacker News :(
+             </span>
+        </infinite-loading>
     </v-container>
 </template>
 
@@ -96,20 +100,20 @@
             infiniteHandler($state) {
                 this.axios.post(this.HttpAddr + '/api/groupList',
                     {
-                        select  : this.select,
-                        input   : this.input,
-                        page    : this.list_num
+                        select: this.select,
+                        input: this.input,
+                        page: this.list_num
                     }).then(response => {
-                        // if(response.hits.length)    {
-                        //
-                        // }
-                   if (response) {
+                    if (response) {
                         this.list = this.list.concat(response.data);
-                       $state.loaded();
-                   }
-                   else {
-                       $state.complete();
-                   }
+                        $state.loaded();
+                        if (this.list.length / 10 === 0) {
+                            $state.complete();
+                        }
+                    }
+                    else {
+                        $state.complete();
+                    }
                 });
                 this.list_num += 10;
             },
@@ -123,13 +127,13 @@
                     userUuid: sessionStorage.userid,  // user의 uuid
                     groupUuid: groupId               // group의 uuid
                 }).then(response => {
-                        console.log(response);
-                        if (response) {
-                            this.$EventBus.$emit('complitedModalOpen', true);
-                        } else {
-                            this.$EventBus.$emit('errorModalOpen', '잘못된 접근입니다.');
-                        }
-                    });
+                    console.log(response);
+                    if (response) {
+                        this.$EventBus.$emit('complitedModalOpen', true);
+                    } else {
+                        this.$EventBus.$emit('errorModalOpen', '잘못된 접근입니다.');
+                    }
+                });
             }
         },
         components: {
