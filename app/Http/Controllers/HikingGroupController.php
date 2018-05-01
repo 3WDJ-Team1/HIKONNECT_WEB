@@ -10,6 +10,7 @@
  */
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -75,12 +76,19 @@ class HikingGroupController extends Controller
     public function store(Request $request)
     {
         $groupinfo = array([
-            'uuid'      => '',
-            'title'     => $request->get('title'),
-            'content'   => $request->get('text'),
-            'leader'    => $request->get()
+            'uuid'          => '',
+            'title'         => $request->get('title'),
+            'content'       => $request->get('content'),
+            'leader'        => $request->get('writer'),
+            'min_member'    => $request->get('min'),
+            'max_member'    => $request->get('max'),
+            'password'      => '',
+            'port'          => 0,
+            'created_at'    => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'    => Carbon::now()->format('Y-m-d H:i:s')
         ]);
-        return ;
+        $this->_group_model->groupReg($groupinfo);
+        return response()->json('true');
     }
 
     /**

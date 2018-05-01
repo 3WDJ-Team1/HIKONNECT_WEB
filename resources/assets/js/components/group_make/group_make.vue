@@ -68,13 +68,15 @@
         }),
         methods: {
             submit() {
-                axios.post(this.$HttpAddr + '/notice', {
+                axios.post(this.$HttpAddr + '/hikingGroup', {
                     // nickname: this.nickname,
                     writer: sessionStorage.getItem('userid'), // user's uuid,
                     title: this.title,
                     content: this.text,
                     min: this.min,
                     max: this.max
+                }).then((response)=> {
+                    console.log(response.data);
                 });
                 this.$parent.close();
             }

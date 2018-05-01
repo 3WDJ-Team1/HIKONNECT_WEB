@@ -30,9 +30,6 @@ use Illuminate\Database\Eloquent\Model;
 class HikingGroup extends Model
 {
     protected   $table      = 'hiking_group';
-    protected   $fillable   = ['uuid', 'title', 'content', 'name', 'owner', 'min_members',
-        'max_members', 'created_at', 'updated_at', 'hiking_group',
-        'hits', 'start_date', 'starting_point', 'stopover', 'end_point'];
 
     public function getGroupMembers(String $groupUuid, $idx, $perIdx)
     {
@@ -293,6 +290,10 @@ class HikingGroup extends Model
                 'updated_at'        => Carbon::now()->format('Y-m-d H:i:s')
             ]);
         return 'true';
+    }
+
+    public function groupReg(Array $groupinfo) {
+        HikingGroup::insert($groupinfo);
     }
     public function updateSelectedGroupInfo(Array $inputData, String $uuid) {
         /**
