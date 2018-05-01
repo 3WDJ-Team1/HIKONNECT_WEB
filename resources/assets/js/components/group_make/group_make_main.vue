@@ -98,7 +98,7 @@
                 })
                     .then(response => {
                         console.log(response.data);
-                        if (response.data == true) {
+                        if (response.data == 'true') {
                             alert('성공적으로 저장 되었습니다.');
                             this.$router.push('/list');
 

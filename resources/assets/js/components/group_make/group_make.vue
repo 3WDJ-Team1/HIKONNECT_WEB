@@ -68,7 +68,7 @@
         }),
         methods: {
             submit() {
-                axios.post(this.$HttpAddr + '/api/hikingGroup', {
+                axios.post(this.$HttpAddr + '/hikingGroup', {
                     writer: sessionStorage.getItem('userid'), // user's uuid,
                     title: this.title,
                     content: this.text,
@@ -76,6 +76,12 @@
                     max: this.max
                 }).then((response)=> {
                     console.log(response.data);
+                    if (response.data == 'true') {
+                        alert('그룹이 생성되었습니다.');
+                    }
+                    else {
+                        alert('그룹 생성에 실패했습니다.');
+                    }
                 });
                 this.$parent.close();
             }
