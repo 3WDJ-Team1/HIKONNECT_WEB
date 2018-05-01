@@ -102,7 +102,7 @@
                         console.log(response.data);
                         if (response.data == true) {
                             alert('성공적으로 저장 되었습니다.');
-                            this.$router.push('/list');
+                            this.$EventBus.$emit('makeEventOK', true);
 
                         } else {
                             alert('저장을 실패하였습니다.');

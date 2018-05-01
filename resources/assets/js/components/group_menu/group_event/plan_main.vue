@@ -27,8 +27,16 @@
                 makeEventB: false,
             }
         },
-        methods:    {
-            makeEvent(){
+        created() {
+            this.$EventBus.$on('makeEventOK', (sign) => {
+                if (sign == true) {
+                    listEventB = true;
+                    makeEventB = false;
+                }
+            })
+        },
+        methods: {
+            makeEvent() {
                 this.makeEventB = true;
                 this.listEventB = false;
             }
