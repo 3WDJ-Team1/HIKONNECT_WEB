@@ -108,19 +108,13 @@ class HikingGroup extends Model
                 'hg.min_members',
                 'hg.max_members'
             )->join(
-                'hiking_plan as hp',
-                'hp.hiking_group',
-                '=',
-                'hg.uuid'
-            )->join(
                 'user.userid',
                 '=',
-                'hg.owner'
+                'hg.leader'
             )->where(
                 [
                     ['hg.name', 'LIKE', "%$groupName%"],
-                    ['uf.nickname', 'LIKE', "%$writer%"],
-                    ['hp.start_date', 'LIKE', "%$date%"]
+                    ['user.nickname', 'LIKE', "%$writer%"]
                 ]
             )->orderby(
                 'hg.created_at',

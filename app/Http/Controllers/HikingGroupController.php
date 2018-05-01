@@ -51,7 +51,7 @@ class HikingGroupController extends Controller
         // foreach ($groupList as $index => $record) {
         //     $returnTag .= "<a href='/group/" . $record['uuid'] . "'>" . $record['uuid'] . "</a><br />";
         // }
-        
+
         // return $returnTag;
     }
 
@@ -74,6 +74,12 @@ class HikingGroupController extends Controller
      */
     public function store(Request $request)
     {
+        $groupinfo = array([
+            'uuid'      => '',
+            'title'     => $request->get('title'),
+            'content'   => $request->get('text'),
+            'leader'    => $request->get()
+        ]);
         return ;
     }
 
@@ -167,7 +173,7 @@ class HikingGroupController extends Controller
     /**
      * 
      */
-    public function getGroupList($idx, $perIdx, $orderBy = 'created_at') 
+    public function getGroupList($idx, $perIdx)
     {
         if ($idx && $perIdx) {
             if (!$idx = intval($idx) || !$perIdx = intval($perIdx)) {
@@ -175,8 +181,24 @@ class HikingGroupController extends Controller
             }
         }
 
-        $res = $this->_group_model
-            ->getGroupList($idx, $perIdx, $orderBy);
+        $res = HikingGroup::
+        select(
+            'hiking_group.title',
+            'user.nickname',
+            'hiking_group.min_member',
+            'hiking_group.max_member',
+            'hiking_group.uuid'
+        )
+        ->join(
+            'user.userid',
+            '=',
+            'hiking_group.leader'
+        )->orderby(
+            'hiking_group.created_at',
+            'desc'
+        )->skip($perIdx)
+        ->take(10)
+        ->get();
 
         return $res;
     }

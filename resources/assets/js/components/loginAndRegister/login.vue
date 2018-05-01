@@ -50,7 +50,6 @@
         }),
         methods: {
             login() {
-
                 let uri = this.$HttpAddr + '/loginprocess';
                 this.axios.post(uri, {
                     idv: this.userId,
@@ -65,17 +64,16 @@
                     }
                     else  {
                         this.$EventBus.$emit('complitedModalOpen', 'true');
-                        console.log(this.idv);
                         var datavalue   = Object.values(response.data);
-                        var userid      = this.userId;
-                        var scope       = datavalue[0].scope;
+                        var userid      = datavalue[0];
+                        var scope       = datavalue[4];
                         var scv         = 0;
                         var phonesc     = 0;
                         var gendersc    = 0;
                         var agesc       = 0;
-                        var agegroup    = datavalue[0].age_group;
+                        var agegroup    = datavalue[3];
                         var age         = '';
-                        var gendergroup = datavalue[0].gender;
+                        var gendergroup = datavalue[2];
                         var gender      = '';
                         if (gendergroup == 0) {
                             gender = '남자'
@@ -141,7 +139,7 @@
                         sessionStorage.setItem('gender',gender);
                         sessionStorage.setItem('age',age);
                         sessionStorage.setItem('image_path',datavalue[0].profile);
-                        console.log(datavalue);
+                        console.log(sessionStorage);
                         // this.$router.push({ name: 'main'});
                         this.$EventBus.$emit('isLogined', 'true');
                         this.$EventBus.$emit('setRightDrawerFlipped', 'true');

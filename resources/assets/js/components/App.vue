@@ -174,6 +174,7 @@
                 <router-view
                     class="router-inside">
                 </router-view>
+
             </v-flex>
             </v-layout>
             <sweet-modal
