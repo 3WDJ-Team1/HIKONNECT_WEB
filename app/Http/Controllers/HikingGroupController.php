@@ -190,7 +190,7 @@ class HikingGroupController extends Controller
         $input  = $request->get('input');
         $page   = $request->get('page');
         $result = $this->_group_model->getGroupList($page,$select,$input);
-        return response()->json($result);
+        return $result;
     }
 
     /**

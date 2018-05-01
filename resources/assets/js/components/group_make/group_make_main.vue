@@ -86,10 +86,12 @@
         methods: {
             sendData() {
                 axios.post(Laravel.host + '/schedule', {
+                    uuid : this.$route.params.groupid,
                     owner: sessionStorage.getItem('userid')
                     /*
                         @todo localStorage.getItem('userUuid')
                     */,
+                    code: this.mountain_num,
                     tt: this.title,
                     ct: this.content,
                     stDate: this.date.substring(0, 4) + "-" + this.date.substring(5, 7) + "-" + this.date.substring(8, 10) +
