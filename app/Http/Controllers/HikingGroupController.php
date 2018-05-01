@@ -44,6 +44,7 @@ class HikingGroupController extends Controller
      */
     public function index()
     {
+        return response()->json('ttt');
         // return $this->request;
         // $groupList = $this->_group_model->getGroupList();
 
@@ -181,10 +182,15 @@ class HikingGroupController extends Controller
     /**
      * 
      */
-    public function getGroupList($idx)
+    public function getGroupList(Request $request)
     {
-        $res = $this->_group_model->getGroupList($idx);
-        return response()->json($res);
+        $select = '';
+        $request->get('select') == 'writer'     ? $select = 'writer'    : '';
+        $request->get('select') == 'groupname'  ? $select = 'groupname' : '';
+        $input  = $request->get('input');
+        $page   = $request->get('page');
+        $result = $this->_group_model->getGroupList($page,$select,$input);
+        return response()->json($result);
     }
 
     /**

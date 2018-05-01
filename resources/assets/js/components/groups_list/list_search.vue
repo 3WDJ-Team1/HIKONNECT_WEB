@@ -4,7 +4,7 @@
             <div class="item">
                 <v-select
                         :items="items"
-                        label="목적지"
+                        label="그룹명"
                         item-value="text"
                         single-line
                         v-model="sel"
@@ -14,8 +14,8 @@
             <div class="item">
                 <v-text-field
                         v-if="DestinationVis"
-                        label="산이름(목적지)를 입력하시오."
-                        v-model="mountain_name"
+                        label="그룹명을 입력하시오."
+                        v-model="group_name"
                         required>
                 </v-text-field>
                 <v-text-field
@@ -24,11 +24,6 @@
                         v-model="writer"
                         required
                 ></v-text-field>
-                <div v-if="DateVis">
-                    <div id="calBox">
-                        <datetime v-model='date' placeholder='산행일자를 선택하시오.*'></datetime>
-                    </div>
-                </div>
             </div>
             <div class="item">
                 <div>
@@ -44,9 +39,8 @@
         data() {
             return {
                 items: [
-                    {text: '목적지'},
-                    {text: '작성자'},
-                    {text: '산행일자'}
+                    {text: '그룹명'},
+                    {text: '작성자'}
                 ],
                 sel: '',
                 DestinationVis: true,
@@ -60,16 +54,14 @@
         },
         methods: {
             inputSearch()   {
-                if (this.sel == '목적지') {
+                if (this.sel == '그룹명') {
                     this.send_name();
                 } else if (this.sel == '작성자') {
                     this.send_writer();
-                } else if (this.sel == '산행일자') {
-                    this.send_date();
                 }
             },
             search() {
-                if (this.sel == '목적지') {
+                if (this.sel == '그룹명') {
                     this.DestinationVis = true;
                     this.WriterVis = false;
                     this.DateVis = false
@@ -77,10 +69,6 @@
                     this.DestinationVis = false;
                     this.WriterVis = true;
                     this.DateVis = false
-                } else if (this.sel == '산행일자') {
-                    this.DestinationVis = false;
-                    this.WriterVis = false;
-                    this.DateVis = true
                 }
             },
             cal() {
@@ -94,14 +82,11 @@
                 }
             },
             send_name() {
-                this.$EventBus.$emit('input_name', this.mountain_name);
+                this.$EventBus.$emit('input_name','groupname', this.group_name);
             },
             send_writer() {
-                this.$EventBus.$emit('input_writer', this.writer);
+                this.$EventBus.$emit('input_writer','writer', this.writer);
             },
-            send_date() {
-                this.$EventBus.$emit('input_date', this.date);
-            }
         }
     }
 </script>

@@ -93,14 +93,54 @@ class HikingGroup extends Model
             )->get();
         return $queryRes;
     }
-    public function getGroupList($pageIndex)
+    public function getGroupList($page,$select,$input)
     {
-        return HikingGroup::
-        select(
-            'uuid','title','leader','min_member','max_member'
-        )->skip($pageIndex)
-            ->take(10)
-            ->get();
+        if ($select == 'writer') {
+            return HikingGroup::where([
+                ['leader', 'LIKE', "%$input%"]
+            ])
+            ->select(
+                'uuid','title','us.nickname','min_member','max_member'
+            )->join(
+                'user as us',
+                'us.userid',
+                '=',
+                'hiking_group.leader'
+                )
+                ->skip($page)
+                ->take(10)
+                ->get();
+        }
+        elseif ($select == 'groupname') {
+            return HikingGroup::where([
+                ['title', 'LIKE', "%$input%"]
+            ])
+                ->select(
+                    'uuid','title','us.nickname','min_member','max_member'
+                )->join(
+                    'user as us',
+                    'us.userid',
+                    '=',
+                    'hiking_group.leader'
+                )
+                ->skip($page)
+                ->take(10)
+                ->get();
+        }
+        else {
+            return HikingGroup::
+                select(
+                    'uuid','title','us.nickname','min_member','max_member'
+                )->join(
+                    'user as us',
+                    'us.userid',
+                    '=',
+                    'hiking_group.leader'
+                )
+                ->skip($page)
+                ->take(10)
+                ->get();
+        }
     }
 
     public function searchGroup($pageIndex, $input) {

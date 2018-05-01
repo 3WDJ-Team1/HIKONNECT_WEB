@@ -39,8 +39,8 @@ class GroupController extends Controller
         /*$groupInformations  = $this->group_model->getGroupInformations($pageIndex);
         $writers            = $this->group_model->getWriters($pageIndex);
         return compact('groupInformations', 'writers');*/
-        return $this->group_model
-            ->getGroupList($pageIndex, $groupName, $writer, $date);
+        /*return $this->group_model
+            ->getGroupList($pageIndex, $groupName, $writer, $date);*/
     }
     /**
      * Show the form for creating a new resource.

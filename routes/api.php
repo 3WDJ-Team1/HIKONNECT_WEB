@@ -61,8 +61,8 @@ Route::group(
             'hikingGroup', 
             'HikingGroupController'
         );
-        Route::get(
-            'groupList/{idx}',
+        Route::post(
+            'groupList',
             'HikingGroupController@getGroupList'
         )->name('groupList');
         Route::get(

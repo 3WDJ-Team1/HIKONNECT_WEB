@@ -60,7 +60,7 @@
                 <v-icon>update</v-icon>
             </v-btn>
         </div>
-        <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+        <!--<infinite-loading @infinite="infiniteHandler"></infinite-loading>-->
     </v-container>
 </template>
 
@@ -71,10 +71,8 @@
         data() {
             return {
                 show: false,
-                select: "",
-                mountain_name: '',
-                writer: '',
-                date: '',
+                select: "a",
+                input: "a",
                 list_num: 0,
                 list: [],
                 HttpAddr: Laravel.host,
@@ -86,18 +84,16 @@
             // 이벤트 받기
             // '이벤트 명', function(받을 데이터)
             this.$EventBus.$on('input_name', (sel, mountain) => {
+                console.log(mountain)
                 this.select = sel;
-                this.mountain_name = mountain;
+                this.input = mountain;
+                this.list_num = 0;
                 this.infiniteHandler();
             });
             this.$EventBus.$on('input_writer', (sel, writer) => {
                 this.select = sel;
-                this.writer = writer;
-                this.infiniteHandler();
-            });
-            this.$EventBus.$on('input_date', (sel, date) => {
-                this.select = sel;
-                this.date = date.substring(0, 4) + "-" + date.substring(5, 7) + "-" + date.substring(8, 10);
+                this.input = writer;
+                this.list_num = 0;
                 this.infiniteHandler();
             });
         },
@@ -134,26 +130,21 @@
              * @author      Jiyoon Lee, Sungeun Kang <kasueu0814@gmail.com>
              * @augments    $state state of infinite-loading */
             infiniteHandler($state) {
-                let url;
-                if (this.mountain_name != "") {
-                    url = this.HttpAddr + '/groupList/' + this.list_num + "/" + this.select + "/" + this.mountain_name;
-                } else if (this.writer != "") {
-                    console.log(this.writer);
-                    url = this.HttpAddr + '/groupList/' + this.list_num + "/" + this.select + "/" + this.writer;
-                } else if (this.date != "") {
-                    console.log(this.date);
-                    url = this.HttpAddr + '/groupList/' + this.list_num + "/" + this.select + "/" + this.date;
-                } else {
-                    url = this.HttpAddr + '/groupList/' + this.list_num;
-                }
-                axios.get(url).then(response => {
-                    if (response) {
+                console.log(" select:" + this.select + " input:" + this.input + " listnum:" + this.list_num);
+                this.axios.post(this.HttpAddr + '/api/groupList',
+                    {
+                        select  : this.select,
+                        input   : this.input,
+                        page    : this.list_num
+                    }).then(response => {
+                    console.log(response.data);
+//                    if (response) {
                         this.list = this.list.concat(response.data);
-                        $state.loaded();
-                    }
-                    else {
-                        $state.complete();
-                    }
+//                        $state.loaded();
+//                    }
+//                    else {
+//                        $state.complete();
+//                    }
                 });
                 this.list_num += 10;
             },
@@ -164,10 +155,9 @@
              */
             joinGroup(groupId) {
                 axios.post(this.$HttpAddr + '/entryGroup', {
-                    userUuid: sessionStorage.uuid,  // user의 uuid
+                    userUuid: sessionStorage.userid,  // user의 uuid
                     groupUuid: groupId               // group의 uuid
-                })
-                    .then(response => {
+                }).then(response => {
                         console.log(response);
                         if (response) {
                             this.$EventBus.$emit('complitedModalOpen', true);

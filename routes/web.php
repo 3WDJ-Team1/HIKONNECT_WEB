@@ -25,9 +25,5 @@ Route::get('group/destroy/{uuid?}', 'GroupController@destroy');
 Route::get('group/groupNotification/{uuid?}', 'GroupController@groupNotification');
 Route::post('group/store', 'GroupController@store');
 Route::post('group/request', 'GroupController@request');
-Route::get('group/index/{pageIndex?}/{groupName?}/{writer?}/{date?}', 'GroupController@index');
+/*Route::get('group/index/{pageIndex?}/{groupName?}/{writer?}/{date?}', 'GroupController@index');*/
 Route::get('group/findData/{method?}/{inputData?}', 'GroupController@findData');
-Route::get(
-    'searchGroup/{idx}/{select}/{input}',
-    'HikingGroupController@searchGroup'
-)->name('searchGroup');
