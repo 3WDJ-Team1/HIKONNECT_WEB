@@ -52,15 +52,8 @@ class LoginController extends Controller
         }
         if ($userinfo->password == $request->get('pwv')) {
             $sessionVal = User::where('userid',$request->get('idv'))->select(
-                'userid','nickname','gender','age_group','scope','profile','phone'
+                'userid','nickname','gender','age_group','scope','profile','phone','password'
             )->first();
-            /*$request->session()->put('userid',$sessionVal->userid);
-            $request->session()->put('nickname',$sessionVal->nickname);
-            $request->session()->put('gender',$sessionVal->gender);
-            $request->session()->put('age_group',$sessionVal->age_group);
-            $request->session()->put('scope',$sessionVal->scope);
-            $request->session()->put('profile',$sessionVal->profile);
-            $request->session()->put('phone',$sessionVal->phone);*/
             return response()->json($sessionVal);
         } else {
             return response()->json('pwfalse');

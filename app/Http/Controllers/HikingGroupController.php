@@ -181,34 +181,10 @@ class HikingGroupController extends Controller
     /**
      * 
      */
-    public function getGroupList($idx, $perIdx)
+    public function getGroupList($idx)
     {
-        if ($idx && $perIdx) {
-            if (!$idx = intval($idx) || !$perIdx = intval($perIdx)) {
-                return response('Wrong request parameter type: $idx and $perIdx are must be Interger Type');
-            }
-        }
-
-        $res = HikingGroup::
-        select(
-            'hiking_group.title',
-            'user.nickname',
-            'hiking_group.min_member',
-            'hiking_group.max_member',
-            'hiking_group.uuid'
-        )
-        ->join(
-            'user.userid',
-            '=',
-            'hiking_group.leader'
-        )->orderby(
-            'hiking_group.created_at',
-            'desc'
-        )->skip($perIdx)
-        ->take(10)
-        ->get();
-
-        return $res;
+        $res = $this->_group_model->getGroupList($idx);
+        return response()->json($res);
     }
 
     /**
