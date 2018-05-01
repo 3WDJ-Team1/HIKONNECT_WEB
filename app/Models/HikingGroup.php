@@ -93,30 +93,12 @@ class HikingGroup extends Model
             )->get();
         return $queryRes;
     }
-    public function getGroupList($pageIndex, $groupName, $writer, $date)
+    public function getGroupList($pageIndex)
     {
-        return DB::table('hiking_group as hg')
-            ->select(
-                'hg.uuid',
-                'hg.name as title',
-                'uf.nickname',
-                'hp.end_point',
-                'hp.start_date',
-                'hg.min_members',
-                'hg.max_members'
-            )->join(
-                'user.userid',
-                '=',
-                'hg.leader'
-            )->where(
-                [
-                    ['hg.name', 'LIKE', "%$groupName%"],
-                    ['user.nickname', 'LIKE', "%$writer%"]
-                ]
-            )->orderby(
-                'hg.created_at',
-                'desc'
-            )->skip($pageIndex)
+        return HikingGroup::
+        select(
+            'title','leader','min_member','max_member'
+        )->skip($pageIndex)
             ->take(10)
             ->get();
     }
