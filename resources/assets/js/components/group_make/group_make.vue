@@ -68,8 +68,7 @@
         }),
         methods: {
             submit() {
-                axios.post(this.$HttpAddr + '/hikingGroup', {
-                    // nickname: this.nickname,
+                axios.post(this.$HttpAddr + '/api/hikingGroup', {
                     writer: sessionStorage.getItem('userid'), // user's uuid,
                     title: this.title,
                     content: this.text,

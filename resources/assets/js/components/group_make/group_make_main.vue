@@ -85,7 +85,7 @@
         },
         methods: {
             sendData() {
-                axios.post(Laravel.host + '/schedule', {
+                axios.post(Laravel.host + '/api/schedule', {
                     owner: sessionStorage.getItem('userid')
                     /*
                         @todo localStorage.getItem('userUuid')
