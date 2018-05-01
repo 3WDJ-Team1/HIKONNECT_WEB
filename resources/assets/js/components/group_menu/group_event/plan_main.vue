@@ -1,7 +1,6 @@
 <template>
     <div>
         <router-view v-if="listEventB" name="item"></router-view>
-
         <router-view v-if="makeEventB" name="make"></router-view>
         <v-btn
                 style="margin-bottom: 10%;"

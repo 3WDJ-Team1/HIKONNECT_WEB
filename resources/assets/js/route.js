@@ -1,4 +1,3 @@
-import level                from  './components/mypage/level.vue';
 
 // main
 import Main                 from './components/main/MainPage.vue'
@@ -22,10 +21,12 @@ import group_upadate        from './components/group_make/updateGroup'
 import notice               from './components/notice/main'
 import notice_information   from './components/notice/notice_information'
 
-import mypage               from './components/mypage/profile.vue';
+import profile               from './components/mypage/profile.vue';
 import modify               from './components/mypage/modify.vue';
 import graph                from './components/mypage/graph.vue';
 import update                from './components/mypage/update.vue';
+import level                from  './components/mypage/level.vue';
+import myPage               from './components/mypage/mypagemain'
 
 // group menu tab
 import GroupMenuTab         from "./components/group_menu/GroupMenuTab.vue";
@@ -94,7 +95,7 @@ const routes = [
     {
         name: 'mypage',
         path: '/mypage',
-        component: mypage
+        component: myPage
     },
     {
         name: 'modify',
@@ -129,15 +130,10 @@ const routes = [
         children    : [
             // tab of group menu
             {
-                path        : 'event',
-                component   : event_make_main
-            },
-            {
                 path        : ':groupid',
                 components  : {
                     notice      : NoticeListUp,
                     plan        : plan_main,
-                    calendar    : GroupPlanCalendar,
                     member_list : GroupMemberList,
                 },
                 children: [
