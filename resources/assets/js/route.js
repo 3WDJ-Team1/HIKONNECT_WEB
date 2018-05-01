@@ -129,6 +129,10 @@ const routes = [
         children    : [
             // tab of group menu
             {
+                path        : ':groupid/event',
+                component   : event_make_main
+            },
+            {
                 path        : ':groupid',
                 components  : {
                     notice      : NoticeListUp,
@@ -137,10 +141,6 @@ const routes = [
                     member_list : GroupMemberList,
                 },
                 children: [
-                    {
-                        path        : 'event',
-                        component   : event_make_main
-                    },
                     {
                         path        : '',
                         components  : {
@@ -176,7 +176,7 @@ const routes = [
                     }
                 ]
             },
-            
+
         ]
     }
 ];
