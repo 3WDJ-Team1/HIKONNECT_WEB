@@ -70,9 +70,11 @@
             submit() {
                 axios.post(this.$HttpAddr + '/notice', {
                     // nickname: this.nickname,
-                    writer: sessionStorage.uuid, // user's uuid,
+                    writer: sessionStorage.getItem('userid'), // user's uuid,
                     title: this.title,
-                    content: this.text
+                    content: this.text,
+                    min: this.min,
+                    max: this.max
                 });
                 this.$parent.close();
             }
