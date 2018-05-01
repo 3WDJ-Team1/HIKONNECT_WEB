@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\entry_info;
-use App\Models\LocationMemo;
+use App\Models\location_memo;
 use App\Models\test;
-use DB;
-// use App\User;
-// use App\User_Profile;
+use App\User;
+use App\User_Profile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -18,7 +17,7 @@ class testcontroller extends Controller
 
     public function __construct()
     {
-        $this->location_memo = new LocationMemo();
+        $this->location_memo = new location_memo();
     }
 
     /**
@@ -30,6 +29,7 @@ class testcontroller extends Controller
     {
         return "ㅎㅇㅎㅇ";
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -39,6 +39,7 @@ class testcontroller extends Controller
     {
         //
     }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -49,10 +50,10 @@ class testcontroller extends Controller
     {
         $user_id    = $request->get('user_id');
 
-        $uuid = DB::table('user')->where('id',$user_id)->select('uuid')->get()[0]->uuid;
-        $hiking_group = DB::table('entry_info')->where('user',$uuid)->select('hiking_group')->get()[0]->hiking_group;
+        $uuid = User::where('id',$user_id)->select('uuid')->get()[0]['uuid'];
+        $hiking_group = entry_info::where('user',$uuid)->select('hiking_group')->get()[0]['hiking_group'];
 
-        DB::table('location_memo')->insert([
+        location_memo::insert([
             'uuid'          => '',
             'writer'        => $uuid,
             'hiking_group'  => $hiking_group,
@@ -64,7 +65,6 @@ class testcontroller extends Controller
             'created_at'    => $request->get('created_at'),
             'updated_at'    => $request->get('updated_at')
         ]);
-        
         echo $uuid;
     }
 
@@ -78,6 +78,7 @@ class testcontroller extends Controller
     {
         //
     }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -88,6 +89,7 @@ class testcontroller extends Controller
     {
         //
     }
+
     /**
      * Update the specified resource in storage.
      *
@@ -99,6 +101,7 @@ class testcontroller extends Controller
     {
         //
     }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -111,79 +114,55 @@ class testcontroller extends Controller
     }
 
     public function get_Memo_Info(Request $request) {
-        $uuid = DB::table('user')
-        ->where(
+        $uuid = User::where(
             'id',
             $request->get('id')
         )->select('uuid')
-        ->get()[0]->uuid;
+        ->get()[0]['uuid'];
 
-        $hiking_group = DB::table('entry_info')->where(
+        $hiking_group = entry_info::where(
             'user',
             $uuid
         )->select(
             'hiking_group'
-        )->get()[0]->hiking_group;
+        )->get()[0]['hiking_group'];
 
-        $row = DB::table('location_memo')->where(
+        $row = location_memo::where(
             'hiking_group',
             $hiking_group
-        )->get();
+        )->get()
+            ->toArray();
 
-        json_decode($row);
-
-        $row_count = DB::table('location_memo')->where(
+        $post_data = array();
+        $row_count = location_memo::where(
             'hiking_group',
             $hiking_group
         )->count();
 
-        $post_data = array();
-
         for ($i = 0; $i < $row_count; $i++) {
             $distance = 
-            (6371 * acos(cos(deg2rad($request->get('lat'))) * cos(deg2rad($row[$i]->latitude)) * cos(deg2rad($row[$i]->longitude)
-                        - deg2rad($request->get('lng'))) + sin(deg2rad($request->get('lat'))) * sin(deg2rad($row[$i]->latitude))));
+            (6371 * acos(cos(deg2rad($request->get('lat'))) * cos(deg2rad($row[$i]['latitude'])) * cos(deg2rad($row[$i]['longitude'])
+                        - deg2rad($request->get('lng'))) + sin(deg2rad($request->get('lat'))) * sin(deg2rad($row[$i]['latitude']))));
 
-            if ($distance < 0.05) {
+            if ($distance < 0.3) {
                 array_push($post_data, $row[$i]);
             }
             else
                 continue;
         }
-
-        // var_dump($post_data);
-
-        echo json_encode($post_data);
+        printf(json_encode($post_data));
     }
 
     public function send_image_path(Request $request) {
-        $path = location_memo::where('latitude',$request->get('lat'))->
-        where('longitude',$request->get('lng'))->get();
+
+        $path = location_memo::where(
+            'latitude',
+            $request->get('lat')
+        )->where(
+            'longitude',
+            $request->get('lng')
+        )->get();
 
         print json_encode($path);
-    }
-
-    public function store_send(Request $request) {
-        $uuid = User::where('id',$request->get('id'))->select('uuid')->get()[0]['uuid'];
-        $hiking_group = entry_info::where('user',$uuid)->select('hiking_group')->get()[0]['hiking_group'];
-        $userid = user_position::where('user',$request->get('id'))->count();
-            if($userid == null) {
-                user_position::insert([
-                    'uuid'          => '',
-                    'user'          => $uuid,
-                    'hiking_group'  => $hiking_group,
-                    'latitude'      => $request->get('lat'),
-                    'longitude'     => $request->get('lng')
-                ]);
-            }
-            else {
-                user_position::where('user',$request->get('id'))->update([
-                    'latitude'      => $request->get('lat'),
-                    'longitude'     => $request->get('lng')
-                ]);
-            }
-
-        $result = user_position::where('hiking_group',$hiking_group)->get()->toArray();
-        print json_encode($result);
     }
 }

@@ -85,8 +85,8 @@
         },
         methods: {
             sendData() {
-                axios.post(Laravel.host + '/group/store', {
-                    owner: sessionStorage.getItem('uuid')
+                axios.post(Laravel.host + '/schedule', {
+                    owner: sessionStorage.getItem('userid')
                     /*
                         @todo localStorage.getItem('userUuid')
                     */,
@@ -97,9 +97,11 @@
                     mountP: JSON.stringify(this.mountain_path)
                 })
                     .then(response => {
+                        console.log(response.data);
                         if (response.data == true) {
                             alert('성공적으로 저장 되었습니다.');
                             this.$router.push('/list');
+
                         } else {
                             alert('저장을 실패하였습니다.');
                         }

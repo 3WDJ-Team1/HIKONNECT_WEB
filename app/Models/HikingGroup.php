@@ -97,7 +97,7 @@ class HikingGroup extends Model
     {
         return HikingGroup::
         select(
-            'title','leader','min_member','max_member'
+            'uuid','title','leader','min_member','max_member'
         )->skip($pageIndex)
             ->take(10)
             ->get();

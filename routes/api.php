@@ -33,6 +33,10 @@ Route::get(
 Route::group(
     [], 
     function () {
+        /*Route::resource(
+            'schedule',
+            'ScheduleController'
+        )->name('Schedule');*/
         // Radios Routing
         Route::get(
             'radioGram/{groupId}',

@@ -77,7 +77,7 @@ class LoginController extends Controller
     }
 
     public function login_app(Request $request) {
-        $userinfo = User::where('id', $request->get('id'))->first();
+        $userinfo = User::where('userid', $request->get('id'))->first();
         if ($userinfo == false)
             echo "false";
         else {

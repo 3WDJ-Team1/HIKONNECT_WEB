@@ -144,7 +144,7 @@
                     console.log(this.date);
                     url = this.HttpAddr + '/groupList/' + this.list_num + "/" + this.select + "/" + this.date;
                 } else {
-                    url = this.HttpAddr + '/group/index/' + this.list_num;
+                    url = this.HttpAddr + '/groupList/' + this.list_num;
                 }
                 axios.get(url).then(response => {
                     if (response) {
