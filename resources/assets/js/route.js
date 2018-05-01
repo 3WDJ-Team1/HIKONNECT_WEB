@@ -8,10 +8,11 @@ import groups_list          from './components/groups_list/main.vue'
 import list_search          from './components/groups_list/list_search'
 import list_show            from './components/groups_list/list_show'
 
+
 // group_make
 import autocomplete         from './components/group_make/autocomplete'
-import group_make_main      from './components/group_make/group_make_main'
-import group_map            from './components/group_make/group_map'
+import event_make_main      from './components/group_make/group_make_main'
+import event_map            from './components/group_make/group_map'
 import group_make      from './components/group_make/group_make'
 
 // group_update
@@ -35,6 +36,12 @@ import NoticeWriteBtn       from './components/group_menu/group_notice/NoticeWri
 import NoticeModifyBtn      from './components/group_menu/group_notice/NoticeModifyBtn.vue';
 import NoticeDeleteBtn      from './components/group_menu/group_notice/NoticeDeleteBtn.vue';
 import NoticeFormInside     from './components/group_menu/group_notice/NoticeFormInside.vue';
+
+
+//group event
+import groupEvent           from './components/group_menu/group_event/eventItem'
+import makeEvent            from './components/group_menu/group_event/makeEvent'
+
 
 // group plan
 import GroupPlan            from './components/group_menu/group_plan/GroupPlan.vue';
@@ -122,60 +129,54 @@ const routes = [
         children    : [
             // tab of group menu
             {
-                path        : '/group/:groupid',
+                path        : ':groupid',
                 components  : {
                     notice      : NoticeListUp,
                     plan        : GroupPlan,
+                    item        : groupEvent,
                     member_list : GroupMemberList,
                 },
                 children: [
                     {
-                        path        : '/group/:groupid',
+                        path        : 'event',
+                        component   : event_make_main
+                    },
+                    {
+                        path        : '',
                         components  : {
                             // write, modify, delete button of NoticeListUp
                             write   : NoticeWriteBtn,
                             modify  : NoticeModifyBtn,
                             delete  : NoticeDeleteBtn,
                             // components in GroupPlan
-                            map         : GroupPlanMap,
-                            calendar    : GroupPlanCalendar,
+                            // map         : GroupPlanMap,
+                            // calendar    : GroupPlanCalendar,
                             // component in GroupMemberList
                             member_detail   : GroupMemberDetail,
                             waiting_member   : WaitingMemberList,
                         },
                         children: [
                             {
-                                path        : '/group/:groupid',
+                                path        : '',
                                 components  : {
                                     // inner form component of modal(NoticeWriteBtn, NoticeModifyBtn)
                                     form            : NoticeFormInside,
-                                }
+                                    autocomplete: autocomplete
+                                },
+                                children:   [
+                                    {
+                                        path: '',
+                                        components: {
+                                            map: event_map
+                                        }
+                                    }
+                                ]
                             }
                         ]
                     }
                 ]
             },
             
-        ]
-    },
-    {
-        path: '/make',
-        component: group_make_main,
-        children: [
-            {
-                path: '/make',
-                components: {
-                    autocomplete: autocomplete
-                },
-                children:   [
-                    {
-                        path: '/make',
-                        components: {
-                            map: group_map
-                        }
-                    }
-                ]
-            }
         ]
     }
 ];

@@ -26,7 +26,7 @@
             <tr>
                 <td colspan='1'>등산 경로</td>
                 <td colspan='3'>
-                    <router-view name="autocomplete"></router-view>
+                    <!--<router-view name="autocomplete"></router-view>-->
                 </td>
             </tr>
             <tr>
@@ -44,26 +44,6 @@
                     </vue-timepicker>
                     <!--<span> to </span>-->
                     <!--<vue-timepicker format="HH:mm:ss"></vue-timepicker>-->
-                </td>
-            </tr>
-            <tr>
-                <td colspan='1'>최소 모집 인원</td>
-                <td colspan='1'>
-                    <input
-                            style="width: 100px;"
-                            type="text"
-                            place
-                            class="form-control"
-                            v-model="max_num">
-                </td>
-                <td colspan='1'>최대 모집 인원</td>
-                <td colspan='1'>
-                    <input
-                            style="width: 100px;"
-                            type="text"
-                            place
-                            class="form-control"
-                            v-model="min_num">
                 </td>
             </tr>
             </tbody>
