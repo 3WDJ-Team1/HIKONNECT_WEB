@@ -1,15 +1,15 @@
 <template>
     <v-container>
-        <v-card>
-            <v-card-title primary-title>
+        <v-card v-for="item in list" :key="item.owner">
+            <v-card-title primary-title >
                 <div>
-                    <div class="headline">그룹 이름</div>
-                    <span class="grey--text">작성자</span>
+                    <div class="headline">{{ item.title }}</div>
+                    <span class="grey--text">{{ item.nickname }}</span>
                 </div>
             </v-card-title>
             <v-card-actions>
                 <!--<v-btn flat :to="toGroupDetail + '/' + item.uuid">그룹 페이지로 이동</v-btn>-->
-                <v-btn flat :to="toGroupDetail + '/d9cb0da3-4c71-11e8-82cb-42010a9200af'">그룹 페이지로 이동</v-btn>
+                <v-btn flat :to="toGroupDetail + '/' + item.uuid">그룹 페이지로 이동</v-btn>
                 <v-btn flat color="purple">그룹 참여하기</v-btn>
                 <v-spacer></v-spacer>
                 <v-btn icon @click.native="show = !show">
@@ -19,48 +19,14 @@
             <v-slide-y-transition>
                 <v-card-text v-show="show">
                     <div class="member-count-wrapper">
-                        <div class="min_members inlineBlocks">최소인원수: 2</div>
-                        <div class="max_members inlineBlocks">최대인원수: 3</div>
+                        <div class="min_members inlineBlocks">최소인원수: {{ item.min_members }}</div>
+                        <div class="max_members inlineBlocks">최대인원수: {{ item.max_members }}</div>
                     </div>
-                    모집 내용
+                    {{ item.content }}
                 </v-card-text>
             </v-slide-y-transition>
         </v-card>
-        <div class="card" v-for="item in list" :key="item.owner">
-            <div class="card-header">
-                <h4 class="title inlineBlocks">{{ item.title }} </h4>
-                <h5>{{ item.nickname }}</h5>
-                <h5>{{ item.content }}</h5>
-                <v-btn
-                        @click="joinAlert()"
-                        v-if="joinVisible(item.nickname)"
-                        style="margin-right: 5%;"
-                        color="red"
-                        dark
-                        midiuem
-                        fab>
-                    <v-icon>person_add</v-icon>
-                </v-btn>
-            </div>
-            <div class="card-body">
-                <div class="member-count-wrapper">
-                    <div class="min_members inlineBlocks">최소인원수: {{ item.min_members }}</div>
-                    <div class="max_members inlineBlocks">최대인원수: {{ item.max_members }}</div>
-                </div>
-                <!--<div class="end_point inlineBlocks">목적지: {{ item.end_point }}</div>-->
-                <!--<div class="startdate inlineBlocks">산행일자: {{ item.start_date }}</div>-->
-            </div>
-            <v-btn flat color="teal" :to="toGroupDetail + '/' + item.uuid">
-                <span>to group home</span>
-                <v-icon>description</v-icon>
-            </v-btn>
-            <v-btn flat color="teal" :to="toUpdate + '/' + item.uuid"
-                   v-if="updateVisible(item.nickname)">
-                <span>update group page content</span>
-                <v-icon>update</v-icon>
-            </v-btn>
-        </div>
-        <!--<infinite-loading @infinite="infiniteHandler"></infinite-loading>-->
+        <infinite-loading @infinite="infiniteHandler"></infinite-loading>
     </v-container>
 </template>
 
@@ -77,14 +43,12 @@
                 list: [],
                 HttpAddr: Laravel.host,
                 toGroupDetail: '/group',
-                toUpdate: '/group_update'
             };
         },
         created() {
             // 이벤트 받기
             // '이벤트 명', function(받을 데이터)
             this.$EventBus.$on('input_name', (sel, mountain) => {
-                console.log(mountain)
                 this.select = sel;
                 this.input = mountain;
                 this.list_num = 0;
@@ -130,21 +94,22 @@
              * @author      Jiyoon Lee, Sungeun Kang <kasueu0814@gmail.com>
              * @augments    $state state of infinite-loading */
             infiniteHandler($state) {
-                console.log(" select:" + this.select + " input:" + this.input + " listnum:" + this.list_num);
                 this.axios.post(this.HttpAddr + '/api/groupList',
                     {
                         select  : this.select,
                         input   : this.input,
                         page    : this.list_num
                     }).then(response => {
-                    console.log(response.data);
-//                    if (response) {
+                        // if(response.hits.length)    {
+                        //
+                        // }
+                   if (response) {
                         this.list = this.list.concat(response.data);
-//                        $state.loaded();
-//                    }
-//                    else {
-//                        $state.complete();
-//                    }
+                       $state.loaded();
+                   }
+                   else {
+                       $state.complete();
+                   }
                 });
                 this.list_num += 10;
             },

@@ -13,7 +13,7 @@
             </div>
             <div class="item">
                 <v-text-field
-                        v-if="DestinationVis"
+                        v-if="NameVis"
                         label="그룹명을 입력하시오."
                         v-model="group_name"
                         required>
@@ -43,12 +43,10 @@
                     {text: '작성자'}
                 ],
                 sel: '',
-                DestinationVis: true,
+                NameVis: true,
                 WriterVis: false,
-                DateVis: false,
-                mountain_name: "",
+                group_name: "",
                 writer: "",
-                date: "",
                 httpAddr: Laravel.host,
             }
         },
@@ -62,13 +60,11 @@
             },
             search() {
                 if (this.sel == '그룹명') {
-                    this.DestinationVis = true;
+                    this.NameVis = true;
                     this.WriterVis = false;
-                    this.DateVis = false
                 } else if (this.sel == '작성자') {
-                    this.DestinationVis = false;
+                    this.NameVis = false;
                     this.WriterVis = true;
-                    this.DateVis = false
                 }
             },
             cal() {
