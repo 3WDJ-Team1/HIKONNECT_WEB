@@ -31,5 +31,6 @@ class Announce extends Model
             ->skip($page)
             ->take(10)
             ->get();
+
     }
 }

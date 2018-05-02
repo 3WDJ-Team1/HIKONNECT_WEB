@@ -83,6 +83,7 @@
                     console.log(response.data);
                 });
                 this.$parent.close();
+
                 this.$EventBus.$emit('newNoticeWrited', true);
             },
         },

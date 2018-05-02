@@ -54,6 +54,7 @@ class NoticeController extends Controller
                 $groupUuid,
                 $perPage
             );
+
         return response()->json('true');
     }
 

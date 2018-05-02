@@ -127,6 +127,7 @@
                             $state.complete();
                         }
                     });
+
                 this.page++;
             },
             isGroupOwner() {

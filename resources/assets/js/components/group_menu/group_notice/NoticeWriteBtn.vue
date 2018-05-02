@@ -32,6 +32,7 @@
              *              the function for opening modal.
              */
             openWriteModal : function() {
+
                 this.$refs.write.open();
                 this.$EventBus.$emit('noticeData', {title: '', content: ''});
                 this.$EventBus.$emit('modalMode', 'write');
