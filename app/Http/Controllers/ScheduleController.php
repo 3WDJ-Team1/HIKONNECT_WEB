@@ -60,7 +60,6 @@ class ScheduleController extends Controller
             'mnt_id'        => 491303004
         ]);
         $this->hiking_schedule->scheduleReg($info);
-
         return response()->json('true');
     }
 
