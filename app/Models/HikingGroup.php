@@ -100,13 +100,14 @@ class HikingGroup extends Model
                 ['leader', 'LIKE', "%$input%"]
             ])
             ->select(
-                'uuid','title','us.nickname','min_member','max_member'
+                'uuid','title','content','us.nickname','min_member','max_member'
             )->join(
                 'user as us',
                 'us.userid',
                 '=',
                 'hiking_group.leader'
                 )
+                ->orderBy('hiking_group.created_at','DESC')
                 ->skip($page)
                 ->take(10)
                 ->get();
@@ -116,13 +117,14 @@ class HikingGroup extends Model
                 ['title', 'LIKE', "%$input%"]
             ])
                 ->select(
-                    'uuid','title','us.nickname','min_member','max_member'
+                    'uuid','title','content','us.nickname','min_member','max_member'
                 )->join(
                     'user as us',
                     'us.userid',
                     '=',
                     'hiking_group.leader'
                 )
+                ->orderBy('hiking_group.created_at','DESC')
                 ->skip($page)
                 ->take(10)
                 ->get();
@@ -130,13 +132,14 @@ class HikingGroup extends Model
         else {
             return HikingGroup::
                 select(
-                    'uuid','title','us.nickname','min_member','max_member'
+                    'uuid','title','content','us.nickname','min_member','max_member'
                 )->join(
                     'user as us',
                     'us.userid',
                     '=',
                     'hiking_group.leader'
                 )
+                ->orderBy('hiking_group.created_at','DESC')
                 ->skip($page)
                 ->take(10)
                 ->get();

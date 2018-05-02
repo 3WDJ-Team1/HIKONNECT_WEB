@@ -177,28 +177,30 @@ class testcontroller extends Controller
             'longitude'     => $request->get('lng')
         ]);*/
 
+        $useridcheck = schedule_member::where('userid',$request->get('id'))->count();
         $userid = $request ->get('id');
-
-        if($userid == 0) {
+        if($useridcheck == 0) {
             schedule_member::insert([
-                'uuid'          => '',
-                'user'          => $userid,
-                'hiking_group'  => 'ddd',
-                'schedule_no'  => '1',
-                'hiking_state' => '1',
+                'userid'        => $userid,
+                'hiking_group' => '57a89f8f-4dc8-11e8-82cb-42010a9200af',
+                'schedule'      => 1,
+                'hiking_state' => 1,
                 'speed'         => 1,
                 'avg_speed'     => 1,
-                'location'      => $request->get('temp')
+                'current_fid'   => 1,
+                'latitude'      => $request->get('latitude'),
+                'longitude'     => $request->get('longitude')
             ]);
         }
-        else {
-            schedule_member::where('user',$userid)->update([
-                'location'      => $request->get('temp')
+        else{
+            schedule_member::where('userid',$userid)->update([
+                'latitude'          => $request->get('latitude'),
+                'longitude'         => $request->get('longitude')
             ]);
         }
 
         //$result = user_position::leftjoin('hiking_group',$hiking_group)->get()->toArray();
-        $result = user_position::where('hiking_state','1') -> get();
-        print json_encode($result);
+        $result = schedule_member::select('latitude','longitude')->get();
+        print_r(json_encode($result));
     }
 }
