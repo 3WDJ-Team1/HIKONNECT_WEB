@@ -200,7 +200,7 @@ class testcontroller extends Controller
         }
 
         //$result = user_position::leftjoin('hiking_group',$hiking_group)->get()->toArray();
-        $result = schedule_member::select('latitude','longitude')->get();
+        $result = schedule_member::select('latitude','longitude','userid')->get();
         print_r(json_encode($result));
-    }
+    }~
 }

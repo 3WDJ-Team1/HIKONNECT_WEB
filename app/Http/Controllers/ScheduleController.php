@@ -57,10 +57,10 @@ class ScheduleController extends Controller
             'created_at'    => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at'    => Carbon::now()->format('Y-m-d H:i:s'),
             'start_date'    => $request->get('stDate'),
-            'mnt_id'        => $request->get('mnt_id')
+            'mnt_id'        => 13412154
         ]);
         $this->hiking_schedule->scheduleReg($info);
-        return response()->json('true');
+        return response()->json($request);
     }
 
     /**

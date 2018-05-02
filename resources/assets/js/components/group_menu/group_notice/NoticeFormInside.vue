@@ -79,6 +79,8 @@
                     uuid: this.$route.params.groupid,
                     title: this.title,
                     content: this.text
+                }).then(response => {
+                    console.log(response.data);
                 });
                 this.$parent.close();
                 this.$EventBus.$emit('newNoticeWrited', true);
