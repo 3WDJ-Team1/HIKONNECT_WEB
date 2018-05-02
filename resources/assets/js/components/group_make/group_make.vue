@@ -1,5 +1,6 @@
 <template>
     <div>
+        <v-form v-model="valid" ref="form">
         <v-subheader style="font-size: 18px;">Type the group name</v-subheader>
         <v-text-field
                 name="notice_title"
@@ -43,12 +44,14 @@
         >
             submit
         </v-btn>
+        </v-form>
     </div>
 </template>
 
 <script>
     export default {
         data: () => ({
+            valid       : false,
             title: '',
             text: '',
             max: '',
@@ -66,6 +69,13 @@
                 max => !!max || 'number is required.'
             ]
         }),
+        created() {
+            this.$EventBus.$on('noticeData', (data) => {
+                this.title = data.title;
+                this.text = data.content;
+                this.noticeUuid = data.uuid;
+            });
+        },
         methods: {
             submit() {
                 axios.post(this.$HttpAddr + '/hikingGroup', {
@@ -76,7 +86,11 @@
                     min: this.min,
                     max: this.max
                 }).then((response)=> {
-                    console.log(response.data);
+                    if(response.data == 'true')   {
+                        alert('성공적으로 저장되었습니다.');
+                        this.$EventBus.$emit('group_make_sign','true');
+
+                    }
                 });
                 this.$parent.close();
             }

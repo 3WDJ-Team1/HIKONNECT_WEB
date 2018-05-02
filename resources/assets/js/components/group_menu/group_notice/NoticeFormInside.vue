@@ -93,7 +93,7 @@
                                 writer  : sessionStorage.uuid, // user's uuid,
                                 title   : this.title,
                                 content : this.text
-                            })
+                            });
                             this.$parent.close();
                             this.$EventBus.$emit('newNoticeWrited', true);
                         }
