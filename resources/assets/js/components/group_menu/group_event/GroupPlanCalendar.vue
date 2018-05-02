@@ -5,33 +5,81 @@
     @todo   write plz
  -->
 <template>
-    <v-card flat>
-        <vue-event-calendar
-            :events="hikingEvents"
-            style="width: 70%; margin: 0 auto;">
-        </vue-event-calendar>
-    </v-card>
+    <div>
+    <vue-event-calendar
+            style="margin: 0 auto;" :events="hikingEvents">
+        <v-card v-for="event in hikingEvents" :key="event.writer">
+            <v-card-title primary-title>
+                <div>
+                    <div class="headline">{{ event.title }}</div>
+                    <span class="grey--text">{{ event.writer }}</span>
+
+                </div>
+            </v-card-title>
+            <v-card-actions>
+                <v-btn flat>JOIN</v-btn>
+                <v-btn flat color="purple" @click="openShowModal()">SHOW PATH</v-btn>
+                <v-spacer></v-spacer>
+                <v-btn icon @click.native="show = !show">
+                    <v-icon>{{ show ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
+                </v-btn>
+            </v-card-actions>
+            <v-slide-y-transition>
+                <v-card-text v-show="show">
+                    <div class="member-count-wrapper">
+                        <div class="min_members inlineBlocks">산행 일자: {{ event.date }}</div>
+                        <div class="max_members inlineBlocks">시작 시간: {{ event.time }}</div>
+                    </div>
+                    {{ event.desc }}
+                </v-card-text>
+            </v-slide-y-transition>
+        </v-card>
+    </vue-event-calendar>
+    <sweet-modal ref="show" blocking>
+        dfasdfasdfasdfasdfasdf
+    </sweet-modal>
+    </div>
 </template>
 
 <script>
     export default {
         data: () => ({
-            hikingEvents: [
-                {
-                    date: '2018/04/01',
-                    title: 'Hike today',
-                    desc: 'blahblah',
-                }
-            ]
+            show: false,
+            hikingEvents: []
         }),
+        methods:    {
+            openShowModal : function() {
+                this.$refs.show.open();
+                // this.$EventBus.$emit('noticeData', {title: '', content: ''});
+                // this.$EventBus.$emit('modalMode', 'write');
+            },
+        },
         created() {
-            axios.post(this.$HttpAddr + '/hikingGroup', {
+            axios.get(this.$HttpAddr + '/schedule', {
                 uuid: this.$route.params.groupid
-            }).then((response)=> {
-                if(response.data == 'true')   {
-                    alert('성공적으로 저장되었습니다.');
-                    this.$EventBus.$emit('group_make_sign','true');
-
+            }).then((response) => {
+                console.log(response.data);
+                for(let i = 0; i < response.data.length; i++)   {
+                    this.hikingEvents.push({
+                        date:
+                            response.data[i].start_date.substring(0,4) + "/" +
+                            response.data[i].start_date.substring(5,7) + "/" +
+                            response.data[i].start_date.substring(8,10),
+                        title:
+                            response.data[i].title,
+                        desc:
+                            response.data[i].content,
+                        writer:
+                            response.data[i].leader,
+                        no:
+                            response.data[i].no,
+                        route:
+                            response.data[i].route,
+                        mnt_id:
+                            response.data[i].mnt_id,
+                        time:
+                            response.data[i].start_date.substring(11,19)
+                    })
                 }
             });
         }
@@ -39,5 +87,16 @@
 </script>
 
 <style>
+    .inlineBlocks {
+        display: inline-block;
+    }
 
+    .max_members {
+        align-self: flex-end;
+        margin-left: 3%;
+    }
+
+    .member-count-wrapper {
+        text-align: end;
+    }
 </style>

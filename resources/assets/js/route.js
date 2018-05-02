@@ -167,6 +167,7 @@ const routes = [
                                 path        : '',
                                 components  : {
                                     // inner form component of modal(NoticeWriteBtn, NoticeModifyBtn)
+                                    // map             : map,
                                     form            : NoticeFormInside,
                                     autocomplete    : autocomplete
                                 },
