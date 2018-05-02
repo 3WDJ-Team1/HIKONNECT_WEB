@@ -12,7 +12,6 @@
                 <!--v-if="isOwner"-->
                 <!--name="write"></router-view>-->
         <router-view
-                v-if="isOwner"
                 name="write"></router-view>
         <!-- @div           notice list area -->
         <div>
@@ -90,6 +89,7 @@
             },
             groupId: "",
             isOwner: false,
+            httpAddr: Laravel.host,
         }),
         // When this component was created,
         created() {

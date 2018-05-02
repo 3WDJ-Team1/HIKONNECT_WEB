@@ -1,6 +1,5 @@
 <template>
     <div>
-        <h1>마이페이지</h1>
         <div class="container" style="margin-left: 130px;" >
             <div class="row">
                 <div class="panel panel-default" style="margin-top: 150px">
