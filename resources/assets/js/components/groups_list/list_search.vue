@@ -67,9 +67,6 @@
                     this.WriterVis = true;
                 }
             },
-            cal() {
-                alert('dfdf');
-            },
             make_group_button() {
                 if (sessionStorage.userid == undefined) {
                     alert('로그인 이후 이용가능합니다.')

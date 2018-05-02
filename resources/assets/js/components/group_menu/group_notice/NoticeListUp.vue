@@ -8,8 +8,10 @@
     <!-- @div#group_notice  the wrapper of notice list -->
     <div class="text-center" id="group_notice">
         <!-- @router-view   'write' floating button -->
+        <!--<router-view-->
+                <!--v-if="isOwner"-->
+                <!--name="write"></router-view>-->
         <router-view
-                v-if="isOwner"
                 name="write"></router-view>
         <!-- @div           notice list area -->
         <div>
@@ -93,7 +95,7 @@
             this.groupId = this.$route.params.groupid;
             this.$EventBus.$on('newNoticeWrited', () => {
                 this.$router.push('/group/' + this.groupId);
-            })
+            });
             this.isGroupOwner();
         },
         methods: {

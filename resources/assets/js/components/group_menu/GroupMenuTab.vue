@@ -8,19 +8,6 @@
     <!-- @div       wrapper of this component -->
     <div>
         <v-btn
-            style   ="margin-bottom: 5%;"
-            color   ="red"
-            dark
-            midiuem
-            fixed
-            right
-            bottom
-            fab
-            @click  ="enterGroup()"
-            v-if    ="isLogined">
-            <v-icon>person_add</v-icon>
-        </v-btn>
-        <v-btn
                 style   ="margin-bottom: 5%;"
                 color   ="red"
                 dark
