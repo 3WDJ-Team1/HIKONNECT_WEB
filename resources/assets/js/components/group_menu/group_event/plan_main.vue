@@ -30,8 +30,8 @@
         created() {
             this.$EventBus.$on('makeEventOK', (sign) => {
                 if (sign == true) {
-                    listEventB = true;
-                    makeEventB = false;
+                    this.listEventB = true;
+                    this.makeEventB = false;
                 }
             })
         },

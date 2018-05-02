@@ -1,4 +1,4 @@
-<!-- 
+<!--
     @file   NoticeListUp.vue
     @brief  A component to show notices in group
     @author Sungeun Kang <kasueu0814@gmail.com>
@@ -12,6 +12,7 @@
                 <!--v-if="isOwner"-->
                 <!--name="write"></router-view>-->
         <router-view
+                v-if="isOwner"
                 name="write"></router-view>
         <!-- @div           notice list area -->
         <div>
@@ -95,7 +96,7 @@
             this.groupId = this.$route.params.groupid;
             this.$EventBus.$on('newNoticeWrited', () => {
                 this.$router.push('/group/' + this.groupId);
-            });
+            })
             this.isGroupOwner();
         },
         methods: {
