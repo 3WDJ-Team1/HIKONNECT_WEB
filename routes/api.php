@@ -194,7 +194,9 @@ Route::group(
             '/storesend',
             'testcontroller@store_send'
         )->name('login_app');
-        Route::resource('/schedule','ScheduleController');
+        Route::resource('/schedule',
+            'ScheduleController'
+        );
     }
 );
 
