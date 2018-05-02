@@ -23,7 +23,9 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        //
+        $result = Hiking_schedule::select('no','title','leader','content','route','start_date','mnt_id')
+            ->get();
+        return response()->json($result);
     }
 
     /**
@@ -51,12 +53,11 @@ class ScheduleController extends Controller
             'content'       => $request->get('ct'),
             'leader'        => $request->get('owner'),
             'hiking_group'  => $request->get('uuid'),
-            'mnt_name'      => '송산',
-            'mnt_id'        => 123456,
             'route'         => $route,
             'created_at'    => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at'    => Carbon::now()->format('Y-m-d H:i:s'),
-            'start_date'    => $request->get('stDate')
+            'start_date'    => $request->get('stDate'),
+            'mnt_id'        => $request->get('mnt_id')
         ]);
         $this->hiking_schedule->scheduleReg($info);
         return response()->json('true');
