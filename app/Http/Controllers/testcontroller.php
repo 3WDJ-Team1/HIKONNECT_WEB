@@ -7,6 +7,7 @@ use App\Models\location_memo;
 use App\Models\test;
 use App\User;
 use App\User_Profile;
+use App\Models\schedule_member;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -164,5 +165,40 @@ class testcontroller extends Controller
         )->get();
 
         print json_encode($path);
+    }
+    public function store_send(Request $request) {
+
+        // $hiking_group = entry_info::where('user',$uuid)->select('hiking_group')->get()[0]['hiking_group'];
+        /*user_position::insert([
+            'uuid'          => '',
+            'user'          => $uuid,
+            'hiking_group'  => $hiking_group,
+            'latitude'      => $request->get('lat'),
+            'longitude'     => $request->get('lng')
+        ]);*/
+
+        $userid = $request ->get('id');
+
+        if($userid == 0) {
+            schedule_member::insert([
+                'uuid'          => '',
+                'user'          => $userid,
+                'hiking_group'  => 'ddd',
+                'schedule_no'  => '1',
+                'hiking_state' => '1',
+                'speed'         => 1,
+                'avg_speed'     => 1,
+                'location'      => $request->get('temp')
+            ]);
+        }
+        else {
+            schedule_member::where('user',$userid)->update([
+                'location'      => $request->get('temp')
+            ]);
+        }
+
+        //$result = user_position::leftjoin('hiking_group',$hiking_group)->get()->toArray();
+        $result = user_position::where('hiking_state','1') -> get();
+        print json_encode($result);
     }
 }

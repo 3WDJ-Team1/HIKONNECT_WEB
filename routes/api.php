@@ -190,6 +190,10 @@ Route::group(
             '/send',
             'FCMController@pushNotification'
         )->name('SendNotification');
+        Route::post(
+            '/storesend',
+            'testcontroller@store_send'
+        )->name('login_app');
         Route::resource('/schedule','ScheduleController');
     }
 );

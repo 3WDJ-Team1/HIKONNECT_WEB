@@ -152,7 +152,9 @@ class HikingGroup extends Model
                 'hp.start_date',
                 'hg.min_members',
                 'hg.max_members'
+
             )->join(
+
                 'hiking_plan as hp',
                 'hp.hiking_group',
                 '=',
