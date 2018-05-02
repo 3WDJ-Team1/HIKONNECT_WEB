@@ -40,6 +40,7 @@ import NoticeFormInside     from './components/group_menu/group_notice/NoticeFor
 
 
 //group event
+import eventShowmap         from './components/group_menu/group_event/eventShowMap'
 import makeEvent            from './components/group_menu/group_event/makeEvent'
 import plan_main            from './components/group_menu/group_event/plan_main'
 import GroupPlanCalendar    from './components/group_menu/group_event/GroupPlanCalendar.vue';
@@ -167,6 +168,7 @@ const routes = [
                                 path        : '',
                                 components  : {
                                     // inner form component of modal(NoticeWriteBtn, NoticeModifyBtn)
+                                    map             : eventShowmap,
                                     form            : NoticeFormInside,
                                     autocomplete    : autocomplete
                                 },
