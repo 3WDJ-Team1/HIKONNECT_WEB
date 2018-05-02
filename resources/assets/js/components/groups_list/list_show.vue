@@ -107,7 +107,7 @@
                     if (response) {
                         this.list = this.list.concat(response.data);
                         $state.loaded();
-                        if (this.list.length / 10 === 0) {
+                        if (this.list.length < 10) {
                             $state.complete();
                         }
                     }
