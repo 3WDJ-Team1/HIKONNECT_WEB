@@ -77,6 +77,7 @@ class NoticeController extends Controller
      */
     public function store(Request $request)
     {
+
         return $this->_notice_model->insertNotification($request->input());
     }
 

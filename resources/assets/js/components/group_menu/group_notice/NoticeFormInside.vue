@@ -73,32 +73,15 @@
              * @brief       if submit button is clicked, send http request.
              */
             submit() {
-                switch(this.mode) {
-                    case "edit":
-                        if(this.$refs.form.validate()) {
-                            axios.patch(this.$HttpAddr + '/notice/' + this.noticeUuid, {
-                                // nickname: this.nickname,
-                                writer  : sessionStorage.uuid, // user's uuid,
-                                title   : this.title,
-                                content : this.text
-                            });
-                            this.$parent.close();
-                            this.$EventBus.$emit('newNoticeWrited', true);
-                        }
-                    break;
-                    case "write":
-                        if(this.$refs.form.validate()) {
-                            axios.post(this.$HttpAddr + '/notice', {
-                                // nickname: this.nickname,
-                                writer  : sessionStorage.uuid, // user's uuid,
-                                title   : this.title,
-                                content : this.text
-                            });
-                            this.$parent.close();
-                            this.$EventBus.$emit('newNoticeWrited', true);
-                        }
-                    break;
-                }
+                axios.post(this.$HttpAddr + '/api/notice', {
+                    writer  : sessionStorage.uuid, // user's uuid,
+                    title   : this.title,
+                    content : this.text
+                }).then((response)=> {
+
+                });
+                this.$parent.close();
+                this.$EventBus.$emit('newNoticeWrited', true);
             },
         },
         /**
