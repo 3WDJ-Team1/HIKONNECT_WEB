@@ -7,7 +7,7 @@
 <template>
     <div>
     <vue-event-calendar
-            style="margin: 0 auto;" :events="hikingEvents">
+            style="width: 70%; margin: 0 auto;" :events="hikingEvents">
         <v-card v-for="event in hikingEvents" :key="event.writer">
             <v-card-title primary-title>
                 <div>
@@ -18,7 +18,7 @@
             </v-card-title>
             <v-card-actions>
                 <v-btn flat>JOIN</v-btn>
-                <v-btn flat color="purple" @click="openShowModal()">SHOW PATH</v-btn>
+                <v-btn flat color="purple" @click="openShowModal(event.mnt_id, event.route)">SHOW PATH</v-btn>
                 <v-spacer></v-spacer>
                 <v-btn icon @click.native="show = !show">
                     <v-icon>{{ show ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
@@ -36,7 +36,7 @@
         </v-card>
     </vue-event-calendar>
     <sweet-modal ref="show" blocking>
-        dfasdfasdfasdfasdfasdf
+        <router-view name="map"></router-view>
     </sweet-modal>
     </div>
 </template>
@@ -48,10 +48,9 @@
             hikingEvents: []
         }),
         methods:    {
-            openShowModal : function() {
+            openShowModal : function(code, route) {
                 this.$refs.show.open();
-                // this.$EventBus.$emit('noticeData', {title: '', content: ''});
-                // this.$EventBus.$emit('modalMode', 'write');
+                this.$EventBus.$emit('eventShowMap', code, route);
             },
         },
         created() {
