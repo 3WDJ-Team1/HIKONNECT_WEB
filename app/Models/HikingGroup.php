@@ -117,7 +117,7 @@ class HikingGroup extends Model
                 ['title', 'LIKE', "%$input%"]
             ])
                 ->select(
-                    'uuid','title','content','us.nickname','min_member','max_member'
+                    'uuid','title','hiking_group.content','us.nickname','min_member','max_member'
                 )->join(
                     'user as us',
                     'us.userid',
