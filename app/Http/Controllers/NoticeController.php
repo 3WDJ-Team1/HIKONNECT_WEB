@@ -10,6 +10,8 @@
  */
 namespace App\Http\Controllers;
 
+use App\Models\Announce;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Notification;
 use App\Models\User;
@@ -28,7 +30,7 @@ use App\Models\User;
  */
 class NoticeController extends Controller
 {
-    private $_notice_model = null;
+    private $announce_model = null;
     private $_user_model = null;
 
     /**
@@ -36,7 +38,7 @@ class NoticeController extends Controller
      */
     public function __construct()
     {
-        $this->_notice_model = new Notification();
+        $this->announce_model = new Announce();
         $this->_user_model = new User();
     }
     
@@ -77,8 +79,17 @@ class NoticeController extends Controller
      */
     public function store(Request $request)
     {
-
-        return $this->_notice_model->insertNotification($request->input());
+        $info = array([
+            'title'         =>  $request->get('title'),
+            'content'       =>  $request->get('content'),
+            'writer'        =>  $request->get('writer'),
+            'hiking_group'  => $request->get('uuid'),
+            'picture'       => '',
+            'created_at'    => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'    => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+        $this->announce_model->announceReg($info);
+        return response()->json('true');
     }
 
     /**

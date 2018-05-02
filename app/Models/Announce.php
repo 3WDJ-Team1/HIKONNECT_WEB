@@ -17,4 +17,8 @@ use Illuminate\Database\Eloquent\Model;
 class Announce extends Model
 {
     protected $table = 'announce';
+
+    public function announceReg(Array $info) {
+        Announce::insert($info);
+    }
 }
