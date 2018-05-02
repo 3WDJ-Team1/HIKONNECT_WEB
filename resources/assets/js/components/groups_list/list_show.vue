@@ -40,7 +40,6 @@
     export default {
         data() {
             return {
-                group_make_sign: false,
                 show: false,
                 select: "a",
                 input: "a",
@@ -50,16 +49,16 @@
                 toGroupDetail: '/group',
             };
         },
-        watch:  {
-            group_make_sign: function() {
-                this.$router.push('/list')
-            }
-        },
         created() {
             // 이벤트 받기
             // '이벤트 명', function(받을 데이터)
             this.$EventBus.$on('group_make_sign', (sign) => {
-                this.group_make_sign = sign;
+                // this.$EventBus.$emit('group_make_0', {title: '', content: '', min: '', max: ''});
+                this.select = 'a';
+                this.input = 'a';
+                this.list = [];
+                this.list_num = 0;
+                this.infiniteHandler();
             });
             this.$EventBus.$on('input_name', (sel, mountain) => {
                 this.select = sel;

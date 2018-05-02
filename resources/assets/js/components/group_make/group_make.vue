@@ -70,10 +70,11 @@
             ]
         }),
         created() {
-            this.$EventBus.$on('noticeData', (data) => {
-                this.title = data.title;
-                this.text = data.content;
-                this.noticeUuid = data.uuid;
+            this.$EventBus.$on('group_make_0', (tit, con, min, max) => {
+                this.title = tit;
+                this.text = con;
+                this.min = min;
+                this.max = max;
             });
         },
         methods: {

@@ -25,7 +25,15 @@
             ]
         }),
         created() {
-            // axios will be added.
+            axios.post(this.$HttpAddr + '/hikingGroup', {
+                uuid: this.$route.params.groupid
+            }).then((response)=> {
+                if(response.data == 'true')   {
+                    alert('성공적으로 저장되었습니다.');
+                    this.$EventBus.$emit('group_make_sign','true');
+
+                }
+            });
         }
     }
 </script>
