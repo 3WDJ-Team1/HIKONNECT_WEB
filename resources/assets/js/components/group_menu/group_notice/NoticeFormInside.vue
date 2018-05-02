@@ -73,7 +73,7 @@
              * @brief       if submit button is clicked, send http request.
              */
             submit() {
-                axios.post(this.$HttpAddr + '/api/notice', {
+                axios.post(this.$HttpAddr + '/notice', {
                     // nickname: this.nickname,
                     writer: sessionStorage.getItem('userid'), // user's uuid,
                     uuid: this.$route.params.groupid,

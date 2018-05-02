@@ -21,4 +21,15 @@ class Announce extends Model
     public function announceReg(Array $info) {
         Announce::insert($info);
     }
+
+    public function getAnnounce($uuid, $page) {
+        return Announce::where('hiking_group',$uuid)
+            ->select(
+                'title','content','writer','picture','created_at'
+            )
+            ->orderBy('created_at','DESC')
+            ->skip($page)
+            ->take(10)
+            ->get();
+    }
 }

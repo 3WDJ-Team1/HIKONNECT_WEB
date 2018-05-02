@@ -115,11 +115,11 @@
              * @brief       send http request to server, and update this.notice
              */
             infiniteHandler($state) {
-                let url = this.$HttpAddr + '/notice/' + this.groupId + "/" + ((this.page - 1) * this.size + 10)
-                    + '/' + (this.page * this.size + 10);
+                let url = this.$HttpAddr + '/notice/' + this.groupId + "/" + ((this.page - 1) * this.size + 10);
                 axios.get(url)
                     .then(response => {
                         if (response) {
+                            console.log(response.data);
                             this.notices = this.notices.concat(response.data);
                             $state.loaded();
                             // 백엔드에서 넘어오는 값에 같은 값이 잇음!
