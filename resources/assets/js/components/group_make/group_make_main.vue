@@ -85,7 +85,7 @@
         },
         methods: {
             sendData() {
-                axios.post(Laravel.host + '/schedule', {
+                axios.post(Laravel.host + '/api/schedule', {
                     uuid : this.$route.params.groupid,
                     owner: sessionStorage.getItem('userid')
                     /*
@@ -100,7 +100,7 @@
                 })
                     .then(response => {
                         console.log(response.data);
-                        if (response.data == true) {
+                        if (response.data == 'true') {
                             alert('성공적으로 저장 되었습니다.');
                             this.$EventBus.$emit('makeEventOK', true);
 
