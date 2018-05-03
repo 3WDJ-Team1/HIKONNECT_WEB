@@ -221,10 +221,10 @@ class HikingGroupController extends Controller
         $is_member = $this->member_model->checkMember($request->get('userid'),$request->get('uuid'));
         $is_owner = $this->_group_model->isOwner($request->get('userid'),$request->get('uuid'));
         if ($is_member == true && $is_owner == true)
-            return 'owner';
+            return response()->json('owner');
         elseif ($is_member == true && $is_owner == false)
-            return 'member';
+            return response()->json('member');
         else
-            return 'guest';
+            return response()->json('guest');
     }
 }
