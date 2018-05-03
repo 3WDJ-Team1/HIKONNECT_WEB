@@ -58,6 +58,10 @@ Route::group(
             'HikingGroupController'
         );
         Route::post(
+            'checkMember',
+            'HikingGroupController@checkMember'
+        )->name('CheckMember');
+        Route::post(
             'groupList',
             'HikingGroupController@getGroupList'
         )->name('groupList');

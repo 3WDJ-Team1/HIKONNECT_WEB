@@ -10,6 +10,7 @@
  */
 namespace App\Http\Controllers;
 
+use App\Models\Group_Member;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -18,7 +19,7 @@ use App\Models\HikingGroup;
 
 /**
  * Controller for Group
- * 
+ *
  * @category Controller
  * @package  Global
  * @author   bs Kwon <rnjs9957@gmail.com>
@@ -28,6 +29,7 @@ use App\Models\HikingGroup;
 class HikingGroupController extends Controller
 {
     private $_group_model = null;
+    private $member_model = null;
 
     /**
      * Constructor for GroupController
@@ -35,6 +37,7 @@ class HikingGroupController extends Controller
     public function __construct()
     {
         $this->_group_model = new HikingGroup();
+        $this->member_model = new Group_Member();
     }
 
     /**
@@ -45,16 +48,6 @@ class HikingGroupController extends Controller
     public function index()
     {
         return response()->json('ttt');
-        // return $this->request;
-        // $groupList = $this->_group_model->getGroupList();
-
-        // $returnTag = "";
-
-        // foreach ($groupList as $index => $record) {
-        //     $returnTag .= "<a href='/group/" . $record['uuid'] . "'>" . $record['uuid'] . "</a><br />";
-        // }
-
-        // return $returnTag;
     }
 
     /**
@@ -69,9 +62,9 @@ class HikingGroupController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * 
-     * @param \Illuminate\Http\Request $request 
-     * 
+     *
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -89,6 +82,18 @@ class HikingGroupController extends Controller
             'updated_at'    => Carbon::now()->format('Y-m-d H:i:s')
         ]);
         $this->_group_model->groupReg($groupinfo);
+
+        $uuid = HikingGroup::select('uuid')->orderBy('created_at','DESC')->first()['uuid'];
+        $member_info = array([
+            'userid'         => $request->get('writer'),
+            'hiking_group'  => $uuid,
+            'enter_whether' => 1,
+            'enter_date'    => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at'    => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'    => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+        $this->member_model->memberReg($member_info);
+
         return response()->json('true');
     }
 
@@ -210,5 +215,16 @@ class HikingGroupController extends Controller
     public function searchGroup($page_num,$select,$input) {
         if ($select == 'name')
             return response()->json($this->_group_model->searchGroup($page_num,$input));
+    }
+
+    public function checkMember(Request $request) {
+        $is_member = $this->member_model->checkMember($request->get('userid'),$request->get('uuid'));
+        $is_owner = $this->_group_model->isOwner($request->get('userid'),$request->get('uuid'));
+        if ($is_member == true && $is_owner == true)
+            return 'owner';
+        elseif ($is_member == true && $is_owner == false)
+            return 'member';
+        else
+            return 'guest';
     }
 }

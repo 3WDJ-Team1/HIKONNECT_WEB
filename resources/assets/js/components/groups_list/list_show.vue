@@ -52,7 +52,6 @@
         },
         watch:  {
             group_make_sign: function() {
-                a;
             }
         },
         created() {

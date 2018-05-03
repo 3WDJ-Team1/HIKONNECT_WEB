@@ -201,19 +201,12 @@ class HikingGroup extends Model
     /**
      *
      */
-    public function isOwner (String $groupId, String $userId)
+    public function isOwner ($userid, $uuid)
     {
-        try {
-            return DB::table('hiking_group')
-                ->where(
-                    [
-                        ['uuid', $groupId],
-                        ['owner', $userId],
-                    ]
-                )->get();
-        } catch (QeuryException $e) {
-            return $e->getSql();
-        }
+        return HikingGroup::where([
+            ['leader',$userid],
+            ['uuid',$uuid]
+        ])->exists();
     }
 
     public function getWriters($pageIndex)
