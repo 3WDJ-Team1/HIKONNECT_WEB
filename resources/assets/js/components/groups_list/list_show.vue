@@ -61,6 +61,9 @@
             this.$EventBus.$on('group_make_sign', (sign) => {
                 // this.$EventBus.$emit('group_make_0', {title: '', content: '', min: '', max: ''});
                 this.group_make_sign = sign;
+                this.list = [];
+                this.list_num = 0;
+                this.infiniteHandler();
             });
             this.$EventBus.$on('input_name', (sel, mountain) => {
                 this.select = sel;
