@@ -12,7 +12,6 @@
                 <!--v-if="isOwner"-->
                 <!--name="write"></router-view>-->
         <router-view
-                v-if="isOwner"
                 name="write"></router-view>
         <!-- @div           notice list area -->
         <div>
@@ -25,7 +24,7 @@
                                 if you click this, b-collapse will be shown. -->
                     <div v-b-toggle ="'n' + notice.uuid" class="m-1">
                         <h3 class="card-title">{{ notice.title }}</h3>
-                        <p  class="card-text">writer : {{ notice.nickname }} | hits : {{ notice.hits }}</p>
+                        <p  class="card-text">writer : {{ notice.writer }} | created_at : {{ notice.created_at }}</p>
 
                     </div>
                     <!-- @div(b-collapse)   The contents of a notice. -->
@@ -50,7 +49,7 @@
                 </div>
             </div>
         </div>
-        <infinite-loading @infinite="infiniteHandler" spinner="bubbles"></infinite-loading>
+        <infinite-loading @infinite="infiniteHandler"></infinite-loading>
     </div>
 </template>
 
@@ -90,6 +89,7 @@
             },
             groupId: "",
             isOwner: false,
+            httpAddr: Laravel.host,
         }),
         // When this component was created,
         created() {
@@ -97,7 +97,7 @@
             this.groupId = this.$route.params.groupid;
             this.$EventBus.$on('newNoticeWrited', () => {
                 this.$router.push('/group/' + this.groupId);
-            })
+            });
             this.isGroupOwner();
         },
         methods: {
@@ -117,7 +117,7 @@
              * @brief       send http request to server, and update this.notice
              */
             infiniteHandler($state) {
-                this.axios.get(this.HttpAddr + '/notice/' + this.groupId + "/" + this.list_num)
+                this.axios.get(this.$HttpAddr + '/notice/' + this.groupId + "/" + this.list_num)
                     .then(response => {
                         if (response) {
                             this.notices = this.notices.concat(response.data);

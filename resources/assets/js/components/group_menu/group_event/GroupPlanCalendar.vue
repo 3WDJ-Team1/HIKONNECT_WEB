@@ -8,7 +8,7 @@
     <div>
     <vue-event-calendar
             style="width: 70%; margin: 0 auto;" :events="hikingEvents">
-        <v-card v-for="event in hikingEvents" :key="event.writer">
+        <v-card v-for="(event, i) in hikingEvents" :key="i">
             <v-card-title primary-title>
                 <div>
                     <div class="headline">{{ event.title }}</div>

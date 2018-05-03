@@ -55,7 +55,7 @@ class NoticeController extends Controller
                 $perPage
             );
 
-        return response()->json('true');
+        return response()->json($notifications);
     }
 
     /**
