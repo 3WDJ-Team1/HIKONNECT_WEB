@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hiking_schedule;
+use App\Models\schedule_member;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -10,10 +11,12 @@ use App\Http\Controllers\Controller;
 class ScheduleController extends Controller
 {
     private $hiking_schedule;
+    private $schedule_member;
 
     public function __construct()
     {
         $this->hiking_schedule = new Hiking_schedule();
+        $this->schedule_member = new schedule_member();
     }
 
     /**
@@ -69,9 +72,9 @@ class ScheduleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id,$user)
     {
-        //
+        return $id.$user;
     }
 
     /**
@@ -94,7 +97,9 @@ class ScheduleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //$id는 schedule_no로 받기
+        $this->schedule_member->start_hiking($request->get('userid'),$request->get('uuid'),$id);
+        return response()->json('true');
     }
 
     /**
@@ -106,5 +111,28 @@ class ScheduleController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function enter_schedule(Request $request) {
+        $member_info = array([
+            'userid'                         => $request->get('userid'),
+            'hiking_group'                   => $request->get('uuid'),
+            'schedule'                       => $request->get('schedule_no'),
+            'current_fid'                    => 0,
+            'between_before_fid_distance'   => 0,
+            'distance'                       => 0,
+            'created_at'                     => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'                     => Carbon::now()->format('Y-m-d H:i:s'),
+            'latitude'                       => 0,
+            'longitude'                      => 0,
+            'avg_speed'                      => 0
+        ]);
+        $this->schedule_member->enter_schedule($member_info);
+        return response()->json('true');
+    }
+
+    public function out_schedule(Request $request) {
+        $this->schedule_member->out_schedule($request->get('userid'),$request->get('uuid'),$request->get('schedule_no'));
+        return response()->json('true');
     }
 }

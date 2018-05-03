@@ -29,8 +29,6 @@ use App\Models\HikingGroup;
 class HikingGroupController extends Controller
 {
     private $_group_model = null;
-    private $member_model = null;
-
     /**
      * Constructor for GroupController
      */
@@ -92,8 +90,8 @@ class HikingGroupController extends Controller
             'created_at'    => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at'    => Carbon::now()->format('Y-m-d H:i:s')
         ]);
-        $this->member_model->memberReg($member_info);
-
+        $group_member = new Group_Member();
+        $group_member->memberReg($member_info);
         return response()->json('true');
     }
 
@@ -139,7 +137,7 @@ class HikingGroupController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return $this->_notice_model->updateNotification($request->input(), $id);
+        //
     }
 
     /**

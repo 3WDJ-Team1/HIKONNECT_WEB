@@ -75,10 +75,14 @@ Route::group(
         )->name('isOwner');
 
         // Entry info Routings
+        Route::resource(
+            'member',
+            'GroupMemberController'
+        );
         Route::post(
-            'entryGroup',
-            'EntryInfoController@entryGroup'
-        )->name('entryGroup');
+            'out_group',
+            'GroupMemberController@out_group'
+        )->name('out_group');
         Route::patch(
             'replyUserEntry',
             'EntryInfoController@replyUserEntry'
@@ -198,9 +202,17 @@ Route::group(
             '/storesend',
             'testcontroller@store_send'
         )->name('login_app');
+
+        //Group Schedule
         Route::resource('/schedule',
             'ScheduleController'
         );
+        Route::post('/enter_schedule',
+            'ScheduleController@enter_schedule'
+        )->name('schedule_enter');
+        Route::post('/out_schedule',
+            'ScheduleController@out_schedule'
+        )->name('schedule_out');
     }
 );
 

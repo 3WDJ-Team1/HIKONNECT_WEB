@@ -11,7 +11,7 @@ class EntryInfoController extends Controller
 
     public function __construct()
     {
-        $this->_entryInfoModel = new EntryInfo();
+
     }
 
     public function entryGroup(Request $request)
