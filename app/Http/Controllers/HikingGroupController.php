@@ -155,7 +155,7 @@ class HikingGroupController extends Controller
      */
     public function destroy($id)
     {
-        return $this->_notice_model->where('uuid', $id)->delete();
+        return $this->_group_model->where('uuid', $id)->delete();
     }
 
     /**
@@ -230,5 +230,9 @@ class HikingGroupController extends Controller
             return response()->json('member');
         else
             return response()->json('guest');
+    }
+
+    public function groupInfo(Request $request) {
+        return response()->json(HikingGroup::where('uuid',$request->get('uuid'))->get());
     }
 }

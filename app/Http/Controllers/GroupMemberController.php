@@ -91,7 +91,7 @@ class GroupMemberController extends Controller
             $this->member_model->accept_member($request->get('userid'),$request->get('uuid'));
             return response()->json('true');
         }
-        else{
+        elseif ($id == 'false') {
             $this->member_model->delete_member($request->get('userid'),$request->get('uuid'));
             return response()->json('false');
         }
