@@ -77,6 +77,10 @@ Route::group(
             'isOwner/{groupId}/{userId}',
             'HikingGroupController@isOwner'
         )->name('isOwner');
+        Route::post(
+            'mygroup',
+            'GroupMemberController@my_group'
+        )->name('myGroup');
 
         // Entry info Routings
         Route::resource(

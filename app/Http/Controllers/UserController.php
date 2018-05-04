@@ -137,22 +137,30 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //user table insert
-        $userinfo = array([
-            'userid'        => $request->get('idv'),
-            'password'      => $request->get('pwv'),
-            'nickname'     =>  $request->get('nn'),
-            'gender'        => $this->gender,
-            'age_group'     => $this->age_group,
-            'scope'         => $this->scope,
-            'profile'       => 'https://lorempixel.com/640/400/?66549',
-            'phone'         => $request->get('phone'),
-            'rank'          => '동네 뒷산',
-            'created_at'    => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at'    => Carbon::now()->format('Y-m-d H:i:s')
-        ]);
-        $this->usermodel->userReg($userinfo);
-        return response()->json('true');
+        if (User::where('userid',$request->get('idv'))->exists() == true) {
+            return response()->json('idfalse');
+        }
+        else if (User::where('nickname',$request->get('nn'))->exists() == true) {
+            return response()->json('nnfalse');
+        }
+        else {
+            //user table insert
+            $userinfo = array([
+                'userid'        => $request->get('idv'),
+                'password'      => $request->get('pwv'),
+                'nickname'     =>  $request->get('nn'),
+                'gender'        => $this->gender,
+                'age_group'     => $this->age_group,
+                'scope'         => $this->scope,
+                'profile'       => 'https://lorempixel.com/640/400/?66549',
+                'phone'         => $request->get('phone'),
+                'rank'          => '동네 뒷산',
+                'created_at'    => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at'    => Carbon::now()->format('Y-m-d H:i:s')
+            ]);
+            $this->usermodel->userReg($userinfo);
+            return response()->json('true');
+        }
     }
 
     /**

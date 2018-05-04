@@ -45,7 +45,7 @@
             // drop down이 보여지도록
             addDistributionGroup(group) {
                 // 산 코드
-                this.mountain_num = group.selectedObject.mnt_code;
+                this.mountain_num = group.selectedObject.mnt_id;
                 // input에 썼던 text지우기
                 this.$refs.autocomplete.clearValues();
                 // 내가 클릭한 text로 채우기

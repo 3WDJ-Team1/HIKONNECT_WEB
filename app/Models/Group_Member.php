@@ -41,4 +41,13 @@ class Group_Member extends Model
             ['hiking_group',$uuid]
         ])->delete();
     }
+
+    public function my_group($userid) {
+        return
+            Group_Member::select('hiking_group.uuid','hiking_group.title','user.nickname','hiking_group.content',
+                'hiking_group.min_member','hiking_group.max_member')
+                ->where('group_member.userid',$userid)
+                ->join('hiking_group','hiking_group.uuid','=','group_member.hiking_group')
+                ->join('user','user.userid','=','group_member.userid')->get();
+    }
 }

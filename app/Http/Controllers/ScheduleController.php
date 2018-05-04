@@ -49,14 +49,12 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
-        $route = array(['start' => '1', 'end' => '5']);
-        $route = json_encode($route);
         $info = array([
             'title'         => $request->get('tt'),
             'content'       => $request->get('ct'),
             'leader'        => $request->get('owner'),
             'hiking_group'  => $request->get('uuid'),
-            'route'         => $route,
+            'route'         => $request->get('mountP'),
             'created_at'    => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at'    => Carbon::now()->format('Y-m-d H:i:s'),
             'start_date'    => $request->get('stDate'),

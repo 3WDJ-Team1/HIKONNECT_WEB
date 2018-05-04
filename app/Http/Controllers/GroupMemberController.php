@@ -123,4 +123,9 @@ class GroupMemberController extends Controller
 
         return $member_list;
     }
+
+    public function my_group (Request $request) {
+        $result = $this->member_model->my_group($request->get('userid'));
+        return response()->json($result);
+    }
 }
