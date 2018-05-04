@@ -113,10 +113,12 @@ class NoticeController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id = null)
+    public function update(Request $request, $id)
     {
-        return $request->input();
-        // return $this->_notice_model->updateNotification($request->input(), $id);
+        $title   = $request->get('title');
+        $content = $request->get('content');
+        $this->announce_model->updateAnnounce($id,$title,$content);
+        return response()->json('true');
     }
 
     /**
@@ -128,6 +130,6 @@ class NoticeController extends Controller
      */
     public function destroy($id)
     {
-        return $this->_notice_model->deleteNotification($id);
+        return $this->announce_model->deleteAnnounce($id);
     }
 }
