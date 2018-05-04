@@ -49,24 +49,19 @@ class testcontroller extends Controller
      */
     public function store(Request $request)
     {
-        $user_id    = $request->get('user_id');
-
-        $uuid = User::where('id',$user_id)->select('uuid')->get()[0]['uuid'];
-        $hiking_group = entry_info::where('user',$uuid)->select('hiking_group')->get()[0]['hiking_group'];
-
         location_memo::insert([
-            'uuid'          => '',
-            'writer'        => $uuid,
-            'hiking_group'  => $hiking_group,
+            'schedule_no'   => $request->get('schedule_no'),
+            'writer'        => $request->get('userid'),
+            'hiking_group'  => $request->get('uuid'),
             'latitude'      => $request->get('lat'),
             'longitude'     => $request->get('lng'),
             'title'         => $request->get('title'),
             'content'       => $request->get('content'),
-            'image_path'    => $request->get('image_path'),
+            'picture'       => $request->get('image_path'),
             'created_at'    => $request->get('created_at'),
             'updated_at'    => $request->get('updated_at')
         ]);
-        echo $uuid;
+        echo 'true';
     }
 
     /**
@@ -115,29 +110,16 @@ class testcontroller extends Controller
     }
 
     public function get_Memo_Info(Request $request) {
-        $uuid = User::where(
-            'id',
-            $request->get('id')
-        )->select('uuid')
-        ->get()[0]['uuid'];
-
-        $hiking_group = entry_info::where(
-            'user',
-            $uuid
-        )->select(
-            'hiking_group'
-        )->get()[0]['hiking_group'];
-
         $row = location_memo::where(
             'hiking_group',
-            $hiking_group
+            $request->get('uuid')
         )->get()
             ->toArray();
 
         $post_data = array();
         $row_count = location_memo::where(
             'hiking_group',
-            $hiking_group
+            $request->get('uuid')
         )->count();
 
         for ($i = 0; $i < $row_count; $i++) {
