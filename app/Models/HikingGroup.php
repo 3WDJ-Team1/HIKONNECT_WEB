@@ -315,36 +315,14 @@ class HikingGroup extends Model
     public function groupReg(Array $groupinfo) {
         HikingGroup::insert($groupinfo);
     }
-    public function updateSelectedGroupInfo(Array $inputData, String $uuid) {
-        /**
-         * update HikingGroupInfo by correspond selected uuid.
-         *
-         */
-        DB::table('recruitment')
-            ->where('uuid', '=', $uuid)
-            ->update(
-                [
-                    'title' => $request->get('title'),
-                    'content' => $request->get('content')
-                ]
-            );
-        DB::table('hiking_plan')
-            ->where('uuid', '=', $uuid)
-            ->insert(
-                [
-                    'starting_point' => $request->get('starting_point'),
-                    'stopover' => $request->get('stopover'),
-                    'end_point' => $request->get('end_point'),
-                    'start_date' => $request->get('start_date')
-                ]
-            );
-        HikingGroup::where('uuid', '=', $uuid)
-            ->update(
-                [
-                    'min_members' => $request->get('min_members'),
-                    'max_members' => $request->get('max_member')
-                ]
-            );
+    public function updateGroup($uuid,$title,$content,$min,$max) {
+        HikingGroup::where('uuid',$uuid)
+            ->update([
+                'title'         =>  $title,
+                'content'       =>  $content,
+                'min_member'    =>  $min,
+                'max_member'    =>  $max
+            ]);
     }
     public function deleteHikingGroupInfo(String $uuid) {
         /**

@@ -137,7 +137,13 @@ class HikingGroupController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $title      =   $request->get('title');
+        $content    =   $request->get('content');
+        $min        =   $request->get('min');
+        $max        =   $request->get('max');
+        $this->_group_model->updateGroup($id,$title,$content,$min,$max);
+
+        return response()->json('true');
     }
 
     /**

@@ -185,7 +185,6 @@ class testcontroller extends Controller
                 'hiking_group' => '57a89f8f-4dc8-11e8-82cb-42010a9200af',
                 'schedule'      => 1,
                 'hiking_state' => 1,
-                'speed'         => 1,
                 'avg_speed'     => 1,
                 'current_fid'   => 1,
                 'latitude'      => $request->get('latitude'),
