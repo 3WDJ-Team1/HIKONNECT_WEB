@@ -79,6 +79,10 @@ Route::group(
             'member',
             'GroupMemberController'
         );
+        Route::get(
+            'list_member/{uuid}/{state}',
+            'GroupMemberController@list_member'
+        )->name('list_member');
         Route::post(
             'out_group',
             'GroupMemberController@out_group'

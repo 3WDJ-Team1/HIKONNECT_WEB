@@ -62,15 +62,9 @@ class GroupMemberController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($uuid)
+    public function show($id)
     {
-        $enter_member   = $this->member_model->get_member_list($uuid,'1');
-        $waiter         = $this->member_model->get_member_list($uuid,'0');
-        $member_list    = array(
-            ['enter'  => $enter_member],
-            ['waiter' => $waiter]
-        );
-        return response()->json($member_list);
+        //
     }
 
     /**
@@ -117,5 +111,16 @@ class GroupMemberController extends Controller
     public function out_group(Request $request) {
         $this->member_model->delete_member($request->get('userid'),$request->get('uuid'));
         return response()->json('true');
+    }
+
+    public function list_member($uuid,$state) {
+        if ($state == 0) {
+            $member_list = $this->member_model->get_member_list($uuid,$state);
+        }
+        elseif ($state == 1) {
+            $member_list = $this->member_model->get_member_list($uuid,$state);
+        }
+
+        return $member_list;
     }
 }
