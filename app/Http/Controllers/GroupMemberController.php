@@ -87,12 +87,12 @@ class GroupMemberController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if ($request->get('accept') == 'true') {
-            $this->member_model->accept_member($id,$request->get('uuid'));
+        if ($id == 'true') {
+            $this->member_model->accept_member($request->get('userid'),$request->get('uuid'));
             return response()->json('true');
         }
         else{
-            $this->member_model->delete_member($id,$request->get('uuid'));
+            $this->member_model->delete_member($request->get('userid'),$request->get('uuid'));
             return response()->json('false');
         }
     }
