@@ -135,4 +135,9 @@ class ScheduleController extends Controller
         $this->schedule_member->out_schedule($request->get('userid'),$request->get('uuid'),$request->get('schedule_no'));
         return response()->json('true');
     }
+
+    public function my_schedule(Request $request) {
+        $result = $this->hiking_schedule->my_schedule($request->get('userid'),$request->get('uuid'));
+        return response()->json($result);
+    }
 }

@@ -217,6 +217,9 @@ Route::group(
         Route::post('/out_schedule',
             'ScheduleController@out_schedule'
         )->name('schedule_out');
+        Route::post('/myschedule',
+            'ScheduleController@my_schedule'
+        )->name('my_schedule');
     }
 );
 
