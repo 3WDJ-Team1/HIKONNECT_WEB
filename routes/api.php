@@ -19,39 +19,14 @@ Route::middleware(
     }
 );
 
-Route::get(
-    'testing/{key?}', 
-    function ($mnt_name) {
-        return  DB::table('mountain')
-            ->where('mnt_name', 'LIKE', "%" . $mnt_name . "%")
-            ->get();
-    }
-);
-
-
-
 Route::group(
     [], 
     function () {
-        // Radios Routing
-        Route::get(
-            'radioGram/{groupId}',
-            'RadioGramContoller@getGroupRadios'
-        )->name('radios');
         // Notification Routings
         Route::resource(
             'notice', 
             'NoticeController'
         );
-        Route::get(
-            'notice/{groupUuid}/{pageIndex?}/{perPage?}', 
-            'NoticeController@index'
-        )->name('noticePagination');
-        Route::delete(
-            'notice', 
-            'NoticeController@destroy'
-        )->name('deleteNotice');
-
         // Hiking group Routings
         Route::resource(
             'hikingGroup', 
@@ -113,12 +88,6 @@ Route::group(
             'HikingGroupController@getGroupMembers'
         )->name('groupMemberList');
 
-        // User Profile Routings
-        Route::get(
-            'userProfile/{userUuid}', 
-            'UserProfileController@getUserProfile'
-        );
-
         // Login Routings
         Route::resource(
             '/user', 
@@ -164,7 +133,7 @@ Route::group(
             'UserController@showUserData'
         )->name('UserData');
         Route::post(
-            '/graph/{id}', 
+            '/graph',
             'UserController@graph'
         )->name('graph');
         Route::get(

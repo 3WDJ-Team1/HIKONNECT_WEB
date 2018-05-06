@@ -120,7 +120,6 @@ class GroupMemberController extends Controller
         elseif ($state == 1) {
             $member_list = $this->member_model->get_member_list($uuid,$state);
         }
-
         return $member_list;
     }
 

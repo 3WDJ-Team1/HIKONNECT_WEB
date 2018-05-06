@@ -45,7 +45,7 @@ class HikingGroupController extends Controller
      */
     public function index()
     {
-        return response()->json('ttt');
+        //
     }
 
     /**
@@ -55,7 +55,7 @@ class HikingGroupController extends Controller
      */
     public function create()
     {
-        return;
+        //
     }
 
     /**
@@ -81,6 +81,7 @@ class HikingGroupController extends Controller
         ]);
         $this->_group_model->groupReg($groupinfo);
 
+        // 작성자 그룹에 자동 참여
         $uuid = HikingGroup::select('uuid')->orderBy('created_at','DESC')->first()['uuid'];
         $member_info = array([
             'userid'         => $request->get('writer'),
@@ -104,15 +105,7 @@ class HikingGroupController extends Controller
      */
     public function show($id)
     {
-        $groupDetail = $this->_group_model->getGroupDetail($id);
-
-        $returnTag = "";
-
-        foreach ($groupDetail as $index => $record) {
-            $returnTag .= "";
-        }
-
-        return $groupDetail;
+        //
     }
 
     /**
@@ -166,31 +159,6 @@ class HikingGroupController extends Controller
      * 
      * @return Array
      */
-    public function getGroupMembers($groupUuid, $idx = 0, $perIdx = 10)
-    {
-        if ($idx && $perIdx) {
-            if (!$idx = intval($idx) || !$perIdx = intval($perIdx)) {
-                return response('Wrong request parameter type: $idx and $perIdx are must be Interger Type');
-            }
-        }
-
-        $res = $this->_group_model
-            ->getGroupMembers(
-                $groupUuid,
-                $idx,
-                $perIdx
-            );
-
-        if ($res->isEmpty()) {
-            return response("Query result is empty", 206);
-        }
-
-        return $res;
-    }
-
-    /**
-     * 
-     */
     public function getGroupList(Request $request)
     {
         $select = '';
@@ -200,20 +168,6 @@ class HikingGroupController extends Controller
         $page   = $request->get('page');
         $result = $this->_group_model->getGroupList($page,$select,$input);
         return $result;
-    }
-
-    /**
-     * 
-     */
-    public function isOwner(String $groupId, String $userId) {
-        $result = $this->_group_model
-            ->isOwner($groupId, $userId);
-
-        if (count($result) == 0) {
-            return 'false';
-        }
-
-        return 'true';
     }
 
     public function searchGroup($page_num,$select,$input) {

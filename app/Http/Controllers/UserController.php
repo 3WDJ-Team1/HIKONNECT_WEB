@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\hiking_plan;
 use App\Models\hiking_record;
+use App\Models\schedule_member;
 use App\Models\User;
 use App\Models\UserProfile;
 use Illuminate\Http\Request;
@@ -37,12 +38,9 @@ class UserController extends Controller
      */
 
     private $usermodel = null;
-    private $userfilmodel = null;
     private $scope = 0;
     private $gender;
     private $age_group;
-    private $uuid;
-    private $nickname;
 
     /**
      * UserController constructor.
@@ -52,7 +50,6 @@ class UserController extends Controller
     public function __construct(Request $request)
     {
         $this->usermodel = new User();
-        $this->userfilmodel = new UserProfile();
 
         //Scope Setting
         if ($request->get('phonesc') == true) {
@@ -171,7 +168,32 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $result               = $this->usermodel->userInfo($id);
+        $distance             = 0;
+        $total_hiking_time    = 0;
+        $hour                 = 0;
+        $minute               = 0;
+        $second               = 0;
+
+        for($i = 0; $i < count($result); $i++) {
+            $distance += $result[$i]['distance'];
+        }
+
+        for($i = 0; $i < count($result); $i++) {
+            $total_hiking_time = date_diff(date_create($result[$i]['updated_at']),date_create($result[$i]['start_date']));
+            $hour             += $total_hiking_time->days * 24 + $total_hiking_time->h;
+            $minute           += $total_hiking_time->i;
+            $second           += $total_hiking_time->s;
+        }
+
+        $total_hiking_time = array(
+            'hour'      =>  $hour + sprintf('%d',$minute / 60),
+            'minute'    =>  $minute % 60 + sprintf('%d', $second / 60),
+            'second'    =>  $second % 60
+        );
+        $result['total_distance']       = $distance;
+        $result['total_hiking_time']    = $total_hiking_time;
+        return response()->json($result);
     }
 
     /**
@@ -194,35 +216,8 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //UserProfile Picture File Save
-        // Storage::put(
-        //     'userprofile/' . $id . '.png',
-        //     $request->get('imageSrc')
-        // );
-        // $image_path = 'userprofile/'.$id.'.png';
-        // $password = $request->get('pwv');
-        // $this->usermodel->userUpdate($password,$id);
-
-        // $user_info = array([
-        //     'nickname'  => $request->get('nn'),
-        //     'phone'     => $request->get('phone'),
-        //     'scope'     => $this->scope,
-        //     'gender'    => $this->gender,
-        //     'age_group' => $this->age_group,
-        //     'image_path'=> $image_path
-        // ]);
-
-        // UserProfile::where('user',$id)
-        //     ->update([
-        //         'nickname'  => $request->get('nn'),
-        //         'phone'     => $request->get('phone'),
-        //         'scope'     => $this->scope,
-        //         'gender'    => $this->gender,
-        //         'age_group' => $this->age_group,
-        //         'image_path'=> $image_path,
-        //         'updated_at'=> Carbon::now()->format('Y-m-d H:i:s')
-        //     ]);
-        // return response()->json('true');
+        $this->usermodel->userUpdate($request,$this->age_group,$this->scope,$id);
+        return response()->json('true');
     }
 
     /**
@@ -237,90 +232,6 @@ class UserController extends Controller
     }
 
     /**
-     * @function    showUserData
-     * @brief       Get User's Information
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function showUserData($id)
-    {
-        if (hiking_record::where('owner', $id)->count() == 0) {
-            $profile_value = array([
-                'grade' => '동네 뒷산',
-            ]);
-            return response()->json($profile_value);
-        } else {
-            // UserGrade Setting
-            $hiking_count = hiking_record::where('uuid', $id)->count();
-            if ($hiking_count < 5) {
-                $grade = '동네 뒷산';
-            } elseif ($hiking_count > 5 && $hiking_count < 10) {
-                $grade = '팔공산';
-            } elseif ($hiking_count > 10 && $hiking_count < 20) {
-                $grade = '한라산';
-            } elseif ($hiking_count > 20 && $hiking_count < 50) {
-                $grade = '백두산';
-            } else {
-                $grade = '에베레스트';
-            }
-
-            // Total Hiking Time Setting
-            $all_time = 0;
-            $hiking_time = hiking_record::select(
-                DB::raw(
-                    'timestampdiff(minute, created_at, updated_at) as HikingTime'
-                )
-            )->where(
-                'owner', 
-                $id
-            )->get();
-
-            foreach ($hiking_time as $hiking) {
-                $all_time += $hiking->HikingTime;
-            }
-
-            $hour = intval($all_time / 60);
-            $minute = $all_time % 60;
-            $all_time = $hour . '시간 ' . $minute . '분';
-
-            // Average Hiking Speed Setting
-            $total_speed = 0;
-            $row_count = hiking_record::where(
-                'owner', 
-                $id
-            )->count();
-            $avg_speed = hiking_record::where(
-                'owner', 
-                $id
-            )->select('avg_speed')
-            ->get();
-            foreach ($avg_speed as $speed) {
-                $total_speed += $speed->avg_speed;
-            }
-            $avg_speed = $total_speed / $row_count;
-
-            // Recent Hiking Record Setting
-            $recent_hiking = hiking_record::where('owner', $id)->select('created_at')->orderBy('created_at')->first();
-            $hiking_plan_value = hiking_record::where('owner', $id)->select('hiking_plan')->orderBy('created_at')->first();
-            $hiking_plan = $hiking_plan_value->hiking_plan;
-            $hiking_group = hiking_plan::leftjoin('hiking_group', 'hiking_plan.hiking_group', '=', 'hiking_group.uuid')
-                ->select('hiking_group.name')
-                ->where('hiking_plan.uuid', $hiking_plan)
-                ->first();
-            $hiking_group_name = $hiking_group->name;
-
-            $profile_value = array([
-                'grade' => $grade,
-                'avg_speed' => intval($avg_speed),
-                'hiking_time' => $all_time,
-                'recent_hiking' => $recent_hiking,
-                'hiking_group_name' => $hiking_group_name
-            ]);
-        }
-        return response()->json($profile_value);
-    }
-
-    /**
      * @funtion     graph
      * @brief       Get Graph's Information
      * 
@@ -329,57 +240,53 @@ class UserController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function graph(Request $request,$id) 
+    public function graph(Request $request)
     {
         $year = $request->get('year');
         $month = array();
         for ($i = 1; $i <= 12; $i++) {
             if ($i == 1 || 3 || 5 || 7 || 8 || 10 || 12) {
-                $count = hiking_record::where(
-                    'owner',
-                    $id
-                )->where(
-                    'created_at',
-                    '>=', 
-                    $year . '-' . $i . '-01'
-                )->where(
-                    'created_at',
-                    '<=', 
-                    $year . '-' . $i . '-30'
-                )->count();
+                $count = schedule_member::where(
+                    'userid',
+                    $request->get('userid')
+                )->where([
+                    ['updated_at',
+                    '>=',
+                    $year . '-' . $i . '-01'],
+                    ['hiking_state',2],
+                    ['updated_at',
+                        '<=',
+                        $year . '-' . $i . '-31']
+                ])->count();
             } elseif ($i == 2) {
-                $count = hiking_record::where('owner', $id)
-                    ->where('created_at', '>=', $year . '-' . $i . '-01')
-                    ->where('created_at', '<=', $year . '-' . $i . '-28')
-                    ->count();
+                $count = schedule_member::where(
+                    'userid',
+                    $request->get('userid')
+                )->where([
+                    ['updated_at',
+                        '>=',
+                        $year . '-' . $i . '-01'],
+                    ['hiking_state',2],
+                    ['updated_at',
+                        '<=',
+                        $year . '-' . $i . '-28']
+                ])->count();
             } else {
-                $count = hiking_record::where(
-                    'owner',
-                    $id
-                )->where(
-                    'created_at',
-                    '>=', 
-                    $year . '-' . $i . '-01'
-                )->where(
-                    'created_at',
-                    '<=', 
-                    $year . '-' . $i . '-30'
-                )->count();
+                $count = schedule_member::where(
+                    'userid',
+                    $request->get('userid')
+                )->where([
+                    ['updated_at',
+                        '>=',
+                        $year . '-' . $i . '-01'],
+                    ['hiking_state',2],
+                    ['updated_at',
+                        '<=',
+                        $year . '-' . $i . '-30']
+                ])->count();
             }
             $month[$i] = $count;
         }
         return response()->json($month);
-    }
-
-    /**
-     * Get User's profile data set
-     * 
-     * @param String $userUuid 
-     * 
-     * @return Array
-     */
-    public function getUserProfile(String $userUuid)
-    {
-        return $this->_userProfile_model->getUserProfile($userUuid);
     }
 }
