@@ -8,7 +8,7 @@
     <!-- @div       wrapper of this component -->
     <div>
         <v-btn
-                style   ="margin-bottom: 5%;"
+                style="margin-bottom: 0%; margin-right: 1%"
                 color   ="red"
                 dark
                 midiuem
@@ -72,7 +72,6 @@
                 </v-card>
             </v-tab-item>
         </v-tabs>
-
     </div>
 </template>
 

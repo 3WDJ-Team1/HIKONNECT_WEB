@@ -67,10 +67,12 @@
         },
         // 
         created() {
+            this.$EventBus.$on('eventShowMap', (code, route) => {
+                console.log(code);
+                console.log(route);
+            });
             google.maps.event.addDomListener(window, "load", this.createMap);
             google.maps.event.addDomListener(window, "load", this.createPolyLine);
-            this.groupId = this.$route.params.groupid;
-            // this.groupId = "ed9c160c-e1d1-5739-1ebd-ee1dd110a8c8";
             axios.get(this.$HttpAddr + '/hikingPlan/' + this.groupId)
                 .then(response => {
                     console.log(response.data[0].starting_point);
@@ -80,7 +82,7 @@
                     // this.options.center = this.hikingPathCoordinates[0];
                     this.createPolyLine();
             });;
-            
+
         },
     }
 </script>

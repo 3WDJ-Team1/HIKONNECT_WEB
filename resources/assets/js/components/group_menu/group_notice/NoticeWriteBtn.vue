@@ -13,7 +13,7 @@
             class       ="btn--right btn--floating btn--fixed btn--bottom"
             color       ="cyan"
             @click      ="openWriteModal()"
-            style       ="margin-bottom: 10%;">
+            style       ="margin-bottom: 5%; margin-right: 1%">
             <v-icon color="white">mode_edit</v-icon>
         </v-btn>
         <!-- @sweet-modal   the modal which have form script for writing notices -->

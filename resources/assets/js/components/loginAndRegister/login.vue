@@ -27,6 +27,7 @@
             </v-text-field>
         </v-form>
         <v-btn
+                align-content-center
                 @click  ="login"
                 block
                 color   ="light-green"
@@ -160,6 +161,10 @@
     }
 </script>
 <style>
+
+    .container.fluid {
+        margin: 0px;
+    }
     .container-custom {
         margin: 0 auto;
         padding: 0;

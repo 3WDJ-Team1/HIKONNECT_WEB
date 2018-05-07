@@ -1,44 +1,27 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
-require('./bootstrap');
-
-window.Vue = require('vue');
-
-
-// vue-router
+import Vue from 'vue'
 import VueRouter from 'vue-router'
-window.Vue.use(VueRouter);
+import App from './App.vue'
 
-// route structure
-import routes from './route.js';
-
-// BootstrapVue
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import BootstrapVue from 'bootstrap-vue'
 Vue.use(BootstrapVue);
+
+require('./bootstrap');
 
 // sweet-modal
 import SweetModal   from 'sweet-modal-vue/src/plugin.js';
 Vue.use(SweetModal);
 
-
 import VueModalTor from 'vue-modaltor'
-Vue.use(VueModalTor)
-
-
-
+Vue.use(VueModalTor);
 
 // vuetify
 import Vuetify      from 'vuetify';
 Vue.use(Vuetify);
 
-import 'vuetify/dist/vuetify.min.css';
+import 'vuetify/dist/vuetify.css';
+
+import 'material-design-icons-iconfont/dist/material-design-icons.scss'
 
 // vue axios
 import VueAxios     from 'vue-axios';
@@ -54,6 +37,7 @@ Vue.prototype.$EventBus = new Vue();
 // vue-event-calendar
 import 'vue-event-calendar/dist/style.css';
 import vueEventCalendar     from 'vue-event-calendar';
+
 Vue.use(vueEventCalendar, {
     locale  : 'en',
     color   : 'lightskyblue',
@@ -64,6 +48,9 @@ import ElementUI            from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
 
+// set httpAddr all Vue components
+Vue.prototype.$HttpAddr = Laravel.host + "/api";
+
 // vue-datatime
 import Datetime             from 'vue-datetime'
 import 'vue-datetime/dist/vue-datetime.css'
@@ -73,13 +60,25 @@ Vue.use(Datetime);
 import Toasted              from 'vue-toasted';
 Vue.use(Toasted);
 
-import App                  from './components/App.vue';
 
-// set httpAddr all Vue components
-Vue.prototype.$HttpAddr = Laravel.host + "/api";
+// LightBootstrap plugin
+import LightBootstrap from './light-bootstrap-main'
 
-const router = new VueRouter({ routes:routes });
- 
-// view-router 와 직접적인 관련이 있다.
-new Vue(Vue.util.extend({ router }, App)).$mount('#app');
+// router setup
+import routes from './route'
+// plugin setup
+Vue.use(VueRouter);
+Vue.use(LightBootstrap);
 
+// configure router
+const router = new VueRouter({
+    routes, // short for routes: routes
+    linkActiveClass: 'nav-item active'
+})
+
+/* eslint-disable no-new */
+new Vue({
+    el: '#app',
+    render: h => h(App),
+    router
+})

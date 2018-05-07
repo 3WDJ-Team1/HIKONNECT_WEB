@@ -1,12 +1,11 @@
-
-// main
-import Main                 from './components/main/MainPage.vue'
+import DashboardLayout from './components/Layout/DashboardLayout.vue'
+// GeneralViews
+import NotFound from './components/NotFoundPage.vue'
 
 // groups_list
 import groups_list          from './components/groups_list/main.vue'
 import list_search          from './components/groups_list/list_search'
 import list_show            from './components/groups_list/list_show'
-
 
 // group_make
 import autocomplete         from './components/group_make/autocomplete'
@@ -40,7 +39,6 @@ import NoticeFormInside     from './components/group_menu/group_notice/NoticeFor
 
 
 //group event
-import eventShowmap         from './components/group_menu/group_event/eventShowMap'
 import makeEvent            from './components/group_menu/group_event/makeEvent'
 import plan_main            from './components/group_menu/group_event/plan_main'
 import GroupPlanCalendar    from './components/group_menu/group_event/GroupPlanCalendar.vue';
@@ -56,138 +54,149 @@ import GroupMemberDetail    from './components/group_menu/group_member/GroupMemb
 // wating member list
 import WaitingMemberList     from './components/group_menu/group_member/WaitingMemberList.vue';
 
+// Admin pages
+import Record from './components/Views/Overview.vue'
+import UserProfile from './components/Views/UserProfile.vue'
+import TableList from './components/Views/TableList.vue'
+import Typography from './components/Views/Typography.vue'
+import Icons from './components/Views/Icons.vue'
+import Maps from './components/Views/Maps.vue'
+import Notifications from './components/Views/Notifications.vue'
 
-import goo from './components/goo.vue';
 
-// routing structure
+
+// main
+import Main                 from './components/main/MainPage.vue'
+
 const routes = [
-    // main page
     {
-        name: 'main',
-        path: '/',
-        component: Main,
-    },
-    {
-        path: '/list',
-        component: groups_list,
+        path: '/admin',
+        component: DashboardLayout,
+        redirect: '/admin/overview',
         children: [
             {
-                path: '/list',
-                components: {
-                    header: list_search,
-                    body: list_show,
-                    make: group_make
-                }
-            }
-        ]
-    },
-    {
-        path: '/notice',
-        component: notice,
-        children: [
+                path: 'overview',
+                name: 'Overview',
+                component: Main
+            },
             {
-                path: '/notice',
-                components: {
-                    body: notice_information
-                }
-            }
-        ]
-    },
-    {
-        name: 'mypage',
-        path: '/mypage',
-        component: myPage,
-        children:   [
+                path: 'record',
+                name: 'Record',
+                component: Record,
+            },
             {
-                path: '',
-                components: {
-                    graph: graph,
-                    profile: profile,
-                }
-            }
-        ]
-    },
-    {
-        name: 'modify',
-        path: '/modify',
-        component: modify
-    },
-    {
-        name: 'group_update',
-        path: '/group_update/:groupid',
-        component: group_upadate
-    },
-    {
-        name: 'graph',
-        path: '/graph',
-        component: graph
-    },
-    {
-        name: 'update',
-        path: '/update',
-        component: update
-    },
-    {
-        name: 'level',
-        path: '/level',
-        component: level
-    },
-    // group menu
-    {
-        name        : 'GroupMenu',
-        path        : '/group',
-        component   : GroupMenuTab,
-        children    : [
-            // tab of group menu
-            {
-                path        : ':groupid',
-                components  : {
-                    notice      : NoticeListUp,
-                    plan        : plan_main,
-                    member_list : GroupMemberList,
-                },
+                path: 'group-list',
+                name: 'Group List',
+                component: groups_list,
                 children: [
                     {
-                        path        : '',
+                        path: '',
+                        components: {
+                            header: list_search,
+                            body: list_show,
+                            make: group_make
+                        }
+                    }
+                ]
+            },
+            {
+                path: 'user',
+                name: 'User',
+                component: UserProfile
+            },
+            {
+                path: 'table-list',
+                name: 'Table List',
+                component: TableList
+            },
+            {
+                path: 'typography',
+                name: 'Typography',
+                component: Typography
+            },
+            {
+                path: 'icons',
+                name: 'Icons',
+                component: Icons
+            },
+            {
+                path: 'maps',
+                name: 'Maps',
+                component: Maps
+            },
+            {
+                path: 'notifications',
+                name: 'Notifications',
+                component: Notifications
+            },
+            // group menu
+            {
+                name        : 'GroupMenu',
+                path        : '/group',
+                component   : GroupMenuTab,
+                children    : [
+                    // tab of group menu
+                    {
+                        path        : ':groupid',
                         components  : {
-                            item    : GroupPlanCalendar,
-                            make        : event_make_main,
-                            // write, modify, delete button of NoticeListUp
-                            write   : NoticeWriteBtn,
-                            modify  : NoticeModifyBtn,
-                            delete  : NoticeDeleteBtn,
-                            // components in GroupPlan
-                            map         : GroupPlanMap,
-                            calendar    : GroupPlanCalendar,
-                            // component in GroupMemberList
-                            member_detail   : GroupMemberDetail,
-                            waiting_member   : WaitingMemberList,
+                            notice      : NoticeListUp,
+                            plan        : plan_main,
+                            member_list : GroupMemberList,
                         },
                         children: [
                             {
                                 path        : '',
                                 components  : {
-                                    // inner form component of modal(NoticeWriteBtn, NoticeModifyBtn)
-                                    map             : eventShowmap,
-                                    form            : NoticeFormInside,
-                                    autocomplete    : autocomplete
+                                    item    : GroupPlanCalendar,
+                                    make        : event_make_main,
+                                    // write, modify, delete button of NoticeListUp
+                                    write   : NoticeWriteBtn,
+                                    modify  : NoticeModifyBtn,
+                                    delete  : NoticeDeleteBtn,
+                                    // components in GroupPlan
+                                    map         : GroupPlanMap,
+                                    calendar    : GroupPlanCalendar,
+                                    // component in GroupMemberList
+                                    member_detail   : GroupMemberDetail,
+                                    waiting_member   : WaitingMemberList,
                                 },
-                                children:   [
+                                children: [
                                     {
-                                        path: '',
-                                        components: {
-                                            map: event_map,
-                                        }
+                                        path        : '',
+                                        components  : {
+                                            // inner form component of modal(NoticeWriteBtn, NoticeModifyBtn)
+                                            form            : NoticeFormInside,
+                                            autocomplete    : autocomplete
+                                        },
+                                        children:   [
+                                            {
+                                                path: '',
+                                                components: {
+                                                    map: event_map,
+                                                }
+                                            }
+                                        ]
                                     }
                                 ]
                             }
                         ]
-                    }
+                    },
+
                 ]
-            },
-
+            }
         ]
-    }
-];
+    },
 
-export default routes;
+    { path: '*', component: NotFound }
+]
+
+/**
+ * Asynchronously load view (Webpack Lazy loading compatible)
+ * The specified component must be inside the Views folder
+ * @param  {string} name  the filename (basename) of the view to load.
+ function view(name) {
+   var res= require('../components/Dashboard/Views/' + name + '.vue');
+   return res;
+};**/
+
+export default routes

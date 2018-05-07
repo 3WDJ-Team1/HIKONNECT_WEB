@@ -3,7 +3,6 @@
         <router-view name="header"></router-view>
         <router-view name="body"></router-view>
         <v-btn
-                style="margin-bottom: 5%;"
                 dark
                 midiuem
                 fixed

@@ -6,8 +6,7 @@
  -->
 <template>
     <div>
-    <vue-event-calendar
-            style="width: 70%; margin: 0 auto;" :events="hikingEvents">
+    <vue-event-calendar :events="hikingEvents">
         <v-card v-for="(event, i) in hikingEvents" :key="i">
             <v-card-title primary-title>
                 <div>
@@ -36,13 +35,17 @@
         </v-card>
     </vue-event-calendar>
     <sweet-modal ref="show" blocking>
-        <router-view name="map"></router-view>
+        <group-plan-map></group-plan-map>
     </sweet-modal>
     </div>
 </template>
 
 <script>
+    import GroupPlanMap from '../group_plan/GroupPlanMap'
     export default {
+        components: {
+            GroupPlanMap
+        },
         data: () => ({
             show: false,
             hikingEvents: []

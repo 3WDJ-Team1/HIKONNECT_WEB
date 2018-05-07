@@ -3,7 +3,7 @@
         <router-view v-if="listEventB" name="item"></router-view>
         <router-view v-if="makeEventB" name="make"></router-view>
         <v-btn
-                style="margin-bottom: 10%;"
+                style="margin-bottom: 5%; margin-right: 1%"
                 dark
                 midiuem
                 fixed
