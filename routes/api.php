@@ -178,12 +178,27 @@ Route::group(
         );
         Route::post(
             '/getlm',
-            'testcontroller@get_Memo_Info'
-        )->name('Get Memo Information');
+            'testcontroller@getMemoInfo'
+        )->name('getMemoInfo');
         Route::post(
             '/send',
             'FCMController@pushNotification'
         )->name('SendNotification');
+
+        Route::post(
+            '/storesend',
+            'testcontroller@updateScheduleMember'
+        )->name('updateScheduleMember');
+
+        Route::post(
+            '/getScheduleMember',
+            'testcontroller@getScheduleMember'
+        )->name('getScheduleMember');
+
+        Route::post(
+            '/updateHikingState',
+            'testcontroller@updateHikingState'
+        )->name('updateHikingState');
     }
 );
 
