@@ -289,4 +289,16 @@ class UserController extends Controller
         }
         return response()->json($month);
     }
+    /**
+     * @function    user_info
+     * @brief       User's infomation
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function user_info(Request $request) {
+        $userinfo = $this->usermodel->user_profile_info($request->get('userid'));
+        return response()->json($userinfo);
+    }
 }

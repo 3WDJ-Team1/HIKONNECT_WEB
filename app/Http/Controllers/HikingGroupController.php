@@ -18,14 +18,16 @@ use Illuminate\Http\Response;
 use App\Models\HikingGroup;
 
 /**
- * Controller for Group
+ * Controller class for Hiking_group
  *
- * @category Controller
- * @package  Global
- * @author   bs Kwon <rnjs9957@gmail.com>
- * @license  MIT License
- * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB/
+ * @category Controllers
+ * @package  App
+ * @author   Sol Song <thdthf159@naver.com>
+ * @license  MIT license
+ * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB
  */
+
+
 class HikingGroupController extends Controller
 {
     private $_group_model = null;
@@ -105,7 +107,8 @@ class HikingGroupController extends Controller
      */
     public function show($id)
     {
-        //
+        $result = $this->_group_model->mygroup($id);
+        return response()->json($result);
     }
 
     /**

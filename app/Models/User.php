@@ -71,4 +71,9 @@ class User extends Model
             $userid
         )->get();
     }
+
+    public function user_profile_info($userid) {
+        return
+        User::where('userid',$userid)->get();
+    }
 }

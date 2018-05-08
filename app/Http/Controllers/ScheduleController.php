@@ -8,6 +8,16 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+/**
+ * Controller class for Group_Schedule
+ *
+ * @category Controllers
+ * @package  App
+ * @author   Sol Song <thdthf159@naver.com>
+ * @license  MIT license
+ * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB
+ */
+
 class ScheduleController extends Controller
 {
     private $hiking_schedule;
@@ -26,9 +36,7 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        $result = Hiking_schedule::select('no','title','leader','content','route','start_date','mnt_id')
-            ->get();
-        return response()->json($result);
+        //
     }
 
     /**
@@ -70,9 +78,22 @@ class ScheduleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id,$user)
+    public function show($uuid)
     {
-        return $id.$user;
+        $result = array();
+        $i = 0;
+        $list = json_decode(Hiking_schedule::select('no','title','content','leader','start_date','mnt_id','route')->where('hiking_group',$uuid)->get());
+        foreach ($list as $value) {
+            $result[$i]['no'] = $value->no;
+            $result[$i]['title'] = $value->title;
+            $result[$i]['content'] = $value->content;
+            $result[$i]['leader'] = $value->leader;
+            $result[$i]['mnt_id'] = $value->mnt_id;
+            $result[$i]['start_date'] = $value->start_date;
+            $result[$i]['route'] = json_decode($value->route);
+            $i++;
+        }
+        return $result;
     }
 
     /**
@@ -111,6 +132,14 @@ class ScheduleController extends Controller
         //
     }
 
+    /**
+     * @function    enter_schedule
+     * @brief       Enter Schedule
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function enter_schedule(Request $request) {
         $member_info = array([
             'userid'                         => $request->get('userid'),
@@ -129,13 +158,29 @@ class ScheduleController extends Controller
         return response()->json('true');
     }
 
+    /**
+     * @function    out_schedule
+     * @brief       Out of Schedule
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function out_schedule(Request $request) {
         $this->schedule_member->out_schedule($request->get('userid'),$request->get('uuid'),$request->get('schedule_no'));
         return response()->json('true');
     }
 
+    /**
+     * @function    my_schedule
+     * @brief       My Schedule
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function my_schedule(Request $request) {
-        $result = $this->hiking_schedule->my_schedule($request->get('userid'),$request->get('uuid'));
+        $result = $this->hiking_schedule->my_schedule($request->get('userid'));
         return response()->json($result);
     }
 }

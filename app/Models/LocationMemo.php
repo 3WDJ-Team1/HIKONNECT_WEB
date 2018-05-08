@@ -14,11 +14,11 @@ use Illuminate\Database\Eloquent\Model;
 use App\Request;
 
 /**
- * Model for Notification
- * 
+ * Model class for LocationMemo
+ *
  * @category Model
  * @package  App
- * @author   bs Kwon <rnjs9957@gmail.com>
+ * @author   Sol Song <thdthf159@naver.com>
  * @license  MIT license
  * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB
  */

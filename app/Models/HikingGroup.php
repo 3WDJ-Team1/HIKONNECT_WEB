@@ -19,7 +19,7 @@ use Illuminate\Support\Carbon;
  *
  * @category Model
  * @package  App
- * @author   bs Kwon <rnjs9957@gmail.com>
+ * @author   bs SongSol <thdthf159@gmail.com>
  * @license  MIT license
  * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB
  */

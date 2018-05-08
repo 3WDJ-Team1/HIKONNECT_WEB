@@ -27,6 +27,10 @@ Route::group(
             'notice', 
             'NoticeController'
         );
+        Route::get(
+            'list_announce/{uuid}/{page}',
+            'NoticeController@list_announce'
+        )->name('list_announce');
         // Hiking group Routings
         Route::resource(
             'hikingGroup', 
@@ -93,6 +97,10 @@ Route::group(
             '/user', 
             'UserController'
         );
+        Route::post(
+            '/userinfo',
+            'UserController@user_info'
+        )->name('user_info');
         Route::post(
             '/login', 
             'LoginController@login'

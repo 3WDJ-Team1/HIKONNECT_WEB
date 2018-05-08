@@ -11,6 +11,16 @@ use App\Models\schedule_member;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+/**
+ * Controller class for App
+ *
+ * @category Controllers
+ * @package  App
+ * @author   Sol Song <thdthf159@naver.com>
+ * @license  MIT license
+ * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB
+ */
+
 class testcontroller extends Controller
 {
 

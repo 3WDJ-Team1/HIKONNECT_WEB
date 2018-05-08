@@ -7,6 +7,16 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+/**
+ * Controller class for GroupMember
+ *
+ * @category Controllers
+ * @package  App
+ * @author   Sol Song <thdthf159@naver.com>
+ * @license  MIT license
+ * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB
+ */
+
 class GroupMemberController extends Controller
 {
     private $member_model = null;
@@ -108,11 +118,27 @@ class GroupMemberController extends Controller
         //
     }
 
+    /**
+     * @function    out_group
+     * @brief       Out of Group
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function out_group(Request $request) {
         $this->member_model->delete_member($request->get('userid'),$request->get('uuid'));
         return response()->json('true');
     }
 
+    /**
+     * @function    list_member
+     * @brief       Group's member
+     *
+     * @param string uuid
+     *        int state
+     * @return \Illuminate\Http\Response
+     */
     public function list_member($uuid,$state) {
         if ($state == 0) {
             $member_list = $this->member_model->get_member_list($uuid,$state);
@@ -123,6 +149,14 @@ class GroupMemberController extends Controller
         return $member_list;
     }
 
+    /**
+     * @function    my_group
+     * @brief       My Group
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function my_group (Request $request) {
         $result = $this->member_model->my_group($request->get('userid'));
         return response()->json($result);
