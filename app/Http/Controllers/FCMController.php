@@ -6,6 +6,16 @@ use Illuminate\Http\Request;
 use Ixudra\Curl\Facades\Curl;
 
 /**
+ * Controller class for Push Message
+ *
+ * @category Controllers
+ * @package  App
+ * @author   Sol Song <thdthf159@naver.com>
+ * @license  MIT license
+ * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB
+ */
+
+/**
  * 
  */
 class FCMController extends Controller

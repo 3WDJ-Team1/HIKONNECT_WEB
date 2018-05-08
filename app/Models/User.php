@@ -38,12 +38,15 @@ class User extends Model
     }
 
     //User Update
-    public function userUpdate($password,$id) 
+    public function userUpdate(Request $request,$age_group,$scope,$userid)
     {
-        User::where('uuid',$id)
+        User::where('userid',$userid)
             ->update([
-                'password'      => $password,
-                'updated_at'    => Carbon::now()->format('Y-m-d H:i:s')]);
+                'password'  =>  $request->get('pw'),
+                'nickname'  =>  $request->get('nickname'),
+                'age_group' =>  $age_group,
+                'phone'     =>  $request->get('phone'),
+                'scope'     =>  $scope]);
     }
 
     //User Delete
@@ -53,5 +56,24 @@ class User extends Model
             'id',
             $id
         )->delete();
+    }
+
+    public function userInfo($userid) {
+        return
+        User::select(
+           'user.nickname','user.profile','user.rank','schedule_member.distance','schedule_member.updated_at','hiking_schedule.start_date'
+        )->join(
+            'schedule_member','schedule_member.userid','=','user.userid'
+        )->join(
+            'hiking_schedule','hiking_schedule.no','=','schedule_member.schedule'
+        )->where(
+            'user.userid',
+            $userid
+        )->get();
+    }
+
+    public function user_profile_info($userid) {
+        return
+        User::where('userid',$userid)->get();
     }
 }

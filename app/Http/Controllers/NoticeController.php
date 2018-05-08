@@ -17,17 +17,15 @@ use App\Models\Notification;
 use App\Models\User;
 
 /**
- * Controller for Notification
- * 
+ * Controller class for User's Announce
+ *
  * @category Controllers
- * @package  App\Http\Controllers
- * @author   bs Kwon <rnjs9957@gmail.com>
+ * @package  App
+ * @author   Sol Song <thdthf159@naver.com>
  * @license  MIT license
  * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB
- * 
- * @var Model $_notice_model        A reference variable for Notice model
- * @var Model $_user_model          A reference variable for user model
  */
+
 class NoticeController extends Controller
 {
     private $announce_model = null;
@@ -49,13 +47,7 @@ class NoticeController extends Controller
      */
     public function index($groupUuid, $perPage)
     {
-        $notifications = $this->announce_model
-            ->getAnnounce(
-                $groupUuid,
-                $perPage
-            );
-
-        return response()->json($notifications);
+        //
     }
 
     /**
@@ -97,10 +89,15 @@ class NoticeController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($groupUuid,$perPage)
     {
-        return $notification = $this->_notice_model
-            ->selectOwn($id);
+        $notifications = $this->announce_model
+            ->getAnnounce(
+                $groupUuid,
+                $perPage
+            );
+
+        return response()->json($notifications);
     }
 
     /**
@@ -138,6 +135,24 @@ class NoticeController extends Controller
      */
     public function destroy($id)
     {
-        return $this->_notice_model->deleteNotification($id);
+        //
+    }
+
+    /**
+     * @function    list_announce
+     * @brief       List of Announces
+     *
+     * @param string uuid
+     *         int page
+     * @return \Illuminate\Http\Response
+     */
+    public function list_announce($uuid,$page) {
+        $announce_list = $this->announce_model
+            ->getAnnounce(
+                $uuid,
+                $page
+            );
+
+        return response()->json($announce_list);
     }
 }
