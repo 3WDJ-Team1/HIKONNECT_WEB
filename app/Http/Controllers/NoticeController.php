@@ -45,7 +45,7 @@ class NoticeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($groupUuid, $perPage)
+    public function index()
     {
         //
     }

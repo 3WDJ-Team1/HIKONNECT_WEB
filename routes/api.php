@@ -74,23 +74,6 @@ Route::group(
             'out_group',
             'GroupMemberController@out_group'
         )->name('out_group');
-        Route::patch(
-            'replyUserEntry',
-            'EntryInfoController@replyUserEntry'
-        )->name('replyUserEntry');
-        Route::get(
-            'appliedUsers/{groupUuid}',
-            'EntryInfoController@appliedUsers'
-        )->name('appliedUsers');
-        Route::delete(
-            'rejectUserEntry',
-            'EntryInfoController@rejectUserEntry'
-        )->name('rejectUserEntry');
-   
-        Route::get(
-            'groupMembers/{groupUuid}/{idx?}/{perIdx?}', 
-            'HikingGroupController@getGroupMembers'
-        )->name('groupMemberList');
 
         // Login Routings
         Route::resource(

@@ -37,13 +37,13 @@ class HikingGroup extends Model
             return HikingGroup::where([
                 ['leader', 'LIKE', "%$input%"]
             ])
-            ->select(
-                'uuid','title','content','us.nickname','min_member','max_member'
-            )->join(
-                'user as us',
-                'us.userid',
-                '=',
-                'hiking_group.leader'
+                ->select(
+                    'uuid','title','content','us.nickname','min_member','max_member'
+                )->join(
+                    'user as us',
+                    'us.userid',
+                    '=',
+                    'hiking_group.leader'
                 )
                 ->orderBy('hiking_group.created_at','DESC')
                 ->skip($page)
@@ -69,14 +69,14 @@ class HikingGroup extends Model
         }
         else {
             return HikingGroup::
-                select(
-                    'uuid','title','content','us.nickname','min_member','max_member'
-                )->join(
-                    'user as us',
-                    'us.userid',
-                    '=',
-                    'hiking_group.leader'
-                )
+            select(
+                'uuid','title','content','us.nickname','min_member','max_member'
+            )->join(
+                'user as us',
+                'us.userid',
+                '=',
+                'hiking_group.leader'
+            )
                 ->orderBy('hiking_group.created_at','DESC')
                 ->skip($page)
                 ->take(10)
