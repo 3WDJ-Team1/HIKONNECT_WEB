@@ -1,4 +1,16 @@
 <?php
+/** 
+ * Test controller
+ * 
+ * PHP version 7.0
+ * 
+ * @category Controller
+ * @package  App\Http\Controllers
+ * @author   SongSol <address@email.com>
+ * @author   bs Kwon <rnjs9957@gmail.com>
+ * @license  MIT License
+ * @link     n
+ */
 namespace App\Http\Controllers;
 
 use DB;
@@ -13,15 +25,11 @@ use App\Http\Controllers\Controller;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 
+/**
+ * 
+ */
 class testcontroller extends Controller
 {
-
-    private $location_memo;
-
-    public function __construct()
-    {
-        $this->location_memo = new location_memo();
-    }
 
     /**
      * Display a listing of the resource.
@@ -153,13 +161,6 @@ class testcontroller extends Controller
      *                  latitude,
      *                  longitude
      *               ]
-     * 
-     * @todo 위치 메모 반경 계산 루틴 구현.
-     *       [1] 위치 메모의 위도, 경도 값 구하기.
-     *       [2] 알림 반경을 지정.
-     *       [3] [1]의 좌표를 기준으로 알림 반경을 계산.
-     *       [4] 반환 배열에 위치 알림 반경을 추가.
-     *       [5] 계산 된 배열(위치 알림 정보 + 알림 반경)을 반환.
      */
     public function getMemoInfo(Request $request) 
     {
@@ -181,7 +182,6 @@ class testcontroller extends Controller
         );
 
         return $queryRes;
-
     }
 
     /**
@@ -193,53 +193,44 @@ class testcontroller extends Controller
      * @var Double  $lat     [POST] User's latitude.
      * @var Double  $lng     [POST] User's longitude.
      * 
-     * @return Array [userid, latitude, longitude]
-     * 
-     * @todo 자신의 계산 된 정보를 업데이트.
-     *       [계산 할 데이터]
-     *         1. 위도(latitude).                   완료.
-     *         2. 경도(longitude).                  완료.
-     *         3. 평균 속도(avg_speed).
-     *         4. 현재 등산 중인 경로(current_fid).
-     *         5. 총 등산 거리(distance).
-     *         6. 이전 좌표와 현재 좌표의 거리(between_before_fid_distance) ?? 질문 해 볼 것.
+     * @return Array [userid, latitude, longitude, avg_speed, current_fid, distance]
      */
     public function updateScheduleMember(Request $request)
     {
-        $user_id    = $request->get('user_id');
+        $user_id    = $request->get('id');
         $lat        = $request->get('latitude');
         $lng        = $request->get('longitude');
 
         $user_id_check = schedule_member::where('userid', $user_id)
             ->get();
 
-        if (count($user_id_check) == 0) {
-            schedule_member::insert(
-                [
-                    'userid'        => $user_id,
-                    'hiking_group'  => '57a89f8f-4dc8-11e8-82cb-42010a9200af',
-                    'schedule'      => 1,
-                    'hiking_state'  => 1,
-                    'avg_speed'     => 1.0,
-                    'current_fid'   => 1,
-                    'latitude'      => $lat,
-                    'longitude'     => $lng
-                ]
-            );
-        } else {
-            schedule_member::where('userid', $user_id)
-            ->update(
-                [
-                    'latitude'          => $lat,
-                    'longitude'         => $lng
-                ]
-            );
-        }
+        schedule_member::where('userid', $user_id)
+        ->update(
+            [
+                'latitude'          => $lat,
+                'longitude'         => $lng
+            ]
+        );
+
+        // 10초 마다 디바이스에 전달 할 데이터.
+        /* schedule_member::where('userid', $user_id)
+         ->update(
+             [
+                 'latitude'          => $lat,
+                 'longitude'         => $lng,
+                 'current_fid'       => $current_fid,
+                 'avg_speed'         => $avg_speed,
+                 'distance'          => $distance
+             ]
+         ); */
 
         $result = schedule_member::select(
             'userid',
             'latitude',
-            'longitude'
+            'longitude',
+            'current_fid',
+            'avg_speed',
+            'distance'
         )->get();
 
         return $result;
@@ -256,20 +247,29 @@ class testcontroller extends Controller
      * 
      * @return String Field ID which user was located in specific mountain.
      */
-    function getCurrentFID(Integer $mntCode, Array $fidSet, Double $lat, Double $lng)
+    function getCurrentFID($mntCode, $fidSet, $lat, $lng)
     {
-        $client = new Client(); // GuzzleHttp\Client
-        $result = $client->get(
-            '172.25.1.11:3000/mountain/getCurrentFID', 
-            [
-                'query' => [
-                    'mntCode'   => $mntCode,
-                    'fidSet'    => $fidSet,
-                    'lat'       => $lat,
-                    'lng'       => $lng
+        $mntCode    = intval($mntCode);
+        $lat        = doubleval($lat);
+        $lng        = doubleval($lng);
+
+        try {
+
+            $client = new Client(); // GuzzleHttp\Client
+            $result = $client->get(
+                '172.26.2.38:3000/mountain/getCurrentFID', 
+                [
+                    'query' => [
+                        'mntCode'   => $mntCode,
+                        'fidSet'    => $fidSet,
+                        'lat'       => $lat,
+                        'lng'       => $lng
+                    ]
                 ]
-            ]
-        );
+            );
+        } catch (GuzzleException $e) {
+            return "Http Error occured.";
+        }
 
         return $result->getBody()->getContents();
     }
@@ -332,4 +332,6 @@ class testcontroller extends Controller
 
         return $queryRes;
     }
+
+
 }
