@@ -26,7 +26,14 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 
 /**
+ * Test controller
  * 
+ * @category Controller
+ * @package  App\Http\Controller
+ * @author   bs Kwon <rnjs9957@gmail.com>
+ * @author   SongSol <address@domain.com>
+ * @license  MIT License
+ * @link     link
  */
 class testcontroller extends Controller
 {
@@ -141,6 +148,57 @@ class testcontroller extends Controller
     }
 
     /**
+     * Store location memo.
+     * 
+     * @param Request $request .
+     * 
+     * @var String $user_id     User ID.
+     * @var String $latitude    User latitude.
+     * @var String $longitude   User longitude.
+     * @var String $title       Memo title.
+     * @var String $content     Memo contents.
+     * @var String $image_path  Memo image file path.
+     * @var String $created_at  Created time.
+     * @var String $updated_at  Updated time.
+     * 
+     * @return ??
+     */
+    public function storeLocationMemo(Request $request)
+    {
+        $user_id    = $request->get('user_id');
+        $latitude   = $request->get('lat');
+        $longitude  = $request->get('lng');
+        $title      = $request->get('title');
+        $content    = $request->get('content');
+        $image_path = $request->get('image_path');
+        $created_at = $request->get('created_at');
+        $updated_at = $request->get('updated_at');
+
+        $schedule_member = DB::table('schedule_member')
+            ->select('schedule', 'hiking_group')
+            ->where('userid', $user_id)
+            ->get();
+
+        $queryRes = DB::table('location_memo')
+        ->insert(
+            [
+                'schedule_no'   => $schedule_member->get(0)->schedule,
+                'hiking_group'  => $schedule_member->get(0)->hiking_group,
+                'title'         => $title,
+                'content'       => $content,
+                'writer'        => $user_id,
+                'picture'       => $image_path,
+                'created_at'    => $created_at,
+                'updated_at'    => $updated_at,
+                'latitude'      => $latitude,
+                'longitude'     => $longitude
+            ]
+        );
+
+        return $queryRes;
+    }
+
+    /**
      * Get detail information of location memo.
      * 
      * @param Request $request .
@@ -162,22 +220,16 @@ class testcontroller extends Controller
      *                  longitude
      *               ]
      */
-    public function getMemoInfo(Request $request) 
+    public function getLocationMemoDetail(Request $request) 
     {
-        $user_id = $request->get('id');
+        $location_no = $request->get('location_no');
 
         $queryRes = DB::select(
             DB::raw(
-                '
-                    SELECT * 
-                    FROM location_memo as lm
-                    WHERE lm.schedule_no = (
-                        SELECT sm.schedule
-                        FROM schedule_member as sm
-                        WHERE userid = "admin"
-                        GROUP BY sm.schedule
-                    );
-                '
+                "SELECT * 
+                FROM location_memo as lm
+                WHERE no = ${location_no}
+                );"
             )
         );
 
@@ -197,43 +249,62 @@ class testcontroller extends Controller
      */
     public function updateScheduleMember(Request $request)
     {
-        $user_id    = $request->get('id');
-        $lat        = $request->get('latitude');
-        $lng        = $request->get('longitude');
+        $member_no      = $request->get('member_no');
+        $lat            = $request->get('latitude');
+        $lng            = $request->get('longitude');
+        $distance       = $request->get('distance');
+        $avg_speed      = $request->get('velocity');
 
-        $user_id_check = schedule_member::where('userid', $user_id)
+        $user_id_check = schedule_member::where('member_no', $member_no)
             ->get();
 
-        schedule_member::where('userid', $user_id)
+        schedule_member::where('member_no', $member_no)
         ->update(
             [
                 'latitude'          => $lat,
-                'longitude'         => $lng
+                'longitude'         => $lng,
+                'distance'          => $distance,
+                'avg_speed'         => $avg_speed
             ]
         );
 
-        // 10초 마다 디바이스에 전달 할 데이터.
-        /* schedule_member::where('userid', $user_id)
-         ->update(
-             [
-                 'latitude'          => $lat,
-                 'longitude'         => $lng,
-                 'current_fid'       => $current_fid,
-                 'avg_speed'         => $avg_speed,
-                 'distance'          => $distance
-             ]
-         ); */
+        // Get the locations of members who participate in the same schedule.
+        $pos_members = DB::select(
+            DB::raw(
+                "SELECT
+                    member_no,
+                    latitude,
+                    longitude
+                FROM schedule_member
+                WHERE schedule = (
+                    SELECT schedule
+                    FROM schedule_member
+                    WHERE member_no = '${member_no}'
+                );"
+            )
+        );
 
-        $result = schedule_member::select(
-            'userid',
-            'latitude',
-            'longitude',
-            'current_fid',
-            'avg_speed',
-            'distance'
-        )->get();
+        $pos_location_memo = DB::select(
+            DB::raw(
+                "SELECT
+                    no,
+                    latitude,
+                    longitude 
+                FROM location_memo
+                WHERE schedule_no = (
+                    SELECT schedule
+                    FROM schedule_member
+                    WHERE member_no = '${member_no}'
+                )"
+            )
+        );
+        
+        $httpResponse = [
+            'members'           => $pos_members,
+            'location_memos'    => $pos_location_memo
+        ];
 
-        return $result;
+        return $httpResponse;
     }
 
     /**
@@ -254,7 +325,6 @@ class testcontroller extends Controller
         $lng        = doubleval($lng);
 
         try {
-
             $client = new Client(); // GuzzleHttp\Client
             $result = $client->get(
                 '172.26.2.38:3000/mountain/getCurrentFID', 
@@ -308,30 +378,89 @@ class testcontroller extends Controller
      * 
      * @param Request $request .
      * 
-     * @var Integer $user_id [POST] User's ID.
+     * @var Integer $user_id [POST] Unique number of the user.
      * 
-     * @return Array [userid]
+     * @return Array [
+     *                  userid  The Unique number which is participating in schedule.
+     *               ]
      */
-    function getScheduleMember(Request $request)
+    function getScheduleMembers(Request $request)
     {
         $user_id = $request->get('user_id');
 
         $queryRes = DB::select(
             DB::raw(
-                "
-                    SELECT userid
+                "SELECT userid
                     FROM schedule_member
                     WHERE schedule = (
                         SELECT schedule
                         FROM schedule_member
                         WHERE userid = '${user_id}'
-                    );
-                "
+                    );"
             )
         );
 
         return $queryRes;
     }
 
+    /**
+     * Get detail information of the member.
+     * 
+     * @param Request $request .
+     * 
+     * @var String $member_no           [POST] Member's unique number
+     *                                  who is participating in schedule.
+     * 
+     * @return Array [
+     *                  member_no,      Unique number of the member.
+     *                  nickname,       Nickname of the member.
+     *                  profile,        Member's profile image.
+     *                  hiking_group,   The unique number of the group
+     *                                  to which the member joined.
+     *                  current_fid,    Field ID in mountain which 
+     *                                  member was located.
+     *                  distance,       The distance which member hiked.
+     *                  hiking_start    Started time, member was started hiking.
+     *               ]
+     */
+    public function getMemberDetail(Request $request)
+    {
+        $member_no = $request->get('member_no');
 
+        $queryRes = DB::select(
+            DB::raw(
+                "SELECT
+                    u.nickname          as nickname,
+                    u.profile           as profile,
+                    hg.title            as hiking_group,
+                    sm.distance         as distance,
+                    sm.hiking_start     as hiking_start,
+                    sm.avg_speed        as velocity
+                FROM user as u
+                JOIN schedule_member as sm
+                ON u.userid = sm.userid
+                JOIN hiking_group as hg
+                ON hg.uuid = sm.hiking_group
+                WHERE sm.userid = (
+                    SELECT userid
+                    FROM schedule_member sm_sub
+                    WHERE member_no = '${member_no}'
+                );"
+            )
+        );
+
+        return $queryRes;
+    }
+
+    public function getMemberNo(Request $request)
+    {
+        $user_id = $request->get('user_id');
+
+        $queryRes = DB::table('schedule_member')
+            ->select('member_no')
+            ->where('userid', $user_id)
+            ->get();
+
+        return $queryRes;
+    }
 }

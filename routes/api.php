@@ -152,10 +152,6 @@ Route::group(
             'testcontroller'
         );
         Route::post(
-            '/getlm',
-            'testcontroller@get_Memo_Info'
-        )->name('Get Memo Information');
-        Route::post(
             '/send',
             'FCMController@pushNotification'
         )->name('SendNotification');
@@ -177,9 +173,9 @@ Route::group(
             'testcontroller'
         );
         Route::post(
-            '/getlm',
-            'testcontroller@getMemoInfo'
-        )->name('getMemoInfo');
+            '/getLocationMemoDetail',
+            'testcontroller@getLocationMemoDetail'
+        )->name('getLocationMemoDetail');
         Route::post(
             '/send',
             'FCMController@pushNotification'
@@ -191,14 +187,24 @@ Route::group(
         )->name('updateScheduleMember');
 
         Route::post(
-            '/getScheduleMember',
-            'testcontroller@getScheduleMember'
-        )->name('getScheduleMember');
+            '/getScheduleMembers',
+            'testcontroller@getScheduleMembers'
+        )->name('getScheduleMembers');
 
         Route::post(
             '/updateHikingState',
             'testcontroller@updateHikingState'
         )->name('updateHikingState');
+
+        Route::post(
+            '/getMemberNoByUserId',
+            'testcontroller@getMemberNo'
+        )->name('getMemberNoByUserId');
+
+        Route::post(
+            '/getMemberDetail',
+            'testcontroller@getMemberDetail'
+        )->name('getMemberDetail');
     }
 );
 
