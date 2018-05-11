@@ -165,18 +165,21 @@ class testcontroller extends Controller
      */
     public function storeLocationMemo(Request $request)
     {
-        $user_id    = $request->get('user_id');
+        $member_no  = $request->get('member_no');
         $latitude   = $request->get('lat');
         $longitude  = $request->get('lng');
         $title      = $request->get('title');
         $content    = $request->get('content');
         $image_path = $request->get('image_path');
-        $created_at = $request->get('created_at');
-        $updated_at = $request->get('updated_at');
+        $created_at = date("Y-m-d H:i:s");
+        $updated_at = date("Y-m-d H:i:s");
 
         $schedule_member = DB::table('schedule_member')
-            ->select('schedule', 'hiking_group')
-            ->where('userid', $user_id)
+            ->select(
+                'schedule', 
+                'hiking_group', 
+                'userid'
+            )->where('member_no', $member_no)
             ->get();
 
         $queryRes = DB::table('location_memo')
@@ -186,7 +189,7 @@ class testcontroller extends Controller
                 'hiking_group'  => $schedule_member->get(0)->hiking_group,
                 'title'         => $title,
                 'content'       => $content,
-                'writer'        => $user_id,
+                'writer'        => $schedule_member->get(0)->userid,
                 'picture'       => $image_path,
                 'created_at'    => $created_at,
                 'updated_at'    => $updated_at,
@@ -195,7 +198,7 @@ class testcontroller extends Controller
             ]
         );
 
-        return $queryRes;
+        return $queryRes ? 'ture' : 'false';
     }
 
     /**
@@ -203,21 +206,14 @@ class testcontroller extends Controller
      * 
      * @param Request $request .
      * 
-     * @var Integer $user_id [POST] User's ID.
+     * @var Integer $location_no [POST] location no.
      * 
      * @return Array Detail information of location memo.
      *               [
-     *                  no,             Locaiton memo identification value.
-     *                  schedule_no,    Schedule identification value.
-     *                  hiking_group,   Hiking group UUID.
      *                  title,          Memo's title.
      *                  content,        Memo's contents.
      *                  writer,         Memo's writer.
-     *                  picture,        Stored picture directory path.
-     *                  created_at,
-     *                  updated_at,
-     *                  latitude,
-     *                  longitude
+     *                  picture        Stored picture directory path.
      *               ]
      */
     public function getLocationMemoDetail(Request $request) 
@@ -226,10 +222,13 @@ class testcontroller extends Controller
 
         $queryRes = DB::select(
             DB::raw(
-                "SELECT * 
-                FROM location_memo as lm
-                WHERE no = ${location_no}
-                );"
+                "SELECT
+                    title,
+                    content,
+                    writer,
+                    picture
+                FROM location_memo
+                WHERE no = ${location_no};"
             )
         );
 
@@ -378,24 +377,25 @@ class testcontroller extends Controller
      * 
      * @param Request $request .
      * 
-     * @var Integer $user_id [POST] Unique number of the user.
+     * @var Integer $member_no [POST] Unique number of the user.
      * 
      * @return Array [
-     *                  userid  The Unique number which is participating in schedule.
+     *                  member_no  The Unique key of member who is 
+     *                             participating in schedule.
      *               ]
      */
     function getScheduleMembers(Request $request)
     {
-        $user_id = $request->get('user_id');
+        $member_no = $request->get('member_no');
 
         $queryRes = DB::select(
             DB::raw(
-                "SELECT userid
+                "SELECT member_no
                     FROM schedule_member
                     WHERE schedule = (
                         SELECT schedule
                         FROM schedule_member
-                        WHERE userid = '${user_id}'
+                        WHERE member_no = '${member_no}'
                     );"
             )
         );

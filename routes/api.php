@@ -205,6 +205,11 @@ Route::group(
             '/getMemberDetail',
             'testcontroller@getMemberDetail'
         )->name('getMemberDetail');
+
+        Route::post(
+            '/storeLocationMemo',
+            'testcontroller@storeLocationMemo'
+        )->name('storeLocationMemo');
     }
 );
 
