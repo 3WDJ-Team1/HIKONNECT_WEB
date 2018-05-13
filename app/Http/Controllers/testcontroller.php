@@ -244,7 +244,18 @@ class testcontroller extends Controller
      * @var Double  $lat     [POST] User's latitude.
      * @var Double  $lng     [POST] User's longitude.
      * 
-     * @return Array [userid, latitude, longitude, avg_speed, current_fid, distance]
+     * @return JSON {
+     *                  "members": {
+     *                      member_no, 
+     *                      latitude, 
+     *                      longitude, 
+     *                  },
+     *                  "location_memos": {
+     *                      no,
+     *                      latitude,
+     *                      longitude
+     *                  }
+     *              }
      */
     public function updateScheduleMember(Request $request)
     {
@@ -254,18 +265,24 @@ class testcontroller extends Controller
         $distance       = $request->get('distance');
         $avg_speed      = $request->get('velocity');
 
+        $arr_for_update = array();
+
+        if ($lat && $lng) {
+            $arr_for_update['latitude'] = $lat;
+            $arr_for_update['longitude'] = $lng;
+        }
+        if ($distance) {
+            $arr_for_update['distance'] = $distance;
+        }
+        if ($avg_speed) {
+            $arr_for_update['avg_speed'] = $avg_speed;
+        }
+
         $user_id_check = schedule_member::where('member_no', $member_no)
             ->get();
 
         schedule_member::where('member_no', $member_no)
-        ->update(
-            [
-                'latitude'          => $lat,
-                'longitude'         => $lng,
-                'distance'          => $distance,
-                'avg_speed'         => $avg_speed
-            ]
-        );
+        ->update($arr_for_update);
 
         // Get the locations of members who participate in the same schedule.
         $pos_members = DB::select(
@@ -380,8 +397,11 @@ class testcontroller extends Controller
      * @var Integer $member_no [POST] Unique number of the user.
      * 
      * @return Array [
-     *                  member_no  The Unique key of member who is 
-     *                             participating in schedule.
+     *                  member_no,  The Unique key of member who is 
+     *                              participating in schedule.
+     *                  nickname,   The members' nickname.
+     *                  rank        The ranking which measure by distance
+     *                              of hiking from starting point.
      *               ]
      */
     function getScheduleMembers(Request $request)
@@ -390,13 +410,30 @@ class testcontroller extends Controller
 
         $queryRes = DB::select(
             DB::raw(
-                "SELECT member_no
-                    FROM schedule_member
-                    WHERE schedule = (
-                        SELECT schedule
+                "SELECT 
+                    member_no,
+                    nickname,
+                    distance,
+                    (
+                        SELECT count(*) + 1
                         FROM schedule_member
-                        WHERE member_no = '${member_no}'
-                    );"
+                        WHERE distance > sm.distance
+                        AND schedule = (
+                            SELECT schedule
+                            FROM schedule_member
+                            WHERE member_no = '${member_no}'
+                        )
+                    ) as rank
+                FROM schedule_member as sm
+                JOIN user as u
+                ON u.userid = sm.userid
+                WHERE sm.schedule = (
+                    SELECT schedule
+                    FROM schedule_member as sub_sm
+                    WHERE member_no = '${member_no}'
+                )
+                AND sm.distance IS NOT NULL
+                ORDER BY rank;"
             )
         );
 
@@ -412,15 +449,13 @@ class testcontroller extends Controller
      *                                  who is participating in schedule.
      * 
      * @return Array [
-     *                  member_no,      Unique number of the member.
      *                  nickname,       Nickname of the member.
      *                  profile,        Member's profile image.
-     *                  hiking_group,   The unique number of the group
-     *                                  to which the member joined.
-     *                  current_fid,    Field ID in mountain which 
-     *                                  member was located.
      *                  distance,       The distance which member hiked.
-     *                  hiking_start    Started time, member was started hiking.
+     *                  hiking_start,   Started time, member was started hiking.
+     *                  avg_speed,      Member's average hiking speed.
+     *                  rank            The ranking which measure by distance
+     *                                  of hiking from starting point.
      *               ]
      */
     public function getMemberDetail(Request $request)
@@ -435,17 +470,20 @@ class testcontroller extends Controller
                     hg.title            as hiking_group,
                     sm.distance         as distance,
                     sm.hiking_start     as hiking_start,
-                    sm.avg_speed        as velocity
+                    sm.avg_speed        as velocity,
+                    (
+                        SELECT count(*) + 1
+                        FROM schedule_member
+                        WHERE distance > sm.distance
+                        AND schedule = sm.schedule
+                    ) as rank
                 FROM user as u
                 JOIN schedule_member as sm
                 ON u.userid = sm.userid
                 JOIN hiking_group as hg
                 ON hg.uuid = sm.hiking_group
-                WHERE sm.userid = (
-                    SELECT userid
-                    FROM schedule_member sm_sub
-                    WHERE member_no = '${member_no}'
-                );"
+                WHERE sm.member_no = '${member_no}'
+                ORDER BY sm.distance;"
             )
         );
 
