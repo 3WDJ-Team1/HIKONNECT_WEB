@@ -66,7 +66,7 @@ class ScheduleController extends Controller
             'created_at'    => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at'    => Carbon::now()->format('Y-m-d H:i:s'),
             'start_date'    => $request->get('stDate'),
-            'mnt_id'        => 491303004
+            'mnt_id'        => $request->get('mnt_id')
         ]);
         $this->hiking_schedule->scheduleReg($info);
         return response()->json('true');
@@ -146,7 +146,6 @@ class ScheduleController extends Controller
             'hiking_group'                   => $request->get('uuid'),
             'schedule'                       => $request->get('schedule_no'),
             'current_fid'                    => 0,
-            'between_before_fid_distance'   => 0,
             'distance'                       => 0,
             'created_at'                     => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at'                     => Carbon::now()->format('Y-m-d H:i:s'),
@@ -180,7 +179,31 @@ class ScheduleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function my_schedule(Request $request) {
-        $result = $this->hiking_schedule->my_schedule($request->get('userid'));
-        return response()->json($result);
+        if (schedule_member::where('userid',$request->get('userid'))->exists() == true) {
+            return response()->json($this->schedule_member->mySchedule($request->get('userid')));
+        } else {
+            return 'false';
+        }
+    }
+
+    public function makeScheduleList(Request $request) {
+        if (Hiking_schedule::where('hiking_schedule.leader',$request->get('userid'))->exists() == true) {
+            return response()->json($this->schedule_member->makeScheduleList($request->get('userid')));
+        } else {
+            return 'false';
+        }
+    }
+
+    public function hiking_history($userid) {
+        return response()->json($this->schedule_member->hiking_history($userid));
+    }
+
+    public function reg_ip(Request $request) {
+        $schedule   = $request->get('schedule');
+        $userid     = $request->get('userid');
+        $ip         = $request->get('ip');
+
+        $this->schedule_member->reg_ip($schedule, $userid, $ip);
+        return response()->json($schedule.$userid);
     }
 }

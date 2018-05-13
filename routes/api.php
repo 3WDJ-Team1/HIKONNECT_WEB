@@ -60,6 +60,10 @@ Route::group(
             'mygroup',
             'GroupMemberController@my_group'
         )->name('myGroup');
+        Route::post(
+            'makeGroupList',
+            'HikingGroupController@makeGroupList'
+        )->name('makeGroupList');
 
         // Entry info Routings
         Route::resource(
@@ -84,6 +88,10 @@ Route::group(
             '/userinfo',
             'UserController@user_info'
         )->name('user_info');
+        Route::get(
+            '/hiking_history/{userid}',
+            'ScheduleController@hiking_history'
+        )->name('hiking_history');
         Route::post(
             '/login', 
             'LoginController@login'
@@ -188,6 +196,43 @@ Route::group(
         Route::post('/myschedule',
             'ScheduleController@my_schedule'
         )->name('my_schedule');
+        Route::post('/makeScheduleList',
+            'ScheduleController@makeScheduleList'
+        )->name('makeScheduleList');
+
+        Route::resource(
+            'radio'
+            ,'RadioController'
+        );
+        Route::post(
+            'reg_ip'
+            ,'ScheduleController@reg_ip'
+        )->name('Regist Ip Address');
+
+        Route::post(
+            'mnt_info'
+            ,'MountainController@mountain_info'
+        )->name('Mountain Information');
+
+        Route::post(
+            'tour_spot'
+            ,'MountainController@tourlist_spot'
+        )->name('Tourlist Spot');
+
+        Route::post(
+            'mnt_image'
+            ,'MountainController@mnt_image'
+        )->name('Get Mountain Image');
+
+        Route::post(
+            'tour'
+            ,'MountainController@tour'
+        )->name('tour');
+
+        Route::post(
+            'tour_info'
+            ,'MountainController@tour_info'
+        )->name('tour_info');
     }
 );
 

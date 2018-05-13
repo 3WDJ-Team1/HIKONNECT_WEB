@@ -20,7 +20,7 @@ class Group_Member extends Model
 
     public function get_member_list($uuid, $whether) {
         return Group_Member::select('user.userid','user.nickname','user.phone','user.age_group',
-            'user.gender','user.scope','user.profile','user.rank','enter_date')
+            'user.gender','user.scope','user.profile','user.grade','enter_date')
             ->where([
             ['hiking_group', $uuid],
             ['enter_whether', $whether]

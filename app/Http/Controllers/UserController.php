@@ -151,7 +151,7 @@ class UserController extends Controller
                 'scope'         => $this->scope,
                 'profile'       => 'https://lorempixel.com/640/400/?66549',
                 'phone'         => $request->get('phone'),
-                'rank'          => '동네 뒷산',
+                'grade'          => '동네 뒷산',
                 'created_at'    => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'    => Carbon::now()->format('Y-m-d H:i:s')
             ]);

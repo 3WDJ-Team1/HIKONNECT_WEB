@@ -199,4 +199,14 @@ class HikingGroupController extends Controller
         } else
             return 'false';
     }
+
+    public function makeGroupList(Request $request) {
+        if (HikingGroup::where('leader',$request->get('userid'))->exists() == true) {
+            return response()->json(HikingGroup::where('leader',$request->get('userid'))->get());
+        } else {
+            return 'false';
+        }
+
+
+    }
 }

@@ -61,7 +61,7 @@ class User extends Model
     public function userInfo($userid) {
         return
         User::select(
-           'user.nickname','user.profile','user.rank','schedule_member.distance','schedule_member.updated_at','hiking_schedule.start_date'
+           'user.nickname','user.profile','user.grade','schedule_member.distance','schedule_member.updated_at','hiking_schedule.start_date'
         )->join(
             'schedule_member','schedule_member.userid','=','user.userid'
         )->join(
