@@ -8,37 +8,37 @@
     <div style="position: relative;">
         <router-view name="waiting_member"></router-view>
         <div
-            style="display: inline_block; background-color: white;">
+                style="display: inline_block; background-color: white;">
             <b-card
-                class='member_list_card'
-                v-for="userData in memberList"
-                :key="userData.nickname">
+                    class='member_list_card'
+                    v-for="userData in memberList"
+                    :key="userData.nickname">
                 <b-card-header
-                    header-tag="header"
-                    role="tab"
-                    @click="sendMemberData(userData)"
-                    class='member_list_card_header'>
+                        header-tag="header"
+                        role="tab"
+                        @click="sendMemberData(userData)"
+                        class='member_list_card_header'>
                     <div
-                        href="#"
-                        v-b-toggle ="'n' + userData.nickname"> 
+                            href="#"
+                            v-b-toggle ="'n' + userData.nickname">
                         <!-- need to insert profile pic -->
                         <v-layout row>
                             <v-flex
-                                xs12
-                                sm6
-                                md3
-                                class="text-center">
+                                    xs12
+                                    sm6
+                                    md3
+                                    class="text-center">
                                 <v-avatar
-                                    size="42"
-                                    slot="activator"
-                                    style="margin-top: 3%;"
-                                    >
+                                        size="42"
+                                        slot="activator"
+                                        style="margin-top: 3%;"
+                                >
                                     <img :src="userData.image_path">
                                 </v-avatar>
                             </v-flex>
                             <v-flex
-                                xs6
-                                class="text-center">
+                                    xs6
+                                    class="text-center">
                                 <h4 style="line-height:220%;">{{ userData.nickname }}</h4>
                             </v-flex>
                             <!-- <v-flex
@@ -52,13 +52,13 @@
                     </div>
                 </b-card-header>
                 <b-collapse
-                    :id="'n' + userData.nickname"
-                    accordion="member_list"
-                    role="tabpanel">
+                        :id="'n' + userData.nickname"
+                        accordion="member_list"
+                        role="tabpanel">
                     <b-card-body>
-                    <router-view
-                        name="member_detail">
-                    </router-view>
+                        <router-view
+                                name="member_detail">
+                        </router-view>
                     </b-card-body>
                 </b-collapse>
             </b-card>
@@ -83,20 +83,13 @@
                 this.$EventBus.$emit('memberData', argObj);
             },
             infiniteHandlerMember($state) {
-                axios.get(this.$HttpAddr + "/groupMembers/" + this.groupUuid + "/" + this.page + "/" + 10)
-                .then( response => {
-                    if (response) {
-                        this.memberList = this.memberList.concat(response.data);
-                        // $state.loaded();
-                    } else {
-                        // $state.complete();
-                    }
-                })
+                axios.get("http://172.26.2.88:8000/api/list_member/" + this.groupUuid + "/1")
+                    .then( response => {
+                        this.waitingMembers = this.waitingMembers.concat(response.data);
+                    });
             }
         },
         created() {
-            // this.getGroupUserData();
-            // httpAddr+/groupMembers/groupUUID
             this.groupUuid = this.$route.params.groupid;
             this.infiniteHandlerMember();
         },
@@ -109,17 +102,17 @@
 </script>
 
 <style>
-.member_list_card {
-    background-color: white;
-    border-bottom: 1px solid whitesmoke;
-    box-shadow: none;
-    margin-top: 0;
-    margin-bottom: 0;
-}
-.member_list_card_header {
-    background-color: white;
-    border: 0;
-    margin: 0;
-    padding: 0;
-}
+    .member_list_card {
+        background-color: white;
+        border-bottom: 1px solid whitesmoke;
+        box-shadow: none;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    .member_list_card_header {
+        background-color: white;
+        border: 0;
+        margin: 0;
+        padding: 0;
+    }
 </style>

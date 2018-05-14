@@ -15,12 +15,12 @@ Vue.use(SweetModal);
 import VueModalTor from 'vue-modaltor'
 Vue.use(VueModalTor);
 
+
 // vuetify
 import Vuetify      from 'vuetify';
 Vue.use(Vuetify);
 
 import 'vuetify/dist/vuetify.css';
-
 import 'material-design-icons-iconfont/dist/material-design-icons.scss'
 
 // vue axios

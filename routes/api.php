@@ -205,7 +205,16 @@ Route::group(
         Route::post('/myschedule',
             'ScheduleController@my_schedule'
         )->name('my_schedule');
+        Route::get(
+            'testing/{key?}',
+            function ($mnt_name) {
+                return  DB::table('mountain')
+                    ->where('mnt_name', 'LIKE', "%" . $mnt_name . "%")
+                    ->get();
+            }
+        );
     }
+
 );
 
 Route::group(

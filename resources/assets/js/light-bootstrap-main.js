@@ -7,12 +7,12 @@ import GlobalComponents from './globalComponents'
 import GlobalDirectives from './globalDirectives'
 // Sidebar on the right. Used as a local plugin in DashboardLayout.vue
 import SideBar from './components/SidebarPlugin/index'
-
 // asset imports
 import 'bootstrap/dist/css/bootstrap.css'
 import 'vue-notifyjs/themes/default.scss'
 import '../sass/css/demo.css'
 import '../sass/light-bootstrap-dashboard.scss'
+
 
 // library auto imports
 import 'es6-promise/auto'

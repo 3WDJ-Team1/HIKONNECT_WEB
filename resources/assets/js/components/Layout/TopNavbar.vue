@@ -7,7 +7,6 @@
                         <a
                                 class="nav-link"
                                 @click.stop ="drawerRight = !drawerRight"
-                                 @click      ="changeDrawerRightMode('login')"
                                 v-if        ="!isLogined"
                         >
                             Log in
@@ -26,8 +25,7 @@
                         <a
                                 class="nav-link"
                                 v-if="!isLogined"
-                                @click.stop="drawerRight = !drawerRight"
-                                @click="changeDrawerRightMode('register')"
+                                @click="signUp()"
                         >
                             Sign up
                         </a>
@@ -54,20 +52,26 @@
                 right
                 app
                 temporary>
-            <login v-if="drawerRightMode === 'login'"></login>
-            <register v-else></register>
+            <login></login>
         </v-navigation-drawer>
     </div>
 </template>
 <script>
     import Login from '../loginAndRegister/login'
+    import register from '../loginAndRegister/register'
 
     export default {
         data: () => ({
+            userNickname: sessionStorage.getItem('nickname'),
             modalErrorMsg: '',
             isLogined: false,
             drawerRight: false,
-            drawerRightMode: 'login'
+            mypageRoute : {
+                icon: 'account_circle',
+                text: 'MY PAGE',
+                path: '/overview',
+                imagePath: sessionStorage.getItem('image_path')
+            },
         }),
         created() {
             this.$EventBus.$on('errorModalOpen', (message) => {
@@ -76,6 +80,7 @@
             });
             this.$EventBus.$on('complitedModalOpen', (value) => {
                 this.$refs.cModal.open();
+                location.reload();
             });
             this.$EventBus.$on('clickGettingStartBtn', () => {
                 this.changeDrawerRightMode('login');
@@ -89,18 +94,22 @@
                 this.userNickname = sessionStorage.getItem('nickname');
             });
             this.isUserLogined();
+            this.userNickname = sessionStorage.getItem('nickname');
+            this.mypageRoute.imagePath = sessionStorage.getItem('image_path');
         },
         components: {
-            'login': Login,
+            Login,
+            register
         },
         methods: {
-            changeDrawerRightMode(argValue) {
-                this.drawerRightMode = argValue;
-                this.$EventBus.$emit("openDrawer", this.drawerRightMode);
+            signUp()    {
+                this.$router.push("/admin/user");
             },
             logout(userId) {
                 sessionStorage.clear();
                 this.isLogined = false;
+                location.reload();
+                this.$router.push('/admin/overview');
             },
             isUserLogined() {
                 if (sessionStorage.userid != undefined) {

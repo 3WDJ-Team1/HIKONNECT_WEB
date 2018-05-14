@@ -7,19 +7,7 @@
 <template>
     <!-- @div       wrapper of this component -->
     <div>
-        <v-btn
-                style="margin-bottom: 0%; margin-right: 1%"
-                color   ="red"
-                dark
-                midiuem
-                fixed
-                right
-                bottom
-                fab
-                @click  ="enterGroup()"
-                v-if    ="isLogined">
-            <v-icon>person_add</v-icon>
-        </v-btn>
+        <joinButton></joinButton>
         <!-- @v-tabs    there is information of tabs here -->
         <v-tabs
             icons-and-text
@@ -76,39 +64,65 @@
 </template>
 
 <script>
+    import joinButton from './joinButton'
     export default {
+        components: {
+            joinButton
+        },
         data: () => ({
-            groupId     : '',
-            isLogined   : false,
+            groupId: '',
+            isLogined: false,
+            isUpdated: false,
         }),
         created() {
             this.groupId = this.$route.params.groupid;
-            this.$EventBus.$on('isLogined', () => {
-                this.isLogined = true;
-            });
-            if (sessionStorage.length != 0)
-                this.isLogined = true;
+            console.log(this.groupId);
+            console.log(sessionStorage.getItem('userid'));
+            this.axios.post(Laravel.host + '/api/checkMember', {
+                uuid: this.groupId,
+                userid: sessionStorage.getItem('userid'),
+            }).then(response => {
+                console.log(response.data);
+                this.$EventBus.$emit('position', response.data);
+                if (response.data == 'guest') {
+                    this.isLogined = true;
+                } else if (response.data == 'owner') {
+                    this.isLogined = false;
+                    this.isUpdated = true;
+                } else if (response.data == 'member') {
+                    this.isLogined = false;
+                }
+            })
+        },
+        methods: {
+            enterUpdate() {
+                this.$refs.write.open();
+                axios.post(this.$HttpAddr + '/groupinfo',  {
+                    uuid: this.uuid
+                }).then(response => {
+                    console.log(response.data)
+                });
+            },
+            enterGroup() {
+                // 로그인 되어 있을 경우
+                if (sessionStorage.getItem('userid') != 'undefind') {
+                    axios.post(this.$HttpAddr + '/member', {
+                        userid: sessionStorage.getItem('userid'),
+                        uuid: this.groupId
+                    })
+                        .then(response => {
+                            alert('그룹에 참가되었습니다.');
+                            this.isLogined = false;
+                        });
+                }
+                else {
+                    alert('로그인 후 이용가능 합니다.');
+                }
+            }
         }
         ,
-        methods: {
-            enterGroup() {
-                axios.post(this.$HttpAddr + '/entryGroup', {
-                    userUuid    : sessionStorage.uuid,
-                    groupUuid   : this.groupId
-                })
-                .then(response => {
-                    if (response) {
-                        this.$EventBus.$emit('complitedModalOpen', true);
-                        this.$EventBus.$emit('reloadMember', true);
-                    } else {
-                        this.$EventBus.$emit('errorModalOpen', '잘못된 접근입니다.');
-                    }
-                    location.reload();
-                });
-            }
-        },
         watch: {
-            '$route' (to, from) {
+            '$route'(to, from) {
                 this.groupUuid = this.$route.params.groupid;
             }
         }

@@ -2,30 +2,15 @@
     <div class="container">
         <router-view name="header"></router-view>
         <router-view name="body"></router-view>
-        <v-btn
-                dark
-                midiuem
-                fixed
-                right
-                bottom
-                fab
-                color="pink"
-                @click="openWriteModal()"
-        >
-            <v-icon>add</v-icon>
-        </v-btn>
-        <sweet-modal ref="write" blocking>
-            <router-view name="make"></router-view>
-        </sweet-modal>
+        <groupMakeButton></groupMakeButton>
     </div>
 </template>
 
 <script>
+    import groupMakeButton from './groupMakeButton'
     export default {
-        methods: {
-            openWriteModal() {
-                this.$refs.write.open();
-            }
+        components: {
+            groupMakeButton
         }
     }
 </script>

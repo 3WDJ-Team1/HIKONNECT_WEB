@@ -9,7 +9,7 @@
             </div>
             <div slot="content">
               <p class="card-category">나의 등급</p>
-              <h4 class="card-title">동네 뒷산</h4>
+              <h4 class="card-title">{{rank}}</h4>
             </div>
             <div slot="footer">
               <i class="fa fa-refresh"></i>Updated now
@@ -24,7 +24,7 @@
             </div>
             <div slot="content">
               <p class="card-category">총 등산 시간</p>
-              <h4 class="card-title">82H 35M 21S</h4>
+              <h4 class="card-title">{{total_hiking_t}}</h4>
             </div>
             <div slot="footer">
               <i class="fa fa-calendar-o"></i>Last day
@@ -39,7 +39,7 @@
             </div>
             <div slot="content">
               <p class="card-category">총 등산 거리</p>
-              <h4 class="card-title">1,023km</h4>
+              <h4 class="card-title">{{totalD}}</h4>
             </div>
             <div slot="footer">
               <i class="fa fa-clock-o"></i>Last day
@@ -87,6 +87,30 @@
         '작성자': '뀨'
     }];
     export default {
+        created() {
+            this.positionPull();
+            this.graphPull();
+        },
+        methods: {
+            positionPull()  {
+                this.axios.get('http://172.26.2.88:8000/user/' + sessionStorage.getItem('userid'))
+                    .then(response => {
+                        this.rank = response.data[0].grade;
+                        this.totalD = response.data.total_distance;
+                        this.total_hiking_t = response.data.total_hiking_time.hour + "H"
+                                              + response.data.total_hiking_time.minute + "M"
+                                              + response.data.total_hiking_time.second + "S"
+                });
+            },
+            graphPull()  {
+                this.axios.post(this.$HttpAddr + '/graph', {
+                    userid: sessionStorage.getItem('userid'),
+                    year: '2018'
+                }).then(response => {
+                    this.lineChart.data.series = this.lineChart.data.series.concat(response.data);
+                    });
+            }
+        },
         components: {
             LTable,
             ChartCard,
@@ -95,6 +119,9 @@
         },
         data () {
             return {
+                rank: '',
+                totalD: '',
+                total_hiking_t: '',
                 table1: {
                     columns: [...tableColumns],
                     data: [...tableData]
@@ -108,9 +135,7 @@
                 lineChart: {
                     data: {
                         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                        series: [
-                            [12, 25, 39, 77, 58, 64, 21, 33, 42, 51, 61, 68]
-                        ]
+                        series: []
                     },
                     options: {
                         low: 0,

@@ -23,22 +23,43 @@
         name: "plan_main",
         data() {
             return {
+                position: '',
                 listEventB: true,
                 makeEventB: false,
             }
         },
         created() {
+            // 그룹 만들기를 한 후
             this.$EventBus.$on('makeEventOK', (sign) => {
                 if (sign == true) {
                     this.listEventB = true;
                     this.makeEventB = false;
                 }
+            });
+            // 가입 후 그룹 만들기 가능
+            this.$EventBus.$on('position', (position) => {
+                this.position =  position;
             })
         },
         methods: {
             makeEvent() {
-                this.makeEventB = true;
-                this.listEventB = false;
+                if (position == 'guest') {
+                    // alert창 띄워주기
+                    const notification = {
+                        template: "<span><b>그룹 가입 후 사용가능 합니다.</b></span>"
+                    };
+                    this.$notifications.notify(
+                        {
+                            component: notification,
+                            icon: 'nc-icon nc-app',
+                            horizontalAlign: horizontalAlign,
+                            verticalAlign: verticalAlign,
+                            type: 'warning'
+                        })
+                } else {
+                    this.makeEventB = true;
+                    this.listEventB = false;
+                }
             }
         }
     }

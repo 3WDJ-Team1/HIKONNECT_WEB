@@ -15,38 +15,41 @@
   </div>
 </template>
 <script>
-  export default{
-    name: 'p-checkbox',
-    model: {
-      prop: 'checked'
-    },
-    props: {
-      checked: [Array, Boolean],
-      disabled: [Boolean, String],
-      inline: Boolean
-    },
-    data () {
-      return {
-        cbId: ''
-      }
-    },
-    computed: {
-      model: {
-        get () {
-          return this.checked
+    export default{
+        name: 'p-checkbox',
+        model: {
+            prop: 'checked'
         },
-        set (check) {
-          this.$emit('input', check)
+        props: {
+            checked: [Array, Boolean],
+            disabled: [Boolean, String],
+            inline: Boolean
+        },
+        data () {
+            return {
+                cbId: ''
+            }
+        },
+        computed: {
+            model: {
+                get () {
+                    return this.checked
+                },
+                set (check) {
+                    this.$emit('input', check)
+                }
+            },
+            inlineClass () {
+                if (this.inline) {
+                    return `checkbox-inline`
+                }
+            }
+        },
+        created () {
+            this.cbId = Math.random().toString(16).slice(2)
         }
-      },
-      inlineClass () {
-        if (this.inline) {
-          return `checkbox-inline`
-        }
-      }
-    },
-    created () {
-      this.cbId = Math.random().toString(16).slice(2)
     }
-  }
 </script>
+<style>
+
+</style>

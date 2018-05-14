@@ -192,4 +192,10 @@ class HikingGroupController extends Controller
     public function groupInfo(Request $request) {
         return response()->json(HikingGroup::where('uuid',$request->get('uuid'))->get());
     }
+    public function isOwner ($uuid, $userid) {
+        if ($this->_group_model->isOwner($userid,$uuid) == true) {
+            return 'true';
+        } else
+            return 'false';
+    }
 }

@@ -7,14 +7,14 @@ import groups_list          from './components/groups_list/main.vue'
 import list_search          from './components/groups_list/list_search'
 import list_show            from './components/groups_list/list_show'
 
-// group_make
-import autocomplete         from './components/group_make/autocomplete'
-import event_make_main      from './components/group_make/group_make_main'
-import event_map            from './components/group_make/group_map'
-import group_make      from './components/group_make/group_make'
+// make_event
+import autocomplete         from './components/group_menu/make_event/autocomplete'
+import event_make_main      from './components/group_menu/make_event/group_make_main'
+import event_map            from './components/group_menu/make_event/group_map'
+import group_make      from './components/group_menu/make_event/group_make'
 
 // group_update
-import group_upadate        from './components/group_make/updateGroup'
+import group_upadate        from './components/group_menu/make_event/updateGroup'
 
 // notice
 import notice               from './components/notice/main'
@@ -39,15 +39,12 @@ import NoticeFormInside     from './components/group_menu/group_notice/NoticeFor
 
 
 //group event
-import eventShowmap         from './components/group_menu/group_plan/GroupPlanMap'
-import makeEvent            from './components/group_menu/group_event/makeEvent'
 import plan_main            from './components/group_menu/group_event/plan_main'
 import GroupPlanCalendar    from './components/group_menu/group_event/GroupPlanCalendar.vue';
 
 
 // group plan
 import GroupPlan            from './components/group_menu/group_plan/GroupPlan.vue';
-import GroupPlanMap         from './components/group_menu/group_plan/GroupPlanMap.vue';
 
 // group member list
 import GroupMemberList      from './components/group_menu/group_member/GroupMemberList.vue';
@@ -58,16 +55,15 @@ import WaitingMemberList     from './components/group_menu/group_member/WaitingM
 // Admin pages
 import Record from './components/Views/Overview.vue'
 import UserProfile from './components/Views/UserProfile.vue'
-import TableList from './components/Views/TableList.vue'
+import TableList from './components/my_group/TableList.vue'
 import Typography from './components/Views/Typography.vue'
 import Icons from './components/Views/Icons.vue'
 import Maps from './components/Views/Maps.vue'
 import Notifications from './components/Views/Notifications.vue'
 
-
-
 // main
 import Main                 from './components/main/MainPage.vue'
+
 
 const routes = [
     {
@@ -155,7 +151,6 @@ const routes = [
                                     modify  : NoticeModifyBtn,
                                     delete  : NoticeDeleteBtn,
                                     // components in GroupPlan
-                                    map         : GroupPlanMap,
                                     calendar    : GroupPlanCalendar,
                                     // component in GroupMemberList
                                     member_detail   : GroupMemberDetail,
@@ -166,7 +161,6 @@ const routes = [
                                         path        : '',
                                         components  : {
                                             // inner form component of modal(NoticeWriteBtn, NoticeModifyBtn)
-                                            map             : eventShowmap,
                                             form            : NoticeFormInside,
                                             autocomplete    : autocomplete
                                         },

@@ -9,8 +9,8 @@
     <div class="text-center" id="group_notice">
         <!-- @router-view   'write' floating button -->
         <!--<router-view-->
-                <!--v-if="isOwner"-->
-                <!--name="write"></router-view>-->
+        <!--v-if="isOwner"-->
+        <!--name="write"></router-view>-->
         <router-view
                 name="write"></router-view>
         <!-- @div           notice list area -->
@@ -22,14 +22,14 @@
                 <div class="card_wrapper">
                     <!-- @div   The title and author of a notice
                                 if you click this, b-collapse will be shown. -->
-                    <div v-b-toggle ="'n' + notice.uuid" class="m-1">
+                    <div v-b-toggle="'n' + notice.uuid" class="m-1">
                         <h3 class="card-title">{{ notice.title }}</h3>
-                        <p  class="card-text">writer : {{ notice.writer }} | created_at : {{ notice.created_at }}</p>
+                        <p class="card-text">writer : {{ notice.writer }} | created_at : {{ notice.created_at }}</p>
 
                     </div>
                     <!-- @div(b-collapse)   The contents of a notice. -->
                     <b-collapse :id="'n' + notice.uuid">
-                        <div class  ="notice_text">
+                        <div class="notice_text">
                             {{ notice.content }}
                         </div>
                         <!-- @router-view   'delete' button component
@@ -55,11 +55,12 @@
 
 <script>
     import InfiniteLoading from 'vue-infinite-loading';
+
     export default {
         components: {
             InfiniteLoading,
         },
-        data : ()  => ({
+        data: () => ({
             /**
              * groupName    (String)        the name of group
              * notices      (Array)         the array of notices object
@@ -72,24 +73,10 @@
              *      margin  (String)        margin of each div of icon
              *      size    (String)        size of each div
              */
-            // groupName and notices will be changed by http response.
-            groupName   : "3WDJ-Team1",
-            notices     : [
-                // the type of notices is 'object' certainly.
-            ],
-            list_num    :0,
-            page        : 0,
-            size        : 5,
-            bottom      : false,
-            loader      : {
-                loading : true,
-                color   : "#4df1e1",
-                margin  : "2px",
-                size    : "10px"
-            },
+            list_num: 0,
+            notices: [],
             groupId: "",
             isOwner: false,
-            httpAddr: Laravel.host,
         }),
         // When this component was created,
         created() {
@@ -102,22 +89,11 @@
         },
         methods: {
             /**
-             * @function    bottomVisible
-             * @brief       check is bottom visible with the value of scroll position
-             */
-            bottomVisible: function () {
-                const scrollY       = window.scrollY;
-                const visible       = document.documentElement.clientHeight;
-                const pageHeight    = document.documentElement.scrollHeight;
-                const bottomOfPage  = visible + scrollY + 1 >= pageHeight;
-                return bottomOfPage || pageHeight < visible;
-            },
-            /**
              * @function    addNotice
              * @brief       send http request to server, and update this.notice
              */
             infiniteHandler($state) {
-                this.axios.get(this.$HttpAddr + '/notice/' + this.groupId + "/" + this.list_num)
+                this.axios.get(this.$HttpAddr + '/list_announce/' + this.groupId + "/" + this.list_num)
                     .then(response => {
                         if (response) {
                             this.notices = this.notices.concat(response.data);
@@ -134,7 +110,7 @@
             },
             isGroupOwner() {
                 axios.get(this.$HttpAddr + '/isOwner/' + this.groupId + "/" + sessionStorage.getItem('uuid'))
-                    .then( response => {
+                    .then(response => {
                         this.$EventBus.$emit('isOwner', response);
                         this.isOwner = response.data;
                     });
@@ -147,7 +123,7 @@
              * @brief       watch the value of this.bottom.
              *              if the value is true, addNotice function is invoked.
              */
-            '$route' (to, from) {
+            '$route'(to, from) {
                 this.groupId = this.$route.params.groupid;
             }
         }
@@ -164,17 +140,20 @@
         border: 2px solid whitesmoke;
         background-color: white;
     }
+
     /* class for inner text of notice cards */
     .notice_text {
         width: 90%;
         margin: 0 auto;
         word-break: keep-all;
     }
+
     #group_notice {
         width: 98%;
         margin-bottom: 8%;
         margin: 0 auto;
     }
+
     .loader {
         margin-top: 2%
     }
