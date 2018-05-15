@@ -116,9 +116,7 @@ class ScheduleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //$id는 schedule_no로 받기
-        $this->schedule_member->start_hiking($request->get('userid'),$request->get('uuid'),$id);
-        return response()->json('true');
+        //
     }
 
     /**
@@ -180,7 +178,24 @@ class ScheduleController extends Controller
      */
     public function my_schedule(Request $request) {
         if (schedule_member::where('userid',$request->get('userid'))->exists() == true) {
-            return response()->json($this->schedule_member->mySchedule($request->get('userid')));
+            $result = array();
+            $list = json_decode($this->schedule_member->mySchedule($request->get('userid')));
+            $i = 0;
+            foreach ($list as $value) {
+                $result[$i]['group_title'] = $value->group_title;
+                $result[$i]['no'] = $value->no;
+                $result[$i]['title'] = $value->title;
+                $result[$i]['content'] = $value->content;
+                $result[$i]['schedule_leader'] = $value->schedule_leader;
+                $result[$i]['uuid'] = $value->uuid;
+                $result[$i]['group_leader'] = $value->group_leader;
+                $result[$i]['start_date'] = $value->start_date;
+                $result[$i]['mnt_name'] = $value->mnt_name;
+                $result[$i]['mnt_id'] = $value->mnt_id;
+                $result[$i]['route'] = json_decode($value->route);
+                $i++;
+            }
+            return response()->json($result);
         } else {
             return 'false';
         }
@@ -205,5 +220,10 @@ class ScheduleController extends Controller
 
         $this->schedule_member->reg_ip($schedule, $userid, $ip);
         return response()->json($schedule.$userid);
+    }
+
+    public function schedule_member_list($uuid,$schedule_no) {
+        $result = $this->schedule_member->member_list($uuid,$schedule_no);
+        return response()->json($result);
     }
 }

@@ -49,10 +49,6 @@ Route::group(
             'HikingGroupController@getGroupList'
         )->name('groupList');
         Route::get(
-            'searchGroup/{idx}/{select}/{input}',
-            'HikingGroupController@searchGroup'
-        )->name('searchGroup');
-        Route::get(
             'isOwner/{groupId}/{userId}',
             'HikingGroupController@isOwner'
         )->name('isOwner');
@@ -146,9 +142,9 @@ Route::group(
             'testcontroller'
         );
         Route::post(
-            '/getlm',
-            'testcontroller@get_Memo_Info'
-        )->name('Get Memo Information');
+            '/getmemo',
+            'LocationMemoController@getLocationMemo'
+        )->name('Get Location Memo Information');
         Route::post(
             '/send',
             'FCMController@pushNotification'
@@ -172,7 +168,7 @@ Route::group(
         );
         Route::post(
             '/getlm',
-            'testcontroller@get_Memo_Info'
+            'testcontroller@getLm'
         )->name('Get Memo Information');
         Route::post(
             '/send',
@@ -199,6 +195,10 @@ Route::group(
         Route::post('/makeScheduleList',
             'ScheduleController@makeScheduleList'
         )->name('makeScheduleList');
+        Route::get('/schedule_member/{uuid}/{schedule_no}',
+            'ScheduleController@schedule_member_list')->name('schedule_member_list');
+        Route::get('/wait/{userid}',
+            'GroupMemberController@waitGroup')->name('waitGroup');
 
         Route::resource(
             'radio'
@@ -215,11 +215,6 @@ Route::group(
         )->name('Mountain Information');
 
         Route::post(
-            'tour_spot'
-            ,'MountainController@tourlist_spot'
-        )->name('Tourlist Spot');
-
-        Route::post(
             'mnt_image'
             ,'MountainController@mnt_image'
         )->name('Get Mountain Image');
@@ -228,11 +223,6 @@ Route::group(
             'tour'
             ,'MountainController@tour'
         )->name('tour');
-
-        Route::post(
-            'tour_info'
-            ,'MountainController@tour_info'
-        )->name('tour_info');
     }
 );
 

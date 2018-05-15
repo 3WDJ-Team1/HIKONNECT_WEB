@@ -168,16 +168,23 @@ class HikingGroupController extends Controller
         $request->get('select') == 'writer'     ? $select = 'writer'    : '';
         $request->get('select') == 'groupname'  ? $select = 'groupname' : '';
         $input  = $request->get('input');
-        $page   = $request->get('page');
+        $page   = (int)$request->get('page');
         $result = $this->_group_model->getGroupList($page,$select,$input);
-        return $result;
+        return response()->json($result);
     }
 
-    public function searchGroup($page_num,$select,$input) {
-        if ($select == 'name')
-            return response()->json($this->_group_model->searchGroup($page_num,$input));
-    }
-
+    /**
+     * @funtion     checkMember
+     * @brief       Check to member state
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param string userid
+     * @param string uuid
+     *
+     * @return string owner
+     * @return string member
+     * @return string guest
+     */
     public function checkMember(Request $request) {
         $is_member = $this->member_model->checkMember($request->get('userid'),$request->get('uuid'));
         $is_owner = $this->_group_model->isOwner($request->get('userid'),$request->get('uuid'));
@@ -189,24 +196,52 @@ class HikingGroupController extends Controller
             return response()->json('guest');
     }
 
+    /**
+     * @funtion     groupInfo
+     * @brief       Get Group Information
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param string uuid
+     *
+     * @return Array groupInfo
+     */
     public function groupInfo(Request $request) {
         return response()->json(HikingGroup::where('uuid',$request->get('uuid'))->get());
     }
 
+    /**
+     * @funtion     isOwner
+     * @brief       Check Owner
+     *
+     * @param string userid
+     * @param string uuid
+     *
+     * @return 'true'
+     * @return 'false'
+     */
     public function isOwner ($uuid, $userid) {
-        if ($this->_group_model->isOwner($userid,$uuid) == true) {
-            return 'true';
-        } else
-            return 'false';
-    }
+    if ($this->_group_model->isOwner($userid,$uuid) == true) {
+        return 'true';
+    } else
+        return 'false';
+}
 
+    /**
+     * @funtion     makeGroupList
+     * @brief       Group I make
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param string userid
+     *
+     * @return groupinfo
+     * @return 'false'
+     *
+     */
     public function makeGroupList(Request $request) {
         if (HikingGroup::where('leader',$request->get('userid'))->exists() == true) {
             return response()->json(HikingGroup::where('leader',$request->get('userid'))->get());
         } else {
             return 'false';
         }
-
-
     }
 }

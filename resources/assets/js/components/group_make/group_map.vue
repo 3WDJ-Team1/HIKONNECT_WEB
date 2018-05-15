@@ -315,6 +315,10 @@
                             }
                             // 지도의 중심 위도, 경도 입력
                             map.setCenter({ lat : mountain_center.lat, lng : mountain_center.lng });
+                            this.axios.post('http://172.26.2.88:8000/api/tour'), {
+                                latitude: mountain_center.lat,
+                                longitude: mountain_center.lng
+                            }
                         }
                     );
             }

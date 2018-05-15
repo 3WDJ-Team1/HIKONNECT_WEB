@@ -31,16 +31,6 @@ class schedule_member extends Model
         ])->delete();
     }
 
-    public function start_hiking($userid, $uuid, $schedule_no) {
-        schedule_member::where([
-            ['userid', $userid],
-            ['hiking_group', $uuid],
-            ['schedule', $schedule_no]
-        ])->update(
-            ['hiking_state' => 1]
-        );
-    }
-
     public function hiking_history($userid) {
         return
             schedule_member::select(
@@ -120,5 +110,13 @@ class schedule_member extends Model
             ['schedule','=',$schedule],
             ['userid','=',$userid]
         ])->update(['ip_address' => $ip]);
+    }
+
+    public function member_list($uuid,$schedule_no) {
+        return schedule_member::select('user.nickname','hiking_state','avg_speed','hiking_start','current_fid','distance','latitude','longitude','ip_address','password')->where([
+            ['hiking_group',$uuid],
+            ['schedule',$schedule_no]
+        ])->join('user','user.userid','=','schedule_member.userid')
+        ->get();
     }
 }

@@ -244,6 +244,7 @@ class UserController extends Controller
     {
         $year = $request->get('year');
         $month = array();
+        $count = [];
         for ($i = 1; $i <= 12; $i++) {
             if ($i == 1 || 3 || 5 || 7 || 8 || 10 || 12) {
                 $count = schedule_member::where(
@@ -285,9 +286,9 @@ class UserController extends Controller
                         $year . '-' . $i . '-30']
                 ])->count();
             }
-            $month[$i] = $count;
+            $month[] = $count;
         }
-        return response()->json($month);
+        return $month;
     }
     /**
      * @function    user_info

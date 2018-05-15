@@ -35,7 +35,7 @@ class HikingGroup extends Model
     {
         if ($select == 'writer') {
             return HikingGroup::where([
-                ['leader', 'LIKE', "%$input%"]
+                ['us.nickname', 'LIKE', "%$input%"]
             ])
                 ->select(
                     'uuid','title','content','us.nickname','min_member','max_member'
@@ -46,7 +46,7 @@ class HikingGroup extends Model
                     'hiking_group.leader'
                 )
                 ->orderBy('hiking_group.created_at','DESC')
-                ->skip($page)
+                ->skip($page * 10)
                 ->take(10)
                 ->get();
         }
@@ -63,7 +63,7 @@ class HikingGroup extends Model
                     'hiking_group.leader'
                 )
                 ->orderBy('hiking_group.created_at','DESC')
-                ->skip($page)
+                ->skip($page * 10)
                 ->take(10)
                 ->get();
         }
@@ -78,7 +78,7 @@ class HikingGroup extends Model
                 'hiking_group.leader'
             )
                 ->orderBy('hiking_group.created_at','DESC')
-                ->skip($page)
+                ->skip($page * 10)
                 ->take(10)
                 ->get();
         }

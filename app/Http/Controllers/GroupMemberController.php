@@ -144,7 +144,7 @@ class GroupMemberController extends Controller
             $member_list = $this->member_model->get_member_list($uuid,$state);
         }
         elseif ($state == 1) {
-            $member_list = $this->member_model->get_member_list($uuid,$state);
+            $member_list = $this->membefgr_model->get_member_list($uuid,$state);
         }
         return $member_list;
     }
@@ -160,5 +160,12 @@ class GroupMemberController extends Controller
     public function my_group (Request $request) {
         $result = $this->member_model->my_group($request->get('userid'));
         return response()->json($result);
+    }
+
+    public function waitGroup ($userid) {
+        return response()->json(Group_Member::where([
+            ['userid',$userid],
+            ['enter_whether',0]
+        ])->get());
     }
 }

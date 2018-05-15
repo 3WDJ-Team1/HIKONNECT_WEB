@@ -37,8 +37,15 @@ class LoginController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @funtion     loginprocess
+     * @brief       Process of Login
+     *
+     * @param \Illuminate\Http\Request $request
+     *         string idv
+     *         string pwv
+     *
      * @return \Illuminate\Http\JsonResponse
+     *
      */
     public function loginprocess(Request $request)
     {
@@ -77,6 +84,17 @@ class LoginController extends Controller
         return var_dump($user);
     }
 
+    /**
+     * @funtion     login_app
+     * @brief       Process of Login to App
+     *
+     * @param \Illuminate\Http\Request $request
+     *         string id
+     *         string pw
+     *
+     * @return \Illuminate\Http\JsonResponse
+     *
+     */
     public function login_app(Request $request) {
         $userinfo = User::where('userid', $request->get('id'))->first();
         if ($userinfo == false)
