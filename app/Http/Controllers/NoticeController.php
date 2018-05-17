@@ -65,7 +65,7 @@ class NoticeController extends Controller
      * 
      * @param \Illuminate\Http\Request $request 
      * 
-     * @return \Illuminate\Http\Response
+     * @return if store sucess, return 'true'
      */
     public function store(Request $request)
     {
@@ -85,18 +85,18 @@ class NoticeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $id 
+     * @param string groupUuid
+     *         int   page
      * 
-     * @return \Illuminate\Http\Response
+     * @return List of announce
      */
-    public function show($groupUuid,$perPage)
+    public function show($uuid,$page)
     {
         $notifications = $this->announce_model
             ->getAnnounce(
-                $groupUuid,
-                $perPage
+                $uuid,
+                $page
             );
-
         return response()->json($notifications);
     }
 
@@ -116,14 +116,16 @@ class NoticeController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request 
-     * @param int                      $id 
+     *         int $no
+     *         string title
+     *         string content
      * 
-     * @return \Illuminate\Http\Response
+     * @return If update success, return 'true'
      */
-    public function update(Request $request, $id = null)
+    public function update(Request $request, $no)
     {
-        return $request->input();
-        // return $this->_notice_model->updateNotification($request->input(), $id);
+        $this->announce_model->updateAnnounce($request->get('title'),$request->get('content'),$no);
+        return response()->json('true');
     }
 
     /**
@@ -133,9 +135,10 @@ class NoticeController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($no)
     {
-        //
+        $this->announce_model->deleteAnnounce($no);
+        return response()->json('true');
     }
 
     /**

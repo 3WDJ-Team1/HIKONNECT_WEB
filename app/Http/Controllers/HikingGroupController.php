@@ -151,16 +151,18 @@ class HikingGroupController extends Controller
      */
     public function destroy($id)
     {
-        return $this->_group_model->where('uuid', $id)->delete();
+        $this->_group_model->where('uuid', $id)->delete();
+        return response()->json('true');
     }
 
     /**
-     * Get group member list from database.
-     * 
-     * @param String $groupUuid Reference key(Group's UUID) Search
-     *                          for group members
-     * 
-     * @return Array
+     * @function    getGroupList
+     * @brief       List of All Group
+     *
+     * @param \Illuminate\Http\Request $request
+     *          select      if search group enter keyword
+     *          input       search value
+     * @return response json
      */
     public function getGroupList(Request $request)
     {
@@ -178,12 +180,12 @@ class HikingGroupController extends Controller
      * @brief       Check to member state
      *
      * @param \Illuminate\Http\Request $request
-     * @param string userid
-     * @param string uuid
+     *         string userid
+     *         string uuid
      *
-     * @return string owner
-     * @return string member
-     * @return string guest
+     * @return if user is owner string owner
+     *          if user is member string member
+     *          if user is guest string guest
      */
     public function checkMember(Request $request) {
         $is_member = $this->member_model->checkMember($request->get('userid'),$request->get('uuid'));
@@ -201,47 +203,11 @@ class HikingGroupController extends Controller
      * @brief       Get Group Information
      *
      * @param \Illuminate\Http\Request $request
-     * @param string uuid
+     *         string uuid
      *
      * @return Array groupInfo
      */
     public function groupInfo(Request $request) {
         return response()->json(HikingGroup::where('uuid',$request->get('uuid'))->get());
-    }
-
-    /**
-     * @funtion     isOwner
-     * @brief       Check Owner
-     *
-     * @param string userid
-     * @param string uuid
-     *
-     * @return 'true'
-     * @return 'false'
-     */
-    public function isOwner ($uuid, $userid) {
-    if ($this->_group_model->isOwner($userid,$uuid) == true) {
-        return 'true';
-    } else
-        return 'false';
-}
-
-    /**
-     * @funtion     makeGroupList
-     * @brief       Group I make
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param string userid
-     *
-     * @return groupinfo
-     * @return 'false'
-     *
-     */
-    public function makeGroupList(Request $request) {
-        if (HikingGroup::where('leader',$request->get('userid'))->exists() == true) {
-            return response()->json(HikingGroup::where('leader',$request->get('userid'))->get());
-        } else {
-            return 'false';
-        }
     }
 }

@@ -27,6 +27,16 @@ class Hiking_schedule extends Model
 	    Hiking_schedule::insert($info);
     }
 
+    public function scheduleUpdate(Array $info,$id) {
+	    Hiking_schedule::where('no',$id)->update([
+	        'title'      =>  $info[0]['title'],
+            'content'    => $info[0]['content'],
+            'route'      => $info[0]['route'],
+            'mnt_id'     => $info[0]['mnt_id'],
+            'start_date' => $info[0]['start_date']
+        ]);
+    }
+
     public function my_schedule($userid) {
         return
             Hiking_schedule::select('no','title','leader','content','route','start_date','mnt_id')

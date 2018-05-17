@@ -119,12 +119,15 @@ class GroupMemberController extends Controller
     }
 
     /**
-     * @function    out_group
-     * @brief       Out of Group
+     * @funtion     out_group
+     * @brief       Out Group
      *
      * @param \Illuminate\Http\Request $request
+     *         userid
+     *         uuid
      *
-     * @return \Illuminate\Http\Response
+     * @return Delete User to Group List
+     *
      */
     public function out_group(Request $request) {
         $this->member_model->delete_member($request->get('userid'),$request->get('uuid'));
@@ -137,15 +140,15 @@ class GroupMemberController extends Controller
      *
      * @param string uuid
      *        int state
-     * @return \Illuminate\Http\Response
+     * @return List of group member
      */
-    public function list_member($uuid,$state) {
-        if ($state == 0) {
-            $member_list = $this->member_model->get_member_list($uuid,$state);
-        }
-        elseif ($state == 1) {
-            $member_list = $this->membefgr_model->get_member_list($uuid,$state);
-        }
+    public function list_member($uuid) {
+        $not_enter = $this->member_model->get_member_list($uuid,0);
+        $enter = $this->member_model->get_member_list($uuid,1);
+        $member_list = array([
+            'not_enter' => $not_enter,
+            'enter'     => $enter
+        ]);
         return $member_list;
     }
 
@@ -154,14 +157,23 @@ class GroupMemberController extends Controller
      * @brief       My Group
      *
      * @param \Illuminate\Http\Request $request
+     *          userid
      *
-     * @return \Illuminate\Http\Response
+     * @return List of group participating
      */
     public function my_group (Request $request) {
         $result = $this->member_model->my_group($request->get('userid'));
         return response()->json($result);
     }
 
+    /**
+     * @function    waitGroup
+     * @brief       My Group
+     *
+     * @param string userid
+     *
+     * @return List of groups not yet accepted
+     */
     public function waitGroup ($userid) {
         return response()->json(Group_Member::where([
             ['userid',$userid],

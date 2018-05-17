@@ -38,15 +38,17 @@ class User extends Model
     }
 
     //User Update
-    public function userUpdate(Request $request,$age_group,$scope,$userid)
+    public function userUpdate($password,$nickname,$phone,$gender,$age_group,$scope, $userid)
     {
         User::where('userid',$userid)
             ->update([
-                'password'  =>  $request->get('pw'),
-                'nickname'  =>  $request->get('nickname'),
-                'age_group' =>  $age_group,
-                'phone'     =>  $request->get('phone'),
-                'scope'     =>  $scope]);
+                'password'  => $password,
+                'nickname'  => $nickname,
+                'phone'     => $phone,
+                'gender'    => $gender,
+                'age_group' => $age_group,
+                'scope'     => $scope
+            ]);
     }
 
     //User Delete

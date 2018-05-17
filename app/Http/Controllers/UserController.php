@@ -216,7 +216,10 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->usermodel->userUpdate($request,$this->age_group,$this->scope,$id);
+        $password  = $request->get('pwv');
+        $nickname  = $request->get('nn');
+        $phone     = $request->get('phone');
+        $this->usermodel->userUpdate($password,$nickname,$phone,$this->gender,$this->age_group,$this->scope, $id);
         return response()->json('true');
     }
 

@@ -82,7 +82,13 @@ class ScheduleController extends Controller
     {
         $result = array();
         $i = 0;
-        $list = json_decode(Hiking_schedule::select('no','title','content','leader','start_date','mnt_id','route')->where('hiking_group',$uuid)->get());
+        $list = json_decode(Hiking_schedule::select(
+            'no','title','content','leader','start_date','hiking_schedule.mnt_id','route','mountain.mnt_name'
+        )->where(
+            'hiking_group',$uuid
+        )->join(
+            'mountain','hiking_schedule.mnt_id','=','mountain.mnt_id'
+        )->get());
         foreach ($list as $value) {
             $result[$i]['no'] = $value->no;
             $result[$i]['title'] = $value->title;
@@ -91,6 +97,7 @@ class ScheduleController extends Controller
             $result[$i]['mnt_id'] = $value->mnt_id;
             $result[$i]['start_date'] = $value->start_date;
             $result[$i]['route'] = json_decode($value->route);
+            $result[$i]['mnt_name'] = $value->mnt_name;
             $i++;
         }
         return $result;
@@ -116,7 +123,16 @@ class ScheduleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $info = array([
+            'title'         => $request->get('title'),
+            'content'       => $request->get('content'),
+            'route'         => $request->get('route'),
+            'updated_at'    => Carbon::now()->format('Y-m-d H:i:s'),
+            'start_date'    => $request->get('stDate'),
+            'mnt_id'        => $request->get('mnt_id')
+        ]);
+        $this->hiking_schedule->scheduleUpdate($info,$id);
+        return response()->json('true');
     }
 
     /**
@@ -127,7 +143,8 @@ class ScheduleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->hiking_schedule->where('no', $id)->delete();
+        return response()->json('true');
     }
 
     /**
@@ -210,7 +227,28 @@ class ScheduleController extends Controller
     }
 
     public function hiking_history($userid) {
-        return response()->json($this->schedule_member->hiking_history($userid));
+        if (schedule_member::where('userid',$userid)->exists() == true) {
+            $result = array();
+            $list = json_decode($this->schedule_member->mySchedule($userid));
+            $i = 0;
+            foreach ($list as $value) {
+                $result[$i]['group_title'] = $value->group_title;
+                $result[$i]['no'] = $value->no;
+                $result[$i]['title'] = $value->schedule_title;
+                $result[$i]['content'] = $value->content;
+                $result[$i]['schedule_leader'] = $value->schedule_leader;
+                $result[$i]['uuid'] = $value->uuid;
+                $result[$i]['group_leader'] = $value->group_leader;
+                $result[$i]['start_date'] = $value->start_date;
+                $result[$i]['mnt_name'] = $value->mnt_name;
+                $result[$i]['mnt_id'] = $value->mnt_id;
+                $result[$i]['route'] = json_decode($value->route);
+                $i++;
+            }
+            return response()->json($result);
+        } else {
+            return 'false';
+        }
     }
 
     public function reg_ip(Request $request) {
@@ -225,5 +263,9 @@ class ScheduleController extends Controller
     public function schedule_member_list($uuid,$schedule_no) {
         $result = $this->schedule_member->member_list($uuid,$schedule_no);
         return response()->json($result);
+    }
+
+    public function hiking_count($userid) {
+        return response()->json($this->schedule_member->hiking_count($userid));
     }
 }

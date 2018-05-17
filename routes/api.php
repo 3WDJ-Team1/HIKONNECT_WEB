@@ -67,7 +67,7 @@ Route::group(
             'GroupMemberController'
         );
         Route::get(
-            'list_member/{uuid}/{state}',
+            'list_member/{uuid}',
             'GroupMemberController@list_member'
         )->name('list_member');
         Route::post(
@@ -212,17 +212,26 @@ Route::group(
         Route::post(
             'mnt_info'
             ,'MountainController@mountain_info'
-        )->name('Mountain Information');
+        )->name('Get Mountain Information');
 
         Route::post(
             'mnt_image'
-            ,'MountainController@mnt_image'
+            ,'MountainController@mountain_image'
         )->name('Get Mountain Image');
 
+        Route::get(
+            'mnt_name/{mnt_id}'
+            ,'MountainController@getMntName'
+        )->name('Get Mountain Name');
         Route::post(
             'tour'
             ,'MountainController@tour'
         )->name('tour');
+
+        Route::get(
+            'hiking_count/{userid}'
+            ,'ScheduleController@hiking_count'
+        )->name('Count of hiking');
     }
 );
 

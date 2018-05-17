@@ -42,7 +42,7 @@ class testcontroller extends Controller
      */
     public function index()
     {
-        return "ㅎㅇㅎㅇ";
+        //
     }
     /**
      * Show the form for creating a new resource.
@@ -134,56 +134,6 @@ class testcontroller extends Controller
     public function destroy($id)
     {
         //
-    }
-    /**
-     * Store location memo.
-     *
-     * @param Request $request .
-     *
-     * @var String $user_id     User ID.
-     * @var String $latitude    User latitude.
-     * @var String $longitude   User longitude.
-     * @var String $title       Memo title.
-     * @var String $content     Memo contents.
-     * @var String $image_path  Memo image file path.
-     * @var String $created_at  Created time.
-     * @var String $updated_at  Updated time.
-     *
-     * @return ??
-     */
-    public function storeLocationMemo(Request $request)
-    {
-        $member_no  = $request->get('member_no');
-        $latitude   = $request->get('lat');
-        $longitude  = $request->get('lng');
-        $title      = $request->get('title');
-        $content    = $request->get('content');
-        $image_path = $request->get('image_path');
-        $created_at = date("Y-m-d H:i:s");
-        $updated_at = date("Y-m-d H:i:s");
-        $schedule_member = DB::table('schedule_member')
-            ->select(
-                'schedule',
-                'hiking_group',
-                'userid'
-            )->where('member_no', $member_no)
-            ->get();
-        $queryRes = DB::table('location_memo')
-            ->insert(
-                [
-                    'schedule_no'   => $schedule_member->get(0)->schedule,
-                    'hiking_group'  => $schedule_member->get(0)->hiking_group,
-                    'title'         => $title,
-                    'content'       => $content,
-                    'writer'        => $schedule_member->get(0)->userid,
-                    'picture'       => $image_path,
-                    'created_at'    => $created_at,
-                    'updated_at'    => $updated_at,
-                    'latitude'      => $latitude,
-                    'longitude'     => $longitude
-                ]
-            );
-        return $queryRes ? 'ture' : 'false';
     }
     /**
      * Get detail information of location memo.
@@ -458,32 +408,5 @@ class testcontroller extends Controller
             ->where('userid', $user_id)
             ->get();
         return $queryRes;
-    }
-
-    public function getLocationMemo(Request $request) {
-        $row = LocationMemo::where(
-            'schedule_no',
-            $request->get('schedule')
-        )->get()
-            ->toArray();
-
-        $post_data = array();
-        $row_count = LocationMemo::where(
-            'schedule_no',
-            $request->get('schedule')
-        )->count();
-
-        for ($i = 0; $i < $row_count; $i++) {
-            $distance =
-                (6371 * acos(cos(deg2rad($request->get('latitude'))) * cos(deg2rad($row[$i]['latitude'])) * cos(deg2rad($row[$i]['longitude'])
-                            - deg2rad($request->get('longitude'))) + sin(deg2rad($request->get('latitude'))) * sin(deg2rad($row[$i]['latitude']))));
-
-            if ($distance < 0.5) {
-                array_push($post_data, $row[$i]);
-            }
-            else
-                continue;
-        }
-        printf(json_encode($post_data));
     }
 }

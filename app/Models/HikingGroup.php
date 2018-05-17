@@ -38,7 +38,7 @@ class HikingGroup extends Model
                 ['us.nickname', 'LIKE', "%$input%"]
             ])
                 ->select(
-                    'uuid','title','content','us.nickname','min_member','max_member'
+                    'uuid','title','leader','content','us.nickname','min_member','max_member'
                 )->join(
                     'user as us',
                     'us.userid',
@@ -55,7 +55,7 @@ class HikingGroup extends Model
                 ['title', 'LIKE', "%$input%"]
             ])
                 ->select(
-                    'uuid','title','hiking_group.content','us.nickname','min_member','max_member'
+                    'uuid','title','leader','hiking_group.content','us.nickname','min_member','max_member'
                 )->join(
                     'user as us',
                     'us.userid',
@@ -70,7 +70,7 @@ class HikingGroup extends Model
         else {
             return HikingGroup::
             select(
-                'uuid','title','content','us.nickname','min_member','max_member'
+                'uuid','title','content','leader','us.nickname','min_member','max_member'
             )->join(
                 'user as us',
                 'us.userid',

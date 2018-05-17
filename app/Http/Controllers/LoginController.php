@@ -44,7 +44,8 @@ class LoginController extends Controller
      *         string idv
      *         string pwv
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return If login success return 'true'
+     *          if login false return 'false','pwfalse'
      *
      */
     public function loginprocess(Request $request)
@@ -60,7 +61,7 @@ class LoginController extends Controller
         }
         if ($userinfo->password == $request->get('pwv')) {
             $sessionVal = User::where('userid',$request->get('idv'))->select(
-                'userid','nickname','gender','age_group','scope','profile','phone','password'
+                'userid','nickname','gender','age_group','scope','profile','phone','password','grade','created_at'
             )->first();
             return response()->json($sessionVal);
         } else {

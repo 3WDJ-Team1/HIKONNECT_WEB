@@ -22,14 +22,24 @@ class Announce extends Model
         Announce::insert($info);
     }
 
+    public function updateAnnounce($title, $content, $no) {
+        Announce::where('no',$no)
+            ->update(['title' => $title],
+                ['content' => $content]);
+    }
+
     public function getAnnounce($uuid, $page) {
         return Announce::where('hiking_group',$uuid)
             ->select(
-                'title','content','writer','picture','created_at'
+                'no','title','content','writer','picture','created_at'
             )
             ->orderBy('created_at','DESC')
-            ->skip($page)
+            ->skip($page * 10)
             ->take(10)
             ->get();
+    }
+
+    public function deleteAnnounce($no) {
+        Announce::where('no',$no)->delete();
     }
 }

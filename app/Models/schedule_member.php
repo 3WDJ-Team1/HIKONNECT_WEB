@@ -86,7 +86,7 @@ class schedule_member extends Model
             schedule_member::select(
                 'hiking_group.title as group_title',
                 'hiking_schedule.no',
-                'hiking_schedule.title',
+                'hiking_schedule.title as schedule_title',
                 'hiking_schedule.leader as schedule_leader',
                 'hiking_group.uuid',
                 'hiking_group.leader as group_leader',
@@ -118,5 +118,12 @@ class schedule_member extends Model
             ['schedule',$schedule_no]
         ])->join('user','user.userid','=','schedule_member.userid')
         ->get();
+    }
+
+    public function hiking_count($userid) {
+        return schedule_member::where([
+            ['userid',$userid],
+            ['hiking_state',2]
+        ])->count();
     }
 }
