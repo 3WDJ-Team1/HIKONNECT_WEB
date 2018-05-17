@@ -6,11 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 use App\Request;
 
 /**
+<<<<<<< HEAD
  * Model class for schedule_member
  *
  * @category Model
  * @package  App
  * @author   Sol Song <thdthf159@naver.com>
+=======
+ * Model for Notification
+ *
+ * @category Model
+ * @package  App
+ * @author   bs Kwon <rnjs9957@gmail.com>
+>>>>>>> master
  * @license  MIT license
  * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB
  */
@@ -29,6 +37,7 @@ class schedule_member extends Model
             ['hiking_group',$uuid],
             ['schedule',$schedule_no]
         ])->delete();
+<<<<<<< HEAD
     }
 
     public function hiking_history($userid) {
@@ -125,5 +134,18 @@ class schedule_member extends Model
             ['userid',$userid],
             ['hiking_state',2]
         ])->count();
+=======
+
+    }
+
+    public function start_hiking($userid, $uuid, $schedule_no) {
+        schedule_member::where([
+            ['userid', $userid],
+            ['hiking_group', $uuid],
+            ['schedule', $schedule_no]
+        ])->update(
+            ['hiking_state' => 1]
+        );
+>>>>>>> master
     }
 }

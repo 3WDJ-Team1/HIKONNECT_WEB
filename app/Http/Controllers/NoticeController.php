@@ -10,25 +10,25 @@
  */
 namespace App\Http\Controllers;
 
-use App\Models\Announce;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Notification;
 use App\Models\User;
 
 /**
- * Controller class for User's Announce
- *
+ * Controller for Notification
+ * 
  * @category Controllers
- * @package  App
- * @author   Sol Song <thdthf159@naver.com>
+ * @package  App\Http\Controllers
+ * @author   bs Kwon <rnjs9957@gmail.com>
  * @license  MIT license
  * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB
+ * 
+ * @var Model $_notice_model        A reference variable for Notice model
+ * @var Model $_user_model          A reference variable for user model
  */
-
 class NoticeController extends Controller
 {
-    private $announce_model = null;
+    private $_notice_model = null;
     private $_user_model = null;
 
     /**
@@ -36,7 +36,7 @@ class NoticeController extends Controller
      */
     public function __construct()
     {
-        $this->announce_model = new Announce();
+        $this->_notice_model = new Notification();
         $this->_user_model = new User();
     }
     
@@ -45,9 +45,17 @@ class NoticeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($groupUuid, $pageIndex = 0, $perPage = 0)
     {
-        //
+        $notifications = $this->_notice_model
+            ->getNotifications(
+                $groupUuid, 
+                $pageIndex, 
+                $perPage
+            );
+
+        return $notifications;
+        // return view('notice', ['userList' => $notifications]);
     }
 
     /**
@@ -65,39 +73,24 @@ class NoticeController extends Controller
      * 
      * @param \Illuminate\Http\Request $request 
      * 
-     * @return if store sucess, return 'true'
+     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $info = array([
-            'title'         =>  $request->get('title'),
-            'content'       =>  $request->get('content'),
-            'writer'        =>  $request->get('writer'),
-            'hiking_group'  => $request->get('uuid'),
-            'picture'       => '',
-            'created_at'    => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at'    => Carbon::now()->format('Y-m-d H:i:s')
-        ]);
-        $this->announce_model->announceReg($info);
-        return response()->json('true');
+        return $this->_notice_model->insertNotification($request->input());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param string groupUuid
-     *         int   page
+     * @param int $id 
      * 
-     * @return List of announce
+     * @return \Illuminate\Http\Response
      */
-    public function show($uuid,$page)
+    public function show($id)
     {
-        $notifications = $this->announce_model
-            ->getAnnounce(
-                $uuid,
-                $page
-            );
-        return response()->json($notifications);
+        return $notification = $this->_notice_model
+            ->selectOwn($id);
     }
 
     /**
@@ -116,16 +109,14 @@ class NoticeController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request 
-     *         int $no
-     *         string title
-     *         string content
+     * @param int                      $id 
      * 
-     * @return If update success, return 'true'
+     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $no)
+    public function update(Request $request, $id = null)
     {
-        $this->announce_model->updateAnnounce($request->get('title'),$request->get('content'),$no);
-        return response()->json('true');
+        return $request->input();
+        // return $this->_notice_model->updateNotification($request->input(), $id);
     }
 
     /**
@@ -135,27 +126,8 @@ class NoticeController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function destroy($no)
+    public function destroy($id)
     {
-        $this->announce_model->deleteAnnounce($no);
-        return response()->json('true');
-    }
-
-    /**
-     * @function    list_announce
-     * @brief       List of Announces
-     *
-     * @param string uuid
-     *         int page
-     * @return \Illuminate\Http\Response
-     */
-    public function list_announce($uuid,$page) {
-        $announce_list = $this->announce_model
-            ->getAnnounce(
-                $uuid,
-                $page
-            );
-
-        return response()->json($announce_list);
+        return $this->_notice_model->deleteNotification($id);
     }
 }

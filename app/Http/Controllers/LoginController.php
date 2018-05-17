@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Controllers\Controller;
@@ -37,22 +36,14 @@ class LoginController extends Controller
     }
 
     /**
-     * @funtion     loginprocess
-     * @brief       Process of Login
-     *
-     * @param \Illuminate\Http\Request $request
-     *         string idv
-     *         string pwv
-     *
-     * @return If login success return 'true'
-     *          if login false return 'false','pwfalse'
-     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function loginprocess(Request $request)
     {
         //Login
         try {
-            $userinfo = User::where('userid', $request->get('idv'))->first();
+            $userinfo = User::where('id', $request->get('idv'))->first();
             if ($userinfo == false) {
                 throw new Exception('존재하지 않는 ID');
             }
@@ -60,9 +51,26 @@ class LoginController extends Controller
             return response()->json('false');
         }
         if ($userinfo->password == $request->get('pwv')) {
-            $sessionVal = User::where('userid',$request->get('idv'))->select(
-                'userid','nickname','gender','age_group','scope','profile','phone','password','grade','created_at'
-            )->first();
+            $sessionVal = User::join(
+                'user_profile', 
+                'user_profile.user', 
+                '=', 
+                'user.uuid'
+            )->select(
+                'user_profile.nickname', 
+                'user_profile.image_path', 
+                'user_profile.phone',
+                'user_profile.gender', 
+                'user_profile.age_group', 
+                'user_profile.scope',
+                'user.uuid',
+                'user.password',
+                'user.id'
+            )->where(
+                'id',
+                $request->get('idv')
+            )->get();
+            
             return response()->json($sessionVal);
         } else {
             return response()->json('pwfalse');
@@ -85,19 +93,8 @@ class LoginController extends Controller
         return var_dump($user);
     }
 
-    /**
-     * @funtion     login_app
-     * @brief       Process of Login to App
-     *
-     * @param \Illuminate\Http\Request $request
-     *         string id
-     *         string pw
-     *
-     * @return \Illuminate\Http\JsonResponse
-     *
-     */
     public function login_app(Request $request) {
-        $userinfo = User::where('userid', $request->get('id'))->first();
+        $userinfo = User::where('id', $request->get('id'))->first();
         if ($userinfo == false)
             echo "false";
         else {
