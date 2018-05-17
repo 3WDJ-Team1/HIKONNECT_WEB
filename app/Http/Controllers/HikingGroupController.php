@@ -1,7 +1,7 @@
 <?php
 /**
  * PHP version 7.0
- * 
+ *
  * @category Controller
  * @package  Global
  * @author   bs Kwon <rnjs9957@gmail.com>
@@ -9,14 +9,11 @@
  * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB/
  */
 namespace App\Http\Controllers;
-
 use App\Models\Group_Member;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-
 use App\Models\HikingGroup;
-
 /**
  * Controller class for Hiking_group
  *
@@ -26,8 +23,6 @@ use App\Models\HikingGroup;
  * @license  MIT license
  * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB
  */
-
-
 class HikingGroupController extends Controller
 {
     private $_group_model = null;
@@ -39,7 +34,6 @@ class HikingGroupController extends Controller
         $this->_group_model = new HikingGroup();
         $this->member_model = new Group_Member();
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -49,7 +43,6 @@ class HikingGroupController extends Controller
     {
         //
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -59,7 +52,6 @@ class HikingGroupController extends Controller
     {
         //
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -82,7 +74,6 @@ class HikingGroupController extends Controller
             'updated_at'    => Carbon::now()->format('Y-m-d H:i:s')
         ]);
         $this->_group_model->groupReg($groupinfo);
-
         // 작성자 그룹에 자동 참여
         $uuid = HikingGroup::select('uuid')->orderBy('created_at','DESC')->first()['uuid'];
         $member_info = array([
@@ -97,12 +88,11 @@ class HikingGroupController extends Controller
         $group_member->memberReg($member_info);
         return response()->json('true');
     }
-
     /**
      * Display the specified resource.
      *
-     * @param int $id 
-     * 
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -110,25 +100,23 @@ class HikingGroupController extends Controller
         $result = $this->_group_model->mygroup($id);
         return response()->json($result);
     }
-
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id 
-     * 
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         //
     }
-
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request 
-     * @param int                      $id 
-     * 
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -138,15 +126,13 @@ class HikingGroupController extends Controller
         $min        =   $request->get('min');
         $max        =   $request->get('max');
         $this->_group_model->updateGroup($id,$title,$content,$min,$max);
-
         return response()->json('true');
     }
-
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id 
-     * 
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -154,7 +140,6 @@ class HikingGroupController extends Controller
         $this->_group_model->where('uuid', $id)->delete();
         return response()->json('true');
     }
-
     /**
      * @function    getGroupList
      * @brief       List of All Group
@@ -174,7 +159,6 @@ class HikingGroupController extends Controller
         $result = $this->_group_model->getGroupList($page,$select,$input);
         return response()->json($result);
     }
-
     /**
      * @funtion     checkMember
      * @brief       Check to member state
@@ -197,7 +181,6 @@ class HikingGroupController extends Controller
         else
             return response()->json('guest');
     }
-
     /**
      * @funtion     groupInfo
      * @brief       Get Group Information

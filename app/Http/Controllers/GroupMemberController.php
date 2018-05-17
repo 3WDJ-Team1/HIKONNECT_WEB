@@ -1,12 +1,9 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Models\Group_Member;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
 /**
  * Controller class for GroupMember
  *
@@ -16,16 +13,13 @@ use App\Http\Controllers\Controller;
  * @license  MIT license
  * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB
  */
-
 class GroupMemberController extends Controller
 {
     private $member_model = null;
-
     public function __construct()
     {
         $this->member_model = new Group_Member();
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -35,7 +29,6 @@ class GroupMemberController extends Controller
     {
         //
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -45,7 +38,6 @@ class GroupMemberController extends Controller
     {
         //
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -65,7 +57,6 @@ class GroupMemberController extends Controller
         $this->member_model->memberReg($member_info);
         return response()->json('true');
     }
-
     /**
      * Display the specified resource.
      *
@@ -76,7 +67,6 @@ class GroupMemberController extends Controller
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -87,7 +77,6 @@ class GroupMemberController extends Controller
     {
         //
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -106,7 +95,6 @@ class GroupMemberController extends Controller
             return response()->json('false');
         }
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -117,7 +105,6 @@ class GroupMemberController extends Controller
     {
         //
     }
-
     /**
      * @funtion     out_group
      * @brief       Out Group
@@ -133,7 +120,6 @@ class GroupMemberController extends Controller
         $this->member_model->delete_member($request->get('userid'),$request->get('uuid'));
         return response()->json('true');
     }
-
     /**
      * @function    list_member
      * @brief       Group's member
@@ -151,7 +137,6 @@ class GroupMemberController extends Controller
         ]);
         return $member_list;
     }
-
     /**
      * @function    my_group
      * @brief       My Group
@@ -165,7 +150,6 @@ class GroupMemberController extends Controller
         $result = $this->member_model->my_group($request->get('userid'));
         return response()->json($result);
     }
-
     /**
      * @function    waitGroup
      * @brief       My Group

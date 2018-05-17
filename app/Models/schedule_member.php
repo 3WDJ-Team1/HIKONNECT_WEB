@@ -1,45 +1,30 @@
 <?php
 namespace App\Models;
-
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use App\Request;
-
 /**
-<<<<<<< HEAD
  * Model class for schedule_member
  *
  * @category Model
  * @package  App
  * @author   Sol Song <thdthf159@naver.com>
-=======
- * Model for Notification
- *
- * @category Model
- * @package  App
- * @author   bs Kwon <rnjs9957@gmail.com>
->>>>>>> master
  * @license  MIT license
  * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB
  */
-
 class schedule_member extends Model
 {
     protected $table = 'schedule_member';
-
     public function enter_schedule($member_info) {
         schedule_member::insert($member_info);
     }
-
     public function out_schedule($userid, $uuid, $schedule_no) {
         schedule_member::where([
             ['userid',$userid],
             ['hiking_group',$uuid],
             ['schedule',$schedule_no]
         ])->delete();
-<<<<<<< HEAD
     }
-
     public function hiking_history($userid) {
         return
             schedule_member::select(
@@ -67,7 +52,6 @@ class schedule_member extends Model
                 'hiking_group as hg','hg.uuid','=','hs.hiking_group'
             )->get();
     }
-
     public function makeScheduleList($userid) {
         return
             Hiking_schedule::select(
@@ -89,7 +73,6 @@ class schedule_member extends Model
                 'mountain','mountain.mnt_id','=','hiking_schedule.mnt_id'
             )->get();
     }
-
     public function mySchedule($userid) {
         return
             schedule_member::select(
@@ -113,39 +96,23 @@ class schedule_member extends Model
                     'hiking_group','hiking_group.uuid','=','hiking_schedule.hiking_group'
                 )->get();
     }
-
     public function reg_ip ($schedule, $userid, $ip) {
         schedule_member::where([
             ['schedule','=',$schedule],
             ['userid','=',$userid]
         ])->update(['ip_address' => $ip]);
     }
-
     public function member_list($uuid,$schedule_no) {
         return schedule_member::select('user.nickname','hiking_state','avg_speed','hiking_start','current_fid','distance','latitude','longitude','ip_address','password')->where([
             ['hiking_group',$uuid],
             ['schedule',$schedule_no]
         ])->join('user','user.userid','=','schedule_member.userid')
-        ->get();
+            ->get();
     }
-
     public function hiking_count($userid) {
         return schedule_member::where([
             ['userid',$userid],
             ['hiking_state',2]
         ])->count();
-=======
-
-    }
-
-    public function start_hiking($userid, $uuid, $schedule_no) {
-        schedule_member::where([
-            ['userid', $userid],
-            ['hiking_group', $uuid],
-            ['schedule', $schedule_no]
-        ])->update(
-            ['hiking_state' => 1]
-        );
->>>>>>> master
     }
 }

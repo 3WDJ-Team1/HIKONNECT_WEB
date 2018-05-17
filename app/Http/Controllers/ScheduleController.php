@@ -1,13 +1,10 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Models\Hiking_schedule;
 use App\Models\schedule_member;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
 /**
  * Controller class for Group_Schedule
  *
@@ -17,18 +14,15 @@ use App\Http\Controllers\Controller;
  * @license  MIT license
  * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB
  */
-
 class ScheduleController extends Controller
 {
     private $hiking_schedule;
     private $schedule_member;
-
     public function __construct()
     {
         $this->hiking_schedule = new Hiking_schedule();
         $this->schedule_member = new schedule_member();
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -38,7 +32,6 @@ class ScheduleController extends Controller
     {
         //
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -48,7 +41,6 @@ class ScheduleController extends Controller
     {
         //
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -71,7 +63,6 @@ class ScheduleController extends Controller
         $this->hiking_schedule->scheduleReg($info);
         return response()->json('true');
     }
-
     /**
      * Display the specified resource.
      *
@@ -102,7 +93,6 @@ class ScheduleController extends Controller
         }
         return $result;
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -113,7 +103,6 @@ class ScheduleController extends Controller
     {
         //
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -134,7 +123,6 @@ class ScheduleController extends Controller
         $this->hiking_schedule->scheduleUpdate($info,$id);
         return response()->json('true');
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -146,7 +134,6 @@ class ScheduleController extends Controller
         $this->hiking_schedule->where('no', $id)->delete();
         return response()->json('true');
     }
-
     /**
      * @function    enter_schedule
      * @brief       Enter Schedule
@@ -171,7 +158,6 @@ class ScheduleController extends Controller
         $this->schedule_member->enter_schedule($member_info);
         return response()->json('true');
     }
-
     /**
      * @function    out_schedule
      * @brief       Out of Schedule
@@ -184,7 +170,6 @@ class ScheduleController extends Controller
         $this->schedule_member->out_schedule($request->get('userid'),$request->get('uuid'),$request->get('schedule_no'));
         return response()->json('true');
     }
-
     /**
      * @function    my_schedule
      * @brief       My Schedule
@@ -217,7 +202,6 @@ class ScheduleController extends Controller
             return 'false';
         }
     }
-
     public function makeScheduleList(Request $request) {
         if (Hiking_schedule::where('hiking_schedule.leader',$request->get('userid'))->exists() == true) {
             return response()->json($this->schedule_member->makeScheduleList($request->get('userid')));
@@ -225,7 +209,6 @@ class ScheduleController extends Controller
             return 'false';
         }
     }
-
     public function hiking_history($userid) {
         if (schedule_member::where('userid',$userid)->exists() == true) {
             $result = array();
@@ -250,21 +233,17 @@ class ScheduleController extends Controller
             return 'false';
         }
     }
-
     public function reg_ip(Request $request) {
         $schedule   = $request->get('schedule');
         $userid     = $request->get('userid');
         $ip         = $request->get('ip');
-
         $this->schedule_member->reg_ip($schedule, $userid, $ip);
         return response()->json($schedule.$userid);
     }
-
     public function schedule_member_list($uuid,$schedule_no) {
         $result = $this->schedule_member->member_list($uuid,$schedule_no);
         return response()->json($result);
     }
-
     public function hiking_count($userid) {
         return response()->json($this->schedule_member->hiking_count($userid));
     }

@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Models\hiking_plan;
 use App\Models\hiking_record;
 use App\Models\schedule_member;
@@ -14,7 +12,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Mockery\Exception;
-
 /**
  * Controller class for User's Information
  *
@@ -24,86 +21,76 @@ use Mockery\Exception;
  * @license  MIT license
  * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB
  */
-
 class UserController extends Controller
 {
     /**
      * Aq
-     * 
+     *
      * @var Integer   scope       User's Open Scope
      * @var Integer   gender      User's Gender
      * @var Integer   age_group   User's Age Group
      * @var String    uuid        User's Primary Key Value
      * @var nickname  nickname    User's Nickname
      */
-
     private $usermodel = null;
     private $scope = 0;
     private $gender;
     private $age_group;
-
     /**
      * UserController constructor.
-     * 
-     * @param Request $request 
+     *
+     * @param Request $request
      */
     public function __construct(Request $request)
     {
         $this->usermodel = new User();
-
         //Scope Setting
         if ($request->get('phonesc') == true) {
             $this->scope += 100;
         }
-
         if ($request->get('gendersc') == true) {
             $this->scope += 10;
         }
-
         if ($request->get('agesc') == true) {
             $this->scope += 1;
         }
-
         switch ($request->get('groupsc')) {
-        case 'all':
-            $this->scope += 10000;
-            break;
-        case 'group':
-            $this->scope += 1000;
-            break;
+            case 'all':
+                $this->scope += 10000;
+                break;
+            case 'group':
+                $this->scope += 1000;
+                break;
         }
-
         switch ($request->get('gender')) {
-        case '남자' :
-            $this->gender = 0;
-            break;
-        case "여자" :
-            $this->gender = 1;
-            break;
+            case '남자' :
+                $this->gender = 0;
+                break;
+            case "여자" :
+                $this->gender = 1;
+                break;
         }
-
         switch ($request->get('age')) {
-        case '10대':
-            $this->age_group = 10;
-            break;
-        case '20대':
-            $this->age_group = 20;
-            break;
-        case '30대':
-            $this->age_group = 30;
-            break;
-        case '40대':
-            $this->age_group = 40;
-            break;
-        case '50대':
-            $this->age_group = 50;
-            break;
-        case '60대 이상':
-            $this->age_group = 60;
-            break;
+            case '10대':
+                $this->age_group = 10;
+                break;
+            case '20대':
+                $this->age_group = 20;
+                break;
+            case '30대':
+                $this->age_group = 30;
+                break;
+            case '40대':
+                $this->age_group = 40;
+                break;
+            case '50대':
+                $this->age_group = 50;
+                break;
+            case '60대 이상':
+                $this->age_group = 60;
+                break;
         }
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -113,7 +100,6 @@ class UserController extends Controller
     {
         return view('layouts/app');
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -123,13 +109,12 @@ class UserController extends Controller
     {
         //
     }
-
     /**
      * @function    store
      * @brief       User Regist
-     * 
-     * @param \Illuminate\Http\Request $request 
-     * 
+     *
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -159,7 +144,6 @@ class UserController extends Controller
             return response()->json('true');
         }
     }
-
     /**
      * Display the specified resource.
      *
@@ -174,18 +158,15 @@ class UserController extends Controller
         $hour                 = 0;
         $minute               = 0;
         $second               = 0;
-
         for($i = 0; $i < count($result); $i++) {
             $distance += $result[$i]['distance'];
         }
-
         for($i = 0; $i < count($result); $i++) {
             $total_hiking_time = date_diff(date_create($result[$i]['updated_at']),date_create($result[$i]['start_date']));
             $hour             += $total_hiking_time->days * 24 + $total_hiking_time->h;
             $minute           += $total_hiking_time->i;
             $second           += $total_hiking_time->s;
         }
-
         $total_hiking_time = array(
             'hour'      =>  $hour + sprintf('%d',$minute / 60),
             'minute'    =>  $minute % 60 + sprintf('%d', $second / 60),
@@ -195,7 +176,6 @@ class UserController extends Controller
         $result['total_hiking_time']    = $total_hiking_time;
         return response()->json($result);
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -206,7 +186,6 @@ class UserController extends Controller
     {
         //
     }
-
     /**
      * @function    update
      * @brief       User Information Update
@@ -222,7 +201,6 @@ class UserController extends Controller
         $this->usermodel->userUpdate($password,$nickname,$phone,$this->gender,$this->age_group,$this->scope, $id);
         return response()->json('true');
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -233,14 +211,13 @@ class UserController extends Controller
     {
         //
     }
-
     /**
      * @funtion     graph
      * @brief       Get Graph's Information
-     * 
-     * @param \Illuminate\Http\Request $request 
-     * @param int                      $id 
-     * 
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function graph(Request $request)
@@ -255,8 +232,8 @@ class UserController extends Controller
                     $request->get('userid')
                 )->where([
                     ['updated_at',
-                    '>=',
-                    $year . '-' . $i . '-01'],
+                        '>=',
+                        $year . '-' . $i . '-01'],
                     ['hiking_state',2],
                     ['updated_at',
                         '<=',

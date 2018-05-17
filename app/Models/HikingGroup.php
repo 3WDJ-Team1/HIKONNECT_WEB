@@ -30,7 +30,6 @@ use Illuminate\Database\Eloquent\Model;
 class HikingGroup extends Model
 {
     protected   $table      = 'hiking_group';
-
     public function getGroupList($page,$select,$input)
     {
         if ($select == 'writer') {
@@ -83,7 +82,6 @@ class HikingGroup extends Model
                 ->get();
         }
     }
-
     /**
      *
      */
@@ -94,11 +92,9 @@ class HikingGroup extends Model
             ['uuid',$uuid]
         ])->exists();
     }
-
     public function groupReg(Array $groupinfo) {
         HikingGroup::insert($groupinfo);
     }
-
     public function updateGroup($uuid,$title,$content,$min,$max) {
         HikingGroup::where('uuid',$uuid)
             ->update([
