@@ -299,8 +299,11 @@ class testcontroller extends Controller
         $insertSet = [
             'hiking_state' => $state
         ];
-        if ($state == 1) {
+
+        if ($state == 0) { 
             $insertSet['hiking_start'] = date('Y-m-d H:i:s');
+        } else if ($state == 1) {
+            $insertSet['updated_at'] = date('Y-m-d H:i:s');
         }
         DB::table('schedule_member')
             ->where('member_no', $member_no)
