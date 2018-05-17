@@ -216,7 +216,8 @@ class testcontroller extends Controller
                 "SELECT
                     member_no,
                     latitude,
-                    longitude
+                    longitude,
+                    userid
                 FROM schedule_member
                 WHERE schedule = (
                     SELECT schedule
