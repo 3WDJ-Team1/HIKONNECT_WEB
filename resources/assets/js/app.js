@@ -40,7 +40,7 @@ import vueEventCalendar     from 'vue-event-calendar';
 
 Vue.use(vueEventCalendar, {
     locale  : 'en',
-    color   : 'lightskyblue',
+    color   : '#c0c4cc',
 });
 
 // ElementUI

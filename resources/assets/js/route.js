@@ -9,23 +9,10 @@ import list_show            from './components/groups_list/list_show'
 
 // make_event
 import autocomplete         from './components/group_menu/make_event/autocomplete'
-import event_make_main      from './components/group_menu/make_event/group_make_main'
-import event_map            from './components/group_menu/make_event/group_map'
-import group_make      from './components/group_menu/make_event/group_make'
+import event_make_main      from './components/group_menu/make_event/event_make_main'
+import event_map            from './components/group_menu/make_event/event_map'
+import group_make      from './components/groups_list/group_make'
 
-// group_update
-import group_upadate        from './components/group_menu/make_event/updateGroup'
-
-// notice
-import notice               from './components/notice/main'
-import notice_information   from './components/notice/notice_information'
-
-import profile               from './components/mypage/profile.vue';
-import modify               from './components/mypage/modify.vue';
-import graph                from './components/mypage/graph.vue';
-import update                from './components/mypage/update.vue';
-import level                from  './components/mypage/level.vue';
-import myPage               from './components/mypage/mypagemain'
 
 // group menu tab
 import GroupMenuTab         from "./components/group_menu/GroupMenuTab.vue";
@@ -53,13 +40,10 @@ import GroupMemberDetail    from './components/group_menu/group_member/GroupMemb
 import WaitingMemberList     from './components/group_menu/group_member/WaitingMemberList.vue';
 
 // Admin pages
-import Record from './components/Views/Overview.vue'
-import UserProfile from './components/Views/UserProfile.vue'
-import TableList from './components/my_group/TableList.vue'
-import Typography from './components/Views/Typography.vue'
-import Icons from './components/Views/Icons.vue'
-import Maps from './components/Views/Maps.vue'
-import Notifications from './components/Views/Notifications.vue'
+import Record from './components/myRecord/myRecordMain.vue'
+import UserProfile from './components/loginAndRegister/UserProfile.vue'
+import TableList from './components/myGroup/TableList.vue'
+import Notifications from './components/Notifications.vue'
 
 // main
 import Main                 from './components/main/MainPage.vue'
@@ -105,21 +89,6 @@ const routes = [
                 path: 'table-list',
                 name: 'Table List',
                 component: TableList
-            },
-            {
-                path: 'typography',
-                name: 'Typography',
-                component: Typography
-            },
-            {
-                path: 'icons',
-                name: 'Icons',
-                component: Icons
-            },
-            {
-                path: 'maps',
-                name: 'Maps',
-                component: Maps
             },
             {
                 path: 'notifications',

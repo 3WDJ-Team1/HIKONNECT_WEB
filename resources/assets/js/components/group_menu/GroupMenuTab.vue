@@ -68,63 +68,6 @@
     export default {
         components: {
             joinButton
-        },
-        data: () => ({
-            groupId: '',
-            isLogined: false,
-            isUpdated: false,
-        }),
-        created() {
-            this.groupId = this.$route.params.groupid;
-            console.log(this.groupId);
-            console.log(sessionStorage.getItem('userid'));
-            this.axios.post(Laravel.host + '/api/checkMember', {
-                uuid: this.groupId,
-                userid: sessionStorage.getItem('userid'),
-            }).then(response => {
-                console.log(response.data);
-                this.$EventBus.$emit('position', response.data);
-                if (response.data == 'guest') {
-                    this.isLogined = true;
-                } else if (response.data == 'owner') {
-                    this.isLogined = false;
-                    this.isUpdated = true;
-                } else if (response.data == 'member') {
-                    this.isLogined = false;
-                }
-            })
-        },
-        methods: {
-            enterUpdate() {
-                this.$refs.write.open();
-                axios.post(this.$HttpAddr + '/groupinfo',  {
-                    uuid: this.uuid
-                }).then(response => {
-                    console.log(response.data)
-                });
-            },
-            enterGroup() {
-                // 로그인 되어 있을 경우
-                if (sessionStorage.getItem('userid') != 'undefind') {
-                    axios.post(this.$HttpAddr + '/member', {
-                        userid: sessionStorage.getItem('userid'),
-                        uuid: this.groupId
-                    })
-                        .then(response => {
-                            alert('그룹에 참가되었습니다.');
-                            this.isLogined = false;
-                        });
-                }
-                else {
-                    alert('로그인 후 이용가능 합니다.');
-                }
-            }
-        }
-        ,
-        watch: {
-            '$route'(to, from) {
-                this.groupUuid = this.$route.params.groupid;
-            }
         }
     }
 </script>

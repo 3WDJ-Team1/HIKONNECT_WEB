@@ -5,52 +5,37 @@
     @todo   update everything
  -->
 <template>
-    <div style="position: relative;">
-        <router-view name="waiting_member"></router-view>
-        <div
-                style="display: inline_block; background-color: white;">
+    <div>
+        <waitingMember></waitingMember>
+        <div>
             <b-card
+                    style="margin-top: 10px; margin-bottom: 10px;"
                     class='member_list_card'
                     v-for="userData in memberList"
                     :key="userData.nickname">
-                <b-card-header
-                        header-tag="header"
-                        role="tab"
-                        @click="sendMemberData(userData)"
-                        class='member_list_card_header'>
                     <div
-                            href="#"
                             v-b-toggle ="'n' + userData.nickname">
-                        <!-- need to insert profile pic -->
                         <v-layout row>
                             <v-flex
+                                    style="padding-bottom: 2px;"
                                     xs12
                                     sm6
                                     md3
                                     class="text-center">
                                 <v-avatar
-                                        size="42"
+                                        size="68"
                                         slot="activator"
-                                        style="margin-top: 3%;"
                                 >
-                                    <img :src="userData.image_path">
+                                    <img :src="'http://172.26.2.88:3000/images/UserProfile/' + userData.userid + '.jpg'">
                                 </v-avatar>
                             </v-flex>
                             <v-flex
                                     xs6
                                     class="text-center">
-                                <h4 style="line-height:220%;">{{ userData.nickname }}</h4>
+                                <h3 style="margin: 18px 0 15px;">{{ userData.nickname }}</h3>
                             </v-flex>
-                            <!-- <v-flex
-                                xs12
-                                sm6
-                                md3
-                                class="text-center">
-                                <h4 style="line-height:220%;">{{ userData.grade }}</h4>
-                            </v-flex> -->
                         </v-layout>
                     </div>
-                </b-card-header>
                 <b-collapse
                         :id="'n' + userData.nickname"
                         accordion="member_list"
@@ -69,13 +54,16 @@
 
 <script>
     import InfiniteLoading from 'vue-infinite-loading';
+    import waitingMember from './WaitingMemberList'
     export default {
         components: {
+            waitingMember,
             InfiniteLoading,
         },
         data: () => ({
             groupUuid   : "",
             memberList  : [],
+            waitingMember: [],
             page        : 0,
         }),
         methods: {
@@ -83,15 +71,23 @@
                 this.$EventBus.$emit('memberData', argObj);
             },
             infiniteHandlerMember($state) {
-                axios.get("http://172.26.2.88:8000/api/list_member/" + this.groupUuid + "/1")
+                axios.get(this.$HttpAddr + "/list_member/" + this.groupUuid)
                     .then( response => {
-                        this.waitingMembers = this.waitingMembers.concat(response.data);
+                        console.log(response.data[0]);
+                        this.memberList = response.data[0].enter;
+                        this.waitingMember = response.data[0].not_enter;
+                        this.$EventBus.$emit('sendNotEnterMember', this.waitingMember);
                     });
             }
         },
         created() {
             this.groupUuid = this.$route.params.groupid;
             this.infiniteHandlerMember();
+            this.$EventBus.$on('memberCheckSign', ()=>{
+                this.memberList = [];
+                this.waitingMember = [];
+                this.infiniteHandlerMember();
+            });
         },
         watch: {
             '$route' (to, from) {
@@ -102,17 +98,4 @@
 </script>
 
 <style>
-    .member_list_card {
-        background-color: white;
-        border-bottom: 1px solid whitesmoke;
-        box-shadow: none;
-        margin-top: 0;
-        margin-bottom: 0;
-    }
-    .member_list_card_header {
-        background-color: white;
-        border: 0;
-        margin: 0;
-        padding: 0;
-    }
 </style>

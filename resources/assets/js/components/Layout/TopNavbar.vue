@@ -5,6 +5,7 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a
+                                style="cursor:pointer"
                                 class="nav-link"
                                 @click.stop ="drawerRight = !drawerRight"
                                 v-if        ="!isLogined"
@@ -14,6 +15,7 @@
                     </li>
                     <li class="nav-item">
                         <a
+                                style="cursor:pointer"
                                 class="nav-link"
                                 v-if="isLogined"
                                 @click="logout('test')"
@@ -23,6 +25,7 @@
                     </li>
                     <li class="nav-item">
                         <a
+                                style="cursor:pointer"
                                 class="nav-link"
                                 v-if="!isLogined"
                                 @click="signUp()"
@@ -58,8 +61,6 @@
 </template>
 <script>
     import Login from '../loginAndRegister/login'
-    import register from '../loginAndRegister/register'
-
     export default {
         data: () => ({
             userNickname: sessionStorage.getItem('nickname'),
@@ -98,8 +99,7 @@
             this.mypageRoute.imagePath = sessionStorage.getItem('image_path');
         },
         components: {
-            Login,
-            register
+            Login
         },
         methods: {
             signUp()    {

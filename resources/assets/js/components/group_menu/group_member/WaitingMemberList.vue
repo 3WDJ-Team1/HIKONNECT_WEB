@@ -1,26 +1,17 @@
 <template>
-    <div>
-        <v-container>
-            <v-layout
-                    row
-                    wrap>
-                <v-flex
-                        d-flex
-                        xs12
-                        sm12
-                        md12>
+    <v-app>
+        <v-container style="padding: 0px;">
                     <v-card
-                            style="padding-bottom: 1%; padding-top: 1%; border: 0;"
+                            style="padding-bottom: 1%; border-top: 0px;
+    border-left: 0px; padding-top: 1%; border-right: 0px; border-radius: 0px; padding-left: 40px; margin: 0px;"
                             v-for="user in waitingMembers"
-                            :key="user.user"
+                            :key="user.nickname"
                             flat>
                         <v-layout
                                 row
                                 wrap>
                             <v-flex
                                     d-flex
-                                    xs3
-                                    sm3
                                     md2
                                     align-center
                                     align-content-center
@@ -28,14 +19,12 @@
                                 <v-avatar
                                         slot="activator"
                                         size="42">
-                                    <img :src="user.image_path" alt="avatar"/>
+                                    <img :src="'http://172.26.2.88:3000/images/UserProfile/' + user.userid + '.jpg'" alt="avatar"/>
                                 </v-avatar>
                             </v-flex>
                             <v-flex
                                     d-flex
-                                    xs9
-                                    sm6
-                                    md8
+                                    md7
                                     align-center
                                     align-content-center
                                     justify-center
@@ -63,9 +52,7 @@
                                         </v-btn>
                                     </v-flex>
                                     <v-flex
-                                            xs6
-                                            sm6
-                                            md6>
+                                            md4>
                                         <v-btn
                                                 color="red darken-3"
                                                 dark
@@ -79,10 +66,8 @@
                             </v-flex>
                         </v-layout>
                     </v-card>
-                </v-flex>
-            </v-layout>
         </v-container>
-    </div>
+    </v-app>
 </template>
 <script>
     export default {
@@ -92,12 +77,6 @@
             isPushed        : false,
         }),
         methods: {
-            getWaitingMembers() {
-                axios.get("http://172.26.2.88:8000/api/list_member/" + this.groupId + "/0")
-                    .then( response => {
-                        this.waitingMembers = this.waitingMembers.concat(response.data);
-                    });
-            },
             applyUser(userUuid) {
                 console.log(userUuid);
                 axios.put(this.$HttpAddr + "/member/true", {
@@ -105,8 +84,20 @@
                     uuid: this.groupId
                 }).then (response => {
                     if(response) {
-                        alert('참여 신청을 수락 하였습니다.');
-                        location.reload();
+                        this.waitingMembers = [];
+                        const notification = {
+                            template: "<span><b>참여 신청을 수락 하였습니다.</b></span>"
+                        };
+                        this.$notifications.notify(
+                            {
+                                component: notification,
+                                icon: 'nc-icon nc-app',
+                                horizontalAlign: 'center',
+                                verticalAlign: 'top',
+                                type: 'success'
+                            });
+                        this.waitingMembers = [];
+                        this.$EventBus.$emit('memberChechSign')
                     }
                 });
             },
@@ -117,14 +108,28 @@
                 }).then (response => {
                     console.log(response.data);
                     if (response) {
-                        alert('참여 신청을 거절 하였습니다.');
+                        const notification = {
+                            template: "<span><b>참여 신청을 거절 하였습니다.</b></span>"
+                        };
+                        this.$notifications.notify(
+                            {
+                                component: notification,
+                                icon: 'nc-icon nc-app',
+                                horizontalAlign: 'center',
+                                verticalAlign: 'top',
+                                type: 'warning'
+                            });
+                        this.waitingMembers = [];
+                        this.$EventBus.$emit('memberCheckSign')
                     }
                 });
             }
         },
         created() {
             this.groupId = this.$route.params.groupid;
-            this.getWaitingMembers();
+            this.$EventBus.$on('sendNotEnterMember', (noEnter)=>{
+                this.waitingMembers = this.waitingMembers.concat(noEnter);
+            });
             this.$EventBus.$on('reloadMember', () => {
                 this.created();
             });

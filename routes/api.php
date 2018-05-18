@@ -58,7 +58,7 @@ Route::group(
         )->name('isOwner');
         Route::post(
             'mygroup',
-            'GroupMemberController@my_group'
+            'GroupMemberController@myGroup'
         )->name('myGroup');
 
         // Entry info Routings
@@ -137,7 +137,7 @@ Route::group(
             'UserController@getImage'
         )->name('getImage');
         Route::get(
-            '/mypage/{id}', 
+            '/myRecord/{id}',
             'UserController@showUserData'
         )->name('UserData');
         Route::post(

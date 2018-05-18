@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container" style="padding: 0px;">
         <autocomplete
                 ref             ="autocomplete"
                 placeholder     ="Search Distribution Groups(name)"
@@ -11,14 +11,14 @@
                 style           ="width: 200px">
         </autocomplete>
         <sweet-modal ref="map" blocking>
-            <router-view name="map"></router-view>
+            <eventMap></eventMap>
         </sweet-modal>
         <b-btn @click="initMap">지도보기</b-btn>
     </div>
 </template>
 <script>
-    // import {EventBus}   from './event-bus.js';
     import Autocomplete from 'vuejs-auto-complete'
+    import eventMap from './event_map'
     export default {
         data() {
             return {
@@ -27,17 +27,18 @@
             }
         },
         components: {
-            Autocomplete
+            Autocomplete,
+            eventMap
         },
         methods: {
             ///////////////////////////////////////// 지도 api
             initMap() {
                 this.$refs.map.open();
-                this.$EventBus.$emit('group_map', this.mountain_num);
+                this.$EventBus.$emit('event_make_map', this.mountain_num);
             },
             // pull autocomplete data
             distributionGroupsEndpoint(n) {
-                return Laravel.host + '/api/testing/' + n;
+                return this.$HttpAddr + '/testing/' + n;
             },
             hideModal() {
                 this.open = false;

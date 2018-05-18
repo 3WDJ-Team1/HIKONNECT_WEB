@@ -2,7 +2,7 @@
     <div class="wrapper">
         <side-bar>
             <mobile-menu slot="content"></mobile-menu>
-            <div class="box" align="center" v-if="login">
+            <div class="box" align="center" style="margin-bottom: 17px;" v-if="login">
                 <div class="item">
                     <v-avatar
                             class="grey lighten-4"

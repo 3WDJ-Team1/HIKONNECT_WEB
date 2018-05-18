@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <v-app>
         <v-btn
                 dark
                 midiuem
@@ -15,28 +15,16 @@
         <sweet-modal ref="write" blocking>
             <router-view name="make"></router-view>
         </sweet-modal>
-    </div>
+    </v-app>
 </template>
 
 <script>
     export default {
-        data()  {
-            return  {
-                // 로그인 되 있을 경우 true 아니면 false
-                isLogined: false
-            }
-        },
-        // 로그인 되어 있어야 그룹만들기 버튼 생성
-        created()   {
-            this.$EventBus.$on('isLogined', () => {
-                this.isLogined = true;
-            });
-        },
         methods: {
             // 로그인 후 사용가능하도록 제한하기
-            groupMakeAlert(verticalAlign, horizontalAlign)    {
+            groupMakeAlert(verticalAlign, horizontalAlign) {
                 // 로그인 안 되어 있을 경우
-                if(this.isLogined == false)   {
+                if (sessionStorage.getItem('userid') == undefined) {
                     // alert창 띄워주기
                     const notification = {
                         template: "<span><b>로그인 후 사용가능합니다.</b></span>"
