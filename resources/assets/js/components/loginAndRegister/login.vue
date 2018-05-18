@@ -55,7 +55,6 @@
                     idv: this.userId,
                     pwv: this.userPw
                 }).then((response) => {
-                    console.log(response.data);
                     if (response.data == 'false') {
                         this.$EventBus.$emit('errorModalOpen', '아이디가 바르지 않습니다');
                     }
@@ -71,6 +70,7 @@
                         var phonesc     = 0;
                         var gendersc    = 0;
                         var agesc       = 0;
+                        var createdY    = datavalue[9].substring(0, 10);
                         var agegroup    = datavalue[3];
                         var age         = '';
                         var gendergroup = datavalue[2];
@@ -128,6 +128,7 @@
                         else {
                             agesc = 'false';
                         }
+                        // 수정한 값으로 session값 모두 바꾸기
                         sessionStorage.setItem('userid',userid);
                         sessionStorage.setItem('phone',datavalue[6]);
                         sessionStorage.setItem('password',datavalue[7]);
@@ -138,9 +139,7 @@
                         sessionStorage.setItem('scv',scv);
                         sessionStorage.setItem('gender',gender);
                         sessionStorage.setItem('age',age);
-                        sessionStorage.setItem('image_path',datavalue[5]);
-                        // this.$router.push({ name: 'main'});
-                        this.$EventBus.$emit('isLogined', 'true');
+                        sessionStorage.setItem('createdY',createdY);
                         this.$EventBus.$emit('setRightDrawerFlipped', 'true');
                     }
                 });

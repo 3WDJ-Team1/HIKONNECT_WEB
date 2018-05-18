@@ -11,7 +11,7 @@
                         <li><router-link :to="{ name : '#'}">그룹방 조회 & 생성</router-link></li>
                         <li><router-link :to="{ name : '#'}">나의 그룹</router-link></li>
                         <li><router-link :to="{ name : '#'}">알림</router-link></li>
-                        <li><router-link :to="{ name : 'mypage'}">마이페이지</router-link></li>
+                        <li><router-link :to="{ name : 'myRecord'}">마이페이지</router-link></li>
                     </ul>
                 </div>
             </div>

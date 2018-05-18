@@ -1,35 +1,19 @@
 <template>
-    <div class="container">
-        <div class="box">
-            <div class="item">
-                <v-select
-                        :items="items"
-                        label="그룹명"
-                        item-value="text"
-                        single-line
-                        v-model="sel"
-                        @input="search()"
-                ></v-select>
-            </div>
-            <div class="item">
-                <v-text-field
-                        v-if="NameVis"
-                        label="그룹명을 입력하시오."
-                        v-model="group_name"
-                        required>
-                </v-text-field>
-                <v-text-field
-                        v-if="WriterVis"
-                        label="작성자를 입력하시오."
-                        v-model="writer"
-                        required
-                ></v-text-field>
-            </div>
-            <div class="item">
-                <div>
-                    <v-btn depressed @click="inputSearch" color="primary">SEARCH</v-btn>
-                </div>
-            </div>
+    <div class="row" id="serchContainer">
+        <div class="col-md-2">
+            <b-form-select v-model="sel" class="mb-3">
+                <option value="groupname">그룹명</option>
+                <option value="writer">작성자</option>
+            </b-form-select>
+        </div>
+        <div class="col-md-8">
+            <fg-input type="text"
+                      placeholder="검색어를 입력하시오."
+                      v-model="inputForm">
+            </fg-input>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-default btn-block" @click="inputSearch">SEARCH</button>
         </div>
     </div>
 </template>
@@ -38,34 +22,13 @@
     export default {
         data() {
             return {
-                items: [
-                    {text: '그룹명'},
-                    {text: '작성자'}
-                ],
-                sel: '',
-                NameVis: true,
-                WriterVis: false,
-                group_name: "",
-                writer: "",
-                httpAddr: Laravel.host,
+                sel: 'groupname',
+                inputForm: ""
             }
         },
         methods: {
-            inputSearch()   {
-                if (this.sel == '그룹명') {
-                    this.send_name();
-                } else if (this.sel == '작성자') {
-                    this.send_writer();
-                }
-            },
-            search() {
-                if (this.sel == '그룹명') {
-                    this.NameVis = true;
-                    this.WriterVis = false;
-                } else if (this.sel == '작성자') {
-                    this.NameVis = false;
-                    this.WriterVis = true;
-                }
+            inputSearch() {
+                this.$EventBus.$emit('groupListSearch', this.sel, this.inputForm);
             },
             make_group_button() {
                 if (sessionStorage.userid == undefined) {
@@ -73,56 +36,33 @@
                 } else {
                     this.$router.push('make');
                 }
-            },
-            send_name() {
-                this.$EventBus.$emit('input_name','groupname', this.group_name);
-            },
-            send_writer() {
-                this.$EventBus.$emit('input_writer','writer', this.writer);
-            },
+            }
         }
     }
 </script>
 <style>
-    .box {
-        display: flex;
-    }
-    .item {
-        flex-grow: 1;
+    select.form-control:not([size]):not([multiple]) {
+        height: 40px;
     }
 
-    .item:nth-child(1) {
-        flex-basis: 80px;
+    #serchContainer {
+    margin-right: 20px;
+    margin-left: 20px;
+    }
+    .col-md-2 {
+        padding-right: 0px;
     }
 
-    .item:nth-child(2) {
-        flex-grow: 4;
-    }
-    .item:nth-child(3) {
-        flex-grow: 0;
-        margin-left: 10px;
-    }
-    .input-group {
-        padding: 0px;
+    .col-md-8 {
+        padding-right: 0px;
     }
 
-    .input-group--text-field label {
-        top: 0px;
+    .btn:not(:disabled):not(.disabled) {
+        margin-top: 2px;
     }
 
-    #calBox {
-        font-size: 16px;
-        padding-bottom: 3px;
-        margin-top: 3px;
-        font-weight: bold;
-        border-bottom: solid 1px darkgrey;
-    }
-    .btn__content {
-        padding-bottom: 13px;
-    }
-    .application .theme--light.btn:not(.btn--icon):not(.btn--flat), .theme--light .btn:not(.btn--icon):not(.btn--flat)
-    {
-        margin: 0px;
+    .col-md-2 {
+        padding-left: 7px;
     }
 </style>
 

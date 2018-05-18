@@ -1,9 +1,15 @@
-
-// Fonts
+//Fonts
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 
 // Variables
 @import "variables";
 
+// icon
+@import url("http://localhost:8000/css/nucleo-icons.css");
+
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
+@import '~bootstrap/dist/css/bootstrap.css';
+@import '~bootstrap-vue/dist/bootstrap-vue.css';
+
+

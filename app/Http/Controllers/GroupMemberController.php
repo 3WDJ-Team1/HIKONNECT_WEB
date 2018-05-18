@@ -146,7 +146,7 @@ class GroupMemberController extends Controller
             return 'false';
     }
     /**
-     * @function    my_group
+     * @function    myGroup
      * @brief       My Group
      *
      * @param \Illuminate\Http\Request $request
