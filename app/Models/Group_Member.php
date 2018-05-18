@@ -19,12 +19,15 @@ class Group_Member extends Model
     protected $table = 'group_member';
 
     public function get_member_list($uuid, $whether) {
-        return Group_Member::select('user.userid','user.nickname','user.phone','user.age_group',
-            'user.gender','user.scope','user.profile','user.grade','enter_date')
-            ->where([
-            ['hiking_group', $uuid],
-            ['enter_whether', $whether]
-            ])->join('user','user.userid','=','group_member.userid')->get();
+        if (Group_Member::where('hiking_group',$uuid)->exists() == true) {
+            return Group_Member::select('user.userid','user.nickname','user.phone','user.age_group',
+                'user.gender','user.scope','user.grade','enter_date')
+                ->where([
+                ['hiking_group', $uuid],
+                ['enter_whether', $whether]
+                ])->join('user','user.userid','=','group_member.userid')->get();
+        } else
+            return 'error';
     }
 
     public function memberReg(Array $member_info) {
@@ -46,18 +49,42 @@ class Group_Member extends Model
     }
 
     public function delete_member($id,$uuid) {
-        Group_Member::where([
+        if (Group_Member::where([
             ['userid',$id],
             ['hiking_group',$uuid]
-        ])->delete();
+        ])->exists() == true) {
+            Group_Member::where([
+                ['userid',$id],
+                ['hiking_group',$uuid]
+            ])->delete();
+            return 'true';
+        }
+        else
+            return 'false';
+
     }
 
     public function my_group($userid) {
-        return
-            Group_Member::select('hiking_group.uuid','hiking_group.title','user.nickname','hiking_group.content',
-                'hiking_group.min_member','hiking_group.max_member')
-                ->where('group_member.userid',$userid)
-                ->join('hiking_group','hiking_group.uuid','=','group_member.hiking_group')
-                ->join('user','user.userid','=','group_member.userid')->get();
+        if (Group_Member::where('userid',$userid)->exists() == true){
+            return
+                Group_Member::select('hiking_group.uuid','hiking_group.title','user.nickname','hiking_group.content',
+                    'hiking_group.min_member','hiking_group.max_member')
+                    ->where('group_member.userid',$userid)
+                    ->join('hiking_group','hiking_group.uuid','=','group_member.hiking_group')
+                    ->join('user','user.userid','=','group_member.userid')->get();
+        } else
+            return 'false';
+    }
+
+    public function waitGroup($userid) {
+        if (Group_Member::where([
+                ['userid',$userid],
+                ['enter_whether',0]
+            ])->exists() == true)
+            return Group_Member::where([
+                ['userid',$userid],
+                ['enter_whether',0]
+            ])->get();
+        else return 'false';
     }
 }

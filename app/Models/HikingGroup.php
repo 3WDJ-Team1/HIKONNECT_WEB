@@ -24,6 +24,8 @@ use Illuminate\Support\Carbon;
  * @link     https://github.com/3WDJ-Team1/HIKONNECT_WEB
  */
 use Illuminate\Database\Eloquent\Model;
+use Mockery\Exception;
+
 /**
  * @var Table     $table              Tables names used in this model
  */
@@ -96,12 +98,15 @@ class HikingGroup extends Model
         HikingGroup::insert($groupinfo);
     }
     public function updateGroup($uuid,$title,$content,$min,$max) {
-        HikingGroup::where('uuid',$uuid)
-            ->update([
-                'title'         =>  $title,
-                'content'       =>  $content,
-                'min_member'    =>  $min,
-                'max_member'    =>  $max
-            ]);
+        if (HikingGroup::where('uuid',$uuid)->exists() == true) {
+            HikingGroup::where('uuid', $uuid)
+                ->update([
+                    'title' => $title,
+                    'content' => $content,
+                    'min_member' => $min,
+                    'max_member' => $max
+                ]);
+            return 'true';
+        } else return 'false';
     }
 }

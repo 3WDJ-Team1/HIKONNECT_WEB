@@ -193,9 +193,6 @@ Route::group(
         Route::post('/myschedule',
             'ScheduleController@my_schedule'
         )->name('my_schedule');
-        Route::post('/makeScheduleList',
-            'ScheduleController@makeScheduleList'
-        )->name('makeScheduleList');
         Route::get('/schedule_member/{uuid}/{schedule_no}',
             'ScheduleController@schedule_member_list')->name('schedule_member_list');
         Route::get('/wait/{userid}',
@@ -388,6 +385,16 @@ Route::group(
             '/getScheduleMembers',
             'testcontroller@getScheduleMembers'
         )->name('getScheduleMembers');
+
+        Route::get(
+            '/getHikingMembers/{uuid}/{schedule_no}',
+            'ScheduleController@schedule_hiking_member_list'
+        )->name('getScheduleHikingMembers');
+
+        Route::get(
+            '/checkScheduleMember/{userid}/{no}',
+            'ScheduleController@check_schedule'
+        )->name('Check Schedule Member Enter State');
 
         Route::post(
             '/updateHikingState',
