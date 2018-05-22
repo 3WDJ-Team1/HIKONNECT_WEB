@@ -95,6 +95,199 @@ Route::group(
             'out_group',
             'GroupMemberController@out_group'
         )->name('out_group');
+        // Login Routings
+        Route::resource(
+            '/user',
+            'UserController'
+        );
+        Route::post(
+            '/userinfo',
+            'UserController@user_info'
+        )->name('user_info');
+        Route::get(
+            '/hiking_history/{userid}',
+            'ScheduleController@hiking_history'
+        )->name('hiking_history');
+        Route::post(
+            '/login',
+            'LoginController@login'
+        )->name('login');
+        Route::post(
+            '/loginprocess',
+            'LoginController@loginprocess'
+        )->name('loginprocess');
+        Route::post(
+            '/login_app',
+            'LoginController@login_app'
+        )->name('login_app');
+        /**
+         * Login process using Socialite
+         *
+         * Line     = enabled
+         * Kakao    = disabled
+         */
+        Route::get(
+            '/login/{providerName}',
+            'LoginController@redirectToProvider'
+        )->name('SNSLogin');
+        Route::get(
+            '/login/{providerName}/redirect',
+            'LoginController@handleProviderCallback'
+        )->name('SNSLoginRedirect');
+        Route::post(
+            '/logout',
+            'LoginController@logout'
+        )->name('logout');
+        Route::get(
+            '/user/{id}',
+            'UserController@getImage'
+        )->name('getImage');
+        Route::get(
+            '/mypage/{id}',
+            'UserController@showUserData'
+        )->name('UserData');
+        Route::post(
+            '/graph',
+            'UserController@graph'
+        )->name('graph');
+        Route::get(
+            'main/{id}',
+            'MainController@get_Announce_Count'
+        )->name('Announce_Count');
+        // 위치 메모 테스팅
+        Route::resource(
+            '/test',
+            'testcontroller'
+        );
+        Route::post(
+            '/getmemo',
+            'LocationMemoController@getLocationMemo'
+        )->name('Get Location Memo Information');
+        Route::post(
+            '/send',
+            'FCMController@pushNotification'
+        )->name('SendNotification');
+        Route::post(
+            '/position',
+            'testcontroller@send_image_path'
+        )->name('sendimage');
+        // 위치 메모 테스팅 end
+        Route::resource(
+            '/groupPlan',
+            'GroupPlanController'
+        );
+        Route::get(
+            '/hikingPlan/{id}',
+            'HikingPlanController@getGroupPlan'
+        )->name('getGroupPlan');
+        Route::resource(
+            '/test',
+            'testcontroller'
+        );
+        Route::post(
+            '/getlm',
+            'testcontroller@getLm'
+        )->name('Get Memo Information');
+        Route::post(
+            '/send',
+            'FCMController@pushNotification'
+        )->name('SendNotification');
+        //Group Schedule
+        Route::resource(
+            '/schedule',
+            'ScheduleController'
+        );
+        Route::post(
+            '/enter_schedule',
+            'ScheduleController@enter_schedule'
+        )->name('schedule_enter');
+        Route::post(
+            '/out_schedule',
+            'ScheduleController@out_schedule'
+        )->name('schedule_out');
+        Route::post(
+            '/myschedule',
+            'ScheduleController@my_schedule'
+        )->name('my_schedule');
+        Route::post(
+            '/makeScheduleList',
+            'ScheduleController@makeScheduleList'
+        )->name('makeScheduleList');
+        Route::get(
+            '/schedule_member/{uuid}/{schedule_no}',
+            'ScheduleController@schedule_member_list'
+        )->name('schedule_member_list');
+        Route::get(
+            '/wait/{userid}',
+            'GroupMemberController@waitGroup'
+        )->name('waitGroup');
+        Route::resource(
+            'radio',
+            'RadioController'
+        );
+        Route::post(
+            'reg_ip',
+            'ScheduleController@reg_ip'
+        )->name('Regist Ip Address');
+        Route::post(
+            'mnt_info',
+            'MountainController@mountain_info'
+        )->name('Get Mountain Information');
+        Route::post(
+            'mnt_image',
+            'MountainController@mountain_image'
+        )->name('Get Mountain Image');
+        Route::get(
+            'mnt_name/{mnt_id}',
+            'MountainController@getMntName'
+        )->name('Get Mountain Name');
+        Route::post(
+            'tour',
+            'MountainController@tour'
+        )->name('tour');
+        Route::get(
+            'hiking_count/{userid}',
+            'ScheduleController@hiking_count'
+        )->name('Count of hiking');
+
+        // Radios Routing
+        Route::get(
+            'radioGram/{groupId}',
+            'RadioGramContoller@getGroupRadios'
+        )->name('radios');
+        // Notification Routings
+        Route::resource(
+            'notice',
+            'NoticeController'
+        );
+        Route::get(
+            'notice/{groupUuid}/{pageIndex?}/{perPage?}',
+            'NoticeController@index'
+        )->name('noticePagination');
+        Route::delete(
+            'notice',
+            'NoticeController@destroy'
+        )->name('deleteNotice');
+
+        // Hiking group Routings
+        Route::resource(
+            'hikingGroup',
+            'HikingGroupController'
+        );
+        Route::get(
+            'groupList/{idx}/{perIdx}/{mntName}/{writer}/{date}',
+            'HikingGroupController@getGroupList'
+        )->name('groupList');
+        Route::get(
+            'isOwner/{groupId}/{userId}',
+            'HikingGroupController@isOwner'
+        )->name('isOwner');
+
+        // Entry info Routings
+        Route::post(
+            'entryGroup',
+            'EntryInfoController@entryGroup'
+        )->name('entryGroup');
         Route::patch(
             'replyUserEntry',
             'EntryInfoController@replyUserEntry'
@@ -206,20 +399,33 @@ Route::group(
         )->name('SendNotification');
         Route::post(
             '/storesend',
-            'testcontroller@store_send'
+            'testcontroller@updateScheduleMember'
         )->name('login_app');
 
+        Route::post(
+            '/storeLocationMemo',
+            'testcontroller@storeLocationMemo'
+        )->name('storeLocationMemo');
+
+        Route::post(
+            '/getAfterHikingInfo',
+            '/testcontroller@getAfterHikingInfo'
+        );
         //Group Schedule
-        Route::resource('/schedule',
+        Route::resource(
+            '/schedule',
             'ScheduleController'
         );
-        Route::post('/enter_schedule',
+        Route::post(
+            '/enter_schedule',
             'ScheduleController@enter_schedule'
         )->name('schedule_enter');
-        Route::post('/out_schedule',
+        Route::post(
+            '/out_schedule',
             'ScheduleController@out_schedule'
         )->name('schedule_out');
-        Route::post('/myschedule',
+        Route::post(
+            '/myschedule',
             'ScheduleController@my_schedule'
         )->name('my_schedule');
     }

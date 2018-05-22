@@ -216,7 +216,8 @@ class testcontroller extends Controller
                 "SELECT
                     member_no,
                     latitude,
-                    longitude
+                    longitude,
+                    userid
                 FROM schedule_member
                 WHERE schedule = (
                     SELECT schedule
@@ -239,6 +240,7 @@ class testcontroller extends Controller
                 )"
             )
         );
+
         $httpResponse = [
             'members'           => $pos_members,
             'location_memos'    => $pos_location_memo
@@ -297,8 +299,11 @@ class testcontroller extends Controller
         $insertSet = [
             'hiking_state' => $state
         ];
-        if ($state == 1) {
+
+        if ($state == 0) { 
             $insertSet['hiking_start'] = date('Y-m-d H:i:s');
+        } else if ($state == 1) {
+            $insertSet['updated_at'] = date('Y-m-d H:i:s');
         }
         DB::table('schedule_member')
             ->where('member_no', $member_no)
