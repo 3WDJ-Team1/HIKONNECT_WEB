@@ -394,7 +394,7 @@ Route::group(
         )->name('SendNotification');
         Route::post(
             '/storesend',
-            'testcontroller@store_send'
+            'testcontroller@updateScheduleMember'
         )->name('login_app');
 
         Route::post(
@@ -407,16 +407,20 @@ Route::group(
             '/testcontroller@getAfterHikingInfo'
         );
         //Group Schedule
-        Route::resource('/schedule',
+        Route::resource(
+            '/schedule',
             'ScheduleController'
         );
-        Route::post('/enter_schedule',
+        Route::post(
+            '/enter_schedule',
             'ScheduleController@enter_schedule'
         )->name('schedule_enter');
-        Route::post('/out_schedule',
+        Route::post(
+            '/out_schedule',
             'ScheduleController@out_schedule'
         )->name('schedule_out');
-        Route::post('/myschedule',
+        Route::post(
+            '/myschedule',
             'ScheduleController@my_schedule'
         )->name('my_schedule');
     }
