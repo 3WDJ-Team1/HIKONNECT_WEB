@@ -94,7 +94,7 @@ class ScheduleController extends Controller
             'no','title','content','leader','start_date','hiking_schedule.mnt_id','route','mountain.mnt_name'
         )->where([
             ['hiking_group',$uuid],
-            ['start_date','<',Carbon::now()->format('Y-m-d H:i:s')]
+            ['start_date','>',Carbon::now()->format('Y-m-d H:i:s')]
         ])->join(
             'mountain','hiking_schedule.mnt_id','=','mountain.mnt_id'
         )->orderBy('created_at','DESC')->get());
