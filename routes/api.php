@@ -22,6 +22,15 @@ Route::middleware(
 Route::group(
     [], 
     function () {
+        //search Mountain Name
+        Route::get(
+            'searchMount/{key?}',
+            function ($mnt_name) {
+                return DB::table('mountain')
+                    ->where('mnt_name', 'LIKE', "%" . $mnt_name . "%")
+                    ->get();
+            }
+        );
         // Notification Routings
         Route::resource(
             'notice', 
@@ -380,10 +389,6 @@ Route::group(
             '/hikingPlan/{id}',
             'HikingPlanController@getGroupPlan'
         )->name('getGroupPlan');
-        Route::resource(
-            '/test',
-            'testcontroller'
-        );
         Route::post(
             '/getlm',
             'testcontroller@get_Memo_Info'

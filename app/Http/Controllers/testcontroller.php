@@ -284,7 +284,7 @@ class testcontroller extends Controller
     /**
      * Update user's hiking status.
      *
-     * @param Request $request 
+     * @param Request $request
      *
      * @var Integer $member_no [POST] Reference Key which participating user.
      * @var Integer $state     [POST] Status flag.
@@ -300,9 +300,9 @@ class testcontroller extends Controller
             'hiking_state' => $state
         ];
 
-        if ($state == 1) { 
+        if ($state == 0) { 
             $insertSet['hiking_start'] = date('Y-m-d H:i:s');
-        } else if ($state == 2) {
+        } else if ($state == 1) {
             $insertSet['updated_at'] = date('Y-m-d H:i:s');
         }
         DB::table('schedule_member')
@@ -404,35 +404,6 @@ class testcontroller extends Controller
         );
         return $queryRes;
     }
-
-    public function getAfterHikingInfo(Request $request)
-    {
-        $member_no = $request->get('member_no');
-
-        $queryRes = DB::select(
-            DB::raw(
-                "SELECT 
-                TIMEDIFF(updated_at, hiking_start),
-                (
-                    SELECT count(*) + 1
-                    FROM schedule_member
-                    WHERE updated_at > sm.updated_at
-                    AND schedule = sm.schedule
-                ) as rank,
-                (
-                    SELECT mnt_name
-                    FROM mountain as m
-                    JOIN hiking_schedule as hs
-                    ON m.mnt_id = hs.mnt_id
-                    WHERE hs.no = sm.schedule
-                ) as mnt_name
-                FROM schedule_member as sm
-                WHERE member_no = 1
-                ;"
-            )
-        );
-    }
-    
     public function getMemberNo(Request $request)
     {
         $user_id = $request->get('user_id');
