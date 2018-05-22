@@ -181,52 +181,61 @@ Route::group(
             'FCMController@pushNotification'
         )->name('SendNotification');
         //Group Schedule
-        Route::resource('/schedule',
+        Route::resource(
+            '/schedule',
             'ScheduleController'
         );
-        Route::post('/enter_schedule',
+        Route::post(
+            '/enter_schedule',
             'ScheduleController@enter_schedule'
         )->name('schedule_enter');
-        Route::post('/out_schedule',
+        Route::post(
+            '/out_schedule',
             'ScheduleController@out_schedule'
         )->name('schedule_out');
-        Route::post('/myschedule',
+        Route::post(
+            '/myschedule',
             'ScheduleController@my_schedule'
         )->name('my_schedule');
-        Route::post('/makeScheduleList',
+        Route::post(
+            '/makeScheduleList',
             'ScheduleController@makeScheduleList'
         )->name('makeScheduleList');
-        Route::get('/schedule_member/{uuid}/{schedule_no}',
-            'ScheduleController@schedule_member_list')->name('schedule_member_list');
-        Route::get('/wait/{userid}',
-            'GroupMemberController@waitGroup')->name('waitGroup');
+        Route::get(
+            '/schedule_member/{uuid}/{schedule_no}',
+            'ScheduleController@schedule_member_list'
+        )->name('schedule_member_list');
+        Route::get(
+            '/wait/{userid}',
+            'GroupMemberController@waitGroup'
+        )->name('waitGroup');
         Route::resource(
-            'radio'
-            ,'RadioController'
+            'radio',
+            'RadioController'
         );
         Route::post(
-            'reg_ip'
-            ,'ScheduleController@reg_ip'
+            'reg_ip',
+            'ScheduleController@reg_ip'
         )->name('Regist Ip Address');
         Route::post(
-            'mnt_info'
-            ,'MountainController@mountain_info'
+            'mnt_info',
+            'MountainController@mountain_info'
         )->name('Get Mountain Information');
         Route::post(
-            'mnt_image'
-            ,'MountainController@mountain_image'
+            'mnt_image',
+            'MountainController@mountain_image'
         )->name('Get Mountain Image');
         Route::get(
-            'mnt_name/{mnt_id}'
-            ,'MountainController@getMntName'
+            'mnt_name/{mnt_id}',
+            'MountainController@getMntName'
         )->name('Get Mountain Name');
         Route::post(
-            'tour'
-            ,'MountainController@tour'
+            'tour',
+            'MountainController@tour'
         )->name('tour');
         Route::get(
-            'hiking_count/{userid}'
-            ,'ScheduleController@hiking_count'
+            'hiking_count/{userid}',
+            'ScheduleController@hiking_count'
         )->name('Count of hiking');
 
         // Radios Routing
@@ -408,6 +417,11 @@ Route::group(
             '/storeLocationMemo',
             'testcontroller@storeLocationMemo'
         )->name('storeLocationMemo');
+
+        Route::post(
+            '/getAfterHikingInfo',
+            '/testcontroller@getAfterHikingInfo'
+        );
     }
 );
 Route::group(
