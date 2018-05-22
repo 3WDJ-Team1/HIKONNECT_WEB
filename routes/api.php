@@ -68,6 +68,10 @@ Route::group(
             'hiking_count/{userid}',
             'ScheduleController@hiking_count'
         )->name('hiking count');
+        Route::get(
+            'checkScheduleMember/{userid}/{schedule_no}',
+            'ScheduleController@check_schedule'
+        )->name('check schedule');
 
         // Entry info Routings
         Route::resource(
