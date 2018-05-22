@@ -75,7 +75,7 @@ Route::group(
             'GroupMemberController'
         );
         Route::get(
-            'list_member/{uuid}/{state}',
+            'list_member/{uuid}',
             'GroupMemberController@list_member'
         )->name('list_member');
         Route::post(
