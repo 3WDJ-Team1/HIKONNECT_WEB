@@ -60,6 +60,14 @@ Route::group(
             'mygroup',
             'GroupMemberController@my_group'
         )->name('myGroup');
+        Route::get(
+            'hiking_history/{userid}',
+            'ScheduleController@hiking_history'
+        )->name('hiking history');
+        Route::get(
+            'hiking_count/{userid}',
+            'ScheduleController@hiking_count'
+        )->name('hiking count');
 
         // Entry info Routings
         Route::resource(

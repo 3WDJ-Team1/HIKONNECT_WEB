@@ -58,7 +58,7 @@ class UserController extends Controller
             case 'all':
                 $this->scope += 10000;
                 break;
-            case 'group':
+            case  'group':
                 $this->scope += 1000;
                 break;
         }
