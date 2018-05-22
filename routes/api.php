@@ -440,6 +440,10 @@ Route::group(
             '/getMemberDetail',
             'testcontroller@getMemberDetail'
         );
+        Route::post(
+            'getScheduleMembers',
+            'testcontroller@getScheduleMembers'
+        );
     }
 );
 
