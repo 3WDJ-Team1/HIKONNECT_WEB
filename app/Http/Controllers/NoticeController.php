@@ -68,7 +68,7 @@ class NoticeController extends Controller
             'content'       =>  $request->get('content'),
             'writer'        =>  $request->get('writer'),
             'hiking_group'  => $request->get('uuid'),
-            'picture'       => '',
+            'picture'       => $request->get('picture'),
             'created_at'    => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at'    => Carbon::now()->format('Y-m-d H:i:s')
         ]);
@@ -85,12 +85,7 @@ class NoticeController extends Controller
      */
     public function show($uuid,$page)
     {
-        $notifications = $this->announce_model
-            ->getAnnounce(
-                $uuid,
-                $page
-            );
-        return response()->json($notifications);
+        //
     }
     /**
      * Show the form for editing the specified resource.

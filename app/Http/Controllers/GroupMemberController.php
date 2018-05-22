@@ -4,6 +4,8 @@ use App\Models\Group_Member;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Mockery\Exception;
+
 /**
  * Controller class for GroupMember
  *
@@ -81,6 +83,7 @@ class GroupMemberController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     *          userid, uuid
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -94,6 +97,8 @@ class GroupMemberController extends Controller
             $this->member_model->delete_member($request->get('userid'),$request->get('uuid'));
             return response()->json('false');
         }
+        else
+            return 'error';
     }
     /**
      * Remove the specified resource from storage.
@@ -117,8 +122,8 @@ class GroupMemberController extends Controller
      *
      */
     public function out_group(Request $request) {
-        $this->member_model->delete_member($request->get('userid'),$request->get('uuid'));
-        return response()->json('true');
+        $result = $this->member_model->delete_member($request->get('userid'),$request->get('uuid'));
+        return response()->json($result);
     }
     /**
      * @function    list_member
@@ -129,16 +134,19 @@ class GroupMemberController extends Controller
      * @return List of group member
      */
     public function list_member($uuid) {
-        $not_enter = $this->member_model->get_member_list($uuid,0);
-        $enter = $this->member_model->get_member_list($uuid,1);
-        $member_list = array([
-            'not_enter' => $not_enter,
-            'enter'     => $enter
-        ]);
-        return $member_list;
+        if ($this->member_model->get_member_list($uuid,0) != 'error') {
+            $not_enter = $this->member_model->get_member_list($uuid,0);
+            $enter = $this->member_model->get_member_list($uuid,1);
+            $member_list = array([
+                'not_enter' => $not_enter,
+                'enter'     => $enter
+            ]);
+            return $member_list;
+        } else
+            return 'false';
     }
     /**
-     * @function    my_group
+     * @function    myGroup
      * @brief       My Group
      *
      * @param \Illuminate\Http\Request $request
@@ -148,7 +156,10 @@ class GroupMemberController extends Controller
      */
     public function my_group (Request $request) {
         $result = $this->member_model->my_group($request->get('userid'));
-        return response()->json($result);
+        if ($result != 'false')
+            return response()->json($result);
+        else
+            return response()->json('false');
     }
     /**
      * @function    waitGroup
@@ -159,9 +170,10 @@ class GroupMemberController extends Controller
      * @return List of groups not yet accepted
      */
     public function waitGroup ($userid) {
-        return response()->json(Group_Member::where([
-            ['userid',$userid],
-            ['enter_whether',0]
-        ])->get());
+        $result = $this->member_model->waitGroup($userid);
+        if ($result != false)
+            return response()->json($result);
+        else
+            return response()->json('false');
     }
 }

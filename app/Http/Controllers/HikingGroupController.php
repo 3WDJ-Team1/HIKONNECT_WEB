@@ -14,6 +14,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\HikingGroup;
+use Mockery\Exception;
+
 /**
  * Controller class for Hiking_group
  *
@@ -26,6 +28,7 @@ use App\Models\HikingGroup;
 class HikingGroupController extends Controller
 {
     private $_group_model = null;
+    private $member_model = null;
     /**
      * Constructor for GroupController
      */
@@ -73,7 +76,7 @@ class HikingGroupController extends Controller
             'created_at'    => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at'    => Carbon::now()->format('Y-m-d H:i:s')
         ]);
-        $this->_group_model->groupReg($groupinfo);
+            $this->_group_model->groupReg($groupinfo);
         // 작성자 그룹에 자동 참여
         $uuid = HikingGroup::select('uuid')->orderBy('created_at','DESC')->first()['uuid'];
         $member_info = array([
@@ -97,8 +100,7 @@ class HikingGroupController extends Controller
      */
     public function show($id)
     {
-        $result = $this->_group_model->mygroup($id);
-        return response()->json($result);
+        //
     }
     /**
      * Show the form for editing the specified resource.
@@ -125,8 +127,8 @@ class HikingGroupController extends Controller
         $content    =   $request->get('content');
         $min        =   $request->get('min');
         $max        =   $request->get('max');
-        $this->_group_model->updateGroup($id,$title,$content,$min,$max);
-        return response()->json('true');
+        $result = $this->_group_model->updateGroup($id,$title,$content,$min,$max);
+        return response()->json($result);
     }
     /**
      * Remove the specified resource from storage.
@@ -172,14 +174,20 @@ class HikingGroupController extends Controller
      *          if user is guest string guest
      */
     public function checkMember(Request $request) {
-        $is_member = $this->member_model->checkMember($request->get('userid'),$request->get('uuid'));
-        $is_owner = $this->_group_model->isOwner($request->get('userid'),$request->get('uuid'));
+        try {
+            $is_member = $this->member_model->checkMember($request->get('userid'),$request->get('uuid'));
+            $is_owner = $this->_group_model->isOwner($request->get('userid'),$request->get('uuid'));
+        } catch (Exception $e) {
+            return 'Error : ' + $e;
+        }
         if ($is_member == true && $is_owner == true)
             return response()->json('owner');
         elseif ($is_member == true && $is_owner == false)
             return response()->json('member');
-        else
+        elseif ($is_member == false && $is_owner == false)
             return response()->json('guest');
+        else
+            throw new Exception('잘못된 값을 입력하셨습니다.');
     }
     /**
      * @funtion     groupInfo
@@ -192,5 +200,11 @@ class HikingGroupController extends Controller
      */
     public function groupInfo(Request $request) {
         return response()->json(HikingGroup::where('uuid',$request->get('uuid'))->get());
+    }
+    public function isOwner ($uuid, $userid) {
+        if ($this->_group_model->isOwner($userid,$uuid) == true) {
+            return 'true';
+        } else
+            return 'false';
     }
 }

@@ -52,15 +52,32 @@ class ScheduleController extends Controller
         $info = array([
             'title'         => $request->get('tt'),
             'content'       => $request->get('ct'),
-            'leader'        => $request->get('owner'),
+            'leader'        => $request->get('leader'),
             'hiking_group'  => $request->get('uuid'),
-            'route'         => $request->get('mountP'),
+            'route'         => json_encode($request->get('mountP')),
             'created_at'    => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at'    => Carbon::now()->format('Y-m-d H:i:s'),
             'start_date'    => $request->get('stDate'),
             'mnt_id'        => $request->get('mnt_id')
         ]);
         $this->hiking_schedule->scheduleReg($info);
+
+        //leader enter schedule
+        $schedule_no = Hiking_schedule::select('no')->orderBy('created_at','DESC')->first()['no'];
+        $member_info = array([
+            'userid'                         => $request->get('leader'),
+            'hiking_group'                   => $request->get('uuid'),
+            'schedule'                       => $schedule_no,
+            'current_fid'                    => 0,
+            'distance'                       => 0,
+            'created_at'                     => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'                     => Carbon::now()->format('Y-m-d H:i:s'),
+            'latitude'                       => 0,
+            'longitude'                      => 0,
+            'avg_speed'                      => 0
+        ]);
+        $this->schedule_member->enter_schedule($member_info);
+
         return response()->json('true');
     }
     /**
@@ -75,11 +92,12 @@ class ScheduleController extends Controller
         $i = 0;
         $list = json_decode(Hiking_schedule::select(
             'no','title','content','leader','start_date','hiking_schedule.mnt_id','route','mountain.mnt_name'
-        )->where(
-            'hiking_group',$uuid
-        )->join(
+        )->where([
+            ['hiking_group',$uuid],
+            ['start_date','>',Carbon::now()->format('Y-m-d H:i:s')]
+        ])->join(
             'mountain','hiking_schedule.mnt_id','=','mountain.mnt_id'
-        )->get());
+        )->orderBy('created_at','DESC')->get());
         foreach ($list as $value) {
             $result[$i]['no'] = $value->no;
             $result[$i]['title'] = $value->title;
@@ -181,12 +199,12 @@ class ScheduleController extends Controller
     public function my_schedule(Request $request) {
         if (schedule_member::where('userid',$request->get('userid'))->exists() == true) {
             $result = array();
-            $list = json_decode($this->schedule_member->mySchedule($request->get('userid')));
+            $list = json_decode($this->schedule_member->mySchedule($request->get('userid'),0));
             $i = 0;
             foreach ($list as $value) {
                 $result[$i]['group_title'] = $value->group_title;
                 $result[$i]['no'] = $value->no;
-                $result[$i]['title'] = $value->title;
+                $result[$i]['title'] = $value->schedule_title;
                 $result[$i]['content'] = $value->content;
                 $result[$i]['schedule_leader'] = $value->schedule_leader;
                 $result[$i]['uuid'] = $value->uuid;
@@ -202,17 +220,10 @@ class ScheduleController extends Controller
             return 'false';
         }
     }
-    public function makeScheduleList(Request $request) {
-        if (Hiking_schedule::where('hiking_schedule.leader',$request->get('userid'))->exists() == true) {
-            return response()->json($this->schedule_member->makeScheduleList($request->get('userid')));
-        } else {
-            return 'false';
-        }
-    }
     public function hiking_history($userid) {
         if (schedule_member::where('userid',$userid)->exists() == true) {
             $result = array();
-            $list = json_decode($this->schedule_member->mySchedule($userid));
+            $list = json_decode($this->schedule_member->mySchedule($userid,2));
             $i = 0;
             foreach ($list as $value) {
                 $result[$i]['group_title'] = $value->group_title;
@@ -240,11 +251,37 @@ class ScheduleController extends Controller
         $this->schedule_member->reg_ip($schedule, $userid, $ip);
         return response()->json($schedule.$userid);
     }
+
     public function schedule_member_list($uuid,$schedule_no) {
         $result = $this->schedule_member->member_list($uuid,$schedule_no);
         return response()->json($result);
     }
+
     public function hiking_count($userid) {
         return response()->json($this->schedule_member->hiking_count($userid));
+    }
+
+    public function check_schedule($userid, $no) {
+        $result = '';
+        if (Hiking_schedule::where([
+                ['leader',$userid],
+                ['no',$no]
+            ])->exists() == true)
+            $result = 'owner';
+        else if (schedule_member::where([
+                ['userid',$userid],
+                ['schedule',$no]
+            ])->exists() == true)
+            $result = 'member';
+        else if ((schedule_member::where([
+                ['userid',$userid],
+                ['schedule',$no]
+            ])->exists() == false))
+            $result = 'guest';
+        return json_encode($result);
+    }
+
+    public function schedule_hiking_member_list($uuid, $schedule_no) {
+        return response()->json($this->schedule_member->schedule_hiking_member_list($uuid,$schedule_no));
     }
 }

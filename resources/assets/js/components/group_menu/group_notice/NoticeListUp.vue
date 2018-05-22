@@ -5,61 +5,41 @@
     @todo   insert buttons
  -->
 <template>
-    <!-- @div#group_notice  the wrapper of notice list -->
-    <div class="text-center" id="group_notice">
-        <!-- @router-view   'write' floating button -->
-        <!--<router-view-->
-                <!--v-if="isOwner"-->
-                <!--name="write"></router-view>-->
+    <div>
+        <sweet-modal ref="write" blocking>
+            <noticeModal></noticeModal>
+        </sweet-modal>
         <router-view
+                v-if="position"
                 name="write"></router-view>
-        <!-- @div           notice list area -->
-        <div>
-            <!-- @div       A card of notice
-                            notice div are formed automatically by data.notices -->
-            <div v-for="notice in notices" :key="notice.uuid">
-                <!-- @div   the wrapper of notice card -->
-                <div class="card_wrapper">
-                    <!-- @div   The title and author of a notice
-                                if you click this, b-collapse will be shown. -->
-                    <div v-b-toggle ="'n' + notice.uuid" class="m-1">
-                        <h3 class="card-title">{{ notice.title }}</h3>
-                        <p  class="card-text">writer : {{ notice.writer }} | created_at : {{ notice.created_at }}</p>
-
-                    </div>
-                    <!-- @div(b-collapse)   The contents of a notice. -->
-                    <b-collapse :id="'n' + notice.uuid">
-                        <div class  ="notice_text">
-                            {{ notice.content }}
-                        </div>
-                        <!-- @router-view   'delete' button component
-                                            porpsNotice will send notice.uuid to children components -->
-
-                        <router-view
-                                name="delete"
-                                :propsNotice="notice"
-                                v-if="isOwner"></router-view>
-                        <!-- @router-view   'modify(edit)' button component
-                                            porpsNotice will send notice.uuid to children components -->
-                        <router-view
-                                name="modify"
-                                :propsNotice="notice"
-                                v-if="isOwner"></router-view>
-                    </b-collapse>
+        <card id="cardBox" style="margin: 10px;" v-for="notice in notices" :key="notice.uuid" >
+            <div class="row" id="groupListContainer">
+                <div style="padding: 0px;" class="col-md-12" id="noticeCard" @click="noticeModal(notice)">
+                    <h3 style="display:inline-block; padding-left: 25px;">{{ notice.title }}</h3>
+                    <h6 style="color: #9A9A9A; display:inline-block;">관리자: {{ notice.writer }}</h6>
+                    <h5 style="display:inline-block; float: right; padding-top: 30px; padding-right: 25px;">작성일: {{ notice.created_at }}</h5>
                 </div>
             </div>
-        </div>
-        <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+        </card>
+        <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading">
+             <span slot="no-more">
+                There is no more Hacker News :(
+             </span>
+        </infinite-loading>
     </div>
 </template>
 
 <script>
     import InfiniteLoading from 'vue-infinite-loading';
+    import Card from '../../Cards/Card'
+    import noticeModal from './noticeModal'
     export default {
         components: {
             InfiniteLoading,
+            Card,
+            noticeModal
         },
-        data : ()  => ({
+        data: () => ({
             /**
              * groupName    (String)        the name of group
              * notices      (Array)         the array of notices object
@@ -72,52 +52,39 @@
              *      margin  (String)        margin of each div of icon
              *      size    (String)        size of each div
              */
-            // groupName and notices will be changed by http response.
-            groupName   : "3WDJ-Team1",
-            notices     : [
-                // the type of notices is 'object' certainly.
-            ],
-            list_num    :0,
-            page        : 0,
-            size        : 5,
-            bottom      : false,
-            loader      : {
-                loading : true,
-                color   : "#4df1e1",
-                margin  : "2px",
-                size    : "10px"
-            },
+            list_num: 0,
+            notices: [],
             groupId: "",
             isOwner: false,
-            httpAddr: Laravel.host,
+            position: false
         }),
         // When this component was created,
         created() {
             // url에서 그룹 아이디 받아오기
             this.groupId = this.$route.params.groupid;
             this.$EventBus.$on('newNoticeWrited', () => {
-                this.$router.push('/group/' + this.groupId);
+                this.notices = [];
+                this.list_num = 0;
+                this.infiniteHandler();
             });
             this.isGroupOwner();
+            this.$EventBus.$on('sendPositionInfo', (position) => {
+                if(position != 'guest') {
+                    this.position = true;
+                }
+            });
         },
         methods: {
-            /**
-             * @function    bottomVisible
-             * @brief       check is bottom visible with the value of scroll position
-             */
-            bottomVisible: function () {
-                const scrollY       = window.scrollY;
-                const visible       = document.documentElement.clientHeight;
-                const pageHeight    = document.documentElement.scrollHeight;
-                const bottomOfPage  = visible + scrollY + 1 >= pageHeight;
-                return bottomOfPage || pageHeight < visible;
-            },
             /**
              * @function    addNotice
              * @brief       send http request to server, and update this.notice
              */
+            noticeModal(notice) {
+                this.$EventBus.$emit('sendNoticeModal', notice);
+                this.$refs.write.open();
+            },
             infiniteHandler($state) {
-                this.axios.get(this.$HttpAddr + '/notice/' + this.groupId + "/" + this.list_num)
+                this.axios.get(this.$HttpAddr + '/list_announce/' + this.groupId + "/" + this.list_num)
                     .then(response => {
                         if (response) {
                             this.notices = this.notices.concat(response.data);
@@ -130,11 +97,11 @@
                             $state.complete();
                         }
                     });
-                this.list_num += 10;
+                this.list_num += 1;
             },
             isGroupOwner() {
                 axios.get(this.$HttpAddr + '/isOwner/' + this.groupId + "/" + sessionStorage.getItem('uuid'))
-                    .then( response => {
+                    .then(response => {
                         this.$EventBus.$emit('isOwner', response);
                         this.isOwner = response.data;
                     });
@@ -147,7 +114,7 @@
              * @brief       watch the value of this.bottom.
              *              if the value is true, addNotice function is invoked.
              */
-            '$route' (to, from) {
+            '$route'(to, from) {
                 this.groupId = this.$route.params.groupid;
             }
         }
@@ -155,27 +122,17 @@
 </script>
 
 <style>
-    /* class for card wrapper */
-    .card_wrapper {
-        display: inline-block;
-        width: 100%;
-        margin: 0.3%;
-        padding: 3%;
-        border: 2px solid whitesmoke;
-        background-color: white;
+    #cardBox .card-body {
+        padding: 0px 15px 0px 15px;
     }
-    /* class for inner text of notice cards */
-    .notice_text {
-        width: 90%;
-        margin: 0 auto;
-        word-break: keep-all;
+    .application--wrap {
+        min-height: 0px;
     }
-    #group_notice {
-        width: 98%;
-        margin-bottom: 8%;
-        margin: 0 auto;
+    #cardBox .card-footer {
+        padding-left: 25px;
+        padding-right: 25px;
     }
-    .loader {
-        margin-top: 2%
+    #noticeCard:hover  {
+        background-color: #f7f7f8;
     }
 </style>

@@ -18,6 +18,7 @@ class schedule_member extends Model
     public function enter_schedule($member_info) {
         schedule_member::insert($member_info);
     }
+
     public function out_schedule($userid, $uuid, $schedule_no) {
         schedule_member::where([
             ['userid',$userid],
@@ -25,33 +26,7 @@ class schedule_member extends Model
             ['schedule',$schedule_no]
         ])->delete();
     }
-    public function hiking_history($userid) {
-        return
-            schedule_member::select(
-                'schedule_member.avg_speed',
-                'schedule_member.updated_at as arrive_time',
-                'hs.start_date',
-                'hs.title as schedule_title',
-                'hs.route',
-                'hs.mnt_id',
-                'mountain.mnt_name',
-                'user.nickname as schedule_leader',
-                'hg.title as group_title',
-                'hg.leader as group_leader',
-                'hg.uuid'
-            )->where([
-                ['schedule_member.userid',$userid],
-                ['schedule_member.hiking_state',2]
-            ])->join(
-                'hiking_schedule as hs','hs.no','=','schedule_member.schedule'
-            )->join(
-                'mountain','hs.mnt_id','=','mountain.mnt_id'
-            )->join(
-                'user','user.userid','=','hs.leader'
-            )->join(
-                'hiking_group as hg','hg.uuid','=','hs.hiking_group'
-            )->get();
-    }
+
     public function makeScheduleList($userid) {
         return
             Hiking_schedule::select(
@@ -73,7 +48,7 @@ class schedule_member extends Model
                 'mountain','mountain.mnt_id','=','hiking_schedule.mnt_id'
             )->get();
     }
-    public function mySchedule($userid) {
+    public function mySchedule($userid,$state) {
         return
             schedule_member::select(
                 'hiking_group.title as group_title',
@@ -87,14 +62,17 @@ class schedule_member extends Model
                 'hiking_schedule.route',
                 'hiking_schedule.mnt_id',
                 'mountain.mnt_name'
-            )->where('schedule_member.userid',$userid)
+            )->where([
+                ['schedule_member.userid',$userid],
+                ['schedule_member.hiking_state',$state]
+            ])
                 ->join(
                     'hiking_schedule','hiking_schedule.no','=','schedule_member.schedule'
                 )->join(
                     'mountain','mountain.mnt_id','=','hiking_schedule.mnt_id'
                 )->join(
                     'hiking_group','hiking_group.uuid','=','hiking_schedule.hiking_group'
-                )->get();
+                )->orderBy('schedule_member.created_at','DESC')->get();
     }
     public function reg_ip ($schedule, $userid, $ip) {
         schedule_member::where([
@@ -103,16 +81,27 @@ class schedule_member extends Model
         ])->update(['ip_address' => $ip]);
     }
     public function member_list($uuid,$schedule_no) {
-        return schedule_member::select('user.nickname','hiking_state','avg_speed','hiking_start','current_fid','distance','latitude','longitude','ip_address','password')->where([
+        return schedule_member::select('user.userid','user.nickname','user.gender','user.age_group','user.scope','user.phone','user.grade')->where([
             ['hiking_group',$uuid],
             ['schedule',$schedule_no]
         ])->join('user','user.userid','=','schedule_member.userid')
-            ->get();
+            ->orderBy('schedule_member.created_at','DESC')->get();
     }
+
     public function hiking_count($userid) {
-        return schedule_member::where([
-            ['userid',$userid],
-            ['hiking_state',2]
-        ])->count();
+        return
+            schedule_member::where([
+                ['userid',$userid],
+                ['hiking_state',2]
+            ])->count();
+    }
+
+    public function schedule_hiking_member_list($uuid, $schedule_no) {
+        return
+            schedule_member::select('schedule_member.member_no','user.nickname','schedule_member.latitude','schedule_member.longitude')->where([
+                ['schedule_member.hiking_group',$uuid],
+                ['schedule_member.schedule',$schedule_no],
+                ['schedule_member.hiking_state',1]
+            ])->join('user','user.userid','=','schedule_member.userid')->orderBy('schedule_member.created_at','DESC')->get();
     }
 }

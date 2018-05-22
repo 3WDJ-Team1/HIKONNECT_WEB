@@ -28,8 +28,7 @@ class Announce extends Model
             )
             ->orderBy('created_at','DESC')
             ->skip($page * 10)
-            ->take(10)
-            ->get();
+            ->take(10)->get();
     }
     public function deleteAnnounce($no) {
         Announce::where('no',$no)->delete();

@@ -42,8 +42,6 @@ class LoginController extends Controller
      */
     public function loginprocess(Request $request)
     {
-        echo $request->get('pwv');
-    
         //Login
         try {
             $userinfo = User::where('userid', $request->get('idv'))->first();
@@ -51,7 +49,6 @@ class LoginController extends Controller
                 throw new Exception('존재하지 않는 ID');
             }
         } catch (\Exception $e) {
-            echo $e;
             return response()->json('false');
         }
         if ($userinfo->password == $request->get('pwv')) {

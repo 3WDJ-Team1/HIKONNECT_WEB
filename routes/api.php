@@ -13,28 +13,18 @@ use Illuminate\Http\Request;
 Route::middleware(
     'auth:api'
 )->get(
-    '/user',
+    '/user', 
     function (Request $request) {
         return $request->user();
     }
 );
 
-Route::get(
-    'testing/{key?}',
-    function ($mnt_name) {
-        return  DB::table('mountain')
-            ->where('mnt_name', 'LIKE', "%" . $mnt_name . "%")
-            ->get();
-    }
-);
-
-
 Route::group(
-    [],
+    [], 
     function () {
         // Notification Routings
         Route::resource(
-            'notice',
+            'notice', 
             'NoticeController'
         );
         Route::get(
@@ -43,7 +33,7 @@ Route::group(
         )->name('list_announce');
         // Hiking group Routings
         Route::resource(
-            'hikingGroup',
+            'hikingGroup', 
             'HikingGroupController'
         );
         Route::post(
@@ -59,6 +49,10 @@ Route::group(
             'HikingGroupController@getGroupList'
         )->name('groupList');
         Route::get(
+            'searchGroup/{idx}/{select}/{input}',
+            'HikingGroupController@searchGroup'
+        )->name('searchGroup');
+        Route::get(
             'isOwner/{groupId}/{userId}',
             'HikingGroupController@isOwner'
         )->name('isOwner');
@@ -66,10 +60,19 @@ Route::group(
             'mygroup',
             'GroupMemberController@my_group'
         )->name('myGroup');
-        Route::post(
-            'makeGroupList',
-            'HikingGroupController@makeGroupList'
-        )->name('makeGroupList');
+        Route::get(
+            'hiking_history/{userid}',
+            'ScheduleController@hiking_history'
+        )->name('hiking history');
+        Route::get(
+            'hiking_count/{userid}',
+            'ScheduleController@hiking_count'
+        )->name('hiking count');
+        Route::get(
+            'checkScheduleMember/{userid}/{schedule_no}',
+            'ScheduleController@check_schedule'
+        )->name('check schedule');
+
         // Entry info Routings
         Route::resource(
             'member',
@@ -288,29 +291,27 @@ Route::group(
             'rejectUserEntry',
             'EntryInfoController@rejectUserEntry'
         )->name('rejectUserEntry');
-
+   
         Route::get(
-            'groupMembers/{groupUuid}/{idx?}/{perIdx?}',
+            'groupMembers/{groupUuid}/{idx?}/{perIdx?}', 
             'HikingGroupController@getGroupMembers'
         )->name('groupMemberList');
 
-        // User Profile Routings
-        Route::get(
-            'userProfile/{userUuid}',
-            'UserProfileController@getUserProfile'
-        );
-
         // Login Routings
         Route::resource(
-            '/user',
+            '/user', 
             'UserController'
         );
         Route::post(
-            '/login',
+            '/userinfo',
+            'UserController@user_info'
+        )->name('user_info');
+        Route::post(
+            '/login', 
             'LoginController@login'
         )->name('login');
         Route::post(
-            '/loginprocess',
+            '/loginprocess', 
             'LoginController@loginprocess'
         )->name('loginprocess');
         Route::post(
@@ -319,37 +320,37 @@ Route::group(
         )->name('login_app');
         /**
          * Login process using Socialite
-         *
+         * 
          * Line     = enabled
          * Kakao    = disabled
          */
         Route::get(
-            '/login/{providerName}',
+            '/login/{providerName}', 
             'LoginController@redirectToProvider'
         )->name('SNSLogin');
         Route::get(
-            '/login/{providerName}/redirect',
+            '/login/{providerName}/redirect', 
             'LoginController@handleProviderCallback'
         )->name('SNSLoginRedirect');
 
         Route::post(
-            '/logout',
+            '/logout', 
             'LoginController@logout'
         )->name('logout');
         Route::get(
-            '/user/{id}',
+            '/user/{id}', 
             'UserController@getImage'
         )->name('getImage');
         Route::get(
-            '/mypage/{id}',
+            '/mypage/{id}', 
             'UserController@showUserData'
         )->name('UserData');
         Route::post(
-            '/graph/{id}',
+            '/graph',
             'UserController@graph'
         )->name('graph');
         Route::get(
-            'main/{id}',
+            'main/{id}', 
             'MainController@get_Announce_Count'
         )->name('Announce_Count');
 
@@ -358,6 +359,10 @@ Route::group(
             '/test',
             'testcontroller'
         );
+        Route::post(
+            '/getlm',
+            'testcontroller@get_Memo_Info'
+        )->name('Get Memo Information');
         Route::post(
             '/send',
             'FCMController@pushNotification'
@@ -380,38 +385,17 @@ Route::group(
             'testcontroller'
         );
         Route::post(
-            '/getLocationMemoDetail',
-            'testcontroller@getLocationMemoDetail'
-        )->name('getLocationMemoDetail');
+            '/getlm',
+            'testcontroller@get_Memo_Info'
+        )->name('Get Memo Information');
         Route::post(
             '/send',
             'FCMController@pushNotification'
         )->name('SendNotification');
-
         Route::post(
             '/storesend',
-            'testcontroller@updateScheduleMember'
-        )->name('updateScheduleMember');
-
-        Route::post(
-            '/getScheduleMembers',
-            'testcontroller@getScheduleMembers'
-        )->name('getScheduleMembers');
-
-        Route::post(
-            '/updateHikingState',
-            'testcontroller@updateHikingState'
-        )->name('updateHikingState');
-
-        Route::post(
-            '/getMemberNoByUserId',
-            'testcontroller@getMemberNo'
-        )->name('getMemberNoByUserId');
-
-        Route::post(
-            '/getMemberDetail',
-            'testcontroller@getMemberDetail'
-        )->name('getMemberDetail');
+            'testcontroller@store_send'
+        )->name('login_app');
 
         Route::post(
             '/storeLocationMemo',
@@ -422,13 +406,27 @@ Route::group(
             '/getAfterHikingInfo',
             '/testcontroller@getAfterHikingInfo'
         );
+        //Group Schedule
+        Route::resource('/schedule',
+            'ScheduleController'
+        );
+        Route::post('/enter_schedule',
+            'ScheduleController@enter_schedule'
+        )->name('schedule_enter');
+        Route::post('/out_schedule',
+            'ScheduleController@out_schedule'
+        )->name('schedule_out');
+        Route::post('/myschedule',
+            'ScheduleController@my_schedule'
+        )->name('my_schedule');
     }
 );
+
 Route::group(
-    ['prefix' => 'fcm'],
+    ['prefix' => 'fcm'], 
     function () {
         Route::post(
-            'pushNotification',
+            'pushNotification', 
             'FCMController@pushNotification'
         );
     }
