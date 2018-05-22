@@ -436,6 +436,10 @@ Route::group(
             '/getLocationMemoDetail',
             'testcontroller@getLocationMemoDetail'
         );
+        Route::post(
+            '/getMemberDetail',
+            'testcontroller@getMemberDetail'
+        );
     }
 );
 
