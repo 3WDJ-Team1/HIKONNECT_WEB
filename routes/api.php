@@ -423,6 +423,14 @@ Route::group(
             '/myschedule',
             'ScheduleController@my_schedule'
         )->name('my_schedule');
+        Route::post(
+            '/getMemberNoByUserId',
+            'testcontroller@getMemberNo'
+        );
+        Route::post(
+            '/getLocationMemoDetail',
+            'testcontroller@getLocationMemoDetail'
+        );
     }
 );
 
