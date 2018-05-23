@@ -444,6 +444,10 @@ Route::group(
             'getScheduleMembers',
             'testcontroller@getScheduleMembers'
         );
+        Route::post(
+            'updateHikingState',
+            'testcontroller@updateHikingState'
+        );
     }
 );
 
