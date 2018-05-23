@@ -158,9 +158,11 @@ class testcontroller extends Controller
                 "SELECT
                     title,
                     content,
-                    writer,
+                    u.nickname,
                     picture
-                FROM location_memo
+                FROM location_memo as lm
+                JOIN user as u
+                ON u.userid = lm.writer
                 WHERE no = ${location_no};"
             )
         );
