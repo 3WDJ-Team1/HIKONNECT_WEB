@@ -226,7 +226,8 @@ class testcontroller extends Controller
                     SELECT schedule
                     FROM schedule_member
                     WHERE member_no = '${member_no}'
-                );"
+                )
+                AND hiking_state = 1;"
             )
         );
         $pos_location_memo = DB::select(
@@ -414,8 +415,10 @@ class testcontroller extends Controller
     {
         $user_id = $request->get('user_id');
         $queryRes = DB::table('schedule_member')
-            ->select('member_no')
-            ->where('userid', $user_id)
+            ->select(
+                'member_no',
+                'hiking_state'
+            )->where('userid', $user_id)
             ->get();
         return $queryRes;
     }
