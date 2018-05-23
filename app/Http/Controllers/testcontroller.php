@@ -330,6 +330,7 @@ class testcontroller extends Controller
         $queryRes = DB::select(
             DB::raw(
                 "SELECT 
+                    u.userid,
                     member_no,
                     nickname,
                     distance,
