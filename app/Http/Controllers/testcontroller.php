@@ -158,7 +158,8 @@ class testcontroller extends Controller
                 "SELECT
                     title,
                     content,
-                    u.nickname as writer,
+                    writer,
+                    u.nickname as nickname,
                     picture
                 FROM location_memo as lm
                 JOIN user as u
