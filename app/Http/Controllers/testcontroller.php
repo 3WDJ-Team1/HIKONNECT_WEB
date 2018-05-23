@@ -334,6 +334,8 @@ class testcontroller extends Controller
                     member_no,
                     nickname,
                     distance,
+                    latitude,
+                    longitude,
                     (
                         SELECT count(*) + 1
                         FROM schedule_member
