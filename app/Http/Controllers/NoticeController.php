@@ -110,7 +110,7 @@ class NoticeController extends Controller
      */
     public function update(Request $request, $no)
     {
-        $this->announce_model->updateAnnounce($request->get('title'),$request->get('content'),$no);
+        $this->announce_model->updateAnnounce($request->get('title'),$request->get('content'),$request->get('picture'),$no);
         return response()->json('true');
     }
     /**
