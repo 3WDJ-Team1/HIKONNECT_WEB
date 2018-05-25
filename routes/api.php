@@ -448,6 +448,10 @@ Route::group(
             'updateHikingState',
             'testcontroller@updateHikingState'
         );
+        Route::post(
+            'getHikingResult',
+            'testcontroller@getHikingResult'
+        );
     }
 );
 
