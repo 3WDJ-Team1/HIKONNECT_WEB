@@ -16,10 +16,11 @@ class Announce extends Model
     public function announceReg(Array $info) {
         Announce::insert($info);
     }
-    public function updateAnnounce($title, $content, $no) {
+    public function updateAnnounce($title, $content, $picture, $no) {
         Announce::where('no',$no)
-            ->update(['title' => $title],
-                ['content' => $content]);
+            ->update(['title' => $title,
+                'content' => $content,
+                'picture' => $picture]);
     }
     public function getAnnounce($uuid, $page) {
         return Announce::where('hiking_group',$uuid)
