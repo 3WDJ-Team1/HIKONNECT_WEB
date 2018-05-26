@@ -305,11 +305,13 @@ class testcontroller extends Controller
             'hiking_state' => $state
         ];
 
-        if ($state == 0) { 
+        date_default_timezone_set('Asia/Seoul');
+        if ($state == 0) {
             $insertSet['hiking_start'] = date('Y-m-d H:i:s');
         } else if ($state == 1) {
             $insertSet['updated_at'] = date('Y-m-d H:i:s');
         }
+
         return DB::table('schedule_member')
             ->where('member_no', $member_no)
             ->update($insertSet);
