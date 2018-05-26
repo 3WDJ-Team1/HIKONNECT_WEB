@@ -14,7 +14,9 @@ use App\Request;
  */
 class schedule_member extends Model
 {
-    protected $table = 'schedule_member';
+    public $timestamps  = false;
+    protected $table    = 'schedule_member';
+    
     public function enter_schedule($member_info) {
         schedule_member::insert($member_info);
     }

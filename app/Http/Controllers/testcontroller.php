@@ -210,10 +210,14 @@ class testcontroller extends Controller
         if ($avg_speed) {
             $arr_for_update['avg_speed'] = $avg_speed;
         }
+
         $user_id_check = schedule_member::where('member_no', $member_no)
             ->get();
-        schedule_member::where('member_no', $member_no)
-            ->update($arr_for_update);
+
+        if (!empty($arr_for_update)) {
+            schedule_member::where('member_no', $member_no)
+                ->update($arr_for_update);
+        }
         // Get the locations of members who participate in the same schedule.
         $pos_members = DB::select(
             DB::raw(
