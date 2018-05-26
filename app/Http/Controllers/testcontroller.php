@@ -289,7 +289,7 @@ class testcontroller extends Controller
     /**
      * Update user's hiking status.
      *
-     * @param Request $request
+     * @param Request $request 
      *
      * @var Integer $member_no [POST] Reference Key which participating user.
      * @var Integer $state     [POST] Status flag.
@@ -310,7 +310,7 @@ class testcontroller extends Controller
         } else if ($state == 1) {
             $insertSet['updated_at'] = date('Y-m-d H:i:s');
         }
-        DB::table('schedule_member')
+        return DB::table('schedule_member')
             ->where('member_no', $member_no)
             ->update($insertSet);
     }
