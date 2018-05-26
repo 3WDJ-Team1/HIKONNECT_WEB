@@ -299,6 +299,8 @@ class testcontroller extends Controller
      */
     function updateHikingState(Request $request)
     {
+        return date('Y:M:S H-i-s');
+        
         $member_no  = $request->get('member_no');
         $state      = $request->get('state');
         $insertSet = [
