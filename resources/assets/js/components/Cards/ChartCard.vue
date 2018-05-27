@@ -103,6 +103,7 @@
                     }
                 })
                 seq = 0
+
             },
             animateBarChart () {
                 let seq = 0

@@ -7,6 +7,7 @@
 <template>
     <!-- @div       wrapper of this component -->
     <div>
+
         <joinButton></joinButton>
         <!-- @v-tabs    there is information of tabs here -->
         <v-tabs

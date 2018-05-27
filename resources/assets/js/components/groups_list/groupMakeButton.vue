@@ -12,6 +12,7 @@
         >
             <v-icon>add</v-icon>
         </v-btn>
+
         <sweet-modal ref="write" blocking>
             <router-view name="make"></router-view>
         </sweet-modal>

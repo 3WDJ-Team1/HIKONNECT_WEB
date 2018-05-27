@@ -11,6 +11,7 @@
       </span>
     </label>
   </div>
+
 </template>
 <script>
   export default {

@@ -93,6 +93,7 @@
             '$route' (to, from) {
                 this.groupUuid = this.$route.params.groupid;
             }
+
         }
     }
 </script>

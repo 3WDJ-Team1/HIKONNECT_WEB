@@ -10,6 +10,7 @@
         <i :class="addonLeftIcon"></i>
       </span>
     </slot>
+
     <input
       :value="value"
       @input="$emit('input',$event.target.value)"

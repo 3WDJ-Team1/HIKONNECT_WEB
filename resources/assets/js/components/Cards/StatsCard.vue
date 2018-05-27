@@ -11,6 +11,7 @@
           <slot name="content"></slot>
         </div>
       </div>
+
     </div>
     <div slot="footer" class="stats" v-if="$slots.footer">
       <slot name="footer"></slot>

@@ -1,3 +1,4 @@
+
 <template>
     <div class="content">
         <sweet-modal ref="level" blocking>

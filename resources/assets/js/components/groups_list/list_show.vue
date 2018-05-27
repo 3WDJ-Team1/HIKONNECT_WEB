@@ -1,3 +1,4 @@
+
 <template>
     <div>
         <card id="cardBox" style="margin: 10px;" v-for="(item, key) in list" :key="key">

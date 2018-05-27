@@ -204,4 +204,5 @@ nc-simple-delete"></i>
     .BButton:hover    {
         color: #df21ffa3;
     }
+
 </style>

@@ -9,6 +9,7 @@
         <sweet-modal ref="write" blocking>
             <noticeModal></noticeModal>
         </sweet-modal>
+
         <router-view
                 v-if="position"
                 name="write"></router-view>

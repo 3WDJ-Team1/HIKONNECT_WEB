@@ -1,4 +1,4 @@
-<!-- 
+<!--
     @file   NoticeDeleteBtn.vue
     @brief  A component that is a deleteButton of each notice
     @author Sungeun Kang <kasueu0814@gmail.com>
@@ -11,6 +11,7 @@
         <v-btn style="height: 100%;" flat @click="deleteNotice">
              <v-icon dark>remove</v-icon>&nbsp;delete
         </v-btn>
+
     </div>
 </template>
 

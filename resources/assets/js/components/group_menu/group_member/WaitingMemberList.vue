@@ -101,6 +101,7 @@
                     }
                 });
             },
+
             rejectUser(argUserUuid) {
                 axios.put(this.$HttpAddr + '/member/false', {
                     userid: argUserUuid,
