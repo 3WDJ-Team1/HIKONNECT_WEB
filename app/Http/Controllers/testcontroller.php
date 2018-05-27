@@ -314,6 +314,7 @@ class testcontroller extends Controller
         } else if ($state == 1) {
             $insertSet['updated_at'] = date('Y-m-d H:i:s');
         }
+        $insertSet['hiking_state'] = ++$state;
 
         return DB::table('schedule_member')
             ->where('member_no', $member_no)
