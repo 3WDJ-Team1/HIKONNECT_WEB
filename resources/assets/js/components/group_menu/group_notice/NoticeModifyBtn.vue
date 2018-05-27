@@ -1,4 +1,4 @@
-<!-- 
+<!--
     @file   NoticeModifyBtn.vue
     @brief  A component that is an editButton of each notice
     @author Sungeun Kang <kasueu0814@gmail.com>
@@ -14,6 +14,7 @@
             @click  ="openModifyModal();">
              <v-icon dark>edit</v-icon>&nbsp;edit
         </v-btn>
+
         <!-- @sweet-modal   a modal which have input form script -->
         <sweet-modal ref="modify" blocking>
             <!-- @router-view   insert component "form" -->

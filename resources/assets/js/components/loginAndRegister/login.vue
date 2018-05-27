@@ -127,6 +127,7 @@
                         }
                         else {
                             agesc = 'false';
+
                         }
                         // 수정한 값으로 session값 모두 바꾸기
                         sessionStorage.setItem('userid',userid);

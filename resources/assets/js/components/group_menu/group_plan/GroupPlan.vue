@@ -10,6 +10,7 @@
         <div class="plan_title">
             <h1 class="h1_highlight" id="summary">SUMMARY</h1>
             <br>
+
             <p class="p_summary">Destination : {{ summary.destination }}</p>
             <p class="p_summary">Date : {{ summary.schedule.date }}</p>
         </div>

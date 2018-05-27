@@ -54,6 +54,7 @@
                 });
             }
         },
+
         methods: {
             makeEvent() {
                 if (this.position == 'false') {

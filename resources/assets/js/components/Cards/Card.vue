@@ -6,6 +6,7 @@
     <div class="card-header" v-if="$slots.header">
       <slot name="header"></slot>
     </div>
+
     <div class="card-body">
       <slot></slot>
     </div>

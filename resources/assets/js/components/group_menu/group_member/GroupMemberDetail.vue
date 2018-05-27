@@ -25,6 +25,7 @@
                     slot="activator">
                     <img :src='memberData.image_path'>
                 </v-avatar>
+
             </v-flex>
             <v-flex
                 d-flex

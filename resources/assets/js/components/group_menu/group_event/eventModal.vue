@@ -14,6 +14,7 @@
     </div>
 </template>
 
+
 <script>
     import showMap from './showMap'
     import Card from '../../Cards/Card'

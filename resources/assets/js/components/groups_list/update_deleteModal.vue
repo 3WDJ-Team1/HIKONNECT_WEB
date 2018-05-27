@@ -28,6 +28,7 @@
                     ></v-text-field>
                 </div>
                 <div style="margin: 5px; flex-grow: 1;">
+
                     <v-subheader style="font-size: 15px;">Fill minimun number of member</v-subheader>
                     <v-text-field
                             name="maximum"

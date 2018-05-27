@@ -1,3 +1,4 @@
+
 <template>
     <div :class="{'nav-open': $sidebar.showSidebar}">
         <notifications></notifications>
