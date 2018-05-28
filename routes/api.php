@@ -229,6 +229,10 @@ Route::group(
             'reg_ip',
             'ScheduleController@reg_ip'
         )->name('Regist Ip Address');
+        Route::get(
+            'get_ip/{schedule_no}',
+            'ScheduleController@get_ip'
+        )->name('Get Ip Address');
         Route::post(
             'mnt_info',
             'MountainController@mountain_info'

@@ -249,7 +249,11 @@ class ScheduleController extends Controller
         $userid     = $request->get('userid');
         $ip         = $request->get('ip');
         $this->schedule_member->reg_ip($schedule, $userid, $ip);
-        return response()->json($schedule.$userid);
+        return 'true';
+    }
+
+    public function get_ip($schedule_no) {
+        return schedule_member::select('userid','ip_address')->where('schedule',$schedule_no)->get();
     }
 
     public function schedule_member_list($uuid,$schedule_no) {
