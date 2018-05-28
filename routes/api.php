@@ -234,6 +234,11 @@ Route::group(
             'ScheduleController@get_ip'
         )->name('Get Ip Address');
         Route::post(
+            'all_reg_ip',
+            'ScheduleController@all_reg_ip'
+        )->name('All Regist Ip Address');
+
+        Route::post(
             'mnt_info',
             'MountainController@mountain_info'
         )->name('Get Mountain Information');

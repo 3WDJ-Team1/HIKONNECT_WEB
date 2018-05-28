@@ -256,6 +256,11 @@ class ScheduleController extends Controller
         return schedule_member::select('userid','ip_address')->where('schedule',$schedule_no)->get();
     }
 
+    public function all_reg_ip(Request $request) {
+        $this->schedule_member->all_reg_ip($request->get('userid'),$request->get('ip'));
+        return 'true';
+    }
+
     public function schedule_member_list($uuid,$schedule_no) {
         $result = $this->schedule_member->member_list($uuid,$schedule_no);
         return response()->json($result);
