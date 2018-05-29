@@ -207,4 +207,5 @@ class HikingGroupController extends Controller
         } else
             return 'false';
     }
+
 }
