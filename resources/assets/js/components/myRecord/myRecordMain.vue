@@ -115,6 +115,7 @@
                 startDate: [],
                 lineChart: {
                     data: {
+
                         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                         series: []
                     },
