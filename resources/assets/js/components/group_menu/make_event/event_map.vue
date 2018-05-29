@@ -1,8 +1,18 @@
+<!--
+    @author Jiyoon Lee <jiyoon3421@gmail.com>
+ -->
 <template>
     <div>
+        <h3>산 경로를 찍어주세요.</h3>
         <div
                 id="map"
                 style="height: 400px;">
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-info btn-fill float-right"
+                    @click="mapModalSubmit">
+                SUBMIT
+            </button>
         </div>
     </div>
 </template>
@@ -27,6 +37,9 @@
             });
         },
         methods: {
+            mapModalSubmit()  {
+                this.$parent.close();
+            },
             makeMap() {
                 var event = this.$EventBus;
                 // 지도의 중간지점

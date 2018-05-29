@@ -1,12 +1,12 @@
 <!-- 
     @file   GroupMemberList.vue
     @brief  A component of group member list
-    @author Sungeun Kang <kasueu0814@gmail.com>
+    @author Sungeun Kang <kasueu0814@gmail.com>, Jiyoon Lee <jiyoon3421@gmail.com>
     @todo   update everything
  -->
 <template>
     <div>
-        <waitingMember></waitingMember>
+        <waitingMember :waitingMember="waitingMember" v-if="positionString"></waitingMember>
         <div>
             <b-card
                     style="margin-top: 10px; margin-bottom: 10px;"
@@ -26,7 +26,7 @@
                                         size="68"
                                         slot="activator"
                                 >
-                                    <img :src="'http://172.26.2.88:3000/images/UserProfile/' + userData.userid + '.jpg'">
+                                    <img :src="'http://hikonnect.ga:3000/images/UserProfile/' + userData.userid + '.jpg'">
                                 </v-avatar>
                             </v-flex>
                             <v-flex
@@ -37,17 +37,17 @@
                         </v-layout>
                     </div>
                 <b-collapse
+                        v-if="position"
                         :id="'n' + userData.nickname"
                         accordion="member_list"
                         role="tabpanel">
                     <b-card-body>
-                        <router-view
+                        <router-view :userData="userData"
                                 name="member_detail">
                         </router-view>
                     </b-card-body>
                 </b-collapse>
             </b-card>
-            <!-- <infinite-loading @infinite="infiniteHandlerMember" spinner="bubbles"></infinite-loading> -->
         </div>
     </div>
 </template>
@@ -64,36 +64,38 @@
             groupUuid   : "",
             memberList  : [],
             waitingMember: [],
-            page        : 0,
+            position: false,
+            positionString: false
         }),
         methods: {
-            sendMemberData(argObj) {
-                this.$EventBus.$emit('memberData', argObj);
-            },
-            infiniteHandlerMember($state) {
+            // 멤버 정보 서버에서 가지고 오기
+            pullMemberList($state) {
                 axios.get(this.$HttpAddr + "/list_member/" + this.groupUuid)
                     .then( response => {
-                        console.log(response.data[0]);
                         this.memberList = response.data[0].enter;
                         this.waitingMember = response.data[0].not_enter;
-                        this.$EventBus.$emit('sendNotEnterMember', this.waitingMember);
                     });
             }
         },
         created() {
+            // 로그인 된 이용자의 위치 가지고 오기
+            this.$EventBus.$on('sendPositionInfo', (position) => {
+                if (position != 'guest') {
+                    this.position = true;
+                }
+                if (position == 'owner') {
+                    this.positionString = true;
+                }
+            });
             this.groupUuid = this.$route.params.groupid;
-            this.infiniteHandlerMember();
-            this.$EventBus.$on('memberCheckSign', ()=>{
+            this.pullMemberList();
+            // waitingMemberList에서 수락/거절 시 리스트 재배열을 위해 event가 온다.
+            this.$EventBus.$on('memberCheckSign', () => {
                 this.memberList = [];
                 this.waitingMember = [];
-                this.infiniteHandlerMember();
+                this.pullMemberList();
             });
         },
-        watch: {
-            '$route' (to, from) {
-                this.groupUuid = this.$route.params.groupid;
-            }
-        }
     }
 </script>
 

@@ -1,3 +1,6 @@
+<!--
+    @author Jiyoon Lee <jiyoon3421@gmail.com>
+ -->
 <template>
     <div>
         <nav class="navbar navbar-expand-lg">
@@ -63,16 +66,9 @@
     import Login from '../loginAndRegister/login'
     export default {
         data: () => ({
-            userNickname: sessionStorage.getItem('nickname'),
             modalErrorMsg: '',
             isLogined: false,
             drawerRight: false,
-            mypageRoute : {
-                icon: 'account_circle',
-                text: 'MY PAGE',
-                path: '/overview',
-                imagePath: sessionStorage.getItem('image_path')
-            },
         }),
         created() {
             this.$EventBus.$on('errorModalOpen', (message) => {
@@ -83,33 +79,23 @@
                 this.$refs.cModal.open();
                 location.reload();
             });
-            this.$EventBus.$on('clickGettingStartBtn', () => {
-                this.changeDrawerRightMode('login');
-                this.drawerRight = !this.drawerRight;
-            });
             this.$EventBus.$on('setRightDrawerFlipped', (value) => {
                 this.drawerRight = false;
             });
-            this.$EventBus.$on('isLogined', (v) => {
-                this.isLogined = true;
-                this.userNickname = sessionStorage.getItem('nickname');
-            });
             this.isUserLogined();
-            this.userNickname = sessionStorage.getItem('nickname');
-            this.mypageRoute.imagePath = sessionStorage.getItem('image_path');
         },
         components: {
             Login
         },
         methods: {
             signUp()    {
-                this.$router.push("/admin/user");
+                this.$router.push("/user");
             },
             logout(userId) {
                 sessionStorage.clear();
                 this.isLogined = false;
                 location.reload();
-                this.$router.push('/admin/overview');
+                this.$router.push('/');
             },
             isUserLogined() {
                 if (sessionStorage.userid != undefined) {

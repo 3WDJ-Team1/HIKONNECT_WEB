@@ -1,14 +1,17 @@
+<!--
+    @author Jiyoon Lee <jiyoon3421@gmail.com>
+ -->
 <template>
     <v-app>
         <v-form v-model="valid" ref="form">
-            <v-subheader style="font-size: 18px;">Type the group name</v-subheader>
+            <v-subheader style="font-size: 18px;">그룹 이름</v-subheader>
             <v-text-field
                     name="notice_title"
                     v-model="title"
                     :rules="titleRules"
                     required
             ></v-text-field>
-            <v-subheader style="font-size: 18px;">Fill the recruit notice</v-subheader>
+            <v-subheader style="font-size: 18px;">모집내용</v-subheader>
             <v-text-field
                     name="notice_text"
                     v-model="text"
@@ -19,7 +22,7 @@
             ></v-text-field>
             <div style="display: flex;">
                 <div style="margin: 5px; flex-grow: 1;">
-                    <v-subheader style="font-size: 15px;">Fill minimun number of member</v-subheader>
+                    <v-subheader style="font-size: 15px;">최소 모집 인원</v-subheader>
                     <v-text-field
                             name="minimum"
                             v-model="min"
@@ -28,7 +31,7 @@
                     ></v-text-field>
                 </div>
                 <div style="margin: 5px; flex-grow: 1;">
-                    <v-subheader style="font-size: 15px;">Fill minimun number of member</v-subheader>
+                    <v-subheader style="font-size: 15px;">최대 모집 인원</v-subheader>
                     <v-text-field
                             name="maximum"
                             v-model="max"

@@ -1,63 +1,77 @@
+<!--
+    @author Jiyoon Lee <jiyoon3421@gmail.com>
+ -->
 <template>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-            <card>
-                <h4 slot="header" class="card-title">Fill Hiking Plan In</h4>
-                <form>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <fg-input type="text"
-                                      label="제목"
-                                      :disabled="disabledID"
-                                      v-model="title">
-                            </fg-input>
+                <card>
+                    <h4 slot="header" class="card-title">산행 일정 작성</h4>
+                    <form>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <fg-input type="text"
+                                          label="제목"
+                                          :disabled="disabledID"
+                                          v-model="title">
+                                </fg-input>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>모집 내용</label>
-                                <textarea rows="5" class="form-control border-input"
-                                          v-model="content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>모집 내용</label>
+                                    <textarea rows="5" class="form-control border-input"
+                                              v-model="content">
                                 </textarea>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>등산 경로</label>
-                                <autocomplete></autocomplete>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>등산 경로</label>
+                                    <img height="20px" src="http://localhost:8000/images/map.png" alt="">
+                                    <autocomplete></autocomplete>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>산행일자</label>
+                                    <img height="20px" src="http://localhost:8000/images/plan.png" alt="">
+                                    <div style="height: 30px; width: 150px; border: solid 1px #e3e3e3; border-radius: 5px;">
+                                        <datetime
+                                                style="margin: 5px;"
+                                                v-model="date"
+                                                placeholder="산행일자">
+                                        </datetime>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>산행시간</label>
+                                    <img height="20px" src="http://localhost:8000/images/time.png" alt="">
+                                    <br>
+                                    <vue-timepicker
+                                            :format="yourFormat"
+                                            v-model="yourData">
+                                    </vue-timepicker>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>산행일자</label>
-                                <datetime
-                                        v-model="date"
-                                        placeholder="산행일자">
-                                </datetime>
-                            </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-warning btn-fill float-right"
+                                    @click="backCalender">
+                                나가기
+                            </button>
+                            <button type="submit" class="btn btn-info btn-fill float-right"
+                                    @click="sendData">
+                                제출
+                            </button>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>산행시간</label>
-                                <vue-timepicker
-                                        :format="yourFormat"
-                                        v-model="yourData">
-                                </vue-timepicker>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-info btn-fill float-right"
-                                @click="sendData">
-                            SUBMIT
-                        </button>
-                    </div>
-                </form>
-            </card>
+                    </form>
+                </card>
             </div>
         </div>
     </div>
@@ -66,6 +80,7 @@
     import VueTimepicker from 'vue2-timepicker'
     import autocomplete from './autocomplete'
     import Card from '../../Cards/Card.vue'
+
     export default {
         components: {
             VueTimepicker,
@@ -75,7 +90,7 @@
         name: "group_make_main",
         data() {
             return {
-                yourFormat: 'HH:mm:ss',
+                yourFormat: 'HH:mm',
                 title: '',
                 content: '',
                 date: '',
@@ -84,7 +99,7 @@
                 yourData: {
                     hh: '',
                     mm: '',
-                    ss: ''
+                    ss: '00'
                 },
             }
         },
@@ -97,9 +112,12 @@
             });
         },
         methods: {
+            backCalender()  {
+                this.$EventBus.$emit('backCalender', 'true');
+            },
             sendData() {
                 axios.post(this.$HttpAddr + '/schedule', {
-                    uuid : this.$route.params.groupid,
+                    uuid: this.$route.params.groupid,
                     leader: sessionStorage.getItem('userid')
                     /*
                         @todo localStorage.getItem('userUuid')
@@ -144,3 +162,9 @@
         }
     }
 </script>
+<style>
+    .time-picker input.display-time {
+        border: 1px solid #e3e3e3;
+        border-radius: 6px;
+    }
+</style>

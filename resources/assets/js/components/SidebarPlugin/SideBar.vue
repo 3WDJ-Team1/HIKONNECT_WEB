@@ -5,12 +5,7 @@
        :data-image="backgroundImage">
     <div class="sidebar-wrapper">
       <div class="logo">
-        <a href="/#/admin/overview" class="simple-text">
-            <div class="logo-img">
-                <img src="" alt="">
-            </div>
-          {{title}}
-        </a>
+        <img width="200" src="http://localhost:8000/images/logo.png" alt="" @click="moveHome">
       </div>
 
       <slot name="content"></slot>
@@ -75,6 +70,11 @@
         autoClose: this.autoClose
       }
     },
+      methods:  {
+          moveHome()  {
+              this.$router.push("/")
+          }
+      },
     computed: {
       sidebarStyle () {
         return {

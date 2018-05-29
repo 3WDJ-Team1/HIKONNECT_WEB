@@ -1,19 +1,27 @@
+<!--
+    @author Jiyoon Lee <jiyoon3421@gmail.com>
+ -->
 <template>
     <div class="container" style="padding: 0px;">
-        <autocomplete
-                ref             ="autocomplete"
-                placeholder     ="Search Distribution Groups(name)"
-                :source         ="distributionGroupsEndpoint"
-                input-class     ="form-control"
-                results-property="data"
-                :results-display="formattedDisplay"
-                @selected       ="addDistributionGroup"
-                style           ="width: 200px">
-        </autocomplete>
+        <div class="row">
+            <div class="col-6">
+                <autocomplete
+                        ref             ="autocomplete"
+                        placeholder     ="목적지"
+                        :source         ="distributionGroupsEndpoint"
+                        input-class     ="form-control"
+                        results-property="data"
+                        :results-display="formattedDisplay"
+                        @selected       ="addDistributionGroup">
+                </autocomplete>
+            </div>
+            <div class="col-6">
+                <b-btn style="margin: 0px; padding-top: 4px; height: 30px; width: 50px;" @click="initMap">지도보기</b-btn>
+            </div>
+        </div>
         <sweet-modal ref="map" blocking>
             <eventMap></eventMap>
         </sweet-modal>
-        <b-btn @click="initMap">지도보기</b-btn>
     </div>
 </template>
 <script>
@@ -23,7 +31,8 @@
         data() {
             return {
                 // 산 코드
-                mountain_num: ""
+                mountain_num: "",
+                destination: ''
             }
         },
         components: {
@@ -38,7 +47,7 @@
             },
             // pull autocomplete data
             distributionGroupsEndpoint(n) {
-                return this.$HttpAddr + '/testing/' + n;
+                return this.$HttpAddr + '/searchMount/' + n;
             },
             hideModal() {
                 this.open = false;
@@ -58,4 +67,14 @@
             }
         }
     }
-</script>                         
+</script>
+<style>
+    .autocomplete__box  {
+        height: 30px;
+        width: 150px;
+    }
+    .autocomplete__results__item {
+        width: 150px;
+        height: 30px;
+    }
+</style>

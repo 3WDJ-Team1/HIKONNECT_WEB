@@ -1,3 +1,6 @@
+<!--
+    @author Jiyoon Lee <jiyoon3421@gmail.com>
+ -->
 <template>
     <card>
         <h4 slot="header" class="card-title">Fill Profile In</h4>
@@ -216,11 +219,11 @@
                   Iteate over any file sent over appending the files
                   to the form data.
                 */
-                formData.append('userfile', this.file, this.inputId);
+                formData.append('userfile', this.file, this.inputId + '.jpg');
                 /*
                   Make the request to the POST /select-files URL
                 */
-                axios.post('http://172.26.2.88:3000/image/profile',
+                axios.post('http://hikonnect.ga:3000/image/profile',
                     formData,
                     {
                         headers: {
@@ -260,8 +263,7 @@
                     }).then(response => {
                         if (response.data == 'true') {
                             this.$EventBus.$emit('complitedModalOpen', 'true');
-                            this.$EventBus.$emit('setRightDrawerFlipped', 'true');
-                            this.$router.push('/admin/overview');
+                            this.$router.push('/');
                         }
                         else {
                             console.log(response.data);
@@ -284,7 +286,6 @@
                     }).then(response => {
                         if (response.data == 'true') {
                             this.$EventBus.$emit('complitedModalOpen', 'true');
-                            this.$EventBus.$emit('setRightDrawerFlipped', 'true');
                             sessionStorage.setItem('userid',this.inputId);
                             sessionStorage.setItem('phone',this.inputPhoneNo);
                             sessionStorage.setItem('password',this.inputPw);
@@ -295,7 +296,6 @@
                             sessionStorage.setItem('scv',this.openRange);
                             sessionStorage.setItem('gender',this.selectedGender);
                             sessionStorage.setItem('age',this.selectedAgeGroup);
-                            this.$router.push('/admin/overview');
                         }
                         else {
                             console.log(response.data);

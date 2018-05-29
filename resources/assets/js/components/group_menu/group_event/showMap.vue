@@ -1,3 +1,6 @@
+<!--
+    @author Jiyoon Lee <jiyoon3421@gmail.com>
+ -->
 <template>
     <div id="map" style="height: 400px;"></div>
 </template>
@@ -10,6 +13,7 @@
         },
         name: "show-map",
         created() {
+            // 지도의 코드번호와 경로를 전달 받는다.
             this.$EventBus.$on('eventShowMap', (code, route) => {
                 this.initMap(code, route);
             });

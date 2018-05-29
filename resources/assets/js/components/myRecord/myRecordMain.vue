@@ -1,3 +1,6 @@
+<!--
+    @author Jiyoon Lee <jiyoon3421@gmail.com>
+ -->
 <template>
     <div class="content">
         <sweet-modal ref="level" blocking>
@@ -91,6 +94,7 @@
     </div>
 </template>
 <script>
+    import Chartist from 'chartist'
     import Card from '../Cards/Card.vue'
     import ChartCard from '../Cards/ChartCard.vue'
     import StatsCard from '../Cards/StatsCard.vue'
@@ -109,14 +113,17 @@
                 total_hiking_t: '',
                 lastRecord: [],
                 startDate: [],
+                line: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                 lineChart: {
                     data: {
                         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                        series: []
+                        series: [
+                            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                        ]
                     },
                     options: {
                         low: 0,
-                        high: 80,
+                        high: 35,
                         showArea: false,
                         height: '245px',
                         axisX: {
@@ -139,21 +146,28 @@
                             }
                         }]
                     ]
-                },
-            }
-        },
-        beforeCreate()  {
-            // 가입한 날짜
-            for(this.nowYear; Number(sessionStorage.getItem('createdY')) <= this.nowYear; this.nowYear--)   {
-                this.options.concat({value: this.nowYear, text: this.nowYear});
+                }
             }
         },
         created() {
+            this.axios.post(this.$HttpAddr + '/graph', {
+                userid: sessionStorage.getItem('userid'),
+                year: '2018'
+            }).then(response => {
+                this.lineChart.data.series.push(response.data);
+                console.log(this.lineChart.data.series)
+            });
             this.positionPull();
-            this.graphPull();
             this.lastRecordPull();
+            this.yearSearch();
         },
         methods: {
+            yearSearch()  {
+                // 가입한 날짜
+                for(this.nowYear; Number(sessionStorage.getItem('createdY').substring(0,4)) <= this.nowYear; this.nowYear--)   {
+                    this.options.concat({value: this.nowYear, text: this.nowYear});
+                }
+            },
             levelModalOpen() {
                 this.$refs.level.open();
             },
@@ -171,7 +185,7 @@
                     });
             },
             positionPull() {
-                this.axios.get('http://172.26.2.88:8000/user/' + sessionStorage.getItem('userid'))
+                this.axios.get(this.$HttpAddr + '/user/' + sessionStorage.getItem('userid'))
                     .then(response => {
                         this.rank = response.data[0].grade;
                         this.totalD = response.data.total_distance;
@@ -186,6 +200,7 @@
                     year: '2018'
                 }).then(response => {
                     this.lineChart.data.series.push(response.data);
+                    console.log(sessionStorage.getItem('createdY').substring(0,4))
                 });
             }
         },

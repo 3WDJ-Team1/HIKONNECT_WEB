@@ -7,7 +7,7 @@
 <template>
     <!-- @div       wrapper of this component -->
     <div>
-        <joinButton></joinButton>
+        <joinButton v-if="position != 'notLogin'"></joinButton>
         <!-- @v-tabs    there is information of tabs here -->
         <v-tabs
             icons-and-text
@@ -68,6 +68,30 @@
     export default {
         components: {
             joinButton
+        },
+        data()  {
+            return  {
+                position: ''
+            }
+        },
+        created()   {
+            this.positionGet();
+        },
+        methods:    {
+            positionGet() {
+                if (sessionStorage.getItem('userid') != undefined) {
+                    this.axios.post(Laravel.host + '/api/checkMember', {
+                        uuid: this.$route.params.groupid,
+                        userid: sessionStorage.getItem('userid'),
+                    }).then(response => {
+                        this.position = response.data;
+                        this.$EventBus.$emit('sendPositionInfo', this.position);
+                    });
+                }
+                else {
+                    this.position = 'notLogin';
+                }
+            },
         }
     }
 </script>
