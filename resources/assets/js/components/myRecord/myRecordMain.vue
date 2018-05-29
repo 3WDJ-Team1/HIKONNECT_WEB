@@ -113,13 +113,10 @@
                 total_hiking_t: '',
                 lastRecord: [],
                 startDate: [],
-                line: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                 lineChart: {
                     data: {
                         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                        series: [
-                            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-                        ]
+                        series: []
                     },
                     options: {
                         low: 0,
