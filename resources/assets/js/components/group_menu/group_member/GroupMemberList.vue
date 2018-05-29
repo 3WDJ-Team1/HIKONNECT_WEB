@@ -80,6 +80,7 @@
         created() {
             // 로그인 된 이용자의 위치 가지고 오기
             this.$EventBus.$on('sendPositionInfo', (position) => {
+                console.log(position)
                 if (position != 'guest') {
                     this.position = true;
                 }
