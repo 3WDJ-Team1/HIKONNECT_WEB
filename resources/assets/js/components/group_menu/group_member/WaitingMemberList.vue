@@ -1,10 +1,13 @@
+<!--
+    @author Jiyoon Lee <jiyoon3421@gmail.com>
+ -->
 <template>
     <v-app>
         <v-container style="padding: 0px;">
                     <v-card
                             style="padding-bottom: 1%; border-top: 0px;
     border-left: 0px; padding-top: 1%; border-right: 0px; border-radius: 0px; padding-left: 40px; margin: 0px;"
-                            v-for="user in waitingMembers"
+                            v-for="user in waitingMember"
                             :key="user.nickname"
                             flat>
                         <v-layout
@@ -19,7 +22,7 @@
                                 <v-avatar
                                         slot="activator"
                                         size="42">
-                                    <img :src="'http://172.26.2.88:3000/images/UserProfile/' + user.userid + '.jpg'" alt="avatar"/>
+                                    <img :src="'http://hikonnect.ga:3000/images/UserProfile/' + user.userid + '.jpg'" alt="avatar"/>
                                 </v-avatar>
                             </v-flex>
                             <v-flex
@@ -71,12 +74,17 @@
 </template>
 <script>
     export default {
+        props: {
+            waitingMember: {
+                type: Array
+            }
+        },
         data: () => ({
             groupId         : '',
-            waitingMembers  : [],
             isPushed        : false,
         }),
         methods: {
+            // 참여 수락
             applyUser(userUuid) {
                 console.log(userUuid);
                 axios.put(this.$HttpAddr + "/member/true", {
@@ -96,12 +104,14 @@
                                 verticalAlign: 'top',
                                 type: 'success'
                             });
+
+
                         this.waitingMembers = [];
-                        this.$EventBus.$emit('memberChechSign')
+                        this.$EventBus.$emit('memberCheckSign', 'true')
                     }
                 });
             },
-
+            // 참여 거절
             rejectUser(argUserUuid) {
                 axios.put(this.$HttpAddr + '/member/false', {
                     userid: argUserUuid,
@@ -120,26 +130,17 @@
                                 verticalAlign: 'top',
                                 type: 'warning'
                             });
+
+
                         this.waitingMembers = [];
-                        this.$EventBus.$emit('memberCheckSign')
+                        this.$EventBus.$emit('memberCheckSign', 'true')
                     }
                 });
             }
         },
         created() {
             this.groupId = this.$route.params.groupid;
-            this.$EventBus.$on('sendNotEnterMember', (noEnter)=>{
-                this.waitingMembers = this.waitingMembers.concat(noEnter);
-            });
-            this.$EventBus.$on('reloadMember', () => {
-                this.created();
-            });
         },
-        watch: {
-            '$route' (to, from) {
-                this.groupId = this.$route.params.groupid;
-            }
-        }
     }
 </script>
 <style>

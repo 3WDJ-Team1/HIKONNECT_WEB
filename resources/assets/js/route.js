@@ -21,8 +21,6 @@ import GroupMenuTab         from "./components/group_menu/GroupMenuTab.vue";
 // group notice
 import NoticeListUp         from "./components/group_menu/group_notice/NoticeListUp.vue";
 import NoticeWriteBtn       from './components/group_menu/group_notice/NoticeWriteBtn.vue';
-import NoticeModifyBtn      from './components/group_menu/group_notice/NoticeModifyBtn.vue';
-import NoticeDeleteBtn      from './components/group_menu/group_notice/NoticeDeleteBtn.vue';
 import NoticeFormInside     from './components/group_menu/group_notice/NoticeFormInside.vue';
 
 
@@ -31,8 +29,6 @@ import plan_main            from './components/group_menu/group_event/plan_main'
 import GroupPlanCalendar    from './components/group_menu/group_event/GroupPlanCalendar.vue';
 
 
-// group plan
-import GroupPlan            from './components/group_menu/group_plan/GroupPlan.vue';
 
 // group member list
 import GroupMemberList      from './components/group_menu/group_member/GroupMemberList.vue';
@@ -52,12 +48,12 @@ import Main                 from './components/main/MainPage.vue'
 
 const routes = [
     {
-        path: '/admin',
+        path: '',
         component: DashboardLayout,
-        redirect: '/admin/overview',
+        redirect: '',
         children: [
             {
-                path: 'overview',
+                path: '',
                 name: 'Overview',
                 component: Main
             },
@@ -118,8 +114,6 @@ const routes = [
                                     make        : event_make_main,
                                     // write, modify, delete button of NoticeListUp
                                     write   : NoticeWriteBtn,
-                                    modify  : NoticeModifyBtn,
-                                    delete  : NoticeDeleteBtn,
                                     // components in GroupPlan
                                     calendar    : GroupPlanCalendar,
                                     // component in GroupMemberList

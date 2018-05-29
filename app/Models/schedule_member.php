@@ -76,12 +76,19 @@ class schedule_member extends Model
                     'hiking_group','hiking_group.uuid','=','hiking_schedule.hiking_group'
                 )->orderBy('schedule_member.created_at','DESC')->get();
     }
+
     public function reg_ip ($schedule, $userid, $ip) {
         schedule_member::where([
             ['schedule','=',$schedule],
             ['userid','=',$userid]
         ])->update(['ip_address' => $ip]);
     }
+
+    public function all_reg_ip ($userid, $ip) {
+        schedule_member::where('userid','=',$userid)
+            ->update(['ip_address' => $ip]);
+    }
+
     public function member_list($uuid,$schedule_no) {
         return schedule_member::select('user.userid','user.nickname','user.gender','user.age_group','user.scope','user.phone','user.grade')->where([
             ['hiking_group',$uuid],

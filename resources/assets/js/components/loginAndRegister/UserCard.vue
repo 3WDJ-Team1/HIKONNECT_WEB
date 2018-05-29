@@ -1,9 +1,11 @@
-
+<!--
+    @author Jiyoon Lee <jiyoon3421@gmail.com>
+ -->
 <template>
     <card class="card-user">
         <h5 style="color: #9A9A9A;">PROFILE IMAGE</h5>
         <div class="author">
-            <img class="avatar border-gray" v-if="!image" src="http://localhost:8000/images/unnamed.jpg"/>
+            <img class="avatar border-gray" v-if="!image"/>
             <img class="avatar border-gray" v-else :src="image" />
         </div>
         <div slot="footer" v-if="uploadButtonVis" class="text-center">
@@ -33,7 +35,7 @@
             });
             if(sessionStorage.getItem('userid') != undefined)   {
                 this.uploadButtonVis = false;
-                this.image = 'http://172.26.2.88:3000/images/UserProfile/' + sessionStorage.getItem('userid') + '.jpg'
+                this.image = 'http://hikonnect.ga:3000/images/UserProfile/' + sessionStorage.getItem('userid') + '.jpg'
             }
         },
         /*

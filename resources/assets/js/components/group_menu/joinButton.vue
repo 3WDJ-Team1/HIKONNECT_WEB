@@ -1,3 +1,6 @@
+<!--
+    @author Jiyoon Lee <jiyoon3421@gmail.com>
+ -->
 <template>
 
         <div>
@@ -10,7 +13,7 @@
                                 <ul class="nav navbar-nav mr-auto">
                                         <drop-down tag="li">
                                                 <template slot="title">
-                                                        <i class="nc-icon nc-planet"></i>
+                                                        <i class="nc-icon nc-grid-45"></i>
                                                 </template>
                                                 <a v-if="position == 'owner'" class="dropdown-item" @click="updatedModal">그룹정보 수정</a>
                                                 <a v-if="position == 'owner'" class="dropdown-item" @click="deleted">그룹 삭제</a>
@@ -34,25 +37,13 @@
             position: '',
         }),
         created() {
-            this.positionGet();
+            this.$EventBus.$on('sendPositionInfo', (position) => {
+                    this.position = position;
+            });
         },
         methods: {
             updatedModal()  {
                 this.$refs.write.open();
-            },
-            positionGet() {
-                if (sessionStorage.getItem('userid') != undefined) {
-                    this.axios.post(Laravel.host + '/api/checkMember', {
-                        uuid: this.$route.params.groupid,
-                        userid: sessionStorage.getItem('userid'),
-                    }).then(response => {
-                        this.position = response.data;
-                        this.$EventBus.$emit('sendPositionInfo', this.position);
-                    });
-                }
-                else {
-                    this.position = 'notLogin';
-                }
             },
             leaveGroup() {
                 // 로그인 되어 있을 경우
@@ -69,10 +60,12 @@
                                         component: notification,
                                         icon: 'nc-icon nc-app',
                                         horizontalAlign: 'center',
+                                        horizontalAlign: 'center',
                                         verticalAlign: 'top',
                                         type: 'success'
                                     });
                                 this.position = 'guest';
+                                location.reload();
                             }
                         });
             },
@@ -94,7 +87,7 @@
                             this.$EventBus.$emit('group_make_sign', 'true');
                         }
                     });
-                this.$router.push('/admin/group-list')
+                this.$router.push('/group-list')
                 this.$parent.close();
                 this.moveGroupList();
             },
@@ -120,6 +113,7 @@
                                         type: 'success'
                                     });
                                 this.position = 'member';
+                                location.reload();
                             }
                         });
                 }

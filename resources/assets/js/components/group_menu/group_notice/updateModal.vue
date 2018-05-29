@@ -1,14 +1,11 @@
 <!--
-    @file   NoticeFormInside.vue
-    @brief  A component that is inner of 'write or edit' modal
     @author Sungeun Kang <kasueu0814@gmail.com> Jiyoon Lee <jiyoon3421@gmail.com
-    @todo   error test
  -->
 <template>
     <!-- @div   A container of this component -->
     <v-app>
         <!-- @v-form    form script of vuetify -->
-        <v-form v-model="valid" ref="form">
+        <v-form ref="form">
             <v-subheader style="font-size: 20px;">제목</v-subheader>
             <!-- @v-text-field#notice_input_title       text of title will be input -->
             <v-text-field
@@ -27,11 +24,45 @@
                     rows="12"
                     required
             ></v-text-field>
-            <div class="filebox bs3-primary">
-                <input class="upload-name" style="width: 400px;" :value="fileText" disabled="disabled">
-                <label for="file">업로드</label>
-                <input type="file" id="file" ref="file" class="upload-hidden" multiple
-                       v-on:change="handleFilesUpload()"/>
+            <div class="row">
+                <div class="filebox bs3-primary col-9">
+                    <input class="upload-name" style="width: 300px;" :value="fileText" disabled="disabled">
+                    <label for="file" v-if="check == 'accepted'">업로드</label>
+                    <input type="file" id="file" ref="file" class="upload-hidden" multiple
+                           v-on:change="handleFilesUpload()"/>
+
+                    <label for="fake" v-if="check != 'accepted'">업로드</label>
+                    <input type="file" id="fake" disabled class="upload-hidden" multiple/>
+                </div>
+                <div class="col-3">
+                    <div class="row">
+                        <div class="col-12">
+                            <b-form-checkbox
+                                            id="putImage"
+                                             v-model="check"
+                                             style="padding-top: 15px;"
+                                             value="accepted"
+                                             unchecked-value="not_accepted"
+                            >
+                                {{ checkBoxLabel }}
+                            </b-form-checkbox>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <b-form-checkbox
+                                            v-if="updateItem.picture == 'true'"
+                                            id="removeImage"
+                                             v-model="removeImage"
+                                             style="padding-top: 15px;"
+                                             value="accepted"
+                                             unchecked-value="not_accepted"
+                            >
+                                사진 지우기
+                            </b-form-checkbox>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- v-btn      button for submit -->
             <v-btn
@@ -47,6 +78,11 @@
 
 <script>
     export default {
+        props:  {
+            updateItem: {
+                type: Object
+            }
+        },
         data: () => ({
             /**
              * title        (String)    the title of a notice which was selected.
@@ -62,16 +98,54 @@
              */
             title: '',
             text: '',
-            valid: false,
             fileText: '파일선택',
             picture: 'false',
+            checkBoxLabel: '사진바꾸기',
+            removeImage: '',
             titleRules: [
                 title => !!title || 'Title is required.'
             ],
             textRules: [
                 text => !!text || 'Text is required.'
             ],
+            check: ""
         }),
+        watch:  {
+            removeImage: function () {
+                if(this.removeImage == 'accepted')  {
+                    this.picture = 'false';
+                    $('#putImage').attr("disabled", "disabled");
+                } else  {
+                    this.picture = 'true';
+                    $('#putImage').removeAttr("disabled");
+                }
+            },
+            check: function () {
+                if(this.checkBoxLabel == '사진 추가하기') {
+                    if(this.check == 'accepted')  {
+                        this.picture = 'true';
+                        $('#removeImage').attr("disabled", "disabled");
+                    } else  {
+                        this.picture = 'false';
+                        $('#removeImage').removeAttr("disabled");
+                    }
+                } else {
+                    if(this.check == 'accepted')  {
+                        this.picture = 'true';
+                    } else  {
+                        this.picture = 'false';
+                    }
+                }
+            }
+        },
+        created()   {
+            this.picture = this.updateItem.picture;
+            if(this.picture == 'false')   {
+                this.checkBoxLabel = '사진 추가하기'
+            }
+            this.title = this.updateItem.title;
+            this.text = this.updateItem.content;
+        },
         methods: {
             // 파일 이름을 input 박스에 넣기 위한 메서드
             handleFilesUpload() {
@@ -88,7 +162,7 @@
                   Iteate over any file sent over appending the files
                   to the form data.
                 */
-                formData.append('announce', file, this.fileText);
+                formData.append('announce', file, this.updateItem.no + '.jpg');
                 /*
                   Make the request to the POST /select-files URL
                 */
@@ -110,15 +184,9 @@
              * @brief       if submit button is clicked, send http request.
              */
             submit() {
-                // fileText에 사진에 저장 되어 있을 겨우 true
-                if(this.fileText != '파일선택') {
-                    this.picture = 'true';
-                }
                 // 서버로 공지사항 정보 보내기
-                axios.post(this.$HttpAddr + '/notice', {
+                this.axios.put(this.$HttpAddr + '/notice/' + this.updateItem.no, {
                     // nickname: this.nickname,
-                    writer: sessionStorage.getItem('userid'), // user's uuid,
-                    uuid: this.$route.params.groupid,
                     title: this.title,
                     content: this.text,
                     picture: this.picture
@@ -133,12 +201,11 @@
                         }
                         // 공지사항을 저장했으니 form-input 지우기
                         this.$refs.form.reset();
-                        // 공지사항이 쓰여 졌으면 공지사항 리스트를 다시 재배열해야하므로 event보내기
-                        this.$EventBus.$emit('newNoticeWrited', true);
                     }
                 });
                 // 공지사항 쓰기 모달 닫기
                 this.$parent.close();
+                location.reload();
             },
         }
     }
@@ -209,8 +276,12 @@
     }
 
     .filebox.bs3-primary label {
+        margin: 0px;
         color: #fff;
         background-color: #337ab7;
         border-color: #2e6da4;
+    }
+    .card label {
+        padding-top: 2px;
     }
 </style>

@@ -1,3 +1,6 @@
+<!--
+    @author Jiyoon Lee <jiyoon3421@gmail.com>
+ -->
 <template>
     <div>
         <show-map></show-map>
@@ -31,6 +34,7 @@
             Card
         },
         created() {
+            // 모달에 띄워 줄 이벤트 전달 받기
             this.$EventBus.$on('sendContent', (content) => {
                 this.content = content;
             })

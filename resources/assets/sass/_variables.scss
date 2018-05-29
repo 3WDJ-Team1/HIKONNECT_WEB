@@ -3,6 +3,7 @@
 // Body
 $body-bg: #f5f8fa;
 
+
 // Borders
 $laravel-border-color: darken($body-bg, 10%);
 $list-group-border: $laravel-border-color;
@@ -18,7 +19,9 @@ $brand-warning: #cbb956;
 $brand-danger: #bf5329;
 
 // Typography
-$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+// icon
+@import url("http://hikonnect.ga/css/nucleo-icons.css");
+
 $font-family-sans-serif: "Raleway", sans-serif;
 $font-size-base: 14px;
 $line-height-base: 1.6;

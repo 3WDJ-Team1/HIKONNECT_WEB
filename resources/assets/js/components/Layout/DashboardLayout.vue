@@ -1,4 +1,6 @@
-
+<!--
+    @author Jiyoon Lee <jiyoon3421@gmail.com>
+ -->
 <template>
     <div class="wrapper">
         <side-bar>
@@ -16,19 +18,19 @@
                     <h3>{{ userNickname }}</h3>
                 </div>
             </div>
-            <sidebar-link to="/admin/group-list">
+            <sidebar-link to="/group-list">
                 <i class="nc-icon nc-circle-09"></i>
                 <p>그룹찾기</p>
             </sidebar-link>
-            <sidebar-link to="/admin/record" v-if="login">
+            <sidebar-link to="/record" v-if="login">
                 <i class="nc-icon nc-notes"></i>
                 <p>나의 활동기록</p>
             </sidebar-link>
-            <sidebar-link to="/admin/table-list" v-if="login">
+            <sidebar-link to="/table-list" v-if="login">
                 <i class="nc-icon nc-paper-2"></i>
                 <p>나의 그룹</p>
             </sidebar-link>
-            <sidebar-link to="/admin/user" v-if="login">
+            <sidebar-link to="/user" v-if="login">
                 <i class="nc-icon nc-atom"></i>
                 <p>마이 페이지</p>
             </sidebar-link>
@@ -55,7 +57,7 @@
 
     export default {
         data: () => ({
-            imageSrc: "http://172.26.2.88:3000/images/UserProfile/" + sessionStorage.getItem('userid') + ".jpg",
+            imageSrc: "http://hikonnect.ga:3000/images/UserProfile/" + sessionStorage.getItem('userid') + ".jpg",
             login: false,
             userNickname: sessionStorage.getItem('nickname'),
         }),

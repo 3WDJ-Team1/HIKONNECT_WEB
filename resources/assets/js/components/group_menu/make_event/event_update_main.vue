@@ -12,7 +12,6 @@
                             <div class="col-md-12">
                                 <fg-input type="text"
                                           label="제목"
-                                          :disabled="disabledID"
                                           v-model="title">
                                 </fg-input>
                             </div>
@@ -31,14 +30,12 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>등산 경로</label>
-                                    <img height="20px" src="http://hikonnect.ga/images/map.png" alt="">
-                                    <autocomplete></autocomplete>
+                                    <autocomplete :updateItem="updateItem"></autocomplete>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>산행일자</label>
-                                    <img height="20px" src="http://hikonnect.ga/images/plan.png" alt="">
                                     <div style="height: 30px; width: 150px; border: solid 1px #e3e3e3; border-radius: 5px;">
                                         <datetime
                                                 style="margin: 5px;"
@@ -51,7 +48,6 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>산행시간</label>
-                                    <img height="20px" src="http://hikonnect.ga/images/time.png" alt="">
                                     <br>
                                     <vue-timepicker
                                             :format="yourFormat"
@@ -78,22 +74,27 @@
 </template>
 <script>
     import VueTimepicker from 'vue2-timepicker'
-    import autocomplete from './autocomplete'
+    import autocomplete from './update_autocomplete'
     import Card from '../../Cards/Card.vue'
 
     export default {
+        props:  {
+            updateItem: {
+                type: Object
+            }
+        },
         components: {
             VueTimepicker,
             autocomplete,
             Card
         },
-        name: "group_make_main",
         data() {
             return {
                 yourFormat: 'HH:mm',
                 title: '',
                 content: '',
                 date: '',
+                destination: '',
                 mountain_path: [],
                 mountain_num: '',
                 yourData: {
@@ -104,6 +105,16 @@
             }
         },
         created() {
+            // 받아온 updateItem을 input박스에 채우기
+            this.title = this.updateItem.title;
+            this.content = this.updateItem.desc;
+            this.date = this.updateItem.date.substring(0, 4) + '-' + this.updateItem.date.substring(5, 7) + '-'
+                + this.updateItem.date.substring(8, 10) + 'T00:00:00.000Z';
+            this.yourData['HH'] = this.updateItem.time.substring(0, 2);
+            this.yourData['mm'] = this.updateItem.time.substring(3, 5);
+            this.mountain_path = this.updateItem.route;
+            this.mountain_num = this.updateItem.mnt_id;
+            this.destination = this.updateItem.destination;
             // 이벤트 받기
             // '이벤트 명', function(받을 데이터)
             this.$EventBus.$on('mountain_path', (path, num) => {

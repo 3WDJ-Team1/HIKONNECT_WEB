@@ -1,4 +1,6 @@
-
+<!--
+    @author Jiyoon Lee <jiyoon3421@gmail.com>
+ -->
 <template>
     <div class="row" id="serchContainer">
         <div class="col-md-2">
@@ -9,6 +11,7 @@
         </div>
         <div class="col-md-8">
             <fg-input type="text"
+                      @keyup.enter.native="inputSearch"
                       placeholder="검색어를 입력하시오."
                       v-model="inputForm">
             </fg-input>

@@ -7,7 +7,7 @@
             <div class="col-6">
                 <autocomplete
                         ref             ="autocomplete"
-                        placeholder     ="목적지"
+                        :placeholder     ="updateItem.destination"
                         :source         ="distributionGroupsEndpoint"
                         input-class     ="form-control"
                         results-property="data"
@@ -26,13 +26,17 @@
 </template>
 <script>
     import Autocomplete from 'vuejs-auto-complete'
-    import eventMap from './event_map'
+    import eventMap from './update_event_map'
     export default {
+        props:  {
+            updateItem: {
+                type: Object
+            }
+        },
         data() {
             return {
                 // 산 코드
                 mountain_num: "",
-                destination: ''
             }
         },
         components: {
@@ -43,7 +47,11 @@
             ///////////////////////////////////////// 지도 api
             initMap() {
                 this.$refs.map.open();
-                this.$EventBus.$emit('event_make_map', this.mountain_num);
+                if(this.mountain_num == '')  {
+                    this.$EventBus.$emit('event_make_map_update', this.updateItem.mnt_id, this.updateItem.route);
+                } else  {
+                    this.$EventBus.$emit('event_make_map', this.mountain_num);
+                }
             },
             // pull autocomplete data
             distributionGroupsEndpoint(n) {

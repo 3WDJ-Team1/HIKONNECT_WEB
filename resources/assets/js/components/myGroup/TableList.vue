@@ -112,14 +112,14 @@
                 this.$refs.write.open();
             },
             mygroup() {
-                this.axios.post('http://172.26.2.88:8000/api/mygroup', {
+                this.axios.post(this.$HttpAddr + '/mygroup', {
                     userid: sessionStorage.getItem('userid')
                 }).then(response => {
                     this.tableG.data = this.tableG.data.concat(response.data);
                 });
             },
             myschedule()    {
-                this.axios.post('http://172.26.2.88:8000/api/myschedule', {
+                this.axios.post(this.$HttpAddr + '/myschedule', {
                     userid: sessionStorage.getItem('userid')
                 }).then(response => {
                     this.tableS.data = this.tableS.data.concat(response.data);

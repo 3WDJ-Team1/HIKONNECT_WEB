@@ -6,12 +6,7 @@
        :data-image="backgroundImage">
     <div class="sidebar-wrapper">
       <div class="logo">
-        <a href="/#/admin/overview" class="simple-text">
-            <div class="logo-img">
-                <img src="" alt="">
-            </div>
-          {{title}}
-        </a>
+        <img width="200" src="http://hikonnect.ga/images/logo.png" alt="" @click="moveHome">
       </div>
 
       <slot name="content"></slot>
@@ -52,7 +47,7 @@
       },
       backgroundImage: {
         type: String,
-        default: 'http://localhost:8000/images/sidebar-5.jpg'
+        default: 'http://hikonnect.ga/images/sidebar-5.jpg'
       },
       activeColor: {
         type: String,
@@ -76,6 +71,11 @@
         autoClose: this.autoClose
       }
     },
+      methods:  {
+          moveHome()  {
+              this.$router.push("/")
+          }
+      },
     computed: {
       sidebarStyle () {
         return {
