@@ -180,7 +180,7 @@ class HikingGroupController extends Controller
         } catch (Exception $e) {
             return 'Error : ' + $e;
         }
-        if ($is_member == true && $is_owner == true)
+        if ($is_owner == true)
             return response()->json('owner');
         elseif ($is_member == true && $is_owner == false)
             return response()->json('member');
