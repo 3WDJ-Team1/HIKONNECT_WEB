@@ -31,14 +31,14 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>등산 경로</label>
-                                    <img height="20px" src="http://localhost:8000/images/map.png" alt="">
+                                    <img height="20px" src="http://hikonnect.ga/images/map.png" alt="">
                                     <autocomplete></autocomplete>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>산행일자</label>
-                                    <img height="20px" src="http://localhost:8000/images/plan.png" alt="">
+                                    <img height="20px" src="http://hikonnect.ga/images/plan.png" alt="">
                                     <div style="height: 30px; width: 150px; border: solid 1px #e3e3e3; border-radius: 5px;">
                                         <datetime
                                                 style="margin: 5px;"
@@ -51,7 +51,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>산행시간</label>
-                                    <img height="20px" src="http://localhost:8000/images/time.png" alt="">
+                                    <img height="20px" src="http://hikonnect.ga/images/time.png" alt="">
                                     <br>
                                     <vue-timepicker
                                             :format="yourFormat"
