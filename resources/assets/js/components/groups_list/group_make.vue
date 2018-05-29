@@ -30,6 +30,7 @@
                             required
                     ></v-text-field>
                 </div>
+
                 <div style="margin: 5px; flex-grow: 1;">
                     <v-subheader style="font-size: 15px;">최대 모집 인원</v-subheader>
                     <v-text-field

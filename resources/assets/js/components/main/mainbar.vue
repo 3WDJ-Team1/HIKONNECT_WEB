@@ -1,3 +1,4 @@
+
 <template>
     <div>
         <nav class="navbar navbar-default" style="width: 700px">

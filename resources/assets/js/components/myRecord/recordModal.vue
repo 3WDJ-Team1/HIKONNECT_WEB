@@ -6,6 +6,7 @@
         <table class="table" style="text-align:center;">
             <tbody>
             <tr>
+
                 <td style="border-right: solid; color: rgb(244, 244, 244);">
                     <h6 style="font-size: 12px; color: #9A9A9A; margin: 0px; vertical-align: middle;">그룹 이름</h6>
                 </td>

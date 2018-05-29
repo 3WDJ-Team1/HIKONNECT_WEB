@@ -1,3 +1,4 @@
+
 <template>
     <div>
         <table class="table" style="text-align:center;">

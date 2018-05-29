@@ -85,6 +85,7 @@
                 }
             });
         },
+
         methods: {
             // 이벤트 만들기
             makeEvent() {

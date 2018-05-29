@@ -1,4 +1,4 @@
-<!-- 
+<!--
     @file   NoticeFormInside.vue
     @brief  A component that is inner of 'write or edit' modal
     @author Sungeun Kang <kasueu0814@gmail.com> Jiyoon Lee <jiyoon3421@gmail.com

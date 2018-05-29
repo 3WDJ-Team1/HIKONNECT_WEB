@@ -2,6 +2,7 @@
     @author Jiyoon Lee <jiyoon3421@gmail.com>
  -->
 <template>
+
         <div>
                 <sweet-modal ref="write" blocking>
                         <update_delete-modal></update_delete-modal>

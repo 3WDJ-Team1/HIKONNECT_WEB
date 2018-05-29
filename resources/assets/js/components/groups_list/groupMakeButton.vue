@@ -18,6 +18,7 @@
             <br>
             만들기
         </v-btn>
+
         <sweet-modal ref="write" blocking>
             <router-view name="make"></router-view>
         </sweet-modal>
