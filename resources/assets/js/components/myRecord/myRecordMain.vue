@@ -117,6 +117,7 @@
                     data: {
                         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                         series: []
+
                     },
                     options: {
                         low: 0,
