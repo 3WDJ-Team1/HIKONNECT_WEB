@@ -47,11 +47,6 @@
         data: () => ({
             userId: "",
             userPw: "",
-            rules: {
-                isBlanked: [
-                    v => !!v || 'This is required',
-                ]
-            },
         }),
         methods: {
             login() {
