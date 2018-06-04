@@ -14,8 +14,8 @@
         name: "show-map",
         created() {
             // 지도의 코드번호와 경로를 전달 받는다.
-            this.$EventBus.$on('eventShowMap', (code, route) => {
-                this.initMap(code, route);
+            this.$EventBus.$on('eventShowMap', (event) => {
+                this.initMap(event.mnt_id, event.route);
             });
         },
         methods: {

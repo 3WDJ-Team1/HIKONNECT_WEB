@@ -25,6 +25,7 @@
         <div class="row">
             <div class="col-md-12">
                 <fg-input
+                          @keyup.enter.native="login"
                           label       ="Enter password"
                           v-model     ="userPw"
                           type        ="password">

@@ -21,6 +21,7 @@
                                 <div class="form-group">
                                     <label>모집 내용</label>
                                     <textarea rows="5" class="form-control border-input"
+                                              @keyup.enter.native="enterEvent"
                                               v-model="content">
                                 </textarea>
                                 </div>
@@ -123,11 +124,14 @@
             });
         },
         methods: {
+            enterEvent()    {
+                this.content += "<br>";
+            },
             backCalender()  {
                 this.$EventBus.$emit('backCalender', 'true');
             },
             sendData() {
-                axios.post(this.$HttpAddr + '/schedule', {
+                axios.put(this.$HttpAddr + '/schedule', {
                     uuid: this.$route.params.groupid,
                     leader: sessionStorage.getItem('userid')
                     /*
@@ -136,6 +140,7 @@
                     mnt_id: this.mountain_num,
                     tt: this.title,
                     ct: this.content,
+                    no: this.updateItem.no,
                     stDate: this.date.substring(0, 4) + "-" + this.date.substring(5, 7) + "-" + this.date.substring(8, 10) +
                     " " + this.yourData['hh'] + ":" + this.yourData['mm'] + ":" + this.yourData['ss'],
                     mountP: this.mountain_path

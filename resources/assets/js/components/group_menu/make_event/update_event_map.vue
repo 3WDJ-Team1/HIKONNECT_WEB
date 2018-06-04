@@ -6,7 +6,7 @@
         <h3>산 경로를 찍어주세요.</h3>
         <div
                 id="map"
-                style="height: 400px;">
+                style="height: 420px;">
         </div>
         <div class="text-center">
             <button type="submit" class="btn btn-info btn-fill float-right"
