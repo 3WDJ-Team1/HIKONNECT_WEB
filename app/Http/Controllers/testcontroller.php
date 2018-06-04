@@ -225,7 +225,8 @@ class testcontroller extends Controller
                     member_no,
                     latitude,
                     longitude,
-                    userid
+                    userid,
+                    hiking_state
                 FROM schedule_member
                 WHERE schedule = (
                     SELECT schedule
@@ -365,6 +366,7 @@ class testcontroller extends Controller
                     FROM schedule_member as sub_sm
                     WHERE member_no = '${member_no}'
                 )
+                AND sm.hiking_state <> 0
                 AND sm.distance IS NOT NULL
                 ORDER BY rank;"
             )
