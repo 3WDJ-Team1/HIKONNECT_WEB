@@ -21,7 +21,7 @@
                         <v-btn
                                 class   ="red darken-4 mt-5"
                                 dark
-                                href="https://play.google.com/store/search?q=hikonnect"
+                                href="https://play.google.com/store/apps/details?id=kr.ac.yjc.wdj.hikonnect"
                                 large
                                 style   ="padding: 0;">
                             GET APPLICATION

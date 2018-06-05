@@ -23,7 +23,7 @@
                 var flightPlanCoordinates = [];
                 var flightPath = [];
                 var map = new google.maps.Map(document.getElementById('map'), {
-                    zoom: 11,
+                    zoom: 16,
                     mapTypeId: 'terrain'
                 });
 

@@ -27,7 +27,7 @@
         </card>
         <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading">
              <span slot="no-more">
-                There is no more Hacker News :(
+                그룹 리스트가 없습니다 :(
              </span>
         </infinite-loading>
     </div>

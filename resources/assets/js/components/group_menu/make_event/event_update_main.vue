@@ -131,7 +131,6 @@
                 this.$EventBus.$emit('backCalender', 'true');
             },
             sendData() {
-
                 axios.put(this.$HttpAddr + '/schedule', {
                     uuid: this.$route.params.groupid,
                     leader: sessionStorage.getItem('userid')
