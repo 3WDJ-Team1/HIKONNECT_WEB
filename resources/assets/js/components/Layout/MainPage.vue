@@ -11,10 +11,6 @@
                             align-center
                             justify-center
                             class="white--text">
-                        <img
-                                :src="httpAddr + '/images/hikonnect.png'"
-                                alt="Vuetify.js"
-                                height="100">
                         <h1
                                 class="white--text mb-2
                         display-1
@@ -25,8 +21,8 @@
                         <v-btn
                                 class   ="red darken-4 mt-5"
                                 dark
+                                href="https://play.google.com/store/apps/details?id=kr.ac.yjc.wdj.hikonnect"
                                 large
-                                @click  ="login()"
                                 style   ="padding: 0;">
                             GET APPLICATION
                         </v-btn>
@@ -136,15 +132,6 @@
                             column
                             align-center
                             justify-end>
-                        <!-- <v-btn
-                        class="light-blue darken-1 mt-5"
-                        dark
-                        large
-                        href="/#/list"
-                        style="margin-bottom: 5%;"
-                        >
-                        FIND GROUPS
-                        </v-btn> -->
                     </v-layout>
                 </v-parallax>
             </section>
@@ -284,11 +271,6 @@
                 }
             ]
         }),
-        methods: {
-            login: function() {
-                this.$EventBus.$emit('clickGettingStartBtn');
-            },
-        }
     }
 </script>
 <style>

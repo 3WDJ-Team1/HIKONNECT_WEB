@@ -7,36 +7,39 @@
             align-content-center
             justify-center
             fluid
-            style="padding-left: 0; padding-right: 0;">
+            style="padding-left: 0; padding-right: 0; margin-left: 0px;">
         <h1
-                style="font-weight: bold;">
+                style="font-weight: bold; color: #47714c;">
             SIGN IN
         </h1>
-        <v-form>
-            <v-text-field
-                    label       ="Enter ID"
-                    v-model     ="userId"
-                    :rules      ="rules.isBlanked"
-                    prepend-icon="person"
-                    required>
-            </v-text-field>
-            <v-text-field
-                    label       ="Enter password"
-                    v-model     ="userPw"
-                    type        ="password"
-                    :rules      ="rules.isBlanked"
-                    prepend-icon="lock"
-                    required>
-            </v-text-field>
-        </v-form>
-        <v-btn
-                @click  ="login"
-                block
-                color   ="light-green"
-                dark
-                style   ="padding: 0; margin: 0 5%;">
-            sign in!
-        </v-btn>
+
+        <form>
+        <div class="row">
+            <div class="col-md-12">
+                <fg-input type      ="text"
+                          label     ="Enter ID"
+                          v-model   ="userId">
+                </fg-input>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <fg-input
+                          @keyup.enter.native="login"
+                          label       ="Enter password"
+                          v-model     ="userPw"
+                          type        ="password">
+                </fg-input>
+            </div>
+
+        </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-fill" style="background-color: #47714c; border-color: #47714c;"
+                        @click="login">
+                    sign in!
+                </button>
+            </div>
+        </form>
     </v-container>
 </template>
 
@@ -45,11 +48,6 @@
         data: () => ({
             userId: "",
             userPw: "",
-            rules: {
-                isBlanked: [
-                    v => !!v || 'This is required',
-                ]
-            },
         }),
         methods: {
             login() {

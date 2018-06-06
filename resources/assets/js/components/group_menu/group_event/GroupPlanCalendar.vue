@@ -35,7 +35,7 @@
                         </tr>
                         </tbody>
                     </table>
-                    <button class="BButton" style="float: right;" v-if="event.position == 'guest'" @click="joinPlan(event.no)">
+                    <button class="BButton" style="float: right;" v-if="event.position == 'guest' && groupPosition == 'member'" @click="joinPlan(event.no)">
                         <i class="nc-icon nc-simple-add"></i>
                         JOIN
                     </button>
@@ -52,7 +52,7 @@ nc-simple-delete"></i>
                         <i class="nc-icon nc-simple-remove"></i>
                         DELETE
                     </button>
-                    <button class="BButton" style="float: right; margin-right: 10px;" @click="openShowModal(event.desc, event.mnt_id, event.route)">
+                    <button class="BButton" style="float: right; margin-right: 10px;" @click="openShowModal(event)">
                         <i class="nc-icon nc-square-pin"></i>
                         SHOW PATH
                     </button>
@@ -73,7 +73,8 @@ nc-simple-delete"></i>
         },
         data () {
             return {
-                hikingEvents: []
+                hikingEvents: [],
+                groupPosition: ''
             }
         },
         methods: {
@@ -153,12 +154,12 @@ nc-simple-delete"></i>
                 });
             },
             // show path 클릭 시 일정 상세정보 모달을 보여준다.
-            openShowModal: function (content, code, route) {
+            openShowModal: function (event) {
                 this.$refs.show.open();
                 // 상세정보를 보낸다.
-                this.$EventBus.$emit('sendContent', content);
+                this.$EventBus.$emit('sendContent', event);
                 // 상제 정보에 보여 줄 지도에 코드번호와 경로 번호를 보낸다.
-                this.$EventBus.$emit('eventShowMap', code, route);
+                this.$EventBus.$emit('eventShowMap', event);
             },
             // 캘린더 리스트 불러오기
             calendarList()  {
@@ -196,6 +197,9 @@ nc-simple-delete"></i>
         },
         // 캘린더 리스트 불러오기
         created() {
+            this.$EventBus.$on('sendPositionInfo', (position) => {
+                    this.groupPosition = position;
+            });
             this.calendarList();
         }
     }
@@ -206,6 +210,9 @@ nc-simple-delete"></i>
     }
     .BButton:hover    {
         color: #df21ffa3;
+    }
+    .sweet-modal.is-visible {
+        max-width: 100%;
     }
 
 </style>

@@ -225,7 +225,8 @@ class testcontroller extends Controller
                     member_no,
                     latitude,
                     longitude,
-                    userid
+                    userid,
+                    hiking_state
                 FROM schedule_member
                 WHERE schedule = (
                     SELECT schedule
@@ -365,6 +366,7 @@ class testcontroller extends Controller
                     FROM schedule_member as sub_sm
                     WHERE member_no = '${member_no}'
                 )
+                AND sm.hiking_state <> 0
                 AND sm.distance IS NOT NULL
                 ORDER BY rank;"
             )
@@ -494,15 +496,68 @@ class testcontroller extends Controller
         return $queryRes;
     }
 
-    public function getMemberNo(Request $request)
+    public function getNowSchedule(Request $request)
     {
         $user_id = $request->get('user_id');
-        $queryRes = DB::table('schedule_member')
-            ->select(
-                'member_no',
-                'hiking_state'
-            )->where('userid', $user_id)
-            ->get();
+
+        $queryRes = DB::select(
+            DB::raw(
+                "SELECT 
+                    hs.no as schedule_no,
+                    hs.title as title,
+                    hs.leader as leader,
+                    hs.start_date as start_date,
+                    mnt.mnt_name as mnt_name
+                FROM schedule_member as sm
+                JOIN hiking_schedule as hs
+                    ON hs.no = sm.schedule
+                JOIN hiking_group as hg
+                    ON hg.uuid = hs.hiking_group
+                JOIN mountain as mnt
+                    ON mnt.mnt_id = hs.mnt_id
+                WHERE userid = '${user_id}'
+                AND date_add(now(), interval -1 day) <= start_date
+                LIMIT 1;"
+            )
+        );
+
+        return $queryRes;
+    }
+
+    public function getNowScheduleDetail(Request $request)
+    {
+        $schedule_no = $request->get('schedule_no');
+
+        $queryRes = DB::select(
+            DB::raw(
+                "SELECT 
+                    route,
+                    mnt_id
+                FROM hiking_schedule
+                WHERE no = ${schedule_no}
+                ;"
+            )
+        );
+
+        return $queryRes;
+    }
+
+    public function getMemberNo(Request $request)
+    {
+        $user_id        = $request->get('user_id');
+        $schedule_no    = $request->get('schedule_no');
+
+        $queryRes = DB::select(
+            DB::raw(
+                "SELECT 
+                    member_no,
+                    hiking_state
+                FROM schedule_member
+                WHERE userid = '${user_id}'
+                AND schedule = '${schedule_no}'"
+            )
+        );
+
         return $queryRes;
     }
 }

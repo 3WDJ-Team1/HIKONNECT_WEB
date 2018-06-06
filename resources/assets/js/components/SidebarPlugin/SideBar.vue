@@ -6,7 +6,7 @@
        :data-image="backgroundImage">
     <div class="sidebar-wrapper">
       <div class="logo">
-        <img width="200" src="http://localhost:8000/images/logo.png" alt="" @click="moveHome">
+        <img width="200" src="http://hikonnect.ga/images/logo.png" alt="" @click="moveHome">
       </div>
 
       <slot name="content"></slot>
@@ -47,7 +47,7 @@
       },
       backgroundImage: {
         type: String,
-        default: 'http://localhost:8000/images/sidebar-5.jpg'
+        default: 'http://hikonnect.ga/images/sidebar-5.jpg'
       },
       activeColor: {
         type: String,
