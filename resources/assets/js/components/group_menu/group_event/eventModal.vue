@@ -35,8 +35,8 @@
         },
         created() {
             // 모달에 띄워 줄 이벤트 전달 받기
-            this.$EventBus.$on('sendContent', (content) => {
-                this.content = content;
+            this.$EventBus.$on('sendContent', (event) => {
+                this.content = event.desc;
             })
         }
     }

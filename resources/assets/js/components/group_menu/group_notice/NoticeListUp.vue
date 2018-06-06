@@ -28,7 +28,7 @@
         <!-- 무한 스크롤 -->
         <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading">
              <span slot="no-more">
-                There is no more Hacker News :(
+                공지사항이 없습니다 :(
              </span>
         </infinite-loading>
     </div>

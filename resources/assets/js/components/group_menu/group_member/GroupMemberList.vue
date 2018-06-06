@@ -9,7 +9,7 @@
         <waitingMember :waitingMember="waitingMember" v-if="positionString"></waitingMember>
         <div>
             <b-card
-                    style="margin-top: 10px; margin-bottom: 10px;"
+                    style="margin-top: 0px; margin-bottom: 0px;"
                     class='member_list_card'
                     v-for="userData in memberList"
                     :key="userData.nickname">
@@ -80,7 +80,6 @@
         created() {
             // 로그인 된 이용자의 위치 가지고 오기
             this.$EventBus.$on('sendPositionInfo', (position) => {
-                console.log(position)
                 if (position != 'guest') {
                     this.position = true;
                 }
