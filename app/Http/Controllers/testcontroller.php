@@ -516,7 +516,7 @@ class testcontroller extends Controller
                 JOIN mountain as mnt
                     ON mnt.mnt_id = hs.mnt_id
                 WHERE userid = '${user_id}'
-                AND now() <= start_date
+                AND DATE_ADD(now(), INTERVAL 2 DAY) +  <= start_date
                 LIMIT 1;"
             )
         );
