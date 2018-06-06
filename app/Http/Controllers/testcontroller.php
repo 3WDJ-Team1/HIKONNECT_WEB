@@ -517,6 +517,7 @@ class testcontroller extends Controller
                     ON mnt.mnt_id = hs.mnt_id
                 WHERE userid = '${user_id}'
                 AND date_add(now(), interval -1 day) <= start_date
+                ORDER BY start_date
                 LIMIT 1;"
             )
         );
