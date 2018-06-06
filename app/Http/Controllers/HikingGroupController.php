@@ -64,6 +64,7 @@ class HikingGroupController extends Controller
      */
     public function store(Request $request)
     {
+
         $groupinfo = array([
             'uuid'          => '',
             'title'         => $request->get('title'),

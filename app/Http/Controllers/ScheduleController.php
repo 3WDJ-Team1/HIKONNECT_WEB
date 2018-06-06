@@ -134,7 +134,6 @@ class ScheduleController extends Controller
             'title'         => $request->get('title'),
             'content'       => $request->get('content'),
             'route'         => $request->get('route'),
-            'updated_at'    => Carbon::now()->format('Y-m-d H:i:s'),
             'start_date'    => $request->get('stDate'),
             'mnt_id'        => $request->get('mnt_id')
         ]);
