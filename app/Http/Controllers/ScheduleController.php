@@ -184,7 +184,7 @@ class ScheduleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function out_schedule(Request $request) {
-        $this->schedule_member->out_schedule($request->get('userid'),$request->get('uuid'),$request->get('schedule_no'));
+        $this->schedule_member->out_schedule($request->get('userid'),$request->get('uuid'));
         return response()->json('true');
     }
     /**
