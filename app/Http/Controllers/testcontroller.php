@@ -428,64 +428,65 @@ class testcontroller extends Controller
         $queryRes = DB::select(
             DB::raw(
                 "SELECT 
+                (
+                    SELECT count(*)
+                    FROM schedule_member
+                    WHERE hiking_state = 1
+                    AND schedule = sm.schedule
+                ) as remain_member,
+                TIMEDIFF(sm.updated_at, sm.hiking_start) as hiking_time,
+                (
+                    SELECT count(*) + 1
+                    FROM schedule_member
+                    WHERE distance > sm.distance
+                    AND schedule = (
+                        SELECT schedule
+                        FROM schedule_member
+                        WHERE member_no = ${member_no}
+                    )
+                ) as rank,
+                (
+                    SELECT mnt_name
+                    FROM mountain m 
+                    WHERE hs.mnt_id = m.mnt_id
+                ) as mountain,
+                IF(
                     (
                         SELECT count(*)
                         FROM schedule_member
-                        WHERE hiking_state = 1
-                    ) as remain_member,
-                    TIMEDIFF(sm.updated_at, sm.hiking_start) as hiking_time,
-                    (
-                        SELECT count(*) + 1
-                        FROM schedule_member
-                        WHERE distance > sm.distance
-                        AND schedule = (
-                            SELECT schedule
-                            FROM schedule_member
-                            WHERE member_no = ${member_no}
-                        )
-                    ) as rank,
-                    (
-                        SELECT mnt_name
-                        FROM mountain m 
-                        WHERE hs.mnt_id = m.mnt_id
-                    ) as mountain,
+                        WHERE userid = sm.userid
+                        AND hiking_state = 3
+                    ) > 15, 
+                    '한라산', 
                     IF(
                         (
                             SELECT count(*)
                             FROM schedule_member
                             WHERE userid = sm.userid
                             AND hiking_state = 3
-                        ) > 15, 
-                        '한라산', 
+                        ) > 10,
+                        '지리산',
                         IF(
                             (
                                 SELECT count(*)
                                 FROM schedule_member
                                 WHERE userid = sm.userid
                                 AND hiking_state = 3
-                            ) > 10,
-                            '지리산',
+                            ) > 5,
+                            '소백산',
                             IF(
                                 (
                                     SELECT count(*)
                                     FROM schedule_member
                                     WHERE userid = sm.userid
                                     AND hiking_state = 3
-                                ) > 5,
-                                '소백산',
-                                IF(
-                                    (
-                                        SELECT count(*)
-                                        FROM schedule_member
-                                        WHERE userid = sm.userid
-                                        AND hiking_state = 3
-                                    ),
-                                    '앞산',
-                                    '앞산'
-                                )
+                                ),
+                                '앞산',
+                                '앞산'
                             )
                         )
-                    ) as hiking_tear
+                    )
+                ) as hiking_tear
                 FROM schedule_member sm
                 JOIN hiking_schedule hs
                 ON hs.no = sm.schedule
@@ -517,8 +518,7 @@ class testcontroller extends Controller
                     ON mnt.mnt_id = hs.mnt_id
                 WHERE userid = '${user_id}'
                 AND date_add(now(), interval -1 day) <= start_date
-                ORDER BY start_date
-                LIMIT 1;"
+                ORDER BY start_date;"
             )
         );
 
