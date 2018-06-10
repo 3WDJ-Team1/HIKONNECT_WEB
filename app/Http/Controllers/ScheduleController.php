@@ -134,7 +134,6 @@ class ScheduleController extends Controller
             'title'         => $request->get('title'),
             'content'       => $request->get('content'),
             'route'         => $request->get('route'),
-            'updated_at'    => Carbon::now()->format('Y-m-d H:i:s'),
             'start_date'    => $request->get('stDate'),
             'mnt_id'        => $request->get('mnt_id')
         ]);
@@ -185,7 +184,7 @@ class ScheduleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function out_schedule(Request $request) {
-        $this->schedule_member->out_schedule($request->get('userid'),$request->get('uuid'),$request->get('schedule_no'));
+        $this->schedule_member->out_schedule($request->get('userid'),$request->get('uuid'));
         return response()->json('true');
     }
     /**

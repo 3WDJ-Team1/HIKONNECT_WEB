@@ -21,11 +21,10 @@ class schedule_member extends Model
         schedule_member::insert($member_info);
     }
 
-    public function out_schedule($userid, $uuid, $schedule_no) {
+    public function out_schedule($userid, $uuid) {
         schedule_member::where([
             ['userid',$userid],
-            ['hiking_group',$uuid],
-            ['schedule',$schedule_no]
+            ['hiking_group',$uuid]
         ])->delete();
     }
 
