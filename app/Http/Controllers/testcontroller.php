@@ -506,6 +506,7 @@ class testcontroller extends Controller
                 "SELECT 
                     hs.no as schedule_no,
                     hs.title as title,
+                    hg.title as group_name,
                     hs.leader as leader,
                     hs.start_date as start_date,
                     mnt.mnt_name as mnt_name
