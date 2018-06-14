@@ -461,6 +461,14 @@ Route::group(
             'getHikingResult',
             'testcontroller@getHikingResult'
         );
+        Route::post(
+            'getNowSchedule',
+            'testcontroller@getNowSchedule'
+        );
+        Route::post(
+            'getNowScheduleDetail',
+            'testcontroller@getNowScheduleDetail'
+        );
     }
 );
 

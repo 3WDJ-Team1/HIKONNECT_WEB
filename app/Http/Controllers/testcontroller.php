@@ -428,64 +428,65 @@ class testcontroller extends Controller
         $queryRes = DB::select(
             DB::raw(
                 "SELECT 
+                (
+                    SELECT count(*)
+                    FROM schedule_member
+                    WHERE hiking_state = 1
+                    AND schedule = sm.schedule
+                ) as remain_member,
+                TIMEDIFF(sm.updated_at, sm.hiking_start) as hiking_time,
+                (
+                    SELECT count(*) + 1
+                    FROM schedule_member
+                    WHERE distance > sm.distance
+                    AND schedule = (
+                        SELECT schedule
+                        FROM schedule_member
+                        WHERE member_no = ${member_no}
+                    )
+                ) as rank,
+                (
+                    SELECT mnt_name
+                    FROM mountain m 
+                    WHERE hs.mnt_id = m.mnt_id
+                ) as mountain,
+                IF(
                     (
                         SELECT count(*)
                         FROM schedule_member
-                        WHERE hiking_state = 1
-                    ) as remain_member,
-                    TIMEDIFF(sm.updated_at, sm.hiking_start) as hiking_time,
-                    (
-                        SELECT count(*) + 1
-                        FROM schedule_member
-                        WHERE distance > sm.distance
-                        AND schedule = (
-                            SELECT schedule
-                            FROM schedule_member
-                            WHERE member_no = ${member_no}
-                        )
-                    ) as rank,
-                    (
-                        SELECT mnt_name
-                        FROM mountain m 
-                        WHERE hs.mnt_id = m.mnt_id
-                    ) as mountain,
+                        WHERE userid = sm.userid
+                        AND hiking_state = 3
+                    ) > 15, 
+                    '한라산', 
                     IF(
                         (
                             SELECT count(*)
                             FROM schedule_member
                             WHERE userid = sm.userid
                             AND hiking_state = 3
-                        ) > 15, 
-                        '한라산', 
+                        ) > 10,
+                        '지리산',
                         IF(
                             (
                                 SELECT count(*)
                                 FROM schedule_member
                                 WHERE userid = sm.userid
                                 AND hiking_state = 3
-                            ) > 10,
-                            '지리산',
+                            ) > 5,
+                            '소백산',
                             IF(
                                 (
                                     SELECT count(*)
                                     FROM schedule_member
                                     WHERE userid = sm.userid
                                     AND hiking_state = 3
-                                ) > 5,
-                                '소백산',
-                                IF(
-                                    (
-                                        SELECT count(*)
-                                        FROM schedule_member
-                                        WHERE userid = sm.userid
-                                        AND hiking_state = 3
-                                    ),
-                                    '앞산',
-                                    '앞산'
-                                )
+                                ),
+                                '앞산',
+                                '앞산'
                             )
                         )
-                    ) as hiking_tear
+                    )
+                ) as hiking_tear
                 FROM schedule_member sm
                 JOIN hiking_schedule hs
                 ON hs.no = sm.schedule
@@ -496,15 +497,69 @@ class testcontroller extends Controller
         return $queryRes;
     }
 
-    public function getMemberNo(Request $request)
+    public function getNowSchedule(Request $request)
     {
         $user_id = $request->get('user_id');
-        $queryRes = DB::table('schedule_member')
-            ->select(
-                'member_no',
-                'hiking_state'
-            )->where('userid', $user_id)
-            ->get();
+
+        $queryRes = DB::select(
+            DB::raw(
+                "SELECT 
+                    hs.no as schedule_no,
+                    hs.title as title,
+                    hg.title as group_name,
+                    hs.leader as leader,
+                    hs.start_date as start_date,
+                    mnt.mnt_name as mnt_name
+                FROM schedule_member as sm
+                JOIN hiking_schedule as hs
+                    ON hs.no = sm.schedule
+                JOIN hiking_group as hg
+                    ON hg.uuid = hs.hiking_group
+                JOIN mountain as mnt
+                    ON mnt.mnt_id = hs.mnt_id
+                WHERE userid = '${user_id}'
+                AND date_add(now(), interval -1 day) <= start_date
+                ORDER BY start_date;"
+            )
+        );
+
+        return $queryRes;
+    }
+
+    public function getNowScheduleDetail(Request $request)
+    {
+        $schedule_no = $request->get('schedule_no');
+
+        $queryRes = DB::select(
+            DB::raw(
+                "SELECT 
+                    route,
+                    mnt_id
+                FROM hiking_schedule
+                WHERE no = ${schedule_no}
+                ;"
+            )
+        );
+
+        return $queryRes;
+    }
+
+    public function getMemberNo(Request $request)
+    {
+        $user_id        = $request->get('user_id');
+        $schedule_no    = $request->get('schedule_no');
+
+        $queryRes = DB::select(
+            DB::raw(
+                "SELECT 
+                    member_no,
+                    hiking_state
+                FROM schedule_member
+                WHERE userid = '${user_id}'
+                AND schedule = '${schedule_no}'"
+            )
+        );
+
         return $queryRes;
     }
 }
