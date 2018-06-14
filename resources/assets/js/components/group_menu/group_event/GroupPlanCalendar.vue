@@ -37,24 +37,24 @@
                     </table>
                     <button class="BButton" style="float: right;" v-if="event.position == 'guest' && groupPosition == 'member'" @click="joinPlan(event.no)">
                         <i class="nc-icon nc-simple-add"></i>
-                        JOIN
+                        일정 참여
                     </button>
                     <button class="BButton" style="float: right; margin-right: 10px;" v-if="event.position == 'member'" @click="leaveEvent(event)">
                         <i class="nc-icon
 nc-simple-delete"></i>
-                        LEAVE
+                        일정 취소
                     </button>
                     <button class="BButton" style="float: right; margin-right: 10px;" v-if="event.position == 'owner'" @click="uapdateEvent(event)">
                         <i class="nc-icon nc-refresh-02"></i>
-                        UADATE
+                        수정하기
                     </button>
                     <button class="BButton" style="float: right; margin-right: 10px;" v-if="event.position == 'owner'" @click="deleteEvent(event)">
                         <i class="nc-icon nc-simple-remove"></i>
-                        DELETE
+                        일정 삭제
                     </button>
                     <button class="BButton" style="float: right; margin-right: 10px;" @click="openShowModal(event)">
                         <i class="nc-icon nc-square-pin"></i>
-                        SHOW PATH
+                        일정 상세보기
                     </button>
                 </div>
             </template>
@@ -214,5 +214,4 @@ nc-simple-delete"></i>
     .sweet-modal.is-visible {
         max-width: 100%;
     }
-
 </style>

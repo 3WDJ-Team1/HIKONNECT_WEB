@@ -11,9 +11,7 @@ import list_show            from './components/groups_list/list_show'
 // make_event
 import autocomplete         from './components/group_menu/make_event/autocomplete'
 import event_make_main      from './components/group_menu/make_event/event_make_main'
-import event_map            from './components/group_menu/make_event/event_map'
 import group_make      from './components/groups_list/group_make'
-
 
 // group menu tab
 import GroupMenuTab         from "./components/group_menu/GroupMenuTab.vue";
@@ -21,7 +19,6 @@ import GroupMenuTab         from "./components/group_menu/GroupMenuTab.vue";
 // group notice
 import NoticeListUp         from "./components/group_menu/group_notice/NoticeListUp.vue";
 import NoticeWriteBtn       from './components/group_menu/group_notice/NoticeWriteBtn.vue';
-import NoticeFormInside     from './components/group_menu/group_notice/NoticeFormInside.vue';
 
 
 //group event
@@ -112,32 +109,11 @@ const routes = [
                                 components  : {
                                     item    : GroupPlanCalendar,
                                     make        : event_make_main,
-                                    // write, modify, delete button of NoticeListUp
                                     write   : NoticeWriteBtn,
-                                    // components in GroupPlan
                                     calendar    : GroupPlanCalendar,
-                                    // component in GroupMemberList
                                     member_detail   : GroupMemberDetail,
                                     waiting_member   : WaitingMemberList,
-                                },
-                                children: [
-                                    {
-                                        path        : '',
-                                        components  : {
-                                            // inner form component of modal(NoticeWriteBtn, NoticeModifyBtn)
-                                            form            : NoticeFormInside,
-                                            autocomplete    : autocomplete
-                                        },
-                                        children:   [
-                                            {
-                                                path: '',
-                                                components: {
-                                                    map: event_map,
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
+                                }
                             }
                         ]
                     },

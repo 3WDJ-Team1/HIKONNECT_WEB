@@ -13,34 +13,34 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td>백두산</td>
-                        <td style="text-align:left;">총 등산 횟수 26회 이상</td>
+                        <td style="font-size: 12px;">백두산</td>
+                        <td style="text-align:left; font-size: 11px;">26회 이상</td>
                     </tr>
                     <tr>
-                        <td>한라산</td>
-                        <td style="text-align:left;">총 등산 횟수 21~25회</td>
+                        <td style="font-size: 12px;">한라산</td>
+                        <td style="text-align:left; font-size: 12px;">21~25회</td>
                     </tr>
                     <tr>
-                        <td>지리산</td>
-                        <td style="text-align:left;">총 등산횟수 16~20회</td>
+                        <td style="font-size: 12px;">지리산</td>
+                        <td style="text-align:left;">16~20회</td>
                     </tr>
                     <tr>
-                        <td>태백산</td>
-                        <td style="text-align:left;">총 등산횟수 11~15회</td>
+                        <td style="font-size: 12px;">태백산</td>
+                        <td style="text-align:left; font-size: 12px;">11~15회</td>
                     </tr>
                     <tr>
-                        <td>소백산</td>
-                        <td style="text-align:left;">총 등산횟수 6~10회</td>
+                        <td style="font-size: 12px;">소백산</td>
+                        <td style="text-align:left; font-size: 12px;">6~10회</td>
                     </tr>
                     <tr>
-                        <td>동네 뒷산</td>
-                        <td style="text-align:left;">총 등산횟수 5회 미만</td>
+                        <td style="font-size: 12px;">동네 뒷산</td>
+                        <td style="font-size: 12px; text-align:left;">5회 미만</td>
                     </tr>
                     </tbody>
                 </table>
             </div>
+            <h6><i class="nc-icon nc-refresh-02"></i>&nbsp;총<b style="color:#ff5722;">{{ count }}</b>회 등산하셨습니다.</h6>
             <br>
-            <h5><i class="nc-icon nc-refresh-02"></i>&nbsp;&nbsp;{{userID}}님은 <b style="color:#ff5722;">{{ count }}</b>회 등산하셨습니다.</h5>
         </div>
     </div>
 </template>

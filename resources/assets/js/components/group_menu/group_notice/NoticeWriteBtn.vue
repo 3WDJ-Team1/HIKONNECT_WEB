@@ -20,13 +20,17 @@
         </v-btn>
         <!-- @sweet-modal   the modal which have form script for writing notices -->
         <sweet-modal ref="write" blocking>
-            <router-view name="form"></router-view>
+            <noticeFormInside></noticeFormInside>
         </sweet-modal>
     </v-app>
 </template>
 
 <script>
+    import noticeFormInside from './NoticeFormInside'
     export default {
+        components: {
+            noticeFormInside
+        },
         methods : {
             /**
              * @function    openModifyModal

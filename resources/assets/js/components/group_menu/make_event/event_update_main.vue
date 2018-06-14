@@ -131,19 +131,16 @@
                 this.$EventBus.$emit('backCalender', 'true');
             },
             sendData() {
-                axios.put(this.$HttpAddr + '/schedule', {
-                    uuid: this.$route.params.groupid,
-                    leader: sessionStorage.getItem('userid')
+                axios.put(this.$HttpAddr + '/schedule/' + this.updateItem.no, {
                     /*
                         @todo localStorage.getItem('userUuid')
-                    */,
+                    */
                     mnt_id: this.mountain_num,
-                    tt: this.title,
-                    ct: this.content,
-                    no: this.updateItem.no,
+                    title: this.title,
+                    content: this.content,
                     stDate: this.date.substring(0, 4) + "-" + this.date.substring(5, 7) + "-" + this.date.substring(8, 10) +
                     " " + this.yourData['hh'] + ":" + this.yourData['mm'] + ":" + this.yourData['ss'],
-                    mountP: this.mountain_path
+                    route: this.mountain_path
                 })
                     .then(response => {
                         if (response.data == 'true') {

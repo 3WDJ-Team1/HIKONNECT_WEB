@@ -4,8 +4,7 @@
 <template>
     <div class="wrapper">
         <side-bar>
-            <mobile-menu slot="content"></mobile-menu>
-            <div class="box" align="center" style="margin-bottom: 17px;" v-if="login">
+            <div class="box" v-if="login" align="center" style="margin-bottom: 17px;">
                 <div class="item">
                     <v-avatar
                             class="grey lighten-4"
@@ -38,7 +37,7 @@
         <div class="main-panel">
             <top-navbar></top-navbar>
 
-            <dashboard-content @click="toggleSidebar">
+            <dashboard-content @click="toggleSidebar" style="overflow-x: hidden; min-height: 100%">
 
             </dashboard-content>
 
@@ -53,7 +52,6 @@
     import TopNavbar from './TopNavbar.vue'
     import ContentFooter from './ContentFooter.vue'
     import DashboardContent from './Content.vue'
-    import MobileMenu from './MobileMenu.vue'
 
     export default {
         data: () => ({
@@ -65,12 +63,14 @@
             if (sessionStorage.getItem('userid') != undefined) {
                 this.login = true;
             }
+            if(!this.login) {
+                document.getElementsByClassName('main-panel').style.height = '100%';
+            }
         },
         components: {
             TopNavbar,
             ContentFooter,
-            DashboardContent,
-            MobileMenu
+            DashboardContent
         },
         methods: {
             toggleSidebar() {
@@ -86,7 +86,6 @@
     .box {
         display: flex;
     }
-
     .item {
         flex-grow: 1;
     }

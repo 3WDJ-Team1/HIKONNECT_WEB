@@ -43,5 +43,7 @@
 </script>
 
 <style scoped>
-
+    .sweet-modal.is-visible {
+        max-width: 100%;
+    }
 </style>

@@ -22,15 +22,15 @@
             <!-- @v-tab             the tabs in slider -->
             <v-tab
                 href="#tab-1">
-            notices
+            공지사항
                 <v-icon>announcement</v-icon>
             </v-tab>
             <v-tab href="#tab-2">
-            plan
+            일정
                 <v-icon>event</v-icon>
             </v-tab>
             <v-tab href="#tab-3">
-            members
+            멤버
                 <v-icon>group</v-icon>
             </v-tab>
             <!-- @v-tab-item        the items of each tab.

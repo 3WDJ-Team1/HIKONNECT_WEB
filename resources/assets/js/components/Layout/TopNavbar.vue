@@ -10,10 +10,10 @@
                         <a
                                 style="cursor:pointer"
                                 class="nav-link"
-                                @click.stop ="drawerRight = !drawerRight"
-                                v-if        ="!isLogined"
+                                @click.stop="drawerRight = !drawerRight"
+                                v-if="!isLogined"
                         >
-                            Log in
+                            로그인
                         </a>
                     </li>
                     <li class="nav-item">
@@ -23,7 +23,7 @@
                                 v-if="isLogined"
                                 @click="logout('test')"
                         >
-                            Log out
+                            로그아웃
                         </a>
                     </li>
                     <li class="nav-item">
@@ -33,24 +33,26 @@
                                 v-if="!isLogined"
                                 @click="signUp()"
                         >
-                            Sign up
+                            회원가입
                         </a>
                     </li>
                 </ul>
             </div>
         </nav>
         <sweet-modal
-                icon    ="error"
-                title   ="ERROR"
+                @close="reload"
+                icon="error"
+                title="ERROR"
                 blocking
-                ref     ="pModal">
+                ref="pModal">
             {{ modalErrorMsg }}
         </sweet-modal>
         <sweet-modal
-                icon    ="success"
-                title   ="SUCCESS"
+                @close="reload"
+                icon="success"
+                title="SUCCESS"
                 blocking
-                ref     ="cModal">
+                ref="cModal">
             Complited!
         </sweet-modal>
         <v-navigation-drawer
@@ -64,6 +66,7 @@
 </template>
 <script>
     import Login from '../loginAndRegister/login'
+
     export default {
         data: () => ({
             modalErrorMsg: '',
@@ -77,7 +80,6 @@
             });
             this.$EventBus.$on('complitedModalOpen', (value) => {
                 this.$refs.cModal.open();
-                location.reload();
             });
             this.$EventBus.$on('setRightDrawerFlipped', (value) => {
                 this.drawerRight = false;
@@ -88,7 +90,10 @@
             Login
         },
         methods: {
-            signUp()    {
+            reload() {
+                location.reload();
+            },
+            signUp() {
                 this.$router.push("/user");
             },
             logout(userId) {
@@ -106,7 +111,7 @@
     }
 </script>
 <style>
-    .navigation-drawer--temporary:not(.navigation-drawer--close), .navigation-drawer--is-mobile:not(.navigation-drawer--close)  {
+    .navigation-drawer--temporary:not(.navigation-drawer--close), .navigation-drawer--is-mobile:not(.navigation-drawer--close) {
         background-color: white;
     }
 

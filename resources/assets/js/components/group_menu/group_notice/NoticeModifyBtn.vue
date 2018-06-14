@@ -18,17 +18,21 @@
         <!-- @sweet-modal   a modal which have input form script -->
         <sweet-modal ref="modify" blocking>
             <!-- @router-view   insert component "form" -->
-            <router-view name="form"></router-view>
+            <NoticeFormInside></NoticeFormInside>
         </sweet-modal>
     </div>
 </template>
 
 <script>
+    import NoticeFormInside     from './NoticeFormInside.vue';
     export default {
         /**
          * @prop    propsNotice
          * @brief   the object of selected notice.
          */
+        components: {
+            NoticeFormInside
+        },
         props   : ['propsNotice'],
         methods : {
             /**

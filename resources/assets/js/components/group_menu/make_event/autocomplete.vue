@@ -19,7 +19,7 @@
                 <b-btn style="margin: 0px; padding-top: 4px; height: 30px; width: 50px;" @click="initMap">지도보기</b-btn>
             </div>
         </div>
-        <sweet-modal ref="map" blocking>
+        <sweet-modal ref="map" id="paddingRemove">
             <eventMap></eventMap>
         </sweet-modal>
     </div>
@@ -76,5 +76,8 @@
     .autocomplete__results__item {
         width: 150px;
         height: 30px;
+    }
+    #paddingRemove.is-visible .sweet-buttons, #paddingRemove.is-visible .sweet-content {
+        padding: 0px;
     }
 </style>

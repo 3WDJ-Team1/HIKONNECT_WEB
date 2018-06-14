@@ -229,7 +229,7 @@
                                     <div class="headline">Contact us</div>
                                 </v-card-title>
                                 <v-card-text class="layout justify-center">
-                                    영진전문대학 캡스톤디자인 팀 감바리야
+                                    영진전문대학 컴퓨터정보계열 3WDJ 1조
                                 </v-card-text>
                                 <v-list class="transparent layout justify-center" >
                                     <v-list-tile

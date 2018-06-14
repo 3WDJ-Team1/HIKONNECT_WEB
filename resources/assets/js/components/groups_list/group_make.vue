@@ -77,7 +77,6 @@
         methods: {
             submit(verticalAlign, horizontalAlign) {
                 axios.post(this.$HttpAddr + '/hikingGroup', {
-                    // nickname: this.nickname,
                     writer: sessionStorage.getItem('userid'), // user's uuid,
                     title: this.title,
                     content: this.text,

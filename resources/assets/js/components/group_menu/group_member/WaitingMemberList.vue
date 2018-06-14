@@ -86,7 +86,6 @@
         methods: {
             // 참여 수락
             applyUser(userUuid) {
-                console.log(userUuid);
                 axios.put(this.$HttpAddr + "/member/true", {
                     userid: userUuid,
                     uuid: this.groupId

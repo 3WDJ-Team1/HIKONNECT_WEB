@@ -3,9 +3,10 @@
   z-index: 10000;
 
   .tooltip-inner {
+    max-width: 700px;
     background: black;
     color: white;
-    padding: 3px 6px 3px;
+    padding: 30px;
   }
 
   .tooltip-arrow {
