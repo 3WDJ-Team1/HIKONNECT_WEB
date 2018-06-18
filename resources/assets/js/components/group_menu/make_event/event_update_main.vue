@@ -63,7 +63,7 @@
                                 나가기
                             </button>
                             <button type="submit" class="btn btn-info btn-fill float-right"
-                                    @click="updateDate">
+                                    @click="sendData">
                                 제출
                             </button>
                         </div>
@@ -106,6 +106,7 @@
             }
         },
         created() {
+            console.log(this.updateItem.no);
             // 받아온 updateItem을 input박스에 채우기
             this.title = this.updateItem.title;
             this.content = this.updateItem.desc;
@@ -130,19 +131,17 @@
             backCalender()  {
                 this.$EventBus.$emit('backCalender', 'true');
             },
-            updateDate() {
-
+            sendData() {
                 axios.put(this.$HttpAddr + '/schedule/' + this.updateItem.no, {
                     /*
                         @todo localStorage.getItem('userUuid')
                     */
+                    mnt_id: this.mountain_num,
                     title: this.title,
                     content: this.content,
-                    route: this.mountain_path,
                     stDate: this.date.substring(0, 4) + "-" + this.date.substring(5, 7) + "-" + this.date.substring(8, 10) +
-                        "T" + this.yourData['HH'] + ":" + this.yourData['mm'] + ":" + this.yourData['ss'] + "Z",
-                    mnt_id: this.mountain_num
-
+                    " " + this.yourData['HH'] + ":" + this.yourData['mm'] + ":" + this.yourData['ss'],
+                    route: this.mountain_path
                 })
                     .then(response => {
                         if (response.data == 'true') {
