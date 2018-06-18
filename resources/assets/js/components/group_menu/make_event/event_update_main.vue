@@ -167,6 +167,7 @@
                             };
                             this.$notifications.notify(
                                 {
+
                                     component: notification,
                                     icon: 'nc-icon nc-app',
                                     horizontalAlign: 'center',
