@@ -139,8 +139,8 @@
                     title: this.title,
                     content: this.content,
                     route: this.mountain_path,
-                    stDate: Date.parse(this.date.substring(0, 4) + "-" + this.date.substring(5, 7) + "-" + this.date.substring(8, 10) +
-                        "T" + this.yourData['HH'] + ":" + this.yourData['mm'] + ":" + this.yourData['ss'] + "Z"),
+                    stDate: this.date.substring(0, 4) + "-" + this.date.substring(5, 7) + "-" + this.date.substring(8, 10) +
+                        "T" + this.yourData['HH'] + ":" + this.yourData['mm'] + ":" + this.yourData['ss'] + "Z",
                     mnt_id: this.mountain_num
 
                 })
