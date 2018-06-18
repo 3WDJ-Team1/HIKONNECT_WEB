@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use App\Models\Hiking_schedule;
 use App\Models\schedule_member;
 use Carbon\Carbon;
+use Faker\Provider\DateTime;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 /**
@@ -130,14 +131,14 @@ class ScheduleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $info = array([
+        /*$info = array([
             'title'         => $request->get('title'),
             'content'       => $request->get('content'),
             'route'         => $request->get('route'),
             'start_date'    => $request->get('stDate'),
             'mnt_id'        => $request->get('mnt_id')
-        ]);
-        $this->hiking_schedule->scheduleUpdate($info,$id);
+        ]);*/
+        $this->hiking_schedule->scheduleUpdate($request,$id);
         return response()->json('true');
     }
     /**
