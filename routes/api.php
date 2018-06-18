@@ -469,6 +469,10 @@ Route::group(
             'getNowScheduleDetail',
             'testcontroller@getNowScheduleDetail'
         );
+        Route::post(
+            'getRemainMemberDetail',
+            'testcontroller@getRemainMemberDetail'
+        );
     }
 );
 
