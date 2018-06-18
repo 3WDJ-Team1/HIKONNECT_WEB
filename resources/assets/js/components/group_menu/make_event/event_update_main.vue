@@ -124,6 +124,8 @@
             });
         },
         methods: {
+
+
             enterEvent()    {
                 this.content += "<br>";
             },
