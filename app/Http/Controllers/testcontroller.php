@@ -408,7 +408,6 @@ class testcontroller extends Controller
                         FROM schedule_member
                         WHERE distance > sm.distance
                         AND schedule = sm.schedule
-                        AND hiking_state = 1
                     ) as rank,
                     (
                         SELECT count(*)
