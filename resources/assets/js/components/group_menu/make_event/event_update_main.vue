@@ -131,6 +131,7 @@
                 this.$EventBus.$emit('backCalender', 'true');
             },
             updateDate() {
+
                 axios.put(this.$HttpAddr + '/schedule/' + this.updateItem.no, {
                     /*
                         @todo localStorage.getItem('userUuid')
