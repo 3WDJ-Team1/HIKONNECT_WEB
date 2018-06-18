@@ -130,6 +130,7 @@
                     mountP: this.mountain_path
                 })
                     .then(response => {
+                        console.log(response.data);
                         if (response.data == 'true') {
                             const notification = {
                                 template: "<span><b>성공적으로 저장 되었습니다.</b></span>"
