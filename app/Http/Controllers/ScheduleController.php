@@ -131,13 +131,6 @@ class ScheduleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        /*$info = array([
-            'title'         => $request->get('title'),
-            'content'       => $request->get('content'),
-            'route'         => $request->get('route'),
-            'start_date'    => $request->get('stDate'),
-            'mnt_id'        => $request->get('mnt_id')
-        ]);*/
         $this->hiking_schedule->scheduleUpdate($request,$id);
         return response()->json('true');
     }
