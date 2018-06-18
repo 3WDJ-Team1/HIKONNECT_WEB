@@ -63,7 +63,7 @@
                                 나가기
                             </button>
                             <button type="submit" class="btn btn-info btn-fill float-right"
-                                    @click="sendData">
+                                    @click="updateDate">
                                 제출
                             </button>
                         </div>
@@ -130,17 +130,18 @@
             backCalender()  {
                 this.$EventBus.$emit('backCalender', 'true');
             },
-            sendData() {
+            updateDate() {
                 axios.put(this.$HttpAddr + '/schedule/' + this.updateItem.no, {
                     /*
                         @todo localStorage.getItem('userUuid')
                     */
-                    mnt_id: this.mountain_num,
                     title: this.title,
                     content: this.content,
-                    stDate: new Date(this.date.substring(0, 4) + "-" + this.date.substring(5, 7) + "-" + this.date.substring(8, 10) +
+                    route: this.mountain_path,
+                    stDate: Date.parse(this.date.substring(0, 4) + "-" + this.date.substring(5, 7) + "-" + this.date.substring(8, 10) +
                         "T" + this.yourData['HH'] + ":" + this.yourData['mm'] + ":" + this.yourData['ss'] + "Z"),
-                    route: this.mountain_path
+                    mnt_id: this.mountain_num
+
                 })
                     .then(response => {
                         if (response.data == 'true') {
