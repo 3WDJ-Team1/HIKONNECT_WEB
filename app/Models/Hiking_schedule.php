@@ -28,7 +28,7 @@ class Hiking_schedule extends Model
             'content'    => $request->get('content'),
             'route'      => json_encode($request->get('route')),
             'mnt_id'     => $request->get('mnt_id'),
-            'start_date' => $request->get('stDate'),
+            'start_date' => $request->get('stDate')
         ]);
     }
     public function my_schedule($userid) {
