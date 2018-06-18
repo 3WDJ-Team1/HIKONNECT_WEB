@@ -123,7 +123,6 @@
                 this.mountain_num = num;
             });
         },
-
         methods: {
             enterEvent()    {
                 this.content += "<br>";
