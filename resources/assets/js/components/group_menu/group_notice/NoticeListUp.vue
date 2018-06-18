@@ -7,7 +7,7 @@
 <template>
     <div>
         <!-- 리스트의 카드 클릭시 상세 정보 띄우기 모달-->
-        <sweet-modal ref="write" blocking>
+        <sweet-modal ref="write" blocking id="modalnotice">
             <noticeModal :noticeItem="noticeItem" v-if="updateSign"></noticeModal>
             <updateModal :updateItem="updateItem" v-if="!updateSign"></updateModal>
         </sweet-modal>
@@ -154,5 +154,14 @@
     }
     #noticeCard:hover  {
         background-color: #f7f7f8;
+    }
+    #modalnotice.is-visible {
+        border-radius: 15px;
+    }
+    #modalnotice .sweet-box-actions {
+        visibility: hidden;
+    }
+    #modalnotice.is-visible .sweet-buttons, .sweet-modal.is-visible .sweet-content {
+        padding: 20px;
     }
 </style>

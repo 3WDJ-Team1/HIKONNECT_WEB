@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -67,7 +66,7 @@ class Group_Member extends Model
     public function my_group($userid) {
         if (Group_Member::where('userid',$userid)->exists() == true){
             return
-                Group_Member::select('hiking_group.uuid','hiking_group.title','user.nickname','hiking_group.content',
+                Group_Member::select('hiking_group.uuid','hiking_group.title','hiking_group.leader','hiking_group.content',
                     'hiking_group.min_member','hiking_group.max_member')
                     ->where('group_member.userid',$userid)
                     ->join('hiking_group','hiking_group.uuid','=','group_member.hiking_group')

@@ -9,13 +9,13 @@
                 <div class="col-12">
                     <card>
                         <template slot="header">
-                            <h4 class="card-title">내가 소속된 등산 계획</h4>
+                            <h4 class="card-title" style="font-family: 'Black Han Sans', sans-serif;">등산 계획</h4>
                         </template>
                         <div class="table-hover">
                             <table class="table" style="text-align:center;">
                                 <thead>
                                 <slot name="columns">
-                                    <th v-for="column in tableS.columns">{{column}}</th>
+                                    <th style="font-weight: bold" v-for="column in tableS.columns">{{column}}</th>
                                 </slot>
                                 </thead>
                                 <tbody>
@@ -26,7 +26,7 @@
                                         <td>{{ item.title }}</td>
                                         <td>{{ item.start_date }}</td>
                                         <td>
-                                            <button type="submit" class="btn btn-info btn-fill float-right"
+                                            <button style="font-family: 'Do Hyeon', sans-serif;" type="submit" class="btn btn-info btn-fill float-right"
                                                     @click="move(item.uuid)">
                                                 그룹 페이지로 이동
                                             </button>
@@ -43,13 +43,13 @@
                 <div class="col-12">
                     <card>
                         <template slot="header">
-                            <h4 class="card-title">내가 소속된 그룹</h4>
+                            <h4 class="card-title" style="font-family: 'Black Han Sans', sans-serif;">나의 그룹</h4>
                         </template>
                         <div class="table-hover">
                             <table class="table" style="text-align:center;">
                                 <thead>
                                 <slot name="columns">
-                                    <th v-for="column in tableG.columns">{{column}}</th>
+                                    <th style="font-weight: bold" v-for="column in tableG.columns">{{column}}</th>
                                 </slot>
                                 </thead>
                                 <tbody>
@@ -59,7 +59,7 @@
                                         <td></td>
                                         <td>{{ item.nickname }}</td>
                                         <td>
-                                            <button type="submit" class="btn btn-info btn-fill float-right"
+                                            <button style="font-family: 'Do Hyeon', sans-serif;" type="submit" class="btn btn-info btn-fill float-right"
                                                     @click="move(item.uuid)">
                                                 그룹 페이지로 이동
                                             </button>
@@ -115,6 +115,7 @@
                 this.axios.post(this.$HttpAddr + '/mygroup', {
                     userid: sessionStorage.getItem('userid')
                 }).then(response => {
+                    console.log(response.data)
                     this.tableG.data = this.tableG.data.concat(response.data);
                 });
             },

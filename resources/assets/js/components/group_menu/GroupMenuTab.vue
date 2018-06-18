@@ -22,15 +22,15 @@
             <!-- @v-tab             the tabs in slider -->
             <v-tab
                 href="#tab-1">
-            notices
+            <span style="font-size: 20px; font-family: 'Do Hyeon', sans-serif;">공지사항</span>
                 <v-icon>announcement</v-icon>
             </v-tab>
             <v-tab href="#tab-2">
-            plan
+            <span style="font-size: 20px; font-family: 'Do Hyeon', sans-serif;">일정</span>
                 <v-icon>event</v-icon>
             </v-tab>
             <v-tab href="#tab-3">
-            members
+            <span style="font-size: 20px; font-family: 'Do Hyeon', sans-serif;">멤버</span>
                 <v-icon>group</v-icon>
             </v-tab>
             <!-- @v-tab-item        the items of each tab.
@@ -100,5 +100,8 @@
 .tab_full {
     display: inline-block;
     width: 100%;
+}
+.tabs__container--icons-and-text .tabs__item .icon {
+    margin-bottom: 0px;
 }
 </style>

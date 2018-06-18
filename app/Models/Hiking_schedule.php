@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 /**
  * Model class for Announce
  *
@@ -21,13 +22,13 @@ class Hiking_schedule extends Model
     public function scheduleReg(Array $info) {
         Hiking_schedule::insert($info);
     }
-    public function scheduleUpdate(Array $info,$id) {
+    public function scheduleUpdate(Request $request,$id) {
         Hiking_schedule::where('no',$id)->update([
-            'title'      =>  $info[0]['title'],
-            'content'    => $info[0]['content'],
-            'route'      => $info[0]['route'],
-            'mnt_id'     => $info[0]['mnt_id'],
-            'start_date' => $info[0]['start_date']
+            'title'      => $request->get('title'),
+            'content'    => $request->get('content'),
+            'route'      => json_encode($request->get('route')),
+            'mnt_id'     => $request->get('mnt_id'),
+            'start_date' => $request->get('stDate'),
         ]);
     }
     public function my_schedule($userid) {

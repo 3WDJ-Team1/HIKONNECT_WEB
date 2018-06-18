@@ -8,7 +8,6 @@
       <div class="logo">
         <img width="200" src="http://hikonnect.ga/images/logo.png" alt="" @click="moveHome">
       </div>
-
       <slot name="content"></slot>
       <ul class="nav">
         <slot>
@@ -29,6 +28,7 @@
   export default {
       data()  {
           return  {
+              login: sessionStorage.getItem('userid') != undefined,
               httpAddr: Laravel.host,
           }
       },
@@ -79,7 +79,8 @@
     computed: {
       sidebarStyle () {
         return {
-          backgroundImage: `url(${this.backgroundImage})`
+          backgroundImage: `url(${this.backgroundImage})`,
+          width: `19%`
         }
       }
     }

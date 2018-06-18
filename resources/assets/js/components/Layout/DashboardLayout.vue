@@ -3,9 +3,8 @@
  -->
 <template>
     <div class="wrapper">
-        <side-bar>
-            <mobile-menu slot="content"></mobile-menu>
-            <div class="box" align="center" style="margin-bottom: 17px;" v-if="login">
+        <side-bar v-if="login">
+            <div class="box" v-if="login" align="center" style="margin-bottom: 17px;">
                 <div class="item">
                     <v-avatar
                             class="grey lighten-4"
@@ -37,11 +36,8 @@
         </side-bar>
         <div class="main-panel">
             <top-navbar></top-navbar>
-
-            <dashboard-content @click="toggleSidebar">
-
+            <dashboard-content @click="toggleSidebar" style="overflow-x: hidden; min-height: 90%">
             </dashboard-content>
-
             <content-footer></content-footer>
         </div>
     </div>
@@ -53,7 +49,6 @@
     import TopNavbar from './TopNavbar.vue'
     import ContentFooter from './ContentFooter.vue'
     import DashboardContent from './Content.vue'
-    import MobileMenu from './MobileMenu.vue'
 
     export default {
         data: () => ({
@@ -62,15 +57,26 @@
             userNickname: sessionStorage.getItem('nickname'),
         }),
         created() {
+            // 로그인 안되어 있을 경우
             if (sessionStorage.getItem('userid') != undefined) {
                 this.login = true;
+            }
+            if(!this.login) {
+                var x = document.createElement("STYLE");
+                var t = document.createTextNode(".main-panel {width: 100%;}");
+                x.appendChild(t);
+                document.head.appendChild(x);
+            } else  {
+                var x = document.createElement("STYLE");
+                var t = document.createTextNode(".main-panel {width: 81%;}");
+                x.appendChild(t);
+                document.head.appendChild(x);
             }
         },
         components: {
             TopNavbar,
             ContentFooter,
-            DashboardContent,
-            MobileMenu
+            DashboardContent
         },
         methods: {
             toggleSidebar() {
@@ -86,7 +92,6 @@
     .box {
         display: flex;
     }
-
     .item {
         flex-grow: 1;
     }

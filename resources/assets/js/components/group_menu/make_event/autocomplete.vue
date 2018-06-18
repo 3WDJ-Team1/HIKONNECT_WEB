@@ -6,11 +6,10 @@
         <div class="row">
             <div class="col-6">
                 <autocomplete
+                        @keyup.enter.native="initMap"
                         ref             ="autocomplete"
                         placeholder     ="목적지"
                         :source         ="distributionGroupsEndpoint"
-                        input-class     ="form-control"
-                        results-property="data"
                         :results-display="formattedDisplay"
                         @selected       ="addDistributionGroup">
                 </autocomplete>
@@ -19,7 +18,7 @@
                 <b-btn style="margin: 0px; padding-top: 4px; height: 30px; width: 50px;" @click="initMap">지도보기</b-btn>
             </div>
         </div>
-        <sweet-modal ref="map" blocking>
+        <sweet-modal ref="map" id="paddingRemove">
             <eventMap></eventMap>
         </sweet-modal>
     </div>
@@ -40,6 +39,9 @@
             eventMap
         },
         methods: {
+            gg()    {
+                alert('dd')
+            },
             ///////////////////////////////////////// 지도 api
             initMap() {
                 this.$refs.map.open();
@@ -76,5 +78,8 @@
     .autocomplete__results__item {
         width: 150px;
         height: 30px;
+    }
+    #paddingRemove.is-visible .sweet-buttons, #paddingRemove.is-visible .sweet-content {
+        padding: 0px;
     }
 </style>

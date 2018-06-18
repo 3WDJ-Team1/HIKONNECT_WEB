@@ -3,12 +3,12 @@
  -->
 <template>
     <card>
-        <h4 slot="header" class="card-title">Fill Profile In</h4>
+        <h4 slot="header" class="card-title">회원가입</h4>
         <form>
             <div class="row">
                 <div class="col-md-12">
                     <fg-input type="text"
-                              label="Enter ID"
+                              label="아이디를 입력하시오."
                               :disabled="disabledID"
                               placeholder=""
                               v-model="inputId">
@@ -19,7 +19,7 @@
                 <div class="col-md-12">
                     <fg-input type="text"
                               :disabled="disabledTag"
-                              label="Enter Nickname"
+                              label="닉네임을 입력하시오."
                               placeholder=""
                               v-model="inputNickname">
                     </fg-input>
@@ -29,7 +29,7 @@
                 <div class="col-md-6">
                     <fg-input type="password"
                               :disabled="disabledTag"
-                              label="Enter Password"
+                              label="비밀번호를 입력하시오."
                               placeholder=""
                               v-model="inputPw">
                     </fg-input>
@@ -42,7 +42,7 @@
                 </b-tooltip>
                 <div class="col-md-6">
                     <fg-input type="password"
-                              id="inputPwCk"
+                              id="다시 비밀번호를 입력하시오."
                               :disabled="disabledTag"
                               label="Enter password again"
                               placeholder=""
@@ -53,7 +53,7 @@
             <div class="row">
                 <div class="col-md-7">
                     <fg-input type="text"
-                              label="Enter Phone number"
+                              label="핸드폰 번호를 입력하시오."
                               :disabled="disabledTag"
                               placeholder="'-'를 기입해주세요."
                               v-model="inputPhoneNo">
@@ -75,7 +75,7 @@
                     <b-form-select v-model="selectedGender" :disabled="disabledTag" class="mb-3">
                         <template slot="first">
                             <!-- this slot appears above the options from 'options' prop -->
-                            <option :value="null" disabled>-- GENDER --</option>
+                            <option :value="null" disabled>-- 성별 --</option>
                         </template>
                         <!-- these options will appear after the ones from 'options' prop -->
                         <option value="남자">남자</option>
@@ -97,7 +97,7 @@
                     <b-form-select :disabled="disabledTag" v-model="selectedAgeGroup" class="mb-3">
                         <template slot="first">
                             <!-- this slot appears above the options from 'options' prop -->
-                            <option :value="null" disabled>-- AGE --</option>
+                            <option :value="null" disabled>-- 나이 --</option>
                         </template>
                         <!-- these options will appear after the ones from 'options' prop -->
                         <option value="10대">10대</option>
@@ -123,7 +123,7 @@
                     <b-form-select :disabled="disabledTag" v-model="openRange" class="mb-3">
                         <template slot="first">
                             <!-- this slot appears above the options from 'options' prop -->
-                            <option :value="null" disabled>-- RANGE --</option>
+                            <option :value="null" disabled>-- 공개범위 --</option>
                         </template>
                         <!-- these options will appear after the ones from 'options' prop -->
                         <option value="all">ALL</option>
@@ -177,6 +177,7 @@
              */
             disabledTag: false,
             disabledID: false,
+            eventB: this.$EventBus,
             submitButton: true,
             inputId: "",
             inputPw: "",
@@ -184,13 +185,13 @@
             inputNickname: "",
             inputPhoneNo: "",
             isPhoneNoShown: false,
-            phoneM: 'private',
+            phoneM: '개인',
             selectedGender: null,
             isGenderShown: false,
-            genderM: 'private',
+            genderM: '개인',
             selectedAgeGroup: null,
             isAgeGroupShown: false,
-            ageM: 'private',
+            ageM: '개인',
             openRange: null,
             isTooltipShown: false,
             file: ''
@@ -211,30 +212,18 @@
              * @brief       send to database a profile image.
              */
             submitFile() {
-                /*
-                  Initialize the form data
-                */
                 let formData = new FormData();
-                /*
-                  Iteate over any file sent over appending the files
-                  to the form data.
-                */
                 formData.append('userfile', this.file, this.inputId + '.jpg');
-                /*
-                  Make the request to the POST /select-files URL
-                */
-                axios.post('http://hikonnect.ga:3000/image/profile',
-                    formData,
-                    {
+                axios.post('http://hikonnect.ga:3000/image/profile', formData, {
                         headers: {
                             'Content-Type': 'multipart/form-data'
                         }
-                    }
-                ).then(function () {
-                    console.log('SUCCESS!!');
-                }).catch(function () {
-                    console.log('FAILURE!!');
-                });
+                    }).then(() => {
+                    this.$EventBus.$emit('complitedModalOpen', 'true');
+                    }).catch(function (err) {
+                        console.log(err);
+                        console.log('FAILURE!!');
+                    });
             },
             /**
              * @function    regist
@@ -246,7 +235,6 @@
                     this.$EventBus.$emit('errorModalOpen', 'Check your password!');
                     return;
                 }
-                this.submitFile();
                 // 회원가입
                 if(sessionStorage.getItem('userid') == undefined)   {
                     this.axios.post(this.$HttpAddr + '/user', {
@@ -263,7 +251,6 @@
                     }).then(response => {
                         if (response.data == 'true') {
                             this.$EventBus.$emit('complitedModalOpen', 'true');
-                            this.$router.push('/');
                         }
                         else {
                             console.log(response.data);
@@ -285,7 +272,6 @@
                         groupsc: this.openRange
                     }).then(response => {
                         if (response.data == 'true') {
-                            this.$EventBus.$emit('complitedModalOpen', 'true');
                             sessionStorage.setItem('userid',this.inputId);
                             sessionStorage.setItem('phone',this.inputPhoneNo);
                             sessionStorage.setItem('password',this.inputPw);
@@ -296,6 +282,11 @@
                             sessionStorage.setItem('scv',this.openRange);
                             sessionStorage.setItem('gender',this.selectedGender);
                             sessionStorage.setItem('age',this.selectedAgeGroup);
+                            if(this.file == "") {
+                                this.$EventBus.$emit('complitedModalOpen', 'true');
+                            } else {
+                                this.submitFile();
+                            }
                         }
                         else {
                             console.log(response.data);
@@ -314,21 +305,21 @@
             },
             isPhoneNoShown() {
                 if (this.isPhoneNoShown == 'true') {
-                    this.phoneM = "show number public"
+                    this.phoneM = "공개"
                 } else
-                    this.phoneM = "private"
+                    this.phoneM = "개인"
             },
             isGenderShown() {
                 if (this.isGenderShown == 'true') {
-                    this.genderM = "show gender public"
+                    this.genderM = "공개"
                 } else
-                    this.genderM = "private"
+                    this.genderM = "개인"
             },
             isAgeGroupShown() {
                 if (this.isAgeGroupShown == 'true') {
-                    this.ageM = "show Age public"
+                    this.ageM = "공개"
                 } else
-                    this.ageM = "private"
+                    this.ageM = "개인"
             },
             inputPwCk(newValue) {
                 if (newValue == this.inputPw) {
@@ -353,6 +344,9 @@
         },
         // 로그인 되어 있을 시 세션값의 정보를 빼 input에 저장
         created() {
+            this.$EventBus.$on('sendImageFile', (file) => {
+                this.file = file;
+            });
             if (sessionStorage.getItem('userid') != undefined) {
                 this.disabledTag = true;
                 this.disabledID = true;
@@ -370,24 +364,19 @@
                 this.openRange = sessionStorage.getItem('scv');
                 this.isTooltipShown = sessionStorage.getItem('phonesc');
                 if (this.isPhoneNoShown == 'true') {
-                    this.phoneM = "show number public"
+                    this.phoneM = "공개"
                 } else {
-                    this.phoneM = 'private';
+                    this.phoneM = '개인';
                 }
                 if (this.isPhoneNoShown == 'true') {
-                    this.phoneM = "show number public"
+                    this.phoneM = "공개"
                 } else
-                    this.phoneM = "private"
+                    this.phoneM = "개인"
                 if (this.isAgeGroupShown == 'true') {
-                    this.ageM = "show Age public"
+                    this.ageM = "공개"
                 } else
-                    this.ageM = "private"
+                    this.ageM = "개인"
             }
-
-
-            this.$EventBus.$on('sendImageFile', (file) => {
-                this.file = file;
-            });
         }
     }
 

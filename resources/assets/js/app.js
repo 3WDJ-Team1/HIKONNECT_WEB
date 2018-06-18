@@ -3,11 +3,11 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App.vue'
 
-
 import BootstrapVue from 'bootstrap-vue'
 Vue.use(BootstrapVue);
 
 require('./bootstrap');
+
 
 // sweet-modal
 import SweetModal   from 'sweet-modal-vue/src/plugin.js';

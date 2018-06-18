@@ -3,7 +3,7 @@
  -->
 <template>
     <card class="card-user">
-        <h5 style="color: #9A9A9A;">PROFILE IMAGE</h5>
+        <h5 style="color: #9A9A9A;">프로필 이미지</h5>
         <div class="author">
             <img class="avatar border-gray" v-if="!image"/>
             <img class="avatar border-gray" v-else :src="image" />

@@ -1,5 +1,5 @@
 <!--
-    @author Jiyoon Lee <jiyoon3421@gmail.com>,
+    @author Jiyoon Lee <jiyoon3421@gmail.com>, Sungeun Kang <kasueu0814@gmail.com>
  -->
 <template>
     <v-container
@@ -8,38 +8,38 @@
             justify-center
             fluid
             style="padding-left: 0; padding-right: 0; margin-left: 0px;">
-        <h1
-                style="font-weight: bold; color: #47714c;">
-            SIGN IN
-        </h1>
 
-        <form>
-        <div class="row">
-            <div class="col-md-12">
-                <fg-input type      ="text"
-                          label     ="Enter ID"
-                          v-model   ="userId">
-                </fg-input>
+            <h1
+                    style="font-weight: bold; color: #47714c;">
+                로그인
+            </h1>
+            <form>
+            <div class="row">
+                <div class="col-md-12">
+                    <fg-input type      ="text"
+                              label     ="ID"
+                              v-model   ="userId">
+                    </fg-input>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <fg-input
-                          @keyup.enter.native="login"
-                          label       ="Enter password"
-                          v-model     ="userPw"
-                          type        ="password">
-                </fg-input>
-            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <fg-input
+                              @keyup.enter.native="login"
+                              label       ="PASSWORD"
+                              v-model     ="userPw"
+                              type        ="password">
+                    </fg-input>
+                </div>
 
-        </div>
-            <div class="text-center">
-                <button type="submit" class="btn btn-fill" style="background-color: #47714c; border-color: #47714c;"
-                        @click="login">
-                    sign in!
-                </button>
             </div>
-        </form>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-fill" style="background-color: #47714c; border-color: #47714c;"
+                            @click="login">
+                        제출
+                    </button>
+                </div>
+            </form>
     </v-container>
 </template>
 
