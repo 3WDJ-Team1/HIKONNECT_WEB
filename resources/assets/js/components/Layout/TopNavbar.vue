@@ -8,7 +8,7 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a
-                                style="cursor:pointer"
+                                style="cursor:pointer; font-size: 20px; font-family: 'Do Hyeon', sans-serif;"
                                 class="nav-link"
                                 @click.stop="drawerRight = !drawerRight"
                                 v-if="!isLogined"
@@ -18,7 +18,7 @@
                     </li>
                     <li class="nav-item">
                         <a
-                                style="cursor:pointer"
+                                style="cursor:pointer; font-size: 20px; font-family: 'Do Hyeon', sans-serif;"
                                 class="nav-link"
                                 v-if="isLogined"
                                 @click="logout('test')"
@@ -28,7 +28,7 @@
                     </li>
                     <li class="nav-item">
                         <a
-                                style="cursor:pointer"
+                                style="cursor:pointer; font-size: 20px; font-family: 'Do Hyeon', sans-serif;"
                                 class="nav-link"
                                 v-if="!isLogined"
                                 @click="signUp()"
@@ -114,5 +114,4 @@
     .navigation-drawer--temporary:not(.navigation-drawer--close), .navigation-drawer--is-mobile:not(.navigation-drawer--close) {
         background-color: white;
     }
-
 </style>

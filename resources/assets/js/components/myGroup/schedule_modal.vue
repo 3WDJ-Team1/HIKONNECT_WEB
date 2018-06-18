@@ -68,13 +68,11 @@
             }
         },
         created() {
-            // this.$EventBus.$emit('eventShowMap', item.mnt_id, item.route);
             this.$EventBus.$on('schedule_modal', (item) => {
-                console.log(item);
                 this.item = item;
-                this.$EventBus.$emit('eventShowMap', this.item.mnt_id, this.item.route);
-                this.date = this.item.start_date.substring(0, 10)
-                this.time = this.item.start_date.substring(11, 19)
+                this.$EventBus.$emit('eventShowMap', item);
+                this.date = item.start_date.substring(0, 10);
+                this.time = item.start_date.substring(11, 19);
             });
         }
     }

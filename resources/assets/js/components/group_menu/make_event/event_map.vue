@@ -78,6 +78,7 @@
                 this.$parent.close();
             },
             makeMap(num) {
+                var eventbus = this.$EventBus;
                 // 시종점 마커
                 var startEndSameMarker = [];
                 // 시작마커
@@ -233,7 +234,6 @@
                                 });
                                 ///////////////////////////////////////////////////////////////////////////////////// 경로를 클릭 했을 때 이벤트
                                 flightPath[i].addListener('click', function () {
-                                    console.log(path)
                                     // 갈림길 방지
                                     // 각 경로의 끝점이 동일 할 때마다 변수 1씩 추가해 줄 변수
                                     var sameSpot = false;
@@ -440,7 +440,6 @@
                                                 }
                                                 // 반환점이 없을 시
                                                 else {
-                                                    if(i == path[path.length - 1])  {
                                                         // 시종점 마커 찍기.
                                                         let destM = new google.maps.Marker({
                                                             position: end,
@@ -451,14 +450,12 @@
                                                         endMarkers.push(endMarkers[endMarkers.length - 2]);
                                                         endMarkers[endMarkers.length - 2].setMap(null);
                                                         endMarkers[endMarkers.length - 1].setMap(map);
-                                                    }
                                                 }
                                                 path.push(i);
                                             }
                                         }
                                     }
-                                    // this.$EventBus.$emit('mountain_path', path, num);
-                                    console.log(path)
+                                    eventbus.$emit('mountain_path', path, num);
                                 });
 
 

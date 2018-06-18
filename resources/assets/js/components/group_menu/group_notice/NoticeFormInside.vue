@@ -24,7 +24,7 @@
                     v-model="text"
                     :rules="textRules"
                     textarea
-                    rows="12"
+                    rows="5"
                     required
             ></v-text-field>
             <div class="filebox bs3-primary">

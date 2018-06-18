@@ -99,7 +99,7 @@
                 mountain_path: [],
                 mountain_num: '',
                 yourData: {
-                    hh: '',
+                    HH: '',
                     mm: '',
                     ss: '00'
                 },
@@ -138,8 +138,8 @@
                     mnt_id: this.mountain_num,
                     title: this.title,
                     content: this.content,
-                    stDate: this.date.substring(0, 4) + "-" + this.date.substring(5, 7) + "-" + this.date.substring(8, 10) +
-                    " " + this.yourData['hh'] + ":" + this.yourData['mm'] + ":" + this.yourData['ss'],
+                    stDate: new Date(this.date.substring(0, 4) + "-" + this.date.substring(5, 7) + "-" + this.date.substring(8, 10) +
+                        "T" + this.yourData['HH'] + ":" + this.yourData['mm'] + ":" + this.yourData['ss'] + "Z"),
                     route: this.mountain_path
                 })
                     .then(response => {

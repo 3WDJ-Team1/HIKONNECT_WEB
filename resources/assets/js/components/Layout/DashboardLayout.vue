@@ -3,7 +3,7 @@
  -->
 <template>
     <div class="wrapper">
-        <side-bar>
+        <side-bar v-if="login">
             <div class="box" v-if="login" align="center" style="margin-bottom: 17px;">
                 <div class="item">
                     <v-avatar
@@ -36,11 +36,8 @@
         </side-bar>
         <div class="main-panel">
             <top-navbar></top-navbar>
-
-            <dashboard-content @click="toggleSidebar" style="overflow-x: hidden; min-height: 100%">
-
+            <dashboard-content @click="toggleSidebar" style="overflow-x: hidden; min-height: 90%">
             </dashboard-content>
-
             <content-footer></content-footer>
         </div>
     </div>
@@ -60,11 +57,20 @@
             userNickname: sessionStorage.getItem('nickname'),
         }),
         created() {
+            // 로그인 안되어 있을 경우
             if (sessionStorage.getItem('userid') != undefined) {
                 this.login = true;
             }
             if(!this.login) {
-                document.getElementsByClassName('main-panel').style.height = '100%';
+                var x = document.createElement("STYLE");
+                var t = document.createTextNode(".main-panel {width: 100%;}");
+                x.appendChild(t);
+                document.head.appendChild(x);
+            } else  {
+                var x = document.createElement("STYLE");
+                var t = document.createTextNode(".main-panel {width: 81%;}");
+                x.appendChild(t);
+                document.head.appendChild(x);
             }
         },
         components: {

@@ -1,33 +1,63 @@
-
 <template>
     <v-app>
+        <template>
+            <v-carousel hide-controls>
+                <v-carousel-item src="http://localhost:8000/images/main1.png">
+                    <v-btn
+                            class="red darken-4 mt-5"
+                            dark
+                            href="https://play.google.com/store/apps/details?id=kr.ac.yjc.wdj.hikonnect"
+                            large
+                            style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; padding: 0; position: relative; top:62%; left: 40%">
+                        어플 다운 받으러 가기
+                    </v-btn>
+                </v-carousel-item>
+                <v-carousel-item src="http://localhost:8000/images/main2.png">
+                    <v-btn
+
+                            class="red darken-4 mt-5"
+                            dark
+                            href="http://localhost:8000/#/group"
+                            large
+                            style="font-family: 'Do Hyeon', sans-serif; font-size: 20px; padding: 0; position: relative; top:60%; left: 42%">
+                        그룹 리스트로 이동하기
+                    </v-btn>
+                </v-carousel-item>
+                <v-carousel-item src="http://localhost:8000/images/main3.png">
+
+                </v-carousel-item>
+            </v-carousel>
+        </template>
         <v-content style="padding: 0;">
             <section>
-                <v-parallax
-                        :src="httpAddr + '/images/main_2.jpeg'"
-                        height="650">
-                    <v-layout
-                            column
-                            align-center
-                            justify-center
-                            class="white--text">
-                        <h1
-                                class="white--text mb-2
-                        display-1
-                        text-xs-center">
-                            하이커넥트
-                        </h1>
-                        <div class="subheading mb-3 text-xs-center">감바리야</div>
-                        <v-btn
-                                class   ="red darken-4 mt-5"
-                                dark
-                                href="https://play.google.com/store/apps/details?id=kr.ac.yjc.wdj.hikonnect"
-                                large
-                                style   ="padding: 0;">
-                            GET APPLICATION
-                        </v-btn>
-                    </v-layout>
-                </v-parallax>
+                <!--<v-parallax-->
+                <!--:src="httpAddr + '/images/main_2.jpeg'"-->
+                <!--height="650">-->
+                <!--<v-layout-->
+                <!--column-->
+                <!--align-center-->
+                <!--justify-center-->
+                <!--class="white&#45;&#45;text">-->
+                <!--<h1-->
+                <!--class="white&#45;&#45;text mb-2-->
+                <!--display-1-->
+                <!--text-xs-center"-->
+                <!--style="font-family: 'Nanum Gothic', sans-serif;"-->
+                <!--&gt;-->
+                <!--하이커넥트-->
+                <!--</h1>-->
+                <!--<div style="font-family: 'Nanum Gothic', sans-serif;" class="subheading mb-3 text-xs-center">감바리야-->
+                <!--</div>-->
+                <!--<v-btn-->
+                <!--class="red darken-4 mt-5"-->
+                <!--dark-->
+                <!--href="https://play.google.com/store/apps/details?id=kr.ac.yjc.wdj.hikonnect"-->
+                <!--large-->
+                <!--style="padding: 0;">-->
+                <!--GET APPLICATION-->
+                <!--</v-btn>-->
+                <!--</v-layout>-->
+                <!--</v-parallax>-->
             </section>
 
             <section>
@@ -42,9 +72,9 @@
                             xs12
                             sm4
                             class="my-3">
-                        <div    class="text-xs-center">
-                            <h2     class="headline">연결 지향 프로젝트</h2>
-                            <span   class="subheading">
+                        <div class="text-xs-center">
+                            <h2 class="headline">연결 지향 프로젝트</h2>
+                            <span class="subheading">
                     하이커넥트는 동행인들의 연결을 위해 만들어졌습니다.
                 </span>
                         </div>
@@ -62,7 +92,8 @@
                                         <v-card-text class="text-xs-center">
                                             <v-icon
                                                     x-large
-                                                    class="light-blue--text">person_pin</v-icon>
+                                                    class="light-blue--text">person_pin
+                                            </v-icon>
                                         </v-card-text>
                                         <v-card-title
                                                 primary-title
@@ -83,7 +114,8 @@
                                         <v-card-text class="text-xs-center">
                                             <v-icon
                                                     x-large
-                                                    class="light-blue--text">radio</v-icon>
+                                                    class="light-blue--text">radio
+                                            </v-icon>
                                         </v-card-text>
                                         <v-card-title
                                                 primary-title
@@ -104,7 +136,8 @@
                                         <v-card-text class="text-xs-center">
                                             <v-icon
                                                     x-large
-                                                    class="light-blue--text">phonelink_ring</v-icon>
+                                                    class="light-blue--text">phonelink_ring
+                                            </v-icon>
                                         </v-card-text>
                                         <v-card-title
                                                 primary-title
@@ -148,9 +181,9 @@
                             xs12
                             sm4
                             class="my-3">
-                        <div    class="text-xs-center">
-                            <h2     class="headline">산행로 이탈 방지</h2>
-                            <span   class="subheading">
+                        <div class="text-xs-center">
+                            <h2 class="headline">산행로 이탈 방지</h2>
+                            <span class="subheading">
                     산행로 숙지 미숙에 의한 조난 해소
                 </span>
                         </div>
@@ -168,7 +201,8 @@
                                         <v-card-text class="text-xs-center">
                                             <v-icon
                                                     x-large
-                                                    class="light-blue--text">near_me</v-icon>
+                                                    class="light-blue--text">near_me
+                                            </v-icon>
                                         </v-card-text>
                                         <v-card-title
                                                 primary-title
@@ -190,7 +224,8 @@
                                         <v-card-text class="text-xs-center">
                                             <v-icon
                                                     x-large
-                                                    class="light-blue--text">pin_drop</v-icon>
+                                                    class="light-blue--text">pin_drop
+                                            </v-icon>
                                         </v-card-text>
                                         <v-card-title
                                                 primary-title
@@ -231,7 +266,7 @@
                                 <v-card-text class="layout justify-center">
                                     영진전문대학 컴퓨터정보계열 3WDJ 1조
                                 </v-card-text>
-                                <v-list class="transparent layout justify-center" >
+                                <v-list class="transparent layout justify-center">
                                     <v-list-tile
                                             v-for="item in contactList"
                                             :key="item.value">
@@ -254,7 +289,21 @@
 <script>
     export default {
         data: () => ({
-            title   : 'Your Logo',
+            items: [
+                {
+                    src: 'http://localhost:8000/images/main_1.jpeg'
+                },
+                {
+                    src: 'http://hikonnect.ga/images/main_3.jpeg'
+                },
+                {
+                    src: 'http://hikonnect.ga/images/mountain_3.png'
+                },
+                {
+                    src: 'http://hikonnect.ga/images/unnamed.jpg'
+                }
+            ],
+            title: 'Your Logo',
             httpAddr: Laravel.host,
             contactList: [
                 {
@@ -274,7 +323,25 @@
     }
 </script>
 <style>
+    .carousel__controls {
+        background: rgba(0, 0, 0, 0.0);
+    }
+
     .definition {
         font-size: 1.2em;
     }
+
+    .carousel .carousel__controls .btn {
+        width: 1%;
+        border-radius: 50%;
+        height: 72%;
+        border-radius: 50%;
+        border-color: #88888800;
+    }
+
+    .jumbotron {
+        padding: 0px;
+    }
+
+
 </style>

@@ -9,16 +9,15 @@
                     <h4 slot="header" class="card-title">산행 일정 작성</h4>
                     <form>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-12" style="padding-bottom: 0px; padding-top: 0px;">
                                 <fg-input type="text"
                                           label="제목"
-                                          :disabled="disabledID"
                                           v-model="title">
                                 </fg-input>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-12" style="padding-bottom: 0px; padding-top: 0px;">
                                 <div class="form-group">
                                     <label>모집 내용</label>
                                     <textarea rows="5" class="form-control border-input"
@@ -27,15 +26,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-4">
+                        <div class="row" style="height: 75px;">
+                            <div class="col-md-4" style="padding-bottom: 0px; padding-top: 0px;">
                                 <div class="form-group">
                                     <label>등산 경로</label>
                                     <img height="20px" src="http://hikonnect.ga/images/map.png" alt="">
                                     <autocomplete></autocomplete>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-4" style="padding-bottom: 0px; padding-top: 0px;">
                                 <div class="form-group">
                                     <label>산행일자</label>
                                     <img height="20px" src="http://hikonnect.ga/images/plan.png" alt="">
@@ -48,7 +47,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-4" style="padding-bottom: 0px; padding-top: 0px;">
                                 <div class="form-group">
                                     <label>산행시간</label>
                                     <img height="20px" src="http://hikonnect.ga/images/time.png" alt="">
@@ -61,11 +60,12 @@
                             </div>
                         </div>
                         <div class="text-center">
-                            <button type="submit" class="btn btn-warning btn-fill float-right"
+                            <button></button>
+                            <button style="font-size: 16px; font-family: 'Do Hyeon', sans-serif;" type="submit" class="btn btn-warning btn-fill float-right"
                                     @click="backCalender">
                                 나가기
                             </button>
-                            <button type="submit" class="btn btn-info btn-fill float-right"
+                            <button style="font-size: 16px; font-family: 'Do Hyeon', sans-serif;" type="submit" class="btn btn-info btn-fill float-right"
                                     @click="sendData">
                                 제출
                             </button>
@@ -97,7 +97,7 @@
                 mountain_path: [],
                 mountain_num: '',
                 yourData: {
-                    hh: '',
+                    HH: '',
                     mm: '',
                     ss: '00'
                 },
@@ -126,7 +126,7 @@
                     tt: this.title,
                     ct: this.content,
                     stDate: this.date.substring(0, 4) + "-" + this.date.substring(5, 7) + "-" + this.date.substring(8, 10) +
-                    " " + this.yourData['hh'] + ":" + this.yourData['mm'] + ":" + this.yourData['ss'],
+                    " " + this.yourData['HH'] + ":" + this.yourData['mm'] + ":" + this.yourData['ss'],
                     mountP: this.mountain_path
                 })
                     .then(response => {

@@ -8,6 +8,7 @@ Vue.use(BootstrapVue);
 
 require('./bootstrap');
 
+
 // sweet-modal
 import SweetModal   from 'sweet-modal-vue/src/plugin.js';
 Vue.use(SweetModal);

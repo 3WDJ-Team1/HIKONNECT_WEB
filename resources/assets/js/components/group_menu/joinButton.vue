@@ -7,18 +7,18 @@
         <sweet-modal ref="write" blocking>
             <update_delete-modal></update_delete-modal>
         </sweet-modal>
-        <nav class="navbar navbar-expand-lg" style="    top: 0px; display: inline-block;position: absolute; left: 0px;">
+        <nav class="navbar navbar-expand-lg" style="border: hidden; top: 0px; display: inline-block;position: absolute; left: 0px;">
             <div class="container-fluid">
                 <div class="collapse navbar-collapse justify-content-end">
                     <ul class="nav navbar-nav mr-auto">
                         <drop-down tag="li">
                             <template slot="title">
-                                메뉴보기
+                                <span style="font-size: 20px; font-family: 'Do Hyeon', sans-serif;">메뉴보기</span>
                             </template>
-                            <a v-if="position == 'owner'" class="dropdown-item" @click="updatedModal">그룹정보 수정</a>
-                            <a v-if="position == 'owner'" class="dropdown-item" @click="deleted">그룹 삭제</a>
-                            <a v-if="position == 'member'" class="dropdown-item" @click="leaveGroup">그룹탈퇴</a>
-                            <a v-if="position == 'guest'" class="dropdown-item" @click="enterGroup">그룹 참가</a>
+                            <a style="font-size: 17px; font-family: 'Do Hyeon', sans-serif;" v-if="position == 'owner'" class="dropdown-item" @click="updatedModal">그룹정보 수정</a>
+                            <a style="font-size: 17px; font-family: 'Do Hyeon', sans-serif;" v-if="position == 'owner'" class="dropdown-item" @click="deleted">그룹 삭제</a>
+                            <a style="font-size: 17px; font-family: 'Do Hyeon', sans-serif;" v-if="position == 'member'" class="dropdown-item" @click="leaveGroup">그룹탈퇴</a>
+                            <a style="font-size: 17px; font-family: 'Do Hyeon', sans-serif;" v-if="position == 'guest'" class="dropdown-item" @click="enterGroup">그룹 참가</a>
                         </drop-down>
                     </ul>
                 </div>
@@ -136,4 +136,7 @@
 </script>
 
 <style scoped>
+    .navbar .dropdown.nav-item .dropdown-toggle:after {
+        margin-top: 12px;
+    }
 </style>

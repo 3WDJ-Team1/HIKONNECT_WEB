@@ -79,7 +79,8 @@
     computed: {
       sidebarStyle () {
         return {
-          backgroundImage: `url(${this.backgroundImage})`
+          backgroundImage: `url(${this.backgroundImage})`,
+          width: `19%`
         }
       }
     }

@@ -9,13 +9,10 @@
             fluid
             style="padding-left: 0; padding-right: 0; margin-left: 0px;">
 
-        <v-row>
             <h1
                     style="font-weight: bold; color: #47714c;">
                 로그인
             </h1>
-        </v-row>
-        <v-row>
             <form>
             <div class="row">
                 <div class="col-md-12">
@@ -43,7 +40,6 @@
                     </button>
                 </div>
             </form>
-        </v-row>
     </v-container>
 </template>
 

@@ -6,11 +6,10 @@
         <div class="row">
             <div class="col-6">
                 <autocomplete
+                        @keyup.enter.native="initMap"
                         ref             ="autocomplete"
                         placeholder     ="목적지"
                         :source         ="distributionGroupsEndpoint"
-                        input-class     ="form-control"
-                        results-property="data"
                         :results-display="formattedDisplay"
                         @selected       ="addDistributionGroup">
                 </autocomplete>
@@ -40,6 +39,9 @@
             eventMap
         },
         methods: {
+            gg()    {
+                alert('dd')
+            },
             ///////////////////////////////////////// 지도 api
             initMap() {
                 this.$refs.map.open();
