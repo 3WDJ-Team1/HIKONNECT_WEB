@@ -198,6 +198,7 @@
                     userid: sessionStorage.getItem('userid'),
                     year: '2018'
                 }).then(response => {
+
                     sessionStorage.setItem('1', response.data[0]);
                     sessionStorage.setItem('2', response.data[1]);
                     sessionStorage.setItem('3', response.data[2]);
