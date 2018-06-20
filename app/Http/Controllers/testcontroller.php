@@ -366,7 +366,7 @@ class testcontroller extends Controller
                     FROM schedule_member as sub_sm
                     WHERE member_no = '${member_no}'
                 )
-                AND sm.hiking_state <> 0
+                AND sm.hiking_state = 1
                 AND sm.distance IS NOT NULL
                 ORDER BY rank;"
             )
@@ -408,7 +408,14 @@ class testcontroller extends Controller
                         FROM schedule_member
                         WHERE distance > sm.distance
                         AND schedule = sm.schedule
-                    ) as rank
+                    ) as rank,
+                    (
+                        SELECT count(*)
+                        FROM schedule_member
+                        WHERE schedule = sm.schedule
+                        AND hiking_state = 1
+                    )
+                    as remainMemberNum
                 FROM user as u
                 JOIN schedule_member as sm
                 ON u.userid = sm.userid
@@ -421,6 +428,23 @@ class testcontroller extends Controller
         return $queryRes;
     }
 
+    /**
+     * Get result of user hiked schedule.
+     * 
+     * @param Request $request .
+     * 
+     * @var String $member_no           [POST] Member's unique number
+     *                                  who is participating in schedule.
+     * 
+     * @return Array [
+     *                  remain_member,  A number of remain members.
+     *                  hiking_time,    The time of user hiked on schedule.
+     *                  rank,           The Rank, order by time when user 
+     *                                  arrived end-point.
+     *                  hiking_tear     The name is classified by the users' 
+     *                                  hiking records.
+     *               ]
+     */
     public function getHikingResult(Request $request)
     {
         $member_no = $request->get('member_no');
@@ -497,6 +521,70 @@ class testcontroller extends Controller
         return $queryRes;
     }
 
+    /**
+     * Get Remain member's detail information.
+     * 
+     * @param Request $request .
+     * 
+     * @var Integer $member_no  Members' 
+     * 
+     * @return Array    [
+     *                      nickname,
+     *                      profile,
+     *                      hiking_group,
+     *                      distance,
+     *                      hiking_start,
+     *                      velocity,
+     *                      rank
+     *                  ]
+     */
+    public function getRemainMemberDetail(Request $request)
+    {
+        $member_no = $request->get("member_no");
+
+        $queryRes = DB::select(
+            DB::raw(
+                "SELECT 
+                    u.userid,
+                    member_no,
+                    nickname,
+                    distance,
+                    latitude,
+                    longitude,
+                    (
+                        SELECT count(*) + 1
+                        FROM schedule_member
+                        WHERE hiking_start > sm.hiking_start
+                        AND schedule = (
+                            SELECT schedule
+                            FROM schedule_member
+                            WHERE member_no = '${member_no}'
+                        )
+                    ) as rank
+                FROM schedule_member as sm
+                JOIN user as u
+                ON u.userid = sm.userid
+                WHERE sm.schedule = (
+                    SELECT schedule
+                    FROM schedule_member as sub_sm
+                    WHERE member_no = '${member_no}'
+                )
+                AND sm.hiking_state <> 0
+                AND sm.distance IS NOT NULL
+                ORDER BY rank;"
+            )
+        );
+
+        return $queryRes;
+    }
+
+    /**
+     * Get schedule list that user will be hiking.
+     * 
+     * @param 
+     * 
+     * 
+     */
     public function getNowSchedule(Request $request)
     {
         $user_id = $request->get('user_id');
