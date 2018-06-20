@@ -1,7 +1,7 @@
 
 <template>
     <div class="content">
-        <sweet-modal ref="write" blocking>
+        <sweet-modal id="scheduleModal" style="min-width: 1000px;" ref="write">
             <Modal></Modal>
         </sweet-modal>
         <div class="container-fluid">
@@ -57,7 +57,7 @@
                                     <slot :row="item">
                                         <td>{{ item.title }}</td>
                                         <td></td>
-                                        <td>{{ item.nickname }}</td>
+                                        <td>{{ item.leader }}</td>
                                         <td>
                                             <button style="font-family: 'Do Hyeon', sans-serif;" type="submit" class="btn btn-info btn-fill float-right"
                                                     @click="move(item.uuid)">
@@ -130,4 +130,7 @@
     }
 </script>
 <style>
+    #scheduleModal.is-visible .sweet-buttons, #scheduleModal.is-visible .sweet-content {
+        padding-bottom: 0px;
+    }
 </style>

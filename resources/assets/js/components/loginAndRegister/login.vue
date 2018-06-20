@@ -143,6 +143,24 @@
                         sessionStorage.setItem('age',age);
                         sessionStorage.setItem('createdY',createdY);
                         this.$EventBus.$emit('setRightDrawerFlipped', 'true');
+                        this.axios.post(this.$HttpAddr + '/graph', {
+                            userid: sessionStorage.getItem('userid'),
+                            year: '2018'
+                        }).then(response => {
+                            sessionStorage.setItem('1', response.data[0]);
+                            sessionStorage.setItem('2', response.data[1]);
+                            sessionStorage.setItem('3', response.data[2]);
+                            sessionStorage.setItem('4', response.data[3]);
+                            sessionStorage.setItem('5', response.data[4]);
+                            sessionStorage.setItem('6', response.data[5]);
+                            sessionStorage.setItem('7', response.data[6]);
+                            sessionStorage.setItem('8', response.data[7]);
+                            sessionStorage.setItem('9', response.data[8]);
+                            sessionStorage.setItem('10', response.data[9]);
+                            sessionStorage.setItem('11', response.data[10]);
+                            sessionStorage.setItem('12', response.data[11]);
+                            console.log(sessionStorage.getItem('createdY').substring(0, 4))
+                        });
                     }
                 });
 

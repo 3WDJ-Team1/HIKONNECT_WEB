@@ -29,17 +29,17 @@
                             <v-flex
                                     xs7
                                     class="text-center">
-                                <h3 style="margin: 18px 0 15px;">{{ userData.nickname }}</h3>
+                                <h3 style="font-family: 'Do Hyeon', sans-serif; margin: 18px 0 15px;">{{ userData.nickname }}</h3>
                             </v-flex>
                             <v-flex
                                     v-b-toggle ="'n' + userData.nickname"
                                     visible='false'
                                     xs3
                                     class="text-center">
-                                <button style="padding-left: 12px; width: 100px; font-size: 12px; font-weight: bold; margin-top: 15px;" v-if="position" class="btn btn-info">
-                                    멤버 정보보기
+                                <button style="padding-left: 12px; width: 100px; font-size: 15px; font-weight: bold; margin-top: 15px;" v-if="position" class="btn btn-info">
+                                    <span style="font-family: 'Do Hyeon', sans-serif;">멤버 정보보기</span>
                                 </button>
-                                <button v-if="positionString" @click="outGroup(userData)" type="submit" style="width: 100px; font-size: 12px; font-weight: bold; margin-top: 15px;" class="btn btn-warning btn-fill">
+                                <button v-if="positionString" @click="outGroup(userData)" type="submit" style="font-family: 'Do Hyeon', sans-serif; width: 100px; font-size: 15px; font-weight: bold; margin-top: 15px;" class="btn btn-warning btn-fill">
                                     강퇴 시키기
                                 </button>
                             </v-flex>

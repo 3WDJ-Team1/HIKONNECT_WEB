@@ -3,7 +3,7 @@
  -->
 <template>
     <div>
-        <card id="cardBox" style="margin: 10px;" v-for="(item, key) in list" :key="key">
+        <card style="margin: 10px;" v-for="(item, key) in list" :key="key">
             <div class="row" id="groupListContainer">
                 <div style="padding: 0px;">
                     <h3 style="display:inline-block; padding-left: 25px;">{{ item.title }}</h3>&nbsp;&nbsp;&nbsp;
@@ -128,14 +128,4 @@
     }
 </script>
 <style>
-    #cardBox .card-body {
-        padding: 0px 15px 0px 15px;
-    }
-    .application--wrap {
-        min-height: 0px;
-    }
-    #cardBox .card-footer {
-        padding-left: 25px;
-        padding-right: 25px;
-    }
 </style>

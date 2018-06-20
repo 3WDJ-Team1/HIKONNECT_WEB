@@ -1,26 +1,18 @@
-
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App.vue'
 
 import BootstrapVue from 'bootstrap-vue'
 Vue.use(BootstrapVue);
-
 require('./bootstrap');
-
 
 // sweet-modal
 import SweetModal   from 'sweet-modal-vue/src/plugin.js';
 Vue.use(SweetModal);
 
-import VueModalTor from 'vue-modaltor'
-Vue.use(VueModalTor);
-
-
 // vuetify
 import Vuetify      from 'vuetify';
 Vue.use(Vuetify);
-
 import 'vuetify/dist/vuetify.css';
 import 'material-design-icons-iconfont/dist/material-design-icons.scss'
 
@@ -75,11 +67,11 @@ Vue.use(LightBootstrap);
 const router = new VueRouter({
     routes, // short for routes: routes
     linkActiveClass: 'nav-item active'
-})
+});
 
 /* eslint-disable no-new */
 new Vue({
     el: '#app',
     render: h => h(App),
     router
-})
+});

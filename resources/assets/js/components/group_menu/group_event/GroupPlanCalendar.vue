@@ -214,4 +214,7 @@ nc-simple-delete"></i>
     .sweet-modal.is-visible {
         max-width: 100%;
     }
+    .__vev_calendar-wrapper .cal-wrapper {
+        padding: 30px 50px;
+    }
 </style>
