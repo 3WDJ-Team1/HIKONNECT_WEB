@@ -7,7 +7,7 @@
 <template>
     <!-- @div       wrapper of this component -->
     <div>
-        <joinButton v-if="position != 'notLogin'"></joinButton>
+        <joinButton v-if="login != 'undefined'"></joinButton>
         <!-- @v-tabs    there is information of tabs here -->
         <v-tabs
             icons-and-text
@@ -71,27 +71,42 @@
         },
         data()  {
             return  {
-                position: ''
+                positionN: 0,
+                position: false,
+                login: sessionStorage.getItem('userid')
             }
         },
         created()   {
             this.positionGet();
+            this.ownerGet();
         },
         methods:    {
             positionGet() {
+                // 멤버 정보 서버에서 가지고 오기
+                    this.axios.get(this.$HttpAddr + "/list_member/" + this.$route.params.groupid)
+                        .then( response => {
+                            for(let i = 0; i < response.data[0].enter.length; i++)  {
+                                if(response.data[0].enter[i].userid == sessionStorage.getItem('userid')) {
+                                    this.positionN++;
+                                }
+                            };
+                            if(this.positionN > 0) {
+                                this.position = true;
+                            }
+                            this.$EventBus.$emit('positionGet', this.position);
+                            this.$EventBus.$emit('memberList', response.data[0].enter, response.data[0].not_enter);
+                        });
+            },
+            ownerGet() {
                 if (sessionStorage.getItem('userid') != undefined) {
                     this.axios.post(Laravel.host + '/api/checkMember', {
                         uuid: this.$route.params.groupid,
                         userid: sessionStorage.getItem('userid'),
                     }).then(response => {
-                        this.position = response.data;
-                        this.$EventBus.$emit('sendPositionInfo', this.position);
+                        this.$EventBus.$emit('ownerGet', response.data);
                     });
                 }
-                else {
-                    this.position = 'notLogin';
-                }
-            },
+            }
         }
     }
 </script>

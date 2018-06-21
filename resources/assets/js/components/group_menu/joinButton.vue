@@ -7,7 +7,8 @@
         <sweet-modal ref="write" blocking>
             <update_delete-modal></update_delete-modal>
         </sweet-modal>
-        <nav class="navbar navbar-expand-lg" style="border: hidden; top: 0px; display: inline-block;position: absolute; left: 0px;">
+        <nav class="navbar navbar-expand-lg"
+             style="border: hidden; top: 0px; display: inline-block;position: absolute; left: 0px;">
             <div class="container-fluid">
                 <div class="collapse navbar-collapse justify-content-end">
                     <ul class="nav navbar-nav mr-auto">
@@ -15,10 +16,14 @@
                             <template slot="title">
                                 <span style="font-size: 20px; font-family: 'Do Hyeon', sans-serif;">메뉴보기</span>
                             </template>
-                            <a style="font-size: 17px; font-family: 'Do Hyeon', sans-serif;" v-if="position == 'owner'" class="dropdown-item" @click="updatedModal">그룹정보 수정</a>
-                            <a style="font-size: 17px; font-family: 'Do Hyeon', sans-serif;" v-if="position == 'owner'" class="dropdown-item" @click="deleted">그룹 삭제</a>
-                            <a style="font-size: 17px; font-family: 'Do Hyeon', sans-serif;" v-if="position == 'member'" class="dropdown-item" @click="leaveGroup">그룹탈퇴</a>
-                            <a style="font-size: 17px; font-family: 'Do Hyeon', sans-serif;" v-if="position == 'guest'" class="dropdown-item" @click="enterGroup">그룹 참가</a>
+                            <a style="font-size: 17px; font-family: 'Do Hyeon', sans-serif;" v-if="owner == 'owner'"
+                               class="dropdown-item" @click="updatedModal">그룹정보 수정</a>
+                            <a style="font-size: 17px; font-family: 'Do Hyeon', sans-serif;" v-if="owner == 'owner'"
+                               class="dropdown-item" @click="deleted">그룹 삭제</a>
+                            <a style="font-size: 17px; font-family: 'Do Hyeon', sans-serif;"
+                               v-if="position && owner != 'owner'" class="dropdown-item" @click="leaveGroup">그룹탈퇴</a>
+                            <a style="font-size: 17px; font-family: 'Do Hyeon', sans-serif;"
+                               v-if="!position && owner != 'owner'" class="dropdown-item" @click="enterGroup">그룹 참가</a>
                         </drop-down>
                     </ul>
                 </div>
@@ -36,10 +41,14 @@
         },
         data: () => ({
             position: '',
+            owner: ''
         }),
         created() {
-            this.$EventBus.$on('sendPositionInfo', (position) => {
-                this.position = position;
+            this.$EventBus.$on('ownerGet', (owner) => {
+                this.owner = owner;
+            });
+            this.$EventBus.$on('positionGet', (position) => {
+                this.position = position
             });
         },
         methods: {
@@ -94,42 +103,26 @@
 
             enterGroup() {
                 // 로그인 되어 있을 경우
-                if (sessionStorage.getItem('userid') != 'undefind') {
-                    axios.post(this.$HttpAddr + '/member', {
-                        userid: sessionStorage.getItem('userid'),
-                        uuid: this.$route.params.groupid
-                    })
-                        .then(response => {
-                            if (response.data == 'true') {
-                                const notification = {
-                                    template: "<span><b>그룹에 참가 되었습니다.</b></span>"
-                                };
-                                this.$notifications.notify(
-                                    {
-                                        component: notification,
-                                        icon: 'nc-icon nc-app',
-                                        horizontalAlign: 'center',
-                                        verticalAlign: 'top',
-                                        type: 'success'
-                                    });
-                                this.position = 'member';
-                                location.reload();
-                            }
-                        });
-                }
-                else {
-                    const notification = {
-                        template: "<span><b>로그인 후 이용가능 합니다.</b></span>"
-                    };
-                    this.$notifications.notify(
-                        {
-                            component: notification,
-                            icon: 'nc-icon nc-app',
-                            horizontalAlign: 'center',
-                            verticalAlign: 'top',
-                            type: 'warning'
-                        });
-                }
+                axios.post(this.$HttpAddr + '/member', {
+                    userid: sessionStorage.getItem('userid'),
+                    uuid: this.$route.params.groupid
+                }).then(response => {
+                    if (response.data == 'true') {
+                        const notification = {
+                            template: "<span><b>그룹에 참가 되었습니다.</b></span>"
+                        };
+                        this.$notifications.notify(
+                            {
+                                component: notification,
+                                icon: 'nc-icon nc-app',
+                                horizontalAlign: 'center',
+                                verticalAlign: 'top',
+                                type: 'success'
+                            });
+                        this.position = 'member';
+                        location.reload();
+                    }
+                });
             }
         }
     }

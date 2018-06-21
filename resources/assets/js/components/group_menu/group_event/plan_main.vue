@@ -71,10 +71,8 @@
                 this.updateEventB = true;
             });
             // 현재사용자가 작성자인지 맴버인지 맴버도 아닌지 정보를 받아온다.
-            this.$EventBus.$on('sendPositionInfo', (position) => {
-                if (position != 'guest') {
-                    this.position = true;
-                }
+            this.$EventBus.$on('positionGet', (position) => {
+                this.position = position
             });
             // 그룹 만들기를 한 후 페이지를 바꿔줘야하므로
             this.$EventBus.$on('makeEventOK', (sign) => {

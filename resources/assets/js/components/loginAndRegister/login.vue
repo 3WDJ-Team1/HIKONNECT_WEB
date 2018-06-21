@@ -52,7 +52,7 @@
         methods: {
             login() {
                 let uri = this.$HttpAddr + '/loginprocess';
-                this.axios.post(uri, {
+                axios.post(uri, {
                     idv: this.userId,
                     pwv: this.userPw
                 }).then((response) => {
@@ -142,7 +142,6 @@
                         sessionStorage.setItem('gender',gender);
                         sessionStorage.setItem('age',age);
                         sessionStorage.setItem('createdY',createdY);
-                        this.$EventBus.$emit('setRightDrawerFlipped', 'true');
                         this.axios.post(this.$HttpAddr + '/graph', {
                             userid: sessionStorage.getItem('userid'),
                             year: '2018'
@@ -159,7 +158,6 @@
                             sessionStorage.setItem('10', response.data[9]);
                             sessionStorage.setItem('11', response.data[10]);
                             sessionStorage.setItem('12', response.data[11]);
-                            console.log(sessionStorage.getItem('createdY').substring(0, 4))
                         });
                     }
                 });

@@ -2,13 +2,16 @@
     <div class="row">
         <div class="col-md-6">
             <card class="ccard">
-            <table class="table" style="text-align:center;">
+                <template slot="header">
+                    <h4 class="card-title" style="font-family: 'Black Han Sans', sans-serif;">일정 상세보기</h4>
+                </template>
+            <table class="table" style="text-align:center; margin-top: 10px; margin-left: 20px;">
                 <tbody>
                 <tr>
-                    <td colspan="1" style="border-right: solid; color: rgb(244, 244, 244);">
+                    <td colspan="1" style="border-right: solid; border-top: 0px; color: rgb(244, 244, 244);">
                         <h6 style="font-size: 12px; color: #9A9A9A; margin: 0px; vertical-align: middle;">일정 이름</h6>
                     </td>
-                    <td colspan="3">
+                    <td colspan="3" style="border-top: 0px;">
                         <h3 style="font-size: 17px; margin: 0px; text-align:left; margin-left: 10px;">{{ item.title
                             }}</h3>
                     </td>
@@ -38,12 +41,30 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="1" style="border-right: solid; color: rgb(244, 244, 244);">
+                    <td colspan="1" style="border-right: solid; color: rgb(244, 244, 244);" rowspan="4">
                         <h6 style="font-size: 12px; margin: 0px; color: #9A9A9A;">모집 내용</h6>
                     </td>
-                    <td colspan="3" rowspan="5">
+                    <td colspan="3" rowspan="4">
                         <h3 style="font-size: 17px; margin: 0px; text-align:left; margin-left: 10px;">{{ item.content
                             }}</h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="1">
+                    </td>
+                    <td colspan="3">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="1">
+                    </td>
+                    <td colspan="3">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="1">
+                    </td>
+                    <td colspan="3">
                     </td>
                 </tr>
                 </tbody>
@@ -86,6 +107,9 @@
 </script>
 
 <style>
+    .sweet-modal.is-visible {
+        max-width: 1000px;
+    }
     table.table thead td:not(:nth-child(1)), table.table tbody td:not(:nth-child(1)), table.table thead th:not(:nth-child(1)), table.table tbody th:not(:nth-child(1)), table.table thead td:first-child, table.table tbody td:first-child, table.table thead th:first-child, table.table tbody th:first-child {
         padding: 0 0px;
     }

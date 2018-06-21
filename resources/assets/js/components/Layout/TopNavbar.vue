@@ -21,7 +21,7 @@
                                 style="cursor:pointer; font-size: 20px; font-family: 'Do Hyeon', sans-serif;"
                                 class="nav-link"
                                 v-if="isLogined"
-                                @click="logout('test')"
+                                @click="logout()"
                         >
                             로그아웃
                         </a>
@@ -81,9 +81,6 @@
             this.$EventBus.$on('complitedModalOpen', (value) => {
                 this.$refs.cModal.open();
             });
-            this.$EventBus.$on('setRightDrawerFlipped', (value) => {
-                this.drawerRight = false;
-            });
             this.isUserLogined();
         },
         components: {
@@ -96,9 +93,8 @@
             signUp() {
                 this.$router.push("/user");
             },
-            logout(userId) {
+            logout() {
                 sessionStorage.clear();
-                this.isLogined = false;
                 location.reload();
                 this.$router.push('/');
             },

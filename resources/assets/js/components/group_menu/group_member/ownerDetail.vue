@@ -38,7 +38,7 @@
                                 성별
                                 </div>
                                 <div class="detail-content">
-                                {{ userData.gender == 0 ? 'male' : 'female' }}
+                                {{ leaderData.gender == 0 ? 'male' : 'female' }}
                                 </div>
                             </v-card-text>
                         </v-card>
@@ -52,7 +52,7 @@
                                 핸드폰
                                 </div>
                                 <div class="detail-content">
-                                {{ userData.phone }}
+                                {{ leaderData.phone }}
                                 </div>
                             </v-card-text>
                             </v-card>
@@ -66,7 +66,7 @@
                                     나이
                                 </div>
                                 <div class="detail-content">
-                                    {{ userData.age_group }}대
+                                    {{ leaderData.age_group }}대
                                 </div>
                             </v-card-text>
                         </v-card>
@@ -79,7 +79,7 @@
                                     아이디
                                 </div>
                                 <div class="detail-content">
-                                    {{ userData.userid }}
+                                    {{ leaderData.userid }}
                                 </div>
                             </v-card-text>
                         </v-card>
@@ -93,7 +93,7 @@
 <script>
     export default {
         props:  {
-            userData: {
+            leaderData: {
                 type: Object,
                 required: true
             }
@@ -107,29 +107,29 @@
         }),
         methods:    {
             publicMode()    {
-                if(this.userData.scope / 10000 >= 1 ) {
+                if(this.leaderData.scope / 10000 >= 1 ) {
                     this.scv     = 'all';
-                    this.userData.scope   = this.userData.scope - 10000;
+                    this.leaderData.scope   = this.leaderData.scope - 10000;
                 }
                 else {
                     this.scv     = 'group';
-                    this.userData.scope   = this.userData.scope - 1000;
+                    this.leaderData.scope   = this.leaderData.scope - 1000;
                 }
-                if(this.userData.scope / 100 >= 1 ) {
+                if(this.leaderData.scope / 100 >= 1 ) {
                     this.phonesc = 'true';
-                    this.userData.scope   = this.userData.scope - 100;
+                    this.leaderData.scope   = this.leaderData.scope - 100;
                 }
                 else {
                     this.phonesc = 'false';
                 }
-                if(this.userData.scope / 10 >= 1 ) {
+                if(this.leaderData.scope / 10 >= 1 ) {
                     this.gendersc    = 'true';
-                    this.userData.scope       = this.userData.scope - 10;
+                    this.leaderData.scope       = this.leaderData.scope - 10;
                 }
                 else {
                     this.gendersc = 'false';
                 }
-                if(this.userData.scope == 1 ) {
+                if(this.leaderData.scope == 1 ) {
                     this.agesc = 'true';
                 }
                 else {

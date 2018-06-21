@@ -7,7 +7,7 @@
 <template>
     <div>
         <!-- 리스트의 카드 클릭시 상세 정보 띄우기 모달-->
-        <sweet-modal ref="write" blocking id="modalnotice">
+        <sweet-modal ref="write" blocking>
             <noticeModal :noticeItem="noticeItem" v-if="updateSign"></noticeModal>
             <updateModal :updateItem="updateItem" v-if="!updateSign"></updateModal>
         </sweet-modal>
@@ -103,12 +103,10 @@
                 // 공지사항 받아오기
                 this.infiniteHandler();
             });
+
             // 현재 사용자의 포지션을 받아오는 event
-            this.$EventBus.$on('sendPositionInfo', (position) => {
-                if(position != 'guest') {
-                    // position이 guest이 아닐 경우 버튼 보여주기
-                    this.position = true;
-                }
+            this.$EventBus.$on('positionGet', (position) => {
+                this.position = position
             });
         },
         methods: {
@@ -154,14 +152,5 @@
     }
     #noticeCard:hover  {
         background-color: #f7f7f8;
-    }
-    #modalnotice.is-visible {
-        border-radius: 15px;
-    }
-    #modalnotice .sweet-box-actions {
-        visibility: hidden;
-    }
-    #modalnotice.is-visible .sweet-buttons, .sweet-modal.is-visible .sweet-content {
-        padding: 20px;
     }
 </style>

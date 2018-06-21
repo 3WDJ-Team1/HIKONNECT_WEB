@@ -35,11 +35,11 @@
                         </tr>
                         </tbody>
                     </table>
-                    <button class="BButton" style="float: right;" v-if="event.position == 'guest' && groupPosition == 'member'" @click="joinPlan(event.no)">
+                    <button class="BButton" style="float: right;" v-if="event.position == 'guest' && position" @click="joinPlan(event.no)">
                         <i class="nc-icon nc-simple-add"></i>
                         일정 참여
                     </button>
-                    <button class="BButton" style="float: right; margin-right: 10px;" v-if="event.position == 'member'" @click="leaveEvent(event)">
+                    <button class="BButton" style="float: right; margin-right: 10px;" v-if="position && event.position != 'owner'" @click="leaveEvent(event)">
                         <i class="nc-icon
 nc-simple-delete"></i>
                         일정 취소
@@ -74,7 +74,7 @@ nc-simple-delete"></i>
         data () {
             return {
                 hikingEvents: [],
-                groupPosition: ''
+                position: '',
             }
         },
         methods: {
@@ -197,8 +197,8 @@ nc-simple-delete"></i>
         },
         // 캘린더 리스트 불러오기
         created() {
-            this.$EventBus.$on('sendPositionInfo', (position) => {
-                    this.groupPosition = position;
+            this.$EventBus.$on('positionGet', (position) => {
+                this.position = position
             });
             this.calendarList();
         }
