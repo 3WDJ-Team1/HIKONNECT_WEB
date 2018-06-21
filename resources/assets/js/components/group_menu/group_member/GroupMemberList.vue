@@ -133,7 +133,7 @@
                 this.axios.get(this.$HttpAddr + "/list_member/" + this.$route.params.groupid)
                     .then(response => {
                         this.memberList = response.data[0].enter;
-                        this.leaderData = this.memberList[0];
+                        this.leaderData.push(this.memberList[0]);
                         this.memberList.shift();
                         this.waitingMember = response.data[0].not_enter
                     });
