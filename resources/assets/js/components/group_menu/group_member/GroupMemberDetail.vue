@@ -79,6 +79,7 @@
                                     아이디
                                 </div>
                                 <div class="detail-content">
+                                    <span style="font-size: 10px;"></span>
                                     {{ userData.userid }}
                                 </div>
                             </v-card-text>

@@ -5,7 +5,7 @@
                 <template slot="header">
                     <h4 class="card-title" style="font-family: 'Black Han Sans', sans-serif;">일정 상세보기</h4>
                 </template>
-            <table class="table" style="text-align:center; margin-top: 10px; margin-left: 20px;">
+            <table class="table" style="width: 94%; text-align:center; margin-top: 10px; margin-left: 15px;">
                 <tbody>
                 <tr>
                     <td colspan="1" style="border-right: solid; border-top: 0px; color: rgb(244, 244, 244);">
@@ -50,21 +50,21 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="1">
+                    <td>
                     </td>
-                    <td colspan="3">
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="1">
-                    </td>
-                    <td colspan="3">
+                    <td>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="1">
+                    <td>
                     </td>
-                    <td colspan="3">
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
                     </td>
                 </tr>
                 </tbody>

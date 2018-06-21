@@ -4,7 +4,7 @@
 <template>
 
     <div>
-        <sweet-modal ref="write" blocking>
+        <sweet-modal ref="write" blocking id="groupModifyModal">
             <update_delete-modal></update_delete-modal>
         </sweet-modal>
         <nav class="navbar navbar-expand-lg"
