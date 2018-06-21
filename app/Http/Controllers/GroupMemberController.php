@@ -27,7 +27,7 @@ class GroupMemberController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($uuid)
+    public function index()
     {
         //
     }
