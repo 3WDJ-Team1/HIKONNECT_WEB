@@ -129,7 +129,6 @@
             position: false
         }),
         methods: {
-
             pullMemberList() {
                 this.axios.get(this.$HttpAddr + "/list_member/" + this.$route.params.groupid)
                     .then(response => {
