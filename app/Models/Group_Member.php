@@ -24,7 +24,8 @@ class Group_Member extends Model
                 ->where([
                 ['hiking_group', $uuid],
                 ['enter_whether', $whether]
-                ])->join('user','user.userid','=','group_member.userid')->get();
+                ])->join('user','user.userid','=','group_member.userid')->
+                orderBy('enter_date','asc')->get();
         } else
             return 'error';
     }

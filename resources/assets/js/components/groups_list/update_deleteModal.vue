@@ -2,57 +2,68 @@
     @author Jiyoon Lee <jiyoon3421@gmail.com>
  -->
 <template>
-    <v-app>
-        <v-form v-model="valid" ref="form">
-            <v-subheader style="font-size: 18px;">그룹 이름</v-subheader>
-            <v-text-field
-                    name="notice_title"
-                    v-model="title"
-                    :rules="titleRules"
-                    required
-            ></v-text-field>
-            <v-subheader style="font-size: 18px;">모집내용</v-subheader>
-            <v-text-field
-                    name="notice_text"
-                    v-model="text"
-                    :rules="textRules"
-                    textarea
-                    rows="7"
-                    required
-            ></v-text-field>
-            <div style="display: flex;">
-                <div style="margin: 5px; flex-grow: 1;">
-                    <v-subheader style="font-size: 15px;">최소 모집 인원</v-subheader>
-                    <v-text-field
-                            name="minimum"
-                            v-model="min"
-                            :rules="minRules"
-                            required
-                    ></v-text-field>
+    <card>
+        <template slot="header">
+            <h3 class="card-title" style="font-family: 'Black Han Sans', sans-serif;">그룹 만들기</h3>
+        </template>
+        <v-app>
+            <v-form v-model="valid" ref="form">
+                <v-subheader style="font-family: 'Do Hyeon', sans-serif; font-size: 16px;">그룹 이름</v-subheader>
+                <v-text-field
+                        style="padding-top: 0px;"
+                        name="notice_title"
+                        v-model="title"
+                        :rules="titleRules"
+                        required
+                ></v-text-field>
+                <v-subheader style="font-family: 'Do Hyeon', sans-serif; font-size: 16px;">모집내용</v-subheader>
+                <v-text-field
+                        style="padding-top: 0px;"
+                        name="notice_text"
+                        v-model="text"
+                        :rules="textRules"
+                        textarea
+                        rows="3"
+                        required
+                ></v-text-field>
+                <div style="display: flex;">
+                    <div style="margin: 5px; flex-grow: 1;">
+                        <v-subheader style="font-family: 'Do Hyeon', sans-serif; font-size: 16px;">최소 모집 인원</v-subheader>
+                        <v-text-field
+                                name="minimum"
+                                v-model="min"
+                                :rules="minRules"
+                                required
+                        ></v-text-field>
+                    </div>
+                    <div style="margin: 5px; flex-grow: 1;">
+                        <v-subheader style="font-family: 'Do Hyeon', sans-serif; font-size: 16px;">최대 모집 인원</v-subheader>
+                        <v-text-field
+                                name="maximum"
+                                v-model="max"
+                                :rules="maxRules"
+                                required
+                        ></v-text-field>
+                    </div>
                 </div>
-                <div style="margin: 5px; flex-grow: 1;">
-                    <v-subheader style="font-size: 15px;">최대 모집 인원</v-subheader>
-                    <v-text-field
-                            name="maximum"
-                            v-model="max"
-                            :rules="maxRules"
-                            required
-                    ></v-text-field>
-                </div>
-            </div>
-            <v-btn
-                    @click="updated()"
-                    style="height: 100%; color: white;"
-                    color="cyan"
-            >
-                UPDATE
-            </v-btn>
-        </v-form>
-    </v-app>
+                <v-btn
+                        @click="updated()"
+                        style="height: 100%; color: white; float: right;"
+                        color="cyan"
+                >
+                    UPDATE
+                </v-btn>
+            </v-form>
+        </v-app>
+    </card>
 </template>
 
 <script>
+    import Card from '.././Cards/Card'
     export default {
+        components: {
+            Card,
+        },
         data: () => ({
             valid: true,
             item: [],

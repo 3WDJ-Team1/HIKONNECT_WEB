@@ -104,7 +104,6 @@
                                 type: 'success'
                             });
 
-
                         this.waitingMembers = [];
                         this.$EventBus.$emit('memberCheckSign', 'true')
                     }
@@ -116,7 +115,6 @@
                     userid: argUserUuid,
                     uuid: this.groupId
                 }).then (response => {
-                    console.log(response.data);
                     if (response) {
                         const notification = {
                             template: "<span><b>참여 신청을 거절 하였습니다.</b></span>"

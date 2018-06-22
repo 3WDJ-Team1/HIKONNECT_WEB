@@ -14,11 +14,11 @@
                             <i class="nc-icon nc-badge text-warning"></i>
                         </div>
                         <div slot="content">
-                            <p class="card-category" id="levelExplain" style="cursor:pointer">
+                            <p class="card-category" id="levelExplain" style="font-size: 18px; font-family: 'Do Hyeon', sans-serif; cursor:pointer">
                                 <i class="nc-icon nc-tap-01" style="width: 15px;"></i>
                                 나의 등급
                             </p>
-                            <h4 class="card-title">{{rank}}</h4>
+                            <h4 class="card-title" style="font-family: 'Do Hyeon', sans-serif;">{{rank}}</h4>
                         </div>
                     </stats-card>
                 </div>
@@ -31,8 +31,8 @@
                             <i class="nc-icon nc-watch-time text-success"></i>
                         </div>
                         <div slot="content">
-                            <p class="card-category">총 등산 시간</p>
-                            <h4 class="card-title">{{total_hiking_t}}</h4>
+                            <p class="card-category" style="font-size: 18px; font-family: 'Do Hyeon', sans-serif;">총 등산 시간</p>
+                            <h4 class="card-title" style="font-family: 'Do Hyeon', sans-serif;">{{total_hiking_t}}</h4>
                         </div>
                     </stats-card>
                 </div>
@@ -42,8 +42,8 @@
                             <i class="nc-icon nc-ruler-pencil text-danger"></i>
                         </div>
                         <div slot="content">
-                            <p class="card-category">총 등산 거리</p>
-                            <h4 class="card-title">{{totalD}}km</h4>
+                            <p class="card-category" style="font-size: 18px; font-family: 'Do Hyeon', sans-serif;">총 등산 거리</p>
+                            <h4 class="card-title" style="font-family: 'Do Hyeon', sans-serif;">{{totalD}}km</h4>
                         </div>
                     </stats-card>
                 </div>
@@ -54,7 +54,7 @@
                                 :chart-options="lineChart.options"
                                 :responsive-options="lineChart.responsiveOptions">
                         <template slot="header">
-                            <h4 class="card-title" style="display: inline-block;">내가 등산한 횟수</h4>
+                            <h3 class="card-title" style="font-family: 'Do Hyeon', sans-serif; display: inline-block;">등산한 횟수</h3>
                             <!--<b-form-select style="display: inline-block; padding-bottom: 0px;-->
                             <!--padding-top: 0px; float:right; width: 100px" v-model="nowYear" :options="options" class="mb-3" size="sm" />-->
                         </template>
@@ -63,7 +63,7 @@
                 <div class="col-md-4">
                     <card>
                         <template slot="header">
-                            <h4 class="card-title">나의 산행 기록</h4>
+                            <h3 class="card-title" style="font-family: 'Do Hyeon', sans-serif;">산행 기록</h3>
                         </template>
                         <div class="table-hover">
                             <table class="table" style="text-align:center;">
@@ -158,7 +158,7 @@
             }
         },
         created() {
-            this.graphPull();
+            // this.graphPull();
             this.positionPull();
             this.lastRecordPull();
             this.yearSearch();
@@ -198,6 +198,7 @@
                     userid: sessionStorage.getItem('userid'),
                     year: '2018'
                 }).then(response => {
+
                     sessionStorage.setItem('1', response.data[0]);
                     sessionStorage.setItem('2', response.data[1]);
                     sessionStorage.setItem('3', response.data[2]);
