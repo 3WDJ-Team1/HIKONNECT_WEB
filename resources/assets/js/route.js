@@ -38,6 +38,7 @@ import UserProfile from './components/loginAndRegister/UserProfile.vue'
 import TableList from './components/myGroup/TableList.vue'
 import Notifications from './components/Notifications.vue'
 
+
 // main
 import Main                 from './components/Layout/MainPage.vue'
 // import Main from './components/Layout/Main'
