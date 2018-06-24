@@ -19,7 +19,7 @@
             만들기
         </v-btn>
 
-        <sweet-modal id="paddingRemove" ref="write">
+        <sweet-modal ref="write">
             <router-view name="make"></router-view>
         </sweet-modal>
     </v-app>
@@ -54,14 +54,9 @@
 </script>
 
 <style>
-    #paddingRemove.is-visible {
-        overflow: hidden;
-    }
-    #paddingRemove.is-visible .sweet-buttons, #paddingRemove.is-visible .sweet-content {
-        padding: 0px;
-    }
-    #paddingRemove .sweet-box-actions {
-        visibility: hidden;
+    .sweet-modal.is-visible {
+        border-radius: 15px;
+        min-width: 80%;
     }
     .btn--floating {
         border-radius: 50%;

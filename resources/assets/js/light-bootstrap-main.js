@@ -14,7 +14,6 @@ import 'vue-notifyjs/themes/default.scss'
 import '../sass/css/demo.css'
 import '../sass/light-bootstrap-dashboard.scss'
 
-
 // library auto imports
 import 'es6-promise/auto'
 

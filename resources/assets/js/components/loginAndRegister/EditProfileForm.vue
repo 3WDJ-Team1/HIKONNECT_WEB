@@ -3,12 +3,12 @@
  -->
 <template>
     <card>
-        <h4 slot="header" class="card-title">회원가입</h4>
+        <h1 slot="header" style="font-family: 'Do Hyeon', sans-serif;" class="card-title">회원가입</h1>
         <form>
             <div class="row">
                 <div class="col-md-12">
+                    <label><h4 style="margin: 0px; font-family: 'Do Hyeon', sans-serif;">아이디를 입력하시오.</h4></label>
                     <fg-input type="text"
-                              label="아이디를 입력하시오."
                               :disabled="disabledID"
                               placeholder=""
                               v-model="inputId">
@@ -17,9 +17,9 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
+                    <label><h4 style="margin: 0px; font-family: 'Do Hyeon', sans-serif;">닉네임을 입력하시오.</h4></label>
                     <fg-input type="text"
                               :disabled="disabledTag"
-                              label="닉네임을 입력하시오."
                               placeholder=""
                               v-model="inputNickname">
                     </fg-input>
@@ -27,9 +27,9 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
+                    <label><h4 style="margin: 0px; font-family: 'Do Hyeon', sans-serif;">비밀번호를 입력하시오.</h4></label>
                     <fg-input type="password"
                               :disabled="disabledTag"
-                              label="비밀번호를 입력하시오."
                               placeholder=""
                               v-model="inputPw">
                     </fg-input>
@@ -41,37 +41,36 @@
                     Check your password!
                 </b-tooltip>
                 <div class="col-md-6">
+                    <label><h4 style="margin: 0px; font-family: 'Do Hyeon', sans-serif;">다시 비밀번호를 입력하시오.</h4></label>
                     <fg-input type="password"
-                              id="다시 비밀번호를 입력하시오."
                               :disabled="disabledTag"
-                              label="Enter password again"
                               placeholder=""
                               v-model="inputPwCk">
                     </fg-input>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-7">
+                <div class="col-md-6">
+                    <label><h4 style="margin: 0px; font-family: 'Do Hyeon', sans-serif;">핸드폰 번호를 입력하시오.</h4></label>
                     <fg-input type="text"
-                              label="핸드폰 번호를 입력하시오."
                               :disabled="disabledTag"
                               placeholder="'-'를 기입해주세요."
                               v-model="inputPhoneNo">
                     </fg-input>
                 </div>
-                <div class="col-md-5" id="phoneCheckPadding">
+                <div class="col-md-6" id="phoneCheckPadding">
                     <b-form-checkbox
                             id="checkBoxP"
                             :disabled="disabledTag"
                             v-model="isPhoneNoShown"
                             value="true"
                             unchecked-value="false">
-                        {{ phoneM }}
+                        <h5 style="font-family: 'Do Hyeon', sans-serif;">{{ phoneM }}</h5>
                     </b-form-checkbox>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <b-form-select v-model="selectedGender" :disabled="disabledTag" class="mb-3">
                         <template slot="first">
                             <!-- this slot appears above the options from 'options' prop -->
@@ -82,18 +81,18 @@
                         <option value="여자">여자</option>
                     </b-form-select>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-9">
                     <b-form-checkbox
                             :disabled="disabledTag"
                             v-model="isGenderShown"
                             value="true"
                             unchecked-value="false">
-                        {{ genderM }}
+                        <h5 style="font-family: 'Do Hyeon', sans-serif;">{{ genderM }}</h5>
                     </b-form-checkbox>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <b-form-select :disabled="disabledTag" v-model="selectedAgeGroup" class="mb-3">
                         <template slot="first">
                             <!-- this slot appears above the options from 'options' prop -->
@@ -108,18 +107,18 @@
                         <option value="60대 이상">60대 이상</option>
                     </b-form-select>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-9">
                     <b-form-checkbox
                             :disabled="disabledTag"
                             v-model="isAgeGroupShown"
                             value="true"
                             unchecked-value="false">
-                        {{ ageM }}
+                        <h5 style="font-family: 'Do Hyeon', sans-serif;">{{ ageM }}</h5>
                     </b-form-checkbox>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <b-form-select :disabled="disabledTag" v-model="openRange" class="mb-3">
                         <template slot="first">
                             <!-- this slot appears above the options from 'options' prop -->
@@ -132,9 +131,9 @@
                 </div>
             </div>
             <div class="text-center">
-                <button type="submit" v-if="submitButton" class="btn btn-info btn-fill float-right"
+                <button style="padding: 0;" type="submit" v-if="submitButton" class="btn btn-info btn-fill float-right"
                         @click="regist">
-                    SUBMIT
+                    <span style="font-family: 'Do Hyeon', sans-serif; font-size: 30px; padding: 10px;">SUBMIT</span>
                 </button>
                 <button type="submit" v-if="!submitButton" class="btn btn-outline-warning btn-fill float-right"
                         @click="update">

@@ -3,7 +3,7 @@
   z-index: 10000;
 
   .tooltip-inner {
-    max-width: 700px;
+    min-width: 400px;
     background: black;
     color: white;
     padding: 30px;

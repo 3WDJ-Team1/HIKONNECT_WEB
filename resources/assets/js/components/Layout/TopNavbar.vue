@@ -3,12 +3,12 @@
  -->
 <template>
     <div>
-        <nav class="navbar navbar-expand-lg">
+        <nav class="navbar navbar-expand-lg" style="min-height: 67px;">
             <div class="container-fluid">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a
-                                style="cursor:pointer; font-size: 20px; font-family: 'Do Hyeon', sans-serif;"
+                                style="cursor:pointer; font-size: 30px; font-family: 'Do Hyeon', sans-serif;"
                                 class="nav-link"
                                 @click.stop="drawerRight = !drawerRight"
                                 v-if="!isLogined"
@@ -18,7 +18,7 @@
                     </li>
                     <li class="nav-item">
                         <a
-                                style="cursor:pointer; font-size: 20px; font-family: 'Do Hyeon', sans-serif;"
+                                style="cursor:pointer; font-size: 30px; font-family: 'Do Hyeon', sans-serif;"
                                 class="nav-link"
                                 v-if="isLogined"
                                 @click="logout()"
@@ -28,7 +28,7 @@
                     </li>
                     <li class="nav-item">
                         <a
-                                style="cursor:pointer; font-size: 20px; font-family: 'Do Hyeon', sans-serif;"
+                                style="cursor:pointer; font-size: 30px; font-family: 'Do Hyeon', sans-serif;"
                                 class="nav-link"
                                 v-if="!isLogined"
                                 @click="signUp()"
@@ -37,6 +37,17 @@
                         </a>
                     </li>
                 </ul>
+                <button type="button"
+                        class="navbar-toggler navbar-toggler-right"
+                        :class="{toggled: $sidebar.showSidebar}"
+                        aria-controls="navigation-index"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                        @click="toggleSidebar">
+                    <span class="navbar-toggler-bar burger-lines"></span>
+                    <span class="navbar-toggler-bar burger-lines"></span>
+                    <span class="navbar-toggler-bar burger-lines"></span>
+                </button>
             </div>
         </nav>
         <sweet-modal
@@ -72,6 +83,7 @@
             modalErrorMsg: '',
             isLogined: false,
             drawerRight: false,
+            activeNotifications: false
         }),
         created() {
             this.$EventBus.$on('errorModalOpen', (message) => {
@@ -87,6 +99,21 @@
             Login
         },
         methods: {
+            capitalizeFirstLetter(string) {
+                return string.charAt(0).toUpperCase() + string.slice(1)
+            },
+            toggleNotificationDropDown() {
+                this.activeNotifications = !this.activeNotifications
+            },
+            closeDropDown() {
+                this.activeNotifications = false
+            },
+            toggleSidebar() {
+                this.$sidebar.displaySidebar(!this.$sidebar.showSidebar)
+            },
+            hideSidebar() {
+                this.$sidebar.displaySidebar(false)
+            },
             reload() {
                 location.reload();
             },

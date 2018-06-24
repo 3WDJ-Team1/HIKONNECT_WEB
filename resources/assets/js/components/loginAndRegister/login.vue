@@ -10,33 +10,32 @@
             style="padding-left: 0; padding-right: 0; margin-left: 0px;">
 
             <h1
-                    style="font-weight: bold; color: #47714c;">
+                    style="font-family: 'Black Han Sans', sans-serif; color: #47714c;">
                 로그인
             </h1>
             <form>
             <div class="row">
                 <div class="col-md-12">
+                    <label><h4 style="margin: 0; color: #9e9e9e; font-family: 'Black Han Sans', sans-serif;">아이디</h4></label>
                     <fg-input type      ="text"
-                              label     ="ID"
                               v-model   ="userId">
                     </fg-input>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
+                    <label><h4 style="margin: 0; color: #9e9e9e; font-family: 'Black Han Sans', sans-serif;">비밀번호</h4></label>
                     <fg-input
                               @keyup.enter.native="login"
-                              label       ="PASSWORD"
                               v-model     ="userPw"
                               type        ="password">
                     </fg-input>
                 </div>
-
             </div>
                 <div class="text-center">
-                    <button type="submit" class="btn btn-fill" style="background-color: #47714c; border-color: #47714c;"
+                    <button type="submit" class="btn btn-fill" style="padding: 0; height: 10%; background-color: #47714c; border-color: #47714c;"
                             @click="login">
-                        제출
+                        <span style="font-family: 'Do Hyeon', sans-serif; font-size: 25px;">제출</span>
                     </button>
                 </div>
             </form>

@@ -2,7 +2,7 @@
     @author Jiyoon Lee <jiyoon3421@gmail.com>
  -->
 <template>
-    <div id="map" style="height: 400px;"></div>
+    <div id="map" style="height: 600px;"></div>
 </template>
 
 <script>

@@ -9,7 +9,6 @@ import list_search          from './components/groups_list/list_search'
 import list_show            from './components/groups_list/list_show'
 
 // make_event
-import autocomplete         from './components/group_menu/make_event/autocomplete'
 import event_make_main      from './components/group_menu/make_event/event_make_main'
 import group_make      from './components/groups_list/group_make'
 
@@ -40,8 +39,8 @@ import TableList from './components/myGroup/TableList.vue'
 import Notifications from './components/Notifications.vue'
 
 // main
-// import Main                 from './components/Layout/MainPage.vue'
-import Main from './components/Layout/Main'
+import Main                 from './components/Layout/MainPage.vue'
+// import Main from './components/Layout/Main'
 
 const routes = [
     {

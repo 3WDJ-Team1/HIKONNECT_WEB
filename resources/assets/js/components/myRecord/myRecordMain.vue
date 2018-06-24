@@ -11,14 +11,14 @@
                 <div class="col-md-4">
                     <stats-card>
                         <div slot="header" class="icon-warning">
-                            <i class="nc-icon nc-badge text-warning"></i>
+                            <i class="nc-icon nc-badge text-warning" style="font-size: 2em; line-height: normal;"></i>
                         </div>
                         <div slot="content">
-                            <p class="card-category" id="levelExplain" style="font-size: 18px; font-family: 'Do Hyeon', sans-serif; cursor:pointer">
-                                <i class="nc-icon nc-tap-01" style="width: 15px;"></i>
+                            <p class="card-category" id="levelExplain" style="font-size: 30px; font-family: 'Do Hyeon', sans-serif; cursor:pointer">
+                                <i class="nc-icon nc-tap-01" style="font-size: inherit;"></i>
                                 나의 등급
                             </p>
-                            <h4 class="card-title" style="font-family: 'Do Hyeon', sans-serif;">{{rank}}</h4>
+                            <h2 class="card-title" style="font-family: 'Do Hyeon', sans-serif;">{{rank}}</h2>
                         </div>
                     </stats-card>
                 </div>
@@ -28,22 +28,22 @@
                 <div class="col-md-4">
                     <stats-card>
                         <div slot="header" class="icon-success">
-                            <i class="nc-icon nc-watch-time text-success"></i>
+                            <i class="nc-icon nc-watch-time text-success" style="font-size: 2em; line-height: normal;"></i>
                         </div>
                         <div slot="content">
-                            <p class="card-category" style="font-size: 18px; font-family: 'Do Hyeon', sans-serif;">총 등산 시간</p>
-                            <h4 class="card-title" style="font-family: 'Do Hyeon', sans-serif;">{{total_hiking_t}}</h4>
+                            <p class="card-category" style="font-size: 30px; font-family: 'Do Hyeon', sans-serif;">총 등산 시간</p>
+                            <h2 class="card-title" style="font-family: 'Do Hyeon', sans-serif;">{{total_hiking_t}}</h2>
                         </div>
                     </stats-card>
                 </div>
                 <div class="col-md-4">
                     <stats-card>
                         <div slot="header" class="icon-danger">
-                            <i class="nc-icon nc-ruler-pencil text-danger"></i>
+                            <i class="nc-icon nc-ruler-pencil text-danger" style="font-size: 2em; line-height: normal;"></i>
                         </div>
                         <div slot="content">
-                            <p class="card-category" style="font-size: 18px; font-family: 'Do Hyeon', sans-serif;">총 등산 거리</p>
-                            <h4 class="card-title" style="font-family: 'Do Hyeon', sans-serif;">{{totalD}}km</h4>
+                            <p class="card-category" style="font-size: 30px; font-family: 'Do Hyeon', sans-serif;">총 등산 거리</p>
+                            <h2 class="card-title" style="font-family: 'Do Hyeon', sans-serif;">{{totalD}}km</h2>
                         </div>
                     </stats-card>
                 </div>
@@ -54,7 +54,7 @@
                                 :chart-options="lineChart.options"
                                 :responsive-options="lineChart.responsiveOptions">
                         <template slot="header">
-                            <h3 class="card-title" style="font-family: 'Do Hyeon', sans-serif; display: inline-block;">등산한 횟수</h3>
+                            <h1 class="card-title" style="font-family: 'Do Hyeon', sans-serif; display: inline-block;">등산한 횟수</h1>
                             <!--<b-form-select style="display: inline-block; padding-bottom: 0px;-->
                             <!--padding-top: 0px; float:right; width: 100px" v-model="nowYear" :options="options" class="mb-3" size="sm" />-->
                         </template>
@@ -63,21 +63,21 @@
                 <div class="col-md-4">
                     <card>
                         <template slot="header">
-                            <h3 class="card-title" style="font-family: 'Do Hyeon', sans-serif;">산행 기록</h3>
+                            <h1 class="card-title" style="font-family: 'Do Hyeon', sans-serif;">산행 기록</h1>
                         </template>
                         <div class="table-hover">
                             <table class="table" style="text-align:center;">
-                                <thead>
+                                <thead style="padding-top: 0;">
                                 <slot name="columns">
-                                    <th>일정 이름</th>
-                                    <th>산행 일자</th>
+                                    <th><h4 style="margin: 0; color: #9e9e9e; font-family: 'Do Hyeon', sans-serif;">일정 이름</h4></th>
+                                    <th><h4 style="margin: 0; color: #9e9e9e; font-family: 'Do Hyeon', sans-serif;">산행 일자</h4></th>
                                 </slot>
                                 </thead>
                                 <tbody>
                                 <tr v-for="(item, index) in lastRecord" @click="recordModalOpen(item)">
                                     <slot :row="item">
-                                        <td>{{ item.title }}</td>
-                                        <td>{{ startDate[index] }}</td>
+                                        <td><h3 style="font-family: 'Do Hyeon', sans-serif;">{{ item.title }}</h3></td>
+                                        <td><h3 style="font-family: 'Do Hyeon', sans-serif;">{{ startDate[index] }}</h3></td>
                                     </slot>
                                 </tr>
                                 </tbody>
@@ -95,7 +95,6 @@
     import StatsCard from '../Cards/StatsCard.vue'
     import levelModal from './levelModal'
     import recordModal from './recordModal'
-    import LineChart from "./lineChart";
 
     export default {
         data() {
@@ -158,7 +157,6 @@
             }
         },
         created() {
-            // this.graphPull();
             this.positionPull();
             this.lastRecordPull();
             this.yearSearch();
@@ -216,7 +214,6 @@
             }
         },
         components: {
-            LineChart,
             ChartCard,
             StatsCard,
             Card,
