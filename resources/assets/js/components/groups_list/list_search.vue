@@ -4,7 +4,7 @@
 <template>
     <div class="row" id="serchContainer">
         <div class="col-md-2">
-            <b-form-select v-model="sel" class="mb-3">
+            <b-form-select v-model="sel" style="border-color:#24b674; border-width: 2px;" class="mb-3">
                 <option value="groupname">그룹명</option>
                 <option value="writer">작성자</option>
             </b-form-select>
@@ -17,7 +17,9 @@
             </fg-input>
         </div>
         <div class="col-md-2">
-            <button class="btn btn-default btn-block" @click="inputSearch">SEARCH</button>
+            <button class="btn btn-default btn-block" style="height: 50px; padding: 0;" @click="inputSearch">
+                <h2 style="font-family: 'Do Hyeon', sans-serif; margin: 0;">검&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;색</h2>
+            </button>
         </div>
     </div>
 </template>
@@ -62,7 +64,7 @@
     }
 
     .btn:not(:disabled):not(.disabled) {
-        margin-top: 2px;
+        margin-top: 0;
     }
 
     .col-md-2 {

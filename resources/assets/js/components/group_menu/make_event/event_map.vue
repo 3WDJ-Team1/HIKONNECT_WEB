@@ -5,7 +5,7 @@
     <div>
         <div
                 id="map"
-                style="height: 480px; border-radius: 5px;">
+                style="height: 800px; border-radius: 5px;">
         </div>
         <v-btn
                 fab
@@ -105,7 +105,7 @@
                 var path = [];
                 // 지도를 띄우기 위해 지도 객체 생성
                 var map = new window.google.maps.Map(document.getElementById('map'), {
-                    zoom: 11,
+                    zoom: 14,
                 });
                 //////////////////////////////////////////////// 위도와 경도 불러오기
                 axios.get('http://hikonnect.ga:3000/paths/' + num)
@@ -485,8 +485,11 @@
     }
 </script>
 
-<style scoped>
+<style>
     #exp:hover {
         color: #b642f4;
+    }
+    .sweet-modal.is-visible {
+        min-width: 90%;
     }
 </style>

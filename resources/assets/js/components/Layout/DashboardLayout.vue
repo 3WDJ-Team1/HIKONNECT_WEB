@@ -4,39 +4,41 @@
 <template>
     <div class="wrapper">
         <side-bar v-if="login">
-            <div class="box" v-if="login" align="center" style="margin-bottom: 17px;">
-                <div class="item">
+            <div v-if="login" align="center" style="margin-bottom: 17px;">
+                <div>
                     <v-avatar
                             class="grey lighten-4"
-                            size="56"
+                            size="150"
                             slot="activator">
                         <img :src="imageSrc"/>
                     </v-avatar>
                 </div>
-                <div class="item">
-                    <p style="float: left; font-family: 'Gothic A1', sans-serif; font-size: 40px;">{{ userNickname }}</p>
+                <div>
+                    <h1 style="font-family: 'Gothic A1', sans-serif; margin: 0; font-family: 'Gothic A1', sans-serif; font-size: 50px;">{{ userNickname }}</h1>
+                    <div style="width: 230px; height: 3px; background-color: #24b674;"></div>
+                    <h3 style="font-family: 'Gothic A1', sans-serif; font-size: 20px; margin: 10px; font-family: 'Gothic A1', sans-serif;">{{ rank }}</h3>
                 </div>
             </div>
             <sidebar-link to="/group-list">
                 <i class="nc-icon nc-circle-09"></i>
-                <p style="font-family: 'Gothic A1', sans-serif; font-size: 25px;">그룹찾기</p>
+                <p style="font-family: 'Gothic A1', sans-serif;">그룹찾기</p>
             </sidebar-link>
             <sidebar-link to="/record" v-if="login">
                 <i class="nc-icon nc-notes"></i>
-                <p style="font-family: 'Gothic A1', sans-serif; font-size: 25px;">나의 활동기록</p>
+                <p style="font-family: 'Gothic A1', sans-serif;">나의 활동기록</p>
             </sidebar-link>
             <sidebar-link to="/table-list" v-if="login">
                 <i class="nc-icon nc-paper-2"></i>
-                <p style="font-family: 'Gothic A1', sans-serif; font-size: 25px;">나의 그룹</p>
+                <p style="font-family: 'Gothic A1', sans-serif;">나의 그룹</p>
             </sidebar-link>
             <sidebar-link to="/user" v-if="login">
                 <i class="nc-icon nc-atom"></i>
-                <p style="font-family: 'Gothic A1', sans-serif; font-size: 25px;">마이 페이지</p>
+                <p style="font-family: 'Gothic A1', sans-serif;">마이 페이지</p>
             </sidebar-link>
         </side-bar>
         <div class="main-panel">
             <top-navbar></top-navbar>
-            <dashboard-content @click="toggleSidebar" style="max-width: 100%; overflow-x: hidden; min-height: 90%">
+            <dashboard-content @click="toggleSidebar" style="max-width: 100%; overflow-x: hidden; min-height: 100%">
             </dashboard-content>
             <content-footer></content-footer>
         </div>
@@ -55,8 +57,10 @@
             imageSrc: "http://hikonnect.ga:3000/images/UserProfile/" + sessionStorage.getItem('userid') + ".jpg",
             login: false,
             userNickname: sessionStorage.getItem('nickname'),
+            rank: ''
         }),
         created() {
+            this.positionPull();
             // 로그인 안되어 있을 경우
             if (sessionStorage.getItem('userid') != undefined) {
                 this.login = true;
@@ -79,6 +83,12 @@
             DashboardContent
         },
         methods: {
+            positionPull() {
+                this.axios.get(this.$HttpAddr + '/user/' + sessionStorage.getItem('userid'))
+                    .then(response => {
+                        this.rank = response.data[0].grade;
+                    });
+            },
             toggleSidebar() {
                 if (this.$sidebar.showSidebar) {
                     this.$sidebar.displaySidebar(false)
@@ -89,17 +99,6 @@
 
 </script>
 <style>
-    .box {
-        display: flex;
-    }
-    .item {
-        flex-grow: 1;
-    }
-
-    .item:nth-child(2) {
-        flex-grow: 2;
-    }
-
     .item:nth-child(2) h3 {
         margin: 0px;
         padding-top: 10px;

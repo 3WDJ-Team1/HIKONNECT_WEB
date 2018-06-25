@@ -1,7 +1,7 @@
 
 <template>
     <div class="content">
-        <sweet-modal id="scheduleModal" style="min-width: 1000px;" ref="write">
+        <sweet-modal blocking="true" id="scheduleModal" style="min-width: 1000px;" ref="write">
             <Modal></Modal>
         </sweet-modal>
         <div class="container-fluid">
@@ -26,7 +26,7 @@
                                         <td><h3 style="font-family: 'Do Hyeon', sans-serif;">{{ item.title }}</h3></td>
                                         <td style="width: 17%;">
                                             <button style="padding: 0; height: 40px;" type="submit" class="btn btn-info btn-fill float-right" @click="move(item.uuid)">
-                                                <h4 style="font-family: 'Do Hyeon', sans-serif; margin: 0; padding: 5px;">그룹 페이지</h4>
+                                                <h4 style="font-family: 'Do Hyeon', sans-serif; margin: 0; padding: 5px;">바로가기</h4>
                                             </button>
                                         </td>
                                     </slot>
@@ -57,7 +57,7 @@
 
                                         <td>
                                             <button style="padding: 0; height: 40px;" type="submit" class="btn btn-info btn-fill float-right" @click="move(item.uuid)">
-                                                <h4 style="font-family: 'Do Hyeon', sans-serif; margin: 0; padding: 5px;">그룹 페이지</h4>
+                                                <h4 style="font-family: 'Do Hyeon', sans-serif; margin: 0; padding: 5px;">바로가기</h4>
                                             </button>
                                         </td>
                                     </slot>

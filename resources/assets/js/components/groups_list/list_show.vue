@@ -3,31 +3,35 @@
  -->
 <template>
     <div>
-        <card style="margin: 10px;" v-for="(item, key) in list" :key="key">
+        <card style="margin: 10px;" id="ccard" v-for="(item, key) in list" :key="key">
             <div class="row" id="groupListContainer">
                 <div style="padding: 0px;">
-                    <h3 style="display:inline-block; padding-left: 25px;">{{ item.title }}</h3>&nbsp;&nbsp;&nbsp;
-                    <h6 style="color: #9A9A9A; display:inline-block;">관리자: {{ item.nickname }}</h6>
+                    <h2 style="margin: 8px; font-family: 'Do Hyeon', sans-serif; display:inline-block; padding-left: 25px;">{{ item.title }}</h2>&nbsp;&nbsp;&nbsp;
+                    <h4 style="font-family: 'Do Hyeon', sans-serif; color: #9A9A9A; display:inline-block;">관리자: {{ item.nickname }}</h4>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-5" style="padding: 0px; padding-top: 18px;padding-left: 25px;">
+                    <h4 style="margin: 0; font-family: 'Do Hyeon', sans-serif; display:inline-block;">
                     최소인원수: {{ item.min_member }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;최대인원수: {{ item.max_member }}
+                    </h4>
                 </div>
                 <div class="col-md-7" id="item7">
-                    <button class="btn btn-outline-secondary float-right"
-                            @click="moveGroupPage(item)">그룹 페이지로 이동
+                    <button class="btn btn-outline-secondary float-right" style="height: 70%;
+    width: 25%; padding: 0;"
+                            @click="moveGroupPage(item)">
+                        <p style="font-family: 'Do Hyeon', sans-serif; font-size: 30px; ">그룹 페이지로 이동</p>
                     </button>
                 </div>
             </div>
             <div slot="footer" class="text-center">
-                <h6 style="color: #FF6633; padding-top: 10px; float: left">모집내용:&nbsp;&nbsp;</h6>
-                <h6 style="float: left; padding-top: 10px;">{{ item.content }}</h6>
+                <h4 style="margin: 0; font-family: 'Do Hyeon', sans-serif; color: #FF6633; padding-top: 10px; float: left">모집내용:&nbsp;&nbsp;</h4>
+                <h4 style="margin: 0; font-family: 'Do Hyeon', sans-serif; float: left; padding-top: 10px;">{{ item.content }}</h4>
             </div>
         </card>
 
         <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading">
-             <span slot="no-more">
+             <span slot="no-more" style="font-family: 'Do Hyeon', sans-serif; font-size: 30px;">
                 그룹 리스트가 없습니다 :(
              </span>
         </infinite-loading>
@@ -128,4 +132,22 @@
     }
 </script>
 <style>
+    #ccard .card-body {
+        padding-bottom: 0;
+    }
+    .theme--dark .btn:not(.btn--icon):not(.btn--flat), .application .theme--dark.btn:not(.btn--icon):not(.btn--flat) {
+        width: 110px;
+        height: 110px;
+    }
+    .btn--floating .btn__content {
+        font-size: 25px;
+    }
+    select.form-control:not([size]):not([multiple]) {
+        height: 50px;
+        font-size: 20px;
+    }
+    .form-control {
+        height: 50px;
+        font-size: 20px;
+    }
 </style>

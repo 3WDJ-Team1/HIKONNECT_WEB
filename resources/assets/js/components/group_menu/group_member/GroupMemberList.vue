@@ -16,14 +16,14 @@
                     <v-flex
                             xs1
                             class="text-center">
-                        <h2 style="font-family: 'Do Hyeon', sans-serif; margin: 18px 0 15px; color: #42d0ed;">리더</h2>
+                        <h1 style="font-family: 'Do Hyeon', sans-serif; margin: 24px 0 15px; color: #42d0ed;">리더</h1>
                     </v-flex>
                     <v-flex
                             xs2
                             style="padding-bottom: 2px;"
                             class="text-center">
                         <v-avatar
-                                size="80"
+                                size="100"
                                 slot="activator"
                         >
                             <img :src="'http://hikonnect.ga:3000/images/UserProfile/' + userData.userid + '.jpg'">
@@ -32,14 +32,14 @@
                     <v-flex
                             xs6
                             class="text-center">
-                        <h2 style="font-family: 'Black Han Sans', sans-serif; margin: 18px 0 15px;">{{ userData.nickname
-                            }}</h2>
+                        <h1 style="font-family: 'Black Han Sans', sans-serif; margin: 20px 0 15px;">{{ userData.nickname
+                            }}</h1>
                     </v-flex>
                     <v-flex
                             xs3
                             class="text-center">
-                        <button v-b-toggle="'n' + userData.nickname" v-if="position" class="btn btn-info"  style=" margin-top: 22px; padding: 0; margin-right: 35px;">
-                            <span style="font-family: 'Do Hyeon', sans-serif; font-size: 15px; font-weight: bold;">정보보기</span>
+                        <button v-b-toggle="'n' + userData.nickname" v-if="position" class="btn btn-info"  style="margin-top: 25px; padding: 0; width: 160px; height: 45px;">
+                            <span style="font-family: 'Do Hyeon', sans-serif; font-size: 30px;">정보보기</span>
                         </button>
                     </v-flex>
                 </v-layout>
@@ -68,7 +68,7 @@
                             xs2
                             class="text-center">
                         <v-avatar
-                                size="68"
+                                size="80"
                                 slot="activator"
                         >
                             <img :src="'http://hikonnect.ga:3000/images/UserProfile/' + userData.userid + '.jpg'">
@@ -77,20 +77,21 @@
                     <v-flex
                             xs7
                             class="text-center">
-                        <h3 style="font-family: 'Do Hyeon', sans-serif; margin: 18px 0 15px;">{{ userData.nickname
-                            }}</h3>
+                        <h2 style="font-family: 'Do Hyeon', sans-serif; margin: 18px 0 15px;">{{ userData.nickname
+                            }}</h2>
                     </v-flex>
                     <v-flex
                             xs3
                             class="text-center">
-                        <button v-b-toggle="'n' + userData.nickname" style="margin-right: 0px; padding-left: 12px; width: 100px; font-size: 15px; font-weight: bold; margin-top: 15px; padding: 0;"
+                        <button v-b-toggle="'n' + userData.nickname"
+                                style="margin-top: 17px; padding: 0; width: 120px; height: 45px;"
                                 v-if="position" class="btn btn-info">
-                            <span style="font-family: 'Do Hyeon', sans-serif;">정보보기</span>
+                            <span style="font-family: 'Do Hyeon', sans-serif; font-size: 30px;">정보보기</span>
                         </button>
                         <button v-if="owner == 'owner'" @click="outGroup(userData)" type="submit"
-                                style="padding: 0; font-family: 'Do Hyeon', sans-serif; width: 100px; font-size: 15px; font-weight: bold; margin-top: 15px;"
+                                style="margin-top: 17px; padding: 0; width: 160px; height: 45px;"
                                 class="btn btn-warning btn-fill">
-                            강퇴 시키기
+                            <span style="font-family: 'Do Hyeon', sans-serif; font-size: 30px;">강퇴 시키기</span>
                         </button>
                     </v-flex>
                 </v-layout>

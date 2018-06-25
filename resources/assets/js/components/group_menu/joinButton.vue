@@ -14,15 +14,15 @@
                     <ul class="nav navbar-nav mr-auto">
                         <drop-down tag="li">
                             <template slot="title">
-                                <span style="font-size: 20px; font-family: 'Do Hyeon', sans-serif;">메뉴보기</span>
+                                <span style="font-size: 30px; font-family: 'Do Hyeon', sans-serif;">메뉴보기</span>
                             </template>
-                            <a style="font-size: 17px; font-family: 'Do Hyeon', sans-serif;" v-if="owner == 'owner'"
+                            <a style="font-size: 25px; font-family: 'Do Hyeon', sans-serif;" v-if="owner == 'owner'"
                                class="dropdown-item" @click="updatedModal">그룹정보 수정</a>
-                            <a style="font-size: 17px; font-family: 'Do Hyeon', sans-serif;" v-if="owner == 'owner'"
+                            <a style="font-size: 25px; font-family: 'Do Hyeon', sans-serif;" v-if="owner == 'owner'"
                                class="dropdown-item" @click="deleted">그룹 삭제</a>
-                            <a style="font-size: 17px; font-family: 'Do Hyeon', sans-serif;"
+                            <a style="font-size: 25px; font-family: 'Do Hyeon', sans-serif;"
                                v-if="position && owner != 'owner'" class="dropdown-item" @click="leaveGroup">그룹탈퇴</a>
-                            <a style="font-size: 17px; font-family: 'Do Hyeon', sans-serif;"
+                            <a style="font-size: 25px; font-family: 'Do Hyeon', sans-serif;"
                                v-if="!position && owner != 'owner'" class="dropdown-item" @click="enterGroup">그룹 참가</a>
                         </drop-down>
                     </ul>

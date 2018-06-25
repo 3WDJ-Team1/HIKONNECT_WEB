@@ -15,10 +15,10 @@
                 </autocomplete>
             </div>
             <div class="col-6">
-                <b-btn style="margin: 0px; padding-top: 4px; height: 30px; width: 50px;" @click="initMap">지도보기</b-btn>
+                <b-btn style="margin: 0px; min-height: 50px; height: 30px; width: 120px;" @click="initMap"><p style="font-family: 'Do Hyeon', sans-serif; font-size: 25px;">지도보기</p></b-btn>
             </div>
         </div>
-        <sweet-modal ref="map" id="paddingRemove">
+        <sweet-modal blocking="true" ref="map" id="paddingRemove">
             <eventMap></eventMap>
         </sweet-modal>
     </div>
@@ -39,9 +39,6 @@
             eventMap
         },
         methods: {
-            gg()    {
-                alert('dd')
-            },
             ///////////////////////////////////////// 지도 api
             initMap() {
                 this.$refs.map.open();
@@ -76,10 +73,21 @@
         width: 150px;
     }
     .autocomplete__results__item {
-        width: 150px;
-        height: 30px;
+        font-size: 20px;
+        min-width: 240px;
+        min-height: 42px;
+    }
+    .autocomplete__results {
+        min-width: 250px;
     }
     #paddingRemove.is-visible .sweet-buttons, #paddingRemove.is-visible .sweet-content {
         padding: 0px;
+
     }
+    #paddingRemove .sweet-box-actions {
+        z-index: 1000;
+        top: 45px;
+        right: 5px;
+    }
+
 </style>

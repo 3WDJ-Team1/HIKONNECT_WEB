@@ -3,7 +3,7 @@
  -->
 <template>
     <v-app>
-        <v-container style="padding: 0px;">
+        <v-container style="padding: 0px; max-width: 100%; height: 100px;">
                     <v-card
                             style="padding-bottom: 1%; border-top: 0px;
     border-left: 0px; padding-top: 1%; border-right: 0px; border-radius: 0px; padding-left: 40px; margin: 0px;"
@@ -15,29 +15,37 @@
                                 wrap>
                             <v-flex
                                     d-flex
+                                    md1
+                                    align-center
+                                    align-content-center
+                                    justify-center>
+                                <div>참가</div>
+                                <div>신청자</div>
+                            </v-flex>
+                            <v-flex
+                                    d-flex
                                     md2
                                     align-center
                                     align-content-center
                                     justify-center>
                                 <v-avatar
                                         slot="activator"
-                                        size="42">
+                                        size="60">
                                     <img :src="'http://hikonnect.ga:3000/images/UserProfile/' + user.userid + '.jpg'" alt="avatar"/>
                                 </v-avatar>
                             </v-flex>
                             <v-flex
                                     d-flex
-                                    md7
+                                    md6
                                     align-center
                                     align-content-center
-                                    justify-center
-                                    style="font-size: 1.5rem;">
-                                {{ user.nickname }}
+                                    justify-center>
+                                <h3 style="font-family: 'Do Hyeon', sans-serif">{{ user.nickname }}</h3>
                             </v-flex>
                             <v-flex
                                     xs12
                                     sm3
-                                    md2>
+                                    md1>
                                 <v-layout
                                         row
                                         wrap>

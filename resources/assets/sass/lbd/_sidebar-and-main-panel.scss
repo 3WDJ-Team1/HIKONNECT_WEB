@@ -115,7 +115,7 @@ body > .navbar-collapse{
                 p{
                     margin: 0;
                     line-height: 31px;
-                    font-size: 12px;
+                    font-size: 20px;
                     font-weight: 600;
                     text-transform: uppercase;
                     display: inline-flex;
@@ -148,6 +148,7 @@ body > .navbar-collapse{
 
                 & + .nav-item {
                     margin-top: 31px;
+
                 }
             }
 

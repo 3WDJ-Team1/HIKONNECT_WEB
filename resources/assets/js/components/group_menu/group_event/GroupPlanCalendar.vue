@@ -7,52 +7,52 @@
             <template slot-scope="props">
                 <div v-for="(event, index) in props.showEvents" class="event-item">
                     <!-- In here do whatever you want, make you owner event template -->
-                    <div class="headline" style="display: inline; font-size: 20px !important">{{ event.title }}</div>
-                    <span class="grey--text" style="display: inline; float: right; margin-top: 10px;">작성자:&nbsp;&nbsp;{{ event.writer }}</span>
+                    <div class="headline" style="font-family: 'Do Hyeon', sans-serif; display: inline; font-size: 30px !important">{{ event.title }}</div>
+                    <span class="grey--text" style="font-family: 'Do Hyeon', sans-serif; font-size: 20px; display: inline; float: right; margin-top: 10px;">작성자:&nbsp;&nbsp;{{ event.writer }}</span>
                     <table class="table" style="text-align:center;">
                         <tbody class="tbbody">
                         <tr>
                             <td style="border-right: solid; color: rgb(244, 244, 244);">
-                                <h6 style="font-size: 12px; color: #9A9A9A; margin: 0px; vertical-align: middle;">
+                                <h6 style="font-family: 'Do Hyeon', sans-serif; font-size: 20px; color: #9A9A9A; margin: 0px; vertical-align: middle;">
                                     목적지
                                 </h6>
                             </td>
                             <td>
-                                <h5 style="font-size: 14px; margin: 0px; text-align:left; margin-left: 10px;">
+                                <h5 style="font-family: 'Do Hyeon', sans-serif; font-size: 20px; margin: 0px; text-align:left; margin-left: 10px;">
                                     {{ event.destination }}
                                 </h5>
                             </td>
                         </tr>
                         <tr style="border-bottom: solid; color: rgb(244, 244, 244);">
                             <td style="border-right: solid; color: rgb(244, 244, 244);">
-                                <h6 style="font-size: 12px; margin: 0px; color: #9A9A9A;">산행일자</h6>
+                                <h6 style="font-family: 'Do Hyeon', sans-serif; font-size: 20px; margin: 0px; color: #9A9A9A;">산행일자</h6>
                             </td>
                             <td>
-                                <h5 style="font-size: 14px; margin: 0px; color: black; text-align:left; margin-left: 10px;">
+                                <h5 style="font-family: 'Do Hyeon', sans-serif; font-size: 20px; margin: 0px; color: black; text-align:left; margin-left: 10px;">
                                     {{ event.date }}&nbsp;&nbsp;{{ event.time }}
                                 </h5>
                             </td>
                         </tr>
                         </tbody>
                     </table>
-                    <button class="BButton" style="float: right;" v-if="event.position == 'guest' && position" @click="joinPlan(event.no)">
+                    <button class="BButton" style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; float: right;" v-if="event.position == 'guest' && position" @click="joinPlan(event.no)">
                         <i class="nc-icon nc-simple-add"></i>
                         일정 참여
                     </button>
-                    <button class="BButton" style="float: right; margin-right: 10px;" v-if="position && event.position != 'owner'" @click="leaveEvent(event)">
+                    <button class="BButton" style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; float: right; margin-right: 10px;" v-if="position && event.position != 'owner'" @click="leaveEvent(event)">
                         <i class="nc-icon
 nc-simple-delete"></i>
                         일정 취소
                     </button>
-                    <button class="BButton" style="float: right; margin-right: 10px;" v-if="event.position == 'owner'" @click="uapdateEvent(event)">
+                    <button class="BButton" style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; float: right; margin-right: 10px;" v-if="event.position == 'owner'" @click="uapdateEvent(event)">
                         <i class="nc-icon nc-refresh-02"></i>
                         수정하기
                     </button>
-                    <button class="BButton" style="float: right; margin-right: 10px;" v-if="event.position == 'owner'" @click="deleteEvent(event)">
+                    <button class="BButton" style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; float: right; margin-right: 10px;" v-if="event.position == 'owner'" @click="deleteEvent(event)">
                         <i class="nc-icon nc-simple-remove"></i>
                         일정 삭제
                     </button>
-                    <button class="BButton" style="float: right; margin-right: 10px;" @click="openShowModal(event)">
+                    <button class="BButton" style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; float: right; margin-right: 10px;" @click="openShowModal(event)">
                         <i class="nc-icon nc-square-pin"></i>
                         일정 상세보기
                     </button>
@@ -211,7 +211,15 @@ nc-simple-delete"></i>
     .BButton:hover    {
         color: #df21ffa3;
     }
-    .sweet-modal.is-visible {
-        max-width: 100%;
+    .__vev_calendar-wrapper .cal-wrapper {
+        width: 70%;
+        min-height: 795px;
+    }
+    .__vev_calendar-wrapper {
+        position: inherit;
+        margin: 0;
+    }
+    .__vev_calendar-wrapper .events-wrapper .event-item:first-child {
+        padding-bottom: 40px;
     }
 </style>

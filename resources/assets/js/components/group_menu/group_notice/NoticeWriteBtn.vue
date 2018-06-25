@@ -13,7 +13,7 @@
             class       ="btn--right btn--floating btn--fixed btn--bottom"
             color       ="cyan"
             @click      ="openWriteModal()"
-            style       ="margin-right: 1%; font-size: 12px; font-weight: bold;">
+            style       ="width: 110px; height: 110px; font-size: 25px; margin-right: 1%; font-weight: bold;">
             공지사항
             <br>
             작성
