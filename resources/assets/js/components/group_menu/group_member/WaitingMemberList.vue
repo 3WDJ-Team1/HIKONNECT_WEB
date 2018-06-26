@@ -38,7 +38,7 @@
                                     d-flex
                                     md6
                                     class="text-center">
-                                <p style="margin-top: 20px; font-size: 40px; font-family: 'Do Hyeon', sans-serif">{{ user.nickname }}</p>
+                                <h2 style="margin: 0; margin-top: 20px; font-family: 'Do Hyeon', sans-serif">{{ user.nickname }}</h2>
                             </v-flex>
                             <v-flex
                                     xs12

@@ -223,5 +223,7 @@
     }
 </script>
 <style>
-
+    .ct-series-a .ct-point, .ct-series-a .ct-line, .ct-series-a .ct-bar, .ct-series-a .ct-slice-donut {
+        stroke: #FF9800;
+    }
 </style>

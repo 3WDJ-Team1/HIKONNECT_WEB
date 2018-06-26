@@ -100,7 +100,7 @@
                     </tr>
                     </tbody>
                 </table>
-                <button style="margin: 20px;float: right; padding: 0; height: 10%;" type="submit" @click="move(item.uuid)" class="btn btn-info btn-fill float-right">
+                <button style="float: right; padding: 0; height: 10%;" type="submit" @click="move(item.uuid)" class="btn btn-info btn-fill float-right">
                     <h3 style="font-family: 'Do Hyeon', sans-serif; margin: 0; padding: 10px;">그룹 페이지로 이동</h3>
                 </button>
             </card>
