@@ -24,6 +24,8 @@
                 </v-carousel-item>
                 <v-carousel-item src="http://hikonnect.ga/images/main2.png">
                 </v-carousel-item>
+                <v-carousel-item src="http://localhost:8000/images/main4.png">
+                </v-carousel-item>
             </v-carousel>
         </template>
     </v-app>
@@ -73,7 +75,7 @@
         font-size: 1.2em;
     }
     .carousel {
-        height: 880px;
+        height: 890px;
     }
     .carousel .carousel__controls .btn {
         width: 1%;
