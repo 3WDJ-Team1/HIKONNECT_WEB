@@ -2,7 +2,7 @@
     <v-app>
         <template>
             <v-carousel hide-controls>
-                <v-carousel-item src="http://localhost:8000/images/main3.png">
+                <v-carousel-item src="http://hikonnect.ga/images/main3.png">
                     <v-btn
                             class="red darken-4 mt-5"
                             dark
@@ -12,7 +12,7 @@
                         그룹 리스트로 이동하기
                     </v-btn>
                 </v-carousel-item>
-                <v-carousel-item src="http://localhost:8000/images/main.png">
+                <v-carousel-item src="http://hikonnect.ga/images/main.png">
                     <v-btn
                             class="mt-5"
                             dark
@@ -22,7 +22,7 @@
                         어플 다운 받으러 가기
                     </v-btn>
                 </v-carousel-item>
-                <v-carousel-item src="http://localhost:8000/images/main2.png">
+                <v-carousel-item src="http://hikonnect.ga/images/main2.png">
                 </v-carousel-item>
             </v-carousel>
         </template>
