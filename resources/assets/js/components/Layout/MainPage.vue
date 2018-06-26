@@ -24,7 +24,7 @@
                 </v-carousel-item>
                 <v-carousel-item src="http://hikonnect.ga/images/main2.png">
                 </v-carousel-item>
-                <v-carousel-item src="http://localhost:8000/images/main4.png">
+                <v-carousel-item src="http://hikonnect.ga/images/main4.png">
                 </v-carousel-item>
             </v-carousel>
         </template>
