@@ -12,7 +12,7 @@
                 @click="removeMap"
                 dark
                 class="btn--right btn--floating btn--fixed btn--bottom"
-                style="color: white; bottom: 187px; right: 5px; width: 50px; height: 50px;"
+                style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; color: white; bottom: 187px; right: 5px; width: 50px; height: 50px;"
                 color="blue">
             지우기
         </v-btn>
@@ -21,7 +21,7 @@
                 @click="mapModalSubmit"
                 dark
                 class="btn--right btn--floating btn--fixed btn--bottom"
-                style="color: white; bottom: 130px; right: 5px; width: 50px; height: 50px;"
+                style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; color: white; bottom: 130px; right: 5px; width: 50px; height: 50px;"
                 color="red">
             저장
         </v-btn>

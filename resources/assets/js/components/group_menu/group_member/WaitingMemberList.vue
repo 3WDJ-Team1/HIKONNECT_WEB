@@ -3,7 +3,7 @@
  -->
 <template>
     <v-app>
-        <v-container style="padding: 0px; max-width: 100%; height: 100px;">
+        <v-container style="padding: 0px; max-width: 100%;">
                     <v-card
                             style="padding-bottom: 1%; border-top: 0px;
     border-left: 0px; padding-top: 1%; border-right: 0px; border-radius: 0px; padding-left: 40px; margin: 0px;"
@@ -17,10 +17,10 @@
                                     d-flex
                                     md1
                                     align-center
+                                    class="text-center"
                                     align-content-center
                                     justify-center>
-                                <div>참가</div>
-                                <div>신청자</div>
+                                <p style="color: #ED8D00; margin-bottom: 0; font-family: 'Do Hyeon', sans-serif; font-size: 25px;">참가 신청자</p>
                             </v-flex>
                             <v-flex
                                     d-flex
@@ -30,22 +30,20 @@
                                     justify-center>
                                 <v-avatar
                                         slot="activator"
-                                        size="60">
+                                        size="80">
                                     <img :src="'http://hikonnect.ga:3000/images/UserProfile/' + user.userid + '.jpg'" alt="avatar"/>
                                 </v-avatar>
                             </v-flex>
                             <v-flex
                                     d-flex
                                     md6
-                                    align-center
-                                    align-content-center
-                                    justify-center>
-                                <h3 style="font-family: 'Do Hyeon', sans-serif">{{ user.nickname }}</h3>
+                                    class="text-center">
+                                <p style="margin-top: 20px; font-size: 40px; font-family: 'Do Hyeon', sans-serif">{{ user.nickname }}</p>
                             </v-flex>
                             <v-flex
                                     xs12
                                     sm3
-                                    md1>
+                                    md2>
                                 <v-layout
                                         row
                                         wrap>
@@ -56,7 +54,7 @@
                                         <v-btn
                                                 color="cyan lighten-2"
                                                 dark
-                                                style="padding: 0;"
+                                                style="width: 120px; height: 40px; margin-top: 25px; padding: 0;"
                                                 @click="applyUser(user.userid)"
                                                 :disabled="isPushed">
                                             <v-icon>done</v-icon>
@@ -67,7 +65,7 @@
                                         <v-btn
                                                 color="red darken-3"
                                                 dark
-                                                style="padding: 0;"
+                                                style="width: 120px; height: 40px; margin-top: 25px; padding: 0;"
                                                 @click="rejectUser(user.userid)"
                                                 :disabled="isPushed">
                                             <v-icon>block</v-icon>

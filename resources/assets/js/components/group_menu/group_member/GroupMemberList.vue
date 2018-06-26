@@ -64,7 +64,11 @@
             <div>
                 <v-layout row style="margin-right: 10px;">
                     <v-flex
-                            style="padding-bottom: 2px;"
+                            xs1
+                            class="text-center">
+                    </v-flex>
+                    <v-flex
+                            style="margin-left: 30px; padding-bottom: 2px;"
                             xs2
                             class="text-center">
                         <v-avatar
@@ -75,7 +79,8 @@
                         </v-avatar>
                     </v-flex>
                     <v-flex
-                            xs7
+                            style="margin-left: 60px;"
+                            xs5
                             class="text-center">
                         <h2 style="font-family: 'Do Hyeon', sans-serif; margin: 18px 0 15px;">{{ userData.nickname
                             }}</h2>

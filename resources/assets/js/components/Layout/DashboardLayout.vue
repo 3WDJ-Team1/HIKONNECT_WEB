@@ -38,7 +38,7 @@
         </side-bar>
         <div class="main-panel">
             <top-navbar></top-navbar>
-            <dashboard-content @click="toggleSidebar" style="max-width: 100%; overflow-x: hidden; min-height: 100%">
+            <dashboard-content @click="toggleSidebar" style="max-width: 100%; min-height: 100%; overflow-x: hidden;">
             </dashboard-content>
             <content-footer></content-footer>
         </div>
