@@ -72,7 +72,9 @@
     .definition {
         font-size: 1.2em;
     }
-
+    .carousel {
+        height: 880px;
+    }
     .carousel .carousel__controls .btn {
         width: 1%;
         border-radius: 50%;
