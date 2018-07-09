@@ -14,6 +14,9 @@
                 로그인
             </h1>
             <form>
+                <!--function(e){-->
+                    <!--e.preventDefault();-->
+                <!--}-->
             <div class="row">
                 <div class="col-md-12">
                     <label><h4 style="margin: 0; color: #9e9e9e; font-family: 'Black Han Sans', sans-serif;">아이디</h4></label>
@@ -49,7 +52,8 @@
             userPw: "",
         }),
         methods: {
-            login() {
+            login(e) {
+                e.preventDefault();
                 let uri = this.$HttpAddr + '/loginprocess';
                 axios.post(uri, {
                     idv: this.userId,
