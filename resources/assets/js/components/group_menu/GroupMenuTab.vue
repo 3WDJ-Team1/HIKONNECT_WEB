@@ -84,6 +84,7 @@
             this.ownerGet();
         },
         methods:    {
+
             positionGet() {
                 // 멤버 정보 서버에서 가지고 오기
                     this.axios.get(this.$HttpAddr + "/list_member/" + this.$route.params.groupid)
