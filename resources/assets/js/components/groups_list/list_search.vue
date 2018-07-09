@@ -2,24 +2,27 @@
     @author Jiyoon Lee <jiyoon3421@gmail.com>
  -->
 <template>
-    <div class="row" id="serchContainer">
-        <div class="col-md-2">
-            <b-form-select v-model="sel" style="border-color:#24b674; border-width: 2px;" class="mb-3">
-                <option value="groupname">그룹명</option>
-                <option value="writer">작성자</option>
-            </b-form-select>
-        </div>
-        <div class="col-md-8">
-            <fg-input type="text"
-                      @keyup.enter.native="inputSearch"
-                      placeholder="검색어를 입력하시오."
-                      v-model="inputForm">
-            </fg-input>
-        </div>
-        <div class="col-md-2">
-            <button class="btn btn-default btn-block" style="height: 50px; padding: 0;" @click="inputSearch">
-                <h2 style="font-family: 'Do Hyeon', sans-serif; margin: 0;">검&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;색</h2>
-            </button>
+    <div style="height: 120px; margin: auto; width: 95%; background-color: white; box-shadow: 5px 5px 10px 1px #cecece;">
+        <div class="row" style="padding-top: 38px; width: 95%; margin: auto;" id="serchContainer" >
+            <div class="col-md-2">
+                <b-form-select v-model="sel" style="border-color:#24b674; border-width: 2px;" class="mb-3">
+                    <option value="groupname">그룹명</option>
+                    <option value="writer">작성자</option>
+                </b-form-select>
+            </div>
+            <div class="col-md-8">
+                <fg-input type="text"
+                          @keyup.enter.native="inputSearch"
+                          placeholder="검색어를 입력하시오."
+                          v-model="inputForm">
+                </fg-input>
+            </div>
+
+            <div class="col-md-2">
+                <button class="btn btn-default btn-block" style="border-color:#24b674; background-color: #24b67470; height: 50px; padding: 0;" @click="inputSearch">
+                    <img src="http://localhost:8000/images/search.png" width="30" alt="">
+                </button>
+            </div>
         </div>
     </div>
 </template>

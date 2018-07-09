@@ -75,7 +75,7 @@
         font-size: 1.2em;
     }
     .carousel {
-        height: 890px;
+        height: 978px;
     }
     .carousel .carousel__controls .btn {
         width: 1%;
@@ -83,6 +83,9 @@
         min-height: 92%;
         border-radius: 50%;
         border-color: #88888800;
+    }
+    .jumbotron__image {
+        top: 50%;
     }
     .jumbotron {
         padding: 0;

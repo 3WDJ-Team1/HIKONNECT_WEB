@@ -3,38 +3,44 @@
  -->
 <template>
     <div>
-        <nav class="navbar navbar-expand-lg" style="min-height: 67px;">
+        <nav class="navbar navbar-expand-lg" style="border: 0; background: transparent; min-height: 85px; opacity: 1;">
             <div class="container-fluid">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a
-                                style="cursor:pointer; font-size: 30px; font-family: 'Do Hyeon', sans-serif;"
-                                class="nav-link"
-                                @click.stop="drawerRight = !drawerRight"
-                                v-if="!isLogined"
-                        >
-                            로그인
-                        </a>
+                    <li class="nav-item" style="padding-bottom: 10px;">
+                        <div class="login_box">
+                            <a
+                                    style="color: white; cursor:pointer; font-size: 30px; font-family: 'Do Hyeon', sans-serif;"
+                                    class="nav-link"
+                                    @click.stop="drawerRight = !drawerRight"
+                                    v-if="!isLogined"
+                            >
+                                로그인
+                            </a>
+                        </div>
                     </li>
-                    <li class="nav-item">
-                        <a
-                                style="cursor:pointer; font-size: 30px; font-family: 'Do Hyeon', sans-serif;"
-                                class="nav-link"
-                                v-if="isLogined"
-                                @click="logout()"
-                        >
-                            로그아웃
-                        </a>
+                    <li class="nav-item" style="padding-bottom: 10px;">
+                        <div class="login_box">
+                            <a
+                                    style="color: white; cursor:pointer; font-size: 30px; font-family: 'Do Hyeon', sans-serif;"
+                                    class="nav-link"
+                                    v-if="isLogined"
+                                    @click="logout()"
+                            >
+                                로그아웃
+                            </a>
+                        </div>
                     </li>
-                    <li class="nav-item">
-                        <a
-                                style="cursor:pointer; font-size: 30px; font-family: 'Do Hyeon', sans-serif;"
-                                class="nav-link"
-                                v-if="!isLogined"
-                                @click="signUp()"
-                        >
-                            회원가입
-                        </a>
+                    <li class="nav-item" style="padding-bottom: 10px;">
+                        <div class="login_box">
+                            <a
+                                    style="color: white; cursor:pointer; font-size: 30px; font-family: 'Do Hyeon', sans-serif;"
+                                    class="nav-link"
+                                    v-if="!isLogined"
+                                    @click="signUp()"
+                            >
+                                회원가입
+                            </a>
+                        </div>
                     </li>
                 </ul>
                 <button type="button"
@@ -136,5 +142,22 @@
 <style>
     .navigation-drawer--temporary:not(.navigation-drawer--close), .navigation-drawer--is-mobile:not(.navigation-drawer--close) {
         background-color: white;
+    }
+
+    .login_box {
+        background-color: #c1c1c1;
+        text-align: center;
+        padding-right: 10px;
+        padding-left: 10px;
+        margin-left: 3px;
+        margin-top:10px;
+        -webkit-border-top-right-radius: 40px 30px;
+        -webkit-border-top-left-radius: 40px 30px;
+        -webkit-border-bottom-right-radius: 40px 30px;
+        -webkit-border-bottom-left-radius: 40px 30px;
+    }
+
+    .login_box:hover {
+        background-color: #1dc7ea;
     }
 </style>

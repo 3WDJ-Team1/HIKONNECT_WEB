@@ -2,31 +2,55 @@
     @author Jiyoon Lee <jiyoon3421@gmail.com>
  -->
 <template>
-    <div>
-        <card style="margin: 10px;" id="ccard" v-for="(item, key) in list" :key="key">
+    <div style=" margin: auto; width: 95%; background-color: white; margin-top: 30px; margin-bottom: 30px; box-shadow: 5px 5px 10px 1px #cecece;">
+        <div style="height: 50px; background-color: white"></div>
+        <div style="margin: 0; height: 50px; background-color: #24B674; color: white; text-align: center;" class="row">
+            <div class="col-3">
+                <p style="margin: 5px; font-size: 2em; font-family: 'Do Hyeon', sans-serif;">그룹이름/관리자명</p>
+            </div>
+            <div class="col-5" >
+                <p style="margin: 5px; font-size: 2em; font-family: 'Do Hyeon', sans-serif; text-align: left;">모집내용</p>
+            </div>
+            <div class="col-1">
+                <p style="margin: 5px; font-size: 2em; font-family: 'Do Hyeon', sans-serif; vertical-align: middle;">최대인원수</p>
+            </div>
+            <div class="col-1">
+                <p style="margin: 5px; font-size: 2em; font-family: 'Do Hyeon', sans-serif;">최소인원수</p>
+            </div>
+            <div class="col-2">
+            </div>
+        </div>
+        <card style="margin: 20px;" id="ccard" v-for="(item, key) in list" :key="key">
             <div class="row" id="groupListContainer">
-                <div style="padding: 0px;">
-                    <h2 style="margin: 8px; font-family: 'Do Hyeon', sans-serif; display:inline-block; padding-left: 25px;">{{ item.title }}</h2>&nbsp;&nbsp;&nbsp;
-                    <h4 style="font-family: 'Do Hyeon', sans-serif; color: #9A9A9A; display:inline-block;">관리자: {{ item.nickname }}</h4>
+                <div class="col-3">
+                    <h2 style="margin: 8px 8px 0; font-family: 'Do Hyeon', sans-serif; padding-left: 30px;">{{ item.title }}</h2>
+                    <h4 style="margin: 5px 40px 20px; font-family: 'Do Hyeon', sans-serif; color: #9A9A9A;">관리자: {{ item.nickname }}</h4>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-5" style="padding: 0px; padding-top: 18px;padding-left: 25px;">
-                    <h4 style="margin: 0; font-family: 'Do Hyeon', sans-serif; display:inline-block;">
-                    최소인원수: {{ item.min_member }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;최대인원수: {{ item.max_member }}
-                    </h4>
+                <div class="col-5">
+                    <h4 style="margin: 0; font-family: 'Do Hyeon', sans-serif; float: left; padding-top: 10px;">{{ item.content }}</h4>
                 </div>
-                <div class="col-md-7" id="item7">
-                    <button class="btn btn-outline-secondary float-right" style="height: 70%;
-    width: 25%; padding: 0;"
-                            @click="moveGroupPage(item)">
-                        <p style="font-family: 'Do Hyeon', sans-serif; font-size: 30px; ">그룹 페이지로 이동</p>
-                    </button>
+                <div class="col-1" style="text-align: center;">
+                    <h2 style="line-height: 100px; margin: 0; font-family: 'Do Hyeon', sans-serif; display:inline-block;">
+                        {{ item.min_member }}명
+                    </h2>
                 </div>
-            </div>
-            <div slot="footer" class="text-center">
-                <h4 style="margin: 0; font-family: 'Do Hyeon', sans-serif; color: #FF6633; padding-top: 10px; float: left">모집내용:&nbsp;&nbsp;</h4>
-                <h4 style="margin: 0; font-family: 'Do Hyeon', sans-serif; float: left; padding-top: 10px;">{{ item.content }}</h4>
+                <div class="col-1" style="text-align: center;">
+                    <h2 style="line-height: 100px; margin: 0; font-family: 'Do Hyeon', sans-serif; display:inline-block;">
+                        {{ item.max_member }}명
+                    </h2>
+                </div>
+                <div class="col-2" style="text-align: center; margin-top: 10px;">
+                    <div class="move_box">
+                        <a
+                                style="cursor:pointer; font-size: 25px; font-family: 'Do Hyeon', sans-serif;"
+                                class="nav-link"
+                                v-if="!isLogined"
+                                @click="moveGroupPage(item)"
+                        >
+                            바로가기
+                        </a>
+                    </div>
+                </div>
             </div>
         </card>
 
@@ -149,5 +173,21 @@
     .form-control {
         height: 50px;
         font-size: 20px;
+    }
+    .move_box {
+              border: 2px solid #8ED9E9;
+              text-align: center;
+              padding-right: 10px;
+              padding-left: 10px;
+              margin-left: 3px;
+              margin-top:10px;
+              -webkit-border-top-right-radius: 40px 30px;
+              -webkit-border-top-left-radius: 40px 30px;
+              -webkit-border-bottom-right-radius: 40px 30px;
+              -webkit-border-bottom-left-radius: 40px 30px;
+          }
+
+    .move_box:hover {
+        background-color: #1dc7ea;
     }
 </style>

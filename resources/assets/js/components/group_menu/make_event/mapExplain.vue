@@ -11,18 +11,19 @@
         <span style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; color: yellow;">※경로가 클릭되지 않을 시 지도를 확대해서 <br>정확한 위치를 클릭하세요.</span>
         <div class="row" style="font-size: 25px; font-family: 'Do Hyeon', sans-serif; margin-bottom: 15px;">
             <div class="col-md-6">
-                <img src="http://hikonnect.ga/images/start.png" style="font-size: 2em" alt=""> 시작점
+                <img src="http://localhost:8000/images/start.png" style="font-size: 2em" alt=""> 시작점
             </div>
             <div class="col-md-6">
-                <span style="padding-right: 30px;"><img style="font-size: 2em" src="http://hikonnect.ga/images/dest.png" alt=""> 반환점</span>
+                <span style="padding-right: 10px;"><img style="font-size: 2em" src="http://localhost:8000/images/check.png" alt=""> 반환점</span>
             </div>
         </div>
         <div class="row" style="font-size: 25px; font-family: 'Do Hyeon', sans-serif;">
             <div class="col-md-6">
-                <img style="font-size: 2em" src="http://hikonnect.ga/images/end.png" alt=""> 도착점
+                <img style="font-size: 2em" src="http://localhost:8000/images/end.png" alt=""> 도착점
             </div>
             <div class="col-md-6">
-                <img style="font-size: 2em" src="http://hikonnect.ga/images/end.png" alt="">도착점과 시작점이 동일할 시
+                <img style="font-size: 2em;" src="http://localhost:8000/images/startEnd.png" alt="">
+                시종점
             </div>
         </div>
     </div>

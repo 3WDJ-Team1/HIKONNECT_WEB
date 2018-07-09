@@ -12,12 +12,12 @@
         <v-tabs
             icons-and-text
             centered color  ="grey lighten-4"
-            style           ="width: 100%;"
+            style           ="width: 95%; margin: auto; margin-top: 20px;"
             grow>
             <!-- @v-tab-slider      the slider of tabs on top -->
             <v-tabs-slider
-                color="light-green accent-3"
-                style="height: 5px;">
+                color="green accent-4"
+                style="height: 5px; ">
             </v-tabs-slider>
             <!-- @v-tab             the tabs in slider -->
             <v-tab
@@ -39,27 +39,30 @@
                 :key    ="1"
                 :id     ="'tab-' + 1">
                 <!-- @v-card            inner items of each tab are here. -->
-                <v-card flat>
+                <v-card flat style="box-shadow: 5px 5px 10px 1px #cecece;">
                     <!-- @router-vue(notice)          routing component whose name is notice.
                          @use                         app.js -->
-                    <router-view name="notice"></router-view>
+                    <router-view name="notice" style="box-shadow: 5px 5px 10px 1px #cecece;"></router-view>
                 </v-card>
             </v-tab-item>
             <v-tab-item
                 :key    ="2"
                 :id     ="'tab-' + 2">
-                <v-card flat style="background-color: white; border: 1px soild whitesmoke;">
+                <v-card flat style="box-shadow: 10px 5px 10px 1px #cecece; background-color: white; border: 1px soild whitesmoke;">
                     <router-view name="plan"></router-view>
                 </v-card>
             </v-tab-item>
             <v-tab-item
                 :key    ="3"
                 :id     ="'tab-' + 3">
-                <v-card flat style="background-color: white; border: 1px soild whitesmoke;" class="tab_full">
+                <v-card flat style="box-shadow: 10px 5px 10px 1px #cecece; background-color: white; border: 1px soild whitesmoke;" class="tab_full">
                     <router-view name="member_list"></router-view>
                 </v-card>
             </v-tab-item>
         </v-tabs>
+
+
+
     </div>
 </template>
 
@@ -67,7 +70,7 @@
     import joinButton from './joinButton'
     export default {
         components: {
-            joinButton
+            joinButton,
         },
         data()  {
             return  {
@@ -120,6 +123,13 @@
     margin-bottom: 0px;
 }
 .tabs__container--icons-and-text {
+    background-color: white;
     height: 90px;
+}
+.grey.lighten-4 {
+    margin-bottom: 20px;
+}
+.tabs__wrapper {
+    box-shadow: 5px 5px 10px 1px #cecece;
 }
 </style>

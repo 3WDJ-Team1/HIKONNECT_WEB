@@ -278,7 +278,7 @@
 
                                         let startEndSame = new google.maps.Marker({
                                             position: startSpot,
-                                            icon: "http://localhost:8000/images/black.png",
+                                            icon: "http://localhost:8000/images/startEnd.png",
                                             map: map
                                         });
                                         startEndSameMarker.push(startEndSame);
@@ -334,7 +334,7 @@
                                                 // 도착점 마커를 찍는다.
                                                 let endM = new google.maps.Marker({
                                                     position: end,
-                                                    icon: "http://localhost:8000/images/violet.png",
+                                                    icon: "http://localhost:8000/images/end.png",
                                                     map: map
                                                 });
                                                 // 마커를 찍을 때마다 이전의 마커는 제거해준다.
@@ -370,7 +370,7 @@
                                                 // Create markers.
                                                 let startM = new google.maps.Marker({
                                                     position: start,
-                                                    icon: "http://localhost:8000/images/white.png",
+                                                    icon: "http://localhost:8000/images/check.png",
                                                     map: map
                                                 });
                                                 startMarkers.push(startM);
@@ -422,7 +422,7 @@
                                                     // 반환마커 만들기
                                                     let endM = new google.maps.Marker({
                                                         position: end,
-                                                        icon: "http://localhost:8000/images/violet.png",
+                                                        icon: "http://localhost:8000/images/end.png",
                                                         map: map
                                                     });
                                                     // 도착마커를 지도에서 지운다.
@@ -432,7 +432,7 @@
                                                     if (endSpot == startSpot) {
                                                         let startEndSame = new google.maps.Marker({
                                                             position: startSpot,
-                                                            icon: "http://localhost:8000/images/black.png",
+                                                            icon: "http://localhost:8000/images/startEnd.png",
                                                             map: map
                                                         });
                                                         startEndSameMarker.push(startEndSame);
@@ -443,7 +443,7 @@
                                                         // 시종점 마커 찍기.
                                                         let destM = new google.maps.Marker({
                                                             position: end,
-                                                            icon: "http://localhost:8000/images/blue.png",
+                                                            icon: "http://localhost:8000/images/start.png",
                                                             map: map
                                                         });
                                                         destinationMarker.push(destM);

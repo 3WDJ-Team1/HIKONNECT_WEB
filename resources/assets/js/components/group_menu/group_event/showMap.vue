@@ -38,6 +38,11 @@
                             });
                             flightPath[i].setMap(map);
                             map.setCenter(flightPlanCoordinates[0][0]);
+                            new google.maps.Marker({
+                                position: new google.maps.LatLng(flightPlanCoordinates[0][0].lat, flightPlanCoordinates[0][0].lng),
+                                icon: "http://localhost:8000/images/start.png",
+                                map: map
+                            });
                         });
                 }
             }

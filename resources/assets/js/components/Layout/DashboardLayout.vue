@@ -5,18 +5,18 @@
     <div class="wrapper">
         <side-bar v-if="login">
             <div v-if="login" align="center" style="margin-bottom: 17px;">
-                <div>
+                <div style="background-color: white; padding-top: 20px; padding-bottom: 15px;">
                     <v-avatar
                             class="grey lighten-4"
-                            size="150"
+                            size="120"
                             slot="activator">
                         <img :src="imageSrc"/>
                     </v-avatar>
                 </div>
-                <div>
-                    <h1 style="font-family: 'Gothic A1', sans-serif; margin: 0; font-family: 'Gothic A1', sans-serif; font-size: 50px;">{{ userNickname }}</h1>
+                <div style="background-color: white; padding-bottom: 8px;">
+                    <h1 style="color: black; margin: 0; font-family: 'Gothic A1', sans-serif; font-size: 50px;">{{ userNickname }}</h1>
                     <div style="width: 230px; height: 3px; background-color: #24b674;"></div>
-                    <h3 style="font-family: 'Gothic A1', sans-serif; font-size: 20px; margin: 10px; font-family: 'Gothic A1', sans-serif;">{{ rank }}</h3>
+                    <h4 style="color: gray; margin: 10px; font-family: 'Nanum Gothic', sans-serif;">{{ rank }}</h4>
                 </div>
             </div>
             <sidebar-link to="/group-list">
@@ -72,7 +72,7 @@
                 document.head.appendChild(x);
             } else  {
                 var x = document.createElement("STYLE");
-                var t = document.createTextNode(".main-panel {width: 86.5%;}");
+                var t = document.createTextNode(".main-panel {width: 85.1%;}");
                 x.appendChild(t);
                 document.head.appendChild(x);
             }

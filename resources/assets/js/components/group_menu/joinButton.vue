@@ -2,33 +2,21 @@
     @author Jiyoon Lee <jiyoon3421@gmail.com>
  -->
 <template>
-
     <div>
         <sweet-modal ref="write" blocking id="groupModifyModal">
             <update_delete-modal></update_delete-modal>
         </sweet-modal>
-        <nav class="navbar navbar-expand-lg"
-             style="border: hidden; top: 0px; display: inline-block;position: absolute; left: 0px;">
-            <div class="container-fluid">
-                <div class="collapse navbar-collapse justify-content-end">
-                    <ul class="nav navbar-nav mr-auto">
-                        <drop-down tag="li">
-                            <template slot="title">
-                                <span style="font-size: 30px; font-family: 'Do Hyeon', sans-serif;">메뉴보기</span>
-                            </template>
-                            <a style="font-size: 25px; font-family: 'Do Hyeon', sans-serif;" v-if="owner == 'owner'"
-                               class="dropdown-item" @click="updatedModal">그룹정보 수정</a>
-                            <a style="font-size: 25px; font-family: 'Do Hyeon', sans-serif;" v-if="owner == 'owner'"
-                               class="dropdown-item" @click="deleted">그룹 삭제</a>
-                            <a style="font-size: 25px; font-family: 'Do Hyeon', sans-serif;"
-                               v-if="position && owner != 'owner'" class="dropdown-item" @click="leaveGroup">그룹탈퇴</a>
-                            <a style="font-size: 25px; font-family: 'Do Hyeon', sans-serif;"
-                               v-if="!position && owner != 'owner'" class="dropdown-item" @click="enterGroup">그룹 참가</a>
-                        </drop-down>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <img style="position: absolute; top: 1%; left: 1%;" src="http://localhost:8000/images/nav.png" height="70" width="400" alt="">
+        <a style="color: white; position: absolute; top: 2.3%; left: 4.3%; font-size: 20px; font-family: 'Nanum Gothic', sans-serif;" v-if="owner == 'owner'" @click="updatedModal">
+            <img src="http://localhost:8000/images/checkL.png" width="30" alt="">&nbsp;그룹정보 수정</a>
+        <a style="color: white; position: absolute; top: 2.3%; left: 15%; font-size: 20px; font-family: 'Nanum Gothic', sans-serif;" v-if="owner == 'owner'" @click="deleted">
+            <img src="http://localhost:8000/images/ex.png" width="30" alt="">&nbsp;그룹 삭제</a>
+        <a style="color: white; position: absolute; top: 2.3%; left: 4.3%; font-size: 20px; font-family: 'Nanum Gothic', sans-serif;"
+           v-if="position && owner != 'owner'" @click="leaveGroup">
+            <img src="http://localhost:8000/images/minus.png" width="30" alt="">&nbsp;그룹탈퇴</a>
+        <a style="color: white; position: absolute; top: 2.3%; left: 15%; font-size: 20px; font-family: 'Nanum Gothic', sans-serif;"
+           v-if="!position && owner != 'owner'" @click="enterGroup">
+            <img src="http://localhost:8000/images/plus.png" width="30" alt="">&nbsp;그룹 참가</a>
     </div>
 </template>
 
