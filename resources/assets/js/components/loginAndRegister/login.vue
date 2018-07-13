@@ -11,7 +11,7 @@
 
             <h1
                     style="font-family: 'Black Han Sans', sans-serif; color: #47714c;">
-                로그인
+                ログイン
             </h1>
             <form>
                 <!--function(e){-->
@@ -19,7 +19,7 @@
                 <!--}-->
             <div class="row">
                 <div class="col-md-12">
-                    <label><h4 style="margin: 0; color: #9e9e9e; font-family: 'Black Han Sans', sans-serif;">아이디</h4></label>
+                    <label><h4 style="margin: 0; color: #9e9e9e; font-family: 'Black Han Sans', sans-serif;">ID</h4></label>
                     <fg-input type      ="text"
                               v-model   ="userId">
                     </fg-input>
@@ -27,7 +27,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <label><h4 style="margin: 0; color: #9e9e9e; font-family: 'Black Han Sans', sans-serif;">비밀번호</h4></label>
+                    <label><h4 style="margin: 0; color: #9e9e9e; font-family: 'Black Han Sans', sans-serif;">PASSWORD</h4></label>
                     <fg-input
                               @keyup.enter.native="login"
                               v-model     ="userPw"
@@ -38,7 +38,7 @@
                 <div class="text-center">
                     <button type="submit" class="btn btn-fill" style="padding: 0; height: 10%; background-color: #47714c; border-color: #47714c;"
                             @click="login">
-                        <span style="font-family: 'Do Hyeon', sans-serif; font-size: 25px;">제출</span>
+                        <span style="font-family: 'Do Hyeon', sans-serif; font-size: 25px;">ログイン</span>
                     </button>
                 </div>
             </form>

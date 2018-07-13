@@ -20,7 +20,7 @@
                                     class="text-center"
                                     align-content-center
                                     justify-center>
-                                <p style="color: #ED8D00; margin-bottom: 0; font-family: 'Do Hyeon', sans-serif; font-size: 25px;">참가 신청자</p>
+                                <p style="color: #ED8D00; margin-bottom: 0; font-family: 'Do Hyeon', sans-serif; font-size: 25px;">参加申請者</p>
                             </v-flex>
                             <v-flex
                                     d-flex
@@ -99,7 +99,7 @@
                     if(response) {
                         this.waitingMembers = [];
                         const notification = {
-                            template: "<span><b>참여 신청을 수락 하였습니다.</b></span>"
+                            template: "<span><b>受諾しました。</b></span>"
                         };
                         this.$notifications.notify(
                             {
@@ -123,7 +123,7 @@
                 }).then (response => {
                     if (response) {
                         const notification = {
-                            template: "<span><b>참여 신청을 거절 하였습니다.</b></span>"
+                            template: "<span><b>拒絶しました。</b></span>"
                         };
                         this.$notifications.notify(
                             {

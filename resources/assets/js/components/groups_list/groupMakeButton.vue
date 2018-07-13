@@ -14,9 +14,9 @@
                 @click="groupMakeAlert('top', 'center')"
                 style="margin-right: 1%; font-size: 13px; font-weight: bold;"
         >
-            그룹
+            グルーブ
             <br>
-            만들기
+            生成
         </v-btn>
 
         <sweet-modal ref="write">
@@ -34,7 +34,7 @@
                 if (sessionStorage.getItem('userid') == undefined) {
                     // alert창 띄워주기
                     const notification = {
-                        template: "<span><b>로그인 후 사용가능합니다.</b></span>"
+                        template: "<span><b>ログインしてください。</b></span>"
                     };
                     this.$notifications.notify(
                         {

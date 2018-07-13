@@ -14,7 +14,7 @@
                                     @click.stop="drawerRight = !drawerRight"
                                     v-if="!isLogined"
                             >
-                                로그인
+                                ログイン
                             </a>
                         </div>
                     </li>
@@ -26,7 +26,7 @@
                                     v-if="isLogined"
                                     @click="logout()"
                             >
-                                로그아웃
+                                ログアウト
                             </a>
                         </div>
                     </li>
@@ -38,7 +38,7 @@
                                     v-if="!isLogined"
                                     @click="signUp()"
                             >
-                                회원가입
+                                新規取得
                             </a>
                         </div>
                     </li>

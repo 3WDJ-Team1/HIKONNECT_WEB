@@ -4,11 +4,11 @@
 <template>
     <card>
         <template slot="header">
-            <h3 class="card-title" style="font-family: 'Black Han Sans', sans-serif;">그룹 만들기</h3>
+            <h3 class="card-title" style="font-family: 'Black Han Sans', sans-serif;">グループ生成</h3>
         </template>
         <v-app>
             <v-form v-model="valid" ref="form">
-                <v-subheader style="font-family: 'Do Hyeon', sans-serif; font-size: 16px;">그룹 이름</v-subheader>
+                <v-subheader style="font-family: 'Do Hyeon', sans-serif; font-size: 16px;">グループ名</v-subheader>
                 <v-text-field
                         style="padding-top: 0px;"
                         name="notice_title"
@@ -16,7 +16,7 @@
                         :rules="titleRules"
                         required
                 ></v-text-field>
-                <v-subheader style="font-family: 'Do Hyeon', sans-serif; font-size: 16px;">모집내용</v-subheader>
+                <v-subheader style="font-family: 'Do Hyeon', sans-serif; font-size: 16px;">募集内容</v-subheader>
                 <v-text-field
                         style="padding-top: 0px;"
                         name="notice_text"
@@ -28,7 +28,7 @@
                 ></v-text-field>
                 <div style="display: flex;">
                     <div style="margin: 5px; flex-grow: 1;">
-                        <v-subheader style="font-family: 'Do Hyeon', sans-serif; font-size: 16px;">최소 모집 인원</v-subheader>
+                        <v-subheader style="font-family: 'Do Hyeon', sans-serif; font-size: 16px;">最小募集人員</v-subheader>
                         <v-text-field
                                 name="minimum"
                                 v-model="min"
@@ -37,7 +37,7 @@
                         ></v-text-field>
                     </div>
                     <div style="margin: 5px; flex-grow: 1;">
-                        <v-subheader style="font-family: 'Do Hyeon', sans-serif; font-size: 16px;">최대 모집 인원</v-subheader>
+                        <v-subheader style="font-family: 'Do Hyeon', sans-serif; font-size: 16px;">最大募集人員</v-subheader>
                         <v-text-field
                                 name="maximum"
                                 v-model="max"
@@ -107,7 +107,7 @@
                 }).then((response) => {
                     if (response.data == 'true') {
                         const notification = {
-                            template: "<span><b>그룹정보가 수정되었습니다.</b></span>"
+                            template: "<span><b>修正を完了しました。</b></span>"
                         };
                         this.$notifications.notify(
                             {

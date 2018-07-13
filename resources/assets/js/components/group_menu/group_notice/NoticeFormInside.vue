@@ -9,7 +9,7 @@
     <v-app>
         <!-- @v-form    form script of vuetify -->
         <v-form v-model="valid" ref="form">
-            <v-subheader style="font-size: 20px;">제목</v-subheader>
+            <v-subheader style="font-size: 20px;">題名</v-subheader>
             <!-- @v-text-field#notice_input_title       text of title will be input -->
             <v-text-field
                     name="notice_title"
@@ -17,7 +17,7 @@
                     :rules="titleRules"
                     required
             ></v-text-field>
-            <v-subheader style="font-size: 20px;">내용</v-subheader>
+            <v-subheader style="font-size: 20px;">内容</v-subheader>
             <!-- @v-text-field#notice_input_textarea    text of content will be input -->
             <v-text-field
                     name="notice_text"
@@ -29,7 +29,7 @@
             ></v-text-field>
             <div class="filebox bs3-primary">
                 <input class="upload-name" style="width: 400px;" :value="fileText" disabled="disabled">
-                <label for="file">업로드</label>
+                <label for="file">アップロード</label>
                 <input type="file" id="file" ref="file" class="upload-hidden" multiple
                        v-on:change="handleFilesUpload()"/>
             </div>
@@ -39,7 +39,7 @@
                     style="height: 100%; color: white; margin-top: 20px;"
                     color="cyan"
             >
-                submit
+                登録
             </v-btn>
         </v-form>
     </v-app>

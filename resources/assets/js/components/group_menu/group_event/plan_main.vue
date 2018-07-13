@@ -21,9 +21,9 @@
                 v-if="position && listEventB"
                 @click="makeEvent"
         >
-            일정
+            スケジュール
             <br>
-            만들기
+            生成
         </v-btn>
     </div>
 </template>

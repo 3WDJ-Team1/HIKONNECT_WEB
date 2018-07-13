@@ -6,14 +6,14 @@
         <div class="row" style="padding-top: 38px; width: 95%; margin: auto;" id="serchContainer" >
             <div class="col-md-2">
                 <b-form-select v-model="sel" style="border-color:#24b674; border-width: 2px;" class="mb-3">
-                    <option value="groupname">그룹명</option>
-                    <option value="writer">작성자</option>
+                    <option value="groupname">グルーブ名</option>
+                    <option value="writer">作成者</option>
                 </b-form-select>
             </div>
             <div class="col-md-8">
                 <fg-input type="text"
                           @keyup.enter.native="inputSearch"
-                          placeholder="검색어를 입력하시오."
+                          placeholder="検索語を入力してください"
                           v-model="inputForm">
                 </fg-input>
             </div>
@@ -41,7 +41,7 @@
             },
             make_group_button() {
                 if (sessionStorage.userid == undefined) {
-                    alert('로그인 이후 이용가능합니다.')
+                    alert('ログインしてください。')
                 } else {
                     this.$router.push('make');
                 }

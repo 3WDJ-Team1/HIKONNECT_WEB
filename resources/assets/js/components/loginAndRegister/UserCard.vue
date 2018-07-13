@@ -3,7 +3,7 @@
  -->
 <template>
     <card class="card-user">
-        <h2 style="margin: 0px; color: #9A9A9A; font-family: 'Do Hyeon', sans-serif;">프로필 이미지</h2>
+        <h2 style="margin: 0px; color: #9A9A9A; font-family: 'Do Hyeon', sans-serif;">プロフィールイメージ</h2>
         <div class="author">
             <img style="    width: 300px;
     height: 300px;" class="avatar border-gray" v-if="!image" />
@@ -13,7 +13,7 @@
         <div slot="footer" v-if="uploadButtonVis" class="text-center">
             <div class="filebox bs3-primary">
                 <input style="font-size: large;" class="upload-name" :value="fileText" disabled="disabled">
-                <label for="file"><h4>업로드</h4></label>
+                <label for="file"><h4>アップロード</h4></label>
                 <input type="file" id="file" ref="file" class="upload-hidden" multiple
                        v-on:change="handleFilesUpload()"/>
             </div>

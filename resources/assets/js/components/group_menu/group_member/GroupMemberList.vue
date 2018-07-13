@@ -16,7 +16,7 @@
                     <v-flex
                             xs1
                             class="text-center">
-                        <h1 style="font-family: 'Do Hyeon', sans-serif; margin: 24px 0 15px; color: #42d0ed;">리더</h1>
+                        <h1 style="font-family: 'Do Hyeon', sans-serif; margin: 24px 0 15px; color: #42d0ed;">リーダー</h1>
                     </v-flex>
                     <v-flex
                             xs2
@@ -39,7 +39,7 @@
                             xs3
                             class="text-center">
                         <button v-b-toggle="'n' + userData.nickname" v-if="position" class="btn btn-info"  style="margin-top: 25px; padding: 0; width: 160px; height: 45px;">
-                            <span style="font-family: 'Do Hyeon', sans-serif; font-size: 30px;">정보보기</span>
+                            <span style="font-family: 'Do Hyeon', sans-serif; font-size: 30px;">ユーザー情報</span>
                         </button>
                     </v-flex>
                 </v-layout>
@@ -91,12 +91,12 @@
                         <button v-b-toggle="'n' + userData.nickname"
                                 style="margin-top: 17px; padding: 0; width: 120px; height: 45px;"
                                 v-if="position" class="btn btn-info">
-                            <span style="font-family: 'Do Hyeon', sans-serif; font-size: 30px;">정보보기</span>
+                            <span style="font-family: 'Do Hyeon', sans-serif; font-size: 30px;">ユーザー情報</span>
                         </button>
                         <button v-if="owner == 'owner'" @click="outGroup(userData)" type="submit"
                                 style="margin-top: 17px; padding: 0; width: 160px; height: 45px;"
                                 class="btn btn-warning btn-fill">
-                            <span style="font-family: 'Do Hyeon', sans-serif; font-size: 30px;">강퇴 시키기</span>
+                            <span style="font-family: 'Do Hyeon', sans-serif; font-size: 30px;">追放する</span>
                         </button>
                     </v-flex>
                 </v-layout>
@@ -157,7 +157,7 @@
                         }).then(response => {
                             if (response.data == 'true') {
                                 const notification = {
-                                    template: "<span><b>강퇴하셨습니다.</b></span>"
+                                    template: "<span><b>追放しました。</b></span>"
                                 };
                                 this.$notifications.notify(
                                     {

@@ -21,19 +21,19 @@
             </div>
             <sidebar-link to="/group-list">
                 <i class="nc-icon nc-circle-09"></i>
-                <p style="font-family: 'Gothic A1', sans-serif;">그룹찾기</p>
+                <p style="font-family: 'Gothic A1', sans-serif;">サーチグループ</p>
             </sidebar-link>
             <sidebar-link to="/record" v-if="login">
                 <i class="nc-icon nc-notes"></i>
-                <p style="font-family: 'Gothic A1', sans-serif;">나의 활동기록</p>
+                <p style="font-family: 'Gothic A1', sans-serif;">活動記録</p>
             </sidebar-link>
             <sidebar-link to="/table-list" v-if="login">
                 <i class="nc-icon nc-paper-2"></i>
-                <p style="font-family: 'Gothic A1', sans-serif;">나의 그룹</p>
+                <p style="font-family: 'Gothic A1', sans-serif;">My Group</p>
             </sidebar-link>
             <sidebar-link to="/user" v-if="login">
                 <i class="nc-icon nc-atom"></i>
-                <p style="font-family: 'Gothic A1', sans-serif;">마이 페이지</p>
+                <p style="font-family: 'Gothic A1', sans-serif;">My Page</p>
             </sidebar-link>
         </side-bar>
         <div class="main-panel">

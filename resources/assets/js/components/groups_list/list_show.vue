@@ -6,16 +6,16 @@
         <div style="height: 50px; background-color: white"></div>
         <div style="margin: 0; height: 50px; background-color: #24B674; color: white; text-align: center;" class="row">
             <div class="col-3">
-                <p style="margin: 5px; font-size: 2em; font-family: 'Do Hyeon', sans-serif;">그룹이름/관리자명</p>
+                <p style="margin: 5px; font-size: 2em; font-family: 'Do Hyeon', sans-serif;">グループ名・管理者名</p>
             </div>
             <div class="col-5" >
-                <p style="margin: 5px; font-size: 2em; font-family: 'Do Hyeon', sans-serif; text-align: left;">모집내용</p>
+                <p style="margin: 5px; font-size: 2em; font-family: 'Do Hyeon', sans-serif; text-align: left;">募集内容</p>
             </div>
             <div class="col-1">
-                <p style="margin: 5px; font-size: 2em; font-family: 'Do Hyeon', sans-serif; vertical-align: middle;">최대인원수</p>
+                <p style="margin: 5px; font-size: 2em; font-family: 'Do Hyeon', sans-serif; vertical-align: middle;">最大募集人員</p>
             </div>
             <div class="col-1">
-                <p style="margin: 5px; font-size: 2em; font-family: 'Do Hyeon', sans-serif;">최소인원수</p>
+                <p style="margin: 5px; font-size: 2em; font-family: 'Do Hyeon', sans-serif;">最小募集人員</p>
             </div>
             <div class="col-2">
             </div>
@@ -24,19 +24,19 @@
             <div class="row" id="groupListContainer">
                 <div class="col-3">
                     <h2 style="margin: 8px 8px 0; font-family: 'Do Hyeon', sans-serif; padding-left: 30px;">{{ item.title }}</h2>
-                    <h4 style="margin: 5px 40px 20px; font-family: 'Do Hyeon', sans-serif; color: #9A9A9A;">관리자: {{ item.nickname }}</h4>
+                    <h4 style="margin: 5px 40px 20px; font-family: 'Do Hyeon', sans-serif; color: #9A9A9A;">管理者: {{ item.nickname }}</h4>
                 </div>
                 <div class="col-5">
                     <h4 style="margin: 0; font-family: 'Do Hyeon', sans-serif; float: left; padding-top: 10px;">{{ item.content }}</h4>
                 </div>
                 <div class="col-1" style="text-align: center;">
                     <h2 style="line-height: 100px; margin: 0; font-family: 'Do Hyeon', sans-serif; display:inline-block;">
-                        {{ item.min_member }}명
+                        {{ item.min_member }}名
                     </h2>
                 </div>
                 <div class="col-1" style="text-align: center;">
                     <h2 style="line-height: 100px; margin: 0; font-family: 'Do Hyeon', sans-serif; display:inline-block;">
-                        {{ item.max_member }}명
+                        {{ item.max_member }}名
                     </h2>
                 </div>
                 <div class="col-2" style="text-align: center; margin-top: 10px;">
@@ -47,7 +47,7 @@
                                 v-if="!isLogined"
                                 @click="moveGroupPage(item)"
                         >
-                            바로가기
+                            ページへ
                         </a>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
 
         <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading">
              <span slot="no-more" style="font-family: 'Do Hyeon', sans-serif; font-size: 30px;">
-                그룹 리스트가 없습니다 :(
+                登録されたグループがないです。 :(
              </span>
         </infinite-loading>
     </div>
@@ -110,7 +110,7 @@
                 }).then(response => {
                     // alert창 띄워주기
                     const notification = {
-                        template: "<span><b>그룹에 참가되었습니다.</b></span>"
+                        template: "<span><b>グループへ参加しました。</b></span>"
                     };
                     this.$notifications.notify(
                         {

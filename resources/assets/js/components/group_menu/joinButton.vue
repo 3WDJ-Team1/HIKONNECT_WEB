@@ -8,15 +8,15 @@
         </sweet-modal>
         <img style="position: absolute; top: 1%; left: 1%;" src="http://localhost:8000/images/nav.png" height="70" width="400" alt="">
         <a style="color: white; position: absolute; top: 2.3%; left: 4.3%; font-size: 20px; font-family: 'Nanum Gothic', sans-serif;" v-if="owner == 'owner'" @click="updatedModal">
-            <img src="http://localhost:8000/images/checkL.png" width="30" alt="">&nbsp;그룹정보 수정</a>
+            <img src="http://localhost:8000/images/checkL.png" width="30" alt="">&nbsp;グループ修正</a>
         <a style="color: white; position: absolute; top: 2.3%; left: 15%; font-size: 20px; font-family: 'Nanum Gothic', sans-serif;" v-if="owner == 'owner'" @click="deleted">
-            <img src="http://localhost:8000/images/ex.png" width="30" alt="">&nbsp;그룹 삭제</a>
+            <img src="http://localhost:8000/images/ex.png" width="30" alt="">&nbsp;グループ削除</a>
         <a style="color: white; position: absolute; top: 2.3%; left: 4.3%; font-size: 20px; font-family: 'Nanum Gothic', sans-serif;"
            v-if="position && owner != 'owner'" @click="leaveGroup">
-            <img src="http://localhost:8000/images/minus.png" width="30" alt="">&nbsp;그룹탈퇴</a>
+            <img src="http://localhost:8000/images/minus.png" width="30" alt="">&nbsp;グループ脱退</a>
         <a style="color: white; position: absolute; top: 2.3%; left: 15%; font-size: 20px; font-family: 'Nanum Gothic', sans-serif;"
            v-if="!position && owner != 'owner'" @click="enterGroup">
-            <img src="http://localhost:8000/images/plus.png" width="30" alt="">&nbsp;그룹 참가</a>
+            <img src="http://localhost:8000/images/plus.png" width="30" alt="">&nbsp;グループ参加</a>
     </div>
 </template>
 
@@ -51,7 +51,7 @@
                 }).then(response => {
                     if (response.data == 'true') {
                         const notification = {
-                            template: "<span><b>그룹에서 탈퇴하셨습니다.</b></span>"
+                            template: "<span><b>グループ脱退完了</b></span>"
                         };
                         this.$notifications.notify(
                             {
@@ -71,7 +71,7 @@
                     .then((response) => {
                         if (response.data == 'true') {
                             const notification = {
-                                template: "<span><b>그룹이 삭제되었습니다.</b></span>"
+                                template: "<span><b>グループ削除完了</b></span>"
                             };
                             this.$notifications.notify(
                                 {
@@ -97,7 +97,7 @@
                 }).then(response => {
                     if (response.data == 'true') {
                         const notification = {
-                            template: "<span><b>그룹에 참가 되었습니다.</b></span>"
+                            template: "<span><b>グループ参加完了</b></span>"
                         };
                         this.$notifications.notify(
                             {

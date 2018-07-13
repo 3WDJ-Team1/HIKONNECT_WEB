@@ -8,13 +8,13 @@
                 <div v-for="(event, index) in props.showEvents" class="event-item">
                     <!-- In here do whatever you want, make you owner event template -->
                     <div class="headline" style="font-family: 'Do Hyeon', sans-serif; display: inline; font-size: 30px !important">{{ event.title }}</div>
-                    <span class="grey--text" style="font-family: 'Do Hyeon', sans-serif; font-size: 20px; display: inline; float: right; margin-top: 10px;">작성자:&nbsp;&nbsp;{{ event.writer }}</span>
+                    <span class="grey--text" style="font-family: 'Do Hyeon', sans-serif; font-size: 20px; display: inline; float: right; margin-top: 10px;">作成者:&nbsp;&nbsp;{{ event.writer }}</span>
                     <table class="table" style="text-align:center;">
                         <tbody class="tbbody">
                         <tr>
                             <td style="border-right: solid; color: rgb(244, 244, 244);">
                                 <h6 style="font-family: 'Do Hyeon', sans-serif; font-size: 20px; color: #9A9A9A; margin: 0px; vertical-align: middle;">
-                                    목적지
+                                    目的地
                                 </h6>
                             </td>
                             <td>
@@ -25,7 +25,7 @@
                         </tr>
                         <tr style="border-bottom: solid; color: rgb(244, 244, 244);">
                             <td style="border-right: solid; color: rgb(244, 244, 244);">
-                                <h6 style="font-family: 'Do Hyeon', sans-serif; font-size: 20px; margin: 0px; color: #9A9A9A;">산행일자</h6>
+                                <h6 style="font-family: 'Do Hyeon', sans-serif; font-size: 20px; margin: 0px; color: #9A9A9A;">ハイキング日</h6>
                             </td>
                             <td>
                                 <h5 style="font-family: 'Do Hyeon', sans-serif; font-size: 20px; margin: 0px; color: black; text-align:left; margin-left: 10px;">
@@ -37,24 +37,24 @@
                     </table>
                     <button class="BButton" style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; float: right;" v-if="event.position == 'guest' && position" @click="joinPlan(event.no)">
                         <i class="nc-icon nc-simple-add"></i>
-                        일정 참여
+                        スケジュール参加
                     </button>
                     <button class="BButton" style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; float: right; margin-right: 10px;" v-if="position && event.position != 'owner'" @click="leaveEvent(event)">
                         <i class="nc-icon
 nc-simple-delete"></i>
-                        일정 취소
+                        スケジュールキャンセル
                     </button>
                     <button class="BButton" style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; float: right; margin-right: 10px;" v-if="event.position == 'owner'" @click="uapdateEvent(event)">
                         <i class="nc-icon nc-refresh-02"></i>
-                        수정하기
+                        修正する
                     </button>
                     <button class="BButton" style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; float: right; margin-right: 10px;" v-if="event.position == 'owner'" @click="deleteEvent(event)">
                         <i class="nc-icon nc-simple-remove"></i>
-                        일정 삭제
+                        スケジュール削除
                     </button>
                     <button class="BButton" style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; float: right; margin-right: 10px;" @click="openShowModal(event)">
                         <i class="nc-icon nc-square-pin"></i>
-                        일정 상세보기
+                        スケジュール情報
                     </button>
                 </div>
             </template>
@@ -88,7 +88,7 @@ nc-simple-delete"></i>
                     if (response.data == "true") {
                         // alert창 띄우기
                         const notification = {
-                            template: "<span><b>참가신청이 해지 되었습니다.</b></span>"
+                            template: "<span><b>参加申請キャンセル完了</b></span>"
                         };
                         this.$notifications.notify(
                             {
@@ -114,7 +114,7 @@ nc-simple-delete"></i>
                     .then((response) => {
                         if (response.data == "true") {
                             const notification = {
-                                template: "<span><b>일정이 삭제 되었습니다.</b></span>"
+                                template: "<span><b>削除完了</b></span>"
                             };
                             this.$notifications.notify(
                                 {
@@ -138,7 +138,7 @@ nc-simple-delete"></i>
                 }).then((response) => {
                     if (response.data == "true") {
                         const notification = {
-                            template: "<span><b>일정에 참가신청 되었습니다.</b></span>"
+                            template: "<span><b>参加申請完了</b></span>"
                         };
                         this.$notifications.notify(
                             {

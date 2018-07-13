@@ -20,15 +20,15 @@
             <div class="row" id="groupListContainer">
                 <div style="padding: 0px;" class="col-md-12" id="noticeCard" @click="noticeModal(notice)">
                     <h3 style="display:inline-block; padding-left: 25px;">{{ notice.title }}</h3>
-                    <h6 style="color: #9A9A9A; display:inline-block;">관리자: {{ notice.writer }}</h6>
-                    <h5 style="display:inline-block; float: right; padding-top: 30px; padding-right: 25px;">작성일: {{ notice.created_at }}</h5>
+                    <h6 style="color: #9A9A9A; display:inline-block;">作成者: {{ notice.writer }}</h6>
+                    <h5 style="display:inline-block; float: right; padding-top: 30px; padding-right: 25px;">作成日: {{ notice.created_at }}</h5>
                 </div>
             </div>
         </card>
         <!-- 무한 스크롤 -->
         <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading">
              <span slot="no-more" style="font-size: 30px; font-family: 'Do Hyeon', sans-serif;">
-                공지사항이 없습니다 :(
+                公知事項がありません。 :(
              </span>
         </infinite-loading>
     </div>
@@ -77,7 +77,7 @@
             this.$EventBus.$on('deleteNoticeSign', () => {
                 // alert창 띄우기
                 const notification = {
-                    template: "<span><b>공지사항이 삭제되었습니다.</b></span>"
+                    template: "<span><b>削除完了</b></span>"
                 };
                 this.$notifications.notify(
                     {

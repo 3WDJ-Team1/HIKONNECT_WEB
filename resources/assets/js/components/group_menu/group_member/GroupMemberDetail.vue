@@ -35,7 +35,7 @@
                         <v-card class="detail-wrapper">
                             <v-card-text>
                                 <div class="detail-category">
-                                성별
+                                性別
                                 </div>
                                 <div class="detail-content">
                                 {{ userData.gender == 0 ? 'male' : 'female' }}
@@ -49,7 +49,7 @@
                             <v-card class="detail-wrapper">
                             <v-card-text>
                                 <div class="detail-category">
-                                핸드폰
+                                電話番号
                                 </div>
                                 <div class="detail-content">
                                 {{ userData.phone }}
@@ -63,7 +63,7 @@
                         <v-card class="detail-wrapper">
                             <v-card-text>
                                 <div class="detail-category">
-                                    나이
+                                    年齢
                                 </div>
                                 <div class="detail-content">
                                     {{ userData.age_group }}대
@@ -76,7 +76,7 @@
                         <v-card class="detail-wrapper">
                             <v-card-text>
                                 <div class="detail-category">
-                                    아이디
+                                    ID
                                 </div>
                                 <div class="detail-content">
                                     <span style="font-size: 10px;"></span>

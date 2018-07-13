@@ -5,7 +5,7 @@
     <div>
         <show-map></show-map>
         <hr>
-        <h5 style="color: #FF6633;">모집내용</h5>
+        <h5 style="color: #FF6633;">募集内容</h5>
         <div class="row">
             <div class="col-md-12">
                 <Card>

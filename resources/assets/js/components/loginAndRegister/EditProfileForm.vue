@@ -3,34 +3,31 @@
  -->
 <template>
     <card>
-        <h1 slot="header" style="font-family: 'Do Hyeon', sans-serif;" class="card-title">회원가입</h1>
+        <h1 slot="header" style="font-family: 'Do Hyeon', sans-serif;" class="card-title">新規取得</h1>
         <form>
             <div class="row">
                 <div class="col-md-12">
-                    <label><h4 style="margin: 0px; font-family: 'Do Hyeon', sans-serif;">아이디를 입력하시오.</h4></label>
                     <fg-input type="text"
                               :disabled="disabledID"
-                              placeholder=""
+                              placeholder="ID"
                               v-model="inputId">
                     </fg-input>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <label><h4 style="margin: 0px; font-family: 'Do Hyeon', sans-serif;">닉네임을 입력하시오.</h4></label>
                     <fg-input type="text"
                               :disabled="disabledTag"
-                              placeholder=""
+                              placeholder="NICKNAME"
                               v-model="inputNickname">
                     </fg-input>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <label><h4 style="margin: 0px; font-family: 'Do Hyeon', sans-serif;">비밀번호를 입력하시오.</h4></label>
                     <fg-input type="password"
                               :disabled="disabledTag"
-                              placeholder=""
+                              placeholder="パスワード"
                               v-model="inputPw">
                     </fg-input>
                 </div>
@@ -41,20 +38,18 @@
                     Check your password!
                 </b-tooltip>
                 <div class="col-md-6">
-                    <label><h4 style="margin: 0px; font-family: 'Do Hyeon', sans-serif;">다시 비밀번호를 입력하시오.</h4></label>
                     <fg-input type="password"
                               :disabled="disabledTag"
-                              placeholder=""
+                              placeholder="パスワード確認"
                               v-model="inputPwCk">
                     </fg-input>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <label><h4 style="margin: 0px; font-family: 'Do Hyeon', sans-serif;">핸드폰 번호를 입력하시오.</h4></label>
                     <fg-input type="text"
                               :disabled="disabledTag"
-                              placeholder="'-'를 기입해주세요."
+                              placeholder="電話番号"
                               v-model="inputPhoneNo">
                     </fg-input>
                 </div>
@@ -74,11 +69,11 @@
                     <b-form-select v-model="selectedGender" :disabled="disabledTag" class="mb-3">
                         <template slot="first">
                             <!-- this slot appears above the options from 'options' prop -->
-                            <option :value="null" disabled>-- 성별 --</option>
+                            <option :value="null" disabled>-- 性別 --</option>
                         </template>
                         <!-- these options will appear after the ones from 'options' prop -->
-                        <option value="남자">남자</option>
-                        <option value="여자">여자</option>
+                        <option value="남자">男性</option>
+                        <option value="여자">女性</option>
                     </b-form-select>
                 </div>
                 <div class="col-md-9">
@@ -96,15 +91,15 @@
                     <b-form-select :disabled="disabledTag" v-model="selectedAgeGroup" class="mb-3">
                         <template slot="first">
                             <!-- this slot appears above the options from 'options' prop -->
-                            <option :value="null" disabled>-- 나이 --</option>
+                            <option :value="null" disabled>-- 年齢 --</option>
                         </template>
                         <!-- these options will appear after the ones from 'options' prop -->
-                        <option value="10대">10대</option>
-                        <option value="20대">20대</option>
-                        <option value="30대">30대</option>
-                        <option value="40대">40대</option>
-                        <option value="50대">50대</option>
-                        <option value="60대 이상">60대 이상</option>
+                        <option value="10대">10代</option>
+                        <option value="20대">20代</option>
+                        <option value="30대">30代</option>
+                        <option value="40대">40代</option>
+                        <option value="50대">50代</option>
+                        <option value="60대 이상">60代以上</option>
                     </b-form-select>
                 </div>
                 <div class="col-md-9">
@@ -122,7 +117,7 @@
                     <b-form-select :disabled="disabledTag" v-model="openRange" class="mb-3">
                         <template slot="first">
                             <!-- this slot appears above the options from 'options' prop -->
-                            <option :value="null" disabled>-- 공개범위 --</option>
+                            <option :value="null" disabled>-- 公開範囲 --</option>
                         </template>
                         <!-- these options will appear after the ones from 'options' prop -->
                         <option value="all">ALL</option>
@@ -133,7 +128,7 @@
             <div class="text-center">
                 <button style="padding: 0;" type="submit" v-if="submitButton" class="btn btn-info btn-fill float-right"
                         @click="regist">
-                    <span style="font-family: 'Do Hyeon', sans-serif; font-size: 30px; padding: 10px;">SUBMIT</span>
+                    <span style="font-family: 'Do Hyeon', sans-serif; font-size: 30px; padding: 10px;">登録</span>
                 </button>
                 <button type="submit" v-if="!submitButton" class="btn btn-outline-warning btn-fill float-right"
                         @click="update">
@@ -184,13 +179,13 @@
             inputNickname: "",
             inputPhoneNo: "",
             isPhoneNoShown: false,
-            phoneM: '개인',
+            phoneM: '非公開',
             selectedGender: null,
             isGenderShown: false,
-            genderM: '개인',
+            genderM: '非公開',
             selectedAgeGroup: null,
             isAgeGroupShown: false,
-            ageM: '개인',
+            ageM: '非公開',
             openRange: null,
             isTooltipShown: false,
             file: ''
@@ -304,21 +299,21 @@
             },
             isPhoneNoShown() {
                 if (this.isPhoneNoShown == 'true') {
-                    this.phoneM = "공개"
+                    this.phoneM = "公開"
                 } else
-                    this.phoneM = "개인"
+                    this.phoneM = "非公開"
             },
             isGenderShown() {
                 if (this.isGenderShown == 'true') {
-                    this.genderM = "공개"
+                    this.genderM = "公開"
                 } else
-                    this.genderM = "개인"
+                    this.genderM = "非公開"
             },
             isAgeGroupShown() {
                 if (this.isAgeGroupShown == 'true') {
-                    this.ageM = "공개"
+                    this.ageM = "公開"
                 } else
-                    this.ageM = "개인"
+                    this.ageM = "非公開"
             },
             inputPwCk(newValue) {
                 if (newValue == this.inputPw) {
@@ -363,18 +358,18 @@
                 this.openRange = sessionStorage.getItem('scv');
                 this.isTooltipShown = sessionStorage.getItem('phonesc');
                 if (this.isPhoneNoShown == 'true') {
-                    this.phoneM = "공개"
+                    this.phoneM = "公開"
                 } else {
-                    this.phoneM = '개인';
+                    this.phoneM = '非公開';
                 }
                 if (this.isPhoneNoShown == 'true') {
-                    this.phoneM = "공개"
+                    this.phoneM = "公開"
                 } else
-                    this.phoneM = "개인"
+                    this.phoneM = "非公開"
                 if (this.isAgeGroupShown == 'true') {
-                    this.ageM = "공개"
+                    this.ageM = "公開"
                 } else
-                    this.ageM = "개인"
+                    this.ageM = "非公開"
             }
         }
     }

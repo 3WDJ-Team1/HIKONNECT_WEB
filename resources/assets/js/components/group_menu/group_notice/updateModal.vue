@@ -6,7 +6,7 @@
     <v-app>
         <!-- @v-form    form script of vuetify -->
         <v-form ref="form">
-            <v-subheader style="font-size: 20px;">제목</v-subheader>
+            <v-subheader style="font-size: 20px;">題名</v-subheader>
             <!-- @v-text-field#notice_input_title       text of title will be input -->
             <v-text-field
                     name="notice_title"
@@ -14,7 +14,7 @@
                     :rules="titleRules"
                     required
             ></v-text-field>
-            <v-subheader style="font-size: 20px;">내용</v-subheader>
+            <v-subheader style="font-size: 20px;">内容</v-subheader>
             <!-- @v-text-field#notice_input_textarea    text of content will be input -->
             <v-text-field
                     name="notice_text"
@@ -27,11 +27,11 @@
             <div class="row">
                 <div class="filebox bs3-primary col-9">
                     <input class="upload-name" style="width: 300px;" :value="fileText" disabled="disabled">
-                    <label for="file" v-if="check == 'accepted'">업로드</label>
+                    <label for="file" v-if="check == 'accepted'">アップロード</label>
                     <input type="file" id="file" ref="file" class="upload-hidden" multiple
                            v-on:change="handleFilesUpload()"/>
 
-                    <label for="fake" v-if="check != 'accepted'">업로드</label>
+                    <label for="fake" v-if="check != 'accepted'">アップロード</label>
                     <input type="file" id="fake" disabled class="upload-hidden" multiple/>
                 </div>
                 <div class="col-3">
@@ -58,7 +58,7 @@
                                              value="accepted"
                                              unchecked-value="not_accepted"
                             >
-                                사진 지우기
+                                写真削除
                             </b-form-checkbox>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                     style="height: 100%; color: white; margin-top: 20px;"
                     color="cyan"
             >
-                submit
+                登録
             </v-btn>
         </v-form>
     </v-app>

@@ -151,7 +151,7 @@ class GroupMemberController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      *          userid
-     *
+     *ect
      * @return List of group participating
      */
     public function my_group (Request $request) {
