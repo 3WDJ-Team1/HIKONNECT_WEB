@@ -16,7 +16,7 @@
                         <div slot="content">
                             <p class="card-category" id="levelExplain" style="font-size: 30px; font-family: 'Do Hyeon', sans-serif; cursor:pointer">
                                 <i class="nc-icon nc-tap-01" style="font-size: inherit;"></i>
-                                私の等級
+                                （登山）実績
                             </p>
                             <h2 class="card-title" style="font-family: 'Do Hyeon', sans-serif;">{{rank}}</h2>
                         </div>

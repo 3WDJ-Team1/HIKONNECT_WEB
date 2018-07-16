@@ -45,7 +45,7 @@
                 </tr>
                 <tr>
                     <td style="border-right: solid; color: rgb(244, 244, 244);">
-                        <h5 style="margin: 0px; color: #9A9A9A;">ハイキング一字</h5>
+                        <h5 style="margin: 0px; color: #9A9A9A;">ハイキング日程</h5>
                     </td>
                     <td style="border-right: solid; color: rgb(244, 244, 244);">
                         <h3 style="color: black; margin: 0px; text-align:left; margin-left: 10px;">{{

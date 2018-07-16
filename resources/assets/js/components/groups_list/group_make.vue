@@ -4,7 +4,7 @@
 <template>
     <card>
         <template slot="header">
-            <h1 class="card-title" style="font-family: 'Black Han Sans', sans-serif;">グルーブ生成</h1>
+            <h1 class="card-title" style="font-family: 'Black Han Sans', sans-serif;">グループ生成</h1>
         </template>
     <v-app>
         <v-form v-model="valid" ref="form">

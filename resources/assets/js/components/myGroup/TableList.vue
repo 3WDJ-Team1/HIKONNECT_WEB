@@ -26,7 +26,7 @@
                                         <td><h3 style="font-family: 'Do Hyeon', sans-serif;">{{ item.title }}</h3></td>
                                         <td style="width: 17%;">
                                             <button style="padding: 0; height: 40px;" type="submit" class="btn btn-info btn-fill float-right" @click="move(item.uuid)">
-                                                <h4 style="font-family: 'Do Hyeon', sans-serif; margin: 0; padding: 5px;"> ショットカット</h4>
+                                                <h4 style="font-family: 'Do Hyeon', sans-serif; margin: 0; padding: 5px;"> ショートカット</h4>
                                             </button>
                                         </td>
                                     </slot>
@@ -57,7 +57,7 @@
 
                                         <td>
                                             <button style="padding: 0; height: 40px;" type="submit" class="btn btn-info btn-fill float-right" @click="move(item.uuid)">
-                                                <h4 style="font-family: 'Do Hyeon', sans-serif; margin: 0; padding: 5px;"> ショットカット</h4>
+                                                <h4 style="font-family: 'Do Hyeon', sans-serif; margin: 0; padding: 5px;"> ショートカット</h4>
                                             </button>
                                         </td>
                                     </slot>

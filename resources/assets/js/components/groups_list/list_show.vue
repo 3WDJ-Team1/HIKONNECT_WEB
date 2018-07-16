@@ -12,10 +12,10 @@
                 <p style="margin: 5px; font-size: 2em; font-family: 'Do Hyeon', sans-serif; text-align: left;">募集内容</p>
             </div>
             <div class="col-1">
-                <p style="margin: 5px; font-size: 2em; font-family: 'Do Hyeon', sans-serif; vertical-align: middle;">最大募集人員</p>
+                <p style="margin: 5px; font-size: 2em; font-family: 'Do Hyeon', sans-serif; vertical-align: middle;">最小募集人員</p>
             </div>
             <div class="col-1">
-                <p style="margin: 5px; font-size: 2em; font-family: 'Do Hyeon', sans-serif;">最小募集人員</p>
+                <p style="margin: 5px; font-size: 2em; font-family: 'Do Hyeon', sans-serif;">最大募集人員</p>
             </div>
             <div class="col-2">
             </div>
