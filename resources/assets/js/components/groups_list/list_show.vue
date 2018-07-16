@@ -56,7 +56,7 @@
 
         <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading">
              <span slot="no-more" style="font-family: 'Do Hyeon', sans-serif; font-size: 30px;">
-                登録されたグループがないです。 :(
+                登録されたグループがありません。 :(
              </span>
         </infinite-loading>
     </div>

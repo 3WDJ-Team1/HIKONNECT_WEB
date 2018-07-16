@@ -16,7 +16,7 @@
                         <div slot="content">
                             <p class="card-category" id="levelExplain" style="font-size: 30px; font-family: 'Do Hyeon', sans-serif; cursor:pointer">
                                 <i class="nc-icon nc-tap-01" style="font-size: inherit;"></i>
-                                나의 등급
+                                私の等級
                             </p>
                             <h2 class="card-title" style="font-family: 'Do Hyeon', sans-serif;">{{rank}}</h2>
                         </div>
@@ -31,7 +31,7 @@
                             <i class="nc-icon nc-watch-time text-success" style="font-size: 2em; line-height: normal;"></i>
                         </div>
                         <div slot="content">
-                            <p class="card-category" style="font-size: 30px; font-family: 'Do Hyeon', sans-serif;">총 등산 시간</p>
+                            <p class="card-category" style="font-size: 30px; font-family: 'Do Hyeon', sans-serif;">総登山時間</p>
                             <h2 class="card-title" style="font-family: 'Do Hyeon', sans-serif;">{{total_hiking_t}}</h2>
                         </div>
                     </stats-card>
@@ -42,7 +42,7 @@
                             <i class="nc-icon nc-ruler-pencil text-danger" style="font-size: 2em; line-height: normal;"></i>
                         </div>
                         <div slot="content">
-                            <p class="card-category" style="font-size: 30px; font-family: 'Do Hyeon', sans-serif;">총 등산 거리</p>
+                            <p class="card-category" style="font-size: 30px; font-family: 'Do Hyeon', sans-serif;">総登山距離</p>
                             <h2 class="card-title" style="font-family: 'Do Hyeon', sans-serif;">{{totalD}}km</h2>
                         </div>
                     </stats-card>
@@ -54,7 +54,7 @@
                                 :chart-options="lineChart.options"
                                 :responsive-options="lineChart.responsiveOptions">
                         <template slot="header">
-                            <h1 class="card-title" style="font-family: 'Do Hyeon', sans-serif; display: inline-block;">등산한 횟수</h1>
+                            <h1 class="card-title" style="font-family: 'Do Hyeon', sans-serif; display: inline-block;">登山した回数</h1>
                             <!--<b-form-select style="display: inline-block; padding-bottom: 0px;-->
                             <!--padding-top: 0px; float:right; width: 100px" v-model="nowYear" :options="options" class="mb-3" size="sm" />-->
                         </template>
@@ -63,14 +63,14 @@
                 <div class="col-md-4">
                     <card>
                         <template slot="header">
-                            <h1 class="card-title" style="font-family: 'Do Hyeon', sans-serif;">산행 기록</h1>
+                            <h1 class="card-title" style="font-family: 'Do Hyeon', sans-serif;">ハイキング記録</h1>
                         </template>
                         <div class="table-hover">
                             <table class="table" style="text-align:center;">
                                 <thead style="padding-top: 0;">
                                 <slot name="columns">
-                                    <th><h4 style="margin: 0; color: #9e9e9e; font-family: 'Do Hyeon', sans-serif;">일정 이름</h4></th>
-                                    <th><h4 style="margin: 0; color: #9e9e9e; font-family: 'Do Hyeon', sans-serif;">산행 일자</h4></th>
+                                    <th><h4 style="margin: 0; color: #9e9e9e; font-family: 'Do Hyeon', sans-serif;">スケジュール名</h4></th>
+                                    <th><h4 style="margin: 0; color: #9e9e9e; font-family: 'Do Hyeon', sans-serif;">ハイキング一字</h4></th>
                                 </slot>
                                 </thead>
                                 <tbody>
