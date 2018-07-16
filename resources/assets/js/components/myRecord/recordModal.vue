@@ -6,19 +6,19 @@
         <div class="col-md-6">
             <card class="ccard" style="margin: 0px;">
                 <template slot="header">
-                    <h1 class="card-title" style="font-family: 'Black Han Sans', sans-serif;">산행기록</h1>
+                    <h1 class="card-title" style="font-family: 'Black Han Sans', sans-serif;">ハイキング記録</h1>
                 </template>
                 <table class="table" style="width: 100%; text-align:center; margin-top: 4%; margin-left: 20px;">
                     <tbody>
                     <tr>
                         <td style="border-right: solid; border-top: 0px; color: rgb(244, 244, 244);">
-                            <h5 style="margin: 0px; color: #9A9A9A;">그룹 이름</h5>
+                            <h5 style="margin: 0px; color: #9A9A9A;">グループ名</h5>
                         </td>
                         <td style="border-top: 0px; border-right: solid; color: rgb(244, 244, 244);">
                             <h3 style="color: black; margin: 0px; text-align:left; margin-left: 10px;">{{ item.group_title}}</h3>
                         </td>
                         <td style="border-top: 0px; border-right: solid; color: rgb(244, 244, 244);">
-                            <h5 style="margin: 0px; color: #9A9A9A;">관리자</h5>
+                            <h5 style="margin: 0px; color: #9A9A9A;">管理者</h5>
                         </td>
                         <td style="border-top: 0px;">
                             <h3 style="margin: 0px; text-align:left; margin-left: 10px;">{{ item.group_leader }}</h3>
@@ -26,14 +26,14 @@
                     </tr>
                     <tr>
                         <td style="border-right: solid;  color: rgb(244, 244, 244);">
-                            <h5 style="color: #9A9A9A; margin: 0px; vertical-align: middle;">일정 이름</h5>
+                            <h5 style="color: #9A9A9A; margin: 0px; vertical-align: middle;">スケジュール名</h5>
                         </td>
                         <td style="border-right: solid; color: rgb(244, 244, 244);">
                             <h3 style="color: black; margin: 0px; text-align:left; margin-left: 10px;">
                                 {{ item.title }}</h3>
                         </td>
                         <td style="border-top: solid; border-right: solid; color: rgb(244, 244, 244);">
-                            <h5 style="margin: 0px; color: #9A9A9A;">관리자</h5>
+                            <h5 style="margin: 0px; color: #9A9A9A;">管理者</h5>
                         </td>
                         <td style="border-top: solid; color: rgb(244, 244, 244);">
                             <h3 style="margin: 0px; text-align:left; margin-left: 10px; color: black;">
@@ -42,31 +42,29 @@
                     </tr>
                     <tr>
                         <td colspan="1" style="border-right: solid; color: rgb(244, 244, 244);">
-                            <h5 style="margin: 0px; color: #9A9A9A;">목적지</h5>
+                            <h5 style="margin: 0px; color: #9A9A9A;">目的地</h5>
                         </td>
                         <td colspan="3">
-                            <h3 style="margin: 0px; text-align:left; margin-left: 10px;">{{ item.mnt_name
-                                }}</h3>
+                            <h3 style="margin: 0px; text-align:left; margin-left: 10px;">{{ item.mnt_name }}</h3>
                         </td>
                     </tr>
                     <tr>
                         <td style="border-right: solid; color: rgb(244, 244, 244);">
-                            <h5 style="margin: 0px; color: #9A9A9A;">산행 일자</h5>
+                            <h5 style="margin: 0px; color: #9A9A9A;">ハイキング一字</h5>
                         </td>
                         <td style="border-right: solid; color: rgb(244, 244, 244);">
                             <h3 style="color: black; margin: 0px; text-align:left; margin-left: 10px;">{{ date }}</h3>
                         </td>
                         <td style="border-right: solid; color: rgb(244, 244, 244);">
-                            <h5 style="margin: 0px; color: #9A9A9A;">산행 시간</h5>
+                            <h5 style="margin: 0px; color: #9A9A9A;">ハイキング時間</h5>
                         </td>
                         <td>
-                            <h3 style="margin: 0px; text-align:left; margin-left: 10px;">{{ time
-                                }}</h3>
+                            <h3 style="margin: 0px; text-align:left; margin-left: 10px;">{{ time }}</h3>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="1" style="border-right: solid; color: rgb(244, 244, 244);" rowspan="5">
-                            <h5 style="margin: 0px; color: #9A9A9A;">모집 내용</h5>
+                            <h5 style="margin: 0px; color: #9A9A9A;">募集内容</h5>
                         </td>
                         <td colspan="3" rowspan="5">
                             <h3 style="margin: 0px; text-align:left; margin-left: 10px;">{{
@@ -101,7 +99,7 @@
                     </tbody>
                 </table>
                 <button style="float: right; padding: 0; height: 10%;" type="submit" @click="move(item.uuid)" class="btn btn-info btn-fill float-right">
-                    <h3 style="font-family: 'Do Hyeon', sans-serif; margin: 0; padding: 10px;">그룹 페이지로 이동</h3>
+                    <h3 style="font-family: 'Do Hyeon', sans-serif; margin: 0; padding: 10px;">グループページへ</h3>
                 </button>
             </card>
         </div>

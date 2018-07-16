@@ -25,7 +25,12 @@
                         </tr>
                         <tr style="border-bottom: solid; color: rgb(244, 244, 244);">
                             <td style="border-right: solid; color: rgb(244, 244, 244);">
+<<<<<<< HEAD
                                 <h6 style="font-family: 'Do Hyeon', sans-serif; font-size: 20px; margin: 0px; color: #9A9A9A;">ハイキング日</h6>
+=======
+                                <h6 style="font-family: 'Do Hyeon', sans-serif; font-size: 20px; margin: 0px; color: #9A9A9A;">ハイキング日程</h6>
+                            </td>
+>>>>>>> 102a072aa9aee4468deb3daaf98029864986cdee
                             <td>
                                 <h5 style="font-family: 'Do Hyeon', sans-serif; font-size: 20px; margin: 0px; color: black; text-align:left; margin-left: 10px;">
                                     {{ event.date }}&nbsp;&nbsp;{{ event.time }}

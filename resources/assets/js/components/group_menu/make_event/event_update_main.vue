@@ -6,12 +6,12 @@
         <div class="row">
             <div class="col-md-12">
                 <card>
-                    <h4 slot="header" class="card-title">산행 일정 작성</h4>
+                    <h4 slot="header" class="card-title">ハイキングスケジュール作成</h4>
                     <form>
                         <div class="row">
                             <div class="col-md-12">
                                 <fg-input type="text"
-                                          label="제목"
+                                          label="題名"
                                           v-model="title">
                                 </fg-input>
                             </div>
@@ -19,7 +19,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>모집 내용</label>
+                                    <label>募集内容</label>
                                     <textarea rows="5" class="form-control border-input"
                                               @keyup.enter.native="enterEvent"
                                               v-model="content">
@@ -30,25 +30,25 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>등산 경로</label>
+                                    <label>ハイキング経路</label>
                                     <autocomplete :updateItem="updateItem"></autocomplete>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>산행일자</label>
+                                    <label>ハイキング一字</label>
                                     <div style="height: 30px; width: 150px; border: solid 1px #e3e3e3; border-radius: 5px;">
                                         <datetime
                                                 style="margin: 5px;"
                                                 v-model="date"
-                                                placeholder="산행일자">
+                                                placeholder="ハイキング一字">
                                         </datetime>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>산행시간</label>
+                                    <label>ハイキング時間</label>
                                     <br>
                                     <vue-timepicker
                                             :format="yourFormat"
@@ -60,11 +60,11 @@
                         <div class="text-center">
                             <button type="submit" class="btn btn-warning btn-fill float-right"
                                     @click="backCalender">
-                                나가기
+                                取り消し
                             </button>
                             <button type="submit" class="btn btn-info btn-fill float-right"
                                     @click="updateDate">
-                                제출
+                                登録
                             </button>
                         </div>
                     </form>
@@ -149,7 +149,7 @@
                     .then(response => {
                         if (response.data == 'true') {
                             const notification = {
-                                template: "<span><b>성공적으로 저장 되었습니다.</b></span>"
+                                template: "<span><b>成功的に作成しました。</b></span>"
                             };
                             this.$notifications.notify(
                                 {
@@ -163,7 +163,7 @@
 
                         } else {
                             const notification = {
-                                template: "<span><b>저장을 실패하였습니다.</b></span>"
+                                template: "<span><b>作成に失敗しました。</b></span>"
                             };
                             this.$notifications.notify(
                                 {

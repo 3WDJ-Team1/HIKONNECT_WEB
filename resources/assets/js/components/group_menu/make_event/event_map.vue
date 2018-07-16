@@ -14,7 +14,7 @@
                 class="btn--right btn--floating btn--fixed btn--bottom"
                 style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; color: white; bottom: 187px; right: 5px; width: 50px; height: 50px;"
                 color="blue">
-            지우기
+            消す
         </v-btn>
         <v-btn
                 fab
@@ -23,7 +23,7 @@
                 class="btn--right btn--floating btn--fixed btn--bottom"
                 style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; color: white; bottom: 130px; right: 5px; width: 50px; height: 50px;"
                 color="red">
-            저장
+            保存
         </v-btn>
         <span style="
             padding-top: 5px;
@@ -41,7 +41,7 @@
               id="exp"
         >
             <i
-                    class="nc-icon nc-zoom-split text-warning" style="margin-right: 5px;"></i>설명서
+                    class="nc-icon nc-zoom-split text-warning" style="margin-right: 5px;"></i>説明書
         </span>
         <b-tooltip target="exp" style="max-width: 1000px;" placement="right">
             <mapExplain></mapExplain>

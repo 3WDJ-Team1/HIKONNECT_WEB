@@ -28,7 +28,7 @@
         <!-- 무한 스크롤 -->
         <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading">
              <span slot="no-more" style="font-size: 30px; font-family: 'Do Hyeon', sans-serif;">
-                公知事項がありません。 :(
+                お知らせがありません。 :(
              </span>
         </infinite-loading>
     </div>

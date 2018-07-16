@@ -14,9 +14,9 @@
             color       ="cyan"
             @click      ="openWriteModal()"
             style       ="width: 110px; height: 110px; font-size: 25px; margin-right: 1%; font-weight: bold;">
-            공지사항
+            公知事項
             <br>
-            작성
+            作成
         </v-btn>
         <!-- @sweet-modal   the modal which have form script for writing notices -->
         <sweet-modal ref="write" blocking>

@@ -4,42 +4,42 @@
 <template>
     <div class="row">
         <div class="col-12">
-            <h2 style="font-family: 'Do Hyeon', sans-serif;"><i class="nc-icon nc-bulb-63"></i>&nbsp;&nbsp;등급 설명</h2>
+            <h2 style="font-family: 'Do Hyeon', sans-serif;"><i class="nc-icon nc-bulb-63"></i>&nbsp;&nbsp;実績説明</h2>
             <div class="table-hover">
                 <table class="table" style="text-align:center;">
                     <thead>
-                    <th><h4 style="margin: 0; color: #9e9e9e; font-family: 'Do Hyeon', sans-serif;">등급 명칭</h4></th>
-                    <th><h4 style="margin: 0; color: #9e9e9e; font-family: 'Do Hyeon', sans-serif;">등급 기준</h4></th>
+                    <th><h4 style="margin: 0; color: #9e9e9e; font-family: 'Do Hyeon', sans-serif;">等級名称</h4></th>
+                    <th><h4 style="margin: 0; color: #9e9e9e; font-family: 'Do Hyeon', sans-serif;">等級基準</h4></th>
                     </thead>
                     <tbody>
                     <tr>
-                        <td><h3 style="font-family: 'Do Hyeon', sans-serif;">백두산</h3></td>
-                        <td><h3 style="font-family: 'Do Hyeon', sans-serif;">26회 이상</h3></td>
+                        <td><h3 style="font-family: 'Do Hyeon', sans-serif;">富士山</h3></td>
+                        <td><h3 style="font-family: 'Do Hyeon', sans-serif;">26回以上</h3></td>
                     </tr>
                     <tr>
-                        <td><h3 style="font-family: 'Do Hyeon', sans-serif;">한라산</h3></td>
-                        <td><h3 style="font-family: 'Do Hyeon', sans-serif;">21~25회</h3></td>
+                        <td><h3 style="font-family: 'Do Hyeon', sans-serif;">北岳</h3></td>
+                        <td><h3 style="font-family: 'Do Hyeon', sans-serif;">21~25回</h3></td>
                     </tr>
                     <tr>
-                        <td><h3 style="font-family: 'Do Hyeon', sans-serif;">지리산</h3></td>
-                        <td><h3 style="font-family: 'Do Hyeon', sans-serif;">16~20회</h3></td>
+                        <td><h3 style="font-family: 'Do Hyeon', sans-serif;">穂高岳</h3></td>
+                        <td><h3 style="font-family: 'Do Hyeon', sans-serif;">16~20回</h3></td>
                     </tr>
                     <tr>
-                        <td><h3 style="font-family: 'Do Hyeon', sans-serif;">태백산</h3></td>
-                        <td><h3 style="font-family: 'Do Hyeon', sans-serif;">11~15회</h3></td>
+                        <td><h3 style="font-family: 'Do Hyeon', sans-serif;">手塩岳</h3></td>
+                        <td><h3 style="font-family: 'Do Hyeon', sans-serif;">11~15回</h3></td>
                     </tr>
                     <tr>
-                        <td><h3 style="font-family: 'Do Hyeon', sans-serif;">소백산</h3></td>
-                        <td><h3 style="font-family: 'Do Hyeon', sans-serif;">6~10회</h3></td>
+                        <td><h3 style="font-family: 'Do Hyeon', sans-serif;">金剛山</h3></td>
+                        <td><h3 style="font-family: 'Do Hyeon', sans-serif;">6~10回</h3></td>
                     </tr>
                     <tr>
-                        <td><h3 style="font-family: 'Do Hyeon', sans-serif;">동네 뒷산</h3></td>
-                        <td><h3 style="font-family: 'Do Hyeon', sans-serif;">5회 미만</h3></td>
+                        <td><h3 style="font-family: 'Do Hyeon', sans-serif;">裏山</h3></td>
+                        <td><h3 style="font-family: 'Do Hyeon', sans-serif;">5回未満</h3></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
-            <h3 style="font-family: 'Do Hyeon', sans-serif;"><i class="nc-icon nc-refresh-02"></i>&nbsp;총<b style="color:#ff5722;">&nbsp;{{ count }}</b>회 등산하셨습니다.</h3>
+            <h3 style="font-family: 'Do Hyeon', sans-serif;"><i class="nc-icon nc-refresh-02"></i>&nbsp;これまで<b style="color:#ff5722;">&nbsp;{{ count }}</b>会登山しました。</h3>
             <br>
         </div>
     </div>

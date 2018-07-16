@@ -18,7 +18,7 @@
                 <div class="col-md-12">
                     <fg-input type="text"
                               :disabled="disabledTag"
-                              placeholder="NICKNAME"
+                              placeholder="ニックネーム"
                               v-model="inputNickname">
                     </fg-input>
                 </div>
