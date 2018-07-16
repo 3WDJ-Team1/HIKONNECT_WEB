@@ -6,11 +6,11 @@
         <div class="row">
             <div class="col-md-12">
                 <card>
-                    <h1 slot="header" class="card-title" style="font-family: 'Do Hyeon', sans-serif;">산행 일정 작성</h1>
+                    <h1 slot="header" class="card-title" style="font-family: 'Do Hyeon', sans-serif;">ハイキングスケジュール作成</h1>
                     <form>
                         <div class="row">
                             <div class="col-md-12" style="padding-bottom: 0px; padding-top: 0px;">
-                                <label><h3 style="margin: 0; font-family: 'Do Hyeon', sans-serif;">제목</h3></label>
+                                <label><h3 style="margin: 0; font-family: 'Do Hyeon', sans-serif;">題名</h3></label>
                                 <fg-input type="text"
                                           v-model="title">
                                 </fg-input>
@@ -19,7 +19,7 @@
                         <div class="row">
                             <div class="col-md-12" style="padding-bottom: 0px; padding-top: 0px;">
                                 <div class="form-group">
-                                    <label><h3 style="margin: 0; font-family: 'Do Hyeon', sans-serif;">모집 내용</h3></label>
+                                    <label><h3 style="margin: 0; font-family: 'Do Hyeon', sans-serif;">募集内容</h3></label>
                                     <textarea rows="5" class="form-control border-input"
                                               v-model="content">
                                 </textarea>
@@ -29,28 +29,28 @@
                         <div class="row" style="height: 75px;">
                             <div class="col-md-4" style="padding-bottom: 0px; padding-top: 0px;">
                                 <div class="form-group">
-                                    <label><h3 style="margin: 0; font-family: 'Do Hyeon', sans-serif;">등산경로</h3></label>
+                                    <label><h3 style="margin: 0; font-family: 'Do Hyeon', sans-serif;">ハイキング経路</h3></label>
                                     <img height="20px" src="http://hikonnect.ga/images/map.png" alt="">
                                     <autocomplete></autocomplete>
                                 </div>
                             </div>
                             <div class="col-md-4" style="padding-bottom: 0px; padding-top: 0px;">
                                 <div class="form-group">
-                                    <label><h3 style="margin: 0; font-family: 'Do Hyeon', sans-serif;">산행일자</h3></label>
+                                    <label><h3 style="margin: 0; font-family: 'Do Hyeon', sans-serif;">ハイキング一字</h3></label>
                                     <img height="20px" src="http://hikonnect.ga/images/plan.png" alt="">
                                     <div style="    height: 50px;
     width: 200px; border: solid 1px #e3e3e3; border-radius: 5px; font-size: 20px;">
                                         <datetime
                                                 style="margin: 5px;"
                                                 v-model="date"
-                                                placeholder="산행일자">
+                                                placeholder="ハイキング一字">
                                         </datetime>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4" style="padding-bottom: 0px; padding-top: 0px;">
                                 <div class="form-group">
-                                    <label><h3 style="margin: 0; font-family: 'Do Hyeon', sans-serif;">산행시간</h3></label>
+                                    <label><h3 style="margin: 0; font-family: 'Do Hyeon', sans-serif;">ハイキング時間</h3></label>
                                     <img height="20px" src="http://hikonnect.ga/images/time.png" alt="">
                                     <br>
                                     <vue-timepicker
@@ -65,11 +65,11 @@
                             <button></button>
                             <button type="submit" class="btn btn-warning btn-fill float-right" style="padding: 5px; height: 50px;"
                                     @click="backCalender">
-                                <p style="font-size: 30px; font-family: 'Do Hyeon', sans-serif;">나가기</p>
+                                <p style="font-size: 30px; font-family: 'Do Hyeon', sans-serif;">取り消し</p>
                             </button>
                             <button style="padding: 5px; height: 50px;" type="submit" class="btn btn-info btn-fill float-right"
                                     @click="sendData">
-                                <p style="font-size: 30px; font-family: 'Do Hyeon', sans-serif;">제출</p>
+                                <p style="font-size: 30px; font-family: 'Do Hyeon', sans-serif;">登録</p>
                             </button>
                         </div>
                     </form>
@@ -135,7 +135,7 @@
                         console.log(response.data);
                         if (response.data == 'true') {
                             const notification = {
-                                template: "<span><b>성공적으로 저장 되었습니다.</b></span>"
+                                template: "<span><b>成功的に作成しました。</b></span>"
                             };
                             this.$notifications.notify(
                                 {
@@ -149,7 +149,7 @@
 
                         } else {
                             const notification = {
-                                template: "<span><b>저장을 실패하였습니다.</b></span>"
+                                template: "<span><b>作成に失敗しました。</b></span>"
                             };
                             this.$notifications.notify(
                                 {

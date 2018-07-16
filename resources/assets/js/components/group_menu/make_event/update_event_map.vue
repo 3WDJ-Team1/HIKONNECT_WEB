@@ -3,7 +3,7 @@
  -->
 <template>
     <div>
-        <h3>산 경로를 찍어주세요.</h3>
+        <h3>ハイキング経路を決めてください。</h3>
         <div
                 id="map"
                 style="height: 420px;">
@@ -11,11 +11,11 @@
         <div class="text-center">
             <button type="submit" class="btn btn-info btn-fill float-right"
                     @click="resetMap">
-                지우기
+                消す
             </button>
             <button type="submit" class="btn btn-info btn-fill float-right"
                     @click="mapModalSubmit">
-                SUBMIT
+                登録
             </button>
         </div>
     </div>

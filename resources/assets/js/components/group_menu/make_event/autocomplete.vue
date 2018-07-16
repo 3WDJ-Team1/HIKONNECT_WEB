@@ -8,14 +8,14 @@
                 <autocomplete
                         @keyup.enter.native="initMap"
                         ref             ="autocomplete"
-                        placeholder     ="목적지"
+                        placeholder     ="目的地"
                         :source         ="distributionGroupsEndpoint"
                         :results-display="formattedDisplay"
                         @selected       ="addDistributionGroup">
                 </autocomplete>
             </div>
             <div class="col-6">
-                <b-btn style="margin: 0px; min-height: 50px; height: 30px; width: 120px;" @click="initMap"><p style="font-family: 'Do Hyeon', sans-serif; font-size: 25px;">지도보기</p></b-btn>
+                <b-btn style="margin: 0px; min-height: 50px; height: 30px; width: 120px;" @click="initMap"><p style="font-family: 'Do Hyeon', sans-serif; font-size: 25px;">マップ</p></b-btn>
             </div>
         </div>
         <sweet-modal blocking="true" ref="map" id="paddingRemove">

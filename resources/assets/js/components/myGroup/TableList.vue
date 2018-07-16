@@ -86,11 +86,11 @@
         data() {
             return {
                 tableG: {
-                    columns: ['그룹 이름', '작성자', ''],
+                    columns: ['グルーブ名', '作成者', ''],
                     data: []
                 },
                 tableS: {
-                    columns: ['그룹 이름', '일정 이름',  ''],
+                    columns: ['グルーブ名', 'スケジュール名',  ''],
                     data: []
                 }
             }
