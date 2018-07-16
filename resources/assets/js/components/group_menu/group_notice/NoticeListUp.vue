@@ -14,7 +14,7 @@
         <!-- 글쓰기 버튼
                 position이 그룹에 참가 된 멤버나 관리자 일 경우에만 보여지도록 컨트롤 -->
         <router-view
-                v-if="position"
+                v-if="position == 'enter'"
                 name="write"></router-view>
         <card id="cardBox" style="margin: 10px;" v-for="notice in notices" :key="notice.uuid" >
             <div class="row" id="groupListContainer">
@@ -60,7 +60,7 @@
             list_num: 0,
             notices: [],
             groupId: "",
-            position: false,
+            position: "",
             updateSign: true,
             updateItem: {},
             noticeItem: {}

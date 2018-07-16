@@ -84,9 +84,9 @@
         },
         methods: {
             positionPull() {
-                this.axios.get(this.$HttpAddr + '/user/' + sessionStorage.getItem('userid'))
+                this.axios.get('http://localhost:8000/api/user/' + sessionStorage.getItem('userid'))
                     .then(response => {
-                        this.rank = response.data[0].grade;
+                        this.rank = response.data.grade;
                     });
             },
             toggleSidebar() {

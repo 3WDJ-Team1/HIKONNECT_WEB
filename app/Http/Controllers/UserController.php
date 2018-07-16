@@ -152,7 +152,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $result               = $this->usermodel->userInfo($id);
+        $result               = $this->usermodel->user_profile_info($id)[0];
         $distance             = 0;
         $total_hiking_time    = 0;
         $hour                 = 0;

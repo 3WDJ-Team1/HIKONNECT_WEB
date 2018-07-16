@@ -5,7 +5,7 @@
     <div>
         <nav class="navbar navbar-expand-lg" style="border: 0; background: transparent; min-height: 85px; opacity: 1;">
             <div class="container-fluid">
-                <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav ml-auto" style="z-index: 1000;">
                     <li class="nav-item" style="padding-bottom: 10px;">
                         <div class="login_box">
                             <a
@@ -21,7 +21,7 @@
                     <li class="nav-item" style="padding-bottom: 10px;">
                         <div class="login_box">
                             <a
-                                    style="color: white; cursor:pointer; font-size: 30px; font-family: 'Do Hyeon', sans-serif;"
+                                    style="color: white; cursor:pointer; font-size: 30px;"
                                     class="nav-link"
                                     v-if="isLogined"
                                     @click="logout()"
@@ -143,9 +143,8 @@
     .navigation-drawer--temporary:not(.navigation-drawer--close), .navigation-drawer--is-mobile:not(.navigation-drawer--close) {
         background-color: white;
     }
-
     .login_box {
-        background-color: #c1c1c1;
+        background-color: #009245b3;
         text-align: center;
         padding-right: 10px;
         padding-left: 10px;

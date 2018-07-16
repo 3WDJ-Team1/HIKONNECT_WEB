@@ -175,19 +175,21 @@
             lastRecordPull() {
                 this.axios.get(this.$HttpAddr + '/hiking_history/' + sessionStorage.getItem('userid'))
                     .then(response => {
-                        this.lastRecord = this.lastRecord.concat(response.data);
-                        for (let i = 0; i < this.lastRecord.length; i++) {
-                            this.startDate[i] = this.lastRecord[i].start_date.substring(0, 4) + "-" + this.lastRecord[i].start_date.substring(5, 7) + "-" + this.lastRecord[i].start_date.substring(8, 10);
+                        if(response.data != false)  {
+                            this.lastRecord = this.lastRecord.concat(response.data);
+                            for (let i = 0; i < this.lastRecord.length; i++) {
+                                this.startDate[i] = this.lastRecord[i].start_date.substring(0, 4) + "-" + this.lastRecord[i].start_date.substring(5, 7) + "-" + this.lastRecord[i].start_date.substring(8, 10);
+                            }
                         }
                     });
             },
             positionPull() {
-                this.axios.get(this.$HttpAddr + '/user/' + sessionStorage.getItem('userid'))
+                this.axios.get('http://localhost:8000/user/' + sessionStorage.getItem('userid'))
                     .then(response => {
-                        this.rank = response.data[0].grade;
+                        this.rank = response.data.grade;
                         this.totalD = response.data.total_distance;
-                        this.total_hiking_t = response.data.total_hiking_time.hour + "H"
-                            + response.data.total_hiking_time.minute + "M"
+                        this.total_hiking_t = response.data.total_hiking_time.hour + "H "
+                            + response.data.total_hiking_time.minute + "M "
                             + response.data.total_hiking_time.second + "S"
                     });
             },

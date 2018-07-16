@@ -191,7 +191,8 @@
             file: ''
         }),
         methods: {
-            update()    {
+            update(e)    {
+                e.preventDefault();
                 // form undisabled해 놓은거 풀기
                 this.disabledTag = false;
                 // ID는 수정 할 수 없으므로
@@ -224,7 +225,8 @@
              * @brief       Try to regist user.
              *              Check is form valid. Then send request to server.
              */
-            regist() {
+            regist(e) {
+                e.preventDefault();
                 if (this.isTooltipShown) {
                     this.$EventBus.$emit('errorModalOpen', 'Check your password!');
                     return;

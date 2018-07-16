@@ -14,15 +14,16 @@
             <div style="background-color: white; margin-left: 1px; margin-right: 1px; border-radius: 6px; margin-bottom: 4px;">
                 <v-layout row style="padding: 10px; margin-left: 10px;">
                     <v-flex
-                            xs1
+                            xs2
                             class="text-center">
-                        <h1 style="font-family: 'Do Hyeon', sans-serif; margin: 24px 0 15px; color: #42d0ed;">リーダー</h1>
+                        <h2 style="font-family: 'Do Hyeon', sans-serif; margin: 24px 0 15px; color: #42d0ed;">リーダー</h2>
                     </v-flex>
                     <v-flex
                             xs2
                             style="padding-bottom: 2px;"
                             class="text-center">
                         <v-avatar
+                                style="float: left;"
                                 size="100"
                                 slot="activator"
                         >
@@ -30,7 +31,7 @@
                         </v-avatar>
                     </v-flex>
                     <v-flex
-                            xs6
+                            xs5
                             class="text-center">
                         <h1 style="font-family: 'Black Han Sans', sans-serif; margin: 20px 0 15px;">{{ userData.nickname
                             }}</h1>

@@ -18,7 +18,7 @@
                 bottom
                 fab
                 color="pink"
-                v-if="position && listEventB"
+                v-if="position == 'enter' && listEventB"
                 @click="makeEvent"
         >
             スケジュール
@@ -48,7 +48,7 @@
                  * makeEventB   (Boolean)   일정만들기를 보여줄지 안보여줄지
                  * updateEventB (Boolean)   업데이트 페이지를 보여줄지 안보여줄지
                  */
-                position: false,
+                position: "",
                 listEventB: true,
                 makeEventB: false,
                 updateEventB: false,

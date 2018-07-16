@@ -5,14 +5,14 @@
     <div>
         <vue-event-calendar :events="hikingEvents">
             <template slot-scope="props">
-                <div v-for="(event, index) in props.showEvents" class="event-item">
+                <div v-for="(event, index) in props.showEvents" class="event-item" style="padding-right: 30px; padding-left 30px; padding-top: 30px; padding-bottom: 50px;">
                     <!-- In here do whatever you want, make you owner event template -->
                     <div class="headline" style="font-family: 'Do Hyeon', sans-serif; display: inline; font-size: 30px !important">{{ event.title }}</div>
                     <span class="grey--text" style="font-family: 'Do Hyeon', sans-serif; font-size: 20px; display: inline; float: right; margin-top: 10px;">作成者:&nbsp;&nbsp;{{ event.writer }}</span>
                     <table class="table" style="text-align:center;">
                         <tbody class="tbbody">
                         <tr>
-                            <td style="border-right: solid; color: rgb(244, 244, 244);">
+                            <td style="padding: 10px; border-right: solid; color: rgb(244, 244, 244);">
                                 <h6 style="font-family: 'Do Hyeon', sans-serif; font-size: 20px; color: #9A9A9A; margin: 0px; vertical-align: middle;">
                                     目的地
                                 </h6>
@@ -26,7 +26,6 @@
                         <tr style="border-bottom: solid; color: rgb(244, 244, 244);">
                             <td style="border-right: solid; color: rgb(244, 244, 244);">
                                 <h6 style="font-family: 'Do Hyeon', sans-serif; font-size: 20px; margin: 0px; color: #9A9A9A;">ハイキング日</h6>
-                            </td>
                             <td>
                                 <h5 style="font-family: 'Do Hyeon', sans-serif; font-size: 20px; margin: 0px; color: black; text-align:left; margin-left: 10px;">
                                     {{ event.date }}&nbsp;&nbsp;{{ event.time }}
@@ -35,11 +34,12 @@
                         </tr>
                         </tbody>
                     </table>
-                    <button class="BButton" style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; float: right;" v-if="event.position == 'guest' && position" @click="joinPlan(event.no)">
+
+                    <button class="BButton" style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; float: right;" v-if="event.position == 'guest' && position=='enter'" @click="joinPlan(event.no)">
                         <i class="nc-icon nc-simple-add"></i>
                         スケジュール参加
                     </button>
-                    <button class="BButton" style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; float: right; margin-right: 10px;" v-if="position && event.position != 'owner'" @click="leaveEvent(event)">
+                    <button class="BButton" style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; float: right; margin-right: 10px;" v-if="position=='enter' && event.position != 'owner'" @click="leaveEvent(event)">
                         <i class="nc-icon
 nc-simple-delete"></i>
                         スケジュールキャンセル
@@ -52,7 +52,7 @@ nc-simple-delete"></i>
                         <i class="nc-icon nc-simple-remove"></i>
                         スケジュール削除
                     </button>
-                    <button class="BButton" style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; float: right; margin-right: 10px;" @click="openShowModal(event)">
+                    <button class="BButton" style="margin-bottom: 20px; font-size: 20px; font-family: 'Do Hyeon', sans-serif; float: right; margin-right: 10px;" @click="openShowModal(event)">
                         <i class="nc-icon nc-square-pin"></i>
                         スケジュール情報
                     </button>

@@ -111,15 +111,18 @@
                 this.axios.post(this.$HttpAddr + '/mygroup', {
                     userid: sessionStorage.getItem('userid')
                 }).then(response => {
-                    console.log(response.data)
-                    this.tableG.data = this.tableG.data.concat(response.data);
+                    if(response.data != 'false')   {
+                        this.tableG.data = this.tableG.data.concat(response.data);
+                    }
                 });
             },
             myschedule()    {
                 this.axios.post(this.$HttpAddr + '/myschedule', {
                     userid: sessionStorage.getItem('userid')
                 }).then(response => {
-                    this.tableS.data = this.tableS.data.concat(response.data);
+                    if(response.data != false)    {
+                        this.tableS.data = this.tableS.data.concat(response.data);
+                    }
                 })
             }
         }

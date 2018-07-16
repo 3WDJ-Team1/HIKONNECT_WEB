@@ -75,6 +75,7 @@
         data()  {
             return  {
                 positionN: 0,
+                wattingN: 0,
                 position: false,
                 login: sessionStorage.getItem('userid')
             }
@@ -94,8 +95,20 @@
                                     this.positionN++;
                                 }
                             };
-                            if(this.positionN > 0) {
-                                this.position = true;
+                            for(let i = 0; i < response.data[0].not_enter.length; i++)  {
+                                if(response.data[0].not_enter[i].userid == sessionStorage.getItem('userid')) {
+                                    this.wattingN++;
+                                }
+                            };
+                            if(this.wattingN > 0) {
+                                this.position = 'not_enter';
+                            }
+                            // 그룹원이다.
+                            else if(this.positionN > 0) {
+                                this.position = 'enter';
+                            }
+                            else    {
+                                this.position = 'false';
                             }
                             this.$EventBus.$emit('positionGet', this.position);
                             this.$EventBus.$emit('memberList', response.data[0].enter, response.data[0].not_enter);
