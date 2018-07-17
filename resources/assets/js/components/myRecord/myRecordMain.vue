@@ -205,7 +205,7 @@
                     });
             },
             positionPull() {
-                this.axios.get('http://localhost:8000/user/' + sessionStorage.getItem('userid'))
+                this.axios.get('http://hikonnect.ga/user/' + sessionStorage.getItem('userid'))
                     .then(response => {
                         this.totalD = response.data.total_distance;
                         this.total_hiking_t = response.data.total_hiking_time.hour + "H "

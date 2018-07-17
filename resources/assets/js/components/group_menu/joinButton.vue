@@ -6,24 +6,24 @@
         <sweet-modal ref="write" blocking id="groupModifyModal">
             <update_delete-modal></update_delete-modal>
         </sweet-modal>
-        <img v-if="owner == 'owner'" style="position: absolute; top: 1%; left: 1%;" src="http://localhost:8000/images/nav.png" height="70" width="450" alt="">
-        <img v-if="owner != 'owner'" style="position: absolute; top: 1%; left: 1%;" src="http://localhost:8000/images/nav_short.png" height="70" width="250" alt="">
+        <img v-if="owner == 'owner'" style="position: absolute; top: 1%; left: 1%;" src="http://hikonnect.ga/images/nav.png" height="70" width="450" alt="">
+        <img v-if="owner != 'owner'" style="position: absolute; top: 1%; left: 1%;" src="http://hikonnect.ga/images/nav_short.png" height="70" width="250" alt="">
         <a style="cursor:pointer; color: white; position: absolute; top: 2.3%; left: 4.3%; font-size: 20px; font-family: 'Gothic A1', sans-serif;" v-if="owner == 'owner'" @click="updatedModal">
-            <img src="http://localhost:8000/images/checkL.png" width="30" alt="">&nbsp;グループ修正</a>
+            <img src="http://hikonnect.ga/images/checkL.png" width="30" alt="">&nbsp;グループ修正</a>
         <a style="cursor:pointer; color: white; position: absolute; top: 2.3%; left: 15%; font-size: 20px; font-family: 'Gothic A1', sans-serif;" v-if="owner == 'owner'" @click="deleted">
-            <img src="http://localhost:8000/images/ex.png" width="30" alt="">&nbsp;グループ削除</a>
+            <img src="http://hikonnect.ga/images/ex.png" width="30" alt="">&nbsp;グループ削除</a>
         <a style="cursor:pointer; color: white; position: absolute; top: 2.3%; left: 4.3%; font-size: 20px; font-family: 'Gothic A1', sans-serif;"
            v-if="position == 'enter' && owner != 'owner'" @click="leaveGroup">
-            <img src="http://localhost:8000/images/minus.png" width="30" alt="">&nbsp;グループ脱退</a>
-        <a style="cursor:pointer; color: white; position: absolute; top: 2.3%; left: 4.3%; font-size: 20px; font-family: 'Gothic A1', sans-serif;"
+            <img src="http://hikonnect.ga/images/minus.png" width="30" alt="">&nbsp;グループ脱退</a>
+        <a style="cursor:pointer; color: white; position: absolute; top: 2.3%; left: 4%; font-size: 20px; font-family: 'Gothic A1', sans-serif;"
            v-if="position == 'not_enter' && owner != 'owner'">
             <img style="-webkit-animation-name: spin;
     -webkit-animation-duration: 4000ms;
     -webkit-animation-iteration-count: infinite;
-    -webkit-animation-timing-function: linear;" src="http://localhost:8000/images/loading.png" width="30" alt="">&nbsp;신청 대기 중</a>
+    -webkit-animation-timing-function: linear;" src="http://hikonnect.ga/images/loading.png" width="30" alt="">&nbsp;申し込み受付中</a>
         <a style="cursor:pointer; color: white; position: absolute; top: 2.3%; left: 3.5%; font-size: 20px; font-family: 'Gothic A1', sans-serif;"
            v-if="position == 'false' && owner != 'owner'" @click="enterGroup">
-            <img src="http://localhost:8000/images/plus.png" width="30" alt="">&nbsp;グループ参加</a>
+            <img src="http://hikonnect.ga/images/plus.png" width="30" alt="">&nbsp;グループ参加</a>
     </div>
 </template>
 

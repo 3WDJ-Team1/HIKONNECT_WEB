@@ -12,10 +12,10 @@
                 <p style="margin: 5px; font-size: 2em; font-family: 'Gothic A1', sans-serif; text-align: center;">募集内容</p>
             </div>
             <div class="col-1">
-                <p style="margin: 5px; font-size: 2em; font-family: 'Gothic A1', sans-serif; vertical-align: middle;">最小募集人員</p>
+                <p style="margin: 5px; font-size: 1.6em; font-family: 'Gothic A1', sans-serif; vertical-align: middle;">最小人員</p>
             </div>
             <div class="col-1">
-                <p style="margin: 5px; font-size: 2em; font-family: 'Gothic A1', sans-serif;">最大募集人員</p>
+                <p style="margin: 5px; font-size: 1.6em; font-family: 'Gothic A1', sans-serif;">最大人員</p>
             </div>
             <div class="col-2">
             </div>
