@@ -16,7 +16,7 @@
                 <div style="background-color: white; padding-bottom: 8px;">
                     <h1 style="color: black; margin: 0; font-family: 'Gothic A1', sans-serif; font-size: 50px;">{{ userNickname }}</h1>
                     <div style="width: 230px; height: 3px; background-color: #24b674;"></div>
-                    <h4 style="color: gray; margin: 10px; font-family: 'Nanum Gothic', sans-serif;">{{ rank }}</h4>
+                    <h4 style="color: gray; margin: 10px; font-family: 'Gothic A1', sans-serif;">{{ rank }}</h4>
                 </div>
             </div>
             <sidebar-link to="/group-list">
@@ -86,7 +86,10 @@
             positionPull() {
                 this.axios.get('http://localhost:8000/api/user/' + sessionStorage.getItem('userid'))
                     .then(response => {
-                        this.rank = response.data.grade;
+                        if(response.data.grade == '동네 뒷산')   {
+                            this.rank = '裏山';
+                        }
+                        
                     });
             },
             toggleSidebar() {

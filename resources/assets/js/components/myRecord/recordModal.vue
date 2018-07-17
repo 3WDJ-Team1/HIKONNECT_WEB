@@ -6,7 +6,7 @@
         <div class="col-md-6">
             <card class="ccard" style="margin: 0px;">
                 <template slot="header">
-                    <h1 class="card-title" style="font-family: 'Black Han Sans', sans-serif;">ハイキング記録</h1>
+                    <h1 class="card-title" style="font-family: 'Gothic A1', sans-serif;">ハイキング記録</h1>
                 </template>
                 <table class="table" style="width: 100%; text-align:center; margin-top: 4%; margin-left: 20px;">
                     <tbody>
@@ -99,7 +99,7 @@
                     </tbody>
                 </table>
                 <button style="float: right; padding: 0; height: 10%;" type="submit" @click="move(item.uuid)" class="btn btn-info btn-fill float-right">
-                    <h3 style="font-family: 'Do Hyeon', sans-serif; margin: 0; padding: 10px;">グループページへ</h3>
+                    <h3 style="font-family: 'Gothic A1', sans-serif; margin: 0; padding: 10px;">グループページへ</h3>
                 </button>
             </card>
         </div>

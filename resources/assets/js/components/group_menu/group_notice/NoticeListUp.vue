@@ -27,7 +27,7 @@
         </card>
         <!-- 무한 스크롤 -->
         <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading">
-             <span slot="no-more" style="font-size: 30px; font-family: 'Do Hyeon', sans-serif;">
+             <span slot="no-more" style="font-size: 30px; font-family: 'Gothic A1', sans-serif;">
                 お知らせがありません。 :(
              </span>
         </infinite-loading>

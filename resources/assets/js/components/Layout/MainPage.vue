@@ -15,7 +15,7 @@
                             dark
                             href="http://localhost:8000/#/group"
                             large
-                            style="border: 0; background-color: #ffb500; opacity: 1; font-size: 40px; height: auto; width: 22%; font-family: 'Do Hyeon', sans-serif; padding: 0; position: relative; top:70%; left: 38%">
+                            style="border: 0; background-color: #ffb500; opacity: 1; font-size: 40px; height: auto; width: 22%; font-family: 'Gothic A1', sans-serif; padding: 0; position: relative; top:70%; left: 38%">
                         그룹 리스트로 이동하기
                     </v-btn> -->
                 </v-carousel-item>
@@ -25,7 +25,7 @@
                             dark
                             href="https://play.google.com/store/apps/details?id=kr.ac.yjc.wdj.hikonnect"
                             large
-                            style="border: 0; background-color: #ffb500; opacity: 1; font-size: 40px; height: auto; width: 22%; font-family: 'Do Hyeon', sans-serif; padding: 0; position: relative; top:70%; left: 38%">
+                            style="border: 0; background-color: #ffb500; opacity: 1; font-size: 40px; height: auto; width: 22%; font-family: 'Gothic A1', sans-serif; padding: 0; position: relative; top:70%; left: 38%">
                         어플 다운 받으러 가기
                     </v-btn> -->
                 </v-carousel-item>

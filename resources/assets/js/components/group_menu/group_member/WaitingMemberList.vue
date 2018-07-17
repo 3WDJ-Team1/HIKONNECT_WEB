@@ -20,7 +20,7 @@
                                     class="text-center"
                                     align-content-center
                                     justify-center>
-                                <p style="color: #ED8D00; margin-bottom: 0; font-family: 'Do Hyeon', sans-serif; font-size: 25px;">参加申請者</p>
+                                <p style="color: #ED8D00; margin-bottom: 0; font-family: 'Gothic A1', sans-serif; font-size: 25px;">参加申請者</p>
                             </v-flex>
                             <v-flex
                                     d-flex
@@ -38,7 +38,7 @@
                                     d-flex
                                     md6
                                     class="text-center">
-                                <h2 style="margin: 0; margin-top: 20px; font-family: 'Do Hyeon', sans-serif">{{ user.nickname }}</h2>
+                                <h2 style="margin: 0; margin-top: 20px; font-family: 'Gothic A1', sans-serif">{{ user.nickname }}</h2>
                             </v-flex>
                             <v-flex
                                     xs12

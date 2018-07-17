@@ -7,32 +7,28 @@
             <template slot-scope="props">
                 <div v-for="(event, index) in props.showEvents" class="event-item" style="padding-right: 30px; padding-left 30px; padding-top: 30px; padding-bottom: 50px;">
                     <!-- In here do whatever you want, make you owner event template -->
-                    <div class="headline" style="font-family: 'Do Hyeon', sans-serif; display: inline; font-size: 30px !important">{{ event.title }}</div>
-                    <span class="grey--text" style="font-family: 'Do Hyeon', sans-serif; font-size: 20px; display: inline; float: right; margin-top: 10px;">作成者:&nbsp;&nbsp;{{ event.writer }}</span>
+                    <div class="headline" style="font-family: 'Gothic A1', sans-serif; display: inline; font-size: 30px !important">{{ event.title }}</div>
+                    <span class="grey--text" style="font-family: 'Gothic A1', sans-serif; font-size: 20px; display: inline; float: right; margin-top: 10px;">作成者:&nbsp;&nbsp;{{ event.writer }}</span>
                     <table class="table" style="text-align:center;">
                         <tbody class="tbbody">
                         <tr>
                             <td style="padding: 10px; border-right: solid; color: rgb(244, 244, 244);">
-                                <h6 style="font-family: 'Do Hyeon', sans-serif; font-size: 20px; color: #9A9A9A; margin: 0px; vertical-align: middle;">
+                                <h6 style="font-family: 'Gothic A1', sans-serif; font-size: 20px; color: #9A9A9A; margin: 0px; vertical-align: middle;">
                                     目的地
                                 </h6>
                             </td>
                             <td>
-                                <h5 style="font-family: 'Do Hyeon', sans-serif; font-size: 20px; margin: 0px; text-align:left; margin-left: 10px;">
+                                <h5 style="font-family: 'Gothic A1', sans-serif; font-size: 20px; margin: 0px; text-align:left; margin-left: 10px;">
                                     {{ event.destination }}
                                 </h5>
                             </td>
                         </tr>
                         <tr style="border-bottom: solid; color: rgb(244, 244, 244);">
                             <td style="border-right: solid; color: rgb(244, 244, 244);">
-<<<<<<< HEAD
-                                <h6 style="font-family: 'Do Hyeon', sans-serif; font-size: 20px; margin: 0px; color: #9A9A9A;">ハイキング日</h6>
-=======
-                                <h6 style="font-family: 'Do Hyeon', sans-serif; font-size: 20px; margin: 0px; color: #9A9A9A;">ハイキング日程</h6>
+                                <h6 style="font-family: 'Gothic A1', sans-serif; font-size: 20px; margin: 0px; color: #9A9A9A;">ハイキング日程</h6>
                             </td>
->>>>>>> 102a072aa9aee4468deb3daaf98029864986cdee
                             <td>
-                                <h5 style="font-family: 'Do Hyeon', sans-serif; font-size: 20px; margin: 0px; color: black; text-align:left; margin-left: 10px;">
+                                <h5 style="font-family: 'Gothic A1', sans-serif; font-size: 20px; margin: 0px; color: black; text-align:left; margin-left: 10px;">
                                     {{ event.date }}&nbsp;&nbsp;{{ event.time }}
                                 </h5>
                             </td>
@@ -40,24 +36,24 @@
                         </tbody>
                     </table>
 
-                    <button class="BButton" style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; float: right;" v-if="event.position == 'guest' && position=='enter'" @click="joinPlan(event.no)">
+                    <button class="BButton" style="font-size: 20px; font-family: 'Gothic A1', sans-serif; float: right;" v-if="event.position == 'guest' && position=='enter'" @click="joinPlan(event.no)">
                         <i class="nc-icon nc-simple-add"></i>
                         スケジュール参加
-                    </button>
-                    <button class="BButton" style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; float: right; margin-right: 10px;" v-if="position=='enter' && event.position != 'owner'" @click="leaveEvent(event)">
+                    </button>&nbsp;&nbsp;
+                    <button class="BButton" style="font-size: 20px; font-family: 'Gothic A1', sans-serif; float: right; margin-right: 10px;" v-if="position=='enter' && event.position != 'owner'" @click="leaveEvent(event)">
                         <i class="nc-icon
 nc-simple-delete"></i>
                         スケジュールキャンセル
-                    </button>
-                    <button class="BButton" style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; float: right; margin-right: 10px;" v-if="event.position == 'owner'" @click="uapdateEvent(event)">
+                    </button>&nbsp;&nbsp;
+                    <button class="BButton" style="font-size: 20px; font-family: 'Gothic A1', sans-serif; float: right; margin-right: 10px;" v-if="event.position == 'owner'" @click="uapdateEvent(event)">
                         <i class="nc-icon nc-refresh-02"></i>
                         修正する
-                    </button>
-                    <button class="BButton" style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; float: right; margin-right: 10px;" v-if="event.position == 'owner'" @click="deleteEvent(event)">
+                    </button>&nbsp;&nbsp;
+                    <button class="BButton" style="font-size: 20px; font-family: 'Gothic A1', sans-serif; float: right; margin-right: 10px;" v-if="event.position == 'owner'" @click="deleteEvent(event)">
                         <i class="nc-icon nc-simple-remove"></i>
                         スケジュール削除
-                    </button>
-                    <button class="BButton" style="margin-bottom: 20px; font-size: 20px; font-family: 'Do Hyeon', sans-serif; float: right; margin-right: 10px;" @click="openShowModal(event)">
+                    </button>&nbsp;&nbsp;&nbsp;
+                    <button class="BButton" style="margin-bottom: 20px; font-size: 20px; font-family: 'Gothic A1', sans-serif; float: right; margin-right: 10px;" @click="openShowModal(event)">
                         <i class="nc-icon nc-square-pin"></i>
                         スケジュール情報
                     </button>

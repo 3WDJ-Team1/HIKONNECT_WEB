@@ -14,11 +14,11 @@
                             <i class="nc-icon nc-badge text-warning" style="font-size: 2em; line-height: normal;"></i>
                         </div>
                         <div slot="content">
-                            <p class="card-category" id="levelExplain" style="font-size: 30px; font-family: 'Do Hyeon', sans-serif; cursor:pointer">
+                            <p class="card-category" id="levelExplain" style="font-weight: 500; font-size: 30px; font-family: 'Gothic A1', sans-serif; cursor:pointer">
                                 <i class="nc-icon nc-tap-01" style="font-size: inherit;"></i>
                                 （登山）実績
                             </p>
-                            <h2 class="card-title" style="font-family: 'Do Hyeon', sans-serif;">{{rank}}</h2>
+                            <h2 class="card-title" style="font-weight: 500; font-family: 'Gothic A1', sans-serif;">{{rank}}</h2>
                         </div>
                     </stats-card>
                 </div>
@@ -31,8 +31,8 @@
                             <i class="nc-icon nc-watch-time text-success" style="font-size: 2em; line-height: normal;"></i>
                         </div>
                         <div slot="content">
-                            <p class="card-category" style="font-size: 30px; font-family: 'Do Hyeon', sans-serif;">総登山時間</p>
-                            <h2 class="card-title" style="font-family: 'Do Hyeon', sans-serif;">{{total_hiking_t}}</h2>
+                            <p class="card-category" style="font-size: 30px; font-weight: 500; font-family: 'Gothic A1', sans-serif;">総登山時間</p>
+                            <h2 class="card-title" style=" font-weight: 500; font-family: 'Gothic A1', sans-serif;">{{total_hiking_t}}</h2>
                         </div>
                     </stats-card>
                 </div>
@@ -42,8 +42,8 @@
                             <i class="nc-icon nc-ruler-pencil text-danger" style="font-size: 2em; line-height: normal;"></i>
                         </div>
                         <div slot="content">
-                            <p class="card-category" style="font-size: 30px; font-family: 'Do Hyeon', sans-serif;">総登山距離</p>
-                            <h2 class="card-title" style="font-family: 'Do Hyeon', sans-serif;">{{totalD}}km</h2>
+                            <p class="card-category" style=" font-weight: 500; font-size: 30px; font-family: 'Gothic A1', sans-serif;">総登山距離</p>
+                            <h2 class="card-title" style=" font-weight: 500; font-family: 'Gothic A1', sans-serif;">{{totalD}}km</h2>
                         </div>
                     </stats-card>
                 </div>
@@ -54,7 +54,7 @@
                                 :chart-options="lineChart.options"
                                 :responsive-options="lineChart.responsiveOptions">
                         <template slot="header">
-                            <h1 class="card-title" style="font-family: 'Do Hyeon', sans-serif; display: inline-block;">登山した回数</h1>
+                            <h1 class="card-title" style="font-weight: 500; font-family: 'Gothic A1', sans-serif; display: inline-block;">登山した回数</h1>
                             <!--<b-form-select style="display: inline-block; padding-bottom: 0px;-->
                             <!--padding-top: 0px; float:right; width: 100px" v-model="nowYear" :options="options" class="mb-3" size="sm" />-->
                         </template>
@@ -63,21 +63,21 @@
                 <div class="col-md-4">
                     <card>
                         <template slot="header">
-                            <h1 class="card-title" style="font-family: 'Do Hyeon', sans-serif;">ハイキング記録</h1>
+                            <h1 class="card-title" style="font-weight: 500; font-family: 'Gothic A1', sans-serif;">ハイキング記録</h1>
                         </template>
                         <div class="table-hover">
                             <table class="table" style="text-align:center;">
                                 <thead style="padding-top: 0;">
                                 <slot name="columns">
-                                    <th><h4 style="margin: 0; color: #9e9e9e; font-family: 'Do Hyeon', sans-serif;">スケジュール名</h4></th>
-                                    <th><h4 style="margin: 0; color: #9e9e9e; font-family: 'Do Hyeon', sans-serif;">ハイキング一字</h4></th>
+                                    <th><h4 style="font-weight: 500; margin: 0; color: #9e9e9e; font-family: 'Gothic A1', sans-serif;">スケジュール名</h4></th>
+                                    <th><h4 style="font-weight: 500; margin: 0; color: #9e9e9e; font-family: 'Gothic A1', sans-serif;">ハイキング一字</h4></th>
                                 </slot>
                                 </thead>
                                 <tbody>
                                 <tr v-for="(item, index) in lastRecord" @click="recordModalOpen(item)">
                                     <slot :row="item">
-                                        <td><h3 style="font-family: 'Do Hyeon', sans-serif;">{{ item.title }}</h3></td>
-                                        <td><h3 style="font-family: 'Do Hyeon', sans-serif;">{{ startDate[index] }}</h3></td>
+                                        <td><h3 style="font-weight: 500; font-family: 'Gothic A1', sans-serif;">{{ item.title }}</h3></td>
+                                        <td><h3 style="font-weight: 500; font-family: 'Gothic A1', sans-serif;">{{ startDate[index] }}</h3></td>
                                     </slot>
                                 </tr>
                                 </tbody>
@@ -157,6 +157,27 @@
             }
         },
         created() {
+            this.axios.get(this.$HttpAddr + '/hiking_count/' + sessionStorage.getItem('userid'))
+                .then((response) => {
+                    if(response.data < 5)   {
+                        this.rank = '裏山';
+                    }
+                    else if(response.data > 5 && response.data < 11)   {
+                        this.rank = '金剛山';
+                    }
+                    else if(response.data > 10 && response.data < 16)   {
+                        this.rank = '手塩岳';
+                    }
+                    else if(response.data > 15 && response.data < 21)   {
+                        this.rank = '穂高岳';
+                    }
+                    else if(response.data > 20 && response.data < 26)   {
+                        this.rank = '北岳';
+                    }
+                    else if(response.data > 25)   {
+                        this.rank = '富士山';
+                    }
+                })
             this.positionPull();
             this.lastRecordPull();
             this.yearSearch();
@@ -186,7 +207,6 @@
             positionPull() {
                 this.axios.get('http://localhost:8000/user/' + sessionStorage.getItem('userid'))
                     .then(response => {
-                        this.rank = response.data.grade;
                         this.totalD = response.data.total_distance;
                         this.total_hiking_t = response.data.total_hiking_time.hour + "H "
                             + response.data.total_hiking_time.minute + "M "

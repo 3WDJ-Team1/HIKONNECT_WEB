@@ -6,16 +6,16 @@
         <div style="height: 50px; background-color: white"></div>
         <div style="margin: 0; height: 50px; background-color: #24B674; color: white; text-align: center;" class="row">
             <div class="col-3">
-                <p style="margin: 5px; font-size: 2em; font-family: 'Do Hyeon', sans-serif;">グループ名・管理者名</p>
+                <p style="margin: 5px; font-size: 2em; font-family: 'Gothic A1', sans-serif;">グループ名・管理者名</p>
             </div>
             <div class="col-5" >
-                <p style="margin: 5px; font-size: 2em; font-family: 'Do Hyeon', sans-serif; text-align: left;">募集内容</p>
+                <p style="margin: 5px; font-size: 2em; font-family: 'Gothic A1', sans-serif; text-align: center;">募集内容</p>
             </div>
             <div class="col-1">
-                <p style="margin: 5px; font-size: 2em; font-family: 'Do Hyeon', sans-serif; vertical-align: middle;">最小募集人員</p>
+                <p style="margin: 5px; font-size: 2em; font-family: 'Gothic A1', sans-serif; vertical-align: middle;">最小募集人員</p>
             </div>
             <div class="col-1">
-                <p style="margin: 5px; font-size: 2em; font-family: 'Do Hyeon', sans-serif;">最大募集人員</p>
+                <p style="margin: 5px; font-size: 2em; font-family: 'Gothic A1', sans-serif;">最大募集人員</p>
             </div>
             <div class="col-2">
             </div>
@@ -23,26 +23,26 @@
         <card style="margin: 20px;" id="ccard" v-for="(item, key) in list" :key="key">
             <div class="row" id="groupListContainer">
                 <div class="col-3">
-                    <h2 style="margin: 8px 8px 0; font-family: 'Do Hyeon', sans-serif; padding-left: 30px;">{{ item.title }}</h2>
-                    <h4 style="margin: 5px 40px 20px; font-family: 'Do Hyeon', sans-serif; color: #9A9A9A;">管理者: {{ item.nickname }}</h4>
+                    <h2 style="margin: 8px 8px 0; font-family: 'Gothic A1', sans-serif; padding-left: 30px;">{{ item.title }}</h2>
+                    <h4 style="margin: 5px 40px 20px; font-family: 'Gothic A1', sans-serif; color: #9A9A9A;">管理者: {{ item.nickname }}</h4>
                 </div>
                 <div class="col-5">
-                    <h4 style="margin: 0; font-family: 'Do Hyeon', sans-serif; float: left; padding-top: 10px;">{{ item.content }}</h4>
+                    <h4 style="margin: 0; font-family: 'Gothic A1', sans-serif; float: left; padding-top: 10px;">{{ item.content }}</h4>
                 </div>
                 <div class="col-1" style="text-align: center;">
-                    <h2 style="line-height: 100px; margin: 0; font-family: 'Do Hyeon', sans-serif; display:inline-block;">
+                    <h2 style="line-height: 100px; margin: 0; font-family: 'Gothic A1', sans-serif; display:inline-block;">
                         {{ item.min_member }}名
                     </h2>
                 </div>
                 <div class="col-1" style="text-align: center;">
-                    <h2 style="line-height: 100px; margin: 0; font-family: 'Do Hyeon', sans-serif; display:inline-block;">
+                    <h2 style="line-height: 100px; margin: 0; font-family: 'Gothic A1', sans-serif; display:inline-block;">
                         {{ item.max_member }}名
                     </h2>
                 </div>
                 <div class="col-2" style="text-align: center; margin-top: 10px;">
                     <div class="move_box">
                         <a
-                                style="cursor:pointer; font-size: 25px; font-family: 'Do Hyeon', sans-serif;"
+                                style="cursor:pointer; font-size: 25px; font-family: 'Gothic A1', sans-serif;"
                                 class="nav-link"
                                 v-if="!isLogined"
                                 @click="moveGroupPage(item)"
@@ -55,7 +55,7 @@
         </card>
 
         <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading">
-             <span slot="no-more" style="font-family: 'Do Hyeon', sans-serif; font-size: 30px;">
+             <span slot="no-more" style="font-family: 'Gothic A1', sans-serif; font-size: 30px;">
                 登録されたグループがありません。 :(
              </span>
         </infinite-loading>

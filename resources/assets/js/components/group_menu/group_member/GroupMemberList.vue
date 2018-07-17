@@ -16,7 +16,7 @@
                     <v-flex
                             xs2
                             class="text-center">
-                        <h2 style="font-family: 'Do Hyeon', sans-serif; margin: 24px 0 15px; color: #42d0ed;">リーダー</h2>
+                        <h2 style="font-family: 'Gothic A1', sans-serif; margin: 30px 0 0; color: #42d0ed;">リーダー</h2>
                     </v-flex>
                     <v-flex
                             xs2
@@ -33,14 +33,14 @@
                     <v-flex
                             xs5
                             class="text-center">
-                        <h1 style="font-family: 'Black Han Sans', sans-serif; margin: 20px 0 15px;">{{ userData.nickname
+                        <h1 style="font-family: 'Gothic A1', sans-serif; margin: 20px 0 15px;">{{ userData.nickname
                             }}</h1>
                     </v-flex>
                     <v-flex
                             xs3
                             class="text-center">
-                        <button v-b-toggle="'n' + userData.nickname" v-if="position" class="btn btn-info"  style="margin-top: 25px; padding: 0; width: 160px; height: 45px;">
-                            <span style="font-family: 'Do Hyeon', sans-serif; font-size: 30px;">ユーザー情報</span>
+                        <button v-b-toggle="'n' + userData.nickname" v-if="position" class="btn btn-info"  style="margin-top: 20px; padding: 0; width: 210px; height: 60px;">
+                            <span style="font-family: 'Gothic A1', sans-serif; font-size: 30px;">ユーザー情報</span>
                         </button>
                     </v-flex>
                 </v-layout>
@@ -83,21 +83,21 @@
                             style="margin-left: 60px;"
                             xs5
                             class="text-center">
-                        <h2 style="font-family: 'Do Hyeon', sans-serif; margin: 18px 0 15px;">{{ userData.nickname
+                        <h2 style="font-family: 'Gothic A1', sans-serif; margin: 18px 0 15px;">{{ userData.nickname
                             }}</h2>
                     </v-flex>
                     <v-flex
                             xs3
                             class="text-center">
                         <button v-b-toggle="'n' + userData.nickname"
-                                style="margin-top: 17px; padding: 0; width: 120px; height: 45px;"
+                                style="margin-top: 15px; padding: 0; width: 210px; height: 55px;"
                                 v-if="position" class="btn btn-info">
-                            <span style="font-family: 'Do Hyeon', sans-serif; font-size: 30px;">ユーザー情報</span>
+                            <span style="font-family: 'Gothic A1', sans-serif; font-size: 30px;">ユーザー情報</span>
                         </button>
                         <button v-if="owner == 'owner'" @click="outGroup(userData)" type="submit"
                                 style="margin-top: 17px; padding: 0; width: 160px; height: 45px;"
                                 class="btn btn-warning btn-fill">
-                            <span style="font-family: 'Do Hyeon', sans-serif; font-size: 30px;">追放する</span>
+                            <span style="font-family: 'Gothic A1', sans-serif; font-size: 30px;">追放する</span>
                         </button>
                     </v-flex>
                 </v-layout>

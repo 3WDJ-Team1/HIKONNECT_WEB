@@ -5,11 +5,11 @@
     <div>
         <nav class="navbar navbar-expand-lg" style="border: 0; background: transparent; min-height: 85px; opacity: 1;">
             <div class="container-fluid">
-                <ul class="navbar-nav ml-auto" style="z-index: 1000;">
+                <ul class="navbar-nav ml-auto" style="z-index: 100;">
                     <li class="nav-item" style="padding-bottom: 10px;">
                         <div class="login_box">
                             <a
-                                    style="color: white; cursor:pointer; font-size: 30px; font-family: 'Do Hyeon', sans-serif;"
+                                    style="color: white; cursor:pointer; font-size: 30px; font-family: 'Gothic A1', sans-serif;"
                                     class="nav-link"
                                     @click.stop="drawerRight = !drawerRight"
                                     v-if="!isLogined"
@@ -33,7 +33,7 @@
                     <li class="nav-item" style="padding-bottom: 10px;">
                         <div class="login_box">
                             <a
-                                    style="color: white; cursor:pointer; font-size: 30px; font-family: 'Do Hyeon', sans-serif;"
+                                    style="color: white; cursor:pointer; font-size: 30px; font-family: 'Gothic A1', sans-serif;"
                                     class="nav-link"
                                     v-if="!isLogined"
                                     @click="signUp()"
@@ -73,6 +73,7 @@
             Complited!
         </sweet-modal>
         <v-navigation-drawer
+                style="z-index: 1000;"
                 v-model="drawerRight"
                 right
                 app

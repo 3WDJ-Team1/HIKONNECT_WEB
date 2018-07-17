@@ -9,24 +9,24 @@
                 <div class="col-6">
                     <card>
                         <template slot="header">
-                            <h1 class="card-title" style="font-family: 'Black Han Sans', sans-serif;">登山計画</h1>
+                            <h1 class="card-title" style="font-family: 'Gothic A1', sans-serif;">登山計画</h1>
                         </template>
                         <div class="table-hover">
                             <table class="table" style="text-align:center;">
                                 <thead style="padding-top: 0;">
                                 <slot name="columns">
                                     <th v-for="column in tableS.columns">
-                                        <h4 style="margin: 0; color: #9e9e9e; font-family: 'Do Hyeon', sans-serif;">{{column}}</h4></th>
+                                        <h4 style="margin: 0; color: #9e9e9e; font-family: 'Gothic A1', sans-serif;">{{column}}</h4></th>
                                 </slot>
                                 </thead>
                                 <tbody>
                                 <tr v-for="item in tableS.data" @click="openModal(item)">
                                     <slot :row="item">
-                                        <td><h3 style="font-family: 'Do Hyeon', sans-serif;">{{ item.group_title }}</h3></td>
-                                        <td><h3 style="font-family: 'Do Hyeon', sans-serif;">{{ item.title }}</h3></td>
+                                        <td><h3 style="font-family: 'Gothic A1', sans-serif;">{{ item.group_title }}</h3></td>
+                                        <td><h3 style="font-family: 'Gothic A1', sans-serif;">{{ item.title }}</h3></td>
                                         <td style="width: 17%;">
                                             <button style="padding: 0; height: 40px;" type="submit" class="btn btn-info btn-fill float-right" @click="move(item.uuid)">
-                                                <h4 style="font-family: 'Do Hyeon', sans-serif; margin: 0; padding: 5px;"> ショートカット</h4>
+                                                <h4 style="font-family: 'Gothic A1', sans-serif; margin: 0; padding: 5px;"> ショートカット</h4>
                                             </button>
                                         </td>
                                     </slot>
@@ -39,25 +39,25 @@
                 <div class="col-6">
                     <card>
                         <template slot="header">
-                            <h1 class="card-title" style="font-family: 'Black Han Sans', sans-serif;">My Group</h1>
+                            <h1 class="card-title" style="font-family: 'Gothic A1', sans-serif;">My Group</h1>
                         </template>
                         <div class="table-hover">
                             <table class="table" style="text-align:center;">
                                 <thead style="padding-top: 0;">
                                 <slot name="columns">
                                     <th style="font-weight: bold" v-for="column in tableG.columns">
-                                        <h4 style="margin: 0; color: #9e9e9e; font-family: 'Do Hyeon', sans-serif;">{{column}}</h4></th>
+                                        <h4 style="margin: 0; color: #9e9e9e; font-family: 'Gothic A1', sans-serif;">{{column}}</h4></th>
                                 </slot>
                                 </thead>
                                 <tbody>
                                 <tr v-for="item in tableG.data">
                                     <slot :row="item">
-                                        <td><h3 style="font-family: 'Do Hyeon', sans-serif;">{{ item.title }}</h3></td>
-                                        <td><h3 style="font-family: 'Do Hyeon', sans-serif;">{{ item.leader }}</h3></td>
+                                        <td><h3 style="font-family: 'Gothic A1', sans-serif;">{{ item.title }}</h3></td>
+                                        <td><h3 style="font-family: 'Gothic A1', sans-serif;">{{ item.leader }}</h3></td>
 
                                         <td>
                                             <button style="padding: 0; height: 40px;" type="submit" class="btn btn-info btn-fill float-right" @click="move(item.uuid)">
-                                                <h4 style="font-family: 'Do Hyeon', sans-serif; margin: 0; padding: 5px;"> ショートカット</h4>
+                                                <h4 style="font-family: 'Gothic A1', sans-serif; margin: 0; padding: 5px;"> ショートカット</h4>
                                             </button>
                                         </td>
                                     </slot>
