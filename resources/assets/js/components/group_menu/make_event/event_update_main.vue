@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-12">
                 <card>
-                    <h3 slot="header" class="card-title">スケジュール作成</h3>
+                    <h4 slot="header" class="card-title">ハイキングスケジュール作成</h4>
                     <form>
                         <div class="row">
                             <div class="col-md-12">
