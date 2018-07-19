@@ -2,7 +2,7 @@
 <template>
     <div :class="{'nav-open': $sidebar.showSidebar}">
         <notifications></notifications>
-        <router-view style="background-image: url('http://localhost:8000/images/background.png'); background-size: cover;"></router-view>
+        <router-view style="background-image: url('http://hikonnect.ga/images/background.png'); background-size: cover;"></router-view>
     </div>
 </template>
 
