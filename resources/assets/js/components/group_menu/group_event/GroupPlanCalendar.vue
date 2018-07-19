@@ -213,8 +213,9 @@ nc-simple-delete"></i>
         color: #df21ffa3;
     }
     .__vev_calendar-wrapper .cal-wrapper {
-        width: 70%;
-        min-height: 795px;
+        border-right: 3px #22b573 dashed;
+        width: 64%;
+        min-height: 700px;
     }
     .__vev_calendar-wrapper {
         position: inherit;

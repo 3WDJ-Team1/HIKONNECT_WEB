@@ -5,52 +5,31 @@
     <v-app>
         <v-container style="padding: 0px; max-width: 100%;">
                     <v-card
-                            style="padding-bottom: 1%; border-top: 0px;
-    border-left: 0px; padding-top: 1%; border-right: 0px; border-radius: 0px; padding-left: 40px; margin: 0px;"
+                            style="padding: 1% 1.1%; border-radius: 0px; margin: 0px;"
                             v-for="user in waitingMember"
                             :key="user.nickname"
                             flat>
-                        <v-layout
-                                row
-                                wrap>
-                            <v-flex
-                                    d-flex
-                                    md1
-                                    align-center
-                                    class="text-center"
-                                    align-content-center
-                                    justify-center>
-                                <p style="color: #ED8D00; margin-bottom: 0; font-family: 'Gothic A1', sans-serif; font-size: 25px;">参加申請者</p>
-                            </v-flex>
-                            <v-flex
-                                    d-flex
-                                    md2
-                                    align-center
-                                    align-content-center
-                                    justify-center>
+                        <div class="row">
+                            <div
+                                    class="col-2">
+                                <p style="float: left; margin-left: 40px; color: #ED8D00; margin-bottom: 0; line-height: 100px; font-family: 'Gothic A1', sans-serif; font-size: 25px;">参加申請者</p>
+                            </div>
+                            <div
+                                    class="col-2">
                                 <v-avatar
                                         slot="activator"
-                                        size="80">
+                                        size="100">
                                     <img :src="'http://hikonnect.ga:3000/images/UserProfile/' + user.userid + '.jpg'" alt="avatar"/>
                                 </v-avatar>
-                            </v-flex>
-                            <v-flex
-                                    d-flex
-                                    md6
-                                    class="text-center">
-                                <h2 style="margin: 0; margin-top: 20px; font-family: 'Gothic A1', sans-serif">{{ user.nickname }}</h2>
-                            </v-flex>
-                            <v-flex
-                                    xs12
-                                    sm3
-                                    md2>
-                                <v-layout
-                                        row
-                                        wrap>
-                                    <v-flex
-                                            xs6
-                                            sm6
-                                            md6>
+                            </div>
+                            <div
+                                    align-center
+                                    class="col-5">
+                                <h1 style="line-height: 98px; margin: 0; text-align: center; font-family: 'Gothic A1', sans-serif">{{ user.nickname }}</h1>
+                            </div>
+                            <div
+                                    class="col-3"
+                                    >
                                         <v-btn
                                                 color="cyan lighten-2"
                                                 dark
@@ -59,9 +38,6 @@
                                                 :disabled="isPushed">
                                             <v-icon>done</v-icon>
                                         </v-btn>
-                                    </v-flex>
-                                    <v-flex
-                                            md4>
                                         <v-btn
                                                 color="red darken-3"
                                                 dark
@@ -70,10 +46,8 @@
                                                 :disabled="isPushed">
                                             <v-icon>block</v-icon>
                                         </v-btn>
-                                    </v-flex>
-                                </v-layout>
-                            </v-flex>
-                        </v-layout>
+                                </div>
+                        </div>
                     </v-card>
         </v-container>
     </v-app>

@@ -6,22 +6,24 @@
  -->
 <template>
     <div>
+        <div class="row" style="height: 60px; background-color: #22b573; margin-top: 40px; margin-bottom: 20px;">
+            <div class="col-2" style="color: white; font-size: 1.8rem; text-align: center; line-height: 60px;">ポジション</div>
+            <div class="col-2"></div>
+            <div class="col-5" style="color: white; font-size: 1.8rem; text-align: center; line-height: 60px;">ニックネーム</div>
+            <div class="col-3"></div>
+        </div>
         <b-card
-                style="margin-top: 0px; margin-bottom: 0px; background-color: #e6e6e6;"
+                style="border-radius: 0px; margin: 0;"
                 class='member_list_card'
                 v-for="userData in leaderData"
                 :key="userData.nickname">
-            <div style="background-color: white; margin-left: 1px; margin-right: 1px; border-radius: 6px; margin-bottom: 4px;">
-                <v-layout row style="padding: 10px; margin-left: 10px;">
-                    <v-flex
-                            xs2
-                            class="text-center">
-                        <h2 style="font-family: 'Gothic A1', sans-serif; margin: 30px 0 0; color: #42d0ed;">リーダー</h2>
-                    </v-flex>
-                    <v-flex
-                            xs2
+            <div class="row">
+                    <div class="col-2">
+                        <h2 style="float: left; margin-left: 40px; font-family: 'Gothic A1', sans-serif; color: #42d0ed;">リーダー</h2>
+                    </div>
+                    <div
                             style="padding-bottom: 2px;"
-                            class="text-center">
+                            class="col-2">
                         <v-avatar
                                 style="float: left;"
                                 size="100"
@@ -29,22 +31,19 @@
                         >
                             <img :src="'http://hikonnect.ga:3000/images/UserProfile/' + userData.userid + '.jpg'">
                         </v-avatar>
-                    </v-flex>
-                    <v-flex
-                            xs5
-                            class="text-center">
-                        <h1 style="font-family: 'Gothic A1', sans-serif; margin: 20px 0 15px;">{{ userData.nickname
+                    </div>
+                    <div
+                            class="col-5">
+                        <h1 style="margin; 0; line-height: 35px; font-family: 'Gothic A1', sans-serif; text-align: center;">{{ userData.nickname
                             }}</h1>
-                    </v-flex>
-                    <v-flex
-                            xs3
-                            class="text-center">
+                    </div>
+                    <div
+                            class="col-3">
                         <button v-b-toggle="'n' + userData.nickname" v-if="position" class="btn btn-info"  style="margin-top: 20px; padding: 0; width: 210px; height: 60px;">
                             <span style="font-family: 'Gothic A1', sans-serif; font-size: 30px;">ユーザー情報</span>
                         </button>
-                    </v-flex>
-                </v-layout>
-            </div>
+                    </div>
+                </div>
             <b-collapse
                     v-if="position"
                     :id="'n' + userData.nickname"
@@ -63,32 +62,28 @@
                 v-for="userData in memberList"
                 :key="userData.nickname">
             <div>
-                <v-layout row style="margin-right: 10px;">
-                    <v-flex
-                            xs1
-                            class="text-center">
-                    </v-flex>
-                    <v-flex
-                            style="margin-left: 30px; padding-bottom: 2px;"
-                            xs2
-                            class="text-center">
+                <div class="row" >
+                    <div
+                            class="col-2">
+                        <p style="float: left; margin-left: 50px; color: #ED8D00; margin-bottom: 0; line-height: 100px; font-family: 'Gothic A1', sans-serif; font-size: 30px;">メンバー</p>  
+                    </div>
+                    <div
+                            style="padding-bottom: 2px;"
+                            class="col-2">
                         <v-avatar
-                                size="80"
+                                size="100"
                                 slot="activator"
                         >
                             <img :src="'http://hikonnect.ga:3000/images/UserProfile/' + userData.userid + '.jpg'">
                         </v-avatar>
-                    </v-flex>
-                    <v-flex
-                            style="margin-left: 60px;"
-                            xs5
-                            class="text-center">
-                        <h2 style="font-family: 'Gothic A1', sans-serif; margin: 18px 0 15px;">{{ userData.nickname
-                            }}</h2>
-                    </v-flex>
-                    <v-flex
-                            xs3
-                            class="text-center">
+                    </div>
+                    <div
+                            class="text-center col-5">
+                        <h1 style="font-family: 'Gothic A1', sans-serif; margin: 18px 0 15px;">{{ userData.nickname
+                            }}</h1>
+                    </div>
+                    <div
+                            class="text-center col-3">
                         <button v-b-toggle="'n' + userData.nickname"
                                 style="margin-top: 15px; padding: 0; width: 210px; height: 55px;"
                                 v-if="position" class="btn btn-info">
@@ -99,8 +94,8 @@
                                 class="btn btn-warning btn-fill">
                             <span style="font-family: 'Gothic A1', sans-serif; font-size: 30px;">追放する</span>
                         </button>
-                    </v-flex>
-                </v-layout>
+                    </div>
+                </div>
             </div>
             <b-collapse
                     v-if="position"

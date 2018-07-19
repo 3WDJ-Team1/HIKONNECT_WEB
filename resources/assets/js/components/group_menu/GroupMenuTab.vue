@@ -17,21 +17,21 @@
             <!-- @v-tab-slider      the slider of tabs on top -->
             <v-tabs-slider
                 color="green accent-4"
-                style="height: 5px; ">
+                style="height: 5px;">
             </v-tabs-slider>
             <!-- @v-tab             the tabs in slider -->
             <v-tab
                 href="#tab-1">
-            <span style="font-size: 30px; font-family: 'Gothic A1', sans-serif;">公知事項</span>
-                <v-icon style="font-size: 2em;">announcement</v-icon>
+            <span style="font-size: 20px; font-family: 'Gothic A1', sans-serif;">公知事項</span>
+                <v-icon style="font-size: 4em;">announcement</v-icon>
             </v-tab>
             <v-tab href="#tab-2">
-            <span style="font-size: 30px; font-family: 'Gothic A1', sans-serif;">スケジュール</span>
-                <v-icon style="font-size: 2em;">event</v-icon>
+            <span style="font-size: 20px; font-family: 'Gothic A1', sans-serif;">スケジュール</span>
+                <v-icon style="font-size: 4em;">event</v-icon>
             </v-tab>
             <v-tab href="#tab-3">
-            <span style="font-size: 30px; font-family: 'Gothic A1', sans-serif;">メンバー</span>
-                <v-icon style="font-size: 2em;">group</v-icon>
+            <span style="font-size: 20px; font-family: 'Gothic A1', sans-serif;">メンバー</span>
+                <v-icon style="font-size: 4em;">group</v-icon>
             </v-tab>
             <!-- @v-tab-item        the items of each tab.
                                     they are linked by 'id' -->
@@ -48,7 +48,7 @@
             <v-tab-item
                 :key    ="2"
                 :id     ="'tab-' + 2">
-                <v-card flat style="box-shadow: 10px 5px 10px 1px #cecece; background-color: white; border: 1px soild whitesmoke;">
+                <v-card flat style="height: 700px; box-shadow: 10px 5px 10px 1px #cecece; background-color: white; border: 1px soild whitesmoke;">
                     <router-view name="plan"></router-view>
                 </v-card>
             </v-tab-item>
@@ -138,12 +138,15 @@
 }
 .tabs__container--icons-and-text {
     background-color: white;
-    height: 90px;
+    height: 100%;
 }
 .grey.lighten-4 {
     margin-bottom: 20px;
 }
 .tabs__wrapper {
     box-shadow: 5px 5px 10px 1px #cecece;
+}
+.tabs__slider-wrapper {
+    width: 30%;
 }
 </style>
