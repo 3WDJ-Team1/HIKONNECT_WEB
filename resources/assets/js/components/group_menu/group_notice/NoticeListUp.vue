@@ -11,11 +11,6 @@
             <noticeModal :noticeItem="noticeItem" v-if="updateSign"></noticeModal>
             <updateModal :updateItem="updateItem" v-if="!updateSign"></updateModal>
         </sweet-modal>
-        <!-- 글쓰기 버튼
-                position이 그룹에 참가 된 멤버나 관리자 일 경우에만 보여지도록 컨트롤 -->
-        <router-view
-                v-if="position == 'enter'"
-                name="write"></router-view>
         <card id="cardBox" style="margin: 10px;" v-for="notice in notices" :key="notice.uuid" >
             <div class="row" id="groupListContainer">
                 <div style="padding: 0px;" class="col-md-12" id="noticeCard" @click="noticeModal(notice)">

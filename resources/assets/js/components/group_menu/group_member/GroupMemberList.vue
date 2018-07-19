@@ -13,16 +13,16 @@
             <div class="col-3"></div>
         </div>
         <b-card
-                style="border-radius: 0px; margin: 0;"
+                style="border-radius: 0px; margin: auto; margin-bottom: 15px; width: 98%;"
                 class='member_list_card'
                 v-for="userData in leaderData"
                 :key="userData.nickname">
-            <div class="row">
+            <div class="row" style="width: 100%; margin-left: 0.2%">
                     <div class="col-2">
-                        <h2 style="float: left; margin-left: 40px; font-family: 'Gothic A1', sans-serif; color: #42d0ed;">リーダー</h2>
+                        <h2 style="float: left; font-family: 'Gothic A1', sans-serif; color: #42d0ed;">リーダー</h2>
                     </div>
                     <div
-                            style="padding-bottom: 2px;"
+                            style="padding: 2px;"
                             class="col-2">
                         <v-avatar
                                 style="float: left;"
@@ -34,13 +34,13 @@
                     </div>
                     <div
                             class="col-5">
-                        <h1 style="margin; 0; line-height: 35px; font-family: 'Gothic A1', sans-serif; text-align: center;">{{ userData.nickname
-                            }}</h1>
+                        <h2 style="margin; 0; line-height: 35px; font-family: 'Gothic A1', sans-serif; text-align: center;">{{ userData.nickname
+                            }}</h2>
                     </div>
                     <div
                             class="col-3">
-                        <button v-b-toggle="'n' + userData.nickname" v-if="position" class="btn btn-info"  style="margin-top: 20px; padding: 0; width: 210px; height: 60px;">
-                            <span style="font-family: 'Gothic A1', sans-serif; font-size: 30px;">ユーザー情報</span>
+                        <button v-b-toggle="'n' + userData.nickname" v-if="position == 'enter'" class="btn btn-info"  style="float: right; margin-top: 26px; padding: 0; margin-right: 0.9%; width: 150px; height: 40px;">
+                            <span style="font-family: 'Gothic A1', sans-serif; font-size: 20px;">ユーザー情報</span>
                         </button>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
         </b-card>
         <waitingMember :waitingMember="waitingMember" v-if="owner == 'owner'"></waitingMember>
         <b-card
-                style="margin-top: 0px; margin-bottom: 0px;"
+                style="margin: auto; width: 98%; margin-bottom: 15px;"
                 class='member_list_card'
                 v-for="userData in memberList"
                 :key="userData.nickname">
@@ -65,7 +65,7 @@
                 <div class="row" >
                     <div
                             class="col-2">
-                        <p style="float: left; margin-left: 50px; color: #ED8D00; margin-bottom: 0; line-height: 100px; font-family: 'Gothic A1', sans-serif; font-size: 30px;">メンバー</p>  
+                        <h2 style="float: left; margin-left: 20px; font-family: 'Gothic A1', sans-serif; color: #ff92bb;">メンバー</h2> 
                     </div>
                     <div
                             style="padding-bottom: 2px;"
@@ -79,21 +79,25 @@
                     </div>
                     <div
                             class="text-center col-5">
-                        <h1 style="font-family: 'Gothic A1', sans-serif; margin: 18px 0 15px;">{{ userData.nickname
-                            }}</h1>
+                        <h2 style="line-height: 60px; font-family: 'Gothic A1', sans-serif; margin: 18px 0 15px;">{{ userData.nickname
+                            }}</h2>
                     </div>
                     <div
-                            class="text-center col-3">
-                        <button v-b-toggle="'n' + userData.nickname"
-                                style="margin-top: 15px; padding: 0; width: 210px; height: 55px;"
-                                v-if="position" class="btn btn-info">
-                            <span style="font-family: 'Gothic A1', sans-serif; font-size: 30px;">ユーザー情報</span>
-                        </button>
-                        <button v-if="owner == 'owner'" @click="outGroup(userData)" type="submit"
-                                style="margin-top: 17px; padding: 0; width: 160px; height: 45px;"
+                            class="text-center col-3 row">
+                            <div class="col-6">
+                                <button v-if="owner == 'owner'" @click="outGroup(userData)" type="submit"
+                                style="margin-top: 26px; padding: 0; width: 150px; height: 40px;"
                                 class="btn btn-warning btn-fill">
-                            <span style="font-family: 'Gothic A1', sans-serif; font-size: 30px;">追放する</span>
-                        </button>
+                                    <span style="font-family: 'Gothic A1', sans-serif; font-size: 20px;">追放する</span>
+                                </button>
+                            </div>
+                            <div class="col-6">
+                                <button v-b-toggle="'n' + userData.nickname"
+                                style="margin-top: 26px; padding: 0; width: 150px; height: 40px;"
+                                v-if="position == 'enter'" class="btn btn-info">
+                                    <span style="font-family: 'Gothic A1', sans-serif; font-size: 20px;">ユーザー情報</span>
+                                </button>
+                            </div>
                     </div>
                 </div>
             </div>

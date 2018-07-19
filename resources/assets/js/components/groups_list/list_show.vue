@@ -6,16 +6,16 @@
         <div style="height: 50px; background-color: white"></div>
         <div style="margin: 0; height: 50px; background-color: #24B674; color: white; text-align: center;" class="row">
             <div class="col-3">
-                <p style="margin: 5px; font-size: 1.6em; font-family: 'Gothic A1', sans-serif;">グループ名・管理者名</p>
+                <p style="margin: 5px; font-size: 1.8em; font-family: 'Gothic A1', sans-serif;">グループ名・管理者名</p>
             </div>
             <div class="col-5" >
-                <p style="margin: 5px; font-size: 1.6em; font-family: 'Gothic A1', sans-serif; text-align: center;">募集内容</p>
+                <p style="margin: 5px; font-size: 1.8em; font-family: 'Gothic A1', sans-serif; text-align: center;">募集内容</p>
             </div>
             <div class="col-1">
-                <p style="margin: 5px; font-size: 1.4em; font-family: 'Gothic A1', sans-serif; vertical-align: middle;">最小人員</p>
+                <p style="margin: 5px; font-size: 1.5em; line-height: 40px; font-family: 'Gothic A1', sans-serif; vertical-align: middle;">最小人員</p>
             </div>
             <div class="col-1">
-                <p style="margin: 5px; font-size: 1.4em; font-family: 'Gothic A1', sans-serif;">最大人員</p>
+                <p style="margin: 5px; font-size: 1.5em; line-height: 40px; font-family: 'Gothic A1', sans-serif;">最大人員</p>
             </div>
             <div class="col-2">
             </div>

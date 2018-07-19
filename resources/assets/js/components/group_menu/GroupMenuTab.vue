@@ -7,6 +7,23 @@
 <template>
     <!-- @div       wrapper of this component -->
     <div>
+        <!-- 일정 만들기 -->
+        <v-btn
+                style="width: 110px; height: 110px; font-size: 30px; margin-right: 1%; font-weight: bold; color: #ffffff;"
+                dark
+                midiuem
+                fixed
+                right
+                bottom
+                fab
+                color="pink"
+                v-if="position == 'enter' && listEventB"
+                @click="makeEvent"
+        >
+            生成
+        </v-btn>
+        <noticeButton v-if="position == 'enter' && noticeP"></noticeButton>
+
         <joinButton v-if="login != 'undefined'"></joinButton>
         <!-- @v-tabs    there is information of tabs here -->
         <v-tabs
@@ -21,15 +38,15 @@
             </v-tabs-slider>
             <!-- @v-tab             the tabs in slider -->
             <v-tab
-                href="#tab-1">
+                href="#tab-1" @click="changeN">
             <span style="font-size: 20px; font-family: 'Gothic A1', sans-serif;">公知事項</span>
                 <v-icon style="font-size: 4em;">announcement</v-icon>
             </v-tab>
-            <v-tab href="#tab-2">
+            <v-tab href="#tab-2" @click="changeE">
             <span style="font-size: 20px; font-family: 'Gothic A1', sans-serif;">スケジュール</span>
                 <v-icon style="font-size: 4em;">event</v-icon>
             </v-tab>
-            <v-tab href="#tab-3">
+            <v-tab href="#tab-3" @click="changeM">
             <span style="font-size: 20px; font-family: 'Gothic A1', sans-serif;">メンバー</span>
                 <v-icon style="font-size: 4em;">group</v-icon>
             </v-tab>
@@ -67,25 +84,48 @@
 </template>
 
 <script>
+    import noticeButton from './group_notice/NoticeWriteBtn'
     import joinButton from './joinButton'
     export default {
         components: {
             joinButton,
+            noticeButton
         },
         data()  {
             return  {
+                noticeP: true,
+                listEventB: false,
                 positionN: 0,
                 wattingN: 0,
-                position: false,
+                position: '',
                 login: sessionStorage.getItem('userid')
             }
         },
         created()   {
+            this.$EventBus.$on('eventOK', (sign) => {
+                this.listEventB = true;
+                this.noticeP = false;
+            });
             this.positionGet();
             this.ownerGet();
         },
         methods:    {
-
+            changeM()   {
+                this.listEventB = false;
+                this.noticeP = false;
+            },
+            changeN()   {
+                this.listEventB = false;
+                this.noticeP = true;
+            },
+            changeE()   {
+                this.listEventB = true;
+                this.noticeP = false;
+            },
+            makeEvent() {
+                            this.listEventB = false;
+                            this.$EventBus.$emit('eventOOk', 'true');
+                        },
             positionGet() {
                 // 멤버 정보 서버에서 가지고 오기
                     this.axios.get(this.$HttpAddr + "/list_member/" + this.$route.params.groupid)

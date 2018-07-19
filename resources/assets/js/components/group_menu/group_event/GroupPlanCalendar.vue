@@ -5,14 +5,17 @@
     <div>
         <vue-event-calendar :events="hikingEvents">
             <template slot-scope="props">
-                <div v-for="(event, index) in props.showEvents" class="event-item" style="padding-right: 30px; padding-left 30px; padding-top: 30px; padding-bottom: 50px;">
+                <div v-for="(event, index) in props.showEvents" class="event-item" style="padding: 0;">
                     <!-- In here do whatever you want, make you owner event template -->
-                    <div class="headline" style="font-family: 'Gothic A1', sans-serif; display: inline; font-size: 30px !important">{{ event.title }}</div>
-                    <span class="grey--text" style="font-family: 'Gothic A1', sans-serif; font-size: 20px; display: inline; float: right; margin-top: 10px;">作成者:&nbsp;&nbsp;{{ event.writer }}</span>
-                    <table class="table" style="text-align:center;">
+                    <div style="border-bottom: 1px solid rgb(244, 244, 244);">
+                        <div class="headline" style="font-family: 'Gothic A1', sans-serif; display: inline; font-size: 30px !important">{{ event.title }}</div>
+                        <span class="grey--text" style="font-family: 'Gothic A1', sans-serif; font-size: 20px; display: inline; float: right; margin-top: 10px;">{{ event.writer }}</span>
+                    </div>
+                    <div style="border-bottom: 1px solid rgb(244, 244, 244);">
+                        <table class="table" style="text-align:left;">
                         <tbody class="tbbody">
                         <tr>
-                            <td style="padding: 10px; border-right: solid; color: rgb(244, 244, 244);">
+                            <td style="padding: 10px;">
                                 <h6 style="font-family: 'Gothic A1', sans-serif; font-size: 20px; color: #9A9A9A; margin: 0px; vertical-align: middle;">
                                     目的地
                                 </h6>
@@ -23,8 +26,8 @@
                                 </h5>
                             </td>
                         </tr>
-                        <tr style="border-bottom: solid; color: rgb(244, 244, 244);">
-                            <td style="border-right: solid; color: rgb(244, 244, 244);">
+                        <tr>
+                            <td>
                                 <h6 style="font-family: 'Gothic A1', sans-serif; font-size: 20px; margin: 0px; color: #9A9A9A;">ハイキング日程</h6>
                             </td>
                             <td>
@@ -35,8 +38,9 @@
                         </tr>
                         </tbody>
                     </table>
-
-                    <button class="BButton" style="font-size: 20px; font-family: 'Gothic A1', sans-serif; float: right;" v-if="event.position == 'guest' && position=='enter'" @click="joinPlan(event.no)">
+                    </div>
+                    <div>
+                        <button class="BButton" style="font-size: 20px; font-family: 'Gothic A1', sans-serif; float: right;" v-if="event.position == 'guest' && position=='enter'" @click="joinPlan(event.no)">
                         <i class="nc-icon nc-simple-add"></i>
                         スケジュール参加
                     </button>&nbsp;&nbsp;
@@ -57,6 +61,7 @@ nc-simple-delete"></i>
                         <i class="nc-icon nc-square-pin"></i>
                         スケジュール情報
                     </button>
+                    </div>
                 </div>
             </template>
         </vue-event-calendar>
