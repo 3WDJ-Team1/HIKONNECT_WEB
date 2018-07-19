@@ -11,18 +11,18 @@
         <span style="font-size: 20px; font-family: 'Gothic A1', sans-serif; color: yellow;">※経路がクリックできない場合マップを拡大して <br>正しい位置をクリックしてください。</span>
         <div class="row" style="font-size: 25px; font-family: 'Gothic A1', sans-serif; margin-bottom: 15px;">
             <div class="col-md-6">
-                <img src="http://localhost:8000/images/start.png" style="font-size: 2em" alt=""> スタートマーク
+                <img src="http://hikonnect.ga/images/start.png" style="font-size: 2em" alt=""> スタートマーク
             </div>
             <div class="col-md-6">
-                <span style="padding-right: 10px;"><img style="font-size: 2em" src="http://localhost:8000/images/check.png" alt=""> 折り返し点</span>
+                <span style="padding-right: 10px;"><img style="font-size: 2em" src="http://hikonnect.ga/images/check.png" alt=""> 折り返し点</span>
             </div>
         </div>
         <div class="row" style="font-size: 25px; font-family: 'Gothic A1', sans-serif;">
             <div class="col-md-6">
-                <img style="font-size: 2em" src="http://localhost:8000/images/end.png" alt=""> エンドマーク
+                <img style="font-size: 2em" src="http://hikonnect.ga/images/end.png" alt=""> エンドマーク
             </div>
             <div class="col-md-6">
-                <img style="font-size: 2em;" src="http://localhost:8000/images/startEnd.png" alt="">
+                <img style="font-size: 2em;" src="http://hikonnect.ga/images/startEnd.png" alt="">
                 始終点
             </div>
         </div>

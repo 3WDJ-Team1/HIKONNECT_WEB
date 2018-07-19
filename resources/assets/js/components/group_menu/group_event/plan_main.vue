@@ -10,7 +10,7 @@
         <!-- 일정 수정하기 -->
         <eventUpdate :updateItem="updateItem" v-if="updateEventB"></eventUpdate>
         <v-btn
-                style="width: 110px; height: 110px; font-size: 25px; margin-right: 1%; font-weight: bold; color: #ffffff;"
+                style="width: 110px; height: 110px; font-size: 18px; margin-right: 1%; font-weight: bold; color: #ffffff;"
                 dark
                 midiuem
                 fixed
