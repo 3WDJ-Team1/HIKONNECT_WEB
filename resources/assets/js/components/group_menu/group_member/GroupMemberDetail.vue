@@ -66,7 +66,7 @@
                                     年齢
                                 </div>
                                 <div class="detail-content">
-                                    {{ userData.age_group }}대
+                                    {{ userData.age_group }}代
                                 </div>
                             </v-card-text>
                         </v-card>

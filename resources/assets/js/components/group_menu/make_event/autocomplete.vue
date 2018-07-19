@@ -40,14 +40,12 @@
         },
         methods: {
             ///////////////////////////////////////// 지도 api
-            initMap(e) {
-                e.preventDefault();
+            initMap() {
                 this.$refs.map.open();
                 this.$EventBus.$emit('event_make_map', this.mountain_num);
             },
             // pull autocomplete data
             distributionGroupsEndpoint(n) {
-                n.preventDefault();
                 return this.$HttpAddr + '/searchMount/' + n;
             },
             hideModal() {

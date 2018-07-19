@@ -84,7 +84,7 @@
         },
         methods: {
             positionPull() {
-                this.axios.get('http://localhost:8000/api/user/' + sessionStorage.getItem('userid'))
+                this.axios.get('http://hikonnect.ga/api/user/' + sessionStorage.getItem('userid'))
                     .then(response => {
                         if(response.data.grade == '동네 뒷산')   {
                             this.rank = '裏山';
