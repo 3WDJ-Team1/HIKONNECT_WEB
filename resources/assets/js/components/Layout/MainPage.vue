@@ -14,7 +14,7 @@
                         </div>
                     <div class="col-6" style="padding-left: 3%;">
                         <div class="moveBox" style="float: left;" >
-                                <img width="40" style="margin:2% 11% 2% 4%; display: inline;" src="http://hikonnect.ga/images/list.png" alt="">
+                                <img width="40" style="margin:2% 11% 2% 4%; display: inline;" src="http://hikonnect.ga/images/lists.png" alt="">
                                     <p style="display: inline; font-size: 25px; text-align: center; vertical-align: middle;">Groups List</p>
                         </div>
                         </div>
@@ -22,17 +22,17 @@
                 </div>
         <div class="row">
             <v-carousel hide-controls>
-                <v-carousel-item src="http://hikonnect.ga/images/main_1.jpg">
+                <v-carousel-item src="http://hikonnect.ga/images/m1.jpg">
                 </v-carousel-item>
-                <v-carousel-item src="http://hikonnect.ga/images/main_4.jpeg">
+                <v-carousel-item src="http://hikonnect.ga/images/m4.jpeg">
                 </v-carousel-item>
-                <v-carousel-item src="http://hikonnect.ga/images/main_3.jpeg">
+                <v-carousel-item src="http://hikonnect.ga/images/m3.jpeg">
                 </v-carousel-item>
-                <v-carousel-item src="http://hikonnect.ga/images/main_2.jpeg">
+                <v-carousel-item src="http://hikonnect.ga/images/m2.jpeg">
                 </v-carousel-item>
-                <v-carousel-item src="http://hikonnect.ga/images/main_5.jpeg">
+                <v-carousel-item src="http://hikonnect.ga/images/m5.jpeg">
                 </v-carousel-item>
-                 <v-carousel-item src="http://hikonnect.ga/images/main_6.jpeg">
+                 <v-carousel-item src="http://hikonnect.ga/images/m6.jpeg">
                 </v-carousel-item>
             </v-carousel>
             </div>
@@ -40,39 +40,39 @@
                 <div class="row" style="margin-top: 2%;">
                     <div class="col-4" style="border-right: 1px solid #C9C9C9; padding-right: 7%; padding-left: 7%;">
                         <div style="text-align: center;" class="row">
-                            <img width="40" style="margin: auto auto 5%; margin-top: 6%;" height="40" src="http://hikonnect.ga/images/alone.png">
+                            <img width="40" style="margin: auto auto 5%; margin-top: 6%;" height="40" src="http://hikonnect.ga/images/alones.png">
                         </div>
                         <div class="row">
                             <div class="col-1"></div>
                             <div class="col-10">
-                                <p style="text-align: center; margin: 0; color: #C9C9C9;"><b>그룹 멤버들의 고립감 해소</b></p>
-                                <p style="font-size: 12px; padding: 7%; color: #6C6C6C;">그룹 멤버 간 연락이 잘 되지 않아 발생하는 고립감을 해소하고, 어디서나 팀원의 위치를 파악 가능하여 함께 하고 있다는 기분이 들게 한다.</p>
+                                <p style="text-align: center; margin: 0; color: #C9C9C9;"><b>グループメンバーの孤立感解消</b></p>
+                                <p style="font-size: 12px; padding: 7%; color: #6C6C6C;">グループメンバー間の連絡がうまくいかず、発生する孤立感を解消して、どこでもチームメンバーの位置を把握できて一緒にしているという気持ちにされる。</p>
                             </div>
                             <div class="col-1"></div>
                         </div>
                     </div>
                     <div class="col-4" style="border-right: 1px solid #C9C9C9; padding-right: 7%; padding-left: 7%;">
                         <div style="text-align: center;" class="row">
-                            <img width="40" style="margin: auto auto 5%; margin-top: 6%;" height="40" src="http://hikonnect.ga/images/why.png">
+                            <img width="40" style="margin: auto auto 5%; margin-top: 6%;" height="40" src="http://hikonnect.ga/images/whys.png">
                         </div>
                         <div class="row">
                             <div class="col-1"></div>
                             <div class="col-10">
-                                <p style="text-align: center; margin: 0; color: #C9C9C9;"><b>그룹 멤버들의 이탈 방지</b></p>
-                                <p style="font-size: 12px; padding: 7%; color: #6C6C6C;">위치 메모와 실시간으로 연락 가능한 무전 기능을 통해 그룹 멤버들의 산행로 이탈 가능성을 낮출 수 있다.</p>
+                                <p style="text-align: center; margin: 0; color: #C9C9C9;"><b>グループメンバーの離脱防止</b></p>
+                                <p style="font-size: 12px; padding: 7%; color: #6C6C6C;">位置のメモとリアルタイムで連絡可能な無線機能を通じてグループメンバーのサンヘンロ離脱の可能性を下げることができる。</p>
                             </div>
                             <div class="col-1"></div>
                         </div>
                     </div>
                     <div class="col-4" style="padding-right: 7%; padding-left: 7%;">
                         <div style="text-align: center;" class="row">
-                            <img width="40" style="margin: auto auto 5%; margin-top: 6%;" height="40" src="http://hikonnect.ga/images/data.png">
+                            <img width="40" style="margin: auto auto 5%; margin-top: 6%;" height="40" src="http://hikonnect.ga/images/datas.png">
                         </div>
                         <div class="row">
                             <div class="col-1"></div>
                             <div class="col-10">
-                                <p style="text-align: center; margin: 0; color: #C9C9C9;"><b>데이터 송수신 보장</b></p>
-                                <p style="font-size: 12px; padding: 7%; color: #6C6C6C;">내부 통신망을 구축해, 데이터 커버리지 밖에서도 연결이 끊어지지 않고 유지될 수 있다.</p>
+                                <p style="text-align: center; margin: 0; color: #C9C9C9;"><b>データ送受信保障</b></p>
+                                <p style="font-size: 12px; padding: 7%; color: #6C6C6C;">内部通信網を構築して、データカバレッジの外でも連結が切れないで維持することができる。</p>
                             </div>
                             <div class="col-1"></div>
                         </div>
