@@ -20,7 +20,7 @@
 
             <div class="col-md-2">
                 <button class="btn btn-default btn-block" style="border-color:#24b674; background-color: #24b67470; height: 50px; padding: 0;" @click="inputSearch">
-                    <img src="http://localhost:8000/images/search.png" width="30" alt="">
+                    <img src="http://hikonnect.ga/images/search.png" width="30" alt="">
                 </button>
             </div>
         </div>
