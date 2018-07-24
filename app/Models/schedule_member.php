@@ -112,4 +112,12 @@ class schedule_member extends Model
                 ['schedule_member.hiking_state',1]
             ])->join('user','user.userid','=','schedule_member.userid')->orderBy('schedule_member.created_at','DESC')->get();
     }
+
+    public function member_info($id) {
+        return
+            schedule_member::where([
+                ['userid',$id],
+                ['hiking_state',2]
+            ])->get();
+    }
 }
