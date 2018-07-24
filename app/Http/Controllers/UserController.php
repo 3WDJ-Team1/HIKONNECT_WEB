@@ -128,7 +128,8 @@ class UserController extends Controller
             return response()->json('nnfalse');
         }
         else {
-            //user table insert
+
+            // User table insert
             $userinfo = array([
                 'userid'        => $request->get('idv'),
                 'password'      => $request->get('pwv'),
@@ -160,9 +161,13 @@ class UserController extends Controller
         $hour                 = 0;
         $minute               = 0;
         $second               = 0;
+
+        // Set distance
         for($i = 0; $i < count($result); $i++) {
             $distance += $result[$i]['distance'];
         }
+
+        // Set hiking time
         for($i = 0; $i < count($result); $i++) {
             $total_hiking_time = date_diff(date_create($result[$i]['updated_at']),date_create($result[$i]['hiking_start']));
             $hour             += $total_hiking_time->days * 24 + $total_hiking_time->h;
@@ -174,6 +179,7 @@ class UserController extends Controller
             'minute'    =>  $minute % 60 + sprintf('%d', $second / 60),
             'second'    =>  $second % 60
         );
+
         $result['total_distance']       = $distance;
         $result['total_hiking_time']    = $total_hiking_time;
         return response()->json($result);

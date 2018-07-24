@@ -120,4 +120,5 @@ class schedule_member extends Model
                 ['hiking_state',2]
             ])->get();
     }
+
 }
