@@ -15,7 +15,7 @@
                 </autocomplete>
             </div>
             <div class="col-6">
-                <b-btn style="margin: 0px; min-height: 50px; height: 30px; width: 120px;" @click="initMap"><p style="font-family: 'Do Hyeon', sans-serif; font-size: 25px;">マップ</p></b-btn>
+                <b-btn style="margin: 0px; min-height: 50px; height: 30px; width: 120px;" @click="initMap"><p style="font-family: 'Gothic A1', sans-serif; font-size: 25px;">マップ</p></b-btn>
             </div>
         </div>
         <sweet-modal blocking="true" ref="map" id="paddingRemove">

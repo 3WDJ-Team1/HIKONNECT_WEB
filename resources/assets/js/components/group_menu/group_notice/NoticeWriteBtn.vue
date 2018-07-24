@@ -13,9 +13,8 @@
             class       ="btn--right btn--floating btn--fixed btn--bottom"
             color       ="cyan"
             @click      ="openWriteModal()"
-            style       ="width: 110px; height: 110px; font-size: 25px; margin-right: 1%; font-weight: bold;">
-            公知事項
-            <br>
+            style       ="width: 110px; height: 110px; font-size: 30px; margin-right: 1%; font-weight: bold;">
+           
             作成
         </v-btn>
         <!-- @sweet-modal   the modal which have form script for writing notices -->

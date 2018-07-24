@@ -16,23 +16,24 @@
                 <div style="background-color: white; padding-bottom: 8px;">
                     <h1 style="color: black; margin: 0; font-family: 'Gothic A1', sans-serif; font-size: 50px;">{{ userNickname }}</h1>
                     <div style="width: 230px; height: 3px; background-color: #24b674;"></div>
-                    <h4 style="color: gray; margin: 10px; font-family: 'Nanum Gothic', sans-serif;">{{ rank }}</h4>
+                    <h4 style="color: gray; margin: 10px; font-family: 'Gothic A1', sans-serif;">{{ rank }}</h4>
                 </div>
             </div>
             <sidebar-link to="/group-list">
-                <i class="nc-icon nc-circle-09"></i>
+                <i class="nc-icon nc-zoom-split"></i>
                 <p style="font-family: 'Gothic A1', sans-serif;">サーチグループ</p>
             </sidebar-link>
             <sidebar-link to="/record" v-if="login">
-                <i class="nc-icon nc-notes"></i>
+                <i class="nc-icon 
+nc-chart-bar-32"></i>
                 <p style="font-family: 'Gothic A1', sans-serif;">活動記録</p>
             </sidebar-link>
             <sidebar-link to="/table-list" v-if="login">
-                <i class="nc-icon nc-paper-2"></i>
+                <i class="nc-icon nc-circle-09"></i>
                 <p style="font-family: 'Gothic A1', sans-serif;">My Group</p>
             </sidebar-link>
             <sidebar-link to="/user" v-if="login">
-                <i class="nc-icon nc-atom"></i>
+                <i class="nc-icon nc-badge"></i>
                 <p style="font-family: 'Gothic A1', sans-serif;">My Page</p>
             </sidebar-link>
         </side-bar>
@@ -84,9 +85,12 @@
         },
         methods: {
             positionPull() {
-                this.axios.get(this.$HttpAddr + '/user/' + sessionStorage.getItem('userid'))
+                this.axios.get('http://hikonnect.ga/api/user/' + sessionStorage.getItem('userid'))
                     .then(response => {
-                        this.rank = response.data[0].grade;
+                        if(response.data.grade == '동네 뒷산')   {
+                            this.rank = '裏山';
+                        }
+                        
                     });
             },
             toggleSidebar() {

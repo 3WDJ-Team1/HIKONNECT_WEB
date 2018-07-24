@@ -99,9 +99,10 @@ body > .navbar-collapse{
         display: block;
 
         li{
+            border-bottom: 1px solid #204635;
             .nav-link{
                 color: $white-color;
-                margin: 5px 15px;
+                margin: 15px 15px;
                 opacity: .86;
                 border-radius: 4px;
                 display: block;
@@ -214,7 +215,7 @@ body > .navbar-collapse{
 
     &:before{
         opacity: .33;
-        background: #000000;
+        background: rgb(0, 224, 116);
     }
 
     &:after{

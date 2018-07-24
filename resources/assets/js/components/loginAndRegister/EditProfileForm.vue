@@ -3,7 +3,7 @@
  -->
 <template>
     <card>
-        <h1 slot="header" style="font-family: 'Do Hyeon', sans-serif;" class="card-title">新規取得</h1>
+        <h1 slot="header" style="font-family: 'Gothic A1', sans-serif;" class="card-title">新規取得</h1>
         <form>
             <div class="row">
                 <div class="col-md-12">
@@ -60,7 +60,7 @@
                             v-model="isPhoneNoShown"
                             value="true"
                             unchecked-value="false">
-                        <h5 style="font-family: 'Do Hyeon', sans-serif;">{{ phoneM }}</h5>
+                        <h5 style="font-family: 'Gothic A1', sans-serif;">{{ phoneM }}</h5>
                     </b-form-checkbox>
                 </div>
             </div>
@@ -82,7 +82,7 @@
                             v-model="isGenderShown"
                             value="true"
                             unchecked-value="false">
-                        <h5 style="font-family: 'Do Hyeon', sans-serif;">{{ genderM }}</h5>
+                        <h5 style="font-family: 'Gothic A1', sans-serif;">{{ genderM }}</h5>
                     </b-form-checkbox>
                 </div>
             </div>
@@ -108,7 +108,7 @@
                             v-model="isAgeGroupShown"
                             value="true"
                             unchecked-value="false">
-                        <h5 style="font-family: 'Do Hyeon', sans-serif;">{{ ageM }}</h5>
+                        <h5 style="font-family: 'Gothic A1', sans-serif;">{{ ageM }}</h5>
                     </b-form-checkbox>
                 </div>
             </div>
@@ -126,13 +126,13 @@
                 </div>
             </div>
             <div class="text-center">
-                <button style="padding: 0;" type="submit" v-if="submitButton" class="btn btn-info btn-fill float-right"
+                <button style="padding: 20px;" type="submit" v-if="submitButton" class="btn btn-info btn-fill float-right"
                         @click="regist">
-                    <span style="font-family: 'Do Hyeon', sans-serif; font-size: 30px; padding: 10px;">登録</span>
+                    <span style="line-height: 0; font-family: 'Gothic A1', sans-serif; font-size: 30px; padding: 10px;">登録</span>
                 </button>
-                <button type="submit" v-if="!submitButton" class="btn btn-outline-warning btn-fill float-right"
+                <button style="padding: 20px;" type="submit" v-if="!submitButton" class="btn btn-outline-warning btn-fill float-right"
                         @click="update">
-                    UPDATE
+                        <span style="line-height: 0; font-family: 'Gothic A1', sans-serif; font-size: 30px; padding: 10px;">UPDATE</span>
                 </button>
             </div>
         </form>
@@ -191,7 +191,8 @@
             file: ''
         }),
         methods: {
-            update()    {
+            update(e)    {
+                e.preventDefault();
                 // form undisabled해 놓은거 풀기
                 this.disabledTag = false;
                 // ID는 수정 할 수 없으므로
@@ -224,7 +225,8 @@
              * @brief       Try to regist user.
              *              Check is form valid. Then send request to server.
              */
-            regist() {
+            regist(e) {
+                e.preventDefault();
                 if (this.isTooltipShown) {
                     this.$EventBus.$emit('errorModalOpen', 'Check your password!');
                     return;

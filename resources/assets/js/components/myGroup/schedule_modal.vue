@@ -3,9 +3,9 @@
         <div class="col-md-6">
             <card class="ccard">
                 <template slot="header">
-                    <h1 class="card-title" style="font-family: 'Black Han Sans', sans-serif;">詳しいスケジュール</h1>
+                    <h1 class="card-title" style="font-family: 'Gothic A1', sans-serif;">詳しいスケジュール</h1>
                 </template>
-            <table class="table" style="width: 100%; text-align:center; margin-top: 6%; margin-bottom: 7%; margin-left: 20px;">
+            <table class="table" style="width: 100%; text-align:center; margin-top: 5%; margin-bottom: 5%; margin-left: 20px;">
                 <tbody>
                 <tr>
                     <td style="border-right: solid; border-top: 0px; color: rgb(244, 244, 244);">
@@ -99,8 +99,8 @@
                 </tr>
                 </tbody>
             </table>
-                <button style="margin: 20px;float: right; padding: 0; height: 10%;" type="submit" @click="move(item.uuid)" class="btn btn-info btn-fill float-right">
-                    <h3 style="font-family: 'Do Hyeon', sans-serif; margin: 0; padding: 10px;">グループページへ</h3>
+                <button style="margin: 20px; margin-top: 0; float: right; padding: 0; height: 10%;" type="submit" @click="move(item.uuid)" class="btn btn-info btn-fill float-right">
+                    <h3 style="font-family: 'Gothic A1', sans-serif; margin: 0; padding: 10px;">グループページへ</h3>
                 </button>
         </card>
         </div>

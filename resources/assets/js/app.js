@@ -32,8 +32,7 @@ import 'vue-event-calendar/dist/style.css';
 import vueEventCalendar     from 'vue-event-calendar';
 
 Vue.use(vueEventCalendar, {
-    locale  : 'en',
-    color   : '#c0c4cc',
+    locale  : 'en'
 });
 
 // ElementUI

@@ -1,69 +1,88 @@
 <template>
-    <v-app>
-        <template>
+    <v-app style="position: absolute; top: 0;">
+        <div style="z-index: 1000; color: white;">
+                    <div>
+                        <p style="position: absolute; top:20%; width: 100%; text-align: center; font-size: 3rem; font-family: 'Cantata One', serif;">A convenient group hiking
+                            <br> to maintain a healthy life</p>
+                    </div>
+                    <div class="row" style="position: absolute; top:37%; width: 100%;">
+                        <div class="col-6" style="padding-right: 1%;">
+                            <div class="moveBox" href="https://play.google.com/store/apps/details?id=kr.ac.yjc.wdj.hikonnect">
+                                        <img width="40" style="margin:2% 11% 2% 4%; display: inline;" src="http://hikonnect.ga/images/store.png" alt="">
+                                        <p style="display: inline; font-size: 25px; text-align: center; vertical-align: middle;">App Store</p>
+                            </div>
+                        </div>
+                    <div class="col-6" style="padding-left: 3%;">
+                        <div class="moveBox" style="float: left;" >
+                                <img width="40" style="margin:2% 11% 2% 4%; display: inline;" src="http://hikonnect.ga/images/lists.png" alt="">
+                                    <p style="display: inline; font-size: 25px; text-align: center; vertical-align: middle;">Groups List</p>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+        <div class="row">
             <v-carousel hide-controls>
-                <v-carousel-item src="http://hikonnect.ga/images/main3.png">
-                    <v-btn
-                            class="red darken-4 mt-5"
-                            dark
-                            href="http://localhost:8000/#/group"
-                            large
-                            style="border: 0; background-color: #ffb500; opacity: 1; font-size: 40px; height: auto; width: 22%; font-family: 'Do Hyeon', sans-serif; padding: 0; position: relative; top:70%; left: 38%">
-                        그룹 리스트로 이동하기
-                    </v-btn>
+                <v-carousel-item src="http://hikonnect.ga/images/m1.jpg">
                 </v-carousel-item>
-                <v-carousel-item src="http://hikonnect.ga/images/main.png">
-                    <v-btn
-                            class="mt-5"
-                            dark
-                            href="https://play.google.com/store/apps/details?id=kr.ac.yjc.wdj.hikonnect"
-                            large
-                            style="border: 0; background-color: #ffb500; opacity: 1; font-size: 40px; height: auto; width: 22%; font-family: 'Do Hyeon', sans-serif; padding: 0; position: relative; top:70%; left: 38%">
-                        어플 다운 받으러 가기
-                    </v-btn>
+                <v-carousel-item src="http://hikonnect.ga/images/m4.jpeg">
                 </v-carousel-item>
-                <v-carousel-item src="http://hikonnect.ga/images/main2.png">
+                <v-carousel-item src="http://hikonnect.ga/images/m3.jpeg">
                 </v-carousel-item>
-                <v-carousel-item src="http://hikonnect.ga/images/main4.png">
+                <v-carousel-item src="http://hikonnect.ga/images/m2.jpeg">
+                </v-carousel-item>
+                <v-carousel-item src="http://hikonnect.ga/images/m5.jpeg">
+                </v-carousel-item>
+                 <v-carousel-item src="http://hikonnect.ga/images/m6.jpeg">
                 </v-carousel-item>
             </v-carousel>
-        </template>
+            </div>
+            <div>
+                <div class="row" style="margin-top: 2%;">
+                    <div class="col-4" style="border-right: 1px solid #C9C9C9; padding-right: 7%; padding-left: 7%;">
+                        <div style="text-align: center;" class="row">
+                            <img width="40" style="margin: auto auto 5%; margin-top: 6%;" height="40" src="http://hikonnect.ga/images/alones.png">
+                        </div>
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-10">
+                                <p style="text-align: center; margin: 0; color: #C9C9C9;"><b>グループメンバーの孤立感解消</b></p>
+                                <p style="font-size: 12px; padding: 7%; color: #6C6C6C;">グループメンバー間の連絡がうまくいかず、発生する孤立感を解消して、どこでもチームメンバーの位置を把握できて一緒にしているという気持ちにされる。</p>
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+                    </div>
+                    <div class="col-4" style="border-right: 1px solid #C9C9C9; padding-right: 7%; padding-left: 7%;">
+                        <div style="text-align: center;" class="row">
+                            <img width="40" style="margin: auto auto 5%; margin-top: 6%;" height="40" src="http://hikonnect.ga/images/whys.png">
+                        </div>
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-10">
+                                <p style="text-align: center; margin: 0; color: #C9C9C9;"><b>グループメンバーの離脱防止</b></p>
+                                <p style="font-size: 12px; padding: 7%; color: #6C6C6C;">位置のメモとリアルタイムで連絡可能な無線機能を通じてグループメンバーのサンヘンロ離脱の可能性を下げることができる。</p>
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+                    </div>
+                    <div class="col-4" style="padding-right: 7%; padding-left: 7%;">
+                        <div style="text-align: center;" class="row">
+                            <img width="40" style="margin: auto auto 5%; margin-top: 6%;" height="40" src="http://hikonnect.ga/images/datas.png">
+                        </div>
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-10">
+                                <p style="text-align: center; margin: 0; color: #C9C9C9;"><b>データ送受信保障</b></p>
+                                <p style="font-size: 12px; padding: 7%; color: #6C6C6C;">内部通信網を構築して、データカバレッジの外でも連結が切れないで維持することができる。</p>
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
     </v-app>
 </template>
 <script>
     export default {
-        data: () => ({
-            items: [
-                {
-                    src: 'http://localhost:8000/images/main_1.jpeg'
-                },
-                {
-                    src: 'http://hikonnect.ga/images/main_3.jpeg'
-                },
-                {
-                    src: 'http://hikonnect.ga/images/mountain_3.png'
-                },
-                {
-                    src: 'http://hikonnect.ga/images/unnamed.jpg'
-                }
-            ],
-            title: 'Your Logo',
-            httpAddr: Laravel.host,
-            contactList: [
-                {
-                    icon: "phone",
-                    value: "010-3342-3589"
-                },
-                {
-                    icon: "place",
-                    value: "대한민국 대구광역시 영진전문대학"
-                },
-                {
-                    icon: "email",
-                    value: "kasueu0814@gmail.com"
-                }
-            ]
-        }),
     }
 </script>
 <style>
@@ -75,10 +94,11 @@
         font-size: 1.2em;
     }
     .carousel {
-        height: 978px;
+        height: 650px;
     }
     .carousel .carousel__controls .btn {
-        width: 1%;
+        width: 2.7%;
+        height: 1%;
         border-radius: 50%;
         min-height: 92%;
         border-radius: 50%;
@@ -90,5 +110,16 @@
     .jumbotron {
         padding: 0;
     }
-
+    .moveBox {
+        float: right;
+        -webkit-border-top-right-radius: 50px 45px;
+        -webkit-border-top-left-radius: 50px 45px;
+        -webkit-border-bottom-right-radius: 50px 45px;
+        -webkit-border-bottom-left-radius: 50px 45px;
+        padding: 1.8%;
+        border: 1px solid white;
+        width: 40%; 
+        height: auto; 
+        margin: auto;
+    }
 </style>

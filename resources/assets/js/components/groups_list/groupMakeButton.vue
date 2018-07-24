@@ -12,7 +12,7 @@
                 fab
                 color="pink"
                 @click="groupMakeAlert('top', 'center')"
-                style="margin-right: 1%; font-size: 13px; font-weight: bold;"
+                style="font-family: 'Gothic A1', sans-serif; margin-right: 1%; font-size: 13px; font-weight: bold;"
         >
             グルーブ
             <br>
