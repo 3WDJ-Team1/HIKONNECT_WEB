@@ -11,24 +11,19 @@
             <noticeModal :noticeItem="noticeItem" v-if="updateSign"></noticeModal>
             <updateModal :updateItem="updateItem" v-if="!updateSign"></updateModal>
         </sweet-modal>
-        <!-- 글쓰기 버튼
-                position이 그룹에 참가 된 멤버나 관리자 일 경우에만 보여지도록 컨트롤 -->
-        <router-view
-                v-if="position"
-                name="write"></router-view>
         <card id="cardBox" style="margin: 10px;" v-for="notice in notices" :key="notice.uuid" >
             <div class="row" id="groupListContainer">
                 <div style="padding: 0px;" class="col-md-12" id="noticeCard" @click="noticeModal(notice)">
                     <h3 style="display:inline-block; padding-left: 25px;">{{ notice.title }}</h3>
-                    <h6 style="color: #9A9A9A; display:inline-block;">관리자: {{ notice.writer }}</h6>
-                    <h5 style="display:inline-block; float: right; padding-top: 30px; padding-right: 25px;">작성일: {{ notice.created_at }}</h5>
+                    <h6 style="color: #9A9A9A; display:inline-block;">作成者: {{ notice.writer }}</h6>
+                    <h5 style="display:inline-block; float: right; padding-top: 30px; padding-right: 25px;">作成日: {{ notice.created_at }}</h5>
                 </div>
             </div>
         </card>
         <!-- 무한 스크롤 -->
         <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading">
-             <span slot="no-more">
-                공지사항이 없습니다 :(
+             <span slot="no-more" style="font-size: 30px; font-family: 'Gothic A1', sans-serif;">
+                お知らせがありません。 :(
              </span>
         </infinite-loading>
     </div>
@@ -60,7 +55,7 @@
             list_num: 0,
             notices: [],
             groupId: "",
-            position: false,
+            position: "",
             updateSign: true,
             updateItem: {},
             noticeItem: {}
@@ -77,7 +72,7 @@
             this.$EventBus.$on('deleteNoticeSign', () => {
                 // alert창 띄우기
                 const notification = {
-                    template: "<span><b>공지사항이 삭제되었습니다.</b></span>"
+                    template: "<span><b>削除完了</b></span>"
                 };
                 this.$notifications.notify(
                     {

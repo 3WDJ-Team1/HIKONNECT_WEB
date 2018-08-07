@@ -64,8 +64,7 @@ class User extends Model
             )->join(
                 'hiking_schedule','hiking_schedule.no','=','schedule_member.schedule'
             )->where([
-                    ['user.userid',$userid],
-                    ['schedule_member.hiking_state',2]
+                    ['user.userid',$userid]
                 ]
             )->get();
     }

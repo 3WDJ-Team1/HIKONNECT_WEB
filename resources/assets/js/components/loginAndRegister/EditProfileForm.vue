@@ -3,14 +3,13 @@
  -->
 <template>
     <card>
-        <h4 slot="header" class="card-title">회원가입</h4>
+        <h1 slot="header" style="font-family: 'Gothic A1', sans-serif;" class="card-title">新規取得</h1>
         <form>
             <div class="row">
                 <div class="col-md-12">
                     <fg-input type="text"
-                              label="아이디를 입력하시오."
                               :disabled="disabledID"
-                              placeholder=""
+                              placeholder="ID"
                               v-model="inputId">
                     </fg-input>
                 </div>
@@ -19,8 +18,7 @@
                 <div class="col-md-12">
                     <fg-input type="text"
                               :disabled="disabledTag"
-                              label="닉네임을 입력하시오."
-                              placeholder=""
+                              placeholder="ニックネーム"
                               v-model="inputNickname">
                     </fg-input>
                 </div>
@@ -29,8 +27,7 @@
                 <div class="col-md-6">
                     <fg-input type="password"
                               :disabled="disabledTag"
-                              label="비밀번호를 입력하시오."
-                              placeholder=""
+                              placeholder="パスワード"
                               v-model="inputPw">
                     </fg-input>
                 </div>
@@ -42,88 +39,85 @@
                 </b-tooltip>
                 <div class="col-md-6">
                     <fg-input type="password"
-                              id="다시 비밀번호를 입력하시오."
                               :disabled="disabledTag"
-                              label="Enter password again"
-                              placeholder=""
+                              placeholder="パスワード確認"
                               v-model="inputPwCk">
                     </fg-input>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-7">
+                <div class="col-md-6">
                     <fg-input type="text"
-                              label="핸드폰 번호를 입력하시오."
                               :disabled="disabledTag"
-                              placeholder="'-'를 기입해주세요."
+                              placeholder="電話番号"
                               v-model="inputPhoneNo">
                     </fg-input>
                 </div>
-                <div class="col-md-5" id="phoneCheckPadding">
+                <div class="col-md-6" id="phoneCheckPadding">
                     <b-form-checkbox
                             id="checkBoxP"
                             :disabled="disabledTag"
                             v-model="isPhoneNoShown"
                             value="true"
                             unchecked-value="false">
-                        {{ phoneM }}
+                        <h5 style="font-family: 'Gothic A1', sans-serif;">{{ phoneM }}</h5>
                     </b-form-checkbox>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <b-form-select v-model="selectedGender" :disabled="disabledTag" class="mb-3">
                         <template slot="first">
                             <!-- this slot appears above the options from 'options' prop -->
-                            <option :value="null" disabled>-- 성별 --</option>
+                            <option :value="null" disabled>-- 性別 --</option>
                         </template>
                         <!-- these options will appear after the ones from 'options' prop -->
-                        <option value="남자">남자</option>
-                        <option value="여자">여자</option>
+                        <option value="남자">男性</option>
+                        <option value="여자">女性</option>
                     </b-form-select>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-9">
                     <b-form-checkbox
                             :disabled="disabledTag"
                             v-model="isGenderShown"
                             value="true"
                             unchecked-value="false">
-                        {{ genderM }}
+                        <h5 style="font-family: 'Gothic A1', sans-serif;">{{ genderM }}</h5>
                     </b-form-checkbox>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <b-form-select :disabled="disabledTag" v-model="selectedAgeGroup" class="mb-3">
                         <template slot="first">
                             <!-- this slot appears above the options from 'options' prop -->
-                            <option :value="null" disabled>-- 나이 --</option>
+                            <option :value="null" disabled>-- 年齢 --</option>
                         </template>
                         <!-- these options will appear after the ones from 'options' prop -->
-                        <option value="10대">10대</option>
-                        <option value="20대">20대</option>
-                        <option value="30대">30대</option>
-                        <option value="40대">40대</option>
-                        <option value="50대">50대</option>
-                        <option value="60대 이상">60대 이상</option>
+                        <option value="10대">10代</option>
+                        <option value="20대">20代</option>
+                        <option value="30대">30代</option>
+                        <option value="40대">40代</option>
+                        <option value="50대">50代</option>
+                        <option value="60대 이상">60代以上</option>
                     </b-form-select>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-9">
                     <b-form-checkbox
                             :disabled="disabledTag"
                             v-model="isAgeGroupShown"
                             value="true"
                             unchecked-value="false">
-                        {{ ageM }}
+                        <h5 style="font-family: 'Gothic A1', sans-serif;">{{ ageM }}</h5>
                     </b-form-checkbox>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <b-form-select :disabled="disabledTag" v-model="openRange" class="mb-3">
                         <template slot="first">
                             <!-- this slot appears above the options from 'options' prop -->
-                            <option :value="null" disabled>-- 공개범위 --</option>
+                            <option :value="null" disabled>-- 公開範囲 --</option>
                         </template>
                         <!-- these options will appear after the ones from 'options' prop -->
                         <option value="all">ALL</option>
@@ -132,13 +126,13 @@
                 </div>
             </div>
             <div class="text-center">
-                <button type="submit" v-if="submitButton" class="btn btn-info btn-fill float-right"
+                <button style="padding: 20px;" type="submit" v-if="submitButton" class="btn btn-info btn-fill float-right"
                         @click="regist">
-                    SUBMIT
+                    <span style="line-height: 0; font-family: 'Gothic A1', sans-serif; font-size: 30px; padding: 10px;">登録</span>
                 </button>
-                <button type="submit" v-if="!submitButton" class="btn btn-outline-warning btn-fill float-right"
+                <button style="padding: 20px;" type="submit" v-if="!submitButton" class="btn btn-outline-warning btn-fill float-right"
                         @click="update">
-                    UPDATE
+                        <span style="line-height: 0; font-family: 'Gothic A1', sans-serif; font-size: 30px; padding: 10px;">UPDATE</span>
                 </button>
             </div>
         </form>
@@ -185,19 +179,20 @@
             inputNickname: "",
             inputPhoneNo: "",
             isPhoneNoShown: false,
-            phoneM: '개인',
+            phoneM: '非公開',
             selectedGender: null,
             isGenderShown: false,
-            genderM: '개인',
+            genderM: '非公開',
             selectedAgeGroup: null,
             isAgeGroupShown: false,
-            ageM: '개인',
+            ageM: '非公開',
             openRange: null,
             isTooltipShown: false,
             file: ''
         }),
         methods: {
-            update()    {
+            update(e)    {
+                e.preventDefault();
                 // form undisabled해 놓은거 풀기
                 this.disabledTag = false;
                 // ID는 수정 할 수 없으므로
@@ -230,7 +225,8 @@
              * @brief       Try to regist user.
              *              Check is form valid. Then send request to server.
              */
-            regist() {
+            regist(e) {
+                e.preventDefault();
                 if (this.isTooltipShown) {
                     this.$EventBus.$emit('errorModalOpen', 'Check your password!');
                     return;
@@ -305,21 +301,21 @@
             },
             isPhoneNoShown() {
                 if (this.isPhoneNoShown == 'true') {
-                    this.phoneM = "공개"
+                    this.phoneM = "公開"
                 } else
-                    this.phoneM = "개인"
+                    this.phoneM = "非公開"
             },
             isGenderShown() {
                 if (this.isGenderShown == 'true') {
-                    this.genderM = "공개"
+                    this.genderM = "公開"
                 } else
-                    this.genderM = "개인"
+                    this.genderM = "非公開"
             },
             isAgeGroupShown() {
                 if (this.isAgeGroupShown == 'true') {
-                    this.ageM = "공개"
+                    this.ageM = "公開"
                 } else
-                    this.ageM = "개인"
+                    this.ageM = "非公開"
             },
             inputPwCk(newValue) {
                 if (newValue == this.inputPw) {
@@ -364,18 +360,18 @@
                 this.openRange = sessionStorage.getItem('scv');
                 this.isTooltipShown = sessionStorage.getItem('phonesc');
                 if (this.isPhoneNoShown == 'true') {
-                    this.phoneM = "공개"
+                    this.phoneM = "公開"
                 } else {
-                    this.phoneM = '개인';
+                    this.phoneM = '非公開';
                 }
                 if (this.isPhoneNoShown == 'true') {
-                    this.phoneM = "공개"
+                    this.phoneM = "公開"
                 } else
-                    this.phoneM = "개인"
+                    this.phoneM = "非公開"
                 if (this.isAgeGroupShown == 'true') {
-                    this.ageM = "공개"
+                    this.ageM = "公開"
                 } else
-                    this.ageM = "개인"
+                    this.ageM = "非公開"
             }
         }
     }

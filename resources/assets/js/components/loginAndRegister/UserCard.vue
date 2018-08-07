@@ -3,15 +3,17 @@
  -->
 <template>
     <card class="card-user">
-        <h5 style="color: #9A9A9A;">프로필 이미지</h5>
+        <h2 style="margin: 0px; color: #9A9A9A; font-family: 'Gothic A1', sans-serif;">プロフィールイメージ</h2>
         <div class="author">
-            <img class="avatar border-gray" v-if="!image"/>
-            <img class="avatar border-gray" v-else :src="image" />
+            <img style="    width: 300px;
+    height: 300px;" class="avatar border-gray" v-if="!image" />
+            <img style="    width: 300px;
+    height: 300px;" class="avatar border-gray" v-else :src="image" />
         </div>
-        <div slot="footer" v-if="uploadButtonVis" class="text-center">
+        <div slot="footer" v-if="uploadButtonVis" style="margin-left: 60px;">
             <div class="filebox bs3-primary">
-                <input class="upload-name" :value="fileText" disabled="disabled">
-                <label for="file">업로드</label>
+                <input style="font-size: large;" class="upload-name" :value="fileText" disabled="disabled">
+                <label for="file"><h4 style="    margin: 3px;">アップロード</h4></label>
                 <input type="file" id="file" ref="file" class="upload-hidden" multiple
                        v-on:change="handleFilesUpload()"/>
             </div>
@@ -44,7 +46,7 @@
         data() {
             return {
                 uploadButtonVis: true,
-                fileText: '파일선택',
+                fileText: 'イメージ選択',
                 file: '',
                 image: '',
                 userid: ''

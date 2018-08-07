@@ -99,9 +99,10 @@ body > .navbar-collapse{
         display: block;
 
         li{
+            border-bottom: 1px solid #204635;
             .nav-link{
                 color: $white-color;
-                margin: 5px 15px;
+                margin: 15px 15px;
                 opacity: .86;
                 border-radius: 4px;
                 display: block;
@@ -115,7 +116,7 @@ body > .navbar-collapse{
                 p{
                     margin: 0;
                     line-height: 31px;
-                    font-size: 12px;
+                    font-size: 20px;
                     font-weight: 600;
                     text-transform: uppercase;
                     display: inline-flex;
@@ -148,6 +149,7 @@ body > .navbar-collapse{
 
                 & + .nav-item {
                     margin-top: 31px;
+
                 }
             }
 
@@ -213,7 +215,7 @@ body > .navbar-collapse{
 
     &:before{
         opacity: .33;
-        background: #000000;
+        background: rgb(0, 224, 116);
     }
 
     &:after{

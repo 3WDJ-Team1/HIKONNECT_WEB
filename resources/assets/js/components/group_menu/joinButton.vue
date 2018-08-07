@@ -2,33 +2,28 @@
     @author Jiyoon Lee <jiyoon3421@gmail.com>
  -->
 <template>
-
     <div>
         <sweet-modal ref="write" blocking id="groupModifyModal">
             <update_delete-modal></update_delete-modal>
         </sweet-modal>
-        <nav class="navbar navbar-expand-lg"
-             style="border: hidden; top: 0px; display: inline-block;position: absolute; left: 0px;">
-            <div class="container-fluid">
-                <div class="collapse navbar-collapse justify-content-end">
-                    <ul class="nav navbar-nav mr-auto">
-                        <drop-down tag="li">
-                            <template slot="title">
-                                <span style="font-size: 20px; font-family: 'Do Hyeon', sans-serif;">메뉴보기</span>
-                            </template>
-                            <a style="font-size: 17px; font-family: 'Do Hyeon', sans-serif;" v-if="owner == 'owner'"
-                               class="dropdown-item" @click="updatedModal">그룹정보 수정</a>
-                            <a style="font-size: 17px; font-family: 'Do Hyeon', sans-serif;" v-if="owner == 'owner'"
-                               class="dropdown-item" @click="deleted">그룹 삭제</a>
-                            <a style="font-size: 17px; font-family: 'Do Hyeon', sans-serif;"
-                               v-if="position && owner != 'owner'" class="dropdown-item" @click="leaveGroup">그룹탈퇴</a>
-                            <a style="font-size: 17px; font-family: 'Do Hyeon', sans-serif;"
-                               v-if="!position && owner != 'owner'" class="dropdown-item" @click="enterGroup">그룹 참가</a>
-                        </drop-down>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <img v-if="owner == 'owner'" style="position: absolute; top: 1%; left: 1%;" src="http://hikonnect.ga/images/nav.png" height="70" width="450" alt="">
+        <img v-if="owner != 'owner'" style="position: absolute; top: 1%; left: 1%;" src="http://hikonnect.ga/images/nav_short.png" height="70" width="250" alt="">
+        <a style="cursor:pointer; color: white; position: absolute; top: 2.3%; left: 4.3%; font-size: 20px; font-family: 'Gothic A1', sans-serif;" v-if="owner == 'owner'" @click="updatedModal">
+            <img src="http://hikonnect.ga/images/checkL.png" width="30" alt="">&nbsp;グループ修正</a>
+        <a style="cursor:pointer; color: white; position: absolute; top: 2.3%; left: 15%; font-size: 20px; font-family: 'Gothic A1', sans-serif;" v-if="owner == 'owner'" @click="deleted">
+            <img src="http://hikonnect.ga/images/ex.png" width="30" alt="">&nbsp;グループ削除</a>
+        <a style="cursor:pointer; color: white; position: absolute; top: 2.3%; left: 4.3%; font-size: 20px; font-family: 'Gothic A1', sans-serif;"
+           v-if="position == 'enter' && owner != 'owner'" @click="leaveGroup">
+            <img src="http://hikonnect.ga/images/minus.png" width="30" alt="">&nbsp;グループ脱退</a>
+        <a style="cursor:pointer; color: white; position: absolute; top: 2.3%; left: 4%; font-size: 20px; font-family: 'Gothic A1', sans-serif;"
+           v-if="position == 'not_enter' && owner != 'owner'">
+            <img style="-webkit-animation-name: spin;
+    -webkit-animation-duration: 4000ms;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;" src="http://hikonnect.ga/images/loading.png" width="30" alt="">&nbsp;申し込み受付中</a>
+        <a style="cursor:pointer; color: white; position: absolute; top: 2.3%; left: 3.5%; font-size: 20px; font-family: 'Gothic A1', sans-serif;"
+           v-if="position == 'false' && owner != 'owner'" @click="enterGroup">
+            <img src="http://hikonnect.ga/images/plus.png" width="30" alt="">&nbsp;グループ参加</a>
     </div>
 </template>
 
@@ -48,6 +43,7 @@
                 this.owner = owner;
             });
             this.$EventBus.$on('positionGet', (position) => {
+                console.log(position);
                 this.position = position
             });
         },
@@ -63,7 +59,7 @@
                 }).then(response => {
                     if (response.data == 'true') {
                         const notification = {
-                            template: "<span><b>그룹에서 탈퇴하셨습니다.</b></span>"
+                            template: "<span><b>グループ脱退完了</b></span>"
                         };
                         this.$notifications.notify(
                             {
@@ -83,7 +79,7 @@
                     .then((response) => {
                         if (response.data == 'true') {
                             const notification = {
-                                template: "<span><b>그룹이 삭제되었습니다.</b></span>"
+                                template: "<span><b>グループ削除完了</b></span>"
                             };
                             this.$notifications.notify(
                                 {
@@ -109,7 +105,7 @@
                 }).then(response => {
                     if (response.data == 'true') {
                         const notification = {
-                            template: "<span><b>그룹에 참가 되었습니다.</b></span>"
+                            template: "<span><b>グループ参加完了</b></span>"
                         };
                         this.$notifications.notify(
                             {

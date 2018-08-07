@@ -1,34 +1,32 @@
 
 <template>
     <div class="content">
-        <sweet-modal id="scheduleModal" style="min-width: 1000px;" ref="write">
+        <sweet-modal blocking="true" id="scheduleModal" style="min-width: 1000px;" ref="write">
             <Modal></Modal>
         </sweet-modal>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-12">
+                <div class="col-6">
                     <card>
                         <template slot="header">
-                            <h4 class="card-title" style="font-family: 'Black Han Sans', sans-serif;">등산 계획</h4>
+                            <h1 class="card-title" style="font-family: 'Gothic A1', sans-serif;">登山計画</h1>
                         </template>
                         <div class="table-hover">
                             <table class="table" style="text-align:center;">
-                                <thead>
+                                <thead style="padding-top: 0;">
                                 <slot name="columns">
-                                    <th style="font-weight: bold" v-for="column in tableS.columns">{{column}}</th>
+                                    <th v-for="column in tableS.columns">
+                                        <h4 style="margin: 0; color: #9e9e9e; font-family: 'Gothic A1', sans-serif;">{{column}}</h4></th>
                                 </slot>
                                 </thead>
                                 <tbody>
                                 <tr v-for="item in tableS.data" @click="openModal(item)">
                                     <slot :row="item">
-                                        <td>{{ item.group_title }}</td>
-                                        <td>{{ item.group_leader }}</td>
-                                        <td>{{ item.title }}</td>
-                                        <td>{{ item.start_date }}</td>
-                                        <td>
-                                            <button style="font-family: 'Do Hyeon', sans-serif;" type="submit" class="btn btn-info btn-fill float-right"
-                                                    @click="move(item.uuid)">
-                                                그룹 페이지로 이동
+                                        <td><h3 style="font-family: 'Gothic A1', sans-serif;">{{ item.group_title }}</h3></td>
+                                        <td><h3 style="font-family: 'Gothic A1', sans-serif;">{{ item.title }}</h3></td>
+                                        <td style="width: 17%;">
+                                            <button style="padding: 0; height: 40px;" type="submit" class="btn btn-info btn-fill float-right" @click="move(item.uuid)">
+                                                <h4 style="font-family: 'Gothic A1', sans-serif; margin: 0; padding: 5px;"> ショートカット</h4>
                                             </button>
                                         </td>
                                     </slot>
@@ -38,30 +36,28 @@
                         </div>
                     </card>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
+                <div class="col-6">
                     <card>
                         <template slot="header">
-                            <h4 class="card-title" style="font-family: 'Black Han Sans', sans-serif;">나의 그룹</h4>
+                            <h1 class="card-title" style="font-family: 'Gothic A1', sans-serif;">My Group</h1>
                         </template>
                         <div class="table-hover">
                             <table class="table" style="text-align:center;">
-                                <thead>
+                                <thead style="padding-top: 0;">
                                 <slot name="columns">
-                                    <th style="font-weight: bold" v-for="column in tableG.columns">{{column}}</th>
+                                    <th style="font-weight: bold" v-for="column in tableG.columns">
+                                        <h4 style="margin: 0; color: #9e9e9e; font-family: 'Gothic A1', sans-serif;">{{column}}</h4></th>
                                 </slot>
                                 </thead>
                                 <tbody>
                                 <tr v-for="item in tableG.data">
                                     <slot :row="item">
-                                        <td>{{ item.title }}</td>
-                                        <td></td>
-                                        <td>{{ item.leader }}</td>
+                                        <td><h3 style="font-family: 'Gothic A1', sans-serif;">{{ item.title }}</h3></td>
+                                        <td><h3 style="font-family: 'Gothic A1', sans-serif;">{{ item.leader }}</h3></td>
+
                                         <td>
-                                            <button style="font-family: 'Do Hyeon', sans-serif;" type="submit" class="btn btn-info btn-fill float-right"
-                                                    @click="move(item.uuid)">
-                                                그룹 페이지로 이동
+                                            <button style="padding: 0; height: 40px;" type="submit" class="btn btn-info btn-fill float-right" @click="move(item.uuid)">
+                                                <h4 style="font-family: 'Gothic A1', sans-serif; margin: 0; padding: 5px;"> ショートカット</h4>
                                             </button>
                                         </td>
                                     </slot>
@@ -90,11 +86,11 @@
         data() {
             return {
                 tableG: {
-                    columns: ['그룹 이름', '', '작성자', ''],
+                    columns: ['グルーブ名', '作成者', ''],
                     data: []
                 },
                 tableS: {
-                    columns: ['그룹 이름', '그룹 관리자', '일정 이름', '산행날짜', ''],
+                    columns: ['グルーブ名', 'スケジュール名',  ''],
                     data: []
                 }
             }
@@ -115,15 +111,18 @@
                 this.axios.post(this.$HttpAddr + '/mygroup', {
                     userid: sessionStorage.getItem('userid')
                 }).then(response => {
-                    console.log(response.data)
-                    this.tableG.data = this.tableG.data.concat(response.data);
+                    if(response.data != 'false')   {
+                        this.tableG.data = this.tableG.data.concat(response.data);
+                    }
                 });
             },
             myschedule()    {
                 this.axios.post(this.$HttpAddr + '/myschedule', {
                     userid: sessionStorage.getItem('userid')
                 }).then(response => {
-                    this.tableS.data = this.tableS.data.concat(response.data);
+                    if(response.data != false)    {
+                        this.tableS.data = this.tableS.data.concat(response.data);
+                    }
                 })
             }
         }

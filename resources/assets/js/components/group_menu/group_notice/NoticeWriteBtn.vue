@@ -13,10 +13,9 @@
             class       ="btn--right btn--floating btn--fixed btn--bottom"
             color       ="cyan"
             @click      ="openWriteModal()"
-            style       ="margin-right: 1%; font-size: 12px; font-weight: bold;">
-            공지사항
-            <br>
-            작성
+            style       ="width: 110px; height: 110px; font-size: 30px; margin-right: 1%; font-weight: bold;">
+           
+            作成
         </v-btn>
         <!-- @sweet-modal   the modal which have form script for writing notices -->
         <sweet-modal ref="write" blocking>

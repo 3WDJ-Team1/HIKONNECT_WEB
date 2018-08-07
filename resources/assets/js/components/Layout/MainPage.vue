@@ -1,325 +1,88 @@
 <template>
-    <v-app>
-        <template>
+    <v-app style="position: absolute; top: 0;">
+        <div style="z-index: 1000; color: white;">
+                    <div>
+                        <p style="position: absolute; top:20%; width: 100%; text-align: center; font-size: 3rem; font-family: 'Cantata One', serif;">A convenient group hiking
+                            <br> to maintain a healthy life</p>
+                    </div>
+                    <div class="row" style="position: absolute; top:37%; width: 100%;">
+                        <div class="col-6" style="padding-right: 1%;">
+                            <div class="moveBox" href="https://play.google.com/store/apps/details?id=kr.ac.yjc.wdj.hikonnect">
+                                        <img width="40" style="margin:2% 11% 2% 4%; display: inline;" src="http://hikonnect.ga/images/store.png" alt="">
+                                        <p style="display: inline; font-size: 25px; text-align: center; vertical-align: middle;">App Store</p>
+                            </div>
+                        </div>
+                    <div class="col-6" style="padding-left: 3%;">
+                        <div class="moveBox" style="float: left;" >
+                                <img width="40" style="margin:2% 11% 2% 4%; display: inline;" src="http://hikonnect.ga/images/lists.png" alt="">
+                                    <p style="display: inline; font-size: 25px; text-align: center; vertical-align: middle;">Groups List</p>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+        <div class="row">
             <v-carousel hide-controls>
-                <v-carousel-item src="http://hikonnect.ga/images/main1.png">
-                    <v-btn
-                            class="red darken-4 mt-5"
-                            dark
-                            href="https://play.google.com/store/apps/details?id=kr.ac.yjc.wdj.hikonnect"
-                            large
-                            style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; padding: 0; position: relative; top:62%; left: 40%">
-                        어플 다운 받으러 가기
-                    </v-btn>
+                <v-carousel-item src="http://hikonnect.ga/images/m1.jpg">
                 </v-carousel-item>
-                <v-carousel-item src="http://hikonnect.ga/images/main2.png">
-                    <v-btn
-
-                            class="red darken-4 mt-5"
-                            dark
-                            href="http://localhost:8000/#/group"
-                            large
-                            style="font-family: 'Do Hyeon', sans-serif; font-size: 20px; padding: 0; position: relative; top:60%; left: 42%">
-                        그룹 리스트로 이동하기
-                    </v-btn>
+                <v-carousel-item src="http://hikonnect.ga/images/m4.jpeg">
                 </v-carousel-item>
-                <v-carousel-item src="http://hikonnect.ga/images/main3.png">
-
+                <v-carousel-item src="http://hikonnect.ga/images/m3.jpeg">
+                </v-carousel-item>
+                <v-carousel-item src="http://hikonnect.ga/images/m2.jpeg">
+                </v-carousel-item>
+                <v-carousel-item src="http://hikonnect.ga/images/m5.jpeg">
+                </v-carousel-item>
+                 <v-carousel-item src="http://hikonnect.ga/images/m6.jpeg">
                 </v-carousel-item>
             </v-carousel>
-        </template>
-        <v-content style="padding: 0;">
-            <section>
-                <!--<v-parallax-->
-                <!--:src="httpAddr + '/images/main_2.jpeg'"-->
-                <!--height="650">-->
-                <!--<v-layout-->
-                <!--column-->
-                <!--align-center-->
-                <!--justify-center-->
-                <!--class="white&#45;&#45;text">-->
-                <!--<h1-->
-                <!--class="white&#45;&#45;text mb-2-->
-                <!--display-1-->
-                <!--text-xs-center"-->
-                <!--style="font-family: 'Nanum Gothic', sans-serif;"-->
-                <!--&gt;-->
-                <!--하이커넥트-->
-                <!--</h1>-->
-                <!--<div style="font-family: 'Nanum Gothic', sans-serif;" class="subheading mb-3 text-xs-center">감바리야-->
-                <!--</div>-->
-                <!--<v-btn-->
-                <!--class="red darken-4 mt-5"-->
-                <!--dark-->
-                <!--href="https://play.google.com/store/apps/details?id=kr.ac.yjc.wdj.hikonnect"-->
-                <!--large-->
-                <!--style="padding: 0;">-->
-                <!--GET APPLICATION-->
-                <!--</v-btn>-->
-                <!--</v-layout>-->
-                <!--</v-parallax>-->
-            </section>
-
-            <section>
-                <v-layout
-                        column
-                        wrap
-                        class="my-5"
-                        align-center
-                        style="padding: 3% 0;"
-                >
-                    <v-flex
-                            xs12
-                            sm4
-                            class="my-3">
-                        <div class="text-xs-center">
-                            <h2 class="headline">연결 지향 프로젝트</h2>
-                            <span class="subheading">
-                    하이커넥트는 동행인들의 연결을 위해 만들어졌습니다.
-                </span>
+            </div>
+            <div>
+                <div class="row" style="margin-top: 2%;">
+                    <div class="col-4" style="border-right: 1px solid #C9C9C9; padding-right: 7%; padding-left: 7%;">
+                        <div style="text-align: center;" class="row">
+                            <img width="40" style="margin: auto auto 5%; margin-top: 6%;" height="40" src="http://hikonnect.ga/images/alones.png">
                         </div>
-                    </v-flex>
-                    <v-flex xs12 md12>
-                        <v-container grid-list-xl>
-                            <v-layout
-                                    row
-                                    wrap
-                                    align-center>
-                                <v-flex
-                                        xs12
-                                        md4>
-                                    <v-card class="elevation-0 transparent">
-                                        <v-card-text class="text-xs-center">
-                                            <v-icon
-                                                    x-large
-                                                    class="light-blue--text">person_pin
-                                            </v-icon>
-                                        </v-card-text>
-                                        <v-card-title
-                                                primary-title
-                                                class="layout justify-center">
-                                            <div class="headline text-xs-center">실시간 위치 확인</div>
-                                        </v-card-title>
-                                        <v-card-text class="definition">
-                                            하이커넥트는 동행인의 실시간 위치를 확인하여, 지도에 나타냅니다.
-                                            본인의 페이스에 맞추어 빠른 사람은 빠르게, 느린 사람은 느리게 가더라도,
-                                            자신과 동행인의 거리를 파악하고, 떨어져 있더라도 함께하고 있음을 느껴보세요.
-                                        </v-card-text>
-                                    </v-card>
-                                </v-flex>
-                                <v-flex
-                                        xs12
-                                        md4>
-                                    <v-card class="elevation-0 transparent">
-                                        <v-card-text class="text-xs-center">
-                                            <v-icon
-                                                    x-large
-                                                    class="light-blue--text">radio
-                                            </v-icon>
-                                        </v-card-text>
-                                        <v-card-title
-                                                primary-title
-                                                class="layout justify-center">
-                                            <div class="headline">무전 기능</div>
-                                        </v-card-title>
-                                        <v-card-text class="definition">
-                                            하이커넥트는 핸드폰을 통해 1:n 으로 통신하는 무전 기능을 제공합니다.
-                                            무전기를 따로 들고 다니지 않아도 효율적으로 다수의 사람에게 무전을 보낼 수 있습니다.
-                                            게다가, 중간에서 중계해주는 귀찮은 일은 하지 않아도 되지요.
-                                        </v-card-text>
-                                    </v-card>
-                                </v-flex>
-                                <v-flex
-                                        xs12
-                                        md4>
-                                    <v-card class="elevation-0 transparent">
-                                        <v-card-text class="text-xs-center">
-                                            <v-icon
-                                                    x-large
-                                                    class="light-blue--text">phonelink_ring
-                                            </v-icon>
-                                        </v-card-text>
-                                        <v-card-title
-                                                primary-title
-                                                class="layout justify-center">
-                                            <div class="headline text-xs-center">데이터가 안될 때의 사용</div>
-                                        </v-card-title>
-                                        <v-card-text class="definition">
-                                            기본적으로 하이커넥트는 LTE를 기반으로 서비스를 제공합니다만,
-                                            데이터 커버리지(LTE 및 3G를 이용할 수 있는 무선 인터넷 환경)를 벗어나는 곳에서는
-                                            wifi-direct 기술을 이용하여 P2P 통신을 함으로써, 연결을 유지할 수 있습니다.
-                                        </v-card-text>
-                                    </v-card>
-                                </v-flex>
-                            </v-layout>
-                        </v-container>
-                    </v-flex>
-                </v-layout>
-            </section>
-
-            <section>
-                <v-parallax
-                        :src="httpAddr + '/images/main_3.jpeg'"
-                        height="700">
-                    <v-layout
-                            column
-                            align-center
-                            justify-end>
-                    </v-layout>
-                </v-parallax>
-            </section>
-
-            <section>
-                <v-layout
-                        column
-                        wrap
-                        class="my-5"
-                        align-center
-                        style="padding: 3% 0;"
-                >
-                    <v-flex
-                            xs12
-                            sm4
-                            class="my-3">
-                        <div class="text-xs-center">
-                            <h2 class="headline">산행로 이탈 방지</h2>
-                            <span class="subheading">
-                    산행로 숙지 미숙에 의한 조난 해소
-                </span>
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-10">
+                                <p style="text-align: center; margin: 0; color: #C9C9C9;"><b>グループメンバーの孤立感解消</b></p>
+                                <p style="font-size: 12px; padding: 7%; color: #6C6C6C;">グループメンバー間の連絡がうまくいかず、発生する孤立感を解消して、どこでもチームメンバーの位置を把握できて一緒にしているという気持ちにされる。</p>
+                            </div>
+                            <div class="col-1"></div>
                         </div>
-                    </v-flex>
-                    <v-flex xs12 md12>
-                        <v-container grid-list-xl>
-                            <v-layout
-                                    row
-                                    wrap
-                                    align-center>
-                                <v-flex
-                                        xs12
-                                        md6>
-                                    <v-card class="elevation-0 transparent">
-                                        <v-card-text class="text-xs-center">
-                                            <v-icon
-                                                    x-large
-                                                    class="light-blue--text">near_me
-                                            </v-icon>
-                                        </v-card-text>
-                                        <v-card-title
-                                                primary-title
-                                                class="layout justify-center">
-                                            <div class="headline text-xs-center">예정 산행로 표시</div>
-                                        </v-card-title>
-                                        <v-card-text class="definition">
-                                            하이커넥트는 그룹을 만들 당시 입력된 경로를 토대로, 올바른 산행로를 지도에 나타냅니다.
-                                            산행로 위에 뜨는 동행인들과 함께 연결(connect)되어 있음을 느껴보세요.
-                                            본인이 길을 제대로 가고 있는 지, 다른 사람들도 제대로 가고 있는 지 한 눈에 파악할
-                                            수 있습니다.
-                                        </v-card-text>
-                                    </v-card>
-                                </v-flex>
-                                <v-flex
-                                        xs12
-                                        md6>
-                                    <v-card class="elevation-0 transparent">
-                                        <v-card-text class="text-xs-center">
-                                            <v-icon
-                                                    x-large
-                                                    class="light-blue--text">pin_drop
-                                            </v-icon>
-                                        </v-card-text>
-                                        <v-card-title
-                                                primary-title
-                                                class="layout justify-center">
-                                            <div class="headline">위치 메모</div>
-                                        </v-card-title>
-                                        <v-card-text class="definition">
-                                            하이커넥트는 위치에 메모를 남겨, 해당 반경에 들어서면 알림을 주는 위치 메모 서비스를
-                                            제공합니다.
-                                            위치 메모 서비스를 이용해, 분기점에서 길을 잃지 않을 수 있고,
-                                            특정 위치의 특정한 상황에 미리 대처할 수 있습니다.
-                                        </v-card-text>
-                                    </v-card>
-                                </v-flex>
-                            </v-layout>
-                        </v-container>
-                    </v-flex>
-                </v-layout>
-            </section>
-
-            <section>
-                <v-container grid-list-xl>
-                    <v-layout
-                            row
-                            wrap
-                            justify-center
-                            class="my-5">
-                        <v-flex
-                                xs12
-                                sm12
-                                md12>
-                            <v-card class="elevation-0 transparent">
-                                <v-card-title
-                                        primary-title
-                                        class="layout justify-center">
-                                    <div class="headline">Contact us</div>
-                                </v-card-title>
-                                <v-card-text class="layout justify-center">
-                                    영진전문대학 컴퓨터정보계열 3WDJ 1조
-                                </v-card-text>
-                                <v-list class="transparent layout justify-center">
-                                    <v-list-tile
-                                            v-for="item in contactList"
-                                            :key="item.value">
-                                        <v-list-tile-action>
-                                            <v-icon class="red--text text--darken-1">{{ item.icon }}</v-icon>
-                                        </v-list-tile-action>
-                                        <v-list-tile-content>
-                                            <v-list-tile-title>{{ item.value }}</v-list-tile-title>
-                                        </v-list-tile-content>
-                                    </v-list-tile>
-                                </v-list>
-                            </v-card>
-                        </v-flex>
-                    </v-layout>
-                </v-container>
-            </section>
-        </v-content>
+                    </div>
+                    <div class="col-4" style="border-right: 1px solid #C9C9C9; padding-right: 7%; padding-left: 7%;">
+                        <div style="text-align: center;" class="row">
+                            <img width="40" style="margin: auto auto 5%; margin-top: 6%;" height="40" src="http://hikonnect.ga/images/whys.png">
+                        </div>
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-10">
+                                <p style="text-align: center; margin: 0; color: #C9C9C9;"><b>グループメンバーの離脱防止</b></p>
+                                <p style="font-size: 12px; padding: 7%; color: #6C6C6C;">位置のメモとリアルタイムで連絡可能な無線機能を通じてグループメンバーのサンヘンロ離脱の可能性を下げることができる。</p>
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+                    </div>
+                    <div class="col-4" style="padding-right: 7%; padding-left: 7%;">
+                        <div style="text-align: center;" class="row">
+                            <img width="40" style="margin: auto auto 5%; margin-top: 6%;" height="40" src="http://hikonnect.ga/images/datas.png">
+                        </div>
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-10">
+                                <p style="text-align: center; margin: 0; color: #C9C9C9;"><b>データ送受信保障</b></p>
+                                <p style="font-size: 12px; padding: 7%; color: #6C6C6C;">内部通信網を構築して、データカバレッジの外でも連結が切れないで維持することができる。</p>
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
     </v-app>
 </template>
 <script>
     export default {
-        data: () => ({
-            items: [
-                {
-                    src: 'http://localhost:8000/images/main_1.jpeg'
-                },
-                {
-                    src: 'http://hikonnect.ga/images/main_3.jpeg'
-                },
-                {
-                    src: 'http://hikonnect.ga/images/mountain_3.png'
-                },
-                {
-                    src: 'http://hikonnect.ga/images/unnamed.jpg'
-                }
-            ],
-            title: 'Your Logo',
-            httpAddr: Laravel.host,
-            contactList: [
-                {
-                    icon: "phone",
-                    value: "010-3342-3589"
-                },
-                {
-                    icon: "place",
-                    value: "대한민국 대구광역시 영진전문대학"
-                },
-                {
-                    icon: "email",
-                    value: "kasueu0814@gmail.com"
-                }
-            ]
-        }),
     }
 </script>
 <style>
@@ -330,18 +93,33 @@
     .definition {
         font-size: 1.2em;
     }
-
+    .carousel {
+        height: 650px;
+    }
     .carousel .carousel__controls .btn {
-        width: 1%;
+        width: 2.7%;
+        height: 1%;
         border-radius: 50%;
-        height: 72%;
+        min-height: 92%;
         border-radius: 50%;
         border-color: #88888800;
     }
-
-    .jumbotron {
-        padding: 0px;
+    .jumbotron__image {
+        top: 50%;
     }
-
-
+    .jumbotron {
+        padding: 0;
+    }
+    .moveBox {
+        float: right;
+        -webkit-border-top-right-radius: 50px 45px;
+        -webkit-border-top-left-radius: 50px 45px;
+        -webkit-border-bottom-right-radius: 50px 45px;
+        -webkit-border-bottom-left-radius: 50px 45px;
+        padding: 1.8%;
+        border: 1px solid white;
+        width: 40%; 
+        height: auto; 
+        margin: auto;
+    }
 </style>

@@ -2,22 +2,27 @@
     @author Jiyoon Lee <jiyoon3421@gmail.com>
  -->
 <template>
-    <div class="row" id="serchContainer">
-        <div class="col-md-2">
-            <b-form-select v-model="sel" class="mb-3">
-                <option value="groupname">그룹명</option>
-                <option value="writer">작성자</option>
-            </b-form-select>
-        </div>
-        <div class="col-md-8">
-            <fg-input type="text"
-                      @keyup.enter.native="inputSearch"
-                      placeholder="검색어를 입력하시오."
-                      v-model="inputForm">
-            </fg-input>
-        </div>
-        <div class="col-md-2">
-            <button class="btn btn-default btn-block" @click="inputSearch">SEARCH</button>
+    <div style="height: 120px; margin: auto; width: 95%; background-color: white; box-shadow: 5px 5px 10px 1px #cecece;">
+        <div class="row" style="padding-top: 38px; width: 95%; margin: auto;" id="serchContainer" >
+            <div class="col-md-2">
+                <b-form-select v-model="sel" style="border-color:#24b674; border-width: 2px;" class="mb-3">
+                    <option value="groupname">グルーブ名</option>
+                    <option value="writer">作成者</option>
+                </b-form-select>
+            </div>
+            <div class="col-md-8">
+                <fg-input type="text"
+                          @keyup.enter.native="inputSearch"
+                          placeholder="検索語を入力してください"
+                          v-model="inputForm">
+                </fg-input>
+            </div>
+
+            <div class="col-md-2">
+                <button class="btn btn-default btn-block" style="border-color:#24b674; background-color: #24b67470; height: 50px; padding: 0;" @click="inputSearch">
+                    <img src="http://hikonnect.ga/images/search.png" width="30" alt="">
+                </button>
+            </div>
         </div>
     </div>
 </template>
@@ -36,7 +41,7 @@
             },
             make_group_button() {
                 if (sessionStorage.userid == undefined) {
-                    alert('로그인 이후 이용가능합니다.')
+                    alert('ログインしてください。')
                 } else {
                     this.$router.push('make');
                 }
@@ -62,7 +67,7 @@
     }
 
     .btn:not(:disabled):not(.disabled) {
-        margin-top: 2px;
+        margin-top: 0;
     }
 
     .col-md-2 {

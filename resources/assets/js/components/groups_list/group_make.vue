@@ -4,11 +4,11 @@
 <template>
     <card>
         <template slot="header">
-            <h3 class="card-title" style="font-family: 'Black Han Sans', sans-serif;">그룹 만들기</h3>
+            <h1 class="card-title" style="font-family: 'Gothic A1', sans-serif;">グループ生成</h1>
         </template>
     <v-app>
         <v-form v-model="valid" ref="form">
-            <v-subheader style="font-family: 'Do Hyeon', sans-serif; font-size: 16px;">그룹 이름</v-subheader>
+            <v-subheader><h3 style="font-family: 'Gothic A1', sans-serif;">グループ名</h3></v-subheader>
             <v-text-field
                     style="padding-top: 0px;"
                     name="notice_title"
@@ -16,19 +16,19 @@
                     :rules="titleRules"
                     required
             ></v-text-field>
-            <v-subheader style="font-family: 'Do Hyeon', sans-serif; font-size: 16px;">모집 내용</v-subheader>
+            <v-subheader><h3 style="font-family: 'Gothic A1', sans-serif;">募集内容</h3></v-subheader>
             <v-text-field
                     style="padding-top: 0px;"
                     name="notice_text"
                     v-model="text"
                     :rules="textRules"
                     textarea
-                    rows="3"
+                    rows="5"
                     required
             ></v-text-field>
             <div style="display: flex;">
                 <div style="margin: 5px; flex-grow: 1;">
-                    <v-subheader style="font-family: 'Do Hyeon', sans-serif; font-size: 16px;">최소 모집 인원</v-subheader>
+                    <v-subheader><h3 style="font-family: 'Gothic A1', sans-serif;">最小募集人員</h3></v-subheader>
                     <v-text-field
                             name="minimum"
                             v-model="min"
@@ -38,7 +38,7 @@
                 </div>
 
                 <div style="margin: 5px; flex-grow: 1;">
-                    <v-subheader style="font-family: 'Do Hyeon', sans-serif; font-size: 16px;">최대 모집 인원</v-subheader>
+                    <v-subheader><h3 style="font-family: 'Gothic A1', sans-serif;">最大募集人員</h3></v-subheader>
                     <v-text-field
                             name="maximum"
                             v-model="max"
@@ -52,7 +52,7 @@
                     style="height: 100%; color: white;     float: right;"
                     color="cyan"
             >
-                SUBMIT
+                <h4 style="margin: 5px; font-family: 'Gothic A1', sans-serif;">登録</h4>
             </v-btn>
         </v-form>
     </v-app>
@@ -96,7 +96,7 @@
                 }).then((response) => {
                     if (response.data == 'true') {
                         const notification = {
-                            template: "<span><b>그룹이 생성 되었습니다.</b></span>"
+                            template: "<span><b>グルーブ生成完了</b></span>"
                         };
                         this.$notifications.notify(
                             {

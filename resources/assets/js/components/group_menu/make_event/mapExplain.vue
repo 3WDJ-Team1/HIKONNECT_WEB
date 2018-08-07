@@ -1,28 +1,29 @@
 <template>
     <div>
-        <h5>노란 선을 클릭하여 경로를 만들어요.</h5>
-        <div style="border: 1px solid white; padding-bottom: 10px; padding-top: 10px; margin-top: 10px; margin-bottom: 10px;">
-            <img width="13px" style="margin-right: 5px;" src="http://localhost:8000/images/tiny-mouse.png" alt="">좌클릭은 경로 선택 시
+        <h2 style="font-family: 'Gothic A1', sans-serif;">黄色い線をクリックして <br> 経路を作ります。</h2>
+        <div style="font-family: 'Gothic A1', sans-serif; border: 1px solid white; padding-bottom: 10px; padding-top: 10px; margin-top: 10px; margin-bottom: 10px; font-size: 25px;">
+            <img width="13px" style="margin-right: 5px;" src="http://hikonnect.ga/images/tiny-mouse.png" alt="">左クリック→経路を選択
             <br>
-            <img width="13px" style="margin-right: 5px;" src="http://localhost:8000/images/right.png" alt="">우클릭은 경로 선택 해지 시
+            <img width="13px" style="margin-right: 5px;" src="http://hikonnect.ga/images/right.png" alt="">右クリック→選択した経路を解除
             <br>
-            사용해 주세요
+            <span style="font-family: 'Gothic A1', sans-serif;">使用してください。</span>
         </div>
-        <span style="color: yellow;">※경로가 클릭되지 않을 시 지도를 확대해서 정확한 위치를 클릭하세요.</span>
-        <div class="row" style="margin-bottom: 15px;">
+        <span style="font-size: 20px; font-family: 'Gothic A1', sans-serif; color: yellow;">※経路がクリックできない場合マップを拡大して <br>正しい位置をクリックしてください。</span>
+        <div class="row" style="font-size: 25px; font-family: 'Gothic A1', sans-serif; margin-bottom: 15px;">
             <div class="col-md-6">
-                <img src="http://localhost:8000/images/start.png" alt=""> 시작점
+                <img src="http://hikonnect.ga/images/start.png" style="font-size: 2em" alt=""> スタートマーク
             </div>
             <div class="col-md-6">
-                <span style="padding-right: 30px;"><img src="http://localhost:8000/images/dest.png" alt=""> 반환점</span>
+                <span style="padding-right: 10px;"><img style="font-size: 2em" src="http://hikonnect.ga/images/check.png" alt=""> 折り返し点</span>
             </div>
         </div>
-        <div class="row">
+        <div class="row" style="font-size: 25px; font-family: 'Gothic A1', sans-serif;">
             <div class="col-md-6">
-                <img src="http://localhost:8000/images/end.png" alt=""> 도착점
+                <img style="font-size: 2em" src="http://hikonnect.ga/images/end.png" alt=""> エンドマーク
             </div>
             <div class="col-md-6">
-                <img src="http://localhost:8000/images/end.png" alt=""> <span style="font-size: 10px;">도착점과 시작점이 동일할 시</span>
+                <img style="font-size: 2em;" src="http://hikonnect.ga/images/startEnd.png" alt="">
+                始終点
             </div>
         </div>
     </div>

@@ -9,22 +9,7 @@
         <eventMake v-if="makeEventB"></eventMake>
         <!-- 일정 수정하기 -->
         <eventUpdate :updateItem="updateItem" v-if="updateEventB"></eventUpdate>
-        <v-btn
-                style="margin-right: 1%; font-size: 13px; font-weight: bold; color: #ffffff;"
-                dark
-                midiuem
-                fixed
-                right
-                bottom
-                fab
-                color="pink"
-                v-if="position && listEventB"
-                @click="makeEvent"
-        >
-            일정
-            <br>
-            만들기
-        </v-btn>
+        
     </div>
 </template>
 
@@ -48,7 +33,7 @@
                  * makeEventB   (Boolean)   일정만들기를 보여줄지 안보여줄지
                  * updateEventB (Boolean)   업데이트 페이지를 보여줄지 안보여줄지
                  */
-                position: false,
+                position: "",
                 listEventB: true,
                 makeEventB: false,
                 updateEventB: false,
@@ -62,6 +47,7 @@
                 this.listEventB = true;
                 this.makeEventB = false;
                 this.updateEventB = false;
+                this.$EventBus.$emit('eventOK', 'true');
             });
             // 업데이트 사인을 받아와 업데이트 페이지를 보여준다.
             this.$EventBus.$on('updateEventSign', (event) => {
@@ -81,20 +67,17 @@
                     this.makeEventB = false;
                     this.updateEventB = false;
                 }
+                this.$EventBus.$emit('eventOK', 'true');
             });
-        },
-
-        methods: {
-            // 이벤트 만들기
-            makeEvent() {
+            this.$EventBus.$on('eventOOk', (sign) => {
                 this.makeEventB = true;
                 this.listEventB = false;
                 this.updateEventB = false;
-            }
+            });
         }
     }
 </script>
 
-<style scoped>
+<style>
 
 </style>

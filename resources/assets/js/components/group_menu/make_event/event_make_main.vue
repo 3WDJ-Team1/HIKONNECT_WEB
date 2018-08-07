@@ -2,16 +2,15 @@
     @author Jiyoon Lee <jiyoon3421@gmail.com>
  -->
 <template>
-    <div class="container">
+    <div class="container" style="max-width: 100%;">
         <div class="row">
             <div class="col-md-12">
                 <card>
-                    <h4 slot="header" class="card-title">산행 일정 작성</h4>
-                    <form>
+                    <h1 slot="header" class="card-title" style="font-family: 'Gothic A1', sans-serif;">ハイキングスケジュール作成</h1>
                         <div class="row">
                             <div class="col-md-12" style="padding-bottom: 0px; padding-top: 0px;">
+                                <label><h3 style="margin: 0; font-family: 'Gothic A1', sans-serif;">題名</h3></label>
                                 <fg-input type="text"
-                                          label="제목"
                                           v-model="title">
                                 </fg-input>
                             </div>
@@ -19,7 +18,7 @@
                         <div class="row">
                             <div class="col-md-12" style="padding-bottom: 0px; padding-top: 0px;">
                                 <div class="form-group">
-                                    <label>모집 내용</label>
+                                    <label><h3 style="margin: 0; font-family: 'Gothic A1', sans-serif;">募集内容</h3></label>
                                     <textarea rows="5" class="form-control border-input"
                                               v-model="content">
                                 </textarea>
@@ -29,30 +28,32 @@
                         <div class="row" style="height: 75px;">
                             <div class="col-md-4" style="padding-bottom: 0px; padding-top: 0px;">
                                 <div class="form-group">
-                                    <label>등산 경로</label>
+                                    <label><h3 style="margin: 0; font-family: 'Gothic A1', sans-serif;">ハイキング経路</h3></label>
                                     <img height="20px" src="http://hikonnect.ga/images/map.png" alt="">
                                     <autocomplete></autocomplete>
                                 </div>
                             </div>
                             <div class="col-md-4" style="padding-bottom: 0px; padding-top: 0px;">
                                 <div class="form-group">
-                                    <label>산행일자</label>
+                                    <label><h3 style="margin: 0; font-family: 'Gothic A1', sans-serif;">ハイキング一字</h3></label>
                                     <img height="20px" src="http://hikonnect.ga/images/plan.png" alt="">
-                                    <div style="height: 30px; width: 150px; border: solid 1px #e3e3e3; border-radius: 5px;">
+                                    <div style="    height: 50px;
+    width: 200px; border: solid 1px #e3e3e3; border-radius: 5px; font-size: 20px;">
                                         <datetime
                                                 style="margin: 5px;"
                                                 v-model="date"
-                                                placeholder="산행일자">
+                                                placeholder="ハイキング一字">
                                         </datetime>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4" style="padding-bottom: 0px; padding-top: 0px;">
                                 <div class="form-group">
-                                    <label>산행시간</label>
+                                    <label><h3 style="margin: 0; font-family: 'Gothic A1', sans-serif;">ハイキング時間</h3></label>
                                     <img height="20px" src="http://hikonnect.ga/images/time.png" alt="">
                                     <br>
                                     <vue-timepicker
+                                            style="height: 50px; font-size: 20px;"
                                             :format="yourFormat"
                                             v-model="yourData">
                                     </vue-timepicker>
@@ -61,16 +62,15 @@
                         </div>
                         <div class="text-center">
                             <button></button>
-                            <button style="font-size: 16px; font-family: 'Do Hyeon', sans-serif;" type="submit" class="btn btn-warning btn-fill float-right"
+                            <button type="submit" class="btn btn-warning btn-fill float-right" style="padding: 5px; height: 50px;"
                                     @click="backCalender">
-                                나가기
+                                <p style="font-size: 30px; font-family: 'Gothic A1', sans-serif;">取り消し</p>
                             </button>
-                            <button style="font-size: 16px; font-family: 'Do Hyeon', sans-serif;" type="submit" class="btn btn-info btn-fill float-right"
+                            <button style="padding: 5px; height: 50px;" type="submit" class="btn btn-info btn-fill float-right"
                                     @click="sendData">
-                                제출
+                                <p style="font-size: 30px; font-family: 'Gothic A1', sans-serif;">登録</p>
                             </button>
                         </div>
-                    </form>
                 </card>
             </div>
         </div>
@@ -133,7 +133,7 @@
                         console.log(response.data);
                         if (response.data == 'true') {
                             const notification = {
-                                template: "<span><b>성공적으로 저장 되었습니다.</b></span>"
+                                template: "<span><b>成功的に作成しました。</b></span>"
                             };
                             this.$notifications.notify(
                                 {
@@ -147,7 +147,7 @@
 
                         } else {
                             const notification = {
-                                template: "<span><b>저장을 실패하였습니다.</b></span>"
+                                template: "<span><b>作成に失敗しました。</b></span>"
                             };
                             this.$notifications.notify(
                                 {
@@ -167,5 +167,14 @@
     .time-picker input.display-time {
         border: 1px solid #e3e3e3;
         border-radius: 6px;
+    }
+    .form-control {
+        height: 50px;
+        font-size: 20px;
+    }
+    .autocomplete__box {
+        min-width: 250px;
+        min-height: 50px;
+        font-size: 20px;
     }
 </style>

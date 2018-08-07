@@ -2,33 +2,61 @@
     @author Jiyoon Lee <jiyoon3421@gmail.com>
  -->
 <template>
-    <div>
-        <card style="margin: 10px;" v-for="(item, key) in list" :key="key">
+    <div style=" margin: auto; width: 95%; background-color: white; margin-top: 30px; margin-bottom: 30px; box-shadow: 5px 5px 10px 1px #cecece;">
+        <div style="height: 50px; background-color: white"></div>
+        <div style="margin: 0; height: 50px; background-color: #24B674; color: white; text-align: center;" class="row">
+            <div class="col-3">
+                <p style="margin: 5px; font-size: 1.8em; font-family: 'Gothic A1', sans-serif;">グループ名・管理者名</p>
+            </div>
+            <div class="col-5" >
+                <p style="margin: 5px; font-size: 1.8em; font-family: 'Gothic A1', sans-serif; text-align: center;">募集内容</p>
+            </div>
+            <div class="col-1">
+                <p style="margin: 5px; font-size: 1.5em; line-height: 40px; font-family: 'Gothic A1', sans-serif; vertical-align: middle;">最小人員</p>
+            </div>
+            <div class="col-1">
+                <p style="margin: 5px; font-size: 1.5em; line-height: 40px; font-family: 'Gothic A1', sans-serif;">最大人員</p>
+            </div>
+            <div class="col-2">
+            </div>
+        </div>
+        <card style="margin: 20px;" id="ccard" v-for="(item, key) in list" :key="key">
             <div class="row" id="groupListContainer">
-                <div style="padding: 0px;">
-                    <h3 style="display:inline-block; padding-left: 25px;">{{ item.title }}</h3>&nbsp;&nbsp;&nbsp;
-                    <h6 style="color: #9A9A9A; display:inline-block;">관리자: {{ item.nickname }}</h6>
+                <div class="col-3">
+                    <h2 style="margin: 8px 8px 0; font-family: 'Gothic A1', sans-serif; padding-left: 30px;">{{ item.title }}</h2>
+                    <h4 style="margin: 5px 40px 20px; font-family: 'Gothic A1', sans-serif; color: #9A9A9A;">管理者: {{ item.nickname }}</h4>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-5" style="padding: 0px; padding-top: 18px;padding-left: 25px;">
-                    최소인원수: {{ item.min_member }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;최대인원수: {{ item.max_member }}
+                <div class="col-5">
+                    <h4 style="margin: 0; font-family: 'Gothic A1', sans-serif; float: left; padding-top: 10px;">{{ item.content }}</h4>
                 </div>
-                <div class="col-md-7" id="item7">
-                    <button class="btn btn-outline-secondary float-right"
-                            @click="moveGroupPage(item)">그룹 페이지로 이동
-                    </button>
+                <div class="col-1" style="text-align: center;">
+                    <h2 style="line-height: 100px; margin: 0; font-family: 'Gothic A1', sans-serif; display:inline-block;">
+                        {{ item.min_member }}名
+                    </h2>
                 </div>
-            </div>
-            <div slot="footer" class="text-center">
-                <h6 style="color: #FF6633; padding-top: 10px; float: left">모집내용:&nbsp;&nbsp;</h6>
-                <h6 style="float: left; padding-top: 10px;">{{ item.content }}</h6>
+                <div class="col-1" style="text-align: center;">
+                    <h2 style="line-height: 100px; margin: 0; font-family: 'Gothic A1', sans-serif; display:inline-block;">
+                        {{ item.max_member }}名
+                    </h2>
+                </div>
+                <div class="col-2" style="text-align: center; margin-top: 10px;">
+                    <div class="move_box">
+                        <a
+                                style="cursor:pointer; font-size: 25px; font-family: 'Gothic A1', sans-serif;"
+                                class="nav-link"
+                                v-if="!isLogined"
+                                @click="moveGroupPage(item)"
+                        >
+                            ページへ
+                        </a>
+                    </div>
+                </div>
             </div>
         </card>
 
         <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading">
-             <span slot="no-more">
-                그룹 리스트가 없습니다 :(
+             <span slot="no-more" style="font-family: 'Gothic A1', sans-serif; font-size: 30px;">
+                登録されたグループがありません。 :(
              </span>
         </infinite-loading>
     </div>
@@ -82,7 +110,7 @@
                 }).then(response => {
                     // alert창 띄워주기
                     const notification = {
-                        template: "<span><b>그룹에 참가되었습니다.</b></span>"
+                        template: "<span><b>グループへ参加しました。</b></span>"
                     };
                     this.$notifications.notify(
                         {
@@ -128,4 +156,38 @@
     }
 </script>
 <style>
+    #ccard .card-body {
+        padding-bottom: 0;
+    }
+    .theme--dark .btn:not(.btn--icon):not(.btn--flat), .application .theme--dark.btn:not(.btn--icon):not(.btn--flat) {
+        width: 110px;
+        height: 110px;
+    }
+    .btn--floating .btn__content {
+        font-size: 25px;
+    }
+    select.form-control:not([size]):not([multiple]) {
+        height: 50px;
+        font-size: 20px;
+    }
+    .form-control {
+        height: 50px;
+        font-size: 20px;
+    }
+    .move_box {
+              border: 2px solid #8ED9E9;
+              text-align: center;
+              padding-right: 10px;
+              padding-left: 10px;
+              margin-left: 3px;
+              margin-top:10px;
+              -webkit-border-top-right-radius: 40px 30px;
+              -webkit-border-top-left-radius: 40px 30px;
+              -webkit-border-bottom-right-radius: 40px 30px;
+              -webkit-border-bottom-left-radius: 40px 30px;
+          }
+
+    .move_box:hover {
+        background-color: #1dc7ea;
+    }
 </style>

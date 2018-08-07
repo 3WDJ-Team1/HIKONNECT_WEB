@@ -12,14 +12,14 @@
                 fab
                 color="pink"
                 @click="groupMakeAlert('top', 'center')"
-                style="margin-right: 1%; font-size: 13px; font-weight: bold;"
+                style="font-family: 'Gothic A1', sans-serif; margin-right: 1%; font-size: 13px; font-weight: bold;"
         >
-            그룹
+            グルーブ
             <br>
-            만들기
+            生成
         </v-btn>
 
-        <sweet-modal id="paddingRemove" ref="write">
+        <sweet-modal ref="write">
             <router-view name="make"></router-view>
         </sweet-modal>
     </v-app>
@@ -34,7 +34,7 @@
                 if (sessionStorage.getItem('userid') == undefined) {
                     // alert창 띄워주기
                     const notification = {
-                        template: "<span><b>로그인 후 사용가능합니다.</b></span>"
+                        template: "<span><b>ログインしてください。</b></span>"
                     };
                     this.$notifications.notify(
                         {
@@ -54,14 +54,9 @@
 </script>
 
 <style>
-    #paddingRemove.is-visible {
-        overflow: hidden;
-    }
-    #paddingRemove.is-visible .sweet-buttons, #paddingRemove.is-visible .sweet-content {
-        padding: 0px;
-    }
-    #paddingRemove .sweet-box-actions {
-        visibility: hidden;
+    .sweet-modal.is-visible {
+        border-radius: 15px;
+        min-width: 80%;
     }
     .btn--floating {
         border-radius: 50%;

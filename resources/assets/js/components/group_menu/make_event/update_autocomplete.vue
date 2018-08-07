@@ -16,7 +16,7 @@
                 </autocomplete>
             </div>
             <div class="col-6">
-                <b-btn style="margin: 0px; padding-top: 4px; height: 30px; width: 50px;" @click="initMap">지도보기</b-btn>
+                <b-btn style="margin: 0px; padding-top: 4px; height: 30px; width: 50px;" @click="initMap">マップ</b-btn>
             </div>
         </div>
         <sweet-modal ref="map" blocking>

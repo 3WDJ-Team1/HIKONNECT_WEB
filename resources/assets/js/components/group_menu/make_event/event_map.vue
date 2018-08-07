@@ -5,25 +5,25 @@
     <div>
         <div
                 id="map"
-                style="height: 480px; border-radius: 5px;">
+                style="height: 800px; border-radius: 5px;">
         </div>
         <v-btn
                 fab
                 @click="removeMap"
                 dark
                 class="btn--right btn--floating btn--fixed btn--bottom"
-                style="color: white; bottom: 187px; right: 5px; width: 50px; height: 50px;"
+                style="font-size: 20px; font-family: 'Gothic A1', sans-serif; color: white; bottom: 187px; right: 5px; width: 50px; height: 50px;"
                 color="blue">
-            지우기
+            消す
         </v-btn>
         <v-btn
                 fab
                 @click="mapModalSubmit"
                 dark
                 class="btn--right btn--floating btn--fixed btn--bottom"
-                style="color: white; bottom: 130px; right: 5px; width: 50px; height: 50px;"
+                style="font-size: 20px; font-family: 'Gothic A1', sans-serif; color: white; bottom: 130px; right: 5px; width: 50px; height: 50px;"
                 color="red">
-            저장
+            保存
         </v-btn>
         <span style="
             padding-top: 5px;
@@ -41,7 +41,7 @@
               id="exp"
         >
             <i
-                    class="nc-icon nc-zoom-split text-warning" style="margin-right: 5px;"></i>설명서
+                    class="nc-icon nc-zoom-split text-warning" style="margin-right: 5px;"></i>説明書
         </span>
         <b-tooltip target="exp" style="max-width: 1000px;" placement="right">
             <mapExplain></mapExplain>
@@ -105,7 +105,7 @@
                 var path = [];
                 // 지도를 띄우기 위해 지도 객체 생성
                 var map = new window.google.maps.Map(document.getElementById('map'), {
-                    zoom: 11,
+                    zoom: 14,
                 });
                 //////////////////////////////////////////////// 위도와 경도 불러오기
                 axios.get('http://hikonnect.ga:3000/paths/' + num)
@@ -278,7 +278,7 @@
 
                                         let startEndSame = new google.maps.Marker({
                                             position: startSpot,
-                                            icon: "http://localhost:8000/images/black.png",
+                                            icon: "http://hikonnect.ga/images/startEnd.png",
                                             map: map
                                         });
                                         startEndSameMarker.push(startEndSame);
@@ -334,7 +334,7 @@
                                                 // 도착점 마커를 찍는다.
                                                 let endM = new google.maps.Marker({
                                                     position: end,
-                                                    icon: "http://localhost:8000/images/violet.png",
+                                                    icon: "http://hikonnect.ga/images/end.png",
                                                     map: map
                                                 });
                                                 // 마커를 찍을 때마다 이전의 마커는 제거해준다.
@@ -370,7 +370,7 @@
                                                 // Create markers.
                                                 let startM = new google.maps.Marker({
                                                     position: start,
-                                                    icon: "http://localhost:8000/images/white.png",
+                                                    icon: "http://hikonnect.ga/images/check.png",
                                                     map: map
                                                 });
                                                 startMarkers.push(startM);
@@ -422,7 +422,7 @@
                                                     // 반환마커 만들기
                                                     let endM = new google.maps.Marker({
                                                         position: end,
-                                                        icon: "http://localhost:8000/images/violet.png",
+                                                        icon: "http://hikonnect.ga/images/end.png",
                                                         map: map
                                                     });
                                                     // 도착마커를 지도에서 지운다.
@@ -432,7 +432,7 @@
                                                     if (endSpot == startSpot) {
                                                         let startEndSame = new google.maps.Marker({
                                                             position: startSpot,
-                                                            icon: "http://localhost:8000/images/black.png",
+                                                            icon: "http://hikonnect.ga/images/startEnd.png",
                                                             map: map
                                                         });
                                                         startEndSameMarker.push(startEndSame);
@@ -443,7 +443,7 @@
                                                         // 시종점 마커 찍기.
                                                         let destM = new google.maps.Marker({
                                                             position: end,
-                                                            icon: "http://localhost:8000/images/blue.png",
+                                                            icon: "http://hikonnect.ga/images/start.png",
                                                             map: map
                                                         });
                                                         destinationMarker.push(destM);
@@ -485,8 +485,11 @@
     }
 </script>
 
-<style scoped>
+<style>
     #exp:hover {
         color: #b642f4;
+    }
+    .sweet-modal.is-visible {
+        min-width: 90%;
     }
 </style>

@@ -4,42 +4,42 @@
 <template>
     <div class="row">
         <div class="col-12">
-            <h4><i class="nc-icon nc-bulb-63"></i>&nbsp;&nbsp;등급 설명</h4>
+            <h2 style="font-family: 'Gothic A1', sans-serif;"><i class="nc-icon nc-bulb-63"></i>&nbsp;&nbsp;実績説明</h2>
             <div class="table-hover">
                 <table class="table" style="text-align:center;">
                     <thead>
-                    <th>등급 명칭</th>
-                    <th>등급 기준</th>
+                    <th><h4 style="margin: 0; color: #9e9e9e; font-family: 'Gothic A1', sans-serif;">等級名称</h4></th>
+                    <th><h4 style="margin: 0; color: #9e9e9e; font-family: 'Gothic A1', sans-serif;">等級基準</h4></th>
                     </thead>
                     <tbody>
                     <tr>
-                        <td style="font-size: 12px;">백두산</td>
-                        <td style="text-align:left; font-size: 11px;">26회 이상</td>
+                        <td><h3 style="font-family: 'Gothic A1', sans-serif;">富士山</h3></td>
+                        <td><h3 style="font-family: 'Gothic A1', sans-serif;">26回以上</h3></td>
                     </tr>
                     <tr>
-                        <td style="font-size: 12px;">한라산</td>
-                        <td style="text-align:left; font-size: 12px;">21~25회</td>
+                        <td><h3 style="font-family: 'Gothic A1', sans-serif;">北岳</h3></td>
+                        <td><h3 style="font-family: 'Gothic A1', sans-serif;">21~25回</h3></td>
                     </tr>
                     <tr>
-                        <td style="font-size: 12px;">지리산</td>
-                        <td style="text-align:left;">16~20회</td>
+                        <td><h3 style="font-family: 'Gothic A1', sans-serif;">穂高岳</h3></td>
+                        <td><h3 style="font-family: 'Gothic A1', sans-serif;">16~20回</h3></td>
                     </tr>
                     <tr>
-                        <td style="font-size: 12px;">태백산</td>
-                        <td style="text-align:left; font-size: 12px;">11~15회</td>
+                        <td><h3 style="font-family: 'Gothic A1', sans-serif;">手塩岳</h3></td>
+                        <td><h3 style="font-family: 'Gothic A1', sans-serif;">11~15回</h3></td>
                     </tr>
                     <tr>
-                        <td style="font-size: 12px;">소백산</td>
-                        <td style="text-align:left; font-size: 12px;">6~10회</td>
+                        <td><h3 style="font-family: 'Gothic A1', sans-serif;">金剛山</h3></td>
+                        <td><h3 style="font-family: 'Gothic A1', sans-serif;">6~10回</h3></td>
                     </tr>
                     <tr>
-                        <td style="font-size: 12px;">동네 뒷산</td>
-                        <td style="font-size: 12px; text-align:left;">5회 미만</td>
+                        <td><h3 style="font-family: 'Gothic A1', sans-serif;">裏山</h3></td>
+                        <td><h3 style="font-family: 'Gothic A1', sans-serif;">5回未満</h3></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
-            <h6><i class="nc-icon nc-refresh-02"></i>&nbsp;총<b style="color:#ff5722;">{{ count }}</b>회 등산하셨습니다.</h6>
+            <h3 style="font-family: 'Gothic A1', sans-serif;"><i class="nc-icon nc-refresh-02"></i>&nbsp;これまで<b style="color:#ff5722;">&nbsp;{{ count }}</b>会登山しました。</h3>
             <br>
         </div>
     </div>

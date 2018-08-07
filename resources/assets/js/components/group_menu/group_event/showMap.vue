@@ -2,7 +2,7 @@
     @author Jiyoon Lee <jiyoon3421@gmail.com>
  -->
 <template>
-    <div id="map" style="height: 400px;"></div>
+    <div id="map" style="height: 670px;"></div>
 </template>
 
 <script>
@@ -23,8 +23,7 @@
                 var flightPlanCoordinates = [];
                 var flightPath = [];
                 var map = new google.maps.Map(document.getElementById('map'), {
-                    zoom: 16,
-                    mapTypeId: 'terrain'
+                    zoom: 14,
                 });
 
                 for (let i = 0; i < route.length; i++) {
@@ -39,6 +38,11 @@
                             });
                             flightPath[i].setMap(map);
                             map.setCenter(flightPlanCoordinates[0][0]);
+                            new google.maps.Marker({
+                                position: new google.maps.LatLng(flightPlanCoordinates[0][0].lat, flightPlanCoordinates[0][0].lng),
+                                icon: "http://localhost:8000/images/start.png",
+                                map: map
+                            });
                         });
                 }
             }
