@@ -20,7 +20,7 @@ Route::middleware(
 );
 
 Route::group(
-    [], 
+    ['middleware' => 'cors'], 
     function () {
         //search Mountain Name
         Route::get(
