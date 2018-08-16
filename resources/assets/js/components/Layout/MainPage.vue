@@ -42,6 +42,7 @@
                         <div style="text-align: center;" class="row">
                             <img width="40" style="margin: auto auto 5%; margin-top: 6%;" height="40" src="http://hikonnect.ga/images/alones.png">
                         </div>
+                        
                         <div class="row">
                             <div class="col-1"></div>
                             <div class="col-10">
