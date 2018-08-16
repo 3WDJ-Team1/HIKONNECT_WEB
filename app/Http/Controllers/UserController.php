@@ -32,8 +32,9 @@ class UserController extends Controller
      * @var String    uuid        User's Primary Key Value
      * @var nickname  nickname    User's Nickname
      */
-    private $usermodel = null;
-    private $scope = 0;
+    private $usermodel        = null;
+    private $schedule_member = null;
+    private $scope            = 0;
     private $gender;
     private $age_group;
     /**
@@ -44,6 +45,7 @@ class UserController extends Controller
     public function __construct(Request $request)
     {
         $this->usermodel = new User();
+        $this->schedule_member = new schedule_member();
         //Scope Setting
         if ($request->get('phonesc') == true) {
             $this->scope += 100;
@@ -126,7 +128,8 @@ class UserController extends Controller
             return response()->json('nnfalse');
         }
         else {
-            //user table insert
+
+            // User table insert
             $userinfo = array([
                 'userid'        => $request->get('idv'),
                 'password'      => $request->get('pwv'),
@@ -136,7 +139,7 @@ class UserController extends Controller
                 'scope'         => $this->scope,
                 'profile'       => 'https://lorempixel.com/640/400/?66549',
                 'phone'         => $request->get('phone'),
-                'grade'          => '동네 뒷산',
+                'grade'          => '裏山',
                 'created_at'    => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at'    => Carbon::now()->format('Y-m-d H:i:s')
             ]);
@@ -152,17 +155,21 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $result               = $this->usermodel->user_profile_info($id)[0];
+        $result               = $this->schedule_member->member_info($id);
         $distance             = 0;
         $total_hiking_time    = 0;
         $hour                 = 0;
         $minute               = 0;
         $second               = 0;
+
+        // Set distance
         for($i = 0; $i < count($result); $i++) {
             $distance += $result[$i]['distance'];
         }
+
+        // Set hiking time
         for($i = 0; $i < count($result); $i++) {
-            $total_hiking_time = date_diff(date_create($result[$i]['updated_at']),date_create($result[$i]['start_date']));
+            $total_hiking_time = date_diff(date_create($result[$i]['updated_at']),date_create($result[$i]['hiking_start']));
             $hour             += $total_hiking_time->days * 24 + $total_hiking_time->h;
             $minute           += $total_hiking_time->i;
             $second           += $total_hiking_time->s;
@@ -172,6 +179,7 @@ class UserController extends Controller
             'minute'    =>  $minute % 60 + sprintf('%d', $second / 60),
             'second'    =>  $second % 60
         );
+
         $result['total_distance']       = $distance;
         $result['total_hiking_time']    = $total_hiking_time;
         return response()->json($result);
